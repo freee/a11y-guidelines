@@ -3,7 +3,7 @@ name: Publish HTML
 on:
   push:
     branches: [ master ]
-    tags: [ "*"" ]
+    tags: [ "*" ]
 
 jobs:
   build:
