@@ -4,12 +4,31 @@ freee株式会社が作成しているアクセシビリティー・ガイドラ
 
 このガイドラインの作成の経緯などについて詳しくは、[ガイドラインのイントロダクション](https://a11y-guidelines.freee.co.jp/intro/)をご覧ください。
 
+## 最新ファイルの入手
+
+以下のURLで最新のファイルを入手していただけます:
+
+* HTML版: <https://a11y-guidelines.freee.co.jp/>
+* ソースファイル: <https://github.com/freee/a11y-guidelines/releases/latest>
+
 ## この文書に関するお問い合わせなど
 
 この文書に関するお問い合わせ、ご意見などは、このリポジトリーでissueを作成してお知らせください。
 
 誤字脱字の修正など、エディトリアルな修せょの提案については、issueまたはpull requestを作成してください。
 
+## ソースについて
+
+この文書はreStructuredTextで記述し、Sphinxで処理しています。
+HTMLファイルの生成には、Python 3.x (開発環境では3.7.xを使っています)、[Sphinx](https://www.sphinx-doc.org/en/master/)と[Read the Docs Sphinx Theme (sphinx_rtd_theme)](https://github.com/readthedocs/sphinx_rtd_theme)が必要です。
+
+このリポジトリーをcloneしたうえで、Pythonが利用できる環境で、以下のように実行するとHTMLを生成することができます:
+
+`````
+% pip install --upgrade pip
+% pip install -r requirements.txt
+% make html
+`````
 
 ## ライセンス
 
