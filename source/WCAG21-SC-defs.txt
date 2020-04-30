@@ -1,0 +1,389 @@
+.. |SC 1.1.1| replace:: `Non-text Content`_
+.. _`Non-text Content`: https://www.w3.org/TR/WCAG21/#non-text-content
+.. |SC 1.1.1ja| replace:: `非テキストコンテンツ`_
+.. _`非テキストコンテンツ`: https://waic.jp/docs/WCAG21/#non-text-content
+
+.. |SC 1.2.1| replace:: `Audio-only and Video-only (Prerecorded)`_
+.. _`Audio-only and Video-only (Prerecorded)`: https://www.w3.org/TR/WCAG21/#audio-only-and-video-only-prerecorded
+.. |SC 1.2.1ja| replace:: `音声のみ及び映像のみ (収録済)`_
+.. _`音声のみ及び映像のみ (収録済)`: https://waic.jp/docs/WCAG21/#audio-only-and-video-only-prerecorded
+
+.. |SC 1.2.2| replace:: `Captions (Prerecorded)`_
+.. _`Captions (Prerecorded)`: https://www.w3.org/TR/WCAG21/#captions-prerecorded
+.. |SC 1.2.2ja| replace:: `キャプション (収録済)`_
+.. _`キャプション (収録済)`: https://waic.jp/docs/WCAG21/#captions-prerecorded
+
+.. |SC 1.2.3| replace:: `Audio Description or Media Alternative (Prerecorded)`_
+.. _`Audio Description or Media Alternative (Prerecorded)`: https://www.w3.org/TR/WCAG21/#audio-description-or-media-alternative-prerecorded
+.. |SC 1.2.3ja| replace:: `音声解説、又はメディアに対する代替 (収録済)`_
+.. _`音声解説、又はメディアに対する代替 (収録済)`: https://waic.jp/docs/WCAG21/#audio-description-or-media-alternative-prerecorded
+
+.. |SC 1.2.4| replace:: `Captions (Live)`_
+.. _`Captions (Live)`: https://www.w3.org/TR/WCAG21/#captions-live
+.. |SC 1.2.4ja| replace:: `キャプション (ライブ)`_
+.. _`キャプション (ライブ)`: https://waic.jp/docs/WCAG21/#captions-live
+
+.. |SC 1.2.5| replace:: `Audio Description (Prerecorded)`_
+.. _`Audio Description (Prerecorded)`: https://www.w3.org/TR/WCAG21/#audio-description-prerecorded
+.. |SC 1.2.5ja| replace:: `音声解説 (収録済)`_
+.. _`音声解説 (収録済)`: https://waic.jp/docs/WCAG21/#audio-description-prerecorded
+
+.. |SC 1.2.6| replace:: `Sign Language (Prerecorded)`_
+.. _`Sign Language (Prerecorded)`: https://www.w3.org/TR/WCAG21/#sign-language-prerecorded
+.. |SC 1.2.6ja| replace:: `手話 (収録済)`_
+.. _`手話 (収録済)`: https://waic.jp/docs/WCAG21/#sign-language-prerecorded
+
+.. |SC 1.2.7| replace:: `Extended Audio Description (Prerecorded)`_
+.. _`Extended Audio Description (Prerecorded)`: https://www.w3.org/TR/WCAG21/#extended-audio-description-prerecorded
+.. |SC 1.2.7ja| replace:: `拡張音声解説 (収録済)`_
+.. _`拡張音声解説 (収録済)`: https://waic.jp/docs/WCAG21/#extended-audio-description-prerecorded
+
+.. |SC 1.2.8| replace:: `Media Alternative (Prerecorded)`_
+.. _`Media Alternative (Prerecorded)`: https://www.w3.org/TR/WCAG21/#media-alternative-prerecorded
+.. |SC 1.2.8ja| replace:: `メディアに対する代替 (収録済)`_
+.. _`メディアに対する代替 (収録済)`: https://waic.jp/docs/WCAG21/#media-alternative-prerecorded
+
+.. |SC 1.2.9| replace:: `Audio-only (Live)`_
+.. _`Audio-only (Live)`: https://www.w3.org/TR/WCAG21/#audio-only-live
+.. |SC 1.2.9ja| replace:: `音声のみ (ライブ)`_
+.. _`音声のみ (ライブ)`: https://waic.jp/docs/WCAG21/#audio-only-live
+
+.. |SC 1.3.1| replace:: `Info and Relationships`_
+.. _`Info and Relationships`: https://www.w3.org/TR/WCAG21/#info-and-relationships
+.. |SC 1.3.1ja| replace:: `情報及び関係性`_
+.. _`情報及び関係性`: https://waic.jp/docs/WCAG21/#info-and-relationships
+
+.. |SC 1.3.2| replace:: `Meaningful Sequence`_
+.. _`Meaningful Sequence`: https://www.w3.org/TR/WCAG21/#meaningful-sequence
+.. |SC 1.3.2ja| replace:: `意味のある順序`_
+.. _`意味のある順序`: https://waic.jp/docs/WCAG21/#meaningful-sequence
+
+.. |SC 1.3.3| replace:: `Sensory Characteristics`_
+.. _`Sensory Characteristics`: https://www.w3.org/TR/WCAG21/#sensory-characteristics
+.. |SC 1.3.3ja| replace:: `感覚的な特徴`_
+.. _`感覚的な特徴`: https://waic.jp/docs/WCAG21/#sensory-characteristics
+
+.. |SC 1.3.4| replace:: `Orientation`_
+.. _`Orientation`: https://www.w3.org/TR/WCAG21/#orientation
+.. |SC 1.3.4ja| replace:: `表示の向き`_
+.. _`表示の向き`: https://waic.jp/docs/WCAG21/#orientation
+
+.. |SC 1.3.5| replace:: `Identify Input Purpose`_
+.. _`Identify Input Purpose`: https://www.w3.org/TR/WCAG21/#identify-input-purpose
+.. |SC 1.3.5ja| replace:: `入力目的の特定`_
+.. _`入力目的の特定`: https://waic.jp/docs/WCAG21/#identify-input-purpose
+
+.. |SC 1.3.6| replace:: `Identify Purpose`_
+.. _`Identify Purpose`: https://www.w3.org/TR/WCAG21/#identify-purpose
+.. |SC 1.3.6ja| replace:: `目的の特定`_
+.. _`目的の特定`: https://waic.jp/docs/WCAG21/#identify-purpose
+
+.. |SC 1.4.1| replace:: `Use of Color`_
+.. _`Use of Color`: https://www.w3.org/TR/WCAG21/#use-of-color
+.. |SC 1.4.1ja| replace:: `色の使用`_
+.. _`色の使用`: https://waic.jp/docs/WCAG21/#use-of-color
+
+.. |SC 1.4.2| replace:: `Audio Control`_
+.. _`Audio Control`: https://www.w3.org/TR/WCAG21/#audio-control
+.. |SC 1.4.2ja| replace:: `音声の制御`_
+.. _`音声の制御`: https://waic.jp/docs/WCAG21/#audio-control
+
+.. |SC 1.4.3| replace:: `Contrast (Minimum)`_
+.. _`Contrast (Minimum)`: https://www.w3.org/TR/WCAG21/#contrast-minimum
+.. |SC 1.4.3ja| replace:: `コントラスト (最低限)`_
+.. _`コントラスト (最低限)`: https://waic.jp/docs/WCAG21/#contrast-minimum
+
+.. |SC 1.4.4| replace:: `Resize text`_
+.. _`Resize text`: https://www.w3.org/TR/WCAG21/#resize-text
+.. |SC 1.4.4ja| replace:: `テキストのサイズ変更`_
+.. _`テキストのサイズ変更`: https://waic.jp/docs/WCAG21/#resize-text
+
+.. |SC 1.4.5| replace:: `Images of Text`_
+.. _`Images of Text`: https://www.w3.org/TR/WCAG21/#images-of-text
+.. |SC 1.4.5ja| replace:: `文字画像`_
+.. _`文字画像`: https://waic.jp/docs/WCAG21/#images-of-text
+
+.. |SC 1.4.6| replace:: `Contrast (Enhanced)`_
+.. _`Contrast (Enhanced)`: https://www.w3.org/TR/WCAG21/#contrast-enhanced
+.. |SC 1.4.6ja| replace:: `コントラスト (高度)`_
+.. _`コントラスト (高度)`: https://waic.jp/docs/WCAG21/#contrast-enhanced
+
+.. |SC 1.4.7| replace:: `Low or No Background Audio`_
+.. _`Low or No Background Audio`: https://www.w3.org/TR/WCAG21/#low-or-no-background-audio
+.. |SC 1.4.7ja| replace:: `小さな背景音、又は背景音なし`_
+.. _`小さな背景音、又は背景音なし`: https://waic.jp/docs/WCAG21/#low-or-no-background-audio
+
+.. |SC 1.4.8| replace:: `Visual Presentation`_
+.. _`Visual Presentation`: https://www.w3.org/TR/WCAG21/#visual-presentation
+.. |SC 1.4.8ja| replace:: `視覚的提示`_
+.. _`視覚的提示`: https://waic.jp/docs/WCAG21/#visual-presentation
+
+.. |SC 1.4.9| replace:: `Images of Text (No Exception)`_
+.. _`Images of Text (No Exception)`: https://www.w3.org/TR/WCAG21/#images-of-text-no-exception
+.. |SC 1.4.9ja| replace:: `文字画像 (例外なし)`_
+.. _`文字画像 (例外なし)`: https://waic.jp/docs/WCAG21/#images-of-text-no-exception
+
+.. |SC 1.4.10| replace:: `Reflow`_
+.. _`Reflow`: https://www.w3.org/TR/WCAG21/#reflow
+.. |SC 1.4.10ja| replace:: `リフロー`_
+.. _`リフロー`: https://waic.jp/docs/WCAG21/#reflow
+
+.. |SC 1.4.11| replace:: `Non-text Contrast`_
+.. _`Non-text Contrast`: https://www.w3.org/TR/WCAG21/#non-text-contrast
+.. |SC 1.4.11ja| replace:: `非テキストのコントラスト`_
+.. _`非テキストのコントラスト`: https://waic.jp/docs/WCAG21/#non-text-contrast
+
+.. |SC 1.4.12| replace:: `Text Spacing`_
+.. _`Text Spacing`: https://www.w3.org/TR/WCAG21/#text-spacing
+.. |SC 1.4.12ja| replace:: `テキストの間隔`_
+.. _`テキストの間隔`: https://waic.jp/docs/WCAG21/#text-spacing
+
+.. |SC 1.4.13| replace:: `Content on Hover or Focus`_
+.. _`Content on Hover or Focus`: https://www.w3.org/TR/WCAG21/#content-on-hover-or-focus
+.. |SC 1.4.13ja| replace:: `ホバー又はフォーカスで表示されるコンテンツ`_
+.. _`ホバー又はフォーカスで表示されるコンテンツ`: https://waic.jp/docs/WCAG21/#content-on-hover-or-focus
+
+.. |SC 2.1.1| replace:: `Keyboard`_
+.. _`Keyboard`: https://www.w3.org/TR/WCAG21/#keyboard
+.. |SC 2.1.1ja| replace:: `キーボード`_
+.. _`キーボード`: https://waic.jp/docs/WCAG21/#keyboard
+
+.. |SC 2.1.2| replace:: `No Keyboard Trap`_
+.. _`No Keyboard Trap`: https://www.w3.org/TR/WCAG21/#no-keyboard-trap
+.. |SC 2.1.2ja| replace:: `キーボードトラップなし`_
+.. _`キーボードトラップなし`: https://waic.jp/docs/WCAG21/#no-keyboard-trap
+
+.. |SC 2.1.3| replace:: `Keyboard (No Exception)`_
+.. _`Keyboard (No Exception)`: https://www.w3.org/TR/WCAG21/#keyboard-no-exception
+.. |SC 2.1.3ja| replace:: `キーボード (例外なし)`_
+.. _`キーボード (例外なし)`: https://waic.jp/docs/WCAG21/#keyboard-no-exception
+
+.. |SC 2.1.4| replace:: `Character Key Shortcuts`_
+.. _`Character Key Shortcuts`: https://www.w3.org/TR/WCAG21/#character-key-shortcuts
+.. |SC 2.1.4ja| replace:: `文字キーのショートカット`_
+.. _`文字キーのショートカット`: https://waic.jp/docs/WCAG21/#character-key-shortcuts
+
+.. |SC 2.2.1| replace:: `Timing Adjustable`_
+.. _`Timing Adjustable`: https://www.w3.org/TR/WCAG21/#timing-adjustable
+.. |SC 2.2.1ja| replace:: `タイミング調整可能`_
+.. _`タイミング調整可能`: https://waic.jp/docs/WCAG21/#timing-adjustable
+
+.. |SC 2.2.2| replace:: `Pause, Stop, Hide`_
+.. _`Pause, Stop, Hide`: https://www.w3.org/TR/WCAG21/#pause-stop-hide
+.. |SC 2.2.2ja| replace:: `一時停止、停止、非表示`_
+.. _`一時停止、停止、非表示`: https://waic.jp/docs/WCAG21/#pause-stop-hide
+
+.. |SC 2.2.3| replace:: `No Timing`_
+.. _`No Timing`: https://www.w3.org/TR/WCAG21/#no-timing
+.. |SC 2.2.3ja| replace:: `タイミング非依存`_
+.. _`タイミング非依存`: https://waic.jp/docs/WCAG21/#no-timing
+
+.. |SC 2.2.4| replace:: `Interruptions`_
+.. _`Interruptions`: https://www.w3.org/TR/WCAG21/#interruptions
+.. |SC 2.2.4ja| replace:: `割り込み`_
+.. _`割り込み`: https://waic.jp/docs/WCAG21/#interruptions
+
+.. |SC 2.2.5| replace:: `Re-authenticating`_
+.. _`Re-authenticating`: https://www.w3.org/TR/WCAG21/#re-authenticating
+.. |SC 2.2.5ja| replace:: `再認証`_
+.. _`再認証`: https://waic.jp/docs/WCAG21/#re-authenticating
+
+.. |SC 2.2.6| replace:: `Timeouts`_
+.. _`Timeouts`: https://www.w3.org/TR/WCAG21/#timeouts
+.. |SC 2.2.6ja| replace:: `タイムアウト`_
+.. _`タイムアウト`: https://waic.jp/docs/WCAG21/#timeouts
+
+.. |SC 2.3.1| replace:: `Three Flashes or Below Threshold`_
+.. _`Three Flashes or Below Threshold`: https://www.w3.org/TR/WCAG21/#three-flashes-or-below-threshold
+.. |SC 2.3.1ja| replace:: `3 回の閃光、又は閾値以下`_
+.. _`3 回の閃光、又は閾値以下`: https://waic.jp/docs/WCAG21/#three-flashes-or-below-threshold
+
+.. |SC 2.3.2| replace:: `Three Flashes`_
+.. _`Three Flashes`: https://www.w3.org/TR/WCAG21/#three-flashes
+.. |SC 2.3.2ja| replace:: `3 回の閃光`_
+.. _`3 回の閃光`: https://waic.jp/docs/WCAG21/#three-flashes
+
+.. |SC 2.3.3| replace:: `Animation from Interactions`_
+.. _`Animation from Interactions`: https://www.w3.org/TR/WCAG21/#animation-from-interactions
+.. |SC 2.3.3ja| replace:: `インタラクションによるアニメーション`_
+.. _`インタラクションによるアニメーション`: https://waic.jp/docs/WCAG21/#animation-from-interactions
+
+.. |SC 2.4.1| replace:: `Bypass Blocks`_
+.. _`Bypass Blocks`: https://www.w3.org/TR/WCAG21/#bypass-blocks
+.. |SC 2.4.1ja| replace:: `ブロックスキップ`_
+.. _`ブロックスキップ`: https://waic.jp/docs/WCAG21/#bypass-blocks
+
+.. |SC 2.4.2| replace:: `Page Titled`_
+.. _`Page Titled`: https://www.w3.org/TR/WCAG21/#page-titled
+.. |SC 2.4.2ja| replace:: `ページタイトル`_
+.. _`ページタイトル`: https://waic.jp/docs/WCAG21/#page-titled
+
+.. |SC 2.4.3| replace:: `Focus Order`_
+.. _`Focus Order`: https://www.w3.org/TR/WCAG21/#focus-order
+.. |SC 2.4.3ja| replace:: `フォーカス順序`_
+.. _`フォーカス順序`: https://waic.jp/docs/WCAG21/#focus-order
+
+.. |SC 2.4.4| replace:: `Link Purpose (In Context)`_
+.. _`Link Purpose (In Context)`: https://www.w3.org/TR/WCAG21/#link-purpose-in-context
+.. |SC 2.4.4ja| replace:: `リンクの目的 (コンテキスト内)`_
+.. _`リンクの目的 (コンテキスト内)`: https://waic.jp/docs/WCAG21/#link-purpose-in-context
+
+.. |SC 2.4.5| replace:: `Multiple Ways`_
+.. _`Multiple Ways`: https://www.w3.org/TR/WCAG21/#multiple-ways
+.. |SC 2.4.5ja| replace:: `複数の手段`_
+.. _`複数の手段`: https://waic.jp/docs/WCAG21/#multiple-ways
+
+.. |SC 2.4.6| replace:: `Headings and Labels`_
+.. _`Headings and Labels`: https://www.w3.org/TR/WCAG21/#headings-and-labels
+.. |SC 2.4.6ja| replace:: `見出し及びラベル`_
+.. _`見出し及びラベル`: https://waic.jp/docs/WCAG21/#headings-and-labels
+
+.. |SC 2.4.7| replace:: `Focus Visible`_
+.. _`Focus Visible`: https://www.w3.org/TR/WCAG21/#focus-visible
+.. |SC 2.4.7ja| replace:: `フォーカスの可視化`_
+.. _`フォーカスの可視化`: https://waic.jp/docs/WCAG21/#focus-visible
+
+.. |SC 2.4.8| replace:: `Location`_
+.. _`Location`: https://www.w3.org/TR/WCAG21/#location
+.. |SC 2.4.8ja| replace:: `現在位置`_
+.. _`現在位置`: https://waic.jp/docs/WCAG21/#location
+
+.. |SC 2.4.9| replace:: `Link Purpose (Link Only)`_
+.. _`Link Purpose (Link Only)`: https://www.w3.org/TR/WCAG21/#link-purpose-link-only
+.. |SC 2.4.9ja| replace:: `リンクの目的 (リンクのみ)`_
+.. _`リンクの目的 (リンクのみ)`: https://waic.jp/docs/WCAG21/#link-purpose-link-only
+
+.. |SC 2.4.10| replace:: `Section Headings`_
+.. _`Section Headings`: https://www.w3.org/TR/WCAG21/#section-headings
+.. |SC 2.4.10ja| replace:: `セクション見出し`_
+.. _`セクション見出し`: https://waic.jp/docs/WCAG21/#section-headings
+
+.. |SC 2.5.1| replace:: `Pointer Gestures`_
+.. _`Pointer Gestures`: https://www.w3.org/TR/WCAG21/#pointer-gestures
+.. |SC 2.5.1ja| replace:: `ポインタのジェスチャ`_
+.. _`ポインタのジェスチャ`: https://waic.jp/docs/WCAG21/#pointer-gestures
+
+.. |SC 2.5.2| replace:: `Pointer Cancellation`_
+.. _`Pointer Cancellation`: https://www.w3.org/TR/WCAG21/#pointer-cancellation
+.. |SC 2.5.2ja| replace:: `ポインタのキャンセル`_
+.. _`ポインタのキャンセル`: https://waic.jp/docs/WCAG21/#pointer-cancellation
+
+.. |SC 2.5.3| replace:: `Label in Name`_
+.. _`Label in Name`: https://www.w3.org/TR/WCAG21/#label-in-name
+.. |SC 2.5.3ja| replace:: `名前 (name) のラベル`_
+.. _`名前 (name) のラベル`: https://waic.jp/docs/WCAG21/#label-in-name
+
+.. |SC 2.5.4| replace:: `Motion Actuation`_
+.. _`Motion Actuation`: https://www.w3.org/TR/WCAG21/#motion-actuation
+.. |SC 2.5.4ja| replace:: `動きによる起動`_
+.. _`動きによる起動`: https://waic.jp/docs/WCAG21/#motion-actuation
+
+.. |SC 2.5.5| replace:: `Target Size`_
+.. _`Target Size`: https://www.w3.org/TR/WCAG21/#target-size
+.. |SC 2.5.5ja| replace:: `ターゲットのサイズ`_
+.. _`ターゲットのサイズ`: https://waic.jp/docs/WCAG21/#target-size
+
+.. |SC 2.5.6| replace:: `Concurrent Input Mechanisms`_
+.. _`Concurrent Input Mechanisms`: https://www.w3.org/TR/WCAG21/#concurrent-input-mechanisms
+.. |SC 2.5.6ja| replace:: `入力メカニズム非依存`_
+.. _`入力メカニズム非依存`: https://waic.jp/docs/WCAG21/#concurrent-input-mechanisms
+
+.. |SC 3.1.1| replace:: `Language of Page`_
+.. _`Language of Page`: https://www.w3.org/TR/WCAG21/#language-of-page
+.. |SC 3.1.1ja| replace:: `ページの言語`_
+.. _`ページの言語`: https://waic.jp/docs/WCAG21/#language-of-page
+
+.. |SC 3.1.2| replace:: `Language of Parts`_
+.. _`Language of Parts`: https://www.w3.org/TR/WCAG21/#language-of-parts
+.. |SC 3.1.2ja| replace:: `一部分の言語`_
+.. _`一部分の言語`: https://waic.jp/docs/WCAG21/#language-of-parts
+
+.. |SC 3.1.3| replace:: `Unusual Words`_
+.. _`Unusual Words`: https://www.w3.org/TR/WCAG21/#unusual-words
+.. |SC 3.1.3ja| replace:: `一般的ではない用語`_
+.. _`一般的ではない用語`: https://waic.jp/docs/WCAG21/#unusual-words
+
+.. |SC 3.1.4| replace:: `Abbreviations`_
+.. _`Abbreviations`: https://www.w3.org/TR/WCAG21/#abbreviations
+.. |SC 3.1.4ja| replace:: `略語`_
+.. _`略語`: https://waic.jp/docs/WCAG21/#abbreviations
+
+.. |SC 3.1.5| replace:: `Reading Level`_
+.. _`Reading Level`: https://www.w3.org/TR/WCAG21/#reading-level
+.. |SC 3.1.5ja| replace:: `読解レベル`_
+.. _`読解レベル`: https://waic.jp/docs/WCAG21/#reading-level
+
+.. |SC 3.1.6| replace:: `Pronunciation`_
+.. _`Pronunciation`: https://www.w3.org/TR/WCAG21/#pronunciation
+.. |SC 3.1.6ja| replace:: `発音`_
+.. _`発音`: https://waic.jp/docs/WCAG21/#pronunciation
+
+.. |SC 3.2.1| replace:: `On Focus`_
+.. _`On Focus`: https://www.w3.org/TR/WCAG21/#on-focus
+.. |SC 3.2.1ja| replace:: `フォーカス時`_
+.. _`フォーカス時`: https://waic.jp/docs/WCAG21/#on-focus
+
+.. |SC 3.2.2| replace:: `On Input`_
+.. _`On Input`: https://www.w3.org/TR/WCAG21/#on-input
+.. |SC 3.2.2ja| replace:: `入力時`_
+.. _`入力時`: https://waic.jp/docs/WCAG21/#on-input
+
+.. |SC 3.2.3| replace:: `Consistent Navigation`_
+.. _`Consistent Navigation`: https://www.w3.org/TR/WCAG21/#consistent-navigation
+.. |SC 3.2.3ja| replace:: `一貫したナビゲーション`_
+.. _`一貫したナビゲーション`: https://waic.jp/docs/WCAG21/#consistent-navigation
+
+.. |SC 3.2.4| replace:: `Consistent Identification`_
+.. _`Consistent Identification`: https://www.w3.org/TR/WCAG21/#consistent-identification
+.. |SC 3.2.4ja| replace:: `一貫した識別性`_
+.. _`一貫した識別性`: https://waic.jp/docs/WCAG21/#consistent-identification
+
+.. |SC 3.2.5| replace:: `Change on Request`_
+.. _`Change on Request`: https://www.w3.org/TR/WCAG21/#change-on-request
+.. |SC 3.2.5ja| replace:: `要求による変化`_
+.. _`要求による変化`: https://waic.jp/docs/WCAG21/#change-on-request
+
+.. |SC 3.3.1| replace:: `Error Identification`_
+.. _`Error Identification`: https://www.w3.org/TR/WCAG21/#error-identification
+.. |SC 3.3.1ja| replace:: `エラーの特定`_
+.. _`エラーの特定`: https://waic.jp/docs/WCAG21/#error-identification
+
+.. |SC 3.3.2| replace:: `Labels or Instructions`_
+.. _`Labels or Instructions`: https://www.w3.org/TR/WCAG21/#labels-or-instructions
+.. |SC 3.3.2ja| replace:: `ラベル又は説明`_
+.. _`ラベル又は説明`: https://waic.jp/docs/WCAG21/#labels-or-instructions
+
+.. |SC 3.3.3| replace:: `Error Suggestion`_
+.. _`Error Suggestion`: https://www.w3.org/TR/WCAG21/#error-suggestion
+.. |SC 3.3.3ja| replace:: `エラー修正の提案`_
+.. _`エラー修正の提案`: https://waic.jp/docs/WCAG21/#error-suggestion
+
+.. |SC 3.3.4| replace:: `Error Prevention (Legal, Financial, Data)`_
+.. _`Error Prevention (Legal, Financial, Data)`: https://www.w3.org/TR/WCAG21/#error-prevention-legal-financial-data
+.. |SC 3.3.4ja| replace:: `エラー回避 (法的、金融、データ)`_
+.. _`エラー回避 (法的、金融、データ)`: https://waic.jp/docs/WCAG21/#error-prevention-legal-financial-data
+
+.. |SC 3.3.5| replace:: `Help`_
+.. _`Help`: https://www.w3.org/TR/WCAG21/#help
+.. |SC 3.3.5ja| replace:: `ヘルプ`_
+.. _`ヘルプ`: https://waic.jp/docs/WCAG21/#help
+
+.. |SC 3.3.6| replace:: `Error Prevention (All)`_
+.. _`Error Prevention (All)`: https://www.w3.org/TR/WCAG21/#error-prevention-all
+.. |SC 3.3.6ja| replace:: `エラー回避 (すべて)`_
+.. _`エラー回避 (すべて)`: https://waic.jp/docs/WCAG21/#error-prevention-all
+
+.. |SC 4.1.1| replace:: `Parsing`_
+.. _`Parsing`: https://www.w3.org/TR/WCAG21/#parsing
+.. |SC 4.1.1ja| replace:: `構文解析`_
+.. _`構文解析`: https://waic.jp/docs/WCAG21/#parsing
+
+.. |SC 4.1.2| replace:: `Name, Role, Value`_
+.. _`Name, Role, Value`: https://www.w3.org/TR/WCAG21/#name-role-value
+.. |SC 4.1.2ja| replace:: `名前 (name) ・役割 (role) 及び値 (value)`_
+.. _`名前 (name) ・役割 (role) 及び値 (value)`: https://waic.jp/docs/WCAG21/#name-role-value
+
+.. |SC 4.1.3| replace:: `Status Messages`_
+.. _`Status Messages`: https://www.w3.org/TR/WCAG21/#status-messages
+.. |SC 4.1.3ja| replace:: `ステータスメッセージ`_
+.. _`ステータスメッセージ`: https://waic.jp/docs/WCAG21/#status-messages

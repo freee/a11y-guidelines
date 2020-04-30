@@ -13,14 +13,23 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
-
+import datetime
 
 # -- Project information -----------------------------------------------------
 
 project = 'freeeアクセシビリティー・ガイドライン'
 copyright = '2020, freee株式会社'
 author = 'freee株式会社'
+version = 'Ver. 202004.0'
+release = version
+publishedDate = u'2020年4月30日'
 
+if 'internal' in tags:
+  publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
+  release = u"INTERNAL {ver} ({date})".format(
+    ver = version,
+    date = publishedDate
+  )
 
 # -- General configuration ---------------------------------------------------
 
@@ -29,6 +38,7 @@ author = 'freee株式会社'
 # ones.
 extensions = [
         'japanesesupport',
+        'sphinx.ext.todo',
 ]
 
 
@@ -48,6 +58,15 @@ language = 'ja'
 exclude_patterns = []
 
 # substitution definitions:
+rst_prolog = u"""
+.. |published_date| replace:: {pubdate}
+
+.. include:: /defs.txt
+.. include:: /WCAG21-SC-defs.txt
+""".format(
+  pubdate = publishedDate
+)
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -73,3 +92,8 @@ html_show_sphinx = False
 def setup(app):
   app.add_css_file('a11y-gl.css')
 
+[extensions]
+
+if 'internal' in tags:
+  todo_include_todos = True
+  todo_link_only = True

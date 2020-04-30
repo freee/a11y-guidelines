@@ -1,0 +1,8 @@
+.. |functionality| replace:: 機能
+
+.. |visual| replace:: ビジュアル
+
+.. |behavior| replace:: 挙動
+
+.. |markup| replace:: マークアップ
+

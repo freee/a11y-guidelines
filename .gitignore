@@ -1,0 +1,5 @@
+html/*
+node_modules/*
+.vscode/*
+build/*
+source/__pycache__/*
