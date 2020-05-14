@@ -9,7 +9,7 @@ freee株式会社が作成しているアクセシビリティー・ガイドラ
 以下のURLで最新のファイルを入手していただけます:
 
 * HTML版: <https://a11y-guidelines.freee.co.jp/>
-* ソースファイル: <https://github.com/freee/a11y-guidelines/releases/latest>
+* HTMLファイルをまとめたzipファイルおよびソースファイル: <https://github.com/freee/a11y-guidelines/releases/latest>
 
 ## この文書に関するお問い合わせなど
 
