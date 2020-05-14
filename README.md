@@ -41,8 +41,8 @@ Copyright © 2020, freee株式会社
 
 ### 次期リリース
 
-* 誤字修正 (#3, #5, #6)
+* 誤字修正 ([#3](https://github.com/freee/a11y-guidelines/pull/3), [#5](https://github.com/freee/a11y-guidelines/pull/5), [#6](https://github.com/freee/a11y-guidelines/pull/6))
 
-### Ver. 202004.0 (2020年4月30日)
+### [Ver. 202004.0](https://github.com/freee/a11y-guidelines/releases/202004.0/) (2020年4月30日)
 
 * 初版公開
