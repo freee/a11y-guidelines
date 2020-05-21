@@ -10,7 +10,7 @@
 テキスト情報の提供
 ~~~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-image-text-alternative` 
+参考: :ref:`exp-image-text-alternative`
 
 .. _gl-image-description:
 
@@ -65,7 +65,7 @@
 表示と視覚的要素
 ~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-image-visual` 
+参考: :ref:`exp-image-visual`
 
 .. _gl-image-color-only:
 
@@ -76,13 +76,14 @@
       <details>
 
    意図
-      *  色弱者が、コンテンツを利用できるようにする。
+      *  視覚障害者や色弱者が、コンテンツを利用できるようにする。
    チェック内容
       *  グレースケール表示でも意図が伝わるようになっている。
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-grayscale` 
+      *  :ref:`exp-color-only`
+      *  :ref:`exp-grayscale`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.1:
 
@@ -107,7 +108,8 @@
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-contrast` 
+      *  :ref:`exp-contrast`
+      *  :ref:`exp-check-contrast`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.11:
 
@@ -136,7 +138,8 @@
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-contrast` 
+      *  :ref:`exp-contrast`
+      *  :ref:`exp-check-contrast`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.3:
 

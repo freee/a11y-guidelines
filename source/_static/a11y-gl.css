@@ -1,107 +1,11 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: #efede8;
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
-    color: #252525;
-    font-size: 0.875rem;
-}
-
-header {
-    padding: 2rem 0;
-}
-
-a {
-    color: #4575b4;
-}
-a:hover {
-    /* Vibesでは2019/10/24現在accentColorなのだが、これだとコントラスト不足なのでPrimary ButtonのHover時の色にしておく */
-    color: #345888;
 }
 
 .header-logo {
     width: 8.1875rem;
     height: 2.75rem;
-    fill: #4575b4;
+    fill: #fff;
     display: block;
     margin: 0 auto 1rem;
-}
-
-.title {
-    font-size: 1.5rem;
-    text-align: center;
-    font-weight: bold;
-    margin: 0;
-}
-
-.date {
-    text-align: center;
-    font-size: 0.75rem;
-}
-.toc {
-    font-size: 0.75rem;
-}
-
-.container {
-    box-sizing: border-box;
-    padding: 1.5rem;
-    background: #ffffff;
-    width: calc(100vw - 3rem);
-    max-width: 50rem;
-    margin: 0 auto;
-}
-
-h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 2.5rem 0 0 0;
-    padding: 0;
-}
-
-h3 {
-    font-size:  1.125rem;
-    font-weight: bold;
-    margin:  2rem 0 0 0;
-    padding: 0;
-}
-
-p {
-    margin: 1em 0;
-    padding: 0;
-    line-height: 1.5;
-}
-
-dl {
-    margin: 1em 0;
-    padding: 0;
-}
-
-dt {
-    margin-top: 1em;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #7a766d;
-}
-
-dd {
-    margin: 0.5em 0 0 2em;
-}
-
-
-ul {
-    margin: 1em 0;
-    padding: 0 0 0 1.5em;
-}
-
-ul li {
-    margin-top: 0.5em;
-}
-
-dd ul {
-    margin: 0;
-    padding-left: 0;
-}
-
-li ul {
-    margin-top: 0;
 }

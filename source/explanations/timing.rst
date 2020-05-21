@@ -23,4 +23,5 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  ログイン・セッション: :ref:`login_session-timeout` 
+*  ログイン・セッション: :ref:`login-session-timeout`
+*  フォーム: :ref:`form-timing`

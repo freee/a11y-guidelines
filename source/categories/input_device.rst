@@ -1,18 +1,18 @@
-.. _category-input_device:
+.. _category-input-device:
 
 入力ディバイス
 ----------------------------------
 
 これらのガイドラインは、様々な入力ディバイスの利用を可能にするためのもので、すべてのコンテンツが対象です。
 
-.. _input_device-keyboard-focus:
+.. _input-device-keyboard-focus:
 
 キーボード・フォーカス関連
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _gl-input_device-focus:
+.. _gl-input-device-focus:
 
--  [MUST] Tab/SHIFT+Tabなどでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+-  [MUST] Tab/Shift+Tabキーなどでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
 
    .. raw:: html
 
@@ -24,6 +24,8 @@
       *  Tab/Shift+Tabキーを使ってリンク、フォーム・コントロール、その他のコンポーネント間でフォーカスを移動させたとき、レイアウト的にも文脈的にも自然な順序でフォーカスが移動する。
    チェック対象
       |behavior|
+   参考
+      *  :ref:`exp-tab-order-check` 
    対応するWCAG 2.1の達成基準
       *  SC 1.3.2:
 
@@ -39,7 +41,7 @@
 
       </details>
 
-   .. _gl-input_device-focus-indicator:
+   .. _gl-input-device-focus-indicator:
 -  [MUST] キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
 
    .. raw:: html
@@ -52,6 +54,8 @@
       *  Tab/Shift+Tabキーでフォーカスを移動した時、フォーカス可能なすべての要素でフォーカスインジケーターまたはそれを代替する表示がある。
    チェック対象
       |visual| 、 |behavior|
+   参考
+      *  :ref:`exp-tab-order-check` 
    対応するWCAG 2.1の達成基準
       *  SC 2.4.7:
 
@@ -62,8 +66,8 @@
 
       </details>
 
-   .. _gl-input_device-no-trap:
--  [MUST] 動画プレイヤーなど、特定のコンポーネントにフォーカスした状態から、タブキー、矢印キー、ESCキーで抜け出すことができるようにする。
+   .. _gl-input-device-no-trap:
+-  [MUST] 動画プレイヤーなど、特定のコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーで抜け出すことができるようにする。
 
    .. raw:: html
 
@@ -72,9 +76,11 @@
    意図
       *  キーボードのみを利用している場合に、ページ中の特定のコンポーネントがページの他の部分へのアクセスを阻害しないようにする。
    チェック内容
-      *  埋め込まれたコンポーネントにフォーカスがある状態で、Tab, Shift+Tab, 矢印キーのいずれかの操作で、そのコンポーネントの外のリンクなどにフォーカスを移動することができ、自動的にフォーカスが元の位置に戻されない。
+      *  埋め込まれたコンポーネントにフォーカスがある状態で、Tab/Shift+Tabキー、矢印キー、Escキーのいずれかの操作で、そのコンポーネントの外のリンクなどにフォーカスを移動することができ、自動的にフォーカスが元の位置に戻されない。
    チェック対象
       |behavior|
+   参考
+      *  :ref:`exp-keyboard-notrap`
    対応するWCAG 2.1の達成基準
       *  SC 2.1.2:
 
@@ -85,12 +91,14 @@
 
       </details>
 
-.. _input_device-various-input-device:
+.. _input-device-various:
 
 多様な入力ディバイスのサポート
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _gl-input_device-keyboard-operable:
+参考: :ref:`exp-input-device-various`
+
+.. _gl-input-device-keyboard-operable:
 
 -  [MUST] マウスまたはタッチUIを使わないと実行できないような機能を作らず、キーボードによる操作を可能にする。
 
@@ -101,12 +109,12 @@
    意図
       *  マウスを使わない/使えない視覚障害者、肢体不自由者が、コンテンツを利用できるようにする。
    チェック内容
-      *  何らかの操作を受け付けるすべてのコンポーネント (リンク、ボタン、フォーム・コントロール、ウィジェットなど) にTab/Shift+Tabでフォーカスを移動させることができる。かつ
+      *  何らかの操作を受け付けるすべてのコンポーネント (リンク、ボタン、フォーム・コントロール、ウィジェットなど) にTab/Shift+Tabキーでフォーカスを移動させることができる。かつ
       *  フォーカスされたコンポーネントに対する操作がキーボードのみで可能
    チェック対象
       |behavior|
    参考
-      .. todo:: 代替入力とキーボード・エミュレーションについて詳述 
+      *  :ref:`exp-tab-order-check` 
    対応するWCAG 2.1の達成基準
       *  SC 2.1.1:
 
@@ -127,7 +135,7 @@
 
       </details>
 
-   .. _gl-input_device-use-up-event:
+   .. _gl-input-device-use-up-event:
 -  [MUST] 操作の実行、完了のトリガーにはダウン・イベントを使わず、アップ・イベントを使う。
 
    .. raw:: html
@@ -150,7 +158,7 @@
 
       </details>
 
-   .. _gl-input_device-concurrent-mechanisms:
+   .. _gl-input-device-concurrent-mechanisms:
 -  [MUST] OSがサポートしている入力ディバイスの使用を妨げない。
 
    .. raw:: html
@@ -173,7 +181,7 @@
 
       </details>
 
-   .. _gl-input_device-motion-devices:
+   .. _gl-input-device-motion-devices:
 -  [MUST] 加速度センサー、モーション・キャプチャーなどを活用した、ユーザーの動きをトリガーにする機能は、他のインターフェースによっても実行できるようにする。
 
    .. raw:: html
@@ -196,7 +204,7 @@
 
       </details>
 
-   .. _gl-input_device-shortcut-keys:
+   .. _gl-input-device-shortcut-keys:
 -  [SHOULD] ショートカットキーを提供する場合は、以下のいずれかを満たす。
 
    -  ショートカットキーを無効にする設定を可能する。

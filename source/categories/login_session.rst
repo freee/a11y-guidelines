@@ -1,4 +1,4 @@
-.. _category-login_session:
+.. _category-login-session:
 
 ログイン・セッション
 ----------------------------------------
@@ -7,14 +7,14 @@
 
 これらのガイドラインは、ログイン・セッション管理に関するものです。
 
-.. _login_session-timeout:
+.. _login-session-timeout:
 
 セッションのタイムアウト
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-timing` 
+参考: :ref:`exp-timing`
 
-.. _gl-login_session-timing:
+.. _gl-login-session-timing:
 
 -  [MUST] ログイン・セッションにタイムアウトを設ける場合は、次に挙げる事項のうち、少なくとも一つを満たす。
 
@@ -44,8 +44,8 @@
 
       </details>
 
-   .. _gl-login_session-no-timing:
--  [SHOULD] タイムアウトを設けない。
+   .. _gl-login-session-no-timing:
+-  [SHOULD] ログイン・セッションにタイムアウトを設けない。
 
    .. raw:: html
 
@@ -67,8 +67,8 @@
 
       </details>
 
-   .. _gl-login_session-continue:
--  [SHOULD] セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
+   .. _gl-login-session-continue:
+-  [SHOULD] ログイン・セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
 
    .. raw:: html
 

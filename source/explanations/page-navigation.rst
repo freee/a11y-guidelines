@@ -19,4 +19,4 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~~~
 
-*  ページ: :ref:`page-navigation` 
+*  ページ: :ref:`page-navigation`

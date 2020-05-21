@@ -10,7 +10,7 @@
 文言
 ~~~~
 
-参考: :ref:`exp-text-wording` 
+参考: :ref:`exp-text-wording`
 
 .. _gl-text-multiple-modality:
 
@@ -66,7 +66,7 @@
 自然言語
 ~~~~~~~~~~~~
 
-参考: :ref:`exp-text-lang` 
+参考: :ref:`exp-text-lang`
 
 .. _gl-text-page-lang:
 
@@ -120,7 +120,7 @@
 テキスト表示の拡大
 ~~~~~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-magnification` 
+参考: :ref:`exp-magnification`
 
 .. _gl-text-zoom:
 
@@ -189,7 +189,7 @@
    チェック対象
       |behavior|
    参考
-      *  .. todo:: CSSの書き方、ユーザーCSSの適用方法などについて詳述してリンク
+      *  :ref:`exp-text-custom-css`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.12:
 
@@ -208,13 +208,14 @@
       <details>
 
    意図
-      *  視覚障害者、色弱者がコンテンツを利用できるようにする。
+      *  視覚障害者や色弱者がコンテンツを利用できるようにする。
    チェック内容
       *  テキストはグレースケール表示でも意図が伝わるような文言になっている。
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-grayscale` 
+      *  :ref:`exp-color-only`
+      *  :ref:`exp-grayscale`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.1:
 
@@ -244,7 +245,8 @@
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-contrast` 
+      *  :ref:`exp-contrast`
+      *  :ref:`exp-check-contrast`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.3:
 
@@ -259,6 +261,3 @@
    .. raw:: html
 
       </details>
-
-.. todo:: explanations/text-display.rstを書き直してリンク。
-

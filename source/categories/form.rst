@@ -10,7 +10,7 @@
 適切なラベル付け
 ~~~~~~~~~~~~~~~~
 
-.. todo:: explanations/form-labeling.rstを再編集してリンク
+参考: :ref:`exp-form-labeling`
 
 .. _gl-form-label:
 
@@ -101,7 +101,7 @@
 
 .. _gl-form-color-only:
 
--  [MUST] 必須項目ゃエラー表示に際して、色に加えて他の視覚的要素も用いる。
+-  [MUST] 必須項目やエラー表示に際して、色に加えて他の視覚的要素も用いる。
 
    .. raw:: html
 
@@ -114,8 +114,8 @@
    チェック対象
       |visual|
    参考
-      *  .. todo:: explanations/form-color-only.rstを再編集してリンク (色による表現関係は全部まとめても良いかも)
-      *  :ref:`exp-grayscale` 
+      *  :ref:`exp-color-only`
+      *  :ref:`exp-grayscale`
    対応するWCAG 2.1の達成基準
       *  SC 1.3.3:
 
@@ -139,7 +139,7 @@
 
 .. todo:: 制限時間について、現実的なところを検討する。
 
-.. todo:: explanations/form-timing.rstを再編集してリンク
+参考: :ref:`exp-timing`
 
 .. _gl-form-timing:
 
@@ -196,7 +196,7 @@
       </details>
 
    .. _gl-form-continue:
--  [SHOULD] セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
+-  [SHOULD] 制限時間を超過した場合も、データを失うことなくユーザーが操作を継続できるようにする。
 
    .. raw:: html
 
@@ -221,12 +221,12 @@
 
 .. _form-tab-order:
 
-タブによるフォーカスの移動順序
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Tabキーによるフォーカスの移動順序
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. _gl-form-tab-order:
 
--  [MUST] Tab/SHIFT+Tabでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+-  [MUST] Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
 
    .. raw:: html
 
@@ -239,7 +239,7 @@
    チェック対象
       |behavior| 、 |markup|
    参考
-      *  .. todo:: explanations/form-taborder.rstを再編集してリンク
+      *  :ref:`exp-tab-order-check` 
    対応するWCAG 2.1の達成基準
       *  SC 2.4.3:
 
@@ -256,7 +256,7 @@
 予期できない動的な変化の抑制
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: explanations/form-dynamic-content.rstを再編集してリンク
+参考: :ref:`exp-form-dynamic-content`
 
 .. _gl-form-dynamic-content-focus:
 
@@ -318,11 +318,11 @@
 エラーの扱い
 ~~~~~~~~~~~~
 
-.. todo:: explanations/form-errors.rstを再編集してリンク
+参考: :ref:`exp-form-errors`
 
 .. _gl-form-errors-identify:
 
--  [MUST] 入力エラーがある場合、エラー箇所と内容をテキストで知らせる。
+-  [MUST] 入力エラーがある場合、エラー箇所とエラー内容をテキストで知らせる。
 
    .. raw:: html
 
@@ -345,7 +345,7 @@
       </details>
 
    .. _gl-form-errors-correction:
--  [SHOULD] エラーがある場合に、修正方法を示す。
+-  [SHOULD] 入力エラーがある場合に、修正方法を示す。
 
    .. raw:: html
 
@@ -417,7 +417,7 @@
    チェック対象
       |visual|
    参考
-      *  .. todo:: explanations/form-target-size.rstを再編集してリンク
+      *  :ref:`exp-target-size`
    対応するWCAG 2.1の達成基準
       *  SC 2.5.5:
 

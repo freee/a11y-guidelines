@@ -45,5 +45,5 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  画像: :ref:`image-text-alternative` 
+*  画像: :ref:`image-text-alternative`
 

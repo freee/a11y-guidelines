@@ -10,7 +10,7 @@
 ページ構造
 ~~~~~~~~~~
 
-参考: :ref:`exp-page-structure` 
+参考: :ref:`exp-page-structure`
 
 .. _gl-page-title:
 
@@ -151,7 +151,7 @@
    チェック対象
       |visual| 、 |behavior|
    参考
-      *  :ref:`exp-page-orientation` 
+      *  :ref:`exp-page-orientation`
    対応するWCAG 2.1の達成基準
       *  SC 1.3.4:
 
@@ -167,7 +167,7 @@
 ナビゲーション
 ~~~~~~~~~~~~~~
 
-参考: :ref:`exp-page-navigation` 
+参考: :ref:`exp-page-navigation`
 
 .. _gl-page-consistent-navigation:
 

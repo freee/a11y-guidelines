@@ -132,7 +132,47 @@ Copyright © 2020, freee株式会社
 公開日:
    |published_date|
 
-.. include:: changes.rst
+.. _intro-changes:
+
+更新履歴
+~~~~~~~~~~
+
+`Ver. 202005.0 (2020年5月21日、Global Accessibility Awareness Day) <https://github.com/freee/a11y-guidelines/releases/tag/202005.0>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*  一部文言を修正
+*  色に関するガイドラインについて、色弱者に加えて視覚障害者のアクセスに影響することを「意図」に明記
+*  参考情報の追加:
+
+   -  :ref:`exp-dynamic-content-auto-update`
+   -  :ref:`exp-form-labeling`
+   -  :ref:`exp-color-only`
+   -  :ref:`exp-form-dynamic-content`
+   -  :ref:`exp-form-errors`
+   -  :ref:`exp-target-size`
+   -  :ref:`exp-iot-usage`
+   -  :ref:`exp-iot-text-alternative` 
+   -  :ref:`exp-contrast`
+   -  :ref:`exp-text-custom-css`
+   -  :ref:`exp-keyboard-notrap`
+   -  :ref:`exp-input-device-various`
+   -  :ref:`exp-multimedia-perceivable`
+   -  :ref:`exp-multimedia-autoplay`
+   -  :ref:`exp-multimedia-content-access`
+   -  :ref:`exp-tab-order-check`
+
+*  参考情報の更新:
+
+   -  :ref:`exp-markup-component` : AccessibleNameとroleについて加筆
+
+*  誤字修正
+*  CSSなど修正
+
+`Ver. 202004.0 (2020年4月30日) <https://github.com/freee/a11y-guidelines/releases/tag/202004.0>`_
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*  初版公開
+
 
 .. _WCAG20: https://www.w3.org/TR/WCAG20/
 .. _WCAG21: https://www.w3.org/TR/WCAG21/

@@ -27,4 +27,4 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  テキスト: :ref:`text-wording` 
+*  テキスト: :ref:`text-wording`

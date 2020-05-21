@@ -1,4 +1,4 @@
-.. _category-dynamic_content:
+.. _category-dynamic-content:
 
 動的コンテンツ
 ------------------------------------
@@ -7,12 +7,12 @@
 
 動的コンテンツとは、自動的、またはユーザーの操作を受けて変化するものです。そのような変化には、表示されているものの変更に加えて、ページ遷移なども含まれる場合があります。
 
-.. _dynamic_content-behavior-on-interaction:
+.. _dynamic-content-behavior-on-interaction:
 
 ユーザーの操作に伴う挙動
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _gl-dynamic_content-focus:
+.. _gl-dynamic-content-focus:
 
 -  [MUST] OnFocus, OffFocusが以下のような変化を発生させないようにする。
 
@@ -30,6 +30,8 @@
       *  Tab/Shift+Tabキーでフォーカスを移動させたときに、このような挙動が発生するコンポーネントがない。
    チェック対象
       |functionality| 、 |behavior|
+   参考
+      *  :ref:`exp-tab-order-check` 
    対応するWCAG 2.1の達成基準
       *  SC 3.2.1:
 
@@ -40,10 +42,10 @@
 
       </details>
 
-   .. _gl-dynamic_content-hover:
+   .. _gl-dynamic-content-hover:
 -  [SHOULD] ホバーで表示されるコンテンツについて、以下のすべてを満たす。
 
-   -  ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。  (ESCキーで消える、など)
+   -  ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。  (Escキーで消える、など)
    -  ポインターを、ホバーで表示されたコンテンツ上に移動しても、コンテンツが消えない。
    -  ホバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、ホバーで表示されたコンテンツを非表示にする。
 
@@ -58,7 +60,7 @@
    チェック対象
       |behavior|
    参考
-      *  :ref:`exp-hover-content` 
+      *  :ref:`exp-hover-content`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.13:
 
@@ -69,16 +71,12 @@
 
       </details>
 
-.. _dynamic_content-auto-updated:
+.. _dynamic-content-status:
 
-自動的に変化するコンテンツ
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+ステータス・メッセージ
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: 自動的に変化するコンテンツについて、チェック内容を検討
-
-.. todo:: explanations/page-medium.rstを再検討
-
-.. _gl-dynamic_content-status:
+.. _gl-dynamic-content-status:
 
 -  [MUST] ステータス・メッセージについて、以下のすべてを満たす。
 
@@ -96,7 +94,7 @@
    チェック対象
       |behavior| 、 |markup|
    参考
-      *  :ref:`exp-dynamic_content-status` 
+      *  :ref:`exp-dynamic-content-status`
    対応するWCAG 2.1の達成基準
       *  SC 4.1.3:
 
@@ -107,7 +105,18 @@
 
       </details>
 
-   .. _gl-dynamic_content-pause-movement:
+
+.. _dynamic-content-auto-updated:
+
+自動的に変化するコンテンツ
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo:: 自動的に変化するコンテンツについて、チェック内容を検討
+
+参考: :ref:`exp-dynamic-content-auto-update`
+
+.. _gl-dynamic-content-pause-movement:
+
 -  [MUST] 動きのある、点滅している、又はスクロールしている情報が、(1)自動的に開始し、(2) 5 秒よりも長く継続し、かつ、(3)その他のコンテンツと並行して提示される場合、ユーザーがそれらを一時停止、停止、又は非表示にすることができるようにする。
 
    .. raw:: html
@@ -132,7 +141,7 @@
 
       </details>
 
-   .. _gl-dynamic_content-pause-refresh:
+   .. _gl-dynamic-content-pause-refresh:
 -  [MUST] 自動更新する情報が、(1) 自動的に開始し、 (2)その他のコンテンツと並行して提示される場合、ユーザーがそれを一時停止、停止、もしくは非表示にする、又はその更新頻度を調整することができるようにする。
 
    .. raw:: html
@@ -157,7 +166,7 @@
 
       </details>
 
-   .. _gl-dynamic_content-no-flashing:
+   .. _gl-dynamic-content-no-flashing:
 -  [MUST] どの 1 秒間においても 3回を超える閃光を放つものがないようにする。
 
    .. raw:: html
@@ -187,7 +196,7 @@
 
       </details>
 
-   .. _gl-dynamic_content-no-interrupt:
+   .. _gl-dynamic-content-no-interrupt:
 -  [SHOULD] 緊急性が高い情報を提示する場合を除いて、プッシュ通知や自動更新などによる割り込みを発生させない。
 
    .. raw:: html

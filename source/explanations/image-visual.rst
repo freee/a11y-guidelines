@@ -14,9 +14,9 @@
 その問題を回避するために、ガイドラインではこのコントラストを一定以上確保することを求めています。
 [SHOULD]ではより高いコントラスト比が要求されています。
 
-参考: :ref:`exp-contrast` 
+参考: :ref:`exp-check-contrast`
 
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  画像: :ref:`image-visual` 
+*  画像: :ref:`image-visual`

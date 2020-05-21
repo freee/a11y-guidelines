@@ -7,16 +7,18 @@
 
 たとえば写真に写っている人物の名札にある名前など、文字情報意外の視覚的情報が、コンテンツのより重要な要素となっているようなものは、このガイドラインの対象外です。
 
-参考: WCAG 2.1では ``images of text`` という用語が用いられ、WCAG 2.1日本語訳では「文字画像」という訳語が当てられています。
+注: WCAG 2.1では ``images of text`` という用語が用いられ、WCAG 2.1日本語訳では「文字画像」という訳語が当てられています。
+
+参考: :ref:`exp-iot-usage`
 
 .. _iot-avoid-usage:
 
-利用の回避
+使用の回避
 ~~~~~~~~~~
 
 .. _gl-iot-avoid-usage:
 
--  [MUST] 画像化したテキストを用いないと実現できない表現が不可欠な場合 (例: ロゴ) を除いて、文字情報は画像化せず、テキスト・データで提供する。画像化されたテキストを用いる場合は、以下に示すコントラストに関する要件と、代替情報に関する要件を満たす。
+-  [MUST] 画像化されたテキストを用いないと実現できない表現が不可欠な場合 (例: ロゴ) を除いて、文字情報は画像化せず、テキスト・データで提供する。画像化されたテキストを用いる場合は、以下に示すコントラストに関する要件と、代替情報に関する要件を満たす。
 
    .. raw:: html
 
@@ -29,8 +31,6 @@
       *  画像化されたテキストは、自社および他社のロゴ、バナー以外には用いられていない。
    チェック対象
       |visual| 、 |markup|
-   参考
-      .. todo:: explanations/images_of_text-avoid-usage.rstを書き直してリンク
    対応するWCAG 2.1の達成基準
       *  SC 1.4.5:
 
@@ -61,7 +61,7 @@
    チェック対象
       |markup|
    参考
-      .. todo:: explanations/images_of_text-text-alternative.rstを書き直してリンク
+      *  :ref:`exp-iot-text-alternative`
    対応するWCAG 2.1の達成基準
       *  SC 1.1.1:
 
@@ -86,7 +86,8 @@
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-contrast` 
+      *  :ref:`exp-contrast`
+      *  :ref:`exp-check-contrast`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.11:
 
@@ -115,8 +116,8 @@
    チェック対象
       |visual|
    参考
-      *  :ref:`exp-contrast` 
-      *  .. todo:: explanations/images_of_text-contrast.rstを書き直してリンク
+      *  :ref:`exp-contrast`
+      *  :ref:`exp-check-contrast`
    対応するWCAG 2.1の達成基準
       *  SC 1.4.3:
 
