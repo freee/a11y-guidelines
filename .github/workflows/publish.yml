@@ -39,7 +39,7 @@ jobs:
     - name: Publish to S3
       env:
         AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync build/html/ s3://${AWS_BUCKET}/ --quiet
+      run: aws s3 sync --delete build/html/ s3://${AWS_BUCKET}/ --quiet
 
     - name: Prepare the HTML Archive
       run: |
