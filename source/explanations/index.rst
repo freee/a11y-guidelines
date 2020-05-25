@@ -11,7 +11,7 @@
    page-structure
    page-orientation
    page-navigation
-   timing   
+   timing
    text-wording
    images_of_text-usage
    images_of_text-text-alternative
@@ -42,4 +42,3 @@
 
 
 
- 

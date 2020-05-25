@@ -10,7 +10,7 @@
 文言
 ~~~~
 
-参考: :ref:`exp-text-wording`
+参考： :ref:`exp-text-wording`
 
 .. _gl-text-multiple-modality:
 
@@ -37,7 +37,7 @@
       </details>
 
    .. _gl-text-heading-label:
--  [MUST] 主題又は目的を説明する見出し及びラベルを付ける。
+-  [MUST] 主題又は目的を説明する見出しおよびラベルを付ける。
 
    .. raw:: html
 
@@ -66,7 +66,7 @@
 自然言語
 ~~~~~~~~~~~~
 
-参考: :ref:`exp-text-lang`
+参考： :ref:`exp-text-lang`
 
 .. _gl-text-page-lang:
 
@@ -120,7 +120,7 @@
 テキスト表示の拡大
 ~~~~~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-magnification`
+参考： :ref:`exp-magnification`
 
 .. _gl-text-zoom:
 
@@ -228,11 +228,11 @@
 
    .. _gl-text-contrast:
 
--  [MUST] 文字色と背景色に十分なコントラスト を確保する。
+-  [MUST] 文字色と背景色に十分なコントラストを確保する。
 
-   -  テキストの文字サイズが22ポイント以上の場合: 3:1以上 ([SHOULD] 4.5:1以上)
-   -  テキストの文字サイズが18ポイント以上で太字の場合: 3:1以上 ([SHOULD] 4.5:1以上)
-   -  その他の場合: 4.5:1以上 ([SHOULD] 7:1以上)
+   -  テキストの文字サイズが22ポイント以上の場合： 3:1以上（[SHOULD] 4.5:1以上）
+   -  テキストの文字サイズが18ポイント以上で太字の場合： 3:1以上（[SHOULD] 4.5:1以上）
+   -  その他の場合： 4.5:1以上（[SHOULD] 7:1以上）
 
    .. raw:: html
 

@@ -13,5 +13,5 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  テキスト: :ref:`text-magnification`
+*  テキスト： :ref:`text-magnification`
 

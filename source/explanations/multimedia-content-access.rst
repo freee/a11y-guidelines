@@ -29,5 +29,5 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  音声・映像コンテンツ: :ref:`multimedia-content-access`
+*  音声・映像コンテンツ： :ref:`multimedia-content-access`
 

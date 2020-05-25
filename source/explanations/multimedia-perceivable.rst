@@ -28,4 +28,4 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  音声・映像コンテンツ: :ref:`multimedia-perceivable`
+*  音声・映像コンテンツ： :ref:`multimedia-perceivable`

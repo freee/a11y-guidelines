@@ -15,4 +15,4 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  フォーム: :ref:`form-dynamic-content`
+*  フォーム： :ref:`form-dynamic-content`

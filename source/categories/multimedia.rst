@@ -1,6 +1,6 @@
 .. _category-multimedia:
 
-音声・映像映像
+音声・映像コンテンツ
 ------------------------------------------------
 
 これらのガイドラインは、音声のみのコンテンツ、音声を含む動画コンテンツ、映像のみの動画コンテンツに関するものです。
@@ -97,10 +97,10 @@
 
 .. _multimedia-content-access:
 
-内容へのアクセス 
+内容へのアクセス
 ~~~~~~~~~~~~~~~~
 
-参考: :ref:`exp-multimedia-content-access`
+参考： :ref:`exp-multimedia-content-access`
 
 .. _gl-multimedia-text-alternative:
 

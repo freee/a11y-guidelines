@@ -5,7 +5,7 @@ Reactコンポーネントなどのアクセシビリティー
 
 HTMLで記述されるコンテンツの場合は、仕様に則って適切なセマンティクスを示すマークアップをすることで、支援技術が利用しやすいコンテンツにすることができます。一方、JavaScriptで記述されたものなど、標準的なHTML以外のコンポーネントを利用する場合、適切にHTMLでマークアップした場合同様に、支援技術が適切にコンテンツを解析し、ユーザーに提示できるようにする必要があります。
 
-まず重要なことは、コンポーネントの名前 (nameやAccessibleNameなどとも呼ばれます) と、roleが定義されていて、支援技術が取得できる状態になっていることです。
+まず重要なことは、コンポーネントの名前（nameやAccessibleNameなどとも呼ばれます）と、roleが定義されていて、支援技術が取得できる状態になっていることです。
 
 AccessibleNameは、支援技術が利用するための名前で、スクリーン・リーダーの読み上げや、音声認識を用ている場合のクリック・ターゲットの指定などに利用されます。
 HTMLの要素においては、要素の中のテキスト、特定の属性の値、その要素に関連付けられた別の要素などを利用して自動的に付与されます。
@@ -13,13 +13,13 @@ HTMLの要素においては、要素の中のテキスト、特定の属性の�
 一方roleは、その要素やコンポーネントの役割を示すもので、支援技術の挙動に影響します。
 HTMLの要素においては、要素ごとにデフォルトが決まっていて、それとは異なるroleを割り当てる必要があるときには ``role`` 属性を用います。
 
-例1: ``a`` 要素の場合、要素の中のテキスト (リンク・テキスト) がAccessibleName、デフォルトのroleはlink。
+例1： ``a`` 要素の場合、要素の中のテキスト（リンク・テキスト）がAccessibleName、デフォルトのroleはlink。
 
-例2: ``img`` 要素の場合、 ``alt`` 属性の値がAccessibleName、デフォルトのroleはimg。
+例2： ``img`` 要素の場合、 ``alt`` 属性の値がAccessibleName、デフォルトのroleはimg。
 
-例3: ``<input type="checkbox" />`` の場合、関連付けられた ``label`` 要素の中身がAccessibleName、デフォルトのroleはcheckbox。
+例3： ``<input type="checkbox" />`` の場合、関連付けられた ``label`` 要素の中身がAccessibleName、デフォルトのroleはcheckbox。
 
-参考: 要素ごとのAccessibleNameとroleの付与については、 `HTML
+参考： 要素ごとのAccessibleNameとroleの付与については、 `HTML
 Accessibility API Mappings
 1.0 <https://www.w3.org/TR/html-aam-1.0/>`_ で定義されています。
 
@@ -38,4 +38,4 @@ WCAG 2.1の解説書では、フォーカスの状態の取得と制御、チェ
 関連ガイドライン
 ~~~~~~~~~~~~~~~~~~
 
-*  マークアップ: :ref:`gl-markup-component`
+*  マークアップ： :ref:`gl-markup-component`
