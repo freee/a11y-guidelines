@@ -17,6 +17,12 @@ freee株式会社が作成しているアクセシビリティー・ガイドラ
 
 誤字脱字の修正など、エディトリアルな修正の提案については、issueまたはpull requestを作成してください。
 
+## 日本語の表記ルールについて
+
+このガイドラインは、 原則として[日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html)に従って記述しています。
+
+ソースコード中の `.textlintrc` に、現在使用しているtextlintのルールが含まれていますが、現時点では不完全な状態です。
+
 ## ソースについて
 
 この文書はreStructuredTextで記述し、Sphinxで処理しています。
