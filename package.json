@@ -1,0 +1,34 @@
+{
+  "name": "freee-a11y-guidelines",
+  "version": "1.0.0",
+  "description": "freeeアクセシビリティー・ガイドライン",
+  "main": "index.js",
+  "dependencies": {
+    "@textlint-ja/textlint-rule-no-synonyms": "^1.0.2",
+    "sudachi-synonyms-dictionary": "^4.1.0",
+    "textlint": "^11.6.3",
+    "textlint-filter-rule-whitelist": "^2.0.0",
+    "textlint-plugin-rst": "^0.1.1",
+    "textlint-rule-ja-hiragana-fukushi": "^1.2.0",
+    "textlint-rule-ja-hiragana-hojodoushi": "^1.0.4",
+    "textlint-rule-ja-hiragana-keishikimeishi": "^1.0.2",
+    "textlint-rule-ja-unnatural-alphabet": "^2.0.1",
+    "textlint-rule-no-nfd": "^1.0.2",
+    "textlint-rule-no-todo": "^2.0.1",
+    "textlint-rule-preset-jtf-style": "^2.3.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freee/a11y-guidelines.git"
+  },
+  "author": "freee, K.K.",
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/freee/a11y-guidelines/issues"
+  },
+  "homepage": "https://github.com/freee/a11y-guidelines#readme"
+}

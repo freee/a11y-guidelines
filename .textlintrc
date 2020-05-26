@@ -1,0 +1,51 @@
+{
+  "filters": {
+    "whitelist": {
+      "allow": [
+        "/\\.\\. +_[-a-z_]+:/m",
+        "/\\s*\\[(MUST|SHOULD)\\]\\s*/m",
+        "/:ref:`.+`/m",
+        "/[-a-z`_]+ +(要素|属性)/m",
+        "/^\\s*[-\\*]\\s+[「（]/m",
+        "/^\\s*[0-9#]\\.\\s+[「（]/m",
+        "/\\|.+\\| +[「（]/m"
+      ]
+    }
+  },
+  "plugins": [
+    "rst"
+  ],
+  "rules": {
+    "no-nfd": true,
+    "textlint-rule-no-todo": true,
+    "preset-jtf-style": {
+      "1.1.3.箇条書き": false,
+      "4.3.3.かぎかっこ「」": false,
+      "4.3.7.山かっこ<>": false
+    },
+    "@textlint-ja/no-synonyms": {
+      /**
+      * 許可するワードの配列
+      * ワードは完全一致で比較し、一致した場合は無視されます
+      * 例) ["ウェブアプリ", "ウェブアプリケーション"]
+      */
+      // allows: ["ウェブアプリ", "ウェブアプリケーション"],
+      /**
+      * 同じ語形の語の中でのアルファベットの表記揺れを許可するかどうか
+      * trueの場合はカタカナとアルファベットの表記ゆれを許可します
+      * 例) 「ブログ」と「blog」
+      * Default: true
+      */
+      "allowAlphabet": true
+    },
+    "ja-hiragana-keishikimeishi": true,
+    "ja-hiragana-fukushi": true,
+    "ja-hiragana-hojodoushi": true,
+    "ja-unnatural-alphabet": {
+      "allow": [
+        "/`*[-a-z]`* *(属性|要素)/g",
+        "/[A-Z]/"
+      ]
+    }
+  }
+}
