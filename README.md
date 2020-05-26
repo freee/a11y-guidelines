@@ -39,6 +39,11 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202005.1](https://github.com/freee/a11y-guidelines/releases/202005.1/) (2020年5月26日)
+
+* [日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html)に基づき表記揺れなど修正 ([#7](https://github.com/freee/a11y-guidelines/issues/7))
+* 誤字修正
+
 ### [Ver. 202005.0](https://github.com/freee/a11y-guidelines/releases/202005.0/) (2020年5月21日、Global Accessibility Awareness Day)
 
 * 一部文言を修正
