@@ -38,9 +38,9 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
 関連ガイドライン
 ^^^^^^^^^^^^^^^^
 
-*  入力ディバイス： :ref:`マウスまたはタッチUIを使わないと実行できないような機能を作らず、キーボードによる操作を可能にする。 <gl-input-device-keyboard-operable>`
-*  入力ディバイス： :ref:`マウスまたはタッチUIを使わないと実行できないような機能を作らず、キーボードによる操作を可能にする。 <gl-input-device-keyboard-operable>`
-*  入力ディバイス： :ref:`キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。 <gl-input-device-focus-indicator>`
+*  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
+*  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
+*  入力ディバイス： :ref:`gl-input-device-focus-indicator`
 
 フォーカスの移動順序
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -64,9 +64,9 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
 関連ガイドライン
 ^^^^^^^^^^^^^^^^
 
-*  フォーム： :ref:`Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。 <gl-form-tab-order>`
-*  入力ディバイス： :ref:`Tab/Shift+Tabキーなどでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。 <gl-input-device-focus>`
-*  リンク： :ref:`Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。 <gl-link-tab-order>`
+*  フォーム： :ref:`gl-form-tab-order`
+*  入力ディバイス： :ref:`gl-input-device-focus`
+*  リンク： :ref:`gl-link-tab-order`
 
 ユーザーの混乱を招く挙動
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,5 +85,5 @@ Tab/Shift+Tabキーでフォーカスを移動した際に、ユーザーが予�
 関連ガイドライン
 ^^^^^^^^^^^^^^^^
 
-*  動的コンテンツ： :ref:`OnFocus, OffFocusが以下のような変化を発生させないようにする…… <gl-dynamic-content-focus>`
+*  動的コンテンツ： :ref:`gl-dynamic-content-focus`
 *  フォーム： :ref:`form-dynamic-content`

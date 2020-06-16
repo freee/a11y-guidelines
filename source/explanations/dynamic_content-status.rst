@@ -15,4 +15,4 @@
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  動的コンテンツ： :ref:`ステータス・メッセージであることが分かるように適切なマークアップをする。 <gl-dynamic-content-status>`
+*  動的コンテンツ： :ref:`gl-dynamic-content-status`

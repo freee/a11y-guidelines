@@ -17,6 +17,7 @@
    images_of_text-text-alternative
    contrast
    magnification
+   dynamic_content-maintain-dom-tree
    dynamic_content-hover
    dynamic_content-status
    dynamic_content-auto-updated
@@ -25,7 +26,6 @@
    form-dynamic-content
    form-errors
    check-contrast
-   link-text-wording
    text-lang
    text-custom-css
    image-text-alternative

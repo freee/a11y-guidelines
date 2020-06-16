@@ -75,7 +75,7 @@ The Nu Html Checkerを用いたHTMLのバリデーション
 関連ガイドライン
 ^^^^^^^^^^^^^^^^^^
 
-*  マークアップ： :ref:`仕様に準拠したマークアップを行う。 <gl-markup-valid>`
+*  マークアップ： :ref:`gl-markup-valid`
 
 .. _v.nu: https://github.com/validator/validator/
 .. _w3c_validator: https://validator.w3.org/nu/

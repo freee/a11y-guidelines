@@ -44,9 +44,9 @@ Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が�
 関連ガイドライン
 ~~~~~~~~~~~~~~~~
 
-*  アイコン： :ref:`背景色とのコントラストを3:1以上にする。 <gl-icon-contrast>`
-*  画像： :ref:`画像の隣接領域の色とのコントラストを3:1以上にする。 <gl-image-adjacent-contrast>`
-*  画像： :ref:`画像内のテキストや、重要な情報を伝える視覚的要素の色と背景の色に、十分なコントラストを確保する。 <gl-image-text-contrast>`
-*  画像化されたテキスト： :ref:`隣接領域の色とのコントラストを3:1以上にする。 <gl-iot-adjacent-contrast>`
-*  画像化されたテキスト： :ref:`画像内のテキストの色と背景の色に十分なコントラストを確保する。 <gl-iot-text-contrast>`
-*  テキスト： :ref:`文字色と背景色に十分なコントラストを確保する。 <gl-text-contrast>`
+*  アイコン： :ref:`gl-icon-contrast`
+*  画像： :ref:`gl-image-adjacent-contrast`
+*  画像： :ref:`gl-image-text-contrast`
+*  画像化されたテキスト： :ref:`gl-iot-adjacent-contrast`
+*  画像化されたテキスト： :ref:`gl-iot-text-contrast`
+*  テキスト： :ref:`gl-text-contrast`
