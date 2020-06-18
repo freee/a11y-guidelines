@@ -45,6 +45,17 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202006.0](https://github.com/freee/a11y-guidelines/releases/202006.0/) (2020年6月18日)
+
+* ガイドライン部分の文書構造を見直し
+* [入力ディバイス](http://a11y-guidelines.freee.co.jp/categories/input_device.html)に関するガイドラインの構成を一部変更（内容に変更無し）
+* コントラスト関連のガイドラインで、文字サイズの表記をpxとptを併記するように変更
+* [動的コンテンツ](http://a11y-guidelines.freee.co.jp/categories/dynamic_content.html)に関するガイドラインにガイドラインを1項目追加： [[MUST] 適切なDOMツリーを維持する](http://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-maintain-dom-tree)
+* その他内容の変更を伴わないガイドライン文言の変更
+* 「チェック内容」と「チェック対象」を対にして表記するように変更
+* チェック内容の追加と文言変更
+* 「意図」について、一部内容の変更を伴わない文言変更と追記
+
 ### [Ver. 202005.1](https://github.com/freee/a11y-guidelines/releases/202005.1/) (2020年5月26日)
 
 * [日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html)に基づき表記揺れなど修正 ([#7](https://github.com/freee/a11y-guidelines/issues/7))
