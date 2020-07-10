@@ -38,7 +38,7 @@
    multimedia-perceivable
    multimedia-autoplay
    multimedia-content-access
-
+   screen-reader-check
 
 
 
