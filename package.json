@@ -4,7 +4,7 @@
   "description": "freeeアクセシビリティー・ガイドライン",
   "main": "index.js",
   "dependencies": {
-    "@textlint-ja/textlint-rule-no-synonyms": "^1.0.2",
+    "@textlint-ja/textlint-rule-no-synonyms": "^1.1.0",
     "sudachi-synonyms-dictionary": "^4.1.0",
     "textlint": "^11.6.3",
     "textlint-filter-rule-whitelist": "^2.0.0",
