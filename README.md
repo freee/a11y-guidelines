@@ -45,6 +45,10 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### 次期リリース
+
+* 誤字修正 ([#10](https://github.com/freee/a11y-guidelines/pull/10), [#11](https://github.com/freee/a11y-guidelines/pull/11))
+
 ### [Ver. 202007.0](https://github.com/freee/a11y-guidelines/releases/202007.0/) (2020年7月10日)
 
 * 参考情報追加：[スクリーン・リーダーを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check.html#exp-screen-reader-check)
