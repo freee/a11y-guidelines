@@ -20,7 +20,7 @@
 ガイドライン
    [MUST] ユーザーの操作によってコンテンツが増減するようなページでは、どの状態においても、最初から順に読み進めた場合にコンテンツの意味が正しく伝わるような順序にDOMツリーを維持する。
 チェック内容
-   *  |behavior|： ページがどの状態でも、スクリーン・リーダーで読み上げさせたとき、内容的、および視覚的に自然な順序で読み上げられる。
+   .. include:: ../checks/inc/gl-dynamic-content-maintain-dom-tree.rst
 
 .. raw:: html
 
@@ -65,8 +65,7 @@
    -  モーダル・ダイアログの表示
 
 チェック内容
-   *  |functionality|： このようなコンポーネントを作らない。
-   *  |behavior|： Tab/Shift+Tabキーでフォーカスを移動させたときに、このような挙動が発生するコンポーネントがない。
+   .. include:: ../checks/inc/gl-dynamic-content-focus.rst
 
 .. raw:: html
 
@@ -107,7 +106,7 @@
    -  ホバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、ホバーで表示されたコンテンツを非表示にする。
 
 チェック内容
-   *  |behavior|： ホバーで表示されるすべてのコンテンツは、このガイドラインに挙げられている項目を満たしている。
+   .. include:: ../checks/inc/gl-dynamic-content-hover.rst
 
 .. raw:: html
 
@@ -121,7 +120,7 @@
 参考
 ````
 
-*  :ref:`exp-hover-content`
+*  :ref:`exp-dynamic-content-hover`
 
 対応するWCAG 2.1の達成基準
 ````````````````````````````
@@ -152,8 +151,7 @@
    -  ステータス・メッセージであることが分かるように適切なマークアップをする。
 
 チェック内容
-   *  |behavior|： 操作の結果などを伝えるステータス・メッセージは、適切にスクリーン・リーダーで自動的に読み上げられる。
-   *  |markup|： 操作の結果などを伝えるステータス・メッセージには、適切にaria-live属性が付与されている。
+   .. include:: ../checks/inc/gl-dynamic-content-status.rst
 
 .. raw:: html
 
@@ -187,7 +185,7 @@
 自動的に変化するコンテンツ
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-参考： :ref:`exp-dynamic-content-auto-update`
+参考： :ref:`exp-dynamic-content-auto-updated`
 
 .. _gl-dynamic-content-pause-movement:
 
@@ -198,7 +196,7 @@
    [MUST] 同じページ上に、自動的に開始し5秒以上継続する、点滅やスクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
    そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
 チェック内容
-   *  |visual|、|behavior|：点滅、スクロール、動きを伴うコンテンツがない。
+   .. include:: ../checks/inc/gl-dynamic-content-pause-movement.rst
 
 .. raw:: html
 
@@ -230,7 +228,7 @@
    [MUST] 予め設定された間隔で自動的に内容が更新されたり非表示になったりするコンテンツを作らない。
    そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、非表示にすることができるか、更新頻度を調整できるようにする。
 チェック内容
-   *  |visual|、|behavior|：自動更新されるコンテンツがない。
+   .. include:: ../checks/inc/gl-dynamic-content-pause-refresh.rst
 
 .. raw:: html
 
@@ -261,7 +259,7 @@
 ガイドライン
    [MUST] どの1秒間においても3回を超える閃光を放つものがないようにする。
 チェック内容
-   *  |visual|、|behavior|：光り続けているようなコンテンツがない。
+   .. include:: ../checks/inc/gl-dynamic-content-no-flashing.rst
 
 .. raw:: html
 
@@ -297,7 +295,7 @@
 ガイドライン
    [SHOULD] 緊急性が高い情報を提示する場合を除いて、プッシュ通知や自動更新などによる割り込みを発生させない。
 チェック内容
-   *  |visual|、|behavior|：ユーザーが予期しない形で発生する、画面の内容を大きく変更するような通知や自動的に表示されるモーダル・ダイアログがない。
+   .. include:: ../checks/inc/gl-dynamic-content-no-interrupt.rst
 
 .. raw:: html
 

@@ -20,9 +20,9 @@ import datetime
 project = 'freeeアクセシビリティー・ガイドライン'
 copyright = '2020, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202007.0'
+version = 'Ver. 202008.0'
 release = version
-publishedDate = u'2020年7月10日'
+publishedDate = u'2020年8月21日'
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -37,7 +37,7 @@ if 'internal' in tags:
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-        'japanesesupport',
+        'sphinxcontrib.trimblank',
         'sphinx.ext.todo',
 ]
 
@@ -55,13 +55,15 @@ language = 'ja'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = []
+exclude_patterns = [
+  "checks/inc/*",
+  "intro/ChangeLog/*"
+]
 
 # substitution definitions:
 rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
 
-.. include:: /defs.txt
 .. include:: /WCAG21-SC-defs.txt
 """.format(
   pubdate = publishedDate

@@ -3,10 +3,6 @@
 ログイン・セッション
 ----------------------------------------
 
-.. todo:: 制限時間について、現実的なところを検討する。
-
-.. todo:: 制限時間のチェック内容を検討
-
 これらのガイドラインは、ログイン・セッション管理に関するものです。
 
 .. _login-session-timeout:
@@ -31,7 +27,7 @@
    -  20時間の例外： タイムアウトが20時間よりも長い。
 
 チェック内容
-   *  |functionality|：
+   .. include:: ../checks/inc/gl-login-session-timing.rst
 
 .. raw:: html
 
@@ -62,7 +58,7 @@
 ガイドライン
    [SHOULD] ログイン・セッションにタイムアウトを設けない。
 チェック内容
-   *  |functionality|：
+   .. include:: ../checks/inc/gl-login-session-no-timing.rst
 
 .. raw:: html
 
@@ -93,7 +89,7 @@
 ガイドライン
    [SHOULD] ログイン・セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
 チェック内容
-   *  |functionality|：
+   .. include:: ../checks/inc/gl-login-session-continue.rst
 
 .. raw:: html
 

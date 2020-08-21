@@ -10,14 +10,15 @@
 キーボードのみでの操作を可能にする
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. _gl-input-device-keyboard-operable:
+
 [MUST] キーボード操作を可能にする
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ガイドライン
    [MUST] マウスまたはタッチUIを使わないと実行できないような機能を作らず、キーボードによる操作を可能にする。
 チェック内容
-   *  |behavior|： 何らかの操作を受け付けるすべてのコンポーネント（リンク、ボタン、フォーム・コントロール、ウィジェットなど）にTab/Shift+Tabキーでフォーカスを移動させることができる。かつ
-   *  |behavior|： フォーカスされたコンポーネントに対する操作がキーボードのみで可能。
+   .. include:: ../checks/inc/gl-input-device-keyboard-operable.rst
 
 .. raw:: html
 
@@ -63,7 +64,7 @@
 ガイドライン
    [MUST] Tab/Shift+Tabキーなどでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
 チェック内容
-   *  |behavior|： Tab/Shift+Tabキーを使ってリンク、フォーム・コントロール、その他のコンポーネント間でフォーカスを移動させたとき、レイアウト的にも文脈的にも自然な順序でフォーカスが移動する。
+   .. include:: ../checks/inc/gl-input-device-focus.rst
 
 .. raw:: html
 
@@ -104,7 +105,7 @@
 ガイドライン
    [MUST] キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
 チェック内容
-   *  |visual|、|behavior|： Tab/Shift+Tabキーでフォーカスを移動したとき、フォーカス可能なすべての要素でフォーカス・インジケーターまたはそれを代替する表示がある。
+   .. include:: ../checks/inc/gl-input-device-focus-indicator.rst
 
 .. raw:: html
 
@@ -140,7 +141,7 @@
 ガイドライン
    [MUST] 動画プレイヤーなど、特定のコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーで抜け出すことができるようにする。
 チェック内容
-   *  |behavior|： 埋め込まれたコンポーネントにフォーカスがある状態で、Tab/Shift+Tabキー、矢印キー、Escキーのいずれかの操作で、そのコンポーネントの外のリンクなどにフォーカスを移動することができ、自動的にフォーカスが元の位置に戻されない。
+   .. include:: ../checks/inc/gl-input-device-no-trap.rst
 
 .. raw:: html
 
@@ -175,8 +176,6 @@
 
 参考： :ref:`exp-input-device-various`
 
-.. _gl-input-device-keyboard-operable:
-
 .. _gl-input-device-use-up-event:
 
 [MUST] ダウン・イベントをトリガーにしない
@@ -185,7 +184,7 @@
 ガイドライン
    [MUST] クリックやタップで実行される機能の実行、完了のトリガーには、ダウン・イベントを使わず、アップ・イベントやクリック・イベントを使い、誤った操作を中断できるようにする。
 チェック内容
-   *  |behavior|： マウス操作を受け付けるコンポーネント上にマウス・ポインターがある状態でマウス・ボタンを押下し、マウス・ポインターをそのコンポーネントから外したうえでボタンを放した場合、その機能が実行されない。
+   .. include:: ../checks/inc/gl-input-device-use-up-event.rst
 
 .. raw:: html
 
@@ -219,8 +218,7 @@
 ガイドライン
    [MUST] キーボード以外の特定の入力ディバイスを使用しないと実行できない機能がない。
 チェック内容
-   *  |functionality|：特定の入力ディバイスで発生するイベントのみをトリガーにした機能がない。かつ
-   *  |functionality|：使用できる入力ディバイスを、特定の時点で検出されたものに限定していない。
+   .. include:: ../checks/inc/gl-input-device-independent.rst
 
 .. raw:: html
 
@@ -264,9 +262,7 @@
    -  操作対象にフォーカスがあるときのみショートカットキーが有効になるようにする。
 
 チェック内容
-   *  |functionality|、|behavior|： プロダクト側でショートカットキーを提供している場合、ショートカットキーを無効にする設定がある。または
-   *  |functionality|、|behavior|： ショートカットキーの割り当て変更ができる。または
-   *  |functionality|、|behavior|： 操作対象のコンポーネントからフォーカスを外した状態でショートカットキーを押してもなにも起こらない。
+   .. include:: ../checks/inc/gl-input-device-shortcut-keys.rst
 
 .. raw:: html
 

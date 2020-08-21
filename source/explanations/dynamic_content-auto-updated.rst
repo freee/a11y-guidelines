@@ -1,4 +1,4 @@
-.. _exp-dynamic-content-auto-update:
+.. _exp-dynamic-content-auto-updated:
 
 自動的に変化するコンテンツの問題点
 ------------------------------------

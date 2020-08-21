@@ -10,7 +10,9 @@ freeeアクセシビリティー・ガイドライン
 
 .. toctree::
    :maxdepth: 2
+   :titlesonly:
 
    intro/index
    categories/index
+   checks/index
    explanations/index

@@ -21,8 +21,7 @@
 ガイドライン
    [MUST] 画像に関する過不足のない説明をテキストで提供する。
 チェック内容
-   *  |markup|： 画像に関する簡潔で過不足ない説明が ``alt`` 属性や ``aria-label`` 属性で付加されている。かつ
-   *  |markup|： 短いテキストでは充分に説明できない場合には、aria-describedby属性を使うなどして、詳細な説明が提供されている。
+   .. include:: ../checks/inc/gl-image-description.rst
 
 .. raw:: html
 
@@ -53,7 +52,7 @@
 ガイドライン
    [MUST] 純粋な装飾目的の画像は、スクリーン・リーダーなどの支援技術が無視するようにする。
 チェック内容
-   *  |markup|： 情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げさせたとき、画像の存在が分からないようになっている。（空の ``alt`` 属性、 ``role="img"`` などの使用）
+   .. include:: ../checks/inc/gl-image-decorative.rst
 
 .. raw:: html
 
@@ -91,7 +90,7 @@
 ガイドライン
    [MUST] 特定の色に何らかの意味を持たせている場合、形状、模様など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
 チェック内容
-   *  |visual|： グレースケール表示でも意図が伝わるようになっている。
+   .. include:: ../checks/inc/gl-image-color-only.rst
 
 .. raw:: html
 
@@ -128,7 +127,7 @@
 ガイドライン
    [MUST] 画像の隣接領域の色とのコントラスト比を3:1以上にする。
 チェック内容
-   *  |visual|： 画像の隣接領域の色とのコントラストが3:1以上になっている。
+   .. include:: ../checks/inc/gl-image-adjacent-contrast.rst
 
 .. raw:: html
 
@@ -170,7 +169,7 @@
    -  その他の場合： 4.5:1以上（[SHOULD] 7:1以上）
 
 チェック内容
-   *  |visual|： 画像内のテキストや、重要な情報を伝える視覚的要素の色と背景の色に、十分なコントラストが確保されている。
+   .. include:: ../checks/inc/gl-image-text-contrast.rst
 
 .. raw:: html
 

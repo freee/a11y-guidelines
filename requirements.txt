@@ -1,3 +1,4 @@
 sphinx >= 3.0
 sphinx_rtd_theme
 docutils-ast-writer
+sphinxcontrib-trimblank

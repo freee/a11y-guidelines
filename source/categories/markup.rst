@@ -20,7 +20,7 @@
 ガイドライン
    [MUST] 文書構造などのセマンティクスを表す適切なマークアップをする。
 チェック内容
-   *  |markup|： 見出し、段落、箇条書きなどが適切にマークアップされている。（事例参照）
+   .. include:: ../checks/inc/gl-markup-semantics.rst
 
 .. raw:: html
 
@@ -37,7 +37,6 @@
 参考
 ````
 
-*  .. todo:: セマンティクス事例集を作ってリンク
 *  :ref:`exp-markup-semantics`
 
 対応するWCAG 2.1の達成基準
@@ -60,7 +59,7 @@
 ガイドライン
    [MUST] 文法的に正しい、仕様に準拠したマークアップを行う。
 チェック内容
-   *  |markup|： validatorやlinterでチェックが通る。
+   .. include:: ../checks/inc/gl-markup-valid.rst
 
 .. raw:: html
 
@@ -107,7 +106,7 @@
    -  支援技術を含むユーザー・エージェントが、コンポーネントの状態、プロパティー、ユーザーが設定可能な値を設定でき、これらの変更を認知できるようにする。
 
 チェック内容
-   *  |markup|： Reactコンポーネントなど、標準的なHTML以外を用いて実装されているコンポーネントについて、スクリーン・リーダーで問題なく利用できることを確認している。
+   .. include:: ../checks/inc/gl-markup-component.rst
 
 .. raw:: html
 
