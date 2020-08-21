@@ -45,9 +45,15 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
-### 次期リリース
+### [Ver. 202008.0](https://github.com/freee/a11y-guidelines/releases/202008.0/) (2020年8月21日)
 
-* 誤字修正 ([#10](https://github.com/freee/a11y-guidelines/pull/10), [#11](https://github.com/freee/a11y-guidelines/pull/11))
+* チェック内容の見直し
+    - チェック対象を「デザイン」、「コード」、「プロダクト」に変更
+    - 全ガイドラインに対するチェック内容の見直しと整理
+    - すべてのチェック内容をまとめた章を追加： [アクセシビリティー・チェック・リスト](https://a11y-guidelines.freee.co.jp/checks/index.html)
+* 参考情報更新
+    - クリック/タッチ・ターゲットのサイズの確認方法についての記述を追加： [クリックやタッチのターゲット・サイズに関連する問題とターゲット・サイズの確認方法](https://a11y-guidelines.freee.co.jp/explanations/target-size.html)
+* 誤字修正 ([#10](https://github.com/freee/a11y-guidelines/pull/10), [#11](https://github.com/freee/a11y-guidelines/pull/11)、他)
 
 ### [Ver. 202007.0](https://github.com/freee/a11y-guidelines/releases/202007.0/) (2020年7月10日)
 
