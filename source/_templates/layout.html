@@ -21,4 +21,14 @@
       gtag('config', '{{ gtm_id }}');
     </script>
   {% endif %}
+  {% if theme_canonical_url %}
+    <meta property="og:title" content="{{ title|striptags|e }}{{ titlesuffix }}" />
+    {% if pagename == "index" %}
+      <meta property="og:type" content="website" />
+    {% else %}
+      <meta property="og:type" content="article" />
+    {% endif %}
+    <meta property="og:image" content="{{ theme_canonical_url }}_static/a11y-gl-ogp.png" />
+    <meta property="og:url" content="{{ theme_canonical_url }}{{ pagename }}{{ file_suffix }}" />
+  {% endif %}
 {% endblock %}
