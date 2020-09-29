@@ -45,6 +45,26 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202009.0](https://github.com/freee/a11y-guidelines/releases/202009.0/) (2020年8月21日)
+
+* テキストの拡大表示に関連するガイドライン、チェック内容、参考情報を更新
+    - 意図をより明確にするために、「200パーセントの拡大表示」を3ガイドラインに分割
+        - 変更前\
+          200パーセントの拡大表示：[MUST]コンテンツや機能を損なうことなくブラウザーのズーム機能で200パーセントまで拡大できるようにする。
+        - 変更後
+           * [[MUST] ズーム機能を用いた200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom)
+           * [[MUST] 文字サイズ変更機能の使用](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enlarge-settings)
+           * [[SHOULD] 文字サイズ変更機能による200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enable-enlarge)
+    - 意図を明確にするために[[SHOULD] 400パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom-reflow)の文言を変更
+    - 関連するチェック内容の変更と追加
+        - 変更： [チェックID: 0321](https://a11y-guidelines.freee.co.jp/checks/index.html#check-0321)、[チェックID: 0322](https://a11y-guidelines.freee.co.jp/checks/index.html#check-0322)
+        - 追加： [チェックID: 0311](https://a11y-guidelines.freee.co.jp/checks/index.html#check-0311)、[チェックID: 0323](https://a11y-guidelines.freee.co.jp/checks/index.html#check-0323)、[チェックID: 0324](https://a11y-guidelines.freee.co.jp/checks/index.html#check-0324)
+    - 関連する参考情報の更新： [拡大表示時のアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/magnification.html)
+* その他参考情報の更新
+    - [色を用いた表現に関する注意点](https://a11y-guidelines.freee.co.jp/explanations/color-only.html)にカラー・ユニバーサル・デザインに関する記述を追加
+    - [スクリーン・リーダーを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check.html)にNVDAのスピーチビューアーに関する説明を追加
+* 誤字修正
+
 ### [Ver. 202008.0](https://github.com/freee/a11y-guidelines/releases/202008.0/) (2020年8月21日)
 
 * チェック内容の見直し
