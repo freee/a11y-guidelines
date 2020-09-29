@@ -45,7 +45,7 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
-### [Ver. 202009.0](https://github.com/freee/a11y-guidelines/releases/202009.0/) (2020年8月21日)
+### [Ver. 202009.0](https://github.com/freee/a11y-guidelines/releases/202009.0/) (2020年9月29日)
 
 * テキストの拡大表示に関連するガイドライン、チェック内容、参考情報を更新
     - 意図をより明確にするために、「200パーセントの拡大表示」を3ガイドラインに分割
