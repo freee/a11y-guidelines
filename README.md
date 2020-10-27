@@ -45,6 +45,27 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202010.0](https://github.com/freee/a11y-guidelines/releases/202010.0/) (2020年10月27日)
+
+**注意** ：以下のチェック実施方法の例の追加に伴い、チェック内容の全項目一覧のURLが変更されています：
+
+旧： `https://a11y-guidelines.freee.co.jp/checks/index.html`  
+新： <https://a11y-guidelines.freee.co.jp/checks/checklist.html>
+
+* チェック内容の追加
+    - [チェックID: 0621](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0621)
+* いくつかのチェック内容について、チェックの実施方法を例として追加
+    - [NVDAを用いたチェック実施方法の例](https://a11y-guidelines.freee.co.jp/checks/examples/nvda.html)
+    - [axeを用いたチェック実施方法の例](https://a11y-guidelines.freee.co.jp/checks/examples/axe.html)
+* 参考情報の追加
+    - [axeを使用したアクセシビリティー・チェック](https://a11y-guidelines.freee.co.jp/explanations/axe.html)
+   - [リンク先の内容を推測しやすくする](https://a11y-guidelines.freee.co.jp/explanations/link-text.html)
+* 参考情報の更新
+    - ARIAライブ・リージョンの実装例と実装時の注意点を追加：[ステータス・メッセージとスクリーン・リーダー](https://a11y-guidelines.freee.co.jp/explanations/dynamic_content-status.html)
+    - `lang` 属性に関する具体的な説明を追加： [lang 属性と音声読み上げ](https://a11y-guidelines.freee.co.jp/explanations/text-lang.html)
+    - ナビゲーションの一貫性について加筆： [使いやすさとアクセシビリティーを改善するナビゲーションの設計と実装](https://a11y-guidelines.freee.co.jp/explanations/page-navigation.html)
+* 誤字修正
+
 ### [Ver. 202009.0](https://github.com/freee/a11y-guidelines/releases/202009.0/) (2020年9月29日)
 
 * テキストの拡大表示に関連するガイドライン、チェック内容、参考情報を更新
