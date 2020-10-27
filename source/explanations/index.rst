@@ -7,7 +7,6 @@
 
    markup-semantics
    markup-component
-   check-tools
    page-structure
    page-orientation
    page-navigation
@@ -17,6 +16,7 @@
    images_of_text-text-alternative
    contrast
    magnification
+   link-text
    dynamic_content-maintain-dom-tree
    dynamic_content-hover
    dynamic_content-status
@@ -25,7 +25,6 @@
    target-size
    form-dynamic-content
    form-errors
-   check-contrast
    text-lang
    text-custom-css
    image-text-alternative
@@ -38,7 +37,4 @@
    multimedia-perceivable
    multimedia-autoplay
    multimedia-content-access
-   screen-reader-check
-
-
-
+   check-tools
