@@ -11,9 +11,9 @@ jobs:
     steps:
     - name: Extract Branch/Tag Names
       run: |
-        echo "::set-env name=NAME::${GITHUB_REF#refs/*/}"
-        echo "::set-env name=BRANCH::${GITHUB_REF#refs/heads/}"
-        echo "::set-env name=TAG::${GITHUB_REF#refs/tags/}"
+        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
     - uses: actions/checkout@v2
 
