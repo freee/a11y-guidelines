@@ -15,4 +15,5 @@ freeeアクセシビリティー・ガイドライン
    intro/index
    categories/index
    checks/index
+   info/index
    explanations/index
