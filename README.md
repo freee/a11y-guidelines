@@ -19,7 +19,7 @@ freee株式会社が作成しているアクセシビリティー・ガイドラ
 
 ## 日本語の表記ルールについて
 
-このガイドラインは、 原則として[日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html)に従って記述しています。
+このガイドラインは、 原則として[日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/tips/styleguide)に従って記述しています。
 
 リポジトリーのルート・ディレクトリーの `.textlintrc` に、現在使用しているtextlintのルールが含まれていますが、現時点では不完全な状態です。
 
@@ -45,7 +45,27 @@ Copyright © 2020, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202011.0](https://github.com/freee/a11y-guidelines/releases/202011.0/) (2020年11月27日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202011.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202011.0)
+
+**注意** ：新たに追加されたガイドラインと、優先度が変更されたガイドラインがあります。
+
+* WCAG 2.1の各達成基準と当ガイドラインの対応表を追加： [WCAG 2.1の各達成基準と当ガイドラインの項目との対応](https://a11y-guidelines.freee.co.jp/info/wcag21-mapping.html)
+* WCAG 2.1の各達成基準の適合レベルと、当ガイドラインの優先度の関係に関する情報を追加： [当ガイドラインの優先度とWCAG 2.1の適合レベルについて](https://a11y-guidelines.freee.co.jp/info/priority.html)
+* 画像化されたテキストに関するガイドラインの見直し： [[SHOULD] 画像化されたテキストを使用しない](https://a11y-guidelines.freee.co.jp/categories/images_of_text.html#gl-iot-avoid-usage)
+    - 変更前：画像化されたテキストを用いていない、または用いられている画像化されたテキストがコントラスト比と代替情報に関するガイドラインを満たしている場合に[MUST]の条件を満たす
+    - 変更後：画像化されたテキストが用いられていない場合は[SHOULD]の条件を満たし、用いられている画像化されたテキストがコントラスト比と代替情報に関するガイドラインを満たしている場合は[MUST]の条件を満たす
+* テキストの代替の音声・映像コンテンツの音声解説に関するガイドラインを追加： [[SHOULD] 音声解説の提供](https://a11y-guidelines.freee.co.jp/categories/multimedia.html#gl-multimedia-video-description-no-exception)
+    - 対応するチェック内容を追加： [チェックID: 1562](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1562)
+* [入力ディバイス： [MUST] ショートカット・キーを提供する場合](https://a11y-guidelines.freee.co.jp/categories/input_device.html#gl-input-device-shortcut-keys)の優先度を[SHOULD]から[MUST]に変更
+* ARIAランドマークに関する用語の見直しと統一（内容に変更無し）
+* 一部チェック内容について、文言の見直し（内容に変更無し）
+* 誤字修正
+
 ### [Ver. 202010.0](https://github.com/freee/a11y-guidelines/releases/202010.0/) (2020年10月27日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202010.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202010.0)
 
 **注意** ：以下のチェック実施方法の例の追加に伴い、チェック内容の全項目一覧のURLが変更されています：
 
@@ -68,6 +88,8 @@ Copyright © 2020, freee株式会社
 
 ### [Ver. 202009.0](https://github.com/freee/a11y-guidelines/releases/202009.0/) (2020年9月29日)
 
+参考： [freeeアクセシビリティー・ガイドラインVer. 202009.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202009.0)
+
 * テキストの拡大表示に関連するガイドライン、チェック内容、参考情報を更新
     - 意図をより明確にするために、「200パーセントの拡大表示」を3ガイドラインに分割
         - 変更前\
@@ -88,6 +110,8 @@ Copyright © 2020, freee株式会社
 
 ### [Ver. 202008.0](https://github.com/freee/a11y-guidelines/releases/202008.0/) (2020年8月21日)
 
+参考： [freeeアクセシビリティー・ガイドラインVer. 202008.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202008.0)
+
 * チェック内容の見直し
     - チェック対象を「デザイン」、「コード」、「プロダクト」に変更
     - 全ガイドラインに対するチェック内容の見直しと整理
@@ -97,6 +121,8 @@ Copyright © 2020, freee株式会社
 * 誤字修正 ([#10](https://github.com/freee/a11y-guidelines/pull/10), [#11](https://github.com/freee/a11y-guidelines/pull/11)、他)
 
 ### [Ver. 202007.0](https://github.com/freee/a11y-guidelines/releases/202007.0/) (2020年7月10日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202007.0を公開しました](https://developers.freee.co.jp/entry//a11y-guidelines-202007.0)
 
 * 参考情報追加：[スクリーン・リーダーを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check.html#exp-screen-reader-check)
 * 参考情報更新
@@ -126,6 +152,8 @@ Copyright © 2020, freee株式会社
 
 ### [Ver. 202006.0](https://github.com/freee/a11y-guidelines/releases/202006.0/) (2020年6月18日)
 
+参考： [freeeアクセシビリティー・ガイドラインVer. 202006.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202007.0)
+
 * ガイドライン部分の文書構造を見直し
 * [入力ディバイス](http://a11y-guidelines.freee.co.jp/categories/input_device.html)に関するガイドラインの構成を一部変更（内容に変更無し）
 * コントラスト関連のガイドラインで、文字サイズの表記をpxとptを併記するように変更
@@ -137,10 +165,12 @@ Copyright © 2020, freee株式会社
 
 ### [Ver. 202005.1](https://github.com/freee/a11y-guidelines/releases/202005.1/) (2020年5月26日)
 
-* [日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/jp/style_guide/styleguide_top.html)に基づき表記揺れなど修正 ([#7](https://github.com/freee/a11y-guidelines/issues/7))
+* [日本翻訳連盟](https://www.jtf.jp/)が公開している[JTF日本語標準スタイルガイド(翻訳用）](https://www.jtf.jp/tips/styleguide)に基づき表記揺れなど修正 ([#7](https://github.com/freee/a11y-guidelines/issues/7))
 * 誤字修正
 
 ### [Ver. 202005.0](https://github.com/freee/a11y-guidelines/releases/202005.0/) (2020年5月21日、Global Accessibility Awareness Day)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202005.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202005.0)
 
 * 一部文言を修正
 * 色に関するガイドラインについて、色弱者に加えて視覚障害者のアクセスに影響することを「意図」に明記
@@ -167,5 +197,7 @@ Copyright © 2020, freee株式会社
 * CSSなど修正
 
 ### [Ver. 202004.0](https://github.com/freee/a11y-guidelines/releases/202004.0/) (2020年4月30日)
+
+参考： [freeeアクセシビリティー・ガイドラインを一般公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202004.0)
 
 * 初版公開
