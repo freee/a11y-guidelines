@@ -41,9 +41,17 @@ HTMLファイルの生成には、Python 3.x (開発環境では3.7.xを使っ�
 ![クリエイティブ・コモンズ・ライセンス](https://i.creativecommons.org/l/by/4.0/88x31.png)
 「freeeアクセシビリティー・ガイドライン」は、freee株式会社が作成したもので、[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](http://creativecommons.org/licenses/by/4.0/)で提供されています。
 
-Copyright © 2020, freee株式会社
+Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
+
+### [Ver. 202101.0](https://github.com/freee/a11y-guidelines/releases/202101.0/) (2021年1月5日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202101.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202101.0)
+
+* 参考情報更新
+   - [Tab/Shift+Tabキーを用いたチェック](https://a11y-guidelines.freee.co.jp/explanations/tab-order-check.html)に、キーボードのみを用いた操作が可能であることを確認する方法として、マウス・ポインターを非表示にする方法を追加
+* 誤字修正
 
 ### [Ver. 202011.0](https://github.com/freee/a11y-guidelines/releases/202011.0/) (2020年11月27日)
 
