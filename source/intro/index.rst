@@ -130,7 +130,7 @@ GitHubリリース・ページ
 
 |cclogo| 「freeeアクセシビリティー・ガイドライン」は、freee株式会社が作成したもので、 `クリエイティブ・コモンズ 表示 4.0 国際 ライセンス <http://creativecommons.org/licenses/by/4.0/>`_ で提供されています。
 
-Copyright © 2020, freee株式会社
+Copyright © 2020-2021, freee株式会社
 
 バージョン情報
 ^^^^^^^^^^^^^^^^
@@ -145,22 +145,15 @@ Copyright © 2020, freee株式会社
 更新履歴
 ~~~~~~~~~~
 
+.. include:: ChangeLog/202101.0.rst
 .. include:: ChangeLog/202011.0.rst
-
 .. include:: ChangeLog/202010.0.rst
-
 .. include:: ChangeLog/202009.0.rst
-
 .. include:: ChangeLog/202008.0.rst
-
 .. include:: ChangeLog/202007.0.rst
-
 .. include:: ChangeLog/202006.0.rst
-
 .. include:: ChangeLog/202005.1.rst
-
 .. include:: ChangeLog/202005.0.rst
-
 .. include:: ChangeLog/202004.0.rst
 
 .. _WCAG20: https://www.w3.org/TR/WCAG20/

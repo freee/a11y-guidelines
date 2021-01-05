@@ -18,11 +18,11 @@ import datetime
 # -- Project information -----------------------------------------------------
 
 project = 'freeeアクセシビリティー・ガイドライン'
-copyright = '2020, freee株式会社'
+copyright = '2020-2021, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202011.0'
+version = 'Ver. 202101.0'
 release = version
-publishedDate = u'2020年11月27日'
+publishedDate = u'2021年1月5日'
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")

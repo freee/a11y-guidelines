@@ -35,10 +35,34 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
    この際、どのコンポーネントがフォーカスされているのかが視覚的に分からないと、目的のボタンにフォーカスがあるかどうかの判断ができません。
    CSSで ``outline: none`` が指定されているなど、フォーカスされていることを示す表示（フォーカス・インジケーター）が消されているとこの問題が発生します。
 
+参考：マウス・ポインターを消して操作する方法
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+以下の手順で、マウス・ポインターを非表示にすることができます。
+スクリーン・リーダーを使用していないとき、この状態で実行できない操作がある場合、ガイドラインを満たしていない状態です。
+
+#. 以下のコードをターゲットとするブックマーク（ブックマークレット）を作成。
+
+   .. raw:: html
+
+      <details><summary>コードを表示</summary>
+
+   .. code-block:: javascript
+
+      javascript:(function(){var s=document.createElement('style');s.innerText="*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}";document.head.appendChild(s)})()
+
+   .. only:: html
+
+      .. raw:: html
+
+         </details>
+         <a href="javascript:(function(){var s=document.createElement('style');s.innerText='*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}';document.head.appendChild(s)})()">マウス・ポインターを非表示にするブックマークレット</a>
+
+#. チェック対象のページを表示した状態で、このブックマークレットを実行。
+
 関連ガイドライン
 ^^^^^^^^^^^^^^^^
 
-*  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
 *  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
 *  入力ディバイス： :ref:`gl-input-device-focus-indicator`
 
