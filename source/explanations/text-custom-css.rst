@@ -20,7 +20,7 @@
      letter-spacing: 0.12em !important;
    }
    p + p {
-     margin-top: 1em !important;
+     margin-top: 2em !important;
    }
 
 このCSSをユーザーCSSとしてブラウザーに設定すれば良いわけですが、例えばGoogle ChromeではユーザーCSSを指定する機能は廃止されているようですし、他のブラウザーでもその設定方法があまり分かりやすいとはいえません。
@@ -41,14 +41,14 @@
 
    .. code-block:: javascript
 
-      javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML="*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 1em !important;}";d.head.appendChild(s)})()
+      javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML='*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 2em !important;}';d.head.appendChild(s)})()
 
    .. only:: html
 
       .. raw:: html
 
          </details>
-         <a href='javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML="*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 1em !important;}";d.head.appendChild(s)})()'>表示中のページにカスタムCSSを適用するブックマークレット</a>
+         <a href="javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML='*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 2em !important;}';d.head.appendChild(s)})()">表示中のページにカスタムCSSを適用するブックマークレット</a>
 
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
