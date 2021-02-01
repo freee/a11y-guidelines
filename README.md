@@ -45,6 +45,41 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202102.0](https://github.com/freee/a11y-guidelines/releases/202102.0/) (2021年2月2日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202102.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202102.0)
+
+**注意** ：分割されて一部優先度が変更されたガイドラインがあります。
+
+* ホバーで表示されるコンテンツに関するガイドラインの見直し
+    - 変更前：[SHOULD]ホバーで表示されるコンテンツ
+
+      [SHOULD]ホバーで表示されるコンテンツについて、以下のすべてを満たす。
+
+        - ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。（Escキーで消える、など）
+        - ポインターを、ホバーで表示されたコンテンツ上に移動しても、コンテンツが消えない。
+        - ポインターを、ホバーで表示されたコンテンツ上に移動しても、コンテンツが消えない。
+    - 変更後：以下の2ガイドラインに分割
+        - [[MUST] ホバーで表示されるコンテンツの拡大](https://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-hover-magnify)
+
+          [MUST]ホバーで表示されるコンテンツについて、ポインターをホバーで表示されたコンテンツ上に移動しても、コンテンツが消えないようにすることで、そのコンテンツを拡大表示して利用することを可能にする。
+
+        - [[SHOULD] ホバーで表示されるコンテンツの非表示](https://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-hover)
+
+          [SHOULD]ホバーで表示されるコンテンツについて、以下のすべてを満たす。
+
+            - ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。（Escキーで消える、など）
+            - ホバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、ホバーで表示されたコンテンツを非表示にする。
+* ホバーで表示されるコンテンツに関するガイドラインの変更に伴うチェック内容の変更
+    - 変更： [チェックID: 0091](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0091)、[チェックID: 0111](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0111)
+    - 追加： [チェックID: 0092](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0092) 、[チェックID: 0112](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0112)
+* 意図の変更を伴わないチェック内容の文言変更
+    - [チェックID: 0332](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0332)
+    - [チェックID: 1171](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1171)
+    - [チェックID: 1191](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1291)
+    - [チェックID: 1311](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1311)
+*  誤字修正
+
 ### [Ver. 202101.1](https://github.com/freee/a11y-guidelines/releases/202101.1/) (2021年1月20日)
 
 * 参考情報更新
