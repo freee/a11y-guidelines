@@ -821,7 +821,7 @@ NVDAを用いたチェック実施方法の例
 
 .. BEGIN_check-0441
 
-画像の説明が適切に読み上げられる。
+画像の説明がスクリーン・リーダーで適切に読み上げられる。
 
 .. END_check-0441
 
@@ -1025,6 +1025,59 @@ NVDAを用いたチェック実施方法の例
    コード
 関連ガイドライン
    *  マークアップ全般： :ref:`gl-markup-semantics`
+
+.. _check-0561:
+
+チェックID: 0561
+~~~~~~~~~~~~~~~~~~
+
+.. BEGIN_check-0561
+
+設計資料で見出しとして示されているものを、スクリーン・リーダーが見出しとして認識している。
+
+.. END_check-0561
+
+対象
+   プロダクト
+関連ガイドライン
+   *  マークアップ全般： :ref:`gl-markup-semantics`
+
+NVDAを用いたチェック実施方法の例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /checks/examples/nvda.rst
+   :start-after: .. BEGIN_nvda-0561
+   :end-before: .. END_nvda-0561
+
+axeを用いたチェック実施方法の例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /checks/examples/axe.rst
+   :start-after: .. BEGIN_axe-0561
+   :end-before: .. END_axe-0561
+
+.. _check-0562:
+
+チェックID: 0562
+~~~~~~~~~~~~~~~~~~
+
+.. BEGIN_check-0562
+
+スクリーン・リーダーが、表（ ``table`` ）を適切に認識していて、表中のセルも適切に認識している。
+
+.. END_check-0562
+
+対象
+   プロダクト
+関連ガイドライン
+   *  マークアップ全般： :ref:`gl-markup-semantics`
+
+NVDAを用いたチェック実施方法の例
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. include:: /checks/examples/nvda.rst
+   :start-after: .. BEGIN_nvda-0562
+   :end-before: .. END_nvda-0562
 
 .. _check-0571:
 
@@ -1304,32 +1357,6 @@ NVDAを用いたチェック実施方法の例
 参考情報
    *  :ref:`exp-page-structure`
 
-
-.. _check-0741:
-
-チェックID: 0741
-~~~~~~~~~~~~~~~~~~
-
-.. BEGIN_check-0741
-
-スクリーン・リーダーが見出しを適切に見出しとして認識している。
-
-.. END_check-0741
-
-対象
-   プロダクト
-関連ガイドライン
-   *  ページ全体： :ref:`gl-page-headings`
-参考情報
-   *  :ref:`exp-page-structure`
-
-
-NVDAを用いたチェック実施方法の例
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. include:: /checks/examples/nvda.rst
-   :start-after: .. BEGIN_nvda-0741
-   :end-before: .. END_nvda-0741
 
 .. _check-0751:
 

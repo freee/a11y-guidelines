@@ -51,6 +51,25 @@ axeのインストールや基本的な使用方法については、 :ref:`exp-
 
 .. END_axe-0441
 
+.. _check-example-axe-0561:
+
+:ref:`check-0561`
+~~~~~~~~~~~~~~~~~
+
+   .. include:: /checks/inc/allchecks.rst
+      :start-after: .. BEGIN_check-0561
+      :end-before: .. END_check-0561
+
+.. BEGIN_axe-0561
+
+以下のいずれの問題も出ないことを確認する。
+
+*  見出しは空にしてはなりません
+*  見出しのレベルは1つずつ増加させなければなりません
+*  ページにはレベル1の見出しが含まれていなければなりません
+
+.. END_axe-0561
+
 .. _check-example-axe-0951:
 
 :ref:`check-0951`
