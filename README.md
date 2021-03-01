@@ -45,6 +45,14 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202103.0](https://github.com/freee/a11y-guidelines/releases/202103.0/) (2021年3月1日)
+
+* [[MUST] 文書構造を適切にマークアップする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-semantics)に関連するチェック内容とそのチェック実施方法例を追加
+  - [チェックID: 0561](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0561)
+  - [チェックID: 0562](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0562)
+* 上記、チェックID: 0561と内容が重複するチェックID: 0741を削除
+* 意図の変更を伴わないチェック内容の文言変更： [チェックID: 0441](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0441)
+
 ### [Ver. 202102.0](https://github.com/freee/a11y-guidelines/releases/202102.0/) (2021年2月2日)
 
 参考： [freeeアクセシビリティー・ガイドラインVer. 202102.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202102.0)
