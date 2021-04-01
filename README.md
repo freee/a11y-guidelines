@@ -45,6 +45,16 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202104.0](https://github.com/freee/a11y-guidelines/releases/202104.0/) (2021年4月1日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202104.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202104.0)
+
+* axeがaxe DevToolsに改名されたことなどに対応して、表記や画面キャプチャーを更新
+* axe DevToolsのルールと当ガイドラインの対応情報を追加： [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)
+* チェック内容をまとめたGoogleスプレッドシートに関する情報を追加： [チェック実施用Googleスプレッドシート](https://a11y-guidelines.freee.co.jp/checks/checksheet.html)
+* コントラスト関連のチェックについて、テキスト情報とそれ以外のものを分離
+* コントラスト関連のガイドライン、参考情報、チェック内容の箇所に、社内デザイン・システムVibesのカラー・コントラスト表へのリンクを追加
+
 ### [Ver. 202103.0](https://github.com/freee/a11y-guidelines/releases/202103.0/) (2021年3月1日)
 
 * [[MUST] 文書構造を適切にマークアップする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-semantics)に関連するチェック内容とそのチェック実施方法例を追加
