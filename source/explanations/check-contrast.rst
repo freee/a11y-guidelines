@@ -5,16 +5,16 @@
 
 ロービジョン者でもコンテンツを知覚できるよう、テキストやUIコンポーネントにはそれぞれコントラスト比の基準を満たす色が使われることが求められます。
 
-実際のWebページから色のコントラスト比が不足している場所を発見するには `axe <https://www.deque.com/axe/>`_ のようなチェックツールを使用し、
+実際のWebページから色のコントラスト比が不足している場所を発見するには `axe DevTools <https://www.deque.com/axe/>`_ のようなチェックツールを使用し、
 具体的な色同士のコントラスト比の計算には `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`_ のような計算ツールを使用します。
 
 アクセシビリティー・チェックツールの使用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-`axe <https://www.deque.com/axe/>`_ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
+`axe DevTools <https://www.deque.com/axe/>`_ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
 
-Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe が使用されています。
-また、 `axe の Google Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-web-accessibility-tes/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
+Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe DevToolsが使用されています。
+また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-web-accessibility-tes/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
 
 
 コントラスト比の計算ツールの使用
@@ -39,7 +39,11 @@ Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が�
 
    -  Adobe XDはOSの設定を引き継ぐので、カラープロファイルの設定を変更した場合は再起動。
 
-参考： :ref:`exp-contrast`
+参考
+~~~~
+
+*  :ref:`exp-contrast`
+*  |Vibes Color Contrast|
 
 関連ガイドライン
 ~~~~~~~~~~~~~~~~

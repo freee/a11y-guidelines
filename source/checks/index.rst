@@ -7,3 +7,4 @@
 
    checklist
    examples/index
+   checksheet

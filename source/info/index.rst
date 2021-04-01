@@ -7,3 +7,4 @@
 
    wcag21-mapping
    priority
+   axe-rules

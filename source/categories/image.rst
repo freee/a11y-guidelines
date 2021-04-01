@@ -143,6 +143,7 @@
 
 *  :ref:`exp-contrast`
 *  :ref:`exp-check-contrast`
+*  |Vibes Color Contrast|
 
 対応するWCAG 2.1の達成基準
 ````````````````````````````
@@ -185,6 +186,7 @@
 
 *  :ref:`exp-contrast`
 *  :ref:`exp-check-contrast`
+*  |Vibes Color Contrast|
 
 対応するWCAG 2.1の達成基準
 ````````````````````````````

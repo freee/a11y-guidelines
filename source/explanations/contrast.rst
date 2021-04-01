@@ -14,7 +14,11 @@
 
 画像の場合、隣接領域とのコントラスト比も確保する必要があります。
 
-参考： :ref:`exp-check-contrast`
+参考
+~~~~
+
+*  :ref:`exp-check-contrast`
+*  |Vibes Color Contrast|
 
 関連ガイドライン
 ~~~~~~~~~~~~~~~~

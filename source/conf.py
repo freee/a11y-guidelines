@@ -20,9 +20,9 @@ import datetime
 project = 'freeeアクセシビリティー・ガイドライン'
 copyright = '2020-2021, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202103.0'
+version = 'Ver. 202104.0'
 release = version
-publishedDate = u'2021年3月1日'
+publishedDate = u'2021年4月1日'
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -57,6 +57,7 @@ language = 'ja'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
   "checks/inc/*",
+  "info/inc/*",
   "intro/ChangeLog/*"
 ]
 
@@ -65,6 +66,7 @@ rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
 
 .. include:: /WCAG21-SC-defs.txt
+.. include:: /misc-defs.txt
 """.format(
   pubdate = publishedDate
 )

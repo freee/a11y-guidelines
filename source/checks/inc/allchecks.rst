@@ -6,12 +6,11 @@
 
 .. BEGIN_check-0001
 
-充分なコントラスト比 ([MUST]3:1以上、[SHOULD]4.5:1以上) が確保されている。
+アイコンや画像に関して、充分なコントラスト比 ([MUST]3:1以上、[SHOULD]4.5:1以上) が確保されている。
 
 *  アイコンと背景色
-*  画像化されたテキスト、その他の画像内のテキストや重要な情報と背景色
+*  画像内の重要な情報とその背景色
 *  画像および画像化されたテキストとその隣接領域
-*  テキストと背景色
 
 .. END_check-0001
 
@@ -20,13 +19,38 @@
 関連ガイドライン
    *  アイコン： :ref:`gl-icon-contrast`
    *  画像： :ref:`gl-image-adjacent-contrast`
-   *  画像： :ref:`gl-image-text-contrast`
    *  画像化されたテキスト： :ref:`gl-iot-adjacent-contrast`
+参考情報
+   *  :ref:`exp-check-contrast`
+   *  :ref:`exp-contrast`
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
+
+
+.. _check-0002:
+
+チェックID: 0002
+~~~~~~~~~~~~~~~~~~
+
+.. BEGIN_check-0002
+
+テキストおよび画像化されたテキストの表示色と背景色には、充分なコントラスト比が確保されている。
+
+*  文字サイズが30px（22pt）以上の場合：3:1以上（[SHOULD] 4.5:1以上）
+*  文字サイズが22px（18pt）以上で太字の場合：3:1以上（[SHOULD] 4.5:1以上）
+*  その他の場合：4.5:1以上（[SHOULD] 7:1以上）
+
+.. END_check-0002
+
+対象
+   デザイン
+関連ガイドライン
+   *  画像： :ref:`gl-image-text-contrast`
    *  画像化されたテキスト： :ref:`gl-iot-text-contrast`
    *  テキスト： :ref:`gl-text-contrast`
 参考情報
    *  :ref:`exp-check-contrast`
    *  :ref:`exp-contrast`
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
 
 
 .. _check-0021:
@@ -36,30 +60,25 @@
 
 .. BEGIN_check-0021
 
-充分なコントラスト比 ([MUST]3:1以上、[SHOULD]4.5:1以上) が確保されている。
+テキストの表示色と背景色には、充分なコントラスト比が確保されている。
 
-*  アイコンと背景色
-*  画像化されたテキスト、その他の画像内のテキストや重要な情報と背景色
-*  画像および画像化されたテキストとその隣接領域
-*  テキストと背景色
+*  文字サイズが30px（22pt）以上の場合：3:1以上（[SHOULD] 4.5:1以上）
+*  文字サイズが22px（18pt）以上で太字の場合：3:1以上（[SHOULD] 4.5:1以上）
+*  その他の場合：4.5:1以上（[SHOULD] 7:1以上）
 
 .. END_check-0021
 
 対象
    プロダクト
 関連ガイドライン
-   *  アイコン： :ref:`gl-icon-contrast`
-   *  画像： :ref:`gl-image-adjacent-contrast`
-   *  画像： :ref:`gl-image-text-contrast`
-   *  画像化されたテキスト： :ref:`gl-iot-adjacent-contrast`
-   *  画像化されたテキスト： :ref:`gl-iot-text-contrast`
    *  テキスト： :ref:`gl-text-contrast`
 参考情報
    *  :ref:`exp-check-contrast`
    *  :ref:`exp-contrast`
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
 
 
-axeを用いたチェック実施方法の例
+axe DevToolsを用いたチェック実施方法の例
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /checks/examples/axe.rst
@@ -840,7 +859,7 @@ NVDAを用いたチェック実施方法の例
    :start-after: .. BEGIN_nvda-0441
    :end-before: .. END_nvda-0441
 
-axeを用いたチェック実施方法の例
+axe DevToolsを用いたチェック実施方法の例
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /checks/examples/axe.rst
@@ -1049,7 +1068,7 @@ NVDAを用いたチェック実施方法の例
    :start-after: .. BEGIN_nvda-0561
    :end-before: .. END_nvda-0561
 
-axeを用いたチェック実施方法の例
+axe DevToolsを用いたチェック実施方法の例
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /checks/examples/axe.rst
@@ -1672,7 +1691,7 @@ NVDAを用いたチェック実施方法の例
    *  :ref:`exp-form-labeling`
 
 
-axeを用いたチェック実施方法の例
+axe DevToolsを用いたチェック実施方法の例
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. include:: /checks/examples/axe.rst
