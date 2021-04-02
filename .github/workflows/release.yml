@@ -42,10 +42,7 @@ jobs:
     - name: Publish to S3
       env:
         AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-        CHECKSHEET_URL: ${{ secrets.CHECKSHEET_URL }}
-      run: |
-        aws s3 sync --delete build/html/ s3://${AWS_BUCKET}/ --quiet
-        aws s3api put-object --acl public-read --bucket ${AWS_BUCKET} --key checks/checksheet --website-redirect-location ${CHECKSHEET_URL}
+      run: aws s3 sync --delete build/html/ s3://${AWS_BUCKET}/ --quiet
 
     - name: Prepare the HTML Archive
       run: |
