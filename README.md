@@ -45,6 +45,13 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202105.0](https://github.com/freee/a11y-guidelines/releases/202105.0/) (2021年5月6日)
+
+参考： [freeeアクセシビリティー・ガイドラインVer. 202105.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202105.0)
+
+* 表示中のWebページをグレースケール表示にするブックマークレットを追加： [グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
+* 誤字修正
+
 ### [Ver. 202104.0](https://github.com/freee/a11y-guidelines/releases/202104.0/) (2021年4月1日)
 
 参考： [freeeアクセシビリティー・ガイドラインVer. 202104.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202104.0)
