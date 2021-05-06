@@ -5,8 +5,38 @@
 
 参考： :ref:`exp-color-only`
 
+ブックマークレットの利用
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+以下の手順でブックマークレットを利用することで、ブラウザーに表示中のページをグレースケール表示にすることができます。
+なお、このブックマークレットが正常に動作しないブラウザーを使っている場合、Webページ以外のものの表示を確認する場合には、後述するOSの表示切り替え機能を使います。
+
+#. 以下のコードをターゲットとするブックマーク（ブックマークレット）を作成。
+
+   .. raw:: html
+
+      <details><summary>コードを表示</summary>
+
+   .. code-block:: javascript
+
+      javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})()
+
+   .. only:: html
+
+      .. raw:: html
+
+         </details>
+         <a href='javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})();'>表示中のページをグレースケール表示にするブックマークレット</a>
+
+
+#. チェック対象のページを表示した状態で、このブックマークレットを実行。
+
+
+OSの表示切り替え機能の利用
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Windows 10の場合
-~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^
 
 #. 「設定」の「簡単操作」を開く（ :kbd:`Win + U` ）。
 #. 「カラーフィルター」をクリック。
@@ -16,7 +46,7 @@ Windows 10の場合
 頻繁に利用する場合は、同じ画面でショートカットキーを有効にすると便利でしょう。
 
 macOSの場合
-~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^
 
 #. 「システム環境設定」を開く
 #. 「アクセシビリティ」を開き、左側のメニューから「ディスプレイ」を選択

@@ -14,7 +14,7 @@ axe DevToolsのインストールと起動の仕方
 
 ChromeウェブストアからChrome拡張をインストールできます。
 
-https://chrome.google.com/webstore/detail/axe-web-accessibility-tes/lhdoppojpmngadmnindnejefpokejbdd
+`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_
 
 axe DevTools拡張機能はデベロッパーツール内で使用します。
 

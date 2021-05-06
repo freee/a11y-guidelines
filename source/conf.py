@@ -20,9 +20,9 @@ import datetime
 project = 'freeeアクセシビリティー・ガイドライン'
 copyright = '2020-2021, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202104.0'
+version = 'Ver. 202105.0'
 release = version
-publishedDate = u'2021年4月1日'
+publishedDate = u'2021年5月6日'
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")

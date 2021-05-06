@@ -14,7 +14,7 @@
 `axe DevTools <https://www.deque.com/axe/>`_ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
 
 Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe DevToolsが使用されています。
-また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-web-accessibility-tes/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
+また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
 
 
 コントラスト比の計算ツールの使用
