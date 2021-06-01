@@ -21,13 +21,10 @@
 
       javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})()
 
-   .. only:: html
+   .. raw:: html
 
-      .. raw:: html
-
-         </details>
-         <a href='javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})();'>表示中のページをグレースケール表示にするブックマークレット</a>
-
+      </details>
+      <a href='javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})();'>表示中のページをグレースケール表示にするブックマークレット</a>
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 

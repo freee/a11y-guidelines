@@ -30,12 +30,10 @@
 
       javascript:(function(){var d = document,e=d.createElement('div'),g=d.createElement('div'),w=window;d.body.appendChild(e);e.appendChild(g);e.setAttribute('style','position:absolute;top:0;left:0;z-index:2147483647;box-sizing:border-box;width:44px;height:44px;border:1px solid #f00;background:#fff;opacity:0.5;transform: translate(-50%,-50%);pointer-events:none;');g.setAttribute('style','position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:24px;height:24px;border:1px solid #00f;');w.onmousemove=(function(v){e.style.left=w.scrollX+v.clientX+'px';e.style.top=w.scrollY+v.clientY+'px'})})()
 
-   .. only:: html
+   .. raw:: html
 
-      .. raw:: html
-
-         </details>
-         <a href="javascript:(function(){var d = document,e=d.createElement('div'),g=d.createElement('div'),w=window;d.body.appendChild(e);e.appendChild(g);e.setAttribute('style','position:absolute;top:0;left:0;z-index:2147483647;box-sizing:border-box;width:44px;height:44px;border:1px solid #f00;background:#fff;opacity:0.5;transform: translate(-50%,-50%);pointer-events:none;');g.setAttribute('style','position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:24px;height:24px;border:1px solid #00f;');w.onmousemove=(function(v){e.style.left=w.scrollX+v.clientX+'px';e.style.top=w.scrollY+v.clientY+'px'})})()">44x44 pxの4角形を表示するブックマークレット</a>
+      </details>
+      <a href="javascript:(function(){var d = document,e=d.createElement('div'),g=d.createElement('div'),w=window;d.body.appendChild(e);e.appendChild(g);e.setAttribute('style','position:absolute;top:0;left:0;z-index:2147483647;box-sizing:border-box;width:44px;height:44px;border:1px solid #f00;background:#fff;opacity:0.5;transform: translate(-50%,-50%);pointer-events:none;');g.setAttribute('style','position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:24px;height:24px;border:1px solid #00f;');w.onmousemove=(function(v){e.style.left=w.scrollX+v.clientX+'px';e.style.top=w.scrollY+v.clientY+'px'})})()">44x44 pxの4角形を表示するブックマークレット</a>
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 

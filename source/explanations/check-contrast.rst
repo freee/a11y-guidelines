@@ -16,6 +16,16 @@
 Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe DevToolsが使用されています。
 また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
 
+コントラスト比の自動判定ができない場合
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+画像の中の文字など、これらのチェック・ツールではコントラスト比を正しく判定できない場合があります。
+
+axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定ができない場合も「要素には十分な色のコントラストがなければなりません」のような、コントラスト比が不充分な場合と同じメッセージが表示されます。
+しかし自動判定ができない場合は、詳細パネルに「This potential issue needs your review... コントラスト比を判定できません」といったメッセージが表示されます。
+
+このような場合は、当該箇所のカラー・コードを調べて、以下に示すツールを使ってコントラスト比を確認します。
+
 
 コントラスト比の計算ツールの使用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

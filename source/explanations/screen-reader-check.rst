@@ -209,9 +209,9 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 ``````````````````````````
 
 ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`_ には、他のキー操作も含めてまとめられています。
-GitHub上では、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheet.pptx>`_ と `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheet.pdf>`_ が公開されていますが、以下これを画像化したものを掲載します。
+GitHub上では、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ と `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ が公開されていますが、以下これを画像化したものを掲載します。
 
-.. image:: /img/nvdacheet.png
+.. image:: /img/nvdacheat.png
    :alt: 画像化したNVDAチートシート
 
 NVDAの更新

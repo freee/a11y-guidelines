@@ -43,13 +43,10 @@
 
       javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML='*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 2em !important;}';d.head.appendChild(s)})()
 
-   .. only:: html
+   .. raw:: html
 
-      .. raw:: html
-
-         </details>
-         <a href="javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML='*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 2em !important;}';d.head.appendChild(s)})()">表示中のページにカスタムCSSを適用するブックマークレット</a>
-
+      </details>
+      <a href="javascript:(function(){var d=document,s=d.createElement('style');s.innerHTML='*{line-height:1.5em !important;letter-spacing: 0.12em !important;} p+p{margin-top: 2em !important;}';d.head.appendChild(s)})()">表示中のページにカスタムCSSを適用するブックマークレット</a>
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 

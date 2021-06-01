@@ -51,12 +51,10 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
 
       javascript:(function(){var s=document.createElement('style');s.innerText="*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}";document.head.appendChild(s)})()
 
-   .. only:: html
+   .. raw:: html
 
-      .. raw:: html
-
-         </details>
-         <a href="javascript:(function(){var s=document.createElement('style');s.innerText='*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}';document.head.appendChild(s)})()">マウス・ポインターを非表示にするブックマークレット</a>
+      </details>
+      <a href="javascript:(function(){var s=document.createElement('style');s.innerText='*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}';document.head.appendChild(s)})()">マウス・ポインターを非表示にするブックマークレット</a>
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 

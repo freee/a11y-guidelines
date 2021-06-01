@@ -30,12 +30,10 @@
 
       javascript:window.open(location.href,'a11ytest_1280x1024','width=1280,height=1024')
 
-   .. only:: html
+   .. raw:: html
 
-      .. raw:: html
-
-         </details>
-         <a href="javascript:window.open(location.href,'a11ytest_1280x1024','width=1280,height=1024')">ウィンドウ・サイズを1280x1024にするブックマークレット</a>
+      </details>
+      <a href="javascript:window.open(location.href,'a11ytest_1280x1024','width=1280,height=1024')">ウィンドウ・サイズを1280x1024にするブックマークレット</a>
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 
