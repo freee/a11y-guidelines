@@ -45,6 +45,12 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202106.0](https://github.com/freee/a11y-guidelines/releases/202106.0/) (2021年6月1日)
+
+* コントラスト比のチェック方法について加筆： [コントラスト比のチェック方法](https://a11y-guidelines.freee.co.jp/explanations/check-contrast.html)
+* NVDAチートシートの更新に合わせて、掲載している画像などを変更： [スクリーン・リーダーを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check.html)
+* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
+
 ### [Ver. 202105.0](https://github.com/freee/a11y-guidelines/releases/202105.0/) (2021年5月6日)
 
 参考： [freeeアクセシビリティー・ガイドラインVer. 202105.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202105.0)
