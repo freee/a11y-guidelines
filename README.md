@@ -45,6 +45,20 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202107.0](https://github.com/freee/a11y-guidelines/releases/202107.0/) (2021年7月12日)
+
+参考：[freeeアクセシビリティー・ガイドラインVer. 202107.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202107.0)
+
+* ガイドラインの文言変更
+ - 入力ディバイス： [[MUST] キーボード・トラップの回避](https://a11y-guidelines.freee.co.jp/categories/input_device.html#gl-input-device-no-trap)
+  - ページ全体： [[MUST] 画面方向を固定しない](https://a11y-guidelines.freee.co.jp/categories/page.html#gl-page-orientation)
+* チェック内容の文言変更：[チェックID: 0201](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0201)
+* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
+* freee株式会社のコーポレート・アイデンティティーの変更に対応
+  - ページ内のロゴを新しいものに変更
+  - OGP用の画像を差し替え
+  - 社内デザイン・システムVibesのコントラスト比の表のURLを差し替え
+
 ### [Ver. 202106.0](https://github.com/freee/a11y-guidelines/releases/202106.0/) (2021年6月1日)
 
 * コントラスト比のチェック方法について加筆： [コントラスト比のチェック方法](https://a11y-guidelines.freee.co.jp/explanations/check-contrast.html)
