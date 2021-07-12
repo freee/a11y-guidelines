@@ -23,7 +23,7 @@
 参考情報
    *  :ref:`exp-check-contrast`
    *  :ref:`exp-contrast`
-   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%23FFFFFF%0D%0A%23F7F5F5%2C%20S1%0D%0A%23E9E7E7%2C%20S3%0D%0A%23EBF3FF%2C%20P1%0D%0A%23DCE8FF%2C%20P2%0D%0A%23F0EDED%2C%20S2%0D%0A%23E1DCDC%2C%20S4%0D%0A%23D7D2D2%2C%20S5%0D%0A%23FAD2D7%2C%20RE2%0D%0A%23FFE1D2%2C%20OR2%0D%0A%23FFF0D2%2C%20YE2%0D%0A%23E6F0D2%2C%20YG2%0D%0A%23CDEBD7%2C%20GR2%0D%0A%23CDF0F0%2C%20BG2%0D%0A%23E6D7FA%2C%20PU2%0D%0A%23DCDCDC%2C%20GY2%0D%0A&foreground-colors=%23FFFFFF%0D%0A%232864F0%2C%20P5%0D%0A%23285AC8%2C%20P7%0D%0A%23323232%2C%20GY7%0D%0A%236E6B6B%2C%20S9%0D%0A%23DC1E32%2C%20RE5%0D%0A%23BE8C14%2C%20YE7%0D%0A%23825A0F%2C%20YE10%0D%0A%238c8989%2CS8%0D%0A%23464343%2CS10&es-color-form__tile-size=compact>`_
 
 
 .. _check-0002:
@@ -50,7 +50,7 @@
 参考情報
    *  :ref:`exp-check-contrast`
    *  :ref:`exp-contrast`
-   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%23FFFFFF%0D%0A%23F7F5F5%2C%20S1%0D%0A%23E9E7E7%2C%20S3%0D%0A%23EBF3FF%2C%20P1%0D%0A%23DCE8FF%2C%20P2%0D%0A%23F0EDED%2C%20S2%0D%0A%23E1DCDC%2C%20S4%0D%0A%23D7D2D2%2C%20S5%0D%0A%23FAD2D7%2C%20RE2%0D%0A%23FFE1D2%2C%20OR2%0D%0A%23FFF0D2%2C%20YE2%0D%0A%23E6F0D2%2C%20YG2%0D%0A%23CDEBD7%2C%20GR2%0D%0A%23CDF0F0%2C%20BG2%0D%0A%23E6D7FA%2C%20PU2%0D%0A%23DCDCDC%2C%20GY2%0D%0A&foreground-colors=%23FFFFFF%0D%0A%232864F0%2C%20P5%0D%0A%23285AC8%2C%20P7%0D%0A%23323232%2C%20GY7%0D%0A%236E6B6B%2C%20S9%0D%0A%23DC1E32%2C%20RE5%0D%0A%23BE8C14%2C%20YE7%0D%0A%23825A0F%2C%20YE10%0D%0A%238c8989%2CS8%0D%0A%23464343%2CS10&es-color-form__tile-size=compact>`_
 
 
 .. _check-0021:
@@ -75,7 +75,7 @@
 参考情報
    *  :ref:`exp-check-contrast`
    *  :ref:`exp-contrast`
-   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%234575b4%2C%20vbPrimaryColor%0D%0A%23338650%2C%20vbPrimaryColorHR%0D%0A%233D6DAC%2C%20vbLinkColor%0D%0A%23267A43%2C%20vbLinkColorHR%0D%0A%23252525%2C%20vbBlackColor%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23C33939%2C%20vbAlertColor%0D%0A%23C67320%2C%20vbNoticeColor%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23749fcb%2C%20vbAccentColor%0D%0A%2371ab85%2C%20vbAccentColorHR&foreground-colors=%23ffffff%2C%20%0D%0A%23f9f7f4%2C%20vbColumnColor%0D%0A%23efede8%2C%20vbBaseColor1%0D%0A%23e4e0d7%2C%20vbBaseColor2%0D%0A%23938F86%2C%20vbBaseColor3%0D%0A%236F6B62%2C%20vbBurntColor%0D%0A%23252525%2C%20vbBlackColor%0D%0A%0D%0A%0D%0A%0D%0A&es-color-form__tile-size=compact>`_
+   *  `社内デザイン・システムVibesのカラー・コントラスト表 <https://contrast-grid.eightshapes.com/?background-colors=%23FFFFFF%0D%0A%23F7F5F5%2C%20S1%0D%0A%23E9E7E7%2C%20S3%0D%0A%23EBF3FF%2C%20P1%0D%0A%23DCE8FF%2C%20P2%0D%0A%23F0EDED%2C%20S2%0D%0A%23E1DCDC%2C%20S4%0D%0A%23D7D2D2%2C%20S5%0D%0A%23FAD2D7%2C%20RE2%0D%0A%23FFE1D2%2C%20OR2%0D%0A%23FFF0D2%2C%20YE2%0D%0A%23E6F0D2%2C%20YG2%0D%0A%23CDEBD7%2C%20GR2%0D%0A%23CDF0F0%2C%20BG2%0D%0A%23E6D7FA%2C%20PU2%0D%0A%23DCDCDC%2C%20GY2%0D%0A&foreground-colors=%23FFFFFF%0D%0A%232864F0%2C%20P5%0D%0A%23285AC8%2C%20P7%0D%0A%23323232%2C%20GY7%0D%0A%236E6B6B%2C%20S9%0D%0A%23DC1E32%2C%20RE5%0D%0A%23BE8C14%2C%20YE7%0D%0A%23825A0F%2C%20YE10%0D%0A%238c8989%2CS8%0D%0A%23464343%2CS10&es-color-form__tile-size=compact>`_
 
 
 axe DevToolsを用いたチェック実施方法の例
@@ -420,7 +420,12 @@ Tab/Shift+Tabキーを使ったフォーカスの移動時、文脈、レイア�
 
 .. BEGIN_check-0201
 
-動画プレイヤーのような、何らかの機能を提供するためにページ中に埋め込まれているプログラムなどにフォーカスがある状態のとき、Tab, Shift+Tab, 矢印キー、ESCキーのいずれかの操作で、埋め込まれているものの外の領域にあるリンクなどにフォーカスを移動することができ、自動的にフォーカスが元の位置に戻されない。
+何らかの機能を提供するためにページ中に埋め込まれているコンポーネントにフォーカスがあるとき、Tab, Shift+Tab, 矢印キー、ESCキーのいずれかの操作で、埋め込まれているものの外の領域にあるリンクなどにフォーカスを移動することができ、自動的にフォーカスが元の位置に戻されない。
+
+例：
+
+*  動画や音声コンテンツのプレイヤー
+*  デート・ピッカーなど、フォーム入力のためにJavaScriptで実装されたコンポーネント
 
 .. END_check-0201
 
@@ -975,7 +980,7 @@ NVDAを用いたチェック実施方法の例
 
 .. BEGIN_check-0521
 
-画像化されているテキストと同じ内容が ``alt`` 属性または ``aria-label`` 属性で示されていて、スクリーン・リーダーなとで確認できる。
+画像化されているテキストと同じ内容が ``alt`` 属性または ``aria-label`` 属性で示されていて、スクリーン・リーダーなどで確認できる。
 
 .. END_check-0521
 
@@ -994,7 +999,7 @@ NVDAを用いたチェック実施方法の例
 
 .. BEGIN_check-0531
 
-画像化されているテキストと同じ内容がスクリーン・リーダーなとで確認できる。
+画像化されているテキストと同じ内容がスクリーン・リーダーなどで確認できる。
 
 .. END_check-0531
 

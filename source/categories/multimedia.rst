@@ -151,6 +151,11 @@
    *  |SC 2.1.2|
    *  |SC 2.1.2ja|
 
+例
+``
+
+.. include:: ../checks/inc/0201-example.rst
+   
 .. raw:: html
 
    </div></details>

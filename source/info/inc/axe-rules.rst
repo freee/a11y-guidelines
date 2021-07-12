@@ -1,9 +1,9 @@
 ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`_ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
 
 バージョン
-   4.2.0
+   4.2.3
 更新日時
-   2021-05-28 20:58:06++0900
+   2021-07-02 18:07:21++0900
 
 .. _axe-rule-area-alt:
 
@@ -179,10 +179,10 @@
 
 .. _axe-rule-aria-command-name:
 
-ARIA commands must have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIAコマンドにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA button, link and menuitem has an accessible name
+すべてのARIA button、link、menuitemにアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-command-name>`__
 
@@ -364,10 +364,10 @@ ARIA入力欄にアクセシブルな名前があります
 
 .. _axe-rule-aria-meter-name:
 
-ARIA meter nodes must have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIA meterノードにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA meter node has an accessible name
+すべてのARIA meterノードにアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-meter-name>`__
 
@@ -469,10 +469,10 @@ Ensures every ARIA meter node has an accessible name
 
 .. _axe-rule-aria-progressbar-name:
 
-ARIA progressbar nodes must have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIA progressbarノードにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA progressbar node has an accessible name
+すべてのARIA progressbarノードにアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-progressbar-name>`__
 
@@ -844,10 +844,10 @@ ARIAトグル欄にアクセシブルな名前があります
 
 .. _axe-rule-aria-tooltip-name:
 
-ARIA tooltip nodes must have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIA tooltipノードにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA tooltip node has an accessible name
+すべてのARIA tooltipノードにはアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-tooltip-name>`__
 
@@ -1504,10 +1504,10 @@ ARIAおよびラベルに使用されているすべてのid属性値が一意�
 
 .. _axe-rule-empty-table-header:
 
-Table header text must not be empty
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+テーブルのヘッダーは空にしてはなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures table headers have discernible text
+テーブルのヘッダーに認識可能なテキストが存在することを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/empty-table-header>`__
 
@@ -1618,10 +1618,10 @@ Ensures table headers have discernible text
 
 .. _axe-rule-frame-focusable-content:
 
-Frames with focusable content must not have tabindex=-1
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tabindex=-1が指定されているフレームには、フォーカス可能なコンテンツが含まれていてはなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures <frame> and <iframe> elements with focusable content do not have tabindex=-1
+tabindex=-1が指定されている<frame>と<iframe>要素が、フォーカス可能なコンテンツを含まないことを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/frame-focusable-content>`__
 
@@ -2555,10 +2555,10 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 .. _axe-rule-nested-interactive:
 
-Ensure interactive controls are not nested
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+対話的なコントロールがネストされていないことを確認します
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nested interactive controls are not announced by screen readers
+ネストされた対話的なコントロールはスクリーン・リーダーで読み上げられません
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/nested-interactive>`__
 
@@ -2933,10 +2933,10 @@ p要素を見出しとしてスタイル付けするために太字、イタリ�
 
 .. _axe-rule-select-name:
 
-Select element must have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+select要素にはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures select element has an accessible name
+select要素にはアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/select-name>`__
 
@@ -3567,30 +3567,30 @@ role属性の値が要素に対して適切であることを確認します
 
 .. _axe-rule-aria-dialog-name:
 
-ARIA dialog and alertdialog nodes should have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIA dialogとalertdialogノードにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA dialog and alertdialog node has an accessible name
+すべてのARIA dialog、alertdialogノードにアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-dialog-name>`__
 
 
 .. _axe-rule-aria-text:
 
-"role=text" should have no focusable descendants
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"role=text"が指定されている要素には、フォーカス可能な子孫が含まれていてはなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures "role=text" is used on elements with no focusable descendants
+role="text"が指定されている要素にフォーカス可能な子孫がないことを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-text>`__
 
 
 .. _axe-rule-aria-treeitem-name:
 
-ARIA treeitem nodes should have an accessible name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ARIA treeitemノードにはアクセシブルな名前がなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ensures every ARIA treeitem node has an accessible name
+すべてのARIA treeitemノードにはアクセシブルな名前があることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/aria-treeitem-name>`__
 
@@ -3797,10 +3797,10 @@ mainランドマークがトップレベルにあることを確認します
 
 .. _axe-rule-presentation-role-conflict:
 
-Elements of role none or presentation should be flagged
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+roleがnoneまたはpresentationの要素をマークしなければなりません
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Flags elements whose role is none or presentation and which cause the role conflict resolution to trigger.
+roleがnoneまたはpresentationで、roleの競合の解決が必要な要素をマークします
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.2/presentation-role-conflict>`__
 

@@ -145,6 +145,7 @@ Copyright © 2020-2021, freee株式会社
 更新履歴
 ~~~~~~~~~~
 
+.. include:: ChangeLog/202107.0.rst
 .. include:: ChangeLog/202106.0.rst
 .. include:: ChangeLog/202105.0.rst
 .. include:: ChangeLog/202104.0.rst
