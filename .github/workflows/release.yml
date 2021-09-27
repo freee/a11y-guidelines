@@ -19,7 +19,7 @@ jobs:
 
     - uses: actions/setup-python@v1
       with:
-        python-version: '3.7.x'
+        python-version: '3.9.x'
 
     - uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -31,7 +31,7 @@ jobs:
       run: python -m pip install --upgrade pip
 
     - name: Install required modules
-      run: python -m pip install -r requirements.txt
+      run: python -m pip install --upgrade -r requirements.txt
 
     - name: Build HTML with gtag.js, and OGP tags
       env:
