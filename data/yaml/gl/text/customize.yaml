@@ -1,0 +1,13 @@
+id: gl-text-customize
+title: テキスト表示のカスタマイズ
+priority: '[MUST]'
+guideline: |-
+  ユーザーがline-heightを1.5em以上、段落間の空白を2em以上、letter-spacingを0.12em以上に変更し、その他のプロパティーを一切変更していない状況において、コンテンツおよび機能に損失が生じないようにする。
+sc:
+- 1.4.12
+intent: |-
+  ロービジョン者が、問題なくコンテンツを利用できるようにする。
+checks:
+- '0891'
+info:
+- exp-text-custom-css

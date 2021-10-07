@@ -1,0 +1,14 @@
+id: gl-form-errors-correction
+title: エラーの修正方法の提示
+priority: '[SHOULD]'
+guideline: |-
+  入力エラーがある場合に、修正方法を示す。
+sc:
+- 3.3.3
+intent: |-
+  フォーム入力における認知障害者、学習障害者の困難を軽減する。
+checks:
+- '1111'
+- '1131'
+info:
+- exp-form-errors

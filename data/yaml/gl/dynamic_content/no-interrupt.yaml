@@ -1,0 +1,14 @@
+id: gl-dynamic-content-no-interrupt
+title: 割り込み表示
+priority: '[SHOULD]'
+guideline: |-
+  緊急性が高い情報を提示する場合を除いて、プッシュ通知や自動更新などによる割り込みを発生させない。
+sc:
+- 2.2.4
+intent: |-
+  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+checks:
+- '1291'
+- '1311'
+info:
+- exp-dynamic-content-auto-updated

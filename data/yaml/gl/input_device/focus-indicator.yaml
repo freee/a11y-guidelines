@@ -1,0 +1,14 @@
+id: gl-input-device-focus-indicator
+title: フォーカス箇所の可視化
+priority: '[MUST]'
+guideline: |-
+  キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
+sc:
+- 2.4.7
+intent: |-
+  キーボードのみを使っている場合でも、フォーカスされている箇所が分かるようにし、操作を可能にする。
+checks:
+- '0151'
+- '0171'
+info:
+- exp-tab-order-check

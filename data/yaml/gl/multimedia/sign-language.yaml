@@ -1,0 +1,14 @@
+id: gl-multimedia-sign-language
+title: 手話の提供
+priority: '[SHOULD]'
+guideline: |-
+  収録済みコンテンツの音声情報には、同期した手話通訳を提供する。
+sc:
+- 1.2.6
+intent: |-
+  手話を主たる言語として使う聴覚障害者が、音声コンテンツまたは動画コンテンツ中の音声を理解できるようにする。
+checks:
+- '1601'
+- '1621'
+info:
+- exp-multimedia-content-access

@@ -1,0 +1,8 @@
+id: '0371'
+check: |-
+  使用できる入力ディバイスを、特定の時点で検出されたものに限定していない。
+severity: '[MAJOR]'
+target: code
+platform:
+- web
+- mobile

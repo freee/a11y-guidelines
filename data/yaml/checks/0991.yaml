@@ -1,0 +1,8 @@
+id: '0991'
+check: |-
+  フォーム入力に制限時間が設けられていない。
+severity: '[MAJOR]'
+target: design
+platform:
+- web
+- mobile

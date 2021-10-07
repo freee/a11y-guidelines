@@ -1,0 +1,8 @@
+id: '0511'
+check: |-
+  画像化されたテキストと同じ内容のテキストが、その画像代替テキストとして設計資料で明示されている。
+severity: '[MAJOR]'
+target: design
+platform:
+- web
+- mobile

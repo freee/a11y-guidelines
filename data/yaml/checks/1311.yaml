@@ -1,0 +1,8 @@
+id: '1311'
+check: |-
+  ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで表示される、画面の内容を大きく変更するような通知や自動的に表示されるモーダル・ダイアログがない。
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile

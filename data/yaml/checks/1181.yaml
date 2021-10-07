@@ -1,0 +1,16 @@
+id: '1181'
+check: |-
+  操作の結果などを伝えるステータス・メッセージが自動的に読み上げられるようにする。
+severity: '[MAJOR]'
+target: code
+platform:
+- web
+- mobile
+implementation:
+- title: 自動的に読み上げられるようにする
+  web: |-
+    ``aria-live`` 属性を用いる。
+  ios: |-
+    ``UIAccessibility.post(notification:argument:)`` の 引数に  ``.announcement``` とメッセージを入れる。（参考： https://developer.apple.com/documentation/uikit/uiaccessibility/notification/1620176-announcement ）
+  android: |-
+    ``Toast`` 、 ``SnackBar`` 等にメッセージを入れ、TalkBackで適切に読み上げられるようにする。

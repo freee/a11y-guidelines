@@ -1,0 +1,15 @@
+id: gl-dynamic-content-no-flashing
+title: 閃光を放つコンテンツ
+priority: '[MUST]'
+guideline: |-
+  どの1秒間においても3回を超える閃光を放つものがないようにする。
+sc:
+- 2.3.1
+- 2.3.2
+intent: |-
+  光感受性の発作を防ぐ。
+checks:
+- '1261'
+- '1281'
+info:
+- exp-dynamic-content-auto-updated

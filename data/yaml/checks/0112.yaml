@@ -1,0 +1,7 @@
+id: '0112'
+check: |-
+  ホバーで表示されるすべてのコンテンツは、ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
+severity: '[MAJOR]'
+target: product
+platform:
+- web

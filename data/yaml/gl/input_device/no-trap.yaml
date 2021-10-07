@@ -1,0 +1,13 @@
+id: gl-input-device-no-trap
+title: キーボード・トラップの回避
+priority: '[MUST]'
+guideline: |-
+  ページ中のあらゆるコンポーネントについて、Tabキー、矢印キー、Escキーなど簡単な操作でフォーカスを外すことができるようにする。
+sc:
+- 2.1.2
+intent: |-
+  キーボードのみを利用している場合に、ページ中の特定のコンポーネントがページの他の部分へのアクセスを阻害しないようにする。
+checks:
+- '0201'
+info:
+- exp-keyboard-notrap

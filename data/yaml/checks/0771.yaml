@@ -1,0 +1,8 @@
+id: '0771'
+check: |-
+  画面方向を検知できる端末において、端末の方向を変えると適切に画面が回転する。
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile

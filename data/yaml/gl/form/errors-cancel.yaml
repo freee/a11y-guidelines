@@ -1,0 +1,13 @@
+id: gl-form-errors-cancel
+title: 誤操作の防止
+priority: '[SHOULD]'
+guideline: |-
+  法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正を可能にする。
+sc:
+- 3.3.4
+intent: |-
+  誤操作による影響を少なくする。
+checks:
+- '1141'
+info:
+- exp-form-errors

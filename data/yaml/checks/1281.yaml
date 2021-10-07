@@ -1,0 +1,8 @@
+id: '1281'
+check: |-
+  1秒間に3回以上光るコンテンツがない。
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
+- mobile

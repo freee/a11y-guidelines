@@ -1,0 +1,7 @@
+id: '0151'
+check: |-
+  デフォルトのフォーカス・インジケーターを用いない場合、代替となるフォーカス・インジケーターを設計資料で明示している。
+severity: '[CRITICAL]'
+target: design
+platform:
+- web

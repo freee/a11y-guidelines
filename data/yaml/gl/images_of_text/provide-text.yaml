@@ -1,0 +1,16 @@
+id: gl-iot-provide-text
+title: テキスト情報の提供
+priority: '[MUST]'
+guideline: |-
+  画像化されたテキストに含まれる文字情報をテキストでも提供する。
+sc:
+- 1.1.1
+intent: |-
+  スクリーン・リーダーのユーザーが画像化されたテキストにアクセスできるようにする。
+checks:
+- '0511'
+- '0521'
+- '0531'
+info:
+- exp-iot-usage
+- exp-iot-text-alternative

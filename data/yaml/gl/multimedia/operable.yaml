@@ -1,0 +1,14 @@
+id: gl-multimedia-operable
+title: 音声の自動再生
+priority: '[MUST]'
+guideline: |-
+  3秒以上の長さの音声を自動再生しない。
+sc:
+- 1.4.2
+intent: |-
+  スクリーン・リーダーの音声出力を阻害しない。
+checks:
+- '1421'
+- '1441'
+info:
+- exp-multimedia-autoplay

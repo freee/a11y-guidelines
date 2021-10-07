@@ -1,0 +1,19 @@
+id: gl-input-device-keyboard-operable
+title: キーボード操作を可能にする
+priority: '[MUST]'
+guideline: |-
+  マウスまたはタッチUIを使わないと実行できないような機能を作らず、キーボードによる操作を可能にする。
+sc:
+- 2.1.1
+- 2.1.3
+- 2.5.1
+intent: |-
+  マウスを使わない/使えない視覚障害者、肢体不自由者が、コンテンツを利用できるようにする。
+checks:
+- '0172'
+- '0211'
+- '0231'
+- '0581'
+- '0586'
+info:
+- exp-tab-order-check

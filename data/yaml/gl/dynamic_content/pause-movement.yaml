@@ -1,0 +1,15 @@
+id: gl-dynamic-content-pause-movement
+title: 点滅、スクロールを伴うコンテンツ
+priority: '[MUST]'
+sc:
+- 2.2.2
+guideline: |-
+  同じページ上に、自動的に開始し5秒以上継続する、点滅やスクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
+  そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
+intent: |-
+  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+checks:
+- '1201'
+- '1221'
+info:
+- exp-dynamic-content-auto-updated

@@ -1,0 +1,16 @@
+id: gl-image-adjacent-contrast
+title: 隣接領域とのコントラスト比の確保
+priority: '[MUST]'
+guideline: |-
+  画像の隣接領域の色とのコントラスト比を3:1以上にする。
+sc:
+- 1.4.11
+intent: |-
+  ロービジョン者が、コンテンツを利用できるようにする。
+checks:
+- '0001'
+info:
+- exp-image-visual
+- exp-contrast
+- exp-check-contrast
+- '|Vibes Color Contrast|'

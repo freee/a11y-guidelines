@@ -1,0 +1,14 @@
+id: gl-multimedia-background-sound
+title: 充分に小さい背景音
+priority: '[SHOULD]'
+guideline: |-
+  映像がなく音声のみの収録済みコンテンツの場合で主たる発話音声があるとき、背景音がない、もしくは主たる発話音声に対して背景音の音量が少なくとも20db小さい状態にする。
+sc:
+- 1.4.7
+intent: |-
+  音声コンテンツの内容を聞き取りやすいものにする。
+checks:
+- '1631'
+- '1651'
+info:
+- exp-multimedia-content-access

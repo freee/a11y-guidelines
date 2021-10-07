@@ -1,0 +1,14 @@
+id: '0551'
+check: |-
+  見出しが、設計資料に従って適切に実装されている。
+severity: '[NORMAL]'
+target: code
+platform:
+- web
+- mobile
+implementation:
+- title: 見出しの実装
+  web: |-
+    ``h1`` ～ ``h6`` でマークアップ`する。
+  ios: |-
+    ``UIAccessibilityTraits.header`` をセットする。

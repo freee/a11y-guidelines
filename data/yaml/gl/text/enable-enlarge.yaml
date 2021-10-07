@@ -1,0 +1,14 @@
+id: gl-text-enable-enlarge
+title: 文字サイズ変更機能による200パーセントの拡大表示
+priority: '[SHOULD]'
+guideline: |-
+  ブラウザーの文字サイズ変更機能で200パーセントの拡大表示をできるようにする。
+sc:
+- 1.4.4
+intent: |-
+  ロービジョン者が、ズーム機能ではなく文字サイズ変更機能で拡大表示をできるようにする。
+checks:
+- '0324'
+- '0325'
+info:
+- exp-magnification

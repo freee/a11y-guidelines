@@ -1,0 +1,8 @@
+id: '1421'
+check: |-
+  3秒以上の長さの自動再生される音声コンテンツがない。
+severity: '[CRITICAL]'
+target: design
+platform:
+- web
+- mobile

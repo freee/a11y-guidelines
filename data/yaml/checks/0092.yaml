@@ -1,0 +1,7 @@
+id: '0092'
+check: |-
+  ホバーで表示されるすべてのコンテンツは、ポインターをそのコンテンツ上に移動しても、コンテンツが消えない設計になっている。
+severity: '[MAJOR]'
+target: design
+platform:
+- web

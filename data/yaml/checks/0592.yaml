@@ -1,0 +1,8 @@
+id: '0592'
+check: |-
+  複数の状態を持つコンポーネントは、スクリーン・リーダー利用時にもその状態が分かるようになっている。（例：タブUIの現在選択されているタブ、状態に応じて変化するアイコンなど）
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
+- mobile

@@ -1,0 +1,7 @@
+id: '0722'
+check: |-
+  複数の種類の情報を含む画面においては、情報の区切りに見出しが配置されている。
+severity: '[NORMAL]'
+target: design
+platform:
+- mobile

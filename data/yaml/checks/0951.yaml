@@ -1,0 +1,13 @@
+id: '0951'
+check: |-
+  スクリーン・リーダーでフォーム・コントロールとラベルの関連付けが分かるような読み上げがされる。
+
+  注：デスクトップWebの場合、ラベルをクリックするとそのラベルが関連付けられているフォーム・コントロールにフォーカスが移動する。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
+checkMeans:
+  axe: |-
+    「 :ref:`axe-rule-label` 」という問題が出ないことを確認する。

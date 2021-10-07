@@ -1,0 +1,8 @@
+id: '1081'
+check: |-
+  フォーム入力でエラーが発生したとき、エラー内容が分かる具体的な表示文言が設計資料で定義されている
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

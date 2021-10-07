@@ -1,0 +1,13 @@
+id: gl-text-heading-label
+title: 適切な文言の見出し
+priority: '[MUST]'
+guideline: |-
+  主題又は目的を説明する見出しを付ける。
+sc:
+- 2.4.6
+intent: |-
+  視覚障害者が、ページ内で目的のコンテンツを見つけやすくする。
+checks:
+- '0271'
+info:
+- exp-text-wording

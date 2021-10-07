@@ -1,0 +1,15 @@
+id: gl-form-dynamic-content-focus
+title: フォーカス時の挙動
+priority: '[MUST]'
+guideline: |-
+  フォーカスを受け取ったときに、コンテンツの意味を変える、またはページ全体に及ぶような動的な変化を引き起こすフォーム・コントロールやコンポーネントを用いない。
+sc:
+- 3.2.1
+intent: |-
+  視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+checks:
+- '0152'
+- '0171'
+info:
+- exp-form-dynamic-content
+- exp-tab-order-check

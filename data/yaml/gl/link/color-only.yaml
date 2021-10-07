@@ -1,0 +1,15 @@
+id: gl-link-color-only
+title: 複数の視覚的要素を用いた表現
+priority: '[MUST]'
+guideline: |-
+  クリッカブルであることを、色だけで表現しない。
+sc:
+- 1.4.1
+intent: |-
+  視覚障害者や色弱者がリンクを認知できるようにする。
+checks:
+- '0031'
+- '0051'
+info:
+- exp-color-only
+- exp-grayscale

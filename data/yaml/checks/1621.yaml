@@ -1,0 +1,8 @@
+id: '1621'
+check: |-
+  動画の音声情報には同期した手話通訳が提供されている。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile

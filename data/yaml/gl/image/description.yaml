@@ -1,0 +1,15 @@
+id: gl-image-description
+title: 画像の説明の提供
+priority: '[MUST]'
+guideline: |-
+  画像に関する過不足のない説明をテキストで提供する。
+intent: |-
+  視覚障害者が画像の存在を認知し、内容を理解できるようにする。
+checks:
+- '0421'
+- '0431'
+- '0441'
+sc:
+- 1.1.1
+info:
+- exp-image-text-alternative

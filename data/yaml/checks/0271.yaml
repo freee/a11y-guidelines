@@ -1,0 +1,8 @@
+id: '0271'
+check: |-
+  見出しのテキストは、内容を適切に示す文言になっている。
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

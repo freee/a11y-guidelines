@@ -1,0 +1,7 @@
+id: '0321'
+check: |-
+  ブラウザーのズーム機能で200パーセントまで拡大しても、テキストの理解を妨げるようなレイアウト崩れが起こらない。
+severity: '[MAJOR]'
+target: product
+platform:
+- web

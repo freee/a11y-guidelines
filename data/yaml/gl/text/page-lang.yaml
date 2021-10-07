@@ -1,0 +1,14 @@
+id: gl-text-page-lang
+title: ページの主たる言語の指定
+priority: '[MUST]'
+guideline: |-
+  ``html`` 要素に適切にlang属性を指定する。
+sc:
+- 3.1.1
+intent: |-
+  音声/点字出力などが適切に行われるようにする。
+checks:
+- '0611'
+- '0621'
+info:
+- exp-text-lang

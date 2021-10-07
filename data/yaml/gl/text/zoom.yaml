@@ -1,0 +1,13 @@
+id: gl-text-zoom
+title: ズーム機能を用いた200パーセントの拡大表示
+priority: '[MUST]'
+guideline: |-
+  コンテンツや機能を損なうことなく、ブラウザーのズーム機能で200パーセントまで拡大できるようにする。
+sc:
+- 1.4.4
+intent: |-
+  ロービジョン者が、問題なくコンテンツを利用できるようにする。
+checks:
+- '0321'
+info:
+- exp-magnification

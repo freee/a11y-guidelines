@@ -1,0 +1,17 @@
+id: '0402'
+check: |-
+  アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられないようにする。
+severity: '[NORMAL]'
+target: code
+platform:
+- web
+- mobile
+implementation:
+- title: スクリーン・リーダーに読み上げられないようにする
+  web: |-
+    *  ``img`` 要素の場合、空の ``alt`` 属性（ ``alt=""`` ）を指定
+    *  ``img`` 要素以外の要素の場合、 ``aria-label`` 属性や ``aria-labelledby`` 属性を指定しない
+  ios: |-
+    ``isAccessibilityElement``` を ``false`` にする。
+  android: |-
+    ``importantForAccessibility`` を ``no`` にする。

@@ -1,0 +1,15 @@
+id: gl-form-dynamic-content-change
+title: フォームの値の変更時の挙動
+priority: '[MUST]'
+guideline: |-
+  値が変更されたときに、コンテンツの意味の変更、ページ全体に及ぶような変化、他のフォーム・フィールドの値の変更などを引き起こすようなフォーム・フィールドを作らない、またはそのようなフォーム・フィールドの挙動について、事前にユーザーに知らせる。
+sc:
+- 3.2.2
+intent: |-
+  視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+checks:
+- '1051'
+- '1071'
+info:
+- exp-form-dynamic-content
+- exp-tab-order-check

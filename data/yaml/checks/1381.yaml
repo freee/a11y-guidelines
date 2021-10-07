@@ -1,0 +1,8 @@
+id: '1381'
+check: |-
+  ログイン・セッションがタイムアウトした場合、再認証後にデータを失うことなくユーザーが操作を継続できるようになっている。
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

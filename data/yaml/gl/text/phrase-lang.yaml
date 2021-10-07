@@ -1,0 +1,14 @@
+id: gl-text-phrase-lang
+title: 部分的に使用される言語の明示
+priority: '[SHOULD]'
+guideline: |-
+  段落単位など、比較的長いテキストの言語が ``html`` 要素の ``lang`` 属性で指定したものと異なる場合は、その部分に対して適切に ``lang`` 属性を指定する。
+sc:
+- 3.1.2
+intent: |-
+  音声/点字出力などが適切に行われるようにする。
+checks:
+- '0911'
+- '0921'
+info:
+- exp-text-lang

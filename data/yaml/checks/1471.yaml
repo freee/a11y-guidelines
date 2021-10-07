@@ -1,0 +1,9 @@
+id: '1471'
+check: |-
+  *  自動的に開始し5秒以上続く動画、アニメーションがない。または
+  *  動画やアニメーションを呈し、一時停止、または非表示にすることができる。
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile

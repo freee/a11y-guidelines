@@ -1,0 +1,8 @@
+id: '1111'
+check: |-
+  フォーム入力に関するエラー・メッセージには、エラーの修正方法が示されている。
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

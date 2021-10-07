@@ -1,0 +1,16 @@
+id: gl-form-color-only
+title: 複数の視覚的要素を用いた表現
+priority: '[MUST]'
+guideline: |-
+  必須項目やエラー表示に際して、色に加えて他の視覚的要素も用いる。
+sc:
+- 1.3.3
+- 1.4.1
+intent: |-
+  視覚障害者や色弱者が、コンテンツを利用できるようにする。
+checks:
+- '0031'
+- '0051'
+info:
+- exp-color-only
+- exp-grayscale

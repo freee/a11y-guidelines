@@ -1,0 +1,7 @@
+id: '0911'
+check: |-
+  複数の言語が含まれているテキストについて、適切に ``lang`` 属性が指定されている。
+severity: '[MINOR]'
+target: code
+platform:
+- web

@@ -1,0 +1,13 @@
+id: gl-page-redundant-navigation
+title: 複数の到達手段
+priority: '[SHOULD]'
+guideline: |-
+  そのページへの到達手段を複数提供する。ただし、そのページが何らかの手順の実行の過程や結果としてしか表示されない場合は除く。
+sc:
+- 2.4.5
+intent: |-
+  利用環境や認知能力などの違いにかかわらず、そのページへのアクセスのしやすさを確保する。
+checks:
+- '0811'
+info:
+- exp-page-navigation

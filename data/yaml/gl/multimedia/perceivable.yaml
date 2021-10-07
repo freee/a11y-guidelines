@@ -1,0 +1,13 @@
+id: gl-multimedia-perceivable
+title: 音声・映像コンテンツの存在を明示する
+priority: '[MUST]'
+guideline: |-
+  音声・映像コンテンツの存在を認知できるようにする。
+sc:
+- 1.1.1
+intent: |-
+  視覚障害者、聴覚障害者が音声や映像を含むコンテンツの存在を認知できるようにする。
+checks:
+- '1411'
+info:
+- exp-multimedia-perceivable

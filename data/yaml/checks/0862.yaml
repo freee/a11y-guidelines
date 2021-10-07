@@ -1,0 +1,8 @@
+id: '0862'
+check: |-
+  グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような表示がされている。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile

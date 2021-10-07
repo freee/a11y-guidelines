@@ -1,0 +1,12 @@
+id: gl-icon-consistent
+title: アイコンの一貫性
+priority: '[MUST]'
+guideline: |-
+  同じ目的で用いられるアイコンには、サイト内で一貫性のある画像とテキストを用いる。
+sc:
+- 3.2.4
+intent: |-
+  予測可能性を上げ、混乱を防ぐ。
+checks:
+- '0242'
+- '0262'

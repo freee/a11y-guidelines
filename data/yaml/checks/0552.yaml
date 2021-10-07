@@ -1,0 +1,12 @@
+id: '0552'
+check: |-
+  箇条書き、表などのセマンティクスが、設計資料に従って適切に実装されている。
+severity: '[MAJOR]'
+target: code
+platform:
+- web
+implementation:
+- title: セマンティクスに応じた実装
+  web: |-
+    *  箇条書き（ ``ul`` 、 ``ol`` 、 ``dl`` ）、表（ ``table`` ）などを使用する
+    *  デザイン・システムの適切なコンポーネントを使用する

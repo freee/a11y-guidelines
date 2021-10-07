@@ -1,0 +1,8 @@
+id: '1631'
+check: |-
+  音声コンテンツについて、充分に聴き取りやすい。
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

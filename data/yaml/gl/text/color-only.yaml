@@ -1,0 +1,17 @@
+id: gl-text-color-only
+title: 複数の視覚的要素を用いた表現
+priority: '[MUST]'
+guideline: |-
+  強調、引用など、何らかの意図を文字色を変えることによって表現している場合、書体など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
+sc:
+- 1.4.1
+intent: |-
+  視覚障害者や色弱者がコンテンツを利用できるようにする。
+checks:
+- '0031'
+- '0051'
+info:
+- exp-text-wording
+- exp-color-only
+- exp-grayscale
+

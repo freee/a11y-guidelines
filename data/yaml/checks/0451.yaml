@@ -1,0 +1,8 @@
+id: '0451'
+check: |-
+  情報や機能性を一切持たない画像は、説明のテキストを付加してはならないことが設計資料で明示されている。
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile

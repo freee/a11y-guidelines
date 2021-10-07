@@ -1,7 +1,8 @@
 .. _exp-color-only:
 
+############################
 色を用いた表現に関する注意点
-------------------------------
+############################
 
 参考： :ref:`exp-grayscale`
 
@@ -51,8 +52,9 @@ CUDを行う場合、上記のポイントを満たすような配色を用い�
    -  `Android版 <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`_
    -  `Web版 <https://asada.website/webCVS/>`_
 
+****************
 関連ガイドライン
-~~~~~~~~~~~~~~~~
+****************
 
 *  画像： :ref:`gl-image-color-only`
 *  フォーム： :ref:`gl-form-color-only`

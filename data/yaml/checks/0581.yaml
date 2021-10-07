@@ -1,0 +1,8 @@
+id: '0581'
+check: |-
+  独自実装が必要なUIコンポーネントについて、スクリーン・リーダー利用時の挙動およびキーボードによる操作時の挙動が設計資料で示されている。
+severity: '[CRITICAL]'
+target: design
+platform:
+- web
+- mobile

@@ -1,0 +1,8 @@
+id: '1101'
+check: |-
+  フォーム入力に関するエラー発生時には、エラーの内容が具体的に分かるテキスト情報が表示される。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile

@@ -9,3 +9,14 @@ body {
     display: block;
     margin: 0 auto 1rem;
 }
+
+.rst-content blockquote {
+    border-left: 4px solid #e3e3e3;
+    padding: 8px 24px;
+    margin-left: 0;
+    background-color: #efefef;
+}
+
+.rst-content blockquote p:last-child {
+    margin-bottom: 0;
+}

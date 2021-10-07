@@ -1,0 +1,8 @@
+id: '1221'
+check: |-
+  点滅、スクロールを伴うコンテンツがない。
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile

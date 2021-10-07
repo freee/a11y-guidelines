@@ -1,0 +1,15 @@
+id: gl-image-decorative
+title: 装飾目的の画像の無視
+priority: '[MUST]'
+guideline: |-
+  純粋な装飾目的の画像は、スクリーン・リーダーなどの支援技術が無視するようにする。
+intent: |-
+  不要な情報が提示されないようにすることで、視覚障害者などの情報取得をスムースにする。
+checks:
+- '0451'
+- '0461'
+- '0471'
+sc:
+- 1.1.1
+info:
+- exp-image-text-alternative

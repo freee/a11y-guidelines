@@ -1,0 +1,15 @@
+id: gl-dynamic-content-pause-refresh
+title: 自動更新されるコンテンツ
+priority: '[MUST]'
+guideline: |-
+  予め設定された間隔で自動的に内容が更新されたり非表示になったりするコンテンツを作らない。
+  そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、非表示にすることができるか、更新頻度を調整できるようにする。
+sc:
+- 2.2.2
+intent: |-
+  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+checks:
+- '1231'
+- '1251'
+info:
+- exp-dynamic-content-auto-updated

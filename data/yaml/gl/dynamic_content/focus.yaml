@@ -1,0 +1,18 @@
+id: gl-dynamic-content-focus
+title: OnFocus/OffFocus時の挙動
+priority: '[MUST]'
+guideline: |-
+  OnFocus, OffFocusが以下のような変化を発生させないようにする。
+  
+  -  ページ遷移
+  -  フォーム送信
+  -  モーダル・ダイアログの表示
+sc:
+- 3.2.1
+intent: |-
+  視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+checks:
+- '0152'
+- '0171'
+info:
+- exp-tab-order-check

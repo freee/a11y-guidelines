@@ -1,0 +1,12 @@
+id: gl-link-consistent-text
+title: 一貫したリンク・テキスト
+priority: '[MUST]'
+guideline: |-
+  同じ機能を実行するリンクは、サイト内で一貫性のあるリンク・テキストを付与する。
+sc:
+- 3.2.4
+intent: |-
+  予測可能性を上げ、混乱を防ぐ。
+checks:
+- '0242'
+- '0262'

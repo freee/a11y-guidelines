@@ -1,0 +1,24 @@
+id: '0561'
+check: |-
+  設計資料で見出しとして示されているものを、スクリーン・リーダーが見出しとして認識している。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
+checkMeans:
+  nvda: |-
+    以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+
+    1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
+    2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+  axe: |-
+    以下のいずれの問題も出ないことを確認する。
+
+    *  :ref:`axe-rule-empty-heading`
+    *  :ref:`axe-rule-heading-order`
+    *  :ref:`axe-rule-page-has-heading-one`
+  ios-vo: |-
+    ローター・ゼスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+
+    参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`

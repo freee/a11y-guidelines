@@ -1,0 +1,8 @@
+id: '0501'
+check: |-
+  自社および他者のロゴ、バナー、図や写真の中の文字列を除いて、画像化されたテキストがない。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
