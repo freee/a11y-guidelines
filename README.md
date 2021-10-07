@@ -45,6 +45,24 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202110.0](https://github.com/freee/a11y-guidelines/releases/202110.0/) (2021年10月7日)
+
+参考：[freeeアクセシビリティー・ガイドラインVer. 202110.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202110.0)
+
+* ガイドラインおよびチェック内容について、YAMLで記述して管理するように変更
+* チェック内容について、モバイル・アプリケーションについても適用できるように追加、修正
+* iOSに関する情報を追加
+  - iOS VoiceOverに関する情報：[iOS VoiceOverを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-ios-voiceover.html)
+  - 拡大表示の方法：[拡大表示時のアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/magnification.html)
+  - グレイスケール表示の方法：[グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
+* 各ガイドラインの構成を見直し（ガイドラインの内容には変更無し）
+* 各チェック内容の構成の見直し
+  - 重篤度の追加
+  - 対象プラットフォームの追加
+* ガイドラインおよびチェック内容の構成の見直しを反映する形で、当ガイドラインに関する説明を更新：[freeeアクセシビリティー・ガイドラインについて](https://a11y-guidelines.freee.co.jp/intro/intro.html)
+* 当ガイドラインの活用方法に関する説明を追加：[freeeアクセシビリティー・ガイドラインの活用方法](https://a11y-guidelines.freee.co.jp/intro/usage.html)
+* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
+
 ### [Ver. 202107.0](https://github.com/freee/a11y-guidelines/releases/202107.0/) (2021年7月12日)
 
 参考：[freeeアクセシビリティー・ガイドラインVer. 202107.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202107.0)
