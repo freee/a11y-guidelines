@@ -45,6 +45,12 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202110.1](https://github.com/freee/a11y-guidelines/releases/202110.1/) (2021年10月11日)
+
+* チェックリストに関する記述を現状に合わせて修正：[チェック実施用Googleスプレッドシート](https://a11y-guidelines.freee.co.jp/checks/checksheet.html)
+* チェックリストの変更履歴を追加：[アクセシビリティー・チェックリスト更新履歴](https://a11y-guidelines.freee.co.jp/checks/checksheet.html#checksheet-history)
+* 誤字修正
+
 ### [Ver. 202110.0](https://github.com/freee/a11y-guidelines/releases/202110.0/) (2021年10月7日)
 
 参考：[freeeアクセシビリティー・ガイドラインVer. 202110.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202110.0)
