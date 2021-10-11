@@ -4,6 +4,7 @@
 更新履歴
 ########
 
+.. include:: ChangeLog/202110.1.rst
 .. include:: ChangeLog/202110.0.rst
 .. include:: ChangeLog/202107.0.rst
 .. include:: ChangeLog/202106.0.rst

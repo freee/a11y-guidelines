@@ -169,7 +169,6 @@ SC {sc}：
 """.format(sc=sc)
         output = """\
 .. _{0[id]}:
-
 {0[title]}{0[guideline]}
 
 {0[intent]}

@@ -9,6 +9,6 @@ platform:
 implementation:
 - title: 見出しの実装
   web: |-
-    ``h1`` ～ ``h6`` でマークアップ`する。
+    ``h1`` ～ ``h6`` でマークアップする。
   ios: |-
     ``UIAccessibilityTraits.header`` をセットする。

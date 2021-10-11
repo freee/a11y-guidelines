@@ -20,9 +20,9 @@ import datetime
 project = 'freeeアクセシビリティー・ガイドライン'
 copyright = '2020-2021, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202110.0'
+version = 'Ver. 202110.1'
 release = version
-publishedDate = u'2021年10月7日'
+publishedDate = u'2021年10月11日'
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -93,6 +93,7 @@ html_static_path = ['_static']
 
 html_show_sourcelink = False
 html_show_sphinx = False
+html_permalinks = False
 
 linkcheck_ignore = [r'http://localhost:\d+/']
 
