@@ -14,6 +14,7 @@ freee株式会社でのプロダクト開発において使いやすいガイド
 
    intro
    usage
+   contributing
    history
 
 .. _WCAG21: https://www.w3.org/TR/WCAG21/
