@@ -28,6 +28,13 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202111.0](https://github.com/freee/a11y-guidelines/releases/202111.0/) (2021年11月19日)
+
+* [画像化されたテキスト](https://a11y-guidelines.freee.co.jp/categories/images_of_text.html)中のガイドライン、「隣接領域とのコントラスト比の確保」を削除
+* Android TalkBackに関する情報を追加： [Android TalkBackを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-android-talkback.html)
+* これらの変更を反映する形でチェック内容を更新
+* ガイドラインの各カテゴリー・ページにページ内目次を追加
+
 ### [Ver. 202110.2](https://github.com/freee/a11y-guidelines/releases/202110.2/) (2021年10月18日)
 
 * [この文書の編集について](https://a11y-guidelines.freee.co.jp/intro/contributing.html)を追加
