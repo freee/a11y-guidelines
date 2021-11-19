@@ -22,6 +22,8 @@ checkMeans:
     *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
     *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
     *  画面上に表示されているもので読み上げられないものがない
+
+    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
 severity: '[NORMAL]'
 target: product
 platform:

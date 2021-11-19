@@ -15,6 +15,8 @@ checkMeans:
     参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   android-tb: |-
     1本指による右および左方向へのフリックの後、フリックする前に選択されていたオブジェクトに選択状態が戻らないことを確認する。
+
+    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
 severity: '[CRITICAL]'
 target: product
 platform:

@@ -6,6 +6,10 @@
 
 これらのガイドラインは、音声のみのコンテンツ、音声を含む動画コンテンツ、映像のみの動画コンテンツに関するものです。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-multimedia-perceivable.rst
 .. include:: /inc/gl-multimedia-operable.rst
 .. include:: /inc/gl-multimedia-pause-movement.rst

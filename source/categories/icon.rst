@@ -11,6 +11,10 @@
 -  オブジェクトの状態を表す
 -  クリック可能なボタンやリンクを提供する
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-icon-visible-label.rst
 .. include:: /inc/gl-icon-color-only.rst
 .. include:: /inc/gl-icon-consistent.rst

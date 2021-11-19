@@ -8,3 +8,4 @@
 
    screen-reader-check-nvda
    screen-reader-check-ios-voiceover
+   screen-reader-check-android-talkback

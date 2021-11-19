@@ -12,6 +12,6 @@ implementation:
     *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
     *  ``role="presentation"`` を指定。
   ios: |-
-    *  ``isAccessibilityElement``` を ``false`` にする。
+    *  ``isAccessibilityElement`` を ``false`` にする。
   android: |-
     *  ``importantForAccessibility`` を ``no`` にする。

@@ -6,6 +6,10 @@
 
 これらのガイドラインは、ページ全体に関するもので、すべてのページが対象です。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-page-title.rst
 .. include:: /inc/gl-page-landmark.rst
 .. include:: /inc/gl-page-markup-main.rst

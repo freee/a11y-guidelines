@@ -10,7 +10,10 @@
 
 注： WCAG 2.1では "images of text" という用語が用いられ、WCAG 2.1日本語訳では「文字画像」という訳語が当てられています。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-iot-avoid-usage.rst
 .. include:: /inc/gl-iot-provide-text.rst
-.. include:: /inc/gl-iot-adjacent-contrast.rst
 .. include:: /inc/gl-iot-text-contrast.rst

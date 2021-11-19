@@ -6,6 +6,10 @@
 
 これらのガイドラインは、テキスト情報に関するものです。テキスト情報とは、大ざっぱにいえば文字情報ですが、文字情報を画像化して表示するものはこれらのガイドラインの対象ではありません。これについては、「画像化されたテキストに関するガイドライン」を参照してください。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-text-multiple-modality.rst
 .. include:: /inc/gl-text-color-only.rst
 .. include:: /inc/gl-text-heading-label.rst

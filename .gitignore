@@ -3,4 +3,5 @@ node_modules/*
 .vscode/*
 build/*
 source/__pycache__/*
+source/inc/*
 .DS_Store

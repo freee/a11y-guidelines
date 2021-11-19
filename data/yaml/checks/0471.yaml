@@ -15,3 +15,5 @@ checkMeans:
     参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   android-tb: |-
     1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+
+    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

@@ -29,6 +29,5 @@
 *  アイコン： :ref:`gl-icon-contrast`
 *  画像： :ref:`gl-image-adjacent-contrast`
 *  画像： :ref:`gl-image-text-contrast`
-*  画像化されたテキスト： :ref:`gl-iot-adjacent-contrast`
 *  画像化されたテキスト： :ref:`gl-iot-text-contrast`
 *  テキスト： :ref:`gl-text-contrast`

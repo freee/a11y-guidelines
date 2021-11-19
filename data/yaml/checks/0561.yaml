@@ -22,3 +22,7 @@ checkMeans:
     ローター・ゼスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
 
     参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
+  android-tb: |-
+    読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+
+    参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`

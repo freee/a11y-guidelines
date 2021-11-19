@@ -8,6 +8,10 @@
 
 動的コンテンツとは、自動的、またはユーザーの操作を受けて変化するものです。そのような変化には、表示されているものの変更に加えて、ページ遷移なども含まれる場合があります。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-dynamic-content-maintain-dom-tree.rst
 .. include:: /inc/gl-dynamic-content-focus.rst
 .. include:: /inc/gl-dynamic-content-hover-magnify.rst

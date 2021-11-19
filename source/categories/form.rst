@@ -6,6 +6,10 @@
 
 これらのガイドラインは、一般的な入力フォームに加え、input要素などフォーム・コントロールを利用している、一見フォームとは思えないようなコンテンツも対象としています。
 
+.. contents:: 目次
+   :depth: 1
+   :local:
+
 .. include:: /inc/gl-form-label.rst
 .. include:: /inc/gl-form-hidden-label.rst
 .. include:: /inc/gl-form-color-only.rst
