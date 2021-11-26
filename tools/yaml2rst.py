@@ -192,7 +192,7 @@ def read_yaml(dir):
     obj = {}
     for src in srcs:
         try:
-            with open(src) as f:
+            with open(src, encoding="utf-8") as f:
                 data = yaml.load(f, Loader=yaml.FullLoader)
         except Exception as e:
             print('Exception occurred while loading YAML...', file=sys.stderr)
