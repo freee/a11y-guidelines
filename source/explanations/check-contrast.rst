@@ -19,7 +19,7 @@ Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が�
 また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
 
 コントラスト比の自動判定ができない場合
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+======================================
 
 画像の中の文字など、これらのチェック・ツールではコントラスト比を正しく判定できない場合があります。
 

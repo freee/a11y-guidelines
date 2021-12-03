@@ -24,14 +24,14 @@ ARIAライブ・リージョンがページ中にあると、スクリーン・�
 参考： `ARIA ライブリージョン - アクセシビリティ | MDN <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Live_Regions>`_
 
 基本的な実装例
-^^^^^^^^^^^^^^^^
+==============
 
 以下のコードが、もっとも基本的な実装です。
 
 `aria-live-basic.html <../_static/samples/aria-live-basic.html>`_ ：
 
 .. raw:: html
-   
+
    <details><summary>コードを表示</summary>
 
 .. include:: ../_static/samples/aria-live-basic.html
@@ -51,7 +51,7 @@ ARIAライブ・リージョンがページ中にあると、スクリーン・�
    <iframe src="../_static/samples/aria-live-basic.html" width="100%" height="320px"></iframe>
 
 注意：ページのロード時にARIAライブ・リージョンが存在しないと読み上げられない
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+============================================================================
 
 基本的に、ARIAライブ・リージョンはページのロード時に存在することが期待されています。
 そのため、メッセージを表示するのと同時に ``aria-live`` 属性が付いた要素を追加しても、適切に読み上げられません。
@@ -62,7 +62,7 @@ ARIAライブ・リージョンがページ中にあると、スクリーン・�
 `aria-live-timer.html <../_static/samples/aria-live-timer.html>`_ ：
 
 .. raw:: html
-   
+
    <details><summary>コードを表示</summary>
 
 .. include:: ../_static/samples/aria-live-timer.html

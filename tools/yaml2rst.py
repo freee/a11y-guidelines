@@ -7,6 +7,7 @@ import json
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 CHECKS_SRCDIR = 'data/yaml/checks'
 DESTDIR = 'source/inc'
+MAKEFILE_FILENAME = 'incfiles.mk'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -31,10 +32,23 @@ PLATFORM_NAMES = {
     'mobile': 'モバイル'
 }
 def main():
+    args = sys.argv
+    argc = len(args)
+    if argc == 1:
+        build_all = True
+    else:
+        build_all = False
+        targets = args[1:argc]
+
+    if build_all or not MAKEFILE_FILENAME in targets:
+        build_allchecks = True
+    else:
+        build_allchecks = False
+
+    build_examples = []
+
     guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
     checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
-
-    os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
 
     allcheck_text = ''
     check_examples = {}
@@ -120,26 +134,16 @@ def main():
 {details}
 """.format(id = key, title = allcheck_title, metainfo = metainfo, glref = glref_text, check = check['check'], details = allcheck_details, info = allcheck_info)
 
-    filename = 'allchecks.rst'
-    destfile = os.path.join(os.getcwd(), DESTDIR, filename)
-    with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-        f.write(allcheck_text)
-
-    for means in check_examples:
-        if check_examples[means] == '':
-            continue
-        filename = 'check-examples-' + means + '.rst'
-        destfile = os.path.join(os.getcwd(), DESTDIR, filename)
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(check_examples[means])
-
     intent_title = mkheader('意図', '=')
     check_title = mkheader('チェック内容', '=')
     sc_title = mkheader('対応するWCAG 2.1の達成基準', '=')
     info_title = mkheader('参考情報', '=')
+    guidelines_rst = []
+    guidelines_rst_depends = []
 
     for key in guidelines:
         gl = guidelines[key]
+        gl['depends'] = [gl['srcpath']]
         glstr = {
             'title': mkheader(gl['priority'] + gl['title'], "*", True),
             'intent': intent_title + gl['intent'],
@@ -158,8 +162,12 @@ def main():
                     glstr['info'] += f'*  :ref:`{ref}`\n'
 
         glstr['checks'] = check_title
+        gl['examples'] = []
         for check in gl['checks']:
+            if 'checkMeans' in checks[check]:
+                gl['examples'].extend(list(checks[check]['checkMeans'].keys()))
             glstr['checks'] += checks[check]['gl_check_text']
+            gl['depends'].append(checks[check]['srcpath'])
         glstr['scs'] = sc_title
         for sc in gl['sc']:
             glstr['scs'] += """\
@@ -178,10 +186,51 @@ SC {sc}：
 """.format(glstr)
 
         filename = key + '.rst'
+        make_target = os.path.join(DESTDIR, filename)
+        guidelines_rst.append(make_target)
+        guidelines_rst_depends.append("{0}: {1}".format(make_target, " ".join(gl['depends'])))
+        if build_all or make_target in targets:
+            os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
+            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(output)
+            if len(guidelines[key]['examples']):
+                build_examples.extend(guidelines[key]['examples'])
+
+            build_examples = uniq(build_examples)
+
+    if build_allchecks:
+        filename = 'allchecks.rst'
         destfile = os.path.join(os.getcwd(), DESTDIR, filename)
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(output)
+            f.write(allcheck_text)
 
+    if build_all or len(build_examples):
+        for means in check_examples:
+            if check_examples[means] == '' or not means in build_examples:
+                continue
+            filename = 'check-examples-' + means + '.rst'
+            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(check_examples[means])
+
+    if build_all or MAKEFILE_FILENAME in targets:
+        makefile_str = '''
+guidelines_rst = {guidelines_rst}
+
+incfiles: $(guidelines_rst)
+
+%.yaml: ;
+'''.format(guidelines_rst = " ".join(guidelines_rst))
+
+        for dep in guidelines_rst_depends:
+            makefile_str += '''
+{0}
+	@$(YAML2RST) {1}
+'''.format(dep, dep.split(":")[0])
+        destfile = os.path.join(os.getcwd(),  MAKEFILE_FILENAME)
+        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(makefile_str)
 
 def read_yaml(dir):
     srcs = []
@@ -198,6 +247,7 @@ def read_yaml(dir):
             print('Exception occurred while loading YAML...', file=sys.stderr)
             print(e, file=sys.stderr)
             sys.exit(1)
+        data['srcpath'] = src.replace(os.getcwd() + "/", "")
         obj[data['id']] = data
     return obj
 

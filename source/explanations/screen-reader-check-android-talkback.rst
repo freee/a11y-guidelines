@@ -275,7 +275,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    menu
 参考
-   *  `Menus - Material Design <https://material.io/components/menus#usage>`_
+   *  `Menus - Material Design <https://material.io/components/menus>`_
    *  `AppCompatSpinner  |  Android Developers <https://developer.android.com/reference/androidx/appcompat/widget/AppCompatSpinner>`_
 
 使用されている箇所の例
