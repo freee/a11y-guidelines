@@ -28,6 +28,13 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202112.0](https://github.com/freee/a11y-guidelines/releases/202112.0/) (2021年12月3日)
+
+* Androidでグレースケール表示をする方法を追加：[グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
+* Androidで拡大表示をする方法を追加：[拡大表示時のアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/magnification.html)
+* 誤字修正
+* YAMLファイルの処理の改善
+
 ### [Ver. 202111.0](https://github.com/freee/a11y-guidelines/releases/202111.0/) (2021年11月19日)
 
 * [画像化されたテキスト](https://a11y-guidelines.freee.co.jp/categories/images_of_text.html)中のガイドライン、「隣接領域とのコントラスト比の確保」を削除
