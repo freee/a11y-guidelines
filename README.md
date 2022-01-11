@@ -28,6 +28,23 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202201.0](https://github.com/freee/a11y-guidelines/releases/202201.0/) (2022年1月11日)
+
+参考：[freeeアクセシビリティー・ガイドラインVer. 202201.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202201.0)
+
+* クリック/タッチのターゲット・サイズ関連の変更
+  - テキスト中のリンクは対象外であることが明確になるように文言を変更： アイコン：[[SHOULD]十分な大きさのクリック/タッチのターゲット](https://a11y-guidelines.freee.co.jp/categories/icon.html#gl-icon-target-size)
+  - ブラウザーのデフォルトから見た目を変更していないフォーム・コントロールは対象外であることが明確になるように文言を変更： フォーム：[[SHOULD]十分な大きさのクリック/タッチのターゲット](https://a11y-guidelines.freee.co.jp/categories/form.html#gl-form-target-size)、[クリックやタッチのターゲット・サイズに関連する問題とターゲット・サイズの確認方法](https://a11y-guidelines.freee.co.jp/explanations/target-size.html#exp-target-size)
+  - チェック内容を、アイコンに対するものとフォーム・コントロールに対するものに分離：
+    - 修正：[チェックID：0331](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0331)、[チェックID：0351](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0351)
+    - 追加：[チェックID：0332](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0332)、[チェックID：0352](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0352)
+  - 対象がデザインのチェック内容に、ターゲット領域が明示されている必要があることを明記：[チェックID：0331](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0331)、[チェックID：0332](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0332)
+* ARIAランドマーク関連の変更
+  - ARIAランドマークに関する確認方法を参考情報に追加：[適切なページ構造、マークアップとスクリーン・リーダーを用いた効率的な情報アクセス](https://a11y-guidelines.freee.co.jp/explanations/page-structure.html)
+  - ARIAランドマークに関するチェックを追加：[チェックID：0682](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0682)
+* 対象がデザインのチェック内容について、全般的に文言を見直し
+* Googleスプレッドシートにまとめて公開しているアクセシビリティー・チェック・リストのバージョン番号に関する説明を追加：[アクセシビリティー・チェック・リストのバージョン番号について](https://a11y-guidelines.freee.co.jp/checks/checksheet.html#checksheet-semver)
+
 ### [Ver. 202112.0](https://github.com/freee/a11y-guidelines/releases/202112.0/) (2021年12月3日)
 
 * Androidでグレースケール表示をする方法を追加：[グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
