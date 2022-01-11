@@ -15,7 +15,8 @@ CHECK_TOOLS = {
     'axe': 'axe DevTools',
     'ios-vo': 'iOS VoiceOver',
     'android-tb': 'Android TalkBack',
-    'keyboard': 'キーボード操作'
+    'keyboard': 'キーボード操作',
+    'misc': 'その他のツール'
 }
 IMPLEMENTATION_NAMES = {
     'web': 'Web',

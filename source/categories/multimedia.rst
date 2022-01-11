@@ -9,6 +9,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-multimedia-perceivable.rst
 .. include:: /inc/gl-multimedia-operable.rst

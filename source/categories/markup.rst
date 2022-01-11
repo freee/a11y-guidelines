@@ -11,6 +11,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-markup-semantics.rst
 .. include:: /inc/gl-markup-valid.rst

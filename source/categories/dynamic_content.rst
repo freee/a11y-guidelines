@@ -11,6 +11,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-dynamic-content-maintain-dom-tree.rst
 .. include:: /inc/gl-dynamic-content-focus.rst

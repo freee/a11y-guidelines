@@ -1,0 +1,10 @@
+id: '0682'
+check: |-
+  ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+checkMeans:
+  misc: |-
+    `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、適切な領域にコンテンツが属していることを確認する。

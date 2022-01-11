@@ -10,6 +10,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-image-description.rst
 .. include:: /inc/gl-image-decorative.rst

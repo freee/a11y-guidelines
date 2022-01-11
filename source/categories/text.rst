@@ -9,6 +9,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-text-multiple-modality.rst
 .. include:: /inc/gl-text-color-only.rst

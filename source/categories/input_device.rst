@@ -9,6 +9,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-input-device-keyboard-operable.rst
 .. include:: /inc/gl-input-device-focus.rst

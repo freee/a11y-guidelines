@@ -9,6 +9,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-login-session-timing.rst
 .. include:: /inc/gl-login-session-no-timing.rst

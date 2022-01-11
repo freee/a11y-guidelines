@@ -13,6 +13,7 @@
 .. contents:: 目次
    :depth: 1
    :local:
+   :backlinks: none
 
 .. include:: /inc/gl-link-color-only.rst
 .. include:: /inc/gl-link-text.rst
