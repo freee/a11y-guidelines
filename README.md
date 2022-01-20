@@ -28,6 +28,11 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202201.1](https://github.com/freee/a11y-guidelines/releases/202201.1/) (2022年1月20日)
+
+* ARIAランドマークに関するMDNの開設記事へのリンクを追加：[適切なページ構造、マークアップとスクリーン・リーダーを用いた効率的な情報アクセス](https://a11y-guidelines.freee.co.jp/explanations/page-structure.html)
+* axe DevToolsを使ったARIAランドマークに関するチェックの実施方法を追加：[チェックID：0682](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0682)
+
 ### [Ver. 202201.0](https://github.com/freee/a11y-guidelines/releases/202201.0/) (2022年1月11日)
 
 参考：[freeeアクセシビリティー・ガイドラインVer. 202201.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202201.0)
@@ -44,47 +49,5 @@ Copyright © 2020-2021, freee株式会社
   - ARIAランドマークに関するチェックを追加：[チェックID：0682](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0682)
 * 対象がデザインのチェック内容について、全般的に文言を見直し
 * Googleスプレッドシートにまとめて公開しているアクセシビリティー・チェック・リストのバージョン番号に関する説明を追加：[アクセシビリティー・チェック・リストのバージョン番号について](https://a11y-guidelines.freee.co.jp/checks/checksheet.html#checksheet-semver)
-
-### [Ver. 202112.0](https://github.com/freee/a11y-guidelines/releases/202112.0/) (2021年12月3日)
-
-* Androidでグレースケール表示をする方法を追加：[グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
-* Androidで拡大表示をする方法を追加：[拡大表示時のアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/magnification.html)
-* 誤字修正
-* YAMLファイルの処理の改善
-
-### [Ver. 202111.0](https://github.com/freee/a11y-guidelines/releases/202111.0/) (2021年11月19日)
-
-* [画像化されたテキスト](https://a11y-guidelines.freee.co.jp/categories/images_of_text.html)中のガイドライン、「隣接領域とのコントラスト比の確保」を削除
-* Android TalkBackに関する情報を追加： [Android TalkBackを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-android-talkback.html)
-* これらの変更を反映する形でチェック内容を更新
-* ガイドラインの各カテゴリー・ページにページ内目次を追加
-
-### [Ver. 202110.2](https://github.com/freee/a11y-guidelines/releases/202110.2/) (2021年10月18日)
-
-* [この文書の編集について](https://a11y-guidelines.freee.co.jp/intro/contributing.html)を追加
-
-### [Ver. 202110.1](https://github.com/freee/a11y-guidelines/releases/202110.1/) (2021年10月11日)
-
-* チェックリストに関する記述を現状に合わせて修正：[チェック実施用Googleスプレッドシート](https://a11y-guidelines.freee.co.jp/checks/checksheet.html)
-* チェックリストの変更履歴を追加：[アクセシビリティー・チェックリスト更新履歴](https://a11y-guidelines.freee.co.jp/checks/checksheet.html#checksheet-history)
-* 誤字修正
-
-### [Ver. 202110.0](https://github.com/freee/a11y-guidelines/releases/202110.0/) (2021年10月7日)
-
-参考：[freeeアクセシビリティー・ガイドラインVer. 202110.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202110.0)
-
-* ガイドラインおよびチェック内容について、YAMLで記述して管理するように変更
-* チェック内容について、モバイル・アプリケーションについても適用できるように追加、修正
-* iOSに関する情報を追加
-  - iOS VoiceOverに関する情報：[iOS VoiceOverを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-ios-voiceover.html)
-  - 拡大表示の方法：[拡大表示時のアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/magnification.html)
-  - グレイスケール表示の方法：[グレースケール表示への切り替え方](https://a11y-guidelines.freee.co.jp/explanations/grayscale.html)
-* 各ガイドラインの構成を見直し（ガイドラインの内容には変更無し）
-* 各チェック内容の構成の見直し
-  - 重篤度の追加
-  - 対象プラットフォームの追加
-* ガイドラインおよびチェック内容の構成の見直しを反映する形で、当ガイドラインに関する説明を更新：[freeeアクセシビリティー・ガイドラインについて](https://a11y-guidelines.freee.co.jp/intro/intro.html)
-* 当ガイドラインの活用方法に関する説明を追加：[freeeアクセシビリティー・ガイドラインの活用方法](https://a11y-guidelines.freee.co.jp/intro/usage.html)
-* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
 
 これより前の更新履歴は、ガイドライン本文の[更新履歴の項](https://a11y-guidelines.freee.co.jp/intro/history.html)でご確認ください。
