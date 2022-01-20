@@ -20,6 +20,17 @@ ARIAランドマークで示される領域とは、 ``header`` 要素、 ``nav`
 
 ページを構成するすべての要素が適切な領域に含まれていれば、ユーザーは斜め読みのような形でページ全体の構成を把握することができ、また目的の情報が掲載されているかどうかの判断や目的の情報を迅速に見つけることに役立てることができます。
 
+ARIAランドマークについて詳しくは、以下のMDNの記事を参考にしてください：
+
+*  `ARIA: banner ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Banner_role>`_
+*  `ARIA: complementary ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Complementary_role>`_
+*  `ARIA: contentinfo ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Contentinfo_role>`_
+*  `ARIA: form ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Form_Role>`_
+*  `ARIA: main ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Main_role>`_
+*  `ARIA: navigation ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Navigation_Role>`_
+*  `ARIA: region ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Region_role>`_
+*  `ARIA: search ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Search_role>`_
+
 さらに、特に長いページにおいてより効率的な斜め読みを可能にするためには、 ``h?`` 要素を用いてページ内に複数の見出しを配置することが有効です。
 ただ、コンテンツの量や性質によっては、複数の見出しを配置することが必ずしも適当ではない場合もありますから、積極的な ``h?`` 要素の利用は[SHOULD]でのみ求められています。
 

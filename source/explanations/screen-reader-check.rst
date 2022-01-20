@@ -5,6 +5,7 @@
 ##############################################
 
 .. toctree::
+   :titlesonly:
 
    screen-reader-check-nvda
    screen-reader-check-ios-voiceover
