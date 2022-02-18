@@ -28,6 +28,17 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202202.0](https://github.com/freee/a11y-guidelines/releases/202202.0/) (2022年2月18日)
+
+参考：[freeeアクセシビリティー・ガイドラインVer. 202202.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202202.0)
+
+* 「マークアップ全般」カテゴリーを「マークアップと実装」に改名し、全体的に見直し
+  - [[MUST]文書構造を適切にマークアップする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-semantics)について、スタティックなコンテンツを対象としていることが明確になるように文言を変更
+  - [[MUST]対話的なUIコンポーネントの実装](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-component-implementation)と[チェックID：0553](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0553)を追加
+  - [[MUST]コンポーネントをアクセシブルにする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-component)の文言を変更
+  - 関連して参考情報に加筆：[UIコンポーネントのアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/markup-component.html#exp-markup-component)
+* ガイドラインおよびチェック内容のYAMLのスキーマ定義を、JSON Schemaで記述して追加
+
 ### [Ver. 202201.1](https://github.com/freee/a11y-guidelines/releases/202201.1/) (2022年1月20日)
 
 * ARIAランドマークに関するMDNの開設記事へのリンクを追加：[適切なページ構造、マークアップとスクリーン・リーダーを用いた効率的な情報アクセス](https://a11y-guidelines.freee.co.jp/explanations/page-structure.html)
