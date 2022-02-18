@@ -37,7 +37,9 @@ jobs:
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
         BASE_URL: https://a11y-guidelines.freee.co.jp/
-      run: make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_theme_options.canonical_url=${BASE_URL}" html
+      run: |
+        make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_theme_options.canonical_url=${BASE_URL}" html
+        cp -r ./data/json/schema ./build/html
 
     - name: Publish to S3
       env:
