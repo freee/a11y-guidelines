@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a11y-guidelines.freee.co.jp/schema/check.json",
+  "title": "check",
+  "description": "a check for guideline conformance",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "a unique identifier for a check",
+      "type": "string",
+      "pattern": "^[0-9]{4}"
+    },
+    "check": {
+      "description": "main text of a check",
+      "type": "string"
+    },
+    "severity": {
+      "description": "severity of the issue if a check doesn't pass",
+      "type": "string",
+      "enum": [
+        "[CRITICAL]",
+        "[MAJOR]",
+        "[NORMAL]",
+        "[MINOR]"
+      ]
+    },
+    "target": {
+      "description": "target in the develop ment process",
+      "type": "string",
+      "enum": [
+        "design",
+        "code",
+        "product"
+      ]
+    },
+    "platform": {
+      "description": "platform a check applies to",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "web",
+          "mobile"
+        ]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "target": {"const": "product"}
+        }
+      },
+      "then": {
+        "properties": {
+          "checkMeans": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "tool": {
+                  "type": "string",
+                  "enum": [
+                    "nvda",
+                    "ios-vo",
+                    "android-tb",
+                    "axe",
+                    "keyboard",
+                    "misc"
+                  ]
+                },
+                "means": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": ["tool", "means"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "target": {"const": "code"}
+        }
+      },
+      "then": {
+        "properties": {
+          "implementation": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "web": {
+                  "type": "string"
+                },
+                "ios": {
+                  "type": "string"
+                },
+                "android": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": ["title"],
+              "anyOf": [
+                {"required": ["web"]},
+                {"required": ["ios"]},
+                {"required": ["android"]}
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "unevaluatedProperties": false,
+  "required": [
+    "id",
+    "check",
+    "severity",
+    "target",
+    "platform"
+  ]
+}

@@ -7,11 +7,13 @@ platform:
 - web
 - mobile
 checkMeans:
-  ios-vo: |-
+- tool: ios-vo
+  means: |-
     1本指による右および左方向のフリックでフォーカスを移動した際、アイコンとそのアイコンに併記されているテキストが読み上げられ、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
 
     参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  android-tb: |-
+- tool: android-tb
+  means: |-
     1本指による右および左方向のフリックでフォーカスを移動した際、アイコンとそのアイコンに併記されているテキストが読み上げられ、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
 
     参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

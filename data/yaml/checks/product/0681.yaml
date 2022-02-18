@@ -6,7 +6,8 @@ target: product
 platform:
 - web
 checkMeans:
-  nvda: |-
+- tool: nvda
+  means: |-
     以下のいずれかの方法で、本文やその画面の中心的な機能の開始位置に移動することができる。
 
     *  ブラウズ・モードで、次/前の見出しへの移動（H/Shift+Hキー）を実行して、容易に本文直前の見出しに移動できる

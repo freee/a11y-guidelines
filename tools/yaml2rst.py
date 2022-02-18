@@ -3,11 +3,14 @@ import sys
 import re
 import yaml
 import json
+from jsonschema import validate, ValidationError
 
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 CHECKS_SRCDIR = 'data/yaml/checks'
 DESTDIR = 'source/inc'
 MAKEFILE_FILENAME = 'incfiles.mk'
+GUIDELINES_SCHEMA = 'data/json/schema/guideline.json'
+CHECKS_SCHEMA = 'data/json/schema/check.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -48,8 +51,8 @@ def main():
 
     build_examples = []
 
-    guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
-    checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+    guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR), os.path.join(os.getcwd(), GUIDELINES_SCHEMA))
+    checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR), os.path.join(os.getcwd(), CHECKS_SCHEMA))
 
     allcheck_text = ''
     check_examples = {}
@@ -100,17 +103,20 @@ def main():
                     gl_check_details += IMPLEMENTATION_NAMES[impl] + "\n" + indent(str, 3)
                     allcheck_details += impl + "\n" + indent(str, 3)
         elif check['target'] == 'product' and 'checkMeans' in check:
+            check['checkMeansTools'] = []
             for means in check['checkMeans']:
+                tool = means['tool']
+                check['checkMeansTools'].append(tool)
                 check_example_title = mkheader(f':ref:`check-{check["id"]}`', '*', True)
-                gl_check_details += mkheader(f'{CHECK_TOOLS[means]}によるチェック実施方法の例', '^') + check['checkMeans'][means] + '\n'
-                allcheck_details += mkheader(f'{CHECK_TOOLS[means]}によるチェック実施方法の例', '=') + check['checkMeans'][means] + '\n'
-                check_examples[means] += '''\
+                gl_check_details += mkheader(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '^') + means['means'] + '\n'
+                allcheck_details += mkheader(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '=') + means['means'] + '\n'
+                check_examples[tool] += '''\
 .. _check-example-{means}-{id}:
 {title}
 {check}
 {example}
 
-'''.format(means = means, id = check['id'], title = check_example_title, check = indent(check['check'], 3), example = check['checkMeans'][means])
+'''.format(means = tool, id = check['id'], title = check_example_title, check = indent(check['check'], 3), example = means['means'])
 
         metainfo = f'対象\n   {target}\n'
         if 'platform' in check:
@@ -166,7 +172,7 @@ def main():
         gl['examples'] = []
         for check in gl['checks']:
             if 'checkMeans' in checks[check]:
-                gl['examples'].extend(list(checks[check]['checkMeans'].keys()))
+                gl['examples'].extend(list(checks[check]['checkMeansTools']))
             glstr['checks'] += checks[check]['gl_check_text']
             gl['depends'].append(checks[check]['srcpath'])
         glstr['scs'] = sc_title
@@ -207,13 +213,13 @@ SC {sc}：
             f.write(allcheck_text)
 
     if build_all or len(build_examples):
-        for means in check_examples:
-            if check_examples[means] == '' or not means in build_examples:
+        for tool in check_examples:
+            if check_examples[tool] == '' or not tool in build_examples:
                 continue
-            filename = 'check-examples-' + means + '.rst'
+            filename = 'check-examples-' + tool + '.rst'
             destfile = os.path.join(os.getcwd(), DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(check_examples[means])
+                f.write(check_examples[tool])
 
     if build_all or MAKEFILE_FILENAME in targets:
         makefile_str = '''
@@ -233,11 +239,19 @@ incfiles: $(guidelines_rst)
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(makefile_str)
 
-def read_yaml(dir):
+def read_yaml(dir, schema_file):
     srcs = []
     for currDir, dirs, files in os.walk(dir):
         for f in files:
             srcs.append(os.path.join(currDir, f))
+
+    try:
+        with open(schema_file) as f:
+            schema = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
 
     obj = {}
     for src in srcs:
@@ -245,8 +259,14 @@ def read_yaml(dir):
             with open(src, encoding="utf-8") as f:
                 data = yaml.load(f, Loader=yaml.FullLoader)
         except Exception as e:
-            print('Exception occurred while loading YAML...', file=sys.stderr)
+            print(f'Exception occurred while loading YAML {src}...', file=sys.stderr)
             print(e, file=sys.stderr)
+            sys.exit(1)
+        try:
+            validate(data, schema)
+        except ValidationError as e:
+            print(f'Error occurred while validating {src}', file=sys.stderr)
+            print(e.message, file=sys.stderr)
             sys.exit(1)
         data['srcpath'] = src.replace(os.getcwd() + "/", "")
         obj[data['id']] = data
@@ -290,7 +310,7 @@ def _get_category(id):
         'input': '入力ディバイス',
         'link': 'リンク',
         'login': 'ログイン・セッション',
-        'markup': 'マークアップ全般',
+        'markup': 'マークアップと実装',
         'multimedia': '音声・映像コンテンツ',
         'page': 'ページ全体',
         'text': 'テキスト'

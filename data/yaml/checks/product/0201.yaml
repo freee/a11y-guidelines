@@ -7,13 +7,16 @@ check: |-
   *  動画や音声コンテンツのプレイヤー
   *  デート・ピッカーなど、フォーム入力のためにJavaScriptで実装されたコンポーネント
 checkMeans:
-  keyboard: |-
+- tool: keyboard
+  means: |-
     Tab, Shift+Tab, 矢印キー、ESCキーのいずれかの操作で、フォーカスを移動できることを確認する。
-  ios-vo: |-
+- tool: ios-vo
+  means: |-
     1本指による右および左方向へのフリックの後、フリックする前に選択されていたオブジェクトに選択状態が戻らないことを確認する。
 
     参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  android-tb: |-
+- tool: android-tb
+  means: |-
     1本指による右および左方向へのフリックの後、フリックする前に選択されていたオブジェクトに選択状態が戻らないことを確認する。
 
     参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

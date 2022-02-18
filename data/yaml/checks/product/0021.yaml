@@ -11,7 +11,8 @@ platform:
 - web
 - mobile
 checkMeans:
-  axe: |-
+- tool: axe
+  means: |-
     「 :ref:`axe-rule-color-contrast` 」という問題が出ないことを確認する。
 
     ただし、ガイドラインを満たしていない状態であっても、以下の場合は問題として表示されませんので注意が必要です。

@@ -8,15 +8,19 @@ platform:
 - web
 - mobile
 checkMeans:
-  keyboard: |-
+- tool: keyboard
+  means: |-
     TabキーおよびShift+Tabキーでフォーカスを移動した際、移動順序が一貫していることを確認する。
-  nvda: |-
+- tool: nvda
+  means: |-
     ブラウズ・モードで上下矢印キーで読み上げさせたとき、読み上げ順序が一貫していることを確認する。
-  ios-vo: |-
+- tool: ios-vo
+  means: |-
     1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
 
     参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  android-tb: |-
+- tool: android-tb
+  means: |-
     1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
 
     参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

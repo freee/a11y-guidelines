@@ -6,7 +6,8 @@ target: product
 platform:
 - web
 checkMeans:
-  axe: |-
+- tool: axe
+  means: |-
     画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
     -  :ref:`axe-rule-landmark-banner-is-top-level`
@@ -19,5 +20,6 @@ checkMeans:
     -  :ref:`axe-rule-landmark-one-main`
     -  :ref:`axe-rule-landmark-unique`
     -  :ref:`axe-rule-region`  
-  misc: |-
+- tool: misc
+  means: |-
     `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、適切な領域にコンテンツが属していることを確認する。
