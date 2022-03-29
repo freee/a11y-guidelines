@@ -1,4 +1,6 @@
 id: gl-text-customize
+sortKey: 1410
+category: text
 title: テキスト表示のカスタマイズ
 priority: '[MUST]'
 guideline: |-

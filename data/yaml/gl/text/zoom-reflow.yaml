@@ -1,4 +1,6 @@
 id: gl-text-zoom-reflow
+sortKey: 1409
+category: text
 title: 400パーセントの拡大表示
 priority: '[SHOULD]'
 guideline: |-

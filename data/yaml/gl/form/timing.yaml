@@ -1,4 +1,6 @@
 id: gl-form-timing
+sortKey: 1904
+category: form
 title: フォームの入力に制限時間を設ける場合
 priority: '[MUST]'
 guideline: |-

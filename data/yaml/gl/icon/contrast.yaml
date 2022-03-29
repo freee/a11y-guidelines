@@ -1,4 +1,6 @@
 id: gl-icon-contrast
+sortKey: 1704
+category: icon
 title: コントラスト比の確保
 priority: '[MUST]'
 guideline: |-

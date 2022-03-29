@@ -1,4 +1,6 @@
 id: gl-text-multiple-modality
+sortKey: 1401
+category: text
 title: 特定の感覚に依存しない表現
 priority: '[MUST]'
 guideline: |-

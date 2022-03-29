@@ -1,4 +1,6 @@
 id: gl-page-orientation
+sortKey: 1106
+category: page
 title: 画面方向を固定しない
 priority: '[MUST]'
 guideline: |-

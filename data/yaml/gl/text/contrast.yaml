@@ -1,4 +1,6 @@
 id: gl-text-contrast
+sortKey: 1411
+category: text
 title: コントラスト比の確保
 priority: '[MUST]'
 guideline: |-

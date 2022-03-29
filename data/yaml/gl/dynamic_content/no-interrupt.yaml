@@ -1,4 +1,6 @@
 id: gl-dynamic-content-no-interrupt
+sortKey: 2009
+category: dynamic_content
 title: 割り込み表示
 priority: '[SHOULD]'
 guideline: |-
@@ -9,6 +11,9 @@ intent: |-
   ロービジョン者や認知障害者が、集中を阻害されないようにする。
 checks:
 - '1291'
+- '1292'
 - '1311'
+- '1312'
+- '1313'
 info:
 - exp-dynamic-content-auto-updated

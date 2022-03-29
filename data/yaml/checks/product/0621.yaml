@@ -14,3 +14,8 @@ checkMeans:
 - tool: ios-vo
   means: |-
     :ref:`exp-sr-iosvo-multilingual-setting` を行った上で読み上げを実行した際、日本語の内容が適切に読み上げられることを確認する。
+- tool: axe
+  means: |-
+    「 :ref:`axe-rule-html-has-lang` 」という問題が出ないことを確認する。
+
+    この問題が出た場合は、そのページの ``<html>`` 要素の記述を ``<html lang="ja">`` （主に利用されている言語が日本語の場合）のように修正する必要があります。

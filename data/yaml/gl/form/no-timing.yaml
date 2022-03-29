@@ -1,4 +1,6 @@
 id: gl-form-no-timing
+sortKey: 1905
+category: form
 title: 制限時間を設けない
 priority: '[SHOULD]'
 guideline: |-

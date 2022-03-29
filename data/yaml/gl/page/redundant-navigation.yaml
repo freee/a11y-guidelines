@@ -1,4 +1,6 @@
 id: gl-page-redundant-navigation
+sortKey: 1108
+category: page
 title: 複数の到達手段
 priority: '[SHOULD]'
 guideline: |-

@@ -1,4 +1,6 @@
 id: gl-form-dynamic-content-change
+sortKey: 1909
+category: form
 title: フォームの値の変更時の挙動
 priority: '[MUST]'
 guideline: |-

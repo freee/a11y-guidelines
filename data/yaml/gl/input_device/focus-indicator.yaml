@@ -1,4 +1,6 @@
 id: gl-input-device-focus-indicator
+sortKey: 1303
+category: input_device
 title: フォーカス箇所の可視化
 priority: '[MUST]'
 guideline: |-

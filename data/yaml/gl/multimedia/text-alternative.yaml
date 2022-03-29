@@ -1,4 +1,6 @@
 id: gl-multimedia-text-alternative
+sortKey: 2105
+category: multimedia
 title: テキスト情報と同等の内容にする
 priority: '[MUST]'
 guideline: |-

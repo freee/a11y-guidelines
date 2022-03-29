@@ -1,4 +1,6 @@
 id: gl-icon-target-size
+sortKey: 1705
+category: icon
 title: 十分な大きさのクリック/タッチのターゲット
 priority: '[SHOULD]'
 guideline: |-

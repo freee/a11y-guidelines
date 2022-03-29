@@ -1,4 +1,6 @@
 id: gl-page-markup-main
+sortKey: 1103
+category: page
 title: 本文の開始位置の明示
 priority: '[MUST]'
 guideline: |-

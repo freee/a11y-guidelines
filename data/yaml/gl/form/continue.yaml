@@ -1,4 +1,6 @@
 id: gl-form-continue
+sortKey: 1906
+category: form
 title: 制限時間超過後の操作の継続
 priority: '[SHOULD]'
 guideline: |-

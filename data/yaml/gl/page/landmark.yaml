@@ -1,4 +1,6 @@
 id: gl-page-landmark
+sortKey: 1102
+category: page
 title: ページを構成する領域の明示
 priority: '[MUST]'
 guideline: |-

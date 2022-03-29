@@ -1,4 +1,6 @@
 id: gl-dynamic-content-status
+sortKey: 2005
+category: dynamic_content
 title: ステータス・メッセージの適切なマークアップ
 priority: '[MUST]'
 guideline: |-

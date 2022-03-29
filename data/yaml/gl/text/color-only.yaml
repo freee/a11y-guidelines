@@ -1,4 +1,6 @@
 id: gl-text-color-only
+sortKey: 1402
+category: text
 title: 複数の視覚的要素を用いた表現
 priority: '[MUST]'
 guideline: |-

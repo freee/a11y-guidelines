@@ -1,4 +1,6 @@
 id: gl-icon-visible-label
+sortKey: 1701
+category: icon
 title: テキスト情報の付与
 priority: '[MUST]'
 guideline: |-

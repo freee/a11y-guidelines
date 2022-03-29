@@ -1,4 +1,6 @@
 id: gl-iot-avoid-usage
+sortKey: 1501
+category: images_of_text
 title: 画像化されたテキストを使用しない
 priority: '[SHOULD]'
 guideline: |-

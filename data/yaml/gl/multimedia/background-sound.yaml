@@ -1,4 +1,6 @@
 id: gl-multimedia-background-sound
+sortKey: 2111
+category: multimedia
 title: 充分に小さい背景音
 priority: '[SHOULD]'
 guideline: |-

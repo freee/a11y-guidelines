@@ -1,4 +1,6 @@
 id: gl-dynamic-content-focus
+sortKey: 2002
+category: dynamic_content
 title: OnFocus/OffFocus時の挙動
 priority: '[MUST]'
 guideline: |-

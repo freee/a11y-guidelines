@@ -1,4 +1,6 @@
 id: gl-text-enlarge-settings
+sortKey: 1407
+category: text
 title: 文字サイズ変更機能の使用
 priority: '[MUST]'
 guideline: |-

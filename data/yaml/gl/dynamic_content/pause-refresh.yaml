@@ -1,4 +1,6 @@
 id: gl-dynamic-content-pause-refresh
+sortKey: 2007
+category: dynamic_content
 title: 自動更新されるコンテンツ
 priority: '[MUST]'
 guideline: |-

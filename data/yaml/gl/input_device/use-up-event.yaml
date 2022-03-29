@@ -1,4 +1,6 @@
 id: gl-input-device-use-up-event
+sortKey: 1305
+category: input_device
 title: ダウン・イベントをトリガーにしない
 priority: '[MUST]'
 guideline: |-

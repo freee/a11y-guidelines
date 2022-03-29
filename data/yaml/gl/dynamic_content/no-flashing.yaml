@@ -1,4 +1,6 @@
 id: gl-dynamic-content-no-flashing
+sortKey: 2008
+category: dynamic_content
 title: 閃光を放つコンテンツ
 priority: '[MUST]'
 guideline: |-

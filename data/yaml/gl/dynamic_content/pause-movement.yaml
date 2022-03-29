@@ -1,4 +1,6 @@
 id: gl-dynamic-content-pause-movement
+sortKey: 2006
+category: dynamic_content
 title: 点滅、スクロールを伴うコンテンツ
 priority: '[MUST]'
 sc:

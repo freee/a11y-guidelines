@@ -1,4 +1,6 @@
 id: gl-markup-component-implementation
+sortKey: 1003
+category: markup
 title: 対話的なUIコンポーネントの実装
 priority: '[MUST]'
 guideline: |-

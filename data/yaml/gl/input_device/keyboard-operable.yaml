@@ -1,4 +1,6 @@
 id: gl-input-device-keyboard-operable
+sortKey: 1301
+category: input_device
 title: キーボード操作を可能にする
 priority: '[MUST]'
 guideline: |-

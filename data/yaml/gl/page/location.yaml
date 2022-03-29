@@ -1,4 +1,6 @@
 id: gl-page-location
+sortKey: 1109
+category: page
 title: 現在地の明示
 priority: '[SHOULD]'
 guideline: |-

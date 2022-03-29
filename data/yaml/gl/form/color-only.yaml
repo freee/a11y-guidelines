@@ -1,4 +1,6 @@
 id: gl-form-color-only
+sortKey: 1903
+category: form
 title: 複数の視覚的要素を用いた表現
 priority: '[MUST]'
 guideline: |-

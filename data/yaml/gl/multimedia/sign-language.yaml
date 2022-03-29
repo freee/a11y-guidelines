@@ -1,4 +1,6 @@
 id: gl-multimedia-sign-language
+sortKey: 2110
+category: multimedia
 title: 手話の提供
 priority: '[SHOULD]'
 guideline: |-

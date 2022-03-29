@@ -1,4 +1,6 @@
 id: gl-iot-provide-text
+sortKey: 1502
+category: images_of_text
 title: テキスト情報の提供
 priority: '[MUST]'
 guideline: |-

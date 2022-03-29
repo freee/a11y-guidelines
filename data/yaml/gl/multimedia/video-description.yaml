@@ -1,4 +1,6 @@
 id: gl-multimedia-video-description
+sortKey: 2108
+category: multimedia
 title: テキスト情報または音声解説の提供
 priority: '[MUST]'
 guideline: |-

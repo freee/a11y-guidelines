@@ -1,4 +1,6 @@
 id: gl-markup-semantics
+sortKey: 1001
+category: markup
 title: 文書構造を適切にマークアップする
 priority: '[MUST]'
 guideline: |-

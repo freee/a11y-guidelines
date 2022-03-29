@@ -1,4 +1,6 @@
 id: gl-input-device-no-trap
+sortKey: 1304
+category: input_device
 title: キーボード・トラップの回避
 priority: '[MUST]'
 guideline: |-

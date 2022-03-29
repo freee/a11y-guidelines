@@ -1,4 +1,6 @@
 id: gl-image-color-only
+sortKey: 1603
+category: image
 title: 複数の視覚的要素を用いた表現
 priority: '[MUST]'
 guideline: |-

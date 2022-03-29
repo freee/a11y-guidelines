@@ -1,4 +1,6 @@
 id: gl-form-label
+sortKey: 1901
+category: form
 title: 表示されているテキストをラベルとして用いる
 priority: '[MUST]'
 guideline: |-

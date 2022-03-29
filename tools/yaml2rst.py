@@ -9,8 +9,15 @@ GUIDELINES_SRCDIR = 'data/yaml/gl'
 CHECKS_SRCDIR = 'data/yaml/checks'
 DESTDIR = 'source/inc'
 MAKEFILE_FILENAME = 'incfiles.mk'
+ALL_CHECKS_FILENAME = "allchecks.rst"
+ALL_CHECKS_PATH = os.path.join(os.getcwd(), DESTDIR, ALL_CHECKS_FILENAME)
+WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
+WCAG_MAPPING_PATH = os.path.join(os.getcwd(), DESTDIR, WCAG_MAPPING_FILENAME)
+PRIORITY_DIFF_FILENAME = "priority-diff.rst"
+PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), DESTDIR, PRIORITY_DIFF_FILENAME)
 GUIDELINES_SCHEMA = 'data/json/schema/guideline.json'
 CHECKS_SCHEMA = 'data/json/schema/check.json'
+WCAG_SC = 'data/json/wcag-sc.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -35,6 +42,22 @@ PLATFORM_NAMES = {
     'web': 'Web',
     'mobile': 'モバイル'
 }
+CATEGORY_NAMES = {
+    'dynamic_content': '動的コンテンツ',
+    'form': 'フォーム',
+    'icon': 'アイコン',
+    'image': '画像',
+    'images_of_text': '画像化されたテキスト',
+    'input_device': '入力ディバイス',
+    'link': 'リンク',
+    'login_session': 'ログイン・セッション',
+    'markup': 'マークアップと実装',
+    'multimedia': '音声・映像コンテンツ',
+    'page': 'ページ全体',
+    'text': 'テキスト'
+}
+
+
 def main():
     args = sys.argv
     argc = len(args)
@@ -44,36 +67,55 @@ def main():
         build_all = False
         targets = args[1:argc]
 
-    if build_all or not MAKEFILE_FILENAME in targets:
-        build_allchecks = True
-    else:
-        build_allchecks = False
-
     build_examples = []
 
     guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR), os.path.join(os.getcwd(), GUIDELINES_SCHEMA))
+    guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
     checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR), os.path.join(os.getcwd(), CHECKS_SCHEMA))
+
+    try:
+        with open(WCAG_SC) as f:
+            wcag_sc = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while reading {WCAG_SC}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    for sc in wcag_sc:
+        wcag_sc[sc]['gls'] = []
+        wcag_sc[sc]['en']['linkCode'] = f'`{wcag_sc[sc]["en"]["title"]} <{wcag_sc[sc]["en"]["url"]}>`_'
+        wcag_sc[sc]['ja']['linkCode'] = f'`{wcag_sc[sc]["ja"]["title"]} <{wcag_sc[sc]["ja"]["url"]}>`_'
+
+    gl_categories = {}
+    for gl in guidelines:
+        gl_categories[gl['id']] = CATEGORY_NAMES[gl['category']]
+        for sc in gl['sc']:
+            wcag_sc[sc]['gls'].append(gl['id'])
 
     allcheck_text = ''
     check_examples = {}
     for key in CHECK_TOOLS:
         check_examples[key] = ''
 
-    for key in sorted(checks):
-        check = checks[key]
-        check['glref'] = []
+    for check in sorted(checks, key=lambda x: x['id']):
+        if f'data/yaml/checks/{check["target"]}/{check["id"]}.yaml' != check['src_path']:
+            raise Exception(f'The file path does not match the ID and/or the target in {check["src_path"]}')
+
+        check['gl_ref'] = []
         check['info'] = []
-        for glkey in guidelines:
-            gl = guidelines[glkey]
-            if key in gl['checks']:
-                check['glref'].append(glkey)
+        for gl in guidelines:
+            if check["id"] in gl['checks']:
+                check['gl_ref'].append(gl["id"])
                 if 'info' in gl:
                     check['info'].extend(gl['info'])
+
+        if len(check['gl_ref']) == 0:
+            raise Exception(f'The check {key} is not referred to from any guideline.')
 
         allcheck_info = ''
         if len(check['info']) > 0:
             check['info'] = uniq(check['info'])
-            allcheck_info = mkheader('参考情報', '=')
+            allcheck_info = make_header('参考情報', '=')
             for info in check['info']:
                 if re.match(r'(https?://|\|.+\|)', info):
                     allcheck_info += f'*  {info}\n'
@@ -81,20 +123,20 @@ def main():
                     allcheck_info += f'*  :ref:`{info}`\n'
 
         target = TARGET_NAMES[check['target']]
-        gl_check_title = mkheader(f':ref:`check-{key}`', '-')
-        allcheck_title = mkheader(f'チェックID：{key}', '*', True)
+        gl_check_title = make_header(f':ref:`check-{check["id"]}`', '-')
+        allcheck_title = make_header(f'チェックID：{check["id"]}', '*', True)
 
-        glref_text = '関連ガイドライン\n'
-        for ref in check['glref']:
-            glcat = _get_category(ref)
-            glref_text += f'   *  {glcat}： :ref:`{ref}`\n'
+        gl_ref_text = '関連ガイドライン\n'
+        for ref in check['gl_ref']:
+            gl_category = gl_categories[ref]
+            gl_ref_text += f'   *  {gl_category}： :ref:`{ref}`\n'
 
         gl_check_details = ''
         allcheck_details = ''
         if check['target'] == 'code' and 'implementation' in check:
             for detail in check['implementation']:
-                gl_check_details += mkheader('実装方法の例：' + detail['title'], '^')
-                allcheck_details += mkheader('実装方法の例：' + detail['title'], '=')
+                gl_check_details += make_header('実装方法の例：' + detail['title'], '^')
+                allcheck_details += make_header('実装方法の例：' + detail['title'], '=')
 
                 for impl in detail:
                     if impl == 'title':
@@ -107,9 +149,9 @@ def main():
             for means in check['checkMeans']:
                 tool = means['tool']
                 check['checkMeansTools'].append(tool)
-                check_example_title = mkheader(f':ref:`check-{check["id"]}`', '*', True)
-                gl_check_details += mkheader(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '^') + means['means'] + '\n'
-                allcheck_details += mkheader(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '=') + means['means'] + '\n'
+                check_example_title = make_header(f':ref:`check-{check["id"]}`', '*', True)
+                gl_check_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '^') + means['means'] + '\n'
+                allcheck_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '=') + means['means'] + '\n'
                 check_examples[tool] += '''\
 .. _check-example-{means}-{id}:
 {title}
@@ -135,53 +177,58 @@ def main():
 
         allcheck_text += """\
 .. _check-{id}:
-{title}{metainfo}{glref}
+{title}{metainfo}{gl_ref}
 {check}
 {info}
 {details}
-""".format(id = key, title = allcheck_title, metainfo = metainfo, glref = glref_text, check = check['check'], details = allcheck_details, info = allcheck_info)
+""".format(id = check["id"], title = allcheck_title, metainfo = metainfo, gl_ref = gl_ref_text, check = check['check'], details = allcheck_details, info = allcheck_info)
 
-    intent_title = mkheader('意図', '=')
-    check_title = mkheader('チェック内容', '=')
-    sc_title = mkheader('対応するWCAG 2.1の達成基準', '=')
-    info_title = mkheader('参考情報', '=')
+    intent_title = make_header('意図', '=')
+    check_title = make_header('チェック内容', '=')
+    sc_title = make_header('対応するWCAG 2.1の達成基準', '=')
+    info_title = make_header('参考情報', '=')
     guidelines_rst = []
     guidelines_rst_depends = []
 
-    for key in guidelines:
-        gl = guidelines[key]
-        gl['depends'] = [gl['srcpath']]
-        glstr = {
-            'title': mkheader(gl['priority'] + gl['title'], "*", True),
+    for gl in guidelines:
+        gl['depends'] = [gl['src_path']]
+        gl_str = {
+            'title': make_header(gl['priority'] + gl['title'], "*", True),
             'intent': intent_title + gl['intent'],
-            'id': key,
+            'id': gl["id"],
             'priority': gl['priority'],
             'guideline': gl['guideline'],
             'info': ''
         }
 
         if 'info' in gl:
-            glstr['info'] = info_title
+            gl_str['info'] = info_title
             for ref in gl['info']:
                 if re.match(r'(https?://|\|.+\|)', ref):
-                    glstr['info'] += f'*  {ref}\n'
+                    gl_str['info'] += f'*  {ref}\n'
                 else:
-                    glstr['info'] += f'*  :ref:`{ref}`\n'
+                    gl_str['info'] += f'*  :ref:`{ref}`\n'
 
-        glstr['checks'] = check_title
+        gl_str['checks'] = check_title
         gl['examples'] = []
         for check in gl['checks']:
-            if 'checkMeans' in checks[check]:
-                gl['examples'].extend(list(checks[check]['checkMeansTools']))
-            glstr['checks'] += checks[check]['gl_check_text']
-            gl['depends'].append(checks[check]['srcpath'])
-        glstr['scs'] = sc_title
+            _check = [x for x in checks if x["id"] == check][0]
+            if 'checkMeans' in _check:
+                gl['examples'].extend(list(_check['checkMeansTools']))
+            gl_str['checks'] += _check['gl_check_text']
+            gl['depends'].append(_check['src_path'])
+        gl_str['scs'] = sc_title
         for sc in gl['sc']:
-            glstr['scs'] += """\
+            gl_str['scs'] += """\
 SC {sc}：
-   -  |SC {sc}|
-   -  |SC {sc}ja|
-""".format(sc=sc)
+   -  {linkCode_en}
+   -  {linkCode_ja}
+""".format(
+           sc=sc,
+           linkCode_en = wcag_sc[sc]['en']['linkCode'],
+           linkCode_ja = wcag_sc[sc]['ja']['linkCode']
+        )
+
         output = """\
 .. _{0[id]}:
 {0[title]}{0[guideline]}
@@ -190,9 +237,9 @@ SC {sc}：
 {0[scs]}
 {0[info]}
 {0[checks]}\
-""".format(glstr)
+""".format(gl_str)
 
-        filename = key + '.rst'
+        filename = gl["id"] + '.rst'
         make_target = os.path.join(DESTDIR, filename)
         guidelines_rst.append(make_target)
         guidelines_rst_depends.append("{0}: {1}".format(make_target, " ".join(gl['depends'])))
@@ -201,15 +248,68 @@ SC {sc}：
             destfile = os.path.join(os.getcwd(), DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
-            if len(guidelines[key]['examples']):
-                build_examples.extend(guidelines[key]['examples'])
+            if len(gl['examples']):
+                build_examples.extend(gl['examples'])
 
             build_examples = uniq(build_examples)
 
-    if build_allchecks:
-        filename = 'allchecks.rst'
-        destfile = os.path.join(os.getcwd(), DESTDIR, filename)
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+    if build_all or os.path.join(DESTDIR, WCAG_MAPPING_FILENAME) in targets:
+        sc_mapping = []
+        for sc in wcag_sc:
+            if len(wcag_sc[sc]['gls']) == 0:
+                continue
+            gls = []
+            for gl in wcag_sc[sc]['gls']:
+                gls.append(f'*  {gl_categories[gl]}： :ref:`{gl}`')
+            mapping = [
+                f'"{sc}"',
+                '"' + wcag_sc[sc]['en']['linkCode'] + '"',
+                '"' + wcag_sc[sc]['ja']['linkCode'] + '"',
+                '"' + wcag_sc[sc]['level'] + '"'
+            ]
+            mapping_str = ','.join(mapping)
+            gls_str = '\n   '.join(gls)
+            sc_mapping.append(f'   {mapping_str},"{gls_str}"')
+
+        csv_table_header = """\
+.. csv-table:: WCAG 2.1の達成基準との対応一覧
+   :widths: auto
+   :header: "達成基準","原文","日本語訳","適合レベル","対応するガイドライン"
+
+"""
+    
+        sc_mapping_text = csv_table_header + '\n'.join(sc_mapping) + "\n"
+        with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(sc_mapping_text)
+
+    if build_all or os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME) in targets:
+        diffs = []
+        for sc in wcag_sc:
+            if wcag_sc[sc]['level'] == wcag_sc[sc]['localPriority']:
+                continue
+            diff = []
+            diff = [
+                f'"{sc}"',
+                '"' + wcag_sc[sc]['en']['linkCode'] + '"',
+                '"' + wcag_sc[sc]['ja']['linkCode'] + '"',
+                '"' + wcag_sc[sc]['level'] + '"',
+                '"' + wcag_sc[sc]['localPriority'] + '"'
+            ]
+            diffs.append('   ' + ','.join(diff))
+
+        csv_table_header = """\
+.. csv-table:: 適合レベルを見直した達成基準一覧
+   :widths: auto
+   :header: "達成基準","原文","日本語訳","見直し前","見直し後"
+
+"""
+    
+        diffs_text = csv_table_header + '\n'.join(diffs) + "\n"
+        with open(PRIORITY_DIFF_PATH, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(diffs_text)
+
+    if build_all or os.path.join(DESTDIR, ALL_CHECKS_FILENAME) in targets:
+        with open(ALL_CHECKS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(allcheck_text)
 
     if build_all or len(build_examples):
@@ -222,13 +322,38 @@ SC {sc}：
                 f.write(check_examples[tool])
 
     if build_all or MAKEFILE_FILENAME in targets:
+        gl_yaml = []
+        for obj in guidelines:
+            gl_yaml.append(obj['src_path'])
+        all_yaml = []
+        for obj in guidelines+checks:
+            all_yaml.append(obj['src_path'])
+
         makefile_str = '''
 guidelines_rst = {guidelines_rst}
 
 incfiles: $(guidelines_rst)
 
 %.yaml: ;
-'''.format(guidelines_rst = " ".join(guidelines_rst))
+
+{wcag_mapping_target}: {gl_yaml} {wcag_sc}
+	@$(YAML2RST) {wcag_mapping_target}
+
+{priority_diff_target}: {gl_yaml} {wcag_sc}
+	@$(YAML2RST) {priority_diff_target}
+
+{all_checks_target}: {all_yaml}
+	@$(YAML2RST) {all_checks_target}
+
+'''.format(
+    guidelines_rst = " ".join(guidelines_rst),
+    wcag_mapping_target = os.path.join(DESTDIR, WCAG_MAPPING_FILENAME),
+    priority_diff_target = os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME),
+    all_checks_target = os.path.join(DESTDIR, ALL_CHECKS_FILENAME),
+    wcag_sc = os.path.join(DESTDIR, WCAG_SC),
+    gl_yaml = " ".join(gl_yaml),
+    all_yaml = " ".join(all_yaml)
+)
 
         for dep in guidelines_rst_depends:
             makefile_str += '''
@@ -240,10 +365,10 @@ incfiles: $(guidelines_rst)
             f.write(makefile_str)
 
 def read_yaml(dir, schema_file):
-    srcs = []
-    for currDir, dirs, files in os.walk(dir):
+    src_files = []
+    for currentDir, dirs, files in os.walk(dir):
         for f in files:
-            srcs.append(os.path.join(currDir, f))
+            src_files.append(os.path.join(currentDir, f))
 
     try:
         with open(schema_file) as f:
@@ -253,8 +378,8 @@ def read_yaml(dir, schema_file):
         print(e, file=sys.stderr)
         sys.exit(1)
 
-    obj = {}
-    for src in srcs:
+    obj = []
+    for src in src_files:
         try:
             with open(src, encoding="utf-8") as f:
                 data = yaml.load(f, Loader=yaml.FullLoader)
@@ -268,8 +393,8 @@ def read_yaml(dir, schema_file):
             print(f'Error occurred while validating {src}', file=sys.stderr)
             print(e.message, file=sys.stderr)
             sys.exit(1)
-        data['srcpath'] = src.replace(os.getcwd() + "/", "")
-        obj[data['id']] = data
+        data['src_path'] = src.replace(os.getcwd() + "/", "")
+        obj.append(data)
     return obj
 
 def uniq(seq):
@@ -283,7 +408,7 @@ def indent(para, level):
 
     return '\n'.join(lines) + '\n'
 
-def mkheader(title, char, overline = False):
+def make_header(title, char, overline = False):
     line = char * width(title)
     if overline:
         return f'\n{line}\n{title}\n{line}\n\n'
@@ -299,23 +424,6 @@ def _width(c):
 def _isMultiByte(c):
     import unicodedata
     return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
-
-def _get_category(id):
-    category_names = {
-        'dynamic': '動的コンテンツ',
-        'form': 'フォーム',
-        'icon': 'アイコン',
-        'image': '画像',
-        'iot': '画像化されたテキスト',
-        'input': '入力ディバイス',
-        'link': 'リンク',
-        'login': 'ログイン・セッション',
-        'markup': 'マークアップと実装',
-        'multimedia': '音声・映像コンテンツ',
-        'page': 'ページ全体',
-        'text': 'テキスト'
-    }
-    return category_names[id.split('-')[1]]
 
 if __name__ == "__main__":
     main()

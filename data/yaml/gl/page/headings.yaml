@@ -1,4 +1,6 @@
 id: gl-page-headings
+sortKey: 1105
+category: page
 title: 適切なセクション分けと見出しの付与
 priority: '[SHOULD]'
 guideline: |-

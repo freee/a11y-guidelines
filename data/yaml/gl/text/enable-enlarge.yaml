@@ -1,4 +1,6 @@
 id: gl-text-enable-enlarge
+sortKey: 1408
+category: text
 title: 文字サイズ変更機能による200パーセントの拡大表示
 priority: '[SHOULD]'
 guideline: |-

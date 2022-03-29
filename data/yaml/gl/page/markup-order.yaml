@@ -1,4 +1,6 @@
 id: gl-page-markup-order
+sortKey: 1104
+category: page
 title: 適切な記述順序
 priority: '[MUST]'
 guideline: |-

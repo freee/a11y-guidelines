@@ -1,4 +1,6 @@
 id: gl-input-device-focus
+sortKey: 1302
+category: input_device
 title: 適切なフォーカス順序
 priority: '[MUST]'
 guideline: |-

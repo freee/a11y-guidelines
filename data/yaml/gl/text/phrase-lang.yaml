@@ -1,4 +1,6 @@
 id: gl-text-phrase-lang
+sortKey: 1405
+category: text
 title: 部分的に使用される言語の明示
 priority: '[SHOULD]'
 guideline: |-

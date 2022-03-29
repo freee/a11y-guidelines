@@ -10,9 +10,32 @@
       "type": "string",
       "pattern": "^gl-.+"
     },
+    "sortKey": {
+      "type": "integer",
+      "minimum": 1001,
+      "maximum": 2199
+    },
     "title": {
       "description": "title of the guideline",
       "type": "string"
+    },
+    "category": {
+      "description": "category the guideline belongs to",
+      "type": "string",
+      "enum": [
+        "dynamic_content",
+        "form",
+        "icon",
+        "image",
+        "images_of_text",
+        "input_device",
+        "link",
+        "login_session",
+        "markup",
+        "multimedia",
+        "page",
+        "text"
+      ]
     },
     "priority": {
       "description": "priority of the guideline",
@@ -60,6 +83,7 @@
   "additionalProperties": false,
   "required": [
     "id",
+    "sortKey",
     "title",
     "priority",
     "guideline",

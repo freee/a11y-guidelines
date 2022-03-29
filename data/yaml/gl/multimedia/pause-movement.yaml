@@ -1,4 +1,6 @@
 id: gl-multimedia-pause-movement
+sortKey: 2103
+category: multimedia
 title: 動きを伴うコンテンツ
 priority: '[MUST]'
 guideline: |-

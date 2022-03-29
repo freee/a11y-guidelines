@@ -1,4 +1,6 @@
 id: gl-image-description
+sortKey: 1601
+category: image
 title: 画像の説明の提供
 priority: '[MUST]'
 guideline: |-

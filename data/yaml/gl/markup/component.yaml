@@ -1,4 +1,6 @@
 id: gl-markup-component
+sortKey: 1004
+category: markup
 title: コンポーネントをアクセシブルにする
 priority: '[MUST]'
 guideline: |-

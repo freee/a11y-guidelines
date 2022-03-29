@@ -1,4 +1,6 @@
 id: gl-form-dynamic-content-focus
+sortKey: 1908
+category: form
 title: フォーカス時の挙動
 priority: '[MUST]'
 guideline: |-

@@ -1,4 +1,6 @@
 id: gl-login-session-continue
+sortKey: 1203
+category: login_session
 title: 制限時間超過後の操作の継続
 priority: '[SHOULD]'
 guideline: |-

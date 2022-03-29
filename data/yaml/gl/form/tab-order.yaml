@@ -1,4 +1,6 @@
 id: gl-form-tab-order
+sortKey: 1907
+category: form
 title: 適切なフォーカス順序
 priority: '[MUST]'
 guideline: |-

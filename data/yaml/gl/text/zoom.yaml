@@ -1,4 +1,6 @@
 id: gl-text-zoom
+sortKey: 1406
+category: text
 title: ズーム機能を用いた200パーセントの拡大表示
 priority: '[MUST]'
 guideline: |-

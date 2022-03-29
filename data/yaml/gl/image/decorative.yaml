@@ -1,4 +1,6 @@
 id: gl-image-decorative
+sortKey: 1602
+category: image
 title: 装飾目的の画像の無視
 priority: '[MUST]'
 guideline: |-

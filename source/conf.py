@@ -14,15 +14,18 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 import datetime
+import re
 
 # -- Project information -----------------------------------------------------
 
 project = 'freeeアクセシビリティー・ガイドライン'
-copyright = '2020-2021, freee株式会社'
 author = 'freee株式会社'
-version = 'Ver. 202202.0'
+version = 'Ver. 202203.0'
 release = version
-publishedDate = u'2022年2月18日'
+publishedDate = u'2022年3月29日'
+copyright = '2020-{pubYear}, freee株式会社'.format(
+  pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
+)
 
 if 'internal' in tags:
   publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -65,11 +68,12 @@ exclude_patterns = [
 # substitution definitions:
 rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
+.. |copyright| replace:: {copyright}
 
-.. include:: /WCAG21-SC-defs.txt
 .. include:: /misc-defs.txt
 """.format(
-  pubdate = publishedDate
+  pubdate = publishedDate,
+  copyright = copyright
 )
 
 

@@ -1,4 +1,6 @@
 id: gl-multimedia-caption
+sortKey: 2106
+category: multimedia
 title: キャプションの提供
 priority: '[MUST]'
 guideline: |-
