@@ -28,6 +28,22 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202203.0](https://github.com/freee/a11y-guidelines/releases/202203.0/) (2022年3月29日)
+
+* 動的コンテンツ：[[MUST]適切なDOMツリーを維持する](https://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-maintain-dom-tree)の見直し
+  - モバイル・アプリケーションへの適用を前提に、タイトルを「支援技術への適切な情報提供の維持」に変更し、文言を見直し
+  - WCAG 2.1の達成基準1.3.2に加えて、達成基準1.3.1との関連付けも追加
+* モーダル・ダイアログに関連するチェック内容の見直し
+  - [チェックID：1291](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1291)、[チェックID：1311](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1311) からモーダル・ダイアログに関する記述を削除
+  - 新たに[チェックID：1292](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1292)、[チェックID：1312](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1312)、[チェックID：1313](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1313)を追加
+* チェック内容の文言見直し
+  - [チェックID：0811](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0811)に例外があることを明示。
+  - [チェックID：0081](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0081)の意図が明確になるように文言修正
+* チェック内容の確認方法の例の見直し
+  - [チェックID：0413](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0413)のiOS VoiceOverとAndroid TalkBackによる確認方法の文言修正と、NVDAによる確認方法の追加
+  - [チェックID：0621](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0621)に、axe-DevToolsによる確認方法を追加
+* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
+
 ### [Ver. 202202.0](https://github.com/freee/a11y-guidelines/releases/202202.0/) (2022年2月18日)
 
 参考：[freeeアクセシビリティー・ガイドラインVer. 202202.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202202.0)
