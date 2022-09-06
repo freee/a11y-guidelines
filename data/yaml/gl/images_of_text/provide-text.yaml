@@ -3,6 +3,9 @@ sortKey: 1502
 category: images_of_text
 title: テキスト情報の提供
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   画像化されたテキストに含まれる文字情報をテキストでも提供する。
 sc:

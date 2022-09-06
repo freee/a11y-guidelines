@@ -5,12 +5,7 @@ severity: '[NORMAL]'
 target: code
 platform:
 - web
-- mobile
 implementation:
 - title: 位置の明示
   web: |-
     *  ``aria-current`` 属性の付与
-  ios: |-
-    *  ナビゲーションバーのタイトルを適切に設定する
-  android: |-
-    *  ナビゲーションを ``contentDescription`` のないアイコン画像のみにしない

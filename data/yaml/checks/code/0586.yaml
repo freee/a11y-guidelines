@@ -1,16 +1,17 @@
 id: '0586'
 check: |-
-  すべてのUIコンポーネントがキーボードによる操作、スクリーン・リーダー利用時の操作が可能になっている。
-
-  Webの場合
-     *  適切なHTMLのマークアップをする。
-     *  デザイン・システムの適切なコンポーネントを用いる。
-     *  独自実装のUIコンポーネントをアクセシブルにする。
-  モバイルの場合
-     *  可能な限り適切な標準コンポーネントを用いる。
-     *  独自実装のUIコンポーネントをアクセシブルにする。
+  独自実装のUIコンポーネントは、スクリーン・リーダーなどの支援技術に適切にその役割や状態が伝わるようになっている。
 severity: '[CRITICAL]'
 target: code
 platform:
 - web
 - mobile
+implementation:
+  - title: スクリーン・リーダーに役割を伝える
+    web: |-
+      ``role`` 属性を適切に指定する。
+    ios: |-
+      *  適切な ``accessibilityTraits`` を指定する。
+    android: |-
+      *  jetpack composeを使用している場合：role属性を適切に指定する
+      *  jetpack composeを使用していない場合：viewの ``getAccessibilityClassName()`` メソッドを、適切な値が返るもので上書きする。

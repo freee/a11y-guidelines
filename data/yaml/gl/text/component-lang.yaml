@@ -1,0 +1,17 @@
+id: gl-text-component-lang
+sortKey: 1406
+category: text
+title: テキストを表示するUIコンポーネントの言語の明示
+priority: '[SHOULD]'
+platform:
+- web
+- mobile
+guideline: |-
+  テキストを表示するUIコンポーネントにおいて、言語やロケールを指定できる場合は、適切なものを指定する。
+sc:
+- 3.1.2
+intent: |-
+  音声/点字出力などが適切に行われるようにする。
+checks:
+- '0912'
+- '0922'

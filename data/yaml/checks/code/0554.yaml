@@ -1,0 +1,8 @@
+id: '0554'
+check: |-
+  UIコンポーネントは、OSや開発フレームワークの標準コンポーネントを用いて実装されている。
+severity: '[MAJOR]'
+target: code
+platform:
+- web
+- mobile

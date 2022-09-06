@@ -3,6 +3,8 @@ sortKey: 2104
 category: multimedia
 title: キーボード・トラップの回避
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   音声/動画のプレイヤーをページに埋め込む場合、そのコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーなどで抜け出すことができるようにする。
 sc:

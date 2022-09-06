@@ -3,6 +3,9 @@ sortKey: 1901
 category: form
 title: 表示されているテキストをラベルとして用いる
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   フォーム・コントロールには、表示されているテキストをラベルとして明示的に関連付ける。
 sc:

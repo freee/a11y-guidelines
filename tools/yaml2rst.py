@@ -110,7 +110,7 @@ def main():
                     check['info'].extend(gl['info'])
 
         if len(check['gl_ref']) == 0:
-            raise Exception(f'The check {key} is not referred to from any guideline.')
+            raise Exception(f'The check {check["id"]} is not referred to from any guideline.')
 
         allcheck_info = ''
         if len(check['info']) > 0:
@@ -193,13 +193,16 @@ def main():
     for gl in guidelines:
         gl['depends'] = [gl['src_path']]
         gl_str = {
-            'title': make_header(gl['priority'] + gl['title'], "*", True),
+            'title': make_header(gl['title'], "*", True),
             'intent': intent_title + gl['intent'],
             'id': gl["id"],
-            'priority': gl['priority'],
             'guideline': gl['guideline'],
             'info': ''
         }
+
+        gl_platforms = list(map(lambda item: PLATFORM_NAMES[item], gl['platform']))
+        gl_platform_str = '、'.join(gl_platforms)
+        gl_str['metainfo'] = f'優先度\n   {gl["priority"]}\n対象プラットフォーム\n   {gl_platform_str}\n\n'
 
         if 'info' in gl:
             gl_str['info'] = info_title
@@ -231,7 +234,7 @@ SC {sc}：
 
         output = """\
 .. _{0[id]}:
-{0[title]}{0[guideline]}
+{0[title]}{0[metainfo]}{0[guideline]}
 
 {0[intent]}
 {0[scs]}

@@ -3,6 +3,9 @@ sortKey: 1403
 category: text
 title: 適切な文言の見出し
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   主題又は目的を説明する見出しを付ける。
 sc:

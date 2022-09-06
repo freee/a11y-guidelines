@@ -3,6 +3,9 @@ sortKey: 1603
 category: image
 title: 複数の視覚的要素を用いた表現
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   特定の色に何らかの意味を持たせている場合、形状、模様など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
 sc:

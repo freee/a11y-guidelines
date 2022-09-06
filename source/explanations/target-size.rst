@@ -45,5 +45,7 @@
 関連ガイドライン
 ****************
 
-*  フォーム： :ref:`クリック/タッチのターゲット・サイズは充分に大きいものにする。<gl-form-target-size>`
-*  アイコン： :ref:`クリック/タッチのターゲット・サイズは充分に大きいものにする。<gl-icon-target-size>`
+*  アイコン： :ref:`gl-icon-target-size`
+*  アイコン： :ref:`gl-icon-target-size-mobile`
+*  フォーム： :ref:`gl-form-target-size`
+*  フォーム： :ref:`gl-form-target-size-mobile`

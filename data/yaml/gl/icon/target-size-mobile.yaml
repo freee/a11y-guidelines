@@ -1,0 +1,20 @@
+id: gl-icon-target-size-mobile
+sortKey: 1706
+category: icon
+title: 十分な大きさのクリック/タッチのターゲット（モバイル）
+priority: '[SHOULD]'
+platform:
+- mobile
+guideline: |-
+  画像をリンクやボタンにする場合、クリック/タッチのターゲット・サイズは充分に大きいものにする。
+
+  *  44 x 44 CSS px以上、または
+  *  OSのインターフェイス・ガイドラインを満たすサイズ
+sc:
+- 2.5.5
+intent: |-
+  ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+checks:
+- '0333'
+info:
+- exp-target-size

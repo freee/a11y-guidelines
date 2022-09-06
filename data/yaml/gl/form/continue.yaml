@@ -3,6 +3,9 @@ sortKey: 1906
 category: form
 title: 制限時間超過後の操作の継続
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   制限時間を超過した場合も、データを失うことなくユーザーが操作を継続できるようにする。
 sc:

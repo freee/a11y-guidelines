@@ -3,6 +3,9 @@ sortKey: 2007
 category: dynamic_content
 title: 自動更新されるコンテンツ
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   予め設定された間隔で自動的に内容が更新されたり非表示になったりするコンテンツを作らない。
   そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、非表示にすることができるか、更新頻度を調整できるようにする。

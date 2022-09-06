@@ -3,6 +3,9 @@ sortKey: 1202
 category: login_session
 title: 制限時間を設けない
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   ログイン・セッションにタイムアウトを設けない。
 sc:

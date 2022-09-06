@@ -5,4 +5,3 @@ severity: '[MAJOR]'
 target: design
 platform:
 - web
-- mobile

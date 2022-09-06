@@ -1,7 +1,7 @@
 id: '1601'
 check: |-
   動画の音声情報には同期した手話通訳が提供されている。
-severity: '[NORMAL]'
+severity: '[MINOR]'
 target: design
 platform:
 - web

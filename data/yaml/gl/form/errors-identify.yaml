@@ -3,6 +3,9 @@ sortKey: 1910
 category: form
 title: テキスト情報によるエラーの特定
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   入力エラーがある場合、エラー箇所とエラー内容をテキストで知らせる。
 sc:

@@ -4,6 +4,9 @@
 更新履歴
 ########
 
+Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`checksheet-history` のみに掲載しています。
+
+.. include:: ChangeLog/202209.0.rst
 .. include:: ChangeLog/202205.0.rst
 .. include:: ChangeLog/202203.0.rst
 .. include:: ChangeLog/202202.0.rst

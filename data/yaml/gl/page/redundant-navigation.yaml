@@ -3,6 +3,9 @@ sortKey: 1108
 category: page
 title: 複数の到達手段
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   そのページへの到達手段を複数提供する。ただし、そのページが何らかの手順の実行の過程や結果としてしか表示されない場合は除く。
 sc:

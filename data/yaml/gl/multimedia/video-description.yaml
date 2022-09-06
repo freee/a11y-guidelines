@@ -3,6 +3,9 @@ sortKey: 2108
 category: multimedia
 title: テキスト情報または音声解説の提供
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   テキストの代替情報ではない音声・映像コンテンツにおいて、映像がある収録済みコンテンツの場合、映像の内容が分かるような同期した音声情報、またはテキストによる説明を提供する。
 sc:

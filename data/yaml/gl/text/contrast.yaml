@@ -1,8 +1,11 @@
 id: gl-text-contrast
-sortKey: 1411
+sortKey: 1413
 category: text
 title: コントラスト比の確保
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   文字色と背景色に十分なコントラストを確保する。
 

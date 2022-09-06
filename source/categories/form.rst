@@ -24,3 +24,4 @@
 .. include:: /inc/gl-form-errors-correction.rst
 .. include:: /inc/gl-form-errors-cancel.rst
 .. include:: /inc/gl-form-target-size.rst
+.. include:: /inc/gl-form-target-size-mobile.rst

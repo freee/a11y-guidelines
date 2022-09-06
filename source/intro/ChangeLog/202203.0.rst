@@ -4,7 +4,7 @@
 `Ver. 202203.0 (2022年3月29日) <https://github.com/freee/a11y-guidelines/releases/202203.0>`_
 *********************************************************************************************
 
-*  動的コンテンツ： `[MUST]適切なDOMツリーを維持する <https://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-maintain-dom-tree>`_ の見直し
+*  動的コンテンツ： :ref:`[MUST]適切なDOMツリーを維持する <gl-dynamic-content-maintain-dom-tree>` の見直し
 
    -  モバイル・アプリケーションへの適用を前提に、タイトルを「支援技術への適切な情報提供の維持」に変更し、文言を見直し
    -  WCAG 2.1の達成基準1.3.2に加えて、達成基準1.3.1との関連付けも追加

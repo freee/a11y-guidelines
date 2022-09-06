@@ -3,12 +3,13 @@ sortKey: 1913
 category: form
 title: 十分な大きさのクリック/タッチのターゲット
 priority: '[SHOULD]'
+platform:
+- web
 guideline: |-
   フォーム・コントロールの見た目をブラウザーのデフォルトのものから変更する場合、クリック/タッチのターゲット・サイズは充分に大きいものにする。
 
   *  デスクトップ向けWebでは最低24 x 24 CSS px、可能であれば44 x 44 CSS px以上
-  *  モバイル向けは44 x 44 CSS px以上
-
+  *  モバイル向けWebでは44 x 44 CSS px以上
 sc:
 - 2.5.5
 intent: |-

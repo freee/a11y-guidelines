@@ -3,6 +3,9 @@ sortKey: 2101
 category: multimedia
 title: 音声・映像コンテンツの存在を明示する
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   音声・映像コンテンツの存在を認知できるようにする。
 sc:

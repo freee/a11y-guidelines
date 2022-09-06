@@ -1,8 +1,10 @@
 id: gl-text-enlarge-settings
-sortKey: 1407
+sortKey: 1408
 category: text
 title: 文字サイズ変更機能の使用
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   コンテンツや機能を損なうことなく、ブラウザーの文字サイズ変更機能で200パーセントの拡大表示をする設定ができるようにする。
 sc:

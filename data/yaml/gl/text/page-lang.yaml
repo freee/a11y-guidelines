@@ -3,6 +3,8 @@ sortKey: 1404
 category: text
 title: ページの主たる言語の指定
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   ``html`` 要素に適切にlang属性を指定する。
 sc:

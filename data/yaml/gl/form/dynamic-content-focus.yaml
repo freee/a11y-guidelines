@@ -3,6 +3,9 @@ sortKey: 1908
 category: form
 title: フォーカス時の挙動
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   フォーカスを受け取ったときに、コンテンツの意味を変える、またはページ全体に及ぶような動的な変化を引き起こすフォーム・コントロールやコンポーネントを用いない。
 sc:

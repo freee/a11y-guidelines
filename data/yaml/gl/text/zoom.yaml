@@ -1,8 +1,10 @@
 id: gl-text-zoom
-sortKey: 1406
+sortKey: 1407
 category: text
 title: ズーム機能を用いた200パーセントの拡大表示
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   コンテンツや機能を損なうことなく、ブラウザーのズーム機能で200パーセントまで拡大できるようにする。
 sc:

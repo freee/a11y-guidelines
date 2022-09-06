@@ -3,6 +3,9 @@ sortKey: 1701
 category: icon
 title: テキスト情報の付与
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   アイコンにはテキストのラベルを併せて表示し、それが難しい場合はアイコンの目的（表している状態、操作の結果）が分かるような代替テキストを付与する。
 sc:

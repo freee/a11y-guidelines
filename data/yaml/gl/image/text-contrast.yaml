@@ -3,6 +3,9 @@ sortKey: 1605
 category: image
 title: 画像内のテキストのコントラスト比
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   画像内のテキストや、重要な情報を伝える視覚的要素の色と背景の色に、十分なコントラストを確保する。
   

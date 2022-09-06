@@ -3,6 +3,8 @@ sortKey: 2004
 category: dynamic_content
 title: ホバーで表示されるコンテンツの非表示
 priority: '[SHOULD]'
+platform:
+- web
 guideline: |-
   ホバーで表示されるコンテンツについて、以下のすべてを満たす。
   

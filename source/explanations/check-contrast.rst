@@ -47,8 +47,7 @@ axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定が�
    -  `macOSのカラープロファイル設定 <https://support.apple.com/ja-jp/guide/mac-help/mchlf3ddc60d/mac>`_ で、「このディスプレイのプロファイルのみを表示」のチェックを外してから ``SRGB IEC61966-2.1`` を選択。
    -  SketchではPreferences➝General➝Color Profileで「SRGB IEC61966-2.1」を選択。
 
-      -  上記はデフォルト設定なので、既存のドキュメントのカラープロファイルは異なったままになっている可能性があります。ファイルのカラープロファイルを変えたい場合は :menuselection:`File --> Change Color Profile` から変更します。
-      -  参考： `Sketch : Color Management <https://www.sketch.com/support/troubleshooting/color-management/>`_
+      上記はデフォルト設定なので、既存のドキュメントのカラープロファイルは異なったままになっている可能性があります。ファイルのカラープロファイルを変えたい場合は :menuselection:`File --> Document Settings` から変更します。
 
    -  Adobe XDはOSの設定を引き継ぐので、カラープロファイルの設定を変更した場合は再起動。
 

@@ -5,12 +5,8 @@ severity: '[MINOR]'
 target: product
 platform:
 - web
-- mobile
 checkMeans:
 - tool: nvda
   means: |-
     1. NVDAの音声設定で、「サポートされている場合自動的に言語を切り替える」と「サポートされている場合自動的に方言を切り替える」がチェックされている状態にする。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」の項を参照）
     2. ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
-- tool: ios-vo
-  means: |-
-    :ref:`exp-sr-iosvo-multilingual-setting` を行った上で読み上げを実行した際、コンテンツの原語に応じて適切に音声合成エンジンが切り替わることを確認する。

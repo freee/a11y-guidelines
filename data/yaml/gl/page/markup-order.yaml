@@ -3,6 +3,8 @@ sortKey: 1104
 category: page
 title: 適切な記述順序
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   最初から順に読み進めた場合に、コンテンツの意味が正しく伝わるような順序でHTMLの各要素を記述する。
 sc:

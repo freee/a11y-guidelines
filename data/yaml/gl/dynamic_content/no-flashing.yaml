@@ -3,6 +3,9 @@ sortKey: 2008
 category: dynamic_content
 title: 閃光を放つコンテンツ
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   どの1秒間においても3回を超える閃光を放つものがないようにする。
 sc:

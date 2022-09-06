@@ -3,6 +3,9 @@ sortKey: 1704
 category: icon
 title: コントラスト比の確保
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   背景色とのコントラスト比を3:1以上にする。
 sc:

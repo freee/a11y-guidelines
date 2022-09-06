@@ -3,6 +3,9 @@ sortKey: 1109
 category: page
 title: 現在地の明示
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   そのページが、サイト構造のどこに位置しているかが分かるようにする。
 sc:

@@ -21,3 +21,4 @@
 .. include:: /inc/gl-icon-consistent.rst
 .. include:: /inc/gl-icon-contrast.rst
 .. include:: /inc/gl-icon-target-size.rst
+.. include:: /inc/gl-icon-target-size-mobile.rst

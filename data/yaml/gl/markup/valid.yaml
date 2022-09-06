@@ -3,6 +3,8 @@ sortKey: 1002
 category: markup
 title: 文法的に正しいマークアップ
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   文法的に正しい、仕様に準拠したマークアップを行う。
 sc:

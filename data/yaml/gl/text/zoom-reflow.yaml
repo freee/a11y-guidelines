@@ -1,8 +1,10 @@
 id: gl-text-zoom-reflow
-sortKey: 1409
+sortKey: 1411
 category: text
 title: 400パーセントの拡大表示
 priority: '[SHOULD]'
+platform:
+- web
 guideline: |-
   400パーセントの拡大表示をしたときでも、横書きのコンテンツのように縦スクロールを前提としたコンテンツては横スクロールが、縦書きのコンテンツのように横スクロールを前提としたコンテンツでは縦スクロールが必要にならないようにする。
 sc:

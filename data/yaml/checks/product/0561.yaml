@@ -22,7 +22,7 @@ checkMeans:
     *  :ref:`axe-rule-page-has-heading-one`
 - tool: ios-vo
   means: |-
-    ローター・ゼスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+    ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
 
     参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
 - tool: android-tb

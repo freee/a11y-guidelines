@@ -16,8 +16,10 @@
 .. include:: /inc/gl-text-heading-label.rst
 .. include:: /inc/gl-text-page-lang.rst
 .. include:: /inc/gl-text-phrase-lang.rst
+.. include:: /inc/gl-text-component-lang.rst
 .. include:: /inc/gl-text-zoom.rst
 .. include:: /inc/gl-text-enlarge-settings.rst
+.. include:: /inc/gl-text-mobile-enlarge-settings.rst
 .. include:: /inc/gl-text-enable-enlarge.rst
 .. include:: /inc/gl-text-zoom-reflow.rst
 .. include:: /inc/gl-text-customize.rst

@@ -45,6 +45,18 @@
         "[SHOULD]"
       ]
     },
+    "platform": {
+      "description": "target platform of the guideline",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "web",
+          "mobile"
+        ]
+      }
+    },
     "guideline": {
       "description": "main text of the guideline",
       "type": "string"
@@ -63,7 +75,7 @@
       "type": "string"
     },
     "checks": {
-      "description": "checks for comformance to the guideline",
+      "description": "checks for conformance to the guideline",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -86,6 +98,7 @@
     "sortKey",
     "title",
     "priority",
+    "platform",
     "guideline",
     "sc",
     "intent",

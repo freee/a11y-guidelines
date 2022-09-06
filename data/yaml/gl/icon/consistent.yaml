@@ -3,6 +3,9 @@ sortKey: 1703
 category: icon
 title: アイコンの一貫性
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   同じ目的で用いられるアイコンには、サイト内で一貫性のある画像とテキストを用いる。
 sc:

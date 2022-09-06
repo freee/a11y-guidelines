@@ -1,0 +1,20 @@
+id: gl-form-target-size-mobile
+sortKey: 1914
+category: form
+title: 十分な大きさのクリック/タッチのターゲット（モバイル）
+priority: '[SHOULD]'
+platform:
+- mobile
+guideline: |-
+  操作を受け付けるもののタッチのターゲット・サイズは充分に大きいものにする。
+
+  *  44 x 44 CSS px以上、または
+  *  OSのインターフェイス・ガイドラインを満たすサイズ
+sc:
+- 2.5.5
+intent: |-
+  ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+checks:
+- '0334'
+info:
+- exp-target-size

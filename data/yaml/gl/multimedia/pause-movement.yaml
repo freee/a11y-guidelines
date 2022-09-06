@@ -3,6 +3,9 @@ sortKey: 2103
 category: multimedia
 title: 動きを伴うコンテンツ
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   自動的に開始し5秒以上継続する、アニメーションや動画のなどの視覚的な動きを伴うコンテンツを作らない。
   そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。

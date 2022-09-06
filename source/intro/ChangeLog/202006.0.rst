@@ -9,7 +9,7 @@
 *  ガイドライン部分の文書構造を見直し
 *  :ref:`category-input-device` に関するガイドラインの構成を一部変更（内容に変更無し）
 *  コントラスト関連のガイドラインで、文字サイズの表記をpxとptを併記するように変更
-*  :ref:`category-dynamic-content` に関するガイドラインにガイドラインを1項目追加： :ref:`gl-dynamic-content-maintain-dom-tree`
+*  :ref:`category-dynamic-content` に関するガイドラインにガイドラインを1項目追加： :ref:`[MUST]支援技術への適切な情報提供の維持 <gl-dynamic-content-maintain-dom-tree>`
 *  その他内容の変更を伴わないガイドライン文言の変更
 *  「チェック内容」と「チェック対象」を対にして表記するように変更
 *  チェック内容の追加と文言変更
