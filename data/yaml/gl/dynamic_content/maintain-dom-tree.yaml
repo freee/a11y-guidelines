@@ -3,6 +3,9 @@ sortKey: 2001
 category: dynamic_content
 title: 支援技術への適切な情報提供の維持
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   ユーザーの操作によってコンテンツが増減するようなページでは、どの状態においてもスクリーン・リーダーが適切に情報を取得できる状態を維持する。
 

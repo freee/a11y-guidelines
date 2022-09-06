@@ -1,9 +1,9 @@
 ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`_ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
 
 バージョン
-   4.4.1
+   4.4.3
 更新日時
-   2022-03-15 18:43:28++0900
+   2022-09-05 18:16:33++0900
 
 .. _axe-rule-area-alt:
 
@@ -18,11 +18,6 @@
 関連するWCAG 2.1の達成基準
 ==========================
 
-*  達成基準 1.1.1
-
-   -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
-
 *  達成基準 2.4.4
 
    -  `Link Purpose (In Context) <https://www.w3.org/TR/WCAG21/#link-purpose-in-context>`_
@@ -36,15 +31,9 @@
 関連ガイドライン
 ================
 
-*  画像化されたテキスト： :ref:`gl-iot-provide-text`
-*  画像： :ref:`gl-image-description`
-*  画像： :ref:`gl-image-decorative`
-*  アイコン： :ref:`gl-icon-visible-label`
-*  フォーム： :ref:`gl-form-label`
-*  フォーム： :ref:`gl-form-hidden-label`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-perceivable`
 *  リンク： :ref:`gl-link-text`
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-allowed-attr:
 
@@ -68,6 +57,7 @@
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-command-name:
 
@@ -91,6 +81,7 @@ ARIAコマンドにはアクセシブルな名前がなければなりません
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-hidden-body:
 
@@ -114,6 +105,7 @@ ARIAコマンドにはアクセシブルな名前がなければなりません
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-hidden-focus:
 
@@ -133,21 +125,11 @@ aria-hidden要素にフォーカス可能な要素が含まれていないこと
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
    -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
 
-*  達成基準 1.3.1
-
-   -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
-
 関連ガイドライン
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
-*  マークアップと実装： :ref:`gl-markup-semantics`
-*  マークアップと実装： :ref:`gl-markup-component-implementation`
-*  ページ全体： :ref:`gl-page-landmark`
-*  フォーム： :ref:`gl-form-label`
-*  フォーム： :ref:`gl-form-hidden-label`
-*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-input-field-name:
 
@@ -171,6 +153,7 @@ ARIA入力欄にアクセシブルな名前があります
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-meter-name:
 
@@ -252,6 +235,7 @@ ARIAロールのある要素にすべての必須ARIA属性が存在すること
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-required-children:
 
@@ -331,6 +315,7 @@ aria-roledescriptionが暗黙的もしくは明示的なロールを持った要
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-roles:
 
@@ -354,6 +339,7 @@ aria-roledescriptionが暗黙的もしくは明示的なロールを持った要
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-toggle-field-name:
 
@@ -377,6 +363,7 @@ ARIAトグル欄にアクセシブルな名前があります
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-tooltip-name:
 
@@ -400,6 +387,7 @@ ARIA tooltipノードにはアクセシブルな名前がなければなりま�
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-valid-attr:
 
@@ -423,6 +411,7 @@ aria- で始まる属性が有効なARIA属性であることを確認します
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-aria-valid-attr-value:
 
@@ -446,6 +435,7 @@ ARIA属性は有効な値に一致しなければなりません
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-audio-caption:
 
@@ -541,6 +531,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-bypass:
 
@@ -786,34 +777,6 @@ ARIAおよびラベルに使用されているすべてのid属性値が一意�
 
 *  マークアップと実装： :ref:`gl-markup-valid`
 
-.. _axe-rule-empty-table-header:
-
-****************************************
-テーブルのヘッダーは空にしてはなりません
-****************************************
-
-テーブルのヘッダーに認識可能なテキストが存在することを確認します
-
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/empty-table-header>`__
-
-関連するWCAG 2.1の達成基準
-==========================
-
-*  達成基準 1.3.1
-
-   -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
-
-関連ガイドライン
-================
-
-*  マークアップと実装： :ref:`gl-markup-semantics`
-*  マークアップと実装： :ref:`gl-markup-component-implementation`
-*  ページ全体： :ref:`gl-page-landmark`
-*  フォーム： :ref:`gl-form-label`
-*  フォーム： :ref:`gl-form-hidden-label`
-*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree`
-
 .. _axe-rule-form-field-multiple-labels:
 
 ***************************************************************
@@ -874,10 +837,29 @@ tabindex=-1が指定されている<frame>と<iframe>要素が、フォーカス
 関連するWCAG 2.1の達成基準
 ==========================
 
-*  達成基準 2.4.1
+*  達成基準 4.1.2
 
-   -  `Bypass Blocks <https://www.w3.org/TR/WCAG21/#bypass-blocks>`_
-   -  `ブロックスキップ <https://waic.jp/docs/WCAG21/#bypass-blocks>`_
+   -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+
+関連ガイドライン
+================
+
+*  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
+
+.. _axe-rule-frame-title-unique:
+
+***********************************************
+フレームには一意のtitle属性がなければなりません
+***********************************************
+
+<iframe>および<frame>要素に一意のtitle属性が含まれていることを確認します
+
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/frame-title-unique>`__
+
+関連するWCAG 2.1の達成基準
+==========================
 
 *  達成基準 4.1.2
 
@@ -887,8 +869,8 @@ tabindex=-1が指定されている<frame>と<iframe>要素が、フォーカス
 関連ガイドライン
 ================
 
-*  ページ全体： :ref:`gl-page-markup-main`
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-html-has-lang:
 
@@ -1010,6 +992,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-input-image-alt:
 
@@ -1029,6 +1012,11 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
    -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
 
+*  達成基準 4.1.2
+
+   -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+
 関連ガイドライン
 ================
 
@@ -1039,6 +1027,8 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 *  フォーム： :ref:`gl-form-label`
 *  フォーム： :ref:`gl-form-hidden-label`
 *  音声・映像コンテンツ： :ref:`gl-multimedia-perceivable`
+*  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-label:
 
@@ -1058,21 +1048,11 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
    -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
 
-*  達成基準 1.3.1
-
-   -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
-
 関連ガイドライン
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
-*  マークアップと実装： :ref:`gl-markup-semantics`
-*  マークアップと実装： :ref:`gl-markup-component-implementation`
-*  ページ全体： :ref:`gl-page-landmark`
-*  フォーム： :ref:`gl-form-label`
-*  フォーム： :ref:`gl-form-hidden-label`
-*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-label-content-name-mismatch:
 
@@ -1151,6 +1131,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 *  リンク： :ref:`gl-link-text`
 
 .. _axe-rule-list:
@@ -1269,6 +1250,34 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 *  フォーム： :ref:`gl-form-timing`
 *  動的コンテンツ： :ref:`gl-dynamic-content-no-interrupt`
 
+.. _axe-rule-meta-refresh-no-exceptions:
+
+********************************
+Delayed refresh must not be used
+********************************
+
+Ensures <meta http-equiv="refresh"> is not used for delayed refresh
+
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/meta-refresh-no-exceptions>`__
+
+関連するWCAG 2.1の達成基準
+==========================
+
+*  達成基準 2.2.4
+
+   -  `Interruptions <https://www.w3.org/TR/WCAG21/#interruptions>`_
+   -  `割り込み <https://waic.jp/docs/WCAG21/#interruptions>`_
+
+*  達成基準 3.2.5
+
+   -  `Change on Request <https://www.w3.org/TR/WCAG21/#change-on-request>`_
+   -  `要求による変化 <https://waic.jp/docs/WCAG21/#change-on-request>`_
+
+関連ガイドライン
+================
+
+*  動的コンテンツ： :ref:`gl-dynamic-content-no-interrupt`
+
 .. _axe-rule-nested-interactive:
 
 ********************************************************
@@ -1291,6 +1300,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-no-autoplay-audio:
 
@@ -1442,21 +1452,11 @@ select要素にはアクセシブルな名前があることを確認します
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
    -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
 
-*  達成基準 1.3.1
-
-   -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
-
 関連ガイドライン
 ================
 
 *  マークアップと実装： :ref:`gl-markup-component`
-*  マークアップと実装： :ref:`gl-markup-semantics`
-*  マークアップと実装： :ref:`gl-markup-component-implementation`
-*  ページ全体： :ref:`gl-page-landmark`
-*  フォーム： :ref:`gl-form-label`
-*  フォーム： :ref:`gl-form-hidden-label`
-*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree`
+*  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
 
 .. _axe-rule-server-side-image-map:
 
@@ -1644,6 +1644,7 @@ lang属性に有効な値が存在することを確認します
 ================
 
 *  テキスト： :ref:`gl-text-phrase-lang`
+*  テキスト： :ref:`gl-text-component-lang`
 
 .. _axe-rule-video-caption:
 
@@ -1773,6 +1774,17 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/empty-heading>`__
 
 
+.. _axe-rule-empty-table-header:
+
+****************************************
+テーブルのヘッダーは空にしてはなりません
+****************************************
+
+テーブルのヘッダーに認識可能なテキストが存在することを確認します
+
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/empty-table-header>`__
+
+
 .. _axe-rule-focus-order-semantics:
 
 ************************************************************************************
@@ -1793,17 +1805,6 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 <iframe>および<frame>要素にaxe-coreスクリプトが含まれていることを確認します
 
 参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/frame-tested>`__
-
-
-.. _axe-rule-frame-title-unique:
-
-***********************************************
-フレームには一意のtitle属性がなければなりません
-***********************************************
-
-<iframe>および<frame>要素に一意のtitle属性が含まれていることを確認します
-
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.4/frame-title-unique>`__
 
 
 .. _axe-rule-heading-order:

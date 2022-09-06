@@ -3,6 +3,8 @@ sortKey: 2003
 category: dynamic_content
 title: ホバーで表示されるコンテンツの拡大
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   ホバーで表示されるコンテンツについて、ポインターをホバーで表示されたコンテンツ上に移動しても、コンテンツが消えないようにすることで、そのコンテンツを拡大表示して利用することを可能にする。
 sc:

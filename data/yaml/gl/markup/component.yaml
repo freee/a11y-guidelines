@@ -3,6 +3,9 @@ sortKey: 1004
 category: markup
 title: コンポーネントをアクセシブルにする
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   ユーザーの操作を受け付けるUIコンポーネントは、以下を満たす実装をする。
 

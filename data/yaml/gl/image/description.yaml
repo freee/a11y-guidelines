@@ -3,6 +3,9 @@ sortKey: 1601
 category: image
 title: 画像の説明の提供
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   画像に関する過不足のない説明をテキストで提供する。
 intent: |-

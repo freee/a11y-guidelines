@@ -3,6 +3,9 @@ sortKey: 1802
 category: link
 title: 適切なリンク・テキスト
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   リンク・テキスト（``a`` 要素の中身、アイコンのラベルなど）は、そのリンクの目的を判断できるものにする。
 sc:

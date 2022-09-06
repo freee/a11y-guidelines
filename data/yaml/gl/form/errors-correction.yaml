@@ -3,6 +3,9 @@ sortKey: 1911
 category: form
 title: エラーの修正方法の提示
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   入力エラーがある場合に、修正方法を示す。
 sc:

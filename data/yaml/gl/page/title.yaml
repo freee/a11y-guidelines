@@ -3,6 +3,8 @@ sortKey: 1101
 category: page
 title: タイトルの指定
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   ``title`` 要素に、ページの主題又は目的を説明したタイトルを 記述する。
 sc:

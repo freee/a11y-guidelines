@@ -3,6 +3,9 @@ sortKey: 1905
 category: form
 title: 制限時間を設けない
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   入力や操作に制限時間を設けない。
 sc:

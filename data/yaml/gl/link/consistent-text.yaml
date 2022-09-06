@@ -3,6 +3,9 @@ sortKey: 1803
 category: link
 title: 一貫したリンク・テキスト
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   同じ機能を実行するリンクは、サイト内で一貫性のあるリンク・テキストを付与する。
 sc:

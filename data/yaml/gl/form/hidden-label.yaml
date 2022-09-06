@@ -3,6 +3,9 @@ sortKey: 1902
 category: form
 title: 表示されているテキストをラベルにできない場合
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   フォーム・コントロールに対して表示されているテキストを用いたラベル付けができない場合は、非表示のテキストを用いてラベルを付ける。
 sc:

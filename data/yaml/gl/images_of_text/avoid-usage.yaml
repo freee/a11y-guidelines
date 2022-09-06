@@ -3,6 +3,9 @@ sortKey: 1501
 category: images_of_text
 title: 画像化されたテキストを使用しない
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   画像化されたテキストを用いないと実現できない表現が不可欠な場合（例： ロゴ）を除いて、文字情報は画像化せず、テキスト・データで提供する。
 sc:

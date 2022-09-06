@@ -1,13 +1,16 @@
 id: gl-dynamic-content-status
 sortKey: 2005
 category: dynamic_content
-title: ステータス・メッセージの適切なマークアップ
+title: ステータス・メッセージの適切な実装
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   ステータス・メッセージについて、以下のすべてを満たす。
   
   -  スクリーン・リーダーに自動的に読み上げられるようにする。
-  -  ステータス・メッセージであることが分かるように適切なマークアップをする。
+  -  ステータス・メッセージであることやその内容が、 ``role`` やその他のプロパティーを通して分かるようにする。
 sc:
 - 4.1.3
 intent: |-

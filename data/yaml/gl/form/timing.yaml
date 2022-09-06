@@ -3,6 +3,9 @@ sortKey: 1904
 category: form
 title: フォームの入力に制限時間を設ける場合
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   フォーム入力に制限時間を設定する場合は、次に挙げる事項のうち、少なくとも1つを満たす。
 

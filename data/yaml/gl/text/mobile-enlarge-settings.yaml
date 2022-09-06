@@ -1,0 +1,15 @@
+id: gl-text-mobile-enlarge-settings
+sortKey: 1409
+category: text
+title: モバイルOSの文字サイズ変更機能の使用
+priority: '[MUST]'
+platform:
+- mobile
+guideline: |-
+  モバイルOSの設定で文字サイズを最大にしても、コンテンツや機能が損なわれないようにする。
+sc:
+- 1.4.4
+intent: |-
+  ロービジョン者が、OSの文字サイズ変更設定で拡大表示を行う設定をした際、実際に拡大表示が行われるかどうかにかかわらず、表示が崩れるなど、コンテンツの利用に支障がでることがないようにする。
+checks:
+- '0326'

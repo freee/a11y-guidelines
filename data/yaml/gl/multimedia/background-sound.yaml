@@ -3,6 +3,9 @@ sortKey: 2111
 category: multimedia
 title: 充分に小さい背景音
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   映像がなく音声のみの収録済みコンテンツの場合で主たる発話音声があるとき、背景音がない、もしくは主たる発話音声に対して背景音の音量が少なくとも20db小さい状態にする。
 sc:

@@ -3,6 +3,9 @@ sortKey: 1203
 category: login_session
 title: 制限時間超過後の操作の継続
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   ログイン・セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
 sc:

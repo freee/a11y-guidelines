@@ -3,6 +3,9 @@ sortKey: 1201
 category: login_session
 title: ログイン・セッションにタイムアウトを設ける場合
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   ログイン・セッションにタイムアウトを設ける場合は、次に挙げる事項のうち、少なくとも1つを満たす。
 

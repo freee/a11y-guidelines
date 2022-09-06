@@ -3,6 +3,9 @@ sortKey: 2002
 category: dynamic_content
 title: OnFocus/OffFocus時の挙動
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   OnFocus, OffFocusが以下のような変化を発生させないようにする。
   

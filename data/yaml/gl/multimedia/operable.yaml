@@ -3,6 +3,9 @@ sortKey: 2102
 category: multimedia
 title: 音声の自動再生
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   3秒以上の長さの音声を自動再生しない。
 sc:

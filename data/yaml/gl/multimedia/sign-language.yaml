@@ -3,6 +3,9 @@ sortKey: 2110
 category: multimedia
 title: 手話の提供
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   収録済みコンテンツの音声情報には、同期した手話通訳を提供する。
 sc:

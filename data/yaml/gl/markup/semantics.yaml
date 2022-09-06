@@ -1,8 +1,11 @@
 id: gl-markup-semantics
 sortKey: 1001
 category: markup
-title: 文書構造を適切にマークアップする
+title: 文書構造を適切に示すマークアップ、実装を行う
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   静的なテキスト・コンテンツは、文書構造などのセマンティクスを適切に表現するHTMLの要素やコンポーネントで実装する。
 sc:
@@ -15,6 +18,7 @@ intent: |-
 checks:
 - '0541'
 - '0542'
+- '0543'
 - '0551'
 - '0552'
 - '0561'

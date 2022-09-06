@@ -3,6 +3,9 @@ sortKey: 1107
 category: page
 title: コンポーネントの一貫した出現順序
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   ナビゲーション・メニューなど、複数のページに共通して用いられるコンポーネントは、すべてのページで同じ出現順序にし、コンポーネント内でのリンクの出現順序も同じにする。
 sc:

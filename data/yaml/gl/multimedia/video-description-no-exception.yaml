@@ -3,6 +3,9 @@ sortKey: 2109
 category: multimedia
 title: 音声解説の提供
 priority: '[SHOULD]'
+platform:
+- web
+- mobile
 guideline: |-
   すべての音声・映像コンテンツにおいて、映像がある収録済みコンテンツの場合、映像の内容が分かるような同期した音声情報を提供する。
 sc:

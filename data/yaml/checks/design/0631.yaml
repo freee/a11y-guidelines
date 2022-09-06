@@ -5,4 +5,3 @@ severity: '[NORMAL]'
 target: design
 platform:
 - web
-- mobile

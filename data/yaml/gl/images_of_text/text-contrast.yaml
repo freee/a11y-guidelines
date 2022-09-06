@@ -3,6 +3,9 @@ sortKey: 1503
 category: images_of_text
 title: 画像内のテキストのコントラスト比
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   画像化されたテキストの色と背景の色に十分なコントラスト比を確保する。
 

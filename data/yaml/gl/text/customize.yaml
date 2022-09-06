@@ -1,10 +1,12 @@
 id: gl-text-customize
-sortKey: 1410
+sortKey: 1412
 category: text
 title: テキスト表示のカスタマイズ
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
-  ユーザーがline-heightを1.5em以上、段落間の空白を2em以上、letter-spacingを0.12em以上に変更し、その他のプロパティーを一切変更していない状況において、コンテンツおよび機能に損失が生じないようにする。
+  ユーザーがline-heightを1.5em以上、段落に続く空白を2em以上、letter-spacingを0.12em以上に変更し、その他のプロパティーを一切変更していない状況において、コンテンツおよび機能に損失が生じないようにする。
 sc:
 - 1.4.12
 intent: |-

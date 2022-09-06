@@ -12,3 +12,5 @@ implementation:
     ``h1`` ～ ``h6`` でマークアップする。
   ios: |-
     ``UIAccessibilityTraits.header`` をセットする。
+  android: |-
+    当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）

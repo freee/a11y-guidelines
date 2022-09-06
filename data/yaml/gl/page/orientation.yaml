@@ -3,6 +3,9 @@ sortKey: 1106
 category: page
 title: 画面方向を固定しない
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   コンテンツの性質上必要不可欠な場合を除いて、特定の画面方向（縦置き/横置き）での利用を強制しない。
 sc:

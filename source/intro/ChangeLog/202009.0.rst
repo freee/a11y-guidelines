@@ -13,11 +13,11 @@
       変更前
          *  200パーセントの拡大表示：[MUST]コンテンツや機能を損なうことなくブラウザーのズーム機能で200パーセントまで拡大できるようにする。
       変更後
-         *  :ref:`gl-text-zoom`
-         *  :ref:`gl-text-enlarge-settings`
-         *  :ref:`gl-text-enable-enlarge`
+         *  :ref:`[MUST]ズーム機能を用いた200パーセントの拡大表示 <gl-text-zoom>`
+         *  :ref:`[MUST]文字サイズ変更機能の使用 <gl-text-enlarge-settings>`
+         *  :ref:`[SHOULD]文字サイズ変更機能による200パーセントの拡大表示 <gl-text-enable-enlarge>`
 
-   -  意図を明確にするために :ref:`gl-text-zoom-reflow` の文言を変更
+   -  意図を明確にするために :ref:`[SHOULD]400パーセントの拡大表示 <gl-text-zoom-reflow>` の文言を変更
    -  関連するチェック内容の変更と追加
 
       -  変更： :ref:`check-0321` 、 :ref:`check-0322`

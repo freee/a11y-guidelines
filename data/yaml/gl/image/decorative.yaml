@@ -3,6 +3,9 @@ sortKey: 1602
 category: image
 title: 装飾目的の画像の無視
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   純粋な装飾目的の画像は、スクリーン・リーダーなどの支援技術が無視するようにする。
 intent: |-

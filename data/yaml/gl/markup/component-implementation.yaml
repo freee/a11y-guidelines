@@ -3,6 +3,9 @@ sortKey: 1003
 category: markup
 title: 対話的なUIコンポーネントの実装
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   リンクやボタン、フォーム・コントロールなど、ユーザーの操作を受け付けるUIコンポーネントは、なるべくHTMLの適切な要素、または使用している開発フレームワークの標準的なコンポーネントを用いて実装する。
 sc:
@@ -13,5 +16,6 @@ intent: |-
   -  キーボードによる操作を可能にする。
 checks:
 - '0553'
+- '0554'
 info:
 - exp-markup-component

@@ -3,6 +3,9 @@ sortKey: 1604
 category: image
 title: 隣接領域とのコントラスト比の確保
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   画像の隣接領域の色とのコントラスト比を3:1以上にする。
 sc:

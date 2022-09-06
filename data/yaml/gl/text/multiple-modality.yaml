@@ -3,6 +3,9 @@ sortKey: 1401
 category: text
 title: 特定の感覚に依存しない表現
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   特定の感覚だけを前提とした表現を用いない。
 sc:

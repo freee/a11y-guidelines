@@ -1,0 +1,8 @@
+id: '0922'
+check: |-
+  日付、時刻、数値などは、アプリケーションで利用されている言語において自然な形で読み上げられる。
+severity: '[MINOR]'
+target: product
+platform:
+- web
+- mobile

@@ -1,8 +1,10 @@
 id: gl-input-device-no-trap
-sortKey: 1304
+sortKey: 1305
 category: input_device
 title: キーボード・トラップの回避
 priority: '[MUST]'
+platform:
+- web
 guideline: |-
   ページ中のあらゆるコンポーネントについて、Tabキー、矢印キー、Escキーなど簡単な操作でフォーカスを外すことができるようにする。
 sc:

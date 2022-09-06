@@ -3,6 +3,9 @@ sortKey: 2107
 category: multimedia
 title: 書き起こしテキストの提供
 priority: '[MUST]'
+platform:
+- web
+- mobile
 guideline: |-
   テキストの代替情報ではない、映像がなく音声のみの収録済みコンテンツの場合は、書き起こしテキストを提供する。
 sc:
