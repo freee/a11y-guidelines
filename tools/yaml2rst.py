@@ -142,18 +142,19 @@ def main():
                     if impl == 'title':
                         continue
                     str = detail.get(impl)
-                    gl_check_details += IMPLEMENTATION_NAMES[impl] + "\n" + indent(str, 3)
-                    allcheck_details += impl + "\n" + indent(str, 3)
+                    gl_check_details += IMPLEMENTATION_NAMES[impl] + "\n" + indent(str, 3) + "\n"
+                    allcheck_details += impl + "\n" + indent(str, 3) + "\n"
         elif check['target'] == 'product' and 'checkMeans' in check:
             check['checkMeansTools'] = []
             for means in check['checkMeans']:
                 tool = means['tool']
                 check['checkMeansTools'].append(tool)
                 check_example_title = make_header(f':ref:`check-{check["id"]}`', '*', True)
-                gl_check_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '^') + means['means'] + '\n'
-                allcheck_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '=') + means['means'] + '\n'
+                gl_check_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '^') + means['means'] + '\n\n'
+                allcheck_details += make_header(f'{CHECK_TOOLS[tool]}によるチェック実施方法の例', '=') + means['means'] + '\n\n'
                 check_examples[tool] += '''\
 .. _check-example-{means}-{id}:
+
 {title}
 {check}
 {example}
@@ -172,19 +173,23 @@ def main():
         check['gl_check_text'] = """\
 {title}{metainfo}
 {check}
+
 {details}
 """.format(title = gl_check_title, metainfo = metainfo, check = check['check'], details = gl_check_details)
 
         allcheck_text += """\
 .. _check-{id}:
+
 {title}{metainfo}{gl_ref}
 {check}
+
 {info}
+
 {details}
 """.format(id = check["id"], title = allcheck_title, metainfo = metainfo, gl_ref = gl_ref_text, check = check['check'], details = allcheck_details, info = allcheck_info)
 
     intent_title = make_header('意図', '=')
-    check_title = make_header('チェック内容', '=')
+    check_title = make_header('チェック内容', '=', False, "checklist")
     sc_title = make_header('対応するWCAG 2.1の達成基準', '=')
     info_title = make_header('参考情報', '=')
     guidelines_rst = []
@@ -234,11 +239,15 @@ SC {sc}：
 
         output = """\
 .. _{0[id]}:
+
 {0[title]}{0[metainfo]}{0[guideline]}
 
 {0[intent]}
+
 {0[scs]}
+
 {0[info]}
+
 {0[checks]}\
 """.format(gl_str)
 
@@ -411,12 +420,17 @@ def indent(para, level):
 
     return '\n'.join(lines) + '\n'
 
-def make_header(title, char, overline = False):
+def make_header(title, char, overline = False, className = ""):
     line = char * width(title)
+    header = ""
+    if className != "":
+        header = f'.. rst-class:: {className}\n\n'
+
     if overline:
-        return f'\n{line}\n{title}\n{line}\n\n'
-    else:
-        return f'\n{title}\n{line}\n\n'
+        header += f'{line}\n'
+
+    header += f'{title}\n{line}\n\n'
+    return header
 
 def width(s):
     return sum([_width(c) for c in s])

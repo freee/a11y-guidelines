@@ -28,6 +28,12 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202209.1](https://github.com/freee/a11y-guidelines/releases/202209.1/) (2022年9月22日)
+
+* NVDAの多言語処理に関する項目の推奨設定を変更：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
+* 各ガイドラインの「チェック内容」の項と[アクセシビリティー・チェック全項目一覧](https://a11y-guidelines.freee.co.jp/checks/checklist.html)の表示を変更
+* 誤字修正
+
 ### [Ver. 202209.0](https://github.com/freee/a11y-guidelines/releases/202209.0/) (2022年9月6日)
 
 参考： [freeeアクセシビリティー・ガイドラインVer. 202209.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202209.0)
