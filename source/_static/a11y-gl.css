@@ -20,3 +20,9 @@ body {
 .rst-content blockquote p:last-child {
     margin-bottom: 0;
 }
+
+.checklist > section {
+    margin: 16px;
+    border: 1px solid #ccc;
+    padding: 16px;
+}
