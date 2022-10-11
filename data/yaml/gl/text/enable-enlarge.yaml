@@ -1,12 +1,12 @@
 id: gl-text-enable-enlarge
 sortKey: 1410
 category: text
-title: 文字サイズ変更機能による200パーセントの拡大表示
+title: 文字サイズの設定による200パーセントの拡大表示
 priority: '[SHOULD]'
 platform:
 - web
 guideline: |-
-  ブラウザーの文字サイズ変更機能で200パーセントの拡大表示をできるようにする。
+  ブラウザーの文字サイズの設定を200パーセントにしたとき、適切に拡大表示されるようにする。
 sc:
 - 1.4.4
 intent: |-

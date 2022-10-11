@@ -6,6 +6,7 @@
 
 Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`checksheet-history` のみに掲載しています。
 
+.. include:: ChangeLog/202210.0.rst
 .. include:: ChangeLog/202209.1.rst
 .. include:: ChangeLog/202209.0.rst
 .. include:: ChangeLog/202205.0.rst
