@@ -1,7 +1,7 @@
 id: gl-text-mobile-enlarge-settings
 sortKey: 1409
 category: text
-title: モバイルOSの文字サイズ変更機能の使用
+title: モバイルOSの文字サイズ設定の変更
 priority: '[MUST]'
 platform:
 - mobile

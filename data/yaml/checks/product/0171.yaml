@@ -9,7 +9,7 @@ check: |-
      -  レイアウトの変更
      -  ページの遷移
      -  モーダル・ダイアログの表示
-     -  表示内容の大幅な変更など
+     -  表示内容の大幅な変更
 severity: '[CRITICAL]'
 target: product
 platform:

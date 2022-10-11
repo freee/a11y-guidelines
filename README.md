@@ -28,6 +28,16 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202210.0](https://github.com/freee/a11y-guidelines/releases/202210.0/) (2022年10月11日)
+
+* テキストの拡大に関連するガイドラインについて、意図が明確になるように文言を修正
+  - [ズーム機能を用いた200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom)
+  - [文字サイズ設定の変更](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enlarge-settings)
+  - [モバイルOSの文字サイズ設定の変更](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-mobile-enlarge-settings)
+  - [文字サイズの設定による200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enable-enlarge)
+  - [ズーム機能を用いた400パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom-reflow)
+* NVDAの初期設定に関する説明で、NVDA Version 2022.3jpにおけるNVDAメニューの構成変更を反映：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
+
 ### [Ver. 202209.1](https://github.com/freee/a11y-guidelines/releases/202209.1/) (2022年9月22日)
 
 * NVDAの多言語処理に関する項目の推奨設定を変更：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
@@ -60,36 +70,5 @@ Copyright © 2020-2021, freee株式会社
     - フォーム：[十分な大きさのクリック/タッチのターゲット（モバイル）](https://a11y-guidelines.freee.co.jp/categories/form.html#gl-form-target-size-mobile)
 * NVDAの設定に関して加筆：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html#exp-screen-reader-check-nvda)
 * キーボードのみによる操作に関して加筆：[Tab/Shift+Tabキーを用いたチェック](https://a11y-guidelines.freee.co.jp/explanations/tab-order-check.html#exp-tab-order-check)
-
-### [Ver. 202205.0](https://github.com/freee/a11y-guidelines/releases/202205.0/) (2022年5月10日)
-
-* 誤字修正
-
-### [Ver. 202203.0](https://github.com/freee/a11y-guidelines/releases/202203.0/) (2022年3月29日)
-
-* 動的コンテンツ：[[MUST]適切なDOMツリーを維持する](https://a11y-guidelines.freee.co.jp/categories/dynamic_content.html#gl-dynamic-content-maintain-dom-tree)の見直し
-  - モバイル・アプリケーションへの適用を前提に、タイトルを「支援技術への適切な情報提供の維持」に変更し、文言を見直し
-  - WCAG 2.1の達成基準1.3.2に加えて、達成基準1.3.1との関連付けも追加
-* モーダル・ダイアログに関連するチェック内容の見直し
-  - [チェックID：1291](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1291)、[チェックID：1311](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1311) からモーダル・ダイアログに関する記述を削除
-  - 新たに[チェックID：1292](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1292)、[チェックID：1312](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1312)、[チェックID：1313](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-1313)を追加
-* チェック内容の文言見直し
-  - [チェックID：0811](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0811)に例外があることを明示。
-  - [チェックID：0081](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0081)の意図が明確になるように文言修正
-* チェック内容の確認方法の例の見直し
-  - [チェックID：0413](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0413)のiOS VoiceOverとAndroid TalkBackによる確認方法の文言修正と、NVDAによる確認方法の追加
-  - [チェックID：0621](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0621)に、axe-DevToolsによる確認方法を追加
-* [axe DevToolsのルールと当ガイドラインの対応](https://a11y-guidelines.freee.co.jp/info/axe-rules.html)を最新のaxe-coreのソースに基づいた内容に更新
-
-### [Ver. 202202.0](https://github.com/freee/a11y-guidelines/releases/202202.0/) (2022年2月18日)
-
-参考：[freeeアクセシビリティー・ガイドラインVer. 202202.0を公開しました](https://developers.freee.co.jp/entry/a11y-guidelines-202202.0)
-
-* 「マークアップ全般」カテゴリーを「マークアップと実装」に改名し、全体的に見直し
-  - [[MUST]文書構造を適切にマークアップする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-semantics)について、スタティックなコンテンツを対象としていることが明確になるように文言を変更
-  - [[MUST]対話的なUIコンポーネントの実装](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-component-implementation)と[チェックID：0553](https://a11y-guidelines.freee.co.jp/checks/checklist.html#check-0553)を追加
-  - [[MUST]コンポーネントをアクセシブルにする](https://a11y-guidelines.freee.co.jp/categories/markup.html#gl-markup-component)の文言を変更
-  - 関連して参考情報に加筆：[UIコンポーネントのアクセシビリティー](https://a11y-guidelines.freee.co.jp/explanations/markup-component.html#exp-markup-component)
-* ガイドラインおよびチェック内容のYAMLのスキーマ定義を、JSON Schemaで記述して追加
 
 これより前の更新履歴は、ガイドライン本文の[更新履歴の項](https://a11y-guidelines.freee.co.jp/intro/history.html)でご確認ください。
