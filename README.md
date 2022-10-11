@@ -28,6 +28,16 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202210.0](https://github.com/freee/a11y-guidelines/releases/202210.0/) (2022年10月11日)
+
+* テキストの拡大に関連するガイドラインについて、意図が明確になるように文言を修正
+  - [ズーム機能を用いた200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom)
+  - [文字サイズ設定の変更](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enlarge-settings)
+  - [モバイルOSの文字サイズ設定の変更](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-mobile-enlarge-settings)
+  - [文字サイズの設定による200パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-enable-enlarge)
+  - [ズーム機能を用いた400パーセントの拡大表示](https://a11y-guidelines.freee.co.jp/categories/text.html#gl-text-zoom-reflow)
+* NVDAの初期設定に関する説明で、NVDA Version 2022.3jpにおけるNVDAメニューの構成変更を反映：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
+
 ### [Ver. 202209.1](https://github.com/freee/a11y-guidelines/releases/202209.1/) (2022年9月22日)
 
 * NVDAの多言語処理に関する項目の推奨設定を変更：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
