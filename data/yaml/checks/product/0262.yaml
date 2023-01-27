@@ -1,6 +1,9 @@
 id: '0262'
-check: |-
-  同じ文脈において、遷移先が同じリンク、目的が同じボタンには、一貫したテキストやアイコンが使われている。
+check:
+  ja: |-
+    同じ文脈において、遷移先が同じリンク、目的が同じボタンには、一貫したテキストやアイコンが使われている。
+  en: |-
+    In the same context, consistent text and icons are used for links that have the same transition destination and buttons that have the same purpose.
 severity: '[NORMAL]'
 target: product
 platform:

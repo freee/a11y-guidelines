@@ -1,0 +1,21 @@
+{
+  "$id": "https://a11y-guidelines.freee.co.jp/schemas/common.json",
+  "type": "object",
+
+  "definitions": {
+    "i18nString": {
+      "type": "object",
+      "properties": {
+        "ja": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["ja"]
+    }
+  }
+
+}

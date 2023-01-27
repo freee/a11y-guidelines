@@ -1,10 +1,17 @@
 id: '0051'
-check: |-
-  グレイスケール表示でも利用に支障が出ない:
+check:
+  ja: |-
+    グレイスケール表示でも利用に支障が出ない:
 
-  *  リンク箇所を判別できる
-  *  画像、テキストの意図が伝わる
-  *  入力フォームの必須項目、エラーを認知できる
+    *  リンク箇所を判別できる
+    *  画像、テキストの意図が伝わる
+    *  入力フォームの必須項目、エラーを認知できる
+  en: |-
+    Displaying content in grayscale does not interfere with its use:
+
+    *  Links can be identified
+    *  The intent of images and text is clear
+    *  Required fields and errors in ininput forms can be recognized
 severity: '[MAJOR]'
 target: product
 platform:

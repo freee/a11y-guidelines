@@ -1,6 +1,7 @@
 id: '1511'
-check: |-
-  音声を含むコンテンツには、同期したキャプションが提供されている。
+check:
+  ja: |-
+    音声を含むコンテンツには、同期したキャプションが提供されている。
 severity: '[NORMAL]'
 target: design
 platform:

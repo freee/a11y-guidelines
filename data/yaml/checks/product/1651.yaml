@@ -1,6 +1,9 @@
 id: '1651'
-check: |-
-  音声コンテンツについて、充分に聴き取りやすい。
+check:
+  ja: |-
+    音声コンテンツについて、充分に聴き取りやすい。
+  en: |-
+    Sufficient audibility is provided for the audio content.
 severity: '[NORMAL]'
 target: product
 platform:

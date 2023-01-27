@@ -1,22 +1,28 @@
 id: '0471'
-check: |-
-  情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
+check:
+  ja: |-
+    情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
+  en: |-
+    Images that do not contain any information or functionality are ignored by the screen reader.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    ブラウズ・モードでのカーソルキー操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされない
+  technique:
+    ja: |-
+      ブラウズ・モードでのカーソルキー操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされない
 - tool: ios-vo
-  means: |-
-    1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+  technique:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
 
-    参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
-  means: |-
-    1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+  technique:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
 
-    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

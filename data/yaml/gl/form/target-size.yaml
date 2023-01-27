@@ -1,7 +1,8 @@
 id: gl-form-target-size
 sortKey: 1913
 category: form
-title: 十分な大きさのクリック/タッチのターゲット
+title:
+  ja: 十分な大きさのクリック/タッチのターゲット
 priority: '[SHOULD]'
 platform:
 - web

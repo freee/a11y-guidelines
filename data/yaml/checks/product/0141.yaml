@@ -1,9 +1,15 @@
 id: '0141'
-check: |-
-  ショートカットキーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
+check:
+  ja: |-
+    ショートカットキーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
 
-  *  ユーザーがショートカットキーを無効にできる
-  *  ユーザーがショートカットキーの割当を変更できる
+    *  ユーザーがショートカットキーを無効にできる
+    *  ユーザーがショートカットキーの割当を変更できる
+  en: |-
+    If there are shortcut keys that work regardless of which part of the screen the focus is on, one of the following is true
+
+    *  Users can disable the shortcut keys
+    *  Users can change shortcut assignments
 severity: '[NORMAL]'
 target: product
 platform:

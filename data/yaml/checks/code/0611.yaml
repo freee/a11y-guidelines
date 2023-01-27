@@ -1,6 +1,7 @@
 id: '0611'
-check: |-
-  日本語のページには、 ``<html lang="ja">`` の記述がある。
+check:
+  ja: |-
+    日本語のページには、 ``<html lang="ja">`` の記述がある。
 severity: '[CRITICAL]'
 target: code
 platform:

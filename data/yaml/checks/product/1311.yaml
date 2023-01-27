@@ -1,6 +1,9 @@
 id: '1311'
-check: |-
-  ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで表示される、画面の内容を大きく変更するような通知がない。
+check:
+  ja: |-
+    ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで表示される、画面の内容を大きく変更するような通知がない。
+  en: |-
+    There are no notifications, which cause significant change of the screen content, that appear at times that interfere with the user's input operations or viewing of information.
 severity: '[MAJOR]'
 target: product
 platform:

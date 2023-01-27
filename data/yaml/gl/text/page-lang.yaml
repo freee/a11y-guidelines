@@ -1,7 +1,8 @@
 id: gl-text-page-lang
 sortKey: 1404
 category: text
-title: ページの主たる言語の指定
+title:
+  ja: ページの主たる言語の指定
 priority: '[MUST]'
 platform:
 - web

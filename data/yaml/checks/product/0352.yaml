@@ -1,9 +1,15 @@
 id: '0352'
-check: |-
-  チェックボックス、ラジオボタン、ボタンなど、フォーム・コントロールの見た目がブラウザーのデフォルト表示から変更されている場合、クリックやタッチに反応するサイズが、充分な大きさになっている。
+check:
+  ja: |-
+    チェックボックス、ラジオボタン、ボタンなど、フォーム・コントロールの見た目がブラウザーのデフォルト表示から変更されている場合、クリックやタッチに反応するサイズが、充分な大きさになっている。
 
-  *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
-  *  モバイル向けWebでは44 x 44 CSS px以上
+    *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
+    *  モバイル向けWebでは44 x 44 CSS px以上
+  en: |-
+    Form controls, such as checkboxes, radio buttons, buttons, etc., have large enough area that responds to clicks and touches, when their appearance is changed from the browser default.
+
+    *  for desktop Web: at least 24 x 24 CSS px, preferably larger than 44 x 44 CSS px
+    *  for mobile Web: larger than 44 x 44 CSS px
 severity: '[NORMAL]'
 target: product
 platform:

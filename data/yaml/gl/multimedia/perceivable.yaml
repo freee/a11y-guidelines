@@ -1,7 +1,8 @@
 id: gl-multimedia-perceivable
 sortKey: 2101
 category: multimedia
-title: 音声・映像コンテンツの存在を明示する
+title:
+  ja: 音声・映像コンテンツの存在を明示する
 priority: '[MUST]'
 platform:
 - web

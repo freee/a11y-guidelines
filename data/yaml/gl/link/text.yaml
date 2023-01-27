@@ -1,7 +1,8 @@
 id: gl-link-text
 sortKey: 1802
 category: link
-title: 適切なリンク・テキスト
+title:
+  ja: 適切なリンク・テキスト
 priority: '[MUST]'
 platform:
 - web

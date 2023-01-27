@@ -1,7 +1,8 @@
 id: gl-form-errors-correction
 sortKey: 1911
 category: form
-title: エラーの修正方法の提示
+title:
+  ja: エラーの修正方法の提示
 priority: '[SHOULD]'
 platform:
 - web

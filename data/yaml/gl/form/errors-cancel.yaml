@@ -1,7 +1,8 @@
 id: gl-form-errors-cancel
 sortKey: 1912
 category: form
-title: 誤操作の防止
+title:
+  ja: 誤操作の防止
 priority: '[SHOULD]'
 platform:
 - web

@@ -1,7 +1,8 @@
 id: gl-form-errors-identify
 sortKey: 1910
 category: form
-title: テキスト情報によるエラーの特定
+title:
+  ja: テキスト情報によるエラーの特定
 priority: '[MUST]'
 platform:
 - web

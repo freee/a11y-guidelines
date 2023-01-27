@@ -1,6 +1,7 @@
 id: '0541'
-check: |-
-  見出しとして表現されるべきものが、設計資料で明示されている。
+check:
+  ja: |-
+    見出しとして表現されるべきものが、設計資料で明示されている。
 severity: '[NORMAL]'
 target: design
 platform:

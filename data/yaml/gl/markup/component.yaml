@@ -1,7 +1,8 @@
 id: gl-markup-component
 sortKey: 1004
 category: markup
-title: コンポーネントをアクセシブルにする
+title:
+  ja: コンポーネントをアクセシブルにする
 priority: '[MUST]'
 platform:
 - web

@@ -1,32 +1,42 @@
 id: '0172'
-check: |-
-  フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序でフォーカスが移動する。
+check:
+  ja: |-
+    フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序でフォーカスが移動する。
 
-  *  リンクとボタン
-  *  フォーム・コントロール（エディット・ボックス、チェックボックス、ラジオボタンなど）
-  *  その他、マウスやキーボード、タッチによる操作を受け付けるすべてのもの
-checkMeans:
+    *  リンクとボタン
+    *  フォーム・コントロール（エディット・ボックス、チェックボックス、ラジオボタンなど）
+    *  その他、マウスやキーボード、タッチによる操作を受け付けるすべてのもの
+  en: |-
+    When moving the focus, the focus moves in a natural order that is consistent with the context, layout, and operating procedures.
+
+    *  Links and Buttons
+    *  Form controls
+    *  Everything else that accepts mouse, keyboard, or touch operation
+techniques:
 - tool: keyboard
-  means: |-
-    TabキーとShift+Tabキーでフォーカスを移動して確認する。
+  technique:
+    ja: |-
+      TabキーとShift+Tabキーでフォーカスを移動して確認する。
 - tool: ios-vo
-  means: |-
-    1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+  technique:
+    ja: |-
+      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
-    *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
-    *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
-    *  画面上に表示されているもので読み上げられないものがない
+      *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
+      *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
+      *  画面上に表示されているもので読み上げられないものがない
 
-    参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
-  means: |-
-    1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+  technique:
+    ja: |-
+      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
-    *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
-    *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
-    *  画面上に表示されているもので読み上げられないものがない
+      *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
+      *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
+      *  画面上に表示されているもので読み上げられないものがない
 
-    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
 severity: '[NORMAL]'
 target: product
 platform:

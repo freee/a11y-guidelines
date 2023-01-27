@@ -1,7 +1,8 @@
 id: gl-iot-text-contrast
 sortKey: 1503
 category: images_of_text
-title: 画像内のテキストのコントラスト比
+title:
+  ja: 画像内のテキストのコントラスト比
 priority: '[MUST]'
 platform:
 - web

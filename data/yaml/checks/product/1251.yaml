@@ -1,8 +1,13 @@
 id: '1251'
-check: |-
-  *  自動更新されるコンテンツがない。または
-  *  ユーザーが自動更新の間隔やタイミングの変更をできる。または
-  *  ユーザーが自動更新を停止できる。
+check:
+  ja: |-
+    *  自動更新されるコンテンツがない。または
+    *  ユーザーが自動更新の間隔やタイミングの変更をできる。または
+    *  ユーザーが自動更新を停止できる。
+  en: |-
+    *  No content is automatically updated. or
+    *  The user can change the interval and timing of automatic updates. or
+    *  The user can stop automatic updates.
 severity: '[MAJOR]'
 target: product
 platform:

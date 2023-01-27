@@ -1,13 +1,23 @@
 id: '0081'
-check: |-
-  リンクやボタンなど、マウス・クリックを受け付けるオブジェクトは、以下の操作を行っても実行されない。
+check:
+  ja: |-
+    リンクやボタンなど、マウス・クリックを受け付けるオブジェクトは、以下の操作を行っても実行されない。
 
-  1. マウス・ポインターをオブジェクト上に移動
-  2. マウス・ボタンを押下
-  3. マウス・ボタンを押下したままの状態でオブジェクト外にマウス・ポインターを移動
-  4. マウス・ボタンを放す
+    1. マウス・ポインターをオブジェクト上に移動
+    2. マウス・ボタンを押下
+    3. マウス・ボタンを押下したままの状態でオブジェクト外にマウス・ポインターを移動
+    4. マウス・ボタンを放す
 
-  注：ドラッグ&ドロップのためのオブジェクトはこのチェックの対象外
+    注：ドラッグ&ドロップのためのオブジェクトはこのチェックの対象外
+  en: |-
+    Objects that accept mouse clicks, such as links and buttons, do not get activated by performing the following steps:
+
+    1. Move the mouse pointer onto the object
+    2. Press the mouse button
+    3. Move the mouse pointer outside the object while holding down the mouse button
+    4. Release the mouse buttonn
+
+    Note： Objects for drag and drop are exempt from this check
 severity: '[NORMAL]'
 target: product
 platform:

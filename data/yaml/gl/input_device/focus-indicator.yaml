@@ -1,7 +1,8 @@
 id: gl-input-device-focus-indicator
 sortKey: 1304
 category: input_device
-title: フォーカス箇所の可視化
+title:
+  ja: フォーカス箇所の可視化
 priority: '[MUST]'
 platform:
 - web

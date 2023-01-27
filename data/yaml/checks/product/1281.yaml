@@ -1,6 +1,9 @@
 id: '1281'
-check: |-
-  1秒間に3回以上光るコンテンツがない。
+check:
+  ja: |-
+    1秒間に3回以上光るコンテンツがない。
+  en: |-
+    No content flashes more than three times per second.
 severity: '[CRITICAL]'
 target: product
 platform:

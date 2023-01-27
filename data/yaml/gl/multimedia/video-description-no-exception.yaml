@@ -1,7 +1,8 @@
 id: gl-multimedia-video-description-no-exception
 sortKey: 2109
 category: multimedia
-title: 音声解説の提供
+title:
+  ja: 音声解説の提供
 priority: '[SHOULD]'
 platform:
 - web

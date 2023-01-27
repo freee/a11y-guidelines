@@ -1,7 +1,8 @@
 id: gl-input-device-independent
 sortKey: 1307
 category: input_device
-title: 特定の入力ディバイスを前提としない
+title:
+  ja: 特定の入力ディバイスを前提としない
 priority: '[MUST]'
 platform:
 - web

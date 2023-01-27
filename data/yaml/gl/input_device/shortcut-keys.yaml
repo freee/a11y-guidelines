@@ -1,7 +1,8 @@
 id: gl-input-device-shortcut-keys
 sortKey: 1308
 category: input_device
-title: ショートカット・キーを提供する場合
+title:
+  ja: ショートカット・キーを提供する場合
 priority: '[MUST]'
 platform:
 - web

@@ -1,7 +1,8 @@
 id: gl-dynamic-content-hover
 sortKey: 2004
 category: dynamic_content
-title: ホバーで表示されるコンテンツの非表示
+title:
+  ja: ホバーで表示されるコンテンツの非表示
 priority: '[SHOULD]'
 platform:
 - web

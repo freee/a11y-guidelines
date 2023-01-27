@@ -1,6 +1,7 @@
 id: '0571'
-check: |-
-  validatorやlinterでチェックが通る。
+check:
+  ja: |-
+    validatorやlinterでチェックが通る。
 severity: '[MAJOR]'
 target: code
 platform:

@@ -1,24 +1,30 @@
 id: '0531'
-check: |-
-  画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
+check:
+  ja: |-
+    画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
+  en: |-
+    The screen reader announces the same content as the images of text.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    ブラウズ・モードでのカーソルキー操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+  technique:
+    ja: |-
+      ブラウズ・モードでのカーソルキー操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 - tool: ios-vo
-  means: |-
-    *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-    *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+  technique:
+    ja: |-
+      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 
-    参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
-  means: |-
-    *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-    *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+  technique:
+    ja: |-
+      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 
-    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

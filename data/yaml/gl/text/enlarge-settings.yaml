@@ -1,7 +1,8 @@
 id: gl-text-enlarge-settings
 sortKey: 1408
 category: text
-title: 文字サイズ設定の変更
+title:
+  ja: 文字サイズ設定の変更
 priority: '[MUST]'
 platform:
 - web

@@ -1,7 +1,8 @@
 id: gl-dynamic-content-hover-magnify
 sortKey: 2003
 category: dynamic_content
-title: ホバーで表示されるコンテンツの拡大
+title:
+  ja: ホバーで表示されるコンテンツの拡大
 priority: '[MUST]'
 platform:
 - web

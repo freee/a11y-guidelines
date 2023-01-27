@@ -1,17 +1,22 @@
 id: '0461'
-check: |-
-  情報や機能性を一切持たない画像は、スクリーン・リーダーで無視されるようになっている。
+check:
+  ja: |-
+    情報や機能性を一切持たない画像は、スクリーン・リーダーで無視されるようになっている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
-implementation:
+implementations:
 - title: スクリーン・リーダーに無視させる
-  web: |-
-    *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
-    *  ``role="presentation"`` を指定。
-  ios: |-
-    *  ``isAccessibilityElement`` を ``false`` にする。
-  android: |-
-    *  ``importantForAccessibility`` を ``no`` にする。
+  methods:
+  - platform: web
+    method: |-
+      *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
+      *  ``role="presentation"`` を指定。
+  - platform: ios
+    method: |-
+      *  ``isAccessibilityElement`` を ``false`` にする。
+  - platform: android
+    method: |-
+      *  ``importantForAccessibility`` を ``no`` にする。

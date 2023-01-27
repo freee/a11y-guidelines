@@ -1,10 +1,17 @@
 id: '1071'
-check: |-
-  ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のような挙動がないことを確認する：
+check:
+  ja: |-
+    ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のような挙動がないことを確認する：
 
-  *  表示内容が大幅に変わる
-  *  自動的に別のページ/画面に遷移する
-  *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+    *  表示内容が大幅に変わる
+    *  自動的に別のページ/画面に遷移する
+    *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+  en: |-
+    Manipulating form controls, such as edit boxes, checkboxes, radio buttons, buttons, etc., within the page/screen doesn not cause behavior such as:
+
+    *  The display content changes significantly.
+    *  Automatic transition to another page/screen
+    *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
 severity: '[CRITICAL]'
 target: product
 platform:

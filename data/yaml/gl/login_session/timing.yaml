@@ -1,7 +1,8 @@
 id: gl-login-session-timing
 sortKey: 1201
 category: login_session
-title: ログイン・セッションにタイムアウトを設ける場合
+title:
+  ja: ログイン・セッションにタイムアウトを設ける場合
 priority: '[MUST]'
 platform:
 - web

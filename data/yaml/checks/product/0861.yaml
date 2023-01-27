@@ -1,12 +1,16 @@
 id: '0861'
-check: |-
-  スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
+check:
+  ja: |-
+    スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
+  en: |-
+    The screen reader announces the location of current page within the global navigation and breadcrumb list.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    ブラウズ・モードでのカーソルキー操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある
+  technique:
+    ja: |-
+      ブラウズ・モードでのカーソルキー操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある

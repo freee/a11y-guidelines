@@ -1,16 +1,21 @@
 id: '0551'
-check: |-
-  見出しが、設計資料に従って適切に実装されている。
+check:
+  ja: |-
+    見出しが、設計資料に従って適切に実装されている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
-implementation:
+implementations:
 - title: 見出しの実装
-  web: |-
-    ``h1`` ～ ``h6`` でマークアップする。
-  ios: |-
-    ``UIAccessibilityTraits.header`` をセットする。
-  android: |-
-    当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）
+  methods:
+  - platform: web
+    method: |-
+      ``h1`` ～ ``h6`` でマークアップする。
+  - platform: ios
+    method: |-
+      ``UIAccessibilityTraits.header`` をセットする。
+  - platform: android
+    method: |-
+      当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）

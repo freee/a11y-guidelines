@@ -20,9 +20,9 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-version = 'Ver. 202210.0'
+version = 'Ver. 202301.0'
 release = version
-publishedDate = u'2022年10月11日'
+publishedDate = u'2023年1月27日'
 copyright = '2020-{pubYear}, freee株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )
@@ -55,6 +55,10 @@ templates_path = ['_templates']
 # Usually you set "language" from the command line for these cases.
 language = 'ja'
 
+# For i18n
+#gettext_compact = False
+#locale_dirs = ['locale/']
+
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
@@ -70,7 +74,7 @@ rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
 .. |copyright| replace:: {copyright}
 
-.. include:: /misc-defs.txt
+.. include:: /inc/misc-defs.txt
 """.format(
   pubdate = publishedDate,
   copyright = copyright

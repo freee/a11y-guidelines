@@ -1,7 +1,8 @@
 id: gl-markup-valid
 sortKey: 1002
 category: markup
-title: 文法的に正しいマークアップ
+title:
+  ja: 文法的に正しいマークアップ
 priority: '[MUST]'
 platform:
 - web

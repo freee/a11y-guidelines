@@ -1,7 +1,8 @@
 id: gl-text-zoom-reflow
 sortKey: 1411
 category: text
-title: ズーム機能を用いた400パーセントの拡大表示
+title:
+  ja: ズーム機能を用いた400パーセントの拡大表示
 priority: '[SHOULD]'
 platform:
 - web

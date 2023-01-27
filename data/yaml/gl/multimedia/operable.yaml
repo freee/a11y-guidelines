@@ -1,7 +1,8 @@
 id: gl-multimedia-operable
 sortKey: 2102
 category: multimedia
-title: 音声の自動再生
+title:
+  ja: 音声の自動再生
 priority: '[MUST]'
 platform:
 - web

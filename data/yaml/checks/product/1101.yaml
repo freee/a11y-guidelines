@@ -1,6 +1,9 @@
 id: '1101'
-check: |-
-  フォーム入力に関するエラー発生時には、エラーの内容が具体的に分かるテキスト情報が表示される。
+check:
+  ja: |-
+    フォーム入力に関するエラー発生時には、エラーの内容が具体的に分かるテキスト情報が表示される。
+  en: |-
+    When an error related to form entry occurs, text information that specifically identifies the nature of the error is displayed.
 severity: '[NORMAL]'
 target: product
 platform:

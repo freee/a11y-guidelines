@@ -1,6 +1,7 @@
 id: '0751'
-check: |-
-  特定の画面方向に固定した使用を前提としたデザインになっていない。
+check:
+  ja: |-
+    特定の画面方向に固定した使用を前提としたデザインになっていない。
 severity: '[MAJOR]'
 target: design
 platform:

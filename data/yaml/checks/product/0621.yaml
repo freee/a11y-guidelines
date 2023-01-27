@@ -1,17 +1,22 @@
 id: '0621'
-check: |-
-  スクリーン・リーダーで読み上げたとき、適切な言語の音声エンジンで読み上げられる。
+check:
+  ja: |-
+    スクリーン・リーダーで読み上げたとき、適切な言語の音声エンジンで読み上げられる。
+  en: |-
+    The screen reader uses text-to-speech engine of appropriate language when it reads the content.
 severity: '[CRITICAL]'
 target: product
 platform:
 - web
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    1. NVDAの音声設定で、「サポートされている場合自動的に言語を切り替える」と「サポートされている場合自動的に方言を切り替える」がチェックされている状態にする。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」の項を参照）
-    2. ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられることを確認する。
+  technique:
+    ja: |-
+      1. NVDAの音声設定で、「サポートされている場合自動的に言語を切り替える」と「サポートされている場合自動的に方言を切り替える」がチェックされている状態にする。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」の項を参照）
+      2. ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられることを確認する。
 - tool: axe
-  means: |-
-    「 :ref:`axe-rule-html-has-lang` 」という問題が出ないことを確認する。
+  technique:
+    ja: |-
+      「 :ref:`axe-rule-html-has-lang` 」という問題が出ないことを確認する。
 
-    この問題が出た場合は、そのページの ``<html>`` 要素の記述を ``<html lang="ja">`` （主に利用されている言語が日本語の場合）のように修正する必要があります。
+      この問題が出た場合は、そのページの ``<html>`` 要素の記述を ``<html lang="ja">`` （主に利用されている言語が日本語の場合）のように修正する必要があります。

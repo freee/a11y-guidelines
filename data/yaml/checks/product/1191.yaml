@@ -1,14 +1,18 @@
 id: '1191'
-check: |-
-  操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
+check:
+  ja: |-
+    操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
+  en: |-
+    Status messages, such as the result of an operation, are automatically announced by the screen reader.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    設計資料に従ってステータス・メッセージが表示される操作を行い、ステータス・メッセージが自動的に読み上げられることを確認する。
+  technique:
+    ja: |-
+      設計資料に従ってステータス・メッセージが表示される操作を行い、ステータス・メッセージが自動的に読み上げられることを確認する。
 
-    参考： 期待される挙動を確認する場合は、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+      参考： 期待される挙動を確認する場合は、 :ref:`exp-dynamic-content-status` に示した実装例を参照

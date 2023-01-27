@@ -1,7 +1,8 @@
 id: gl-text-heading-label
 sortKey: 1403
 category: text
-title: 適切な文言の見出し
+title:
+  ja: 適切な文言の見出し
 priority: '[MUST]'
 platform:
 - web
