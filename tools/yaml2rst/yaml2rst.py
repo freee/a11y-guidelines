@@ -61,7 +61,7 @@ def main():
         targets = args[1:argc]
 
     template_env = Environment(
-        loader=FileSystemLoader(os.path.join(os.path.dirname(args[0]), TEMPLATE_DIR))
+        loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
         )
     template_env.filters['make_header'] = make_header
 
