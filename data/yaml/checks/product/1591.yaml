@@ -1,6 +1,9 @@
 id: '1591'
-check: |-
-  映像がない音声のみのコンテンツについて、音声を書き起こしたテキストが提供されている。
+check:
+  ja: |-
+    映像がない音声のみのコンテンツについて、音声を書き起こしたテキストが提供されている。
+  en: |-
+    For audio-only content with no video, a transcribed audio text is provided.
 severity: '[NORMAL]'
 target: product
 platform:

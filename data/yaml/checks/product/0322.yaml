@@ -1,9 +1,15 @@
 id: '0322'
-check: |-
-  1280x1024のサイズのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに適切にリフローされ
+check:
+  ja: |-
+    1280x1024のサイズのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに適切にリフローされ
 
-  *  横書きのコンテンツでは横スクロールが、縦書きのコンテンツでは縦スクロールが発生しない、かつ
-  *  読み取れない内容や利用できない機能がない
+    *  横書きのコンテンツでは横スクロールが、縦書きのコンテンツでは縦スクロールが発生しない、かつ
+    *  読み取れない内容や利用できない機能がない
+  en: |-
+    Magnifying content to 400 percent using the zoom function of the browser on a 1280x1024 window reflows the content properly and
+
+    *  no horizontal scrolling is necessary on left-to-right content, and no vertical scrolling is necessary on top-to-bottom content, and
+    *  there is no unreadable content or unusable functionality
 severity: '[MINOR]'
 target: product
 platform:

@@ -1,7 +1,8 @@
 id: gl-text-component-lang
 sortKey: 1406
 category: text
-title: テキストを表示するUIコンポーネントの言語の明示
+title:
+  ja: テキストを表示するUIコンポーネントの言語の明示
 priority: '[SHOULD]'
 platform:
 - web

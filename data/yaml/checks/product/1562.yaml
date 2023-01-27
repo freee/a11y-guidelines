@@ -1,7 +1,11 @@
 id: '1562'
-check: |-
-  *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
-  *  動画には音声解説が含まれている。
+check:
+  ja: |-
+    *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
+    *  動画には音声解説が含まれている。
+  en: |-
+    *  For video content, visually presented information can be easily inferred from the content of the originally recorded audio track. Or
+    *  Video includes audio description.
 severity: '[NORMAL]'
 target: product
 platform:

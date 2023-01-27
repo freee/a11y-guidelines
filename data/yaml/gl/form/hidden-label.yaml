@@ -1,7 +1,8 @@
 id: gl-form-hidden-label
 sortKey: 1902
 category: form
-title: 表示されているテキストをラベルにできない場合
+title:
+  ja: 表示されているテキストをラベルにできない場合
 priority: '[MUST]'
 platform:
 - web

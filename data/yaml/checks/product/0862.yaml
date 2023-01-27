@@ -1,6 +1,9 @@
 id: '0862'
-check: |-
-  グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような表示がされている。
+check:
+  ja: |-
+    グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような表示がされている。
+  en: |-
+    There is a visual indication of the location of current page within the global navigation and the breadcrumb list.
 severity: '[NORMAL]'
 target: product
 platform:

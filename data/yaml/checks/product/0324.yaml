@@ -1,6 +1,9 @@
 id: '0324'
-check: |-
-  ブラウザーの文字サイズ設定を200パーセントにしたとき、実際にテキストが200パーセントに拡大され、コンテンツの理解を妨げるようなレイアウト崩れが起こらない。
+check:
+  ja: |-
+    ブラウザーの文字サイズ設定を200パーセントにしたとき、実際にテキストが200パーセントに拡大され、コンテンツの理解を妨げるようなレイアウト崩れが起こらない。
+  en: |-
+    Setting font size to 200 percent in browser's font size settings does not cause layout collapses that interfere with understanding of the text, and actually magnifies the text to 200 percent.
 severity: '[MINOR]'
 target: product
 platform:

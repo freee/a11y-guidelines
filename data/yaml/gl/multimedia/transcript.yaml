@@ -1,7 +1,8 @@
 id: gl-multimedia-transcript
 sortKey: 2107
 category: multimedia
-title: 書き起こしテキストの提供
+title:
+  ja: 書き起こしテキストの提供
 priority: '[MUST]'
 platform:
 - web

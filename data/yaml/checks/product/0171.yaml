@@ -1,15 +1,27 @@
 id: '0171'
-check: |-
-  Tab/Shift+Tabキーによるフォーカス移動時の挙動は以下のすべてを満たしている：
+check:
+  ja: |-
+    Tab/Shift+Tabキーによるフォーカス移動時の挙動は以下のすべてを満たしている：
 
-  *  フォーカス・インジケーターまたはそれを代替する表示がある
-  *  自動的に次のような挙動が発生しない：
+    *  フォーカス・インジケーターまたはそれを代替する表示がある
+    *  自動的に次のような挙動が発生しない：
 
-     -  フォームの送信
-     -  レイアウトの変更
-     -  ページの遷移
-     -  モーダル・ダイアログの表示
-     -  表示内容の大幅な変更
+       -  フォームの送信
+       -  レイアウトの変更
+       -  ページの遷移
+       -  モーダル・ダイアログの表示
+       -  表示内容の大幅な変更
+  en: |-
+    Behavior when moving focus using tab/shift+tab keys fulfills all of the following
+
+    *  Focus indicator or alternative display is present
+    *  The following behaviors do not occur automatically:
+
+      -  Form Submission
+      -  Layout Changes
+      -  Page Transitions
+      -  Display of modal dialogs
+      -  Significant changes in displayed content
 severity: '[CRITICAL]'
 target: product
 platform:

@@ -1,7 +1,8 @@
 id: gl-text-zoom
 sortKey: 1407
 category: text
-title: ズーム機能を用いた200パーセントの拡大表示
+title:
+  ja: ズーム機能を用いた200パーセントの拡大表示
 priority: '[MUST]'
 platform:
 - web

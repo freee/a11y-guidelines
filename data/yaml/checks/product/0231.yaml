@@ -1,6 +1,9 @@
 id: '0231'
-check: |-
-  クリックやホバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できる。
+check:
+  ja: |-
+    クリックやホバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できる。
+  en: |-
+    Anything that accepts mouse operation, such as clicks and hover, can also be operated using only the keyboard.
 severity: '[MAJOR]'
 target: product
 platform:

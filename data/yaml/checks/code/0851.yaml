@@ -1,11 +1,14 @@
 id: '0851'
-check: |-
-  グローバル・ナビゲーションやパンくずリスト内でそのページ/画面の位置が明示されている。
+check:
+  ja: |-
+    グローバル・ナビゲーションやパンくずリスト内でそのページ/画面の位置が明示されている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
-implementation:
+implementations:
 - title: 位置の明示
-  web: |-
-    *  ``aria-current`` 属性の付与
+  methods:
+  - platform: web
+    method: |-
+      *  ``aria-current`` 属性の付与

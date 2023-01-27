@@ -1,7 +1,8 @@
 id: gl-input-device-support-mobile-assistive-tech
 sortKey: 1302
 category: input_device
-title: モバイルの支援技術のサポート
+title:
+  ja: モバイルの支援技術のサポート
 priority: '[MUST]'
 platform:
 - mobile

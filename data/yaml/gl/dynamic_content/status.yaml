@@ -1,7 +1,8 @@
 id: gl-dynamic-content-status
 sortKey: 2005
 category: dynamic_content
-title: ステータス・メッセージの適切な実装
+title:
+  ja: ステータス・メッセージの適切な実装
 priority: '[MUST]'
 platform:
 - web

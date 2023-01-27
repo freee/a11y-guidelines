@@ -1,7 +1,8 @@
 id: gl-image-text-contrast
 sortKey: 1605
 category: image
-title: 画像内のテキストのコントラスト比
+title:
+  ja: 画像内のテキストのコントラスト比
 priority: '[MUST]'
 platform:
 - web

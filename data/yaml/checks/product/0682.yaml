@@ -1,25 +1,30 @@
 id: '0682'
-check: |-
-  ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
+check:
+  ja: |-
+    ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
+  en: |-
+    All content on the page is placed in the appropriate area indicated by ARIA landmarks.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
-checkMeans:
+techniques:
 - tool: axe
-  means: |-
-    画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
+  technique:
+    ja: |-
+      画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
-    -  :ref:`axe-rule-landmark-banner-is-top-level`
-    -  :ref:`axe-rule-landmark-complementary-is-top-level`
-    -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
-    -  :ref:`axe-rule-landmark-main-is-top-level`
-    -  :ref:`axe-rule-landmark-no-duplicate-banner`
-    -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
-    -  :ref:`axe-rule-landmark-no-duplicate-main`
-    -  :ref:`axe-rule-landmark-one-main`
-    -  :ref:`axe-rule-landmark-unique`
-    -  :ref:`axe-rule-region`  
+      -  :ref:`axe-rule-landmark-banner-is-top-level`
+      -  :ref:`axe-rule-landmark-complementary-is-top-level`
+      -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
+      -  :ref:`axe-rule-landmark-main-is-top-level`
+      -  :ref:`axe-rule-landmark-no-duplicate-banner`
+      -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
+      -  :ref:`axe-rule-landmark-no-duplicate-main`
+      -  :ref:`axe-rule-landmark-one-main`
+      -  :ref:`axe-rule-landmark-unique`
+      -  :ref:`axe-rule-region`  
 - tool: misc
-  means: |-
-    `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、適切な領域にコンテンツが属していることを確認する。
+  technique:
+    ja: |-
+      `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、適切な領域にコンテンツが属していることを確認する。

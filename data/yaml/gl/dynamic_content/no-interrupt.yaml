@@ -1,7 +1,8 @@
 id: gl-dynamic-content-no-interrupt
 sortKey: 2009
 category: dynamic_content
-title: 割り込み表示
+title:
+  ja: 割り込み表示
 priority: '[SHOULD]'
 platform:
 - web

@@ -1,7 +1,8 @@
 id: gl-image-adjacent-contrast
 sortKey: 1604
 category: image
-title: 隣接領域とのコントラスト比の確保
+title:
+  ja: 隣接領域とのコントラスト比の確保
 priority: '[MUST]'
 platform:
 - web

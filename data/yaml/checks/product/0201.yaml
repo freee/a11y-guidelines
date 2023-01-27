@@ -1,17 +1,28 @@
 id: '0201'
-check: |-
-  *  Tab/Shift+Tabキーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
-  *  特定の箇所からフォーカスが抜け出せない状態では、矢印キーやEscキーの押下といった簡単な操作でその状態を抜け出すことができる
-  
-  特に注意が必要なコンポーネントの例：
-  
-  *  動画や音声コンテンツのプレイヤー
-  *  ポップアップ・メニュー
-  *  モーダル・ダイアログ
-checkMeans:
+check:
+  ja: |-
+    *  Tab/Shift+Tabキーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
+    *  特定の箇所からフォーカスが抜け出せない状態では、矢印キーやEscキーの押下といった簡単な操作でその状態を抜け出すことができる
+
+    特に注意が必要なコンポーネントの例：
+
+    *  動画や音声コンテンツのプレイヤー
+    *  ポップアップ・メニュー
+    *  モーダル・ダイアログ
+  en: |-
+    *  When moving the focus using Tab/Shift+Tab keys, the focus does not get stuck at certain location, or
+    *  If the focus gets stuck at certain location, simple operation such as pressing arrow keys or Esc key gets the focus away from the location
+
+    Examples of components that require special caution:
+
+    *  audio and/or video players
+    *  pop-up menus
+    *  modal dialogs
+techniques:
 - tool: keyboard
-  means: |-
-    Tabキーを使って、ページの先頭から末尾まで適切にフォーカスが移動することを確認し、もしフォーカスが抜け出せない状況が発生した場合は、矢印キー、ESCキー、または簡単なキーボード操作でその状態から抜け出せることを確認する。
+  technique:
+    ja: |-
+      Tabキーを使って、ページの先頭から末尾まで適切にフォーカスが移動することを確認し、もしフォーカスが抜け出せない状況が発生した場合は、矢印キー、ESCキー、または簡単なキーボード操作でその状態から抜け出せることを確認する。
 severity: '[CRITICAL]'
 target: product
 platform:

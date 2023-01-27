@@ -1,20 +1,27 @@
 id: '0941'
-check: |-
-  エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールにはその役割が分かるラベルが付けられている。
+check:
+  ja: |-
+    エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールにはその役割が分かるラベルが付けられている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
-implementation:
+implementations:
 - title: フォーム・コントロールのラベル付け
-  web: |-
-    *  ``label`` 要素、または ``aria-labelledby`` 属性を用いて表示されているテキストまたは画像と関連付ける、または
-    *  ``aria-label`` 属性でラベルを指定する
-  ios: |-
-    *  ``accessibilityLabel`` を用いる。
-  android: |-
-    *  ``labelFor`` を用いる。
+  methods:
+  - platform: web
+    method: |-
+      *  ``label`` 要素、または ``aria-labelledby`` 属性を用いて表示されているテキストまたは画像と関連付ける、または
+      *  ``aria-label`` 属性でラベルを指定する
+  - platform: ios
+    method: |-
+      *  ``accessibilityLabel`` を用いる。
+  - platform: android
+    method: |-
+      *  ``labelFor`` を用いる。
 - title: 適切な状態の確認
-  web: |-
-    *  開発者ツールで確認するとフォーム・コントロールのaccessible nameに役割が分かるテキストが指定されている状態
+  methods:
+  - platform: web
+    method: |-
+      *  開発者ツールで確認するとフォーム・コントロールのaccessible nameに役割が分かるテキストが指定されている状態

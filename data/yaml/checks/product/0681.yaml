@@ -1,14 +1,18 @@
 id: '0681'
-check: |-
-  スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
+check:
+  ja: |-
+    スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
+  en: |-
+    The start of the main text can be found by using the heading jump function of the screen reader or the jump function between areas indicated by ARIA landmarks.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
-checkMeans:
+techniques:
 - tool: nvda
-  means: |-
-    以下のいずれかの方法で、本文やその画面の中心的な機能の開始位置に移動することができる。
+  technique:
+    ja: |-
+      以下のいずれかの方法で、本文やその画面の中心的な機能の開始位置に移動することができる。
 
-    *  ブラウズ・モードで、次/前の見出しへの移動（H/Shift+Hキー）を実行して、容易に本文直前の見出しに移動できる
-    *  ブラウズ・モードで、次のランドマークへの移動（Dキー）でmain要素の先頭部分に容易に移動でき、その直後から本文が始まっている
+      *  ブラウズ・モードで、次/前の見出しへの移動（H/Shift+Hキー）を実行して、容易に本文直前の見出しに移動できる
+      *  ブラウズ・モードで、次のランドマークへの移動（Dキー）でmain要素の先頭部分に容易に移動でき、その直後から本文が始まっている

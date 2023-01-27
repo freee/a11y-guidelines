@@ -1,8 +1,13 @@
 id: '0651'
-check: |-
-  そのページ/画面の目的を示し、かつ他のページ/画面とは異なるタイトルが付けられている。
+check:
+  ja: |-
+    そのページ/画面の目的を示し、かつ他のページ/画面とは異なるタイトルが付けられている。
 
-  -  ブラウザーのタイトルバー/タブバーに表示されている。
+    -  ブラウザーのタイトルバー/タブバーに表示されている。
+  en: |-
+    The page/screen has a title that indicates its purpose and is different from other pages/screens.
+
+    *  It is displayed in the title bar/tab bar of the browser.
 severity: '[NORMAL]'
 target: product
 platform:

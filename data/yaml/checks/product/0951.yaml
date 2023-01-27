@@ -1,17 +1,23 @@
 id: '0951'
-check: |-
-  スクリーン・リーダーで、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールとラベルの関連付けが分かるような読み上げがされる。
+check:
+  ja: |-
+    スクリーン・リーダーで、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールとラベルの関連付けが分かるような読み上げがされる。
 
-  注：デスクトップWebの場合、ラベルをクリックするとそのラベルが関連付けられているフォーム・コントロールにフォーカスが移動する。
+    注：デスクトップWebの場合、ラベルをクリックするとそのラベルが関連付けられているフォーム・コントロールにフォーカスが移動する。
+  en: |-
+    The screen reader announces the association between the form control and the label.
+
+    Note: For desktop web, clicking on a label moves focus to the form control with which it is associated.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: axe
-  means: |-
-    以下のいずれの問題も発生しないことを確認する。
+  technique:
+    ja: |-
+      以下のいずれの問題も発生しないことを確認する。
 
-    *  :ref:`axe-rule-label`
-    *  :ref:`axe-rule-select-name`
+      *  :ref:`axe-rule-label`
+      *  :ref:`axe-rule-select-name`

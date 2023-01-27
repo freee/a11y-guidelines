@@ -1,7 +1,8 @@
 id: gl-multimedia-no-trap
 sortKey: 2104
 category: multimedia
-title: キーボード・トラップの回避
+title:
+  ja: キーボード・トラップの回避
 priority: '[MUST]'
 platform:
 - web

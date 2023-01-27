@@ -1,7 +1,8 @@
 id: gl-input-device-use-up-event
 sortKey: 1306
 category: input_device
-title: ダウン・イベントをトリガーにしない
+title:
+  ja: ダウン・イベントをトリガーにしない
 priority: '[MUST]'
 platform:
 - web

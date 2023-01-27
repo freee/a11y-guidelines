@@ -1,6 +1,9 @@
 id: '1531'
-check: |-
-  音声を含むコンテンツには、同期したキャプションが提供されている。
+check:
+  ja: |-
+    音声を含むコンテンツには、同期したキャプションが提供されている。
+  en: |-
+    Synchronized captions are provided for content that includes audio.
 severity: '[NORMAL]'
 target: product
 platform:

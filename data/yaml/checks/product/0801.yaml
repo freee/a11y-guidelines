@@ -1,26 +1,34 @@
 id: '0801'
-check: |-
-  *  グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている構成要素は、すべてのページ/画面で同じ出現順序になっている。かつ
-  *  これらの構成要素の中でのリンクやボタンの出現順序は、すべてのページ/画面で同じになっている。
+check:
+  ja: |-
+    *  グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている構成要素は、すべてのページ/画面で同じ出現順序になっている。かつ
+    *  これらの構成要素の中でのリンクやボタンの出現順序は、すべてのページ/画面で同じになっている。
+  en: |-
+    *  Components commonly used on multiple pages/screens, such as global navigation, header, footer, breadcrumb list, and support UI, have the same order of appearance on all pages/screens. and
+    *  The order of appearance of links and buttons within these components is the same on all pages/screens.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
-checkMeans:
+techniques:
 - tool: keyboard
-  means: |-
-    TabキーおよびShift+Tabキーでフォーカスを移動した際、移動順序が一貫していることを確認する。
+  technique:
+    ja: |-
+      TabキーおよびShift+Tabキーでフォーカスを移動した際、移動順序が一貫していることを確認する。
 - tool: nvda
-  means: |-
-    ブラウズ・モードで上下矢印キーで読み上げさせたとき、読み上げ順序が一貫していることを確認する。
+  technique:
+    ja: |-
+      ブラウズ・モードで上下矢印キーで読み上げさせたとき、読み上げ順序が一貫していることを確認する。
 - tool: ios-vo
-  means: |-
-    1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
+  technique:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
 
-    参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
-  means: |-
-    1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
+  technique:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
 
-    参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

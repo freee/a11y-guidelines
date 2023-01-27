@@ -1,7 +1,8 @@
 id: gl-form-target-size-mobile
 sortKey: 1914
 category: form
-title: 十分な大きさのクリック/タッチのターゲット（モバイル）
+title:
+  ja: 十分な大きさのクリック/タッチのターゲット（モバイル）
 priority: '[SHOULD]'
 platform:
 - mobile

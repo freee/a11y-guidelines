@@ -1,7 +1,8 @@
 id: gl-link-consistent-text
 sortKey: 1803
 category: link
-title: 一貫したリンク・テキスト
+title:
+  ja: 一貫したリンク・テキスト
 priority: '[MUST]'
 platform:
 - web

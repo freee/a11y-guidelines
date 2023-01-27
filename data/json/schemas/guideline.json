@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://a11y-guidelines.freee.co.jp/schema/guideline.json",
-  "title": "guideline",
+  "$id": "https://a11y-guidelines.freee.co.jp/schemas/guideline.json",
+  "title": "guideline item",
   "description": "A guideline and its associated info.",
   "type": "object",
   "properties": {
@@ -11,17 +11,17 @@
       "pattern": "^gl-.+"
     },
     "sortKey": {
+      "description": "an integer key to govern the order of the guidelines to appear in the document",
       "type": "integer",
       "minimum": 1001,
       "maximum": 2199
     },
     "title": {
       "description": "title of the guideline",
-      "type": "string"
+      "$ref": "common.json#/definitions/i18nString"
     },
     "category": {
       "description": "category the guideline belongs to",
-      "type": "string",
       "enum": [
         "dynamic_content",
         "form",
@@ -39,7 +39,6 @@
     },
     "priority": {
       "description": "priority of the guideline",
-      "type": "string",
       "enum": [
         "[MUST]",
         "[SHOULD]"
@@ -50,7 +49,6 @@
       "type": "array",
       "minItems": 1,
       "items": {
-        "type": "string",
         "enum": [
           "web",
           "mobile"
@@ -75,7 +73,7 @@
       "type": "string"
     },
     "checks": {
-      "description": "checks for conformance to the guideline",
+      "description": "IDs of the checks for conformance to the guideline",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -84,7 +82,7 @@
       }
     },
     "info": {
-      "description": "additional info to better understand the guideline",
+      "description": "additional info to better understand the guideline, label of internal links or key from the info.json file",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -104,4 +102,5 @@
     "intent",
     "checks"
   ]
+
 }

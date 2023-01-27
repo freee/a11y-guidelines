@@ -1,7 +1,8 @@
 id: gl-page-consistent-navigation
 sortKey: 1107
 category: page
-title: コンポーネントの一貫した出現順序
+title:
+  ja: コンポーネントの一貫した出現順序
 priority: '[MUST]'
 platform:
 - web

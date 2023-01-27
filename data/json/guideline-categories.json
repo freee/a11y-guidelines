@@ -1,0 +1,50 @@
+{
+  "dynamic_content": {
+    "ja": "動的コンテンツ",
+    "en": "Dynamic Content"
+  },
+  "form": {
+    "ja": "フォーム",
+    "en": "Forms"
+  },
+  "icon": {
+    "ja": "アイコン",
+    "en": "Icons"
+  },
+  "image": {
+    "ja": "画像",
+    "en": "Images"
+  },
+  "images_of_text": {
+    "ja": "画像化されたテキスト",
+    "en": "Images of Text"
+  },
+  "input_device": {
+    "ja": "入力ディバイス",
+    "en": "Input Devices"
+  },
+  "link": {
+    "ja": "リンク",
+    "en": "Links"
+  },
+  "login_session": {
+    "ja": "ログイン・セッション",
+    "en": "Login Sessions"
+  },
+  "markup": {
+    "ja": "マークアップと実装",
+    "en": "Markup and Implementation"
+  },
+  "multimedia": {
+    "ja": "音声・映像コンテンツ",
+    "en": "Audio and Video Content"
+  },
+  "page": {
+    "ja": "ページ全体",
+    "en": "Pages in General"
+  },
+  "text": {
+    "ja": "テキスト",
+    "en": "Text"
+  }
+}

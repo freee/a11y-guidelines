@@ -1,7 +1,8 @@
 id: gl-icon-target-size-mobile
 sortKey: 1706
 category: icon
-title: 十分な大きさのクリック/タッチのターゲット（モバイル）
+title:
+  ja: 十分な大きさのクリック/タッチのターゲット（モバイル）
 priority: '[SHOULD]'
 platform:
 - mobile

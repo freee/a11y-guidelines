@@ -1,7 +1,8 @@
 id: gl-dynamic-content-maintain-dom-tree
 sortKey: 2001
 category: dynamic_content
-title: 支援技術への適切な情報提供の維持
+title:
+  ja: 支援技術への適切な情報提供の維持
 priority: '[MUST]'
 platform:
 - web

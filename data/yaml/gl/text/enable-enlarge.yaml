@@ -1,7 +1,8 @@
 id: gl-text-enable-enlarge
 sortKey: 1410
 category: text
-title: 文字サイズの設定による200パーセントの拡大表示
+title:
+  ja: 文字サイズの設定による200パーセントの拡大表示
 priority: '[SHOULD]'
 platform:
 - web

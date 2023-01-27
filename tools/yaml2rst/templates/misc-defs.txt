@@ -1,0 +1,4 @@
+{% for link in links -%}
+.. {{ link.label }} replace:: `{{ link.text }}`_
+.. _`{{ link.text }}`: {{ link.url }}
+{% endfor %}

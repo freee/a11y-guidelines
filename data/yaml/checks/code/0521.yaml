@@ -1,16 +1,21 @@
 id: '0521'
-check: |-
-  画像化されたテキストと同じ内容が、スクリーン・リーダーで確認できる形のテキスト・データとしても提供されている。
+check:
+  ja: |-
+    画像化されたテキストと同じ内容が、スクリーン・リーダーで確認できる形のテキスト・データとしても提供されている。
 severity: '[MAJOR]'
 target: code
 platform:
 - web
 - mobile
-implementation:
+implementations:
 - title: テキスト・データの提供
-  web: |-
-    *  ``alt`` 属性、または ``aria-label`` 属性を用いる
-  ios: |-
-    *  ``accessibilityLabel`` を用いる
-  android: |-
-    *  ``contentDescription`` を用いる
+  methods:
+  - platform: web
+    method: |-
+      *  ``alt`` 属性、または ``aria-label`` 属性を用いる
+  - platform: ios
+    method: |-
+      *  ``accessibilityLabel`` を用いる
+  - platform: android
+    method: |-
+      *  ``contentDescription`` を用いる

@@ -1,23 +1,32 @@
 id: '0401'
-check: |-
-  *  アイコンの役割や示している状態を表すテキストが表示されていて、そのアイコンと明示的に関連付けられている。または
-  *  そのようなテキストがアイコンに付加されている。
+check:
+  ja: |-
+    *  アイコンの役割や示している状態を表すテキストが表示されていて、そのアイコンと明示的に関連付けられている。または
+    *  そのようなテキストがアイコンに付加されている。
 severity: '[MAJOR]'
 target: code
 platform:
 - web
 - mobile
-implementation:
+implementations:
 - title: 表示されているテキストとアイコンを関連付ける
-  web: |-
-    *  ``aria-labelledby`` 属性を用いる
+  methods:
+  - platform: web
+    method: |-
+      *  ``aria-labelledby`` 属性を用いる
 - title: アイコンにラベルを付加する
-  web: |-
-    *  ``alt`` 属性または ``aria-label`` 属性を用いる
-  ios: |-
-    *  ``accessibilityLabel`` で指定する。
-  android: |-
-    *  ``contentDescription`` 属性で指定する。
+  methods:
+  - platform: web
+    method: |-
+      *  ``alt`` 属性または ``aria-label`` 属性を用いる
+  - platform: ios
+    method: |-
+      *  ``accessibilityLabel`` で指定する。
+  - platform: android
+    method: |-
+      *  ``contentDescription`` 属性で指定する。
 - title: 適切な状態の確認
-  web: |-
-    *  開発者ツールで確認すると、Accessible Nameに適切なテキストが設定されている状態になっている。
+  methods:
+  - platform: web
+    method: |-
+      *  開発者ツールで確認すると、Accessible Nameに適切なテキストが設定されている状態になっている。

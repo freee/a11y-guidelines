@@ -1,7 +1,8 @@
 id: gl-page-title
 sortKey: 1101
 category: page
-title: タイトルの指定
+title:
+  ja: タイトルの指定
 priority: '[MUST]'
 platform:
 - web

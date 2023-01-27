@@ -1,6 +1,9 @@
 id: '0592'
-check: |-
-  複数の状態を持つコンポーネントは、スクリーン・リーダー利用時にもその状態が分かるようになっている。（例：タブUIの現在選択されているタブ、状態に応じて変化するアイコンなど）
+check:
+  ja: |-
+    複数の状態を持つコンポーネントは、スクリーン・リーダー利用時にもその状態が分かるようになっている。（例：タブUIの現在選択されているタブ、状態に応じて変化するアイコンなど）
+  en: |-
+    The state of components with multiple states can be determined by the screen reader. (e.g., the currently selected tab in the tabbed UI, icons that change according to state, etc.)
 severity: '[CRITICAL]'
 target: product
 platform:

@@ -1,7 +1,8 @@
 id: gl-icon-consistent
 sortKey: 1703
 category: icon
-title: アイコンの一貫性
+title:
+  ja: アイコンの一貫性
 priority: '[MUST]'
 platform:
 - web

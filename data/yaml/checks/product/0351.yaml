@@ -1,9 +1,15 @@
 id: '0351'
-check: |-
-  ボタンやリンクになっている画像は、クリックやタッチに反応するサイズが、充分な大きさになっている。
+check:
+  ja: |-
+    ボタンやリンクになっている画像は、クリックやタッチに反応するサイズが、充分な大きさになっている。
 
-  *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
-  *  モバイル向けWebでは44 x 44 CSS px以上
+    *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
+    *  モバイル向けWebでは44 x 44 CSS px以上
+  en: |-
+    Images used as buttons or links have large enough area that responds to clicks and touches
+
+    *  for desktop Web: at least 24 x 24 CSS px, preferably larger than 44 x 44 CSS px
+    *  for mobile Web: larger than 44 x 44 CSS px
 severity: '[NORMAL]'
 target: product
 platform:

@@ -1,7 +1,8 @@
 id: gl-image-description
 sortKey: 1601
 category: image
-title: 画像の説明の提供
+title:
+  ja: 画像の説明の提供
 priority: '[MUST]'
 platform:
 - web
