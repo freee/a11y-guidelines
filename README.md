@@ -28,6 +28,10 @@ Copyright © 2020-2021, freee株式会社
 
 ## 更新履歴
 
+### [Ver. 202301.0](https://github.com/freee/a11y-guidelines/releases/202301.0/) (2023年1月27日)
+
+* NVDAの初期設定に関する説明で、マウス追跡の推奨設定を追加：[NVDAを用いたチェックの実施方法](https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-nvda.html)
+
 ### [Ver. 202210.0](https://github.com/freee/a11y-guidelines/releases/202210.0/) (2022年10月11日)
 
 * テキストの拡大に関連するガイドラインについて、意図が明確になるように文言を修正
