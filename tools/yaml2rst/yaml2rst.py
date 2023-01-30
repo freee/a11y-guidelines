@@ -24,7 +24,7 @@ MISCDEFS_PATH = os.path.join(os.getcwd(), DESTDIR, MISCDEFS_FILENAME)
 #CHECKS_SCHEMA = 'data/json/schemas/check.json'
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
-TEMPLATE_DIR = 'templates'
+TEMPLATE_DIR = 'tools/yaml2rst/templates'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -61,7 +61,7 @@ def main():
         targets = args[1:argc]
 
     template_env = Environment(
-        loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
+        loader=FileSystemLoader(os.path.join(os.getcwd(), TEMPLATE_DIR))
         )
     template_env.filters['make_header'] = make_header
 
