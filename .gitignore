@@ -5,4 +5,4 @@ build/*
 source/__pycache__/*
 source/inc/*
 .DS_Store
-incfiles.mk
+/incfiles.mk
