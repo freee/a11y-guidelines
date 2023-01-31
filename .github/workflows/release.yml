@@ -49,7 +49,7 @@ jobs:
     - name: Prepare the HTML Archive
       run: |
         make clean html
-        cp -r ./data/json/schema ./build/html
+        cp -r ./data/json/schemas ./build/html
         mv ./build/html ./freee-a11y-guidelines-${TAG}
         zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
