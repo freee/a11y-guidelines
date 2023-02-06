@@ -9,6 +9,7 @@
 https://github.com/freee/a11y-guidelines
 
 内容の修正、追加、誤字脱字の修正などは、上記リポジトリーのIssuesまたはPull Requestsでお知らせください。
+Pull Requestは、developブランチに対して作成してください。
 
 ここでは、この文書の編集に関する情報をまとめて記します。
 
