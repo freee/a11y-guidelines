@@ -40,6 +40,8 @@ Pull Requestは、developブランチに対して作成してください。
 全体としてはreStructuredTextで記述していますが、ガイドラインとチェック内容についてはYAMLで記述したファイルをreStructuredTextに変換して処理しています。
 `source` ディレクトリー以下のファイルはreStructuredText、 `data/yaml` ディレクトリー以下のファイルはYAMLで記述しています。
 
+`data/json/schemas` ディレクトリー以下のファイルが、YAMLファイルのスキーマ定義です。
+
 `tools/yaml2rst/yaml2rst.py` スクリプトを実行すると、YAMLファイルをreStructuredTextに変換し、 `source/inc` ディレクトリーに出力します。
 この状態で `sphinx-build` を実行することで、文書全体を処理することができます。
 なお、ルート・ディレクトリーで `make html` を実行すると、このスクリプトの実行も含めて必要な処理が実行されます。
