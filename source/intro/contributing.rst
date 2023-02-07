@@ -9,6 +9,7 @@
 https://github.com/freee/a11y-guidelines
 
 内容の修正、追加、誤字脱字の修正などは、上記リポジトリーのIssuesまたはPull Requestsでお知らせください。
+Pull Requestは、developブランチに対して作成してください。
 
 ここでは、この文書の編集に関する情報をまとめて記します。
 
@@ -39,7 +40,9 @@ https://github.com/freee/a11y-guidelines
 全体としてはreStructuredTextで記述していますが、ガイドラインとチェック内容についてはYAMLで記述したファイルをreStructuredTextに変換して処理しています。
 `source` ディレクトリー以下のファイルはreStructuredText、 `data/yaml` ディレクトリー以下のファイルはYAMLで記述しています。
 
-`tools/yaml2rst.py` スクリプトを実行すると、YAMLファイルをreStructuredTextに変換し、 `source/inc` ディレクトリーに出力します。
+`data/json/schemas` ディレクトリー以下のファイルが、YAMLファイルのスキーマ定義です。
+
+`tools/yaml2rst/yaml2rst.py` スクリプトを実行すると、YAMLファイルをreStructuredTextに変換し、 `source/inc` ディレクトリーに出力します。
 この状態で `sphinx-build` を実行することで、文書全体を処理することができます。
 なお、ルート・ディレクトリーで `make html` を実行すると、このスクリプトの実行も含めて必要な処理が実行されます。
 
