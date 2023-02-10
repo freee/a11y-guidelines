@@ -9,9 +9,11 @@
 https://github.com/freee/a11y-guidelines
 
 内容の修正、追加、誤字脱字の修正などは、上記リポジトリーのIssuesまたはPull Requestsでお知らせください。
-Pull Requestは、developブランチに対して作成してください。
 
-ここでは、この文書の編集に関する情報をまとめて記します。
+Pull Requestを作製する場合は、まず上記リポジトリーをforkしてください。
+forkしたリポジトリーで作業用のブランチを作製し、必要な変更を加えた上で、上記リポジトリーのdevelopブランチに対してPull Requestを作成してください。
+
+以下、この文書の編集に関する情報をまとめて記します。
 
 ********
 環境構築
@@ -19,10 +21,11 @@ Pull Requestは、developブランチに対して作成してください。
 
 この文書のソースを処理してHTMLファイルを生成するためには、Pythonが動作する環境が必要です。
 
-以下の手順で、gitリポジトリーをcloneし、必要なモジュールをインストールします：
+gitリポジトリーをcloneし、必要なモジュールをインストールします：
 
-1. `git clone https://github.com/freee/a11y-guidelines`
-2. `pip install --upgrade -r requirements.txt`
+.. code-block:: shell
+
+   pip install --upgrade -r requirements.txt
 
 **********
 表記ルール
