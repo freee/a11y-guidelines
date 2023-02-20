@@ -10,18 +10,36 @@ https://github.com/freee/a11y-guidelines
 
 内容の修正、追加、誤字脱字の修正などは、上記リポジトリーのIssuesまたはPull Requestsでお知らせください。
 
-ここでは、この文書の編集に関する情報をまとめて記します。
+Pull Requestを作製する場合は、まず上記リポジトリーをforkしてください。
+forkしたリポジトリーで作業用のブランチを作製し、必要な変更を加えた上で、上記リポジトリーのdevelopブランチに対してPull Requestを作成してください。
 
-********
-環境構築
-********
+以下、この文書の編集に関する情報をまとめて記します。
+
+****************************
+環境構築とHTMLファイルの生成
+****************************
 
 この文書のソースを処理してHTMLファイルを生成するためには、Pythonが動作する環境が必要です。
 
-以下の手順で、gitリポジトリーをcloneし、必要なモジュールをインストールします：
+gitリポジトリーをcloneし、必要なモジュールをインストールします：
 
-1. `git clone https://github.com/freee/a11y-guidelines`
-2. `pip install --upgrade -r requirements.txt`
+.. code-block:: shell
+
+   pip install --upgrade -r requirements.txt
+
+HTMLファイルの生成のために必要な情報はMakefileに記述されており、GNU Makeが必要です。
+
+リポジトリーのトップ・ディレクトリーで以下を実行てHTMLファイルを生成します：
+
+.. code:: shell
+
+   make html
+
+pythonコマンドを ``python3`` などの別名で実行する必要がある環境では、以下のように実行します：
+
+.. code:: shell
+
+   make PYTHON=python3 html
 
 **********
 表記ルール
@@ -39,7 +57,9 @@ https://github.com/freee/a11y-guidelines
 全体としてはreStructuredTextで記述していますが、ガイドラインとチェック内容についてはYAMLで記述したファイルをreStructuredTextに変換して処理しています。
 `source` ディレクトリー以下のファイルはreStructuredText、 `data/yaml` ディレクトリー以下のファイルはYAMLで記述しています。
 
-`tools/yaml2rst.py` スクリプトを実行すると、YAMLファイルをreStructuredTextに変換し、 `source/inc` ディレクトリーに出力します。
+`data/json/schemas` ディレクトリー以下のファイルが、YAMLファイルのスキーマ定義です。
+
+`tools/yaml2rst/yaml2rst.py` スクリプトを実行すると、YAMLファイルをreStructuredTextに変換し、 `source/inc` ディレクトリーに出力します。
 この状態で `sphinx-build` を実行することで、文書全体を処理することができます。
 なお、ルート・ディレクトリーで `make html` を実行すると、このスクリプトの実行も含めて必要な処理が実行されます。
 

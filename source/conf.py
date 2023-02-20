@@ -20,19 +20,12 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-version = 'Ver. 202301.0'
+version = 'Ver. 202302.0'
 release = version
-publishedDate = u'2023年1月27日'
+publishedDate = u'2023年2月20日'
 copyright = '2020-{pubYear}, freee株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )
-
-if 'internal' in tags:
-  publishedDate = datetime.datetime.now().strftime("%Y-%m-%d")
-  release = u"INTERNAL {ver} ({date})".format(
-    ver = version,
-    date = publishedDate
-  )
 
 # -- General configuration ---------------------------------------------------
 
@@ -40,8 +33,7 @@ if 'internal' in tags:
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-        'sphinxcontrib.trimblank',
-        'sphinx.ext.todo',
+        'sphinxcontrib.trimblank'
 ]
 
 
@@ -109,7 +101,3 @@ def setup(app):
   app.add_css_file('a11y-gl.css')
 
 [extensions]
-
-if 'internal' in tags:
-  todo_include_todos = True
-  todo_link_only = True
