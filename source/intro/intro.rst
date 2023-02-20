@@ -191,7 +191,7 @@ GitHubリリース・ページ
 著作権と利用許諾条件
 ====================
 
-|cclogo| 「freeeアクセシビリティー・ガイドライン」は、freee株式会社が作成したもので、 `クリエイティブ・コモンズ 表示 4.0 国際 ライセンス <http://creativecommons.org/licenses/by/4.0/>`_ で提供されています。
+|cclogo| 「freeeアクセシビリティー・ガイドライン」は、freee株式会社が作成したもので、 `クリエイティブ・コモンズ 表示 4.0 国際 ライセンス <https://creativecommons.org/licenses/by/4.0/>`_ で提供されています。
 
 Copyright © |copyright|
 
