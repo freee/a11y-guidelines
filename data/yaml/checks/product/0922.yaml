@@ -1,7 +1,9 @@
 id: '0922'
 check:
   ja: |-
-    日付、時刻、数値などは、ページやアプリケーションで利用されている言語において自然な形で読み上げられる。
+    日付、時刻、数値などは、ページやアプリケーションで利用されている自然言語において自然な形で読み上げられる。
+  en: |-
+    The screen reader announces dates, times, numeric values, etc. in a way that is natural in the natural language used in the page or in the application.
 severity: '[MINOR]'
 target: product
 platform:
