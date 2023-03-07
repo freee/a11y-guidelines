@@ -9,7 +9,7 @@ iOS用スクリーン・リーダーのVoiceOverの推奨設定の方法、基�
 なお、macOSにも同名のスクリーン・リーダーが標準搭載されていますが、iOSのVoiceOverとはまったくの別物です。
 本稿ではiOSのVoiceOverについてのみ記、「VoiceOver」という記述はiOS VoiceOverを差します。
 
-本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/15.0/ios/15.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
+本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/16.0/ios/16.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
 
 **********
 起動と終了
