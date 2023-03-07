@@ -78,12 +78,37 @@ rst_prolog = u"""
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-import sphinx_rtd_theme
-html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
 html_theme_options = {
-   "collapse_navigation": "false",
+  "logo": "freee-logo.svg",
+  "logo_name": True,
+  "page_width": "60rem",
+  "sidebar_width": "20rem",
+  "link": "#285ac8",
+  "link_hover": "#23418c",
+  "footer_text": "#6e6b6b",
+  "body_text": "#323232",
+  "sidebar_link": "#323232",
+  "sidebar_header": "#323232",
+  "sidebar_text": "#323232",
+  "narrow_sidebar_bg": "#f7f5f5",
+  "narrow_sidebar_fg": "#323232",
+  "narrow_sidebar_link": "#323232",
+  "gray_1": "#6e6b6b",
+  "gray_2": "#e9e7e7",
+  "gray_3": "#f7f5f5",
+  "pre_bg": "#f7f5f5",
+  "font_family":
+    """
+    '-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'ヒラギノ角ゴ ProN', Hiragino Kaku Gothic ProN, Arial, 'メイリオ', Meiryo,
+    sans-serif
+    """,
+  "head_font_family":
+    """
+    '-apple-system', BlinkMacSystemFont, 'Helvetica Neue', 'ヒラギノ角ゴ ProN', Hiragino Kaku Gothic ProN, Arial, 'メイリオ', Meiryo,
+    sans-serif
+    """,
+
+
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
