@@ -205,7 +205,7 @@ Copyright © |copyright|
 
 .. _WCAG20: https://www.w3.org/TR/WCAG20/
 .. _WCAG21: https://www.w3.org/TR/WCAG21/
-.. _WCAG21ja: https://waic.jp/docs/WCAG21/
+.. _WCAG21ja: https://waic.jp/translations/WCAG21/
 
 .. |cclogo| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
    :alt: クリエイティブ・コモンズ・ライセンス

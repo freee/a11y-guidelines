@@ -9,7 +9,7 @@ iOS用スクリーン・リーダーのVoiceOverの推奨設定の方法、基�
 なお、macOSにも同名のスクリーン・リーダーが標準搭載されていますが、iOSのVoiceOverとはまったくの別物です。
 本稿ではiOSのVoiceOverについてのみ記、「VoiceOver」という記述はiOS VoiceOverを差します。
 
-本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/15.0/ios/15.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
+本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/16.0/ios/16.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
 
 **********
 起動と終了
@@ -212,7 +212,7 @@ UIコンポーネント
    *  system buttons
    *  info buttons
 参考
-   `Buttons - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/buttons/>`_
+   `Buttons - Menus and actions - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/menus-and-actions/buttons/>`_
 
 使用されている箇所の例
 ----------------------
@@ -245,7 +245,7 @@ label
 UIコンポーネント
    label
 参考
-   `Labels - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/labels/>`_
+   `Labels - Layout and organization - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/layout-and-organization/labels/>`_
 
 使用されている箇所の例
 ----------------------
@@ -264,7 +264,7 @@ page control
 UIコンポーネント
    page control
 参考
-   `Page Controls - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/page-controls/>`_
+   `Page controls - Presentation - Components - Human Interface Guidelines - Design - Apple Developer <https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-ios-voiceover.html>`_
 
 使用されている箇所の例
 ----------------------
@@ -290,7 +290,7 @@ picker
 UIコンポーネント
    picker
 参考
-   `Pickers - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/pickers/>`_
+   `Pickers - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/pickers/>`_
 
 使用されている箇所の例
 ----------------------
@@ -315,7 +315,7 @@ segmented control
 UIコンポーネント
    segmented control
 参考
-   `Segmented Controls - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/segmented-controls/>`_
+   `Segmented controls - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/segmented-controls/>`_
 
 使用されている箇所の例
 ----------------------
@@ -337,7 +337,7 @@ slider
 UIコンポーネント
    slider
 参考
-   `Sliders - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/sliders/>`_
+   `Sliders - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/sliders/>`_
 
 使用されている箇所の例
 ----------------------
@@ -363,13 +363,13 @@ VoiceOver利用時の挙動
 *  ``label`` に変更対象が分かるテキストを指定する
 *  ``value`` に現在の値を指定する
 
-switch
+toggle
 ======
 
 UIコンポーネント
-   switch
+   toggle
 参考
-   `Switches - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/switches/>`_
+   `Toggles - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/toggles/>`_
 
 使用されている箇所の例
 ----------------------
@@ -391,7 +391,7 @@ text field
 UIコンポーネント
    text field
 参考
-   `Text Fields - Controls - iOS - Human Interface Guidelines - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/ios/controls/text-fields/>`_
+   `Text fields - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer - Google Chrome <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/text-fields/>`_
 
 使用されている箇所の例
 ----------------------

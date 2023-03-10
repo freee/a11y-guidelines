@@ -6,7 +6,7 @@
     },
     "ja": {
       "title": "非テキストコンテンツ",
-      "url": "https://waic.jp/docs/WCAG21/#non-text-content"
+      "url": "https://waic.jp/translations/WCAG21/#non-text-content"
     },
     "level": "A",
     "localPriority": "A"
@@ -18,7 +18,7 @@
     },
     "ja": {
       "title": "音声のみ及び映像のみ (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#audio-only-and-video-only-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#audio-only-and-video-only-prerecorded"
     },
     "level": "A",
     "localPriority": "A"
@@ -30,7 +30,7 @@
     },
     "ja": {
       "title": "キャプション (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#captions-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#captions-prerecorded"
     },
     "level": "A",
     "localPriority": "A"
@@ -42,7 +42,7 @@
     },
     "ja": {
       "title": "音声解説、又はメディアに対する代替 (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#audio-description-or-media-alternative-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#audio-description-or-media-alternative-prerecorded"
     },
     "level": "A",
     "localPriority": "A"
@@ -54,7 +54,7 @@
     },
     "ja": {
       "title": "キャプション (ライブ)",
-      "url": "https://waic.jp/docs/WCAG21/#captions-live"
+      "url": "https://waic.jp/translations/WCAG21/#captions-live"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -66,7 +66,7 @@
     },
     "ja": {
       "title": "音声解説 (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#audio-description-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#audio-description-prerecorded"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -78,7 +78,7 @@
     },
     "ja": {
       "title": "手話 (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#sign-language-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#sign-language-prerecorded"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -90,7 +90,7 @@
     },
     "ja": {
       "title": "拡張音声解説 (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#extended-audio-description-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#extended-audio-description-prerecorded"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -102,7 +102,7 @@
     },
     "ja": {
       "title": "メディアに対する代替 (収録済)",
-      "url": "https://waic.jp/docs/WCAG21/#media-alternative-prerecorded"
+      "url": "https://waic.jp/translations/WCAG21/#media-alternative-prerecorded"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -114,7 +114,7 @@
     },
     "ja": {
       "title": "音声のみ (ライブ)",
-      "url": "https://waic.jp/docs/WCAG21/#audio-only-live"
+      "url": "https://waic.jp/translations/WCAG21/#audio-only-live"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -126,7 +126,7 @@
     },
     "ja": {
       "title": "情報及び関係性",
-      "url": "https://waic.jp/docs/WCAG21/#info-and-relationships"
+      "url": "https://waic.jp/translations/WCAG21/#info-and-relationships"
     },
     "level": "A",
     "localPriority": "A"
@@ -138,7 +138,7 @@
     },
     "ja": {
       "title": "意味のある順序",
-      "url": "https://waic.jp/docs/WCAG21/#meaningful-sequence"
+      "url": "https://waic.jp/translations/WCAG21/#meaningful-sequence"
     },
     "level": "A",
     "localPriority": "A"
@@ -150,7 +150,7 @@
     },
     "ja": {
       "title": "感覚的な特徴",
-      "url": "https://waic.jp/docs/WCAG21/#sensory-characteristics"
+      "url": "https://waic.jp/translations/WCAG21/#sensory-characteristics"
     },
     "level": "A",
     "localPriority": "A"
@@ -162,7 +162,7 @@
     },
     "ja": {
       "title": "表示の向き",
-      "url": "https://waic.jp/docs/WCAG21/#orientation"
+      "url": "https://waic.jp/translations/WCAG21/#orientation"
     },
     "level": "AA",
     "localPriority": "A"
@@ -174,7 +174,7 @@
     },
     "ja": {
       "title": "入力目的の特定",
-      "url": "https://waic.jp/docs/WCAG21/#identify-input-purpose"
+      "url": "https://waic.jp/translations/WCAG21/#identify-input-purpose"
     },
     "level": "AA",
     "localPriority": "AAA"
@@ -186,7 +186,7 @@
     },
     "ja": {
       "title": "目的の特定",
-      "url": "https://waic.jp/docs/WCAG21/#identify-purpose"
+      "url": "https://waic.jp/translations/WCAG21/#identify-purpose"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -198,7 +198,7 @@
     },
     "ja": {
       "title": "色の使用",
-      "url": "https://waic.jp/docs/WCAG21/#use-of-color"
+      "url": "https://waic.jp/translations/WCAG21/#use-of-color"
     },
     "level": "A",
     "localPriority": "A"
@@ -210,7 +210,7 @@
     },
     "ja": {
       "title": "音声の制御",
-      "url": "https://waic.jp/docs/WCAG21/#audio-control"
+      "url": "https://waic.jp/translations/WCAG21/#audio-control"
     },
     "level": "A",
     "localPriority": "A"
@@ -222,7 +222,7 @@
     },
     "ja": {
       "title": "コントラスト (最低限)",
-      "url": "https://waic.jp/docs/WCAG21/#contrast-minimum"
+      "url": "https://waic.jp/translations/WCAG21/#contrast-minimum"
     },
     "level": "AA",
     "localPriority": "A"
@@ -234,7 +234,7 @@
     },
     "ja": {
       "title": "テキストのサイズ変更",
-      "url": "https://waic.jp/docs/WCAG21/#resize-text"
+      "url": "https://waic.jp/translations/WCAG21/#resize-text"
     },
     "level": "AA",
     "localPriority": "A"
@@ -246,7 +246,7 @@
     },
     "ja": {
       "title": "文字画像",
-      "url": "https://waic.jp/docs/WCAG21/#images-of-text"
+      "url": "https://waic.jp/translations/WCAG21/#images-of-text"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -258,7 +258,7 @@
     },
     "ja": {
       "title": "コントラスト (高度)",
-      "url": "https://waic.jp/docs/WCAG21/#contrast-enhanced"
+      "url": "https://waic.jp/translations/WCAG21/#contrast-enhanced"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -270,7 +270,7 @@
     },
     "ja": {
       "title": "小さな背景音、又は背景音なし",
-      "url": "https://waic.jp/docs/WCAG21/#low-or-no-background-audio"
+      "url": "https://waic.jp/translations/WCAG21/#low-or-no-background-audio"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -282,7 +282,7 @@
     },
     "ja": {
       "title": "視覚的提示",
-      "url": "https://waic.jp/docs/WCAG21/#visual-presentation"
+      "url": "https://waic.jp/translations/WCAG21/#visual-presentation"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -294,7 +294,7 @@
     },
     "ja": {
       "title": "文字画像 (例外なし)",
-      "url": "https://waic.jp/docs/WCAG21/#images-of-text-no-exception"
+      "url": "https://waic.jp/translations/WCAG21/#images-of-text-no-exception"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -306,7 +306,7 @@
     },
     "ja": {
       "title": "リフロー",
-      "url": "https://waic.jp/docs/WCAG21/#reflow"
+      "url": "https://waic.jp/translations/WCAG21/#reflow"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -318,7 +318,7 @@
     },
     "ja": {
       "title": "非テキストのコントラスト",
-      "url": "https://waic.jp/docs/WCAG21/#non-text-contrast"
+      "url": "https://waic.jp/translations/WCAG21/#non-text-contrast"
     },
     "level": "AA",
     "localPriority": "A"
@@ -330,7 +330,7 @@
     },
     "ja": {
       "title": "テキストの間隔",
-      "url": "https://waic.jp/docs/WCAG21/#text-spacing"
+      "url": "https://waic.jp/translations/WCAG21/#text-spacing"
     },
     "level": "AA",
     "localPriority": "A"
@@ -342,7 +342,7 @@
     },
     "ja": {
       "title": "ホバー又はフォーカスで表示されるコンテンツ",
-      "url": "https://waic.jp/docs/WCAG21/#content-on-hover-or-focus"
+      "url": "https://waic.jp/translations/WCAG21/#content-on-hover-or-focus"
     },
     "level": "AA",
     "localPriority": "一部A"
@@ -354,7 +354,7 @@
     },
     "ja": {
       "title": "キーボード",
-      "url": "https://waic.jp/docs/WCAG21/#keyboard"
+      "url": "https://waic.jp/translations/WCAG21/#keyboard"
     },
     "level": "A",
     "localPriority": "A"
@@ -366,7 +366,7 @@
     },
     "ja": {
       "title": "キーボードトラップなし",
-      "url": "https://waic.jp/docs/WCAG21/#no-keyboard-trap"
+      "url": "https://waic.jp/translations/WCAG21/#no-keyboard-trap"
     },
     "level": "A",
     "localPriority": "A"
@@ -378,7 +378,7 @@
     },
     "ja": {
       "title": "キーボード (例外なし)",
-      "url": "https://waic.jp/docs/WCAG21/#keyboard-no-exception"
+      "url": "https://waic.jp/translations/WCAG21/#keyboard-no-exception"
     },
     "level": "AAA",
     "localPriority": "A"
@@ -390,7 +390,7 @@
     },
     "ja": {
       "title": "文字キーのショートカット",
-      "url": "https://waic.jp/docs/WCAG21/#character-key-shortcuts"
+      "url": "https://waic.jp/translations/WCAG21/#character-key-shortcuts"
     },
     "level": "A",
     "localPriority": "A"
@@ -402,7 +402,7 @@
     },
     "ja": {
       "title": "タイミング調整可能",
-      "url": "https://waic.jp/docs/WCAG21/#timing-adjustable"
+      "url": "https://waic.jp/translations/WCAG21/#timing-adjustable"
     },
     "level": "A",
     "localPriority": "A"
@@ -414,7 +414,7 @@
     },
     "ja": {
       "title": "一時停止、停止、非表示",
-      "url": "https://waic.jp/docs/WCAG21/#pause-stop-hide"
+      "url": "https://waic.jp/translations/WCAG21/#pause-stop-hide"
     },
     "level": "A",
     "localPriority": "A"
@@ -426,7 +426,7 @@
     },
     "ja": {
       "title": "タイミング非依存",
-      "url": "https://waic.jp/docs/WCAG21/#no-timing"
+      "url": "https://waic.jp/translations/WCAG21/#no-timing"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -438,7 +438,7 @@
     },
     "ja": {
       "title": "割り込み",
-      "url": "https://waic.jp/docs/WCAG21/#interruptions"
+      "url": "https://waic.jp/translations/WCAG21/#interruptions"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -450,7 +450,7 @@
     },
     "ja": {
       "title": "再認証",
-      "url": "https://waic.jp/docs/WCAG21/#re-authenticating"
+      "url": "https://waic.jp/translations/WCAG21/#re-authenticating"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -462,7 +462,7 @@
     },
     "ja": {
       "title": "タイムアウト",
-      "url": "https://waic.jp/docs/WCAG21/#timeouts"
+      "url": "https://waic.jp/translations/WCAG21/#timeouts"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -474,7 +474,7 @@
     },
     "ja": {
       "title": "3 回の閃光、又は閾値以下",
-      "url": "https://waic.jp/docs/WCAG21/#three-flashes-or-below-threshold"
+      "url": "https://waic.jp/translations/WCAG21/#three-flashes-or-below-threshold"
     },
     "level": "A",
     "localPriority": "A"
@@ -486,7 +486,7 @@
     },
     "ja": {
       "title": "3回の閃光",
-      "url": "https://waic.jp/docs/WCAG21/#three-flashes"
+      "url": "https://waic.jp/translations/WCAG21/#three-flashes"
     },
     "level": "AAA",
     "localPriority": "A"
@@ -498,7 +498,7 @@
     },
     "ja": {
       "title": "インタラクションによるアニメーション",
-      "url": "https://waic.jp/docs/WCAG21/#animation-from-interactions"
+      "url": "https://waic.jp/translations/WCAG21/#animation-from-interactions"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -510,7 +510,7 @@
     },
     "ja": {
       "title": "ブロックスキップ",
-      "url": "https://waic.jp/docs/WCAG21/#bypass-blocks"
+      "url": "https://waic.jp/translations/WCAG21/#bypass-blocks"
     },
     "level": "A",
     "localPriority": "A"
@@ -522,7 +522,7 @@
     },
     "ja": {
       "title": "ページタイトル",
-      "url": "https://waic.jp/docs/WCAG21/#page-titled"
+      "url": "https://waic.jp/translations/WCAG21/#page-titled"
     },
     "level": "A",
     "localPriority": "A"
@@ -534,7 +534,7 @@
     },
     "ja": {
       "title": "フォーカス順序",
-      "url": "https://waic.jp/docs/WCAG21/#focus-order"
+      "url": "https://waic.jp/translations/WCAG21/#focus-order"
     },
     "level": "A",
     "localPriority": "A"
@@ -546,7 +546,7 @@
     },
     "ja": {
       "title": "リンクの目的 (コンテキスト内)",
-      "url": "https://waic.jp/docs/WCAG21/#link-purpose-in-context"
+      "url": "https://waic.jp/translations/WCAG21/#link-purpose-in-context"
     },
     "level": "A",
     "localPriority": "A"
@@ -558,7 +558,7 @@
     },
     "ja": {
       "title": "複数の手段",
-      "url": "https://waic.jp/docs/WCAG21/#multiple-ways"
+      "url": "https://waic.jp/translations/WCAG21/#multiple-ways"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -570,7 +570,7 @@
     },
     "ja": {
       "title": "見出し及びラベル",
-      "url": "https://waic.jp/docs/WCAG21/#headings-and-labels"
+      "url": "https://waic.jp/translations/WCAG21/#headings-and-labels"
     },
     "level": "AA",
     "localPriority": "A"
@@ -582,7 +582,7 @@
     },
     "ja": {
       "title": "フォーカスの可視化",
-      "url": "https://waic.jp/docs/WCAG21/#focus-visible"
+      "url": "https://waic.jp/translations/WCAG21/#focus-visible"
     },
     "level": "AA",
     "localPriority": "A"
@@ -594,7 +594,7 @@
     },
     "ja": {
       "title": "現在位置",
-      "url": "https://waic.jp/docs/WCAG21/#location"
+      "url": "https://waic.jp/translations/WCAG21/#location"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -606,7 +606,7 @@
     },
     "ja": {
       "title": "リンクの目的 (リンクのみ)",
-      "url": "https://waic.jp/docs/WCAG21/#link-purpose-link-only"
+      "url": "https://waic.jp/translations/WCAG21/#link-purpose-link-only"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -618,7 +618,7 @@
     },
     "ja": {
       "title": "セクション見出し",
-      "url": "https://waic.jp/docs/WCAG21/#section-headings"
+      "url": "https://waic.jp/translations/WCAG21/#section-headings"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -630,7 +630,7 @@
     },
     "ja": {
       "title": "ポインタのジェスチャ",
-      "url": "https://waic.jp/docs/WCAG21/#pointer-gestures"
+      "url": "https://waic.jp/translations/WCAG21/#pointer-gestures"
     },
     "level": "A",
     "localPriority": "A"
@@ -642,7 +642,7 @@
     },
     "ja": {
       "title": "ポインタのキャンセル",
-      "url": "https://waic.jp/docs/WCAG21/#pointer-cancellation"
+      "url": "https://waic.jp/translations/WCAG21/#pointer-cancellation"
     },
     "level": "A",
     "localPriority": "A"
@@ -654,7 +654,7 @@
     },
     "ja": {
       "title": "名前 (name) のラベル",
-      "url": "https://waic.jp/docs/WCAG21/#label-in-name"
+      "url": "https://waic.jp/translations/WCAG21/#label-in-name"
     },
     "level": "A",
     "localPriority": "A"
@@ -666,7 +666,7 @@
     },
     "ja": {
       "title": "動きによる起動",
-      "url": "https://waic.jp/docs/WCAG21/#motion-actuation"
+      "url": "https://waic.jp/translations/WCAG21/#motion-actuation"
     },
     "level": "A",
     "localPriority": "A"
@@ -678,7 +678,7 @@
     },
     "ja": {
       "title": "ターゲットのサイズ",
-      "url": "https://waic.jp/docs/WCAG21/#target-size"
+      "url": "https://waic.jp/translations/WCAG21/#target-size"
     },
     "level": "AAA",
     "localPriority": "AA"
@@ -690,7 +690,7 @@
     },
     "ja": {
       "title": "入力メカニズム非依存",
-      "url": "https://waic.jp/docs/WCAG21/#concurrent-input-mechanisms"
+      "url": "https://waic.jp/translations/WCAG21/#concurrent-input-mechanisms"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -702,7 +702,7 @@
     },
     "ja": {
       "title": "ページの言語",
-      "url": "https://waic.jp/docs/WCAG21/#language-of-page"
+      "url": "https://waic.jp/translations/WCAG21/#language-of-page"
     },
     "level": "A",
     "localPriority": "A"
@@ -714,7 +714,7 @@
     },
     "ja": {
       "title": "一部分の言語",
-      "url": "https://waic.jp/docs/WCAG21/#language-of-parts"
+      "url": "https://waic.jp/translations/WCAG21/#language-of-parts"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -726,7 +726,7 @@
     },
     "ja": {
       "title": "一般的ではない用語",
-      "url": "https://waic.jp/docs/WCAG21/#unusual-words"
+      "url": "https://waic.jp/translations/WCAG21/#unusual-words"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -738,7 +738,7 @@
     },
     "ja": {
       "title": "略語",
-      "url": "https://waic.jp/docs/WCAG21/#abbreviations"
+      "url": "https://waic.jp/translations/WCAG21/#abbreviations"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -750,7 +750,7 @@
     },
     "ja": {
       "title": "読解レベル",
-      "url": "https://waic.jp/docs/WCAG21/#reading-level"
+      "url": "https://waic.jp/translations/WCAG21/#reading-level"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -762,7 +762,7 @@
     },
     "ja": {
       "title": "発音",
-      "url": "https://waic.jp/docs/WCAG21/#pronunciation"
+      "url": "https://waic.jp/translations/WCAG21/#pronunciation"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -774,7 +774,7 @@
     },
     "ja": {
       "title": "フォーカス時",
-      "url": "https://waic.jp/docs/WCAG21/#on-focus"
+      "url": "https://waic.jp/translations/WCAG21/#on-focus"
     },
     "level": "A",
     "localPriority": "A"
@@ -786,7 +786,7 @@
     },
     "ja": {
       "title": "入力時",
-      "url": "https://waic.jp/docs/WCAG21/#on-input"
+      "url": "https://waic.jp/translations/WCAG21/#on-input"
     },
     "level": "A",
     "localPriority": "A"
@@ -798,7 +798,7 @@
     },
     "ja": {
       "title": "一貫したナビゲーション",
-      "url": "https://waic.jp/docs/WCAG21/#consistent-navigation"
+      "url": "https://waic.jp/translations/WCAG21/#consistent-navigation"
     },
     "level": "AA",
     "localPriority": "A"
@@ -810,7 +810,7 @@
     },
     "ja": {
       "title": "一貫した識別性",
-      "url": "https://waic.jp/docs/WCAG21/#consistent-identification"
+      "url": "https://waic.jp/translations/WCAG21/#consistent-identification"
     },
     "level": "AA",
     "localPriority": "A"
@@ -822,7 +822,7 @@
     },
     "ja": {
       "title": "要求による変化",
-      "url": "https://waic.jp/docs/WCAG21/#change-on-request"
+      "url": "https://waic.jp/translations/WCAG21/#change-on-request"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -834,7 +834,7 @@
     },
     "ja": {
       "title": "エラーの特定",
-      "url": "https://waic.jp/docs/WCAG21/#error-identification"
+      "url": "https://waic.jp/translations/WCAG21/#error-identification"
     },
     "level": "A",
     "localPriority": "A"
@@ -846,7 +846,7 @@
     },
     "ja": {
       "title": "ラベル又は説明",
-      "url": "https://waic.jp/docs/WCAG21/#labels-or-instructions"
+      "url": "https://waic.jp/translations/WCAG21/#labels-or-instructions"
     },
     "level": "A",
     "localPriority": "A"
@@ -858,7 +858,7 @@
     },
     "ja": {
       "title": "エラー修正の提案",
-      "url": "https://waic.jp/docs/WCAG21/#error-suggestion"
+      "url": "https://waic.jp/translations/WCAG21/#error-suggestion"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -870,7 +870,7 @@
     },
     "ja": {
       "title": "エラー回避 (法的、金融、データ)",
-      "url": "https://waic.jp/docs/WCAG21/#error-prevention-legal-financial-data"
+      "url": "https://waic.jp/translations/WCAG21/#error-prevention-legal-financial-data"
     },
     "level": "AA",
     "localPriority": "AA"
@@ -882,7 +882,7 @@
     },
     "ja": {
       "title": "ヘルプ",
-      "url": "https://waic.jp/docs/WCAG21/#help"
+      "url": "https://waic.jp/translations/WCAG21/#help"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -894,7 +894,7 @@
     },
     "ja": {
       "title": "エラー回避 (すべて)",
-      "url": "https://waic.jp/docs/WCAG21/#error-prevention-all"
+      "url": "https://waic.jp/translations/WCAG21/#error-prevention-all"
     },
     "level": "AAA",
     "localPriority": "AAA"
@@ -906,7 +906,7 @@
     },
     "ja": {
       "title": "構文解析",
-      "url": "https://waic.jp/docs/WCAG21/#parsing"
+      "url": "https://waic.jp/translations/WCAG21/#parsing"
     },
     "level": "A",
     "localPriority": "A"
@@ -918,7 +918,7 @@
     },
     "ja": {
       "title": "名前 (name) ・役割 (role) 及び値 (value)",
-      "url": "https://waic.jp/docs/WCAG21/#name-role-value"
+      "url": "https://waic.jp/translations/WCAG21/#name-role-value"
     },
     "level": "A",
     "localPriority": "A"
@@ -930,7 +930,7 @@
     },
     "ja": {
       "title": "ステータスメッセージ",
-      "url": "https://waic.jp/docs/WCAG21/#status-messages"
+      "url": "https://waic.jp/translations/WCAG21/#status-messages"
     },
     "level": "AA",
     "localPriority": "A"

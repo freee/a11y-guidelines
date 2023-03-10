@@ -3,7 +3,7 @@
 バージョン
    4.6.3
 更新日時
-   2023-01-27 03:11:18++0900
+   2023-01-27 03:11:18+0900
 
 .. _axe-rule-area-alt:
 
@@ -21,12 +21,12 @@ Active <area> elements must have alternate text （アクティブな<area>要�
 *  達成基準 2.4.4
 
    -  `Link Purpose (In Context) <https://www.w3.org/TR/WCAG21/#link-purpose-in-context>`_
-   -  `リンクの目的 (コンテキスト内) <https://waic.jp/docs/WCAG21/#link-purpose-in-context>`_
+   -  `リンクの目的 (コンテキスト内) <https://waic.jp/translations/WCAG21/#link-purpose-in-context>`_
 
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -51,7 +51,7 @@ Elements must only use allowed ARIA attributes （要素には許可されてい
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -75,7 +75,7 @@ ARIA commands must have an accessible name （ARIAコマンドにはアクセシ
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -99,7 +99,7 @@ aria-hidden='true' must not be present on the document body （ドキュメン�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -123,7 +123,7 @@ aria-hidden要素にフォーカス可能な要素が含まれていないこと
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -147,7 +147,7 @@ ARIA input fields must have an accessible name （ARIA入力欄にアクセシ�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -171,7 +171,7 @@ ARIA meter nodes must have an accessible name （ARIA meterノードにはアク
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -200,7 +200,7 @@ ARIA progressbar nodes must have an accessible name （ARIA progressbarノード
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -229,7 +229,7 @@ ARIAロールのある要素にすべての必須ARIA属性が存在すること
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -253,7 +253,7 @@ Certain ARIA roles must contain particular children （特定のARIAロールに
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -281,7 +281,7 @@ Certain ARIA roles must be contained by particular parents （特定のARIAロ�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -309,7 +309,7 @@ aria-roledescriptionが暗黙的もしくは明示的なロールを持った要
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -333,7 +333,7 @@ ARIA roles used must conform to valid values （使用されているARIAロー�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -357,7 +357,7 @@ ARIA toggle fields must have an accessible name （ARIAトグル欄にアクセ�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -381,7 +381,7 @@ ARIA tooltip nodes must have an accessible name （ARIA tooltipノードには�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -405,7 +405,7 @@ aria- で始まる属性が有効なARIA属性であることを確認します
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -429,7 +429,7 @@ ARIA attributes must conform to valid values （ARIA属性は有効な値に一�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -453,7 +453,7 @@ ARIA attributes must conform to valid values （ARIA属性は有効な値に一�
 *  達成基準 1.2.1
 
    -  `Audio-only and Video-only (Prerecorded) <https://www.w3.org/TR/WCAG21/#audio-only-and-video-only-prerecorded>`_
-   -  `音声のみ及び映像のみ (収録済) <https://waic.jp/docs/WCAG21/#audio-only-and-video-only-prerecorded>`_
+   -  `音声のみ及び映像のみ (収録済) <https://waic.jp/translations/WCAG21/#audio-only-and-video-only-prerecorded>`_
 
 関連ガイドライン
 ================
@@ -477,7 +477,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 *  達成基準 1.4.12
 
    -  `Text Spacing <https://www.w3.org/TR/WCAG21/#text-spacing>`_
-   -  `テキストの間隔 <https://waic.jp/docs/WCAG21/#text-spacing>`_
+   -  `テキストの間隔 <https://waic.jp/translations/WCAG21/#text-spacing>`_
 
 関連ガイドライン
 ================
@@ -500,7 +500,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 *  達成基準 2.2.2
 
    -  `Pause, Stop, Hide <https://www.w3.org/TR/WCAG21/#pause-stop-hide>`_
-   -  `一時停止、停止、非表示 <https://waic.jp/docs/WCAG21/#pause-stop-hide>`_
+   -  `一時停止、停止、非表示 <https://waic.jp/translations/WCAG21/#pause-stop-hide>`_
 
 関連ガイドライン
 ================
@@ -525,7 +525,7 @@ Buttons must have discernible text （ボタンには認識可能なテキスト
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -549,7 +549,7 @@ Page must have means to bypass repeated blocks （ページには繰り返され
 *  達成基準 2.4.1
 
    -  `Bypass Blocks <https://www.w3.org/TR/WCAG21/#bypass-blocks>`_
-   -  `ブロックスキップ <https://waic.jp/docs/WCAG21/#bypass-blocks>`_
+   -  `ブロックスキップ <https://waic.jp/translations/WCAG21/#bypass-blocks>`_
 
 関連ガイドライン
 ================
@@ -572,7 +572,7 @@ Elements must have sufficient color contrast （要素には十分な色のコ�
 *  達成基準 1.4.3
 
    -  `Contrast (Minimum) <https://www.w3.org/TR/WCAG21/#contrast-minimum>`_
-   -  `コントラスト (最低限) <https://waic.jp/docs/WCAG21/#contrast-minimum>`_
+   -  `コントラスト (最低限) <https://waic.jp/translations/WCAG21/#contrast-minimum>`_
 
 関連ガイドライン
 ================
@@ -597,7 +597,7 @@ Elements must have sufficient color contrast （要素には十分な色のコ�
 *  達成基準 1.4.6
 
    -  `Contrast (Enhanced) <https://www.w3.org/TR/WCAG21/#contrast-enhanced>`_
-   -  `コントラスト (高度) <https://waic.jp/docs/WCAG21/#contrast-enhanced>`_
+   -  `コントラスト (高度) <https://waic.jp/translations/WCAG21/#contrast-enhanced>`_
 
 関連ガイドライン
 ================
@@ -622,7 +622,7 @@ CSS Media queries must not lock display orientation （ディスプレイの向�
 *  達成基準 1.3.4
 
    -  `Orientation <https://www.w3.org/TR/WCAG21/#orientation>`_
-   -  `表示の向き <https://waic.jp/docs/WCAG21/#orientation>`_
+   -  `表示の向き <https://waic.jp/translations/WCAG21/#orientation>`_
 
 関連ガイドライン
 ================
@@ -645,7 +645,7 @@ CSS Media queries must not lock display orientation （ディスプレイの向�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -673,7 +673,7 @@ CSS Media queries must not lock display orientation （ディスプレイの向�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -701,7 +701,7 @@ Documents must have <title> element to aid in navigation （ドキュメント�
 *  達成基準 2.4.2
 
    -  `Page Titled <https://www.w3.org/TR/WCAG21/#page-titled>`_
-   -  `ページタイトル <https://waic.jp/docs/WCAG21/#page-titled>`_
+   -  `ページタイトル <https://waic.jp/translations/WCAG21/#page-titled>`_
 
 関連ガイドライン
 ================
@@ -724,7 +724,7 @@ id attribute value must be unique （id属性値は一意でなければなり�
 *  達成基準 4.1.1
 
    -  `Parsing <https://www.w3.org/TR/WCAG21/#parsing>`_
-   -  `構文解析 <https://waic.jp/docs/WCAG21/#parsing>`_
+   -  `構文解析 <https://waic.jp/translations/WCAG21/#parsing>`_
 
 関連ガイドライン
 ================
@@ -747,7 +747,7 @@ IDs of active elements must be unique （活性要素のIDは一意でなけれ�
 *  達成基準 4.1.1
 
    -  `Parsing <https://www.w3.org/TR/WCAG21/#parsing>`_
-   -  `構文解析 <https://waic.jp/docs/WCAG21/#parsing>`_
+   -  `構文解析 <https://waic.jp/translations/WCAG21/#parsing>`_
 
 関連ガイドライン
 ================
@@ -770,7 +770,7 @@ ARIAおよびラベルに使用されているすべてのid属性値が一意�
 *  達成基準 4.1.1
 
    -  `Parsing <https://www.w3.org/TR/WCAG21/#parsing>`_
-   -  `構文解析 <https://waic.jp/docs/WCAG21/#parsing>`_
+   -  `構文解析 <https://waic.jp/translations/WCAG21/#parsing>`_
 
 関連ガイドライン
 ================
@@ -793,7 +793,7 @@ Form field must not have multiple label elements （複数のlabel要素をフ�
 *  達成基準 3.3.2
 
    -  `Labels or Instructions <https://www.w3.org/TR/WCAG21/#labels-or-instructions>`_
-   -  `ラベル又は説明 <https://waic.jp/docs/WCAG21/#labels-or-instructions>`_
+   -  `ラベル又は説明 <https://waic.jp/translations/WCAG21/#labels-or-instructions>`_
 
 関連ガイドライン
 ================
@@ -817,7 +817,7 @@ tabindex=-1が指定されている<frame>と<iframe>要素が、フォーカス
 *  達成基準 2.1.1
 
    -  `Keyboard <https://www.w3.org/TR/WCAG21/#keyboard>`_
-   -  `キーボード <https://waic.jp/docs/WCAG21/#keyboard>`_
+   -  `キーボード <https://waic.jp/translations/WCAG21/#keyboard>`_
 
 関連ガイドライン
 ================
@@ -840,7 +840,7 @@ Frames must have an accessible name （フレームにはtitle属性がなけれ
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -864,7 +864,7 @@ Frames must have a unique title attribute （フレームには一意のtitle属
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -888,7 +888,7 @@ Frames must have a unique title attribute （フレームには一意のtitle属
 *  達成基準 3.1.1
 
    -  `Language of Page <https://www.w3.org/TR/WCAG21/#language-of-page>`_
-   -  `ページの言語 <https://waic.jp/docs/WCAG21/#language-of-page>`_
+   -  `ページの言語 <https://waic.jp/translations/WCAG21/#language-of-page>`_
 
 関連ガイドライン
 ================
@@ -911,7 +911,7 @@ Frames must have a unique title attribute （フレームには一意のtitle属
 *  達成基準 3.1.1
 
    -  `Language of Page <https://www.w3.org/TR/WCAG21/#language-of-page>`_
-   -  `ページの言語 <https://waic.jp/docs/WCAG21/#language-of-page>`_
+   -  `ページの言語 <https://waic.jp/translations/WCAG21/#language-of-page>`_
 
 関連ガイドライン
 ================
@@ -934,7 +934,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 *  達成基準 3.1.1
 
    -  `Language of Page <https://www.w3.org/TR/WCAG21/#language-of-page>`_
-   -  `ページの言語 <https://waic.jp/docs/WCAG21/#language-of-page>`_
+   -  `ページの言語 <https://waic.jp/translations/WCAG21/#language-of-page>`_
 
 関連ガイドライン
 ================
@@ -957,7 +957,7 @@ Images must have alternate text （画像には代替テキストがなければ
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -986,7 +986,7 @@ Input buttons must have discernible text （入力ボタンには認識可能な
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -1010,12 +1010,12 @@ Image buttons must have alternate text （画像ボタンには代替テキス�
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -1046,7 +1046,7 @@ Form elements must have labels （フォーム要素にはラベルがなけれ�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -1070,7 +1070,7 @@ Elements must have their visible text as part of their accessible name （要素
 *  達成基準 2.5.3
 
    -  `Label in Name <https://www.w3.org/TR/WCAG21/#label-in-name>`_
-   -  `名前 (name) のラベル <https://waic.jp/docs/WCAG21/#label-in-name>`_
+   -  `名前 (name) のラベル <https://waic.jp/translations/WCAG21/#label-in-name>`_
 
 関連ガイドライン
 ================
@@ -1093,7 +1093,7 @@ Links must be distinguishable without relying on color （リンクは色に依�
 *  達成基準 1.4.1
 
    -  `Use of Color <https://www.w3.org/TR/WCAG21/#use-of-color>`_
-   -  `色の使用 <https://waic.jp/docs/WCAG21/#use-of-color>`_
+   -  `色の使用 <https://waic.jp/translations/WCAG21/#use-of-color>`_
 
 関連ガイドライン
 ================
@@ -1120,12 +1120,12 @@ Links must have discernible text （リンクには認識可能なテキスト�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 *  達成基準 2.4.4
 
    -  `Link Purpose (In Context) <https://www.w3.org/TR/WCAG21/#link-purpose-in-context>`_
-   -  `リンクの目的 (コンテキスト内) <https://waic.jp/docs/WCAG21/#link-purpose-in-context>`_
+   -  `リンクの目的 (コンテキスト内) <https://waic.jp/translations/WCAG21/#link-purpose-in-context>`_
 
 関連ガイドライン
 ================
@@ -1150,7 +1150,7 @@ Links must have discernible text （リンクには認識可能なテキスト�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1178,7 +1178,7 @@ Links must have discernible text （リンクには認識可能なテキスト�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1206,7 +1206,7 @@ Links must have discernible text （リンクには認識可能なテキスト�
 *  達成基準 2.2.2
 
    -  `Pause, Stop, Hide <https://www.w3.org/TR/WCAG21/#pause-stop-hide>`_
-   -  `一時停止、停止、非表示 <https://waic.jp/docs/WCAG21/#pause-stop-hide>`_
+   -  `一時停止、停止、非表示 <https://waic.jp/translations/WCAG21/#pause-stop-hide>`_
 
 関連ガイドライン
 ================
@@ -1231,7 +1231,7 @@ Delayed refresh under 20 hours must not be used （制限時間のある更新�
 *  達成基準 2.2.1
 
    -  `Timing Adjustable <https://www.w3.org/TR/WCAG21/#timing-adjustable>`_
-   -  `タイミング調整可能 <https://waic.jp/docs/WCAG21/#timing-adjustable>`_
+   -  `タイミング調整可能 <https://waic.jp/translations/WCAG21/#timing-adjustable>`_
 
 関連ガイドライン
 ================
@@ -1255,12 +1255,12 @@ Ensures <meta http-equiv="refresh"> is not used for delayed refresh
 *  達成基準 2.2.4
 
    -  `Interruptions <https://www.w3.org/TR/WCAG21/#interruptions>`_
-   -  `割り込み <https://waic.jp/docs/WCAG21/#interruptions>`_
+   -  `割り込み <https://waic.jp/translations/WCAG21/#interruptions>`_
 
 *  達成基準 3.2.5
 
    -  `Change on Request <https://www.w3.org/TR/WCAG21/#change-on-request>`_
-   -  `要求による変化 <https://waic.jp/docs/WCAG21/#change-on-request>`_
+   -  `要求による変化 <https://waic.jp/translations/WCAG21/#change-on-request>`_
 
 関連ガイドライン
 ================
@@ -1283,7 +1283,7 @@ Zooming and scaling must not be disabled （ズーミングや拡大縮小は無
 *  達成基準 1.4.4
 
    -  `Resize text <https://www.w3.org/TR/WCAG21/#resize-text>`_
-   -  `テキストのサイズ変更 <https://waic.jp/docs/WCAG21/#resize-text>`_
+   -  `テキストのサイズ変更 <https://waic.jp/translations/WCAG21/#resize-text>`_
 
 関連ガイドライン
 ================
@@ -1309,7 +1309,7 @@ Interactive controls must not be nested （対話的なコントロールがネ�
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -1333,7 +1333,7 @@ Interactive controls must not be nested （対話的なコントロールがネ�
 *  達成基準 1.4.2
 
    -  `Audio Control <https://www.w3.org/TR/WCAG21/#audio-control>`_
-   -  `音声の制御 <https://waic.jp/docs/WCAG21/#audio-control>`_
+   -  `音声の制御 <https://waic.jp/translations/WCAG21/#audio-control>`_
 
 関連ガイドライン
 ================
@@ -1356,7 +1356,7 @@ Interactive controls must not be nested （対話的なコントロールがネ�
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -1385,7 +1385,7 @@ Styled <p> elements must not be used as headings （p要素を見出しとして
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1413,7 +1413,7 @@ Styled <p> elements must not be used as headings （p要素を見出しとして
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -1442,7 +1442,7 @@ Scrollable region must have keyboard access （スクロール可能な領域に
 *  達成基準 2.1.1
 
    -  `Keyboard <https://www.w3.org/TR/WCAG21/#keyboard>`_
-   -  `キーボード <https://waic.jp/docs/WCAG21/#keyboard>`_
+   -  `キーボード <https://waic.jp/translations/WCAG21/#keyboard>`_
 
 関連ガイドライン
 ================
@@ -1465,7 +1465,7 @@ select要素にはアクセシブルな名前があることを確認します
 *  達成基準 4.1.2
 
    -  `Name, Role, Value <https://www.w3.org/TR/WCAG21/#name-role-value>`_
-   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/docs/WCAG21/#name-role-value>`_
+   -  `名前 (name) ・役割 (role) 及び値 (value) <https://waic.jp/translations/WCAG21/#name-role-value>`_
 
 関連ガイドライン
 ================
@@ -1489,7 +1489,7 @@ Server-side image maps must not be used （サーバーサイドのイメージ�
 *  達成基準 2.1.1
 
    -  `Keyboard <https://www.w3.org/TR/WCAG21/#keyboard>`_
-   -  `キーボード <https://waic.jp/docs/WCAG21/#keyboard>`_
+   -  `キーボード <https://waic.jp/translations/WCAG21/#keyboard>`_
 
 関連ガイドライン
 ================
@@ -1512,7 +1512,7 @@ img、graphics-document または graphics-symbol ロールを持つ svg 要素�
 *  達成基準 1.1.1
 
    -  `Non-text Content <https://www.w3.org/TR/WCAG21/#non-text-content>`_
-   -  `非テキストコンテンツ <https://waic.jp/docs/WCAG21/#non-text-content>`_
+   -  `非テキストコンテンツ <https://waic.jp/translations/WCAG21/#non-text-content>`_
 
 関連ガイドライン
 ================
@@ -1541,7 +1541,7 @@ Data or header cells must not be used to give caption to a data table. （デー
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1569,7 +1569,7 @@ Non-empty <td> elements in larger <table> must have an associated table header �
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1597,7 +1597,7 @@ Table cells that use the headers attribute must only refer to cells in the same 
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1625,7 +1625,7 @@ Table headers in a data table must refer to data cells （すべてのth要素�
 *  達成基準 1.3.1
 
    -  `Info and Relationships <https://www.w3.org/TR/WCAG21/#info-and-relationships>`_
-   -  `情報及び関係性 <https://waic.jp/docs/WCAG21/#info-and-relationships>`_
+   -  `情報及び関係性 <https://waic.jp/translations/WCAG21/#info-and-relationships>`_
 
 関連ガイドライン
 ================
@@ -1653,7 +1653,7 @@ lang属性に有効な値が存在することを確認します
 *  達成基準 3.1.2
 
    -  `Language of Parts <https://www.w3.org/TR/WCAG21/#language-of-parts>`_
-   -  `一部分の言語 <https://waic.jp/docs/WCAG21/#language-of-parts>`_
+   -  `一部分の言語 <https://waic.jp/translations/WCAG21/#language-of-parts>`_
 
 関連ガイドライン
 ================
@@ -1677,7 +1677,7 @@ lang属性に有効な値が存在することを確認します
 *  達成基準 1.2.2
 
    -  `Captions (Prerecorded) <https://www.w3.org/TR/WCAG21/#captions-prerecorded>`_
-   -  `キャプション (収録済) <https://waic.jp/docs/WCAG21/#captions-prerecorded>`_
+   -  `キャプション (収録済) <https://waic.jp/translations/WCAG21/#captions-prerecorded>`_
 
 関連ガイドライン
 ================
@@ -1701,7 +1701,7 @@ autocomplete属性が正しく、かつフォームフィールドに対して�
 *  達成基準 1.3.5
 
    -  `Identify Input Purpose <https://www.w3.org/TR/WCAG21/#identify-input-purpose>`_
-   -  `入力目的の特定 <https://waic.jp/docs/WCAG21/#identify-input-purpose>`_
+   -  `入力目的の特定 <https://waic.jp/translations/WCAG21/#identify-input-purpose>`_
 
 
 .. _axe-rule-identical-links-same-purpose:
@@ -1720,7 +1720,7 @@ Links with the same name must have a similar purpose （同じ名前を持つ複
 *  達成基準 2.4.9
 
    -  `Link Purpose (Link Only) <https://www.w3.org/TR/WCAG21/#link-purpose-link-only>`_
-   -  `リンクの目的 (リンクのみ) <https://waic.jp/docs/WCAG21/#link-purpose-link-only>`_
+   -  `リンクの目的 (リンクのみ) <https://waic.jp/translations/WCAG21/#link-purpose-link-only>`_
 
 
 .. _axe-rule-accesskeys:
