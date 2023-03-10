@@ -33,9 +33,9 @@ copyright = '2020-{pubYear}, freee株式会社'.format(
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-        'sphinxcontrib.trimblank'
+        'sphinxcontrib.trimblank',
+        'sphinx_rtd_theme'
 ]
-
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -78,10 +78,7 @@ rst_prolog = u"""
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-import sphinx_rtd_theme
 html_theme = "sphinx_rtd_theme"
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-
 html_theme_options = {
    "collapse_navigation": "false",
 }
@@ -99,5 +96,3 @@ linkcheck_ignore = [r'http://localhost:\d+/']
 
 def setup(app):
   app.add_css_file('a11y-gl.css')
-
-[extensions]
