@@ -22,6 +22,13 @@ Google Chromeを採用しているのは、freeeでは最新版のGoogle Chrome�
 事前準備
 ********
 
+参考動画
+   *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/KKQXZHCmjUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 NVDAのインストール
 ==================
 
@@ -177,6 +184,15 @@ NVDAメニューは、NVDAの各種画面やツールへのアクセスを提供
 フォーカス・モードとブラウズ・モード
 ====================================
 
+参考動画
+   *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`_
+   *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/WE3q9PwHdu0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/Qu2K_LjM4Wo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 NVDAには「フォーカス・モード」と「ブラウズ・モード」という2つの動作モードがあります。
 
 2つのモードの最も大きな違いは、フォーカス・モードではNVDA制御キーを用いたものを除いて、すべてのキー操作がそのままOSや現在フォーカス中のアプリケーションに渡されるのに対して、ブラウズ・モードではキー操作はNVDAが受け取り、NVDAの様々な機能の実行に用いられるという点です。
@@ -194,6 +210,13 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 
 スピーチビューアーの活用
 ========================
+
+参考動画
+   *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/ZyzzgXw11oI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 スピーチビューアーは、NVDAが音声出力した内容を文字で表示する機能です。
 音声出力がよく聴き取れない場合や、そもそも音を出せない状況で読み上げられる内容を確認する必要があるときは、スピーチビューアーを使うと便利です。
