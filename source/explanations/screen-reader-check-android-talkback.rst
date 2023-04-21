@@ -174,19 +174,17 @@ UIコンポーネントを独自に実装する場合は、これらを参考に
 
 UIコンポーネント
    *  button
-   *  floating action button
+   *  FAB
 参考
-   *  `Buttons - Material Design <https://material.io/components/buttons>`_
-   *  `MaterialButton  |  Android Developers <https://developer.android.com/reference/com/google/android/material/button/MaterialButton>`_
-   *  `Buttons: floating action button - Material Design <https://material.io/components/buttons-floating-action-button>`_
-   *  `FloatingActionButton  |  Android Developers <https://developer.android.com/reference/com/google/android/material/floatingactionbutton/FloatingActionButton>`_
+   *  `Common buttons – Material Design 3 <https://m3.material.io/components/buttons/overview>`_
+   *  `FAB – Material Design 3 <https://m3.material.io/components/floating-action-button/overview>`_
 
 使用されている箇所の例
 ----------------------
 
 button
    「電話」アプリ、 :menuselection:`キーパッド` の「発信」ボタン
-floating action button
+FAB
    「Gmail」アプリ、右下の :menuselection:`作成` ボタン
 
 TalkBack利用時の挙動
@@ -204,8 +202,7 @@ checkbox
 UIコンポーネント
    checkbox
 参考
-   *  `Checkboxes - Material Design <https://material.io/components/checkboxes>`_
-   *  `MaterialCheckBox  |  Android Developers <https://developer.android.com/reference/com/google/android/material/checkbox/MaterialCheckBox>`_
+   `Checkbox – Material Design 3 <https://m3.material.io/components/checkbox/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -227,8 +224,7 @@ switch
 UIコンポーネント
    switch
 参考
-   *  `Switches - Material Design <https://material.io/components/switches>`_
-   *  `SwitchMaterial  |  Android Developers <https://developer.android.com/reference/com/google/android/material/switchmaterial/SwitchMaterial>`_
+   `Switch – Material Design 3 <https://m3.material.io/components/switch/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -251,8 +247,7 @@ radio button
 UIコンポーネント
    radio button
 参考
-   *  `Radio buttons - Material Design <https://material.io/components/radio-buttons>`_
-   *  `MaterialRadioButton  |  Android Developers <https://developer.android.com/reference/com/google/android/material/radiobutton/MaterialRadioButton>`_
+   `Radio button – Material Design 3 <https://m3.material.io/components/radio-button/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -275,8 +270,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    menu
 参考
-   *  `Menus - Material Design <https://material.io/components/menus>`_
-   *  `AppCompatSpinner  |  Android Developers <https://developer.android.com/reference/androidx/appcompat/widget/AppCompatSpinner>`_
+   `Menus – Material Design 3 <https://m3.material.io/components/menus/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -303,8 +297,7 @@ time picker
 UIコンポーネント
    time picker
 参考
-   *  `Time pickers - Material Design <https://material.io/components/time-pickers>`_
-   *  `MaterialTimePicker  |  Android Developers <https://developer.android.com/reference/com/google/android/material/timepicker/MaterialTimePicker>`_
+   `Time pickers – Material Design 3 <https://m3.material.io/components/time-pickers/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -326,8 +319,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    snackbar
 参考
-   *  `Snackbars - Material Design <https://material.io/components/snackbars>`_
-   *  `Snackbar  |  Android Developers <https://developer.android.com/reference/com/google/android/material/snackbar/Snackbar>`_
+   `Snackbars – Material Design 3 <https://m3.material.io/components/snackbar/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -345,8 +337,7 @@ dialog
 UIコンポーネント
    dialog
 参考
-   *  `Dialogs - Material Design <https://material.io/components/dialogs>`_
-   *  `DialogFragment  |  Android Developers <https://developer.android.com/reference/androidx/fragment/app/DialogFragment>`_
+   `Dialogs – Material Design 3 <https://m3.material.io/components/dialogs/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -371,8 +362,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    navigation drawer
 参考
-   *  `Navigation drawer - Material Design <https://material.io/components/navigation-drawer>`_
-   *  `Toolbar  |  Android Developers <https://developer.android.com/reference/androidx/appcompat/widget/Toolbar>`_
+   `Navigation drawer – Material Design 3 <https://m3.material.io/components/navigation-drawer/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -396,9 +386,9 @@ TalkBack利用時の挙動
 ==================
 
 UIコンポーネント
-   toolbar
+   top app bar
 参考
-   `Toolbar  |  Android Developers <https://developer.android.com/reference/androidx/appcompat/widget/Toolbar>`_
+   `Top app bar – Material Design 3 <https://m3.material.io/components/top-app-bar/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -424,8 +414,7 @@ tab
 UIコンポーネント
    tab
 参考
-   *  `Tabs - Material Design <https://material.io/components/tabs>`_
-   *  `TabLayout.TabView  |  Android Developers <https://developer.android.com/reference/com/google/android/material/tabs/TabLayout.TabView>`_
+   `Tabs – Material Design 3 <https://m3.material.io/components/tabs/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -445,9 +434,9 @@ TalkBack利用時の挙動
 ============
 
 UIコンポーネント
-   LinearLayoutManager
+   list
 参考
-   *  `LinearLayoutManager  |  Android Developers <https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager>`_
+   `Lists – Material Design 3 <https://m3.material.io/components/lists/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -467,8 +456,7 @@ text field
 UIコンポーネント
    text field
 参考
-   *  `Text fields - Material Design <https://material.io/components/text-fields>`_
-   *  `TextInputEditText  |  Android Developers <https://developer.android.com/reference/com/google/android/material/textfield/TextInputEditText>`_
+   `Text fields – Material Design 3 <https://m3.material.io/components/text-fields/overview>`_
 
 使用されている箇所の例
 ----------------------
@@ -495,9 +483,9 @@ TalkBack利用時の挙動
 ============
 
 UIコンポーネント
-   SearchView
+   search
 参考
-   *  `SearchView  |  Android Developers <https://developer.android.com/reference/androidx/appcompat/widget/SearchView>`_
+   `Search – Material Design 3 <https://m3.material.io/components/search/overview>`_
 
 使用されている箇所の例
 ----------------------
