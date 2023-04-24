@@ -1,4 +1,8 @@
 id: '0081'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     リンクやボタンなど、マウス・クリックを受け付けるオブジェクトは、以下の操作を行っても実行されない。
@@ -18,7 +22,3 @@ check:
     4. Release the mouse buttonn
 
     Note： Objects for drag and drop are exempt from this check
-severity: '[NORMAL]'
-target: product
-platform:
-- web

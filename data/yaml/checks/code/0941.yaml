@@ -1,12 +1,12 @@
 id: '0941'
-check:
-  ja: |-
-    エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールにはその役割が分かるラベルが付けられている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールにはその役割が分かるラベルが付けられている。
 implementations:
 - title: フォーム・コントロールのラベル付け
   methods:

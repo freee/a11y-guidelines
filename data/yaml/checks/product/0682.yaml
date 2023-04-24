@@ -1,13 +1,13 @@
 id: '0682'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
   en: |-
     All content on the page is placed in the appropriate area indicated by ARIA landmarks.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
 techniques:
 - tool: axe
   technique:

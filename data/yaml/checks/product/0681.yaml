@@ -1,13 +1,13 @@
 id: '0681'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
   en: |-
     The start of the main text can be found by using the heading jump function of the screen reader or the jump function between areas indicated by ARIA landmarks.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
 techniques:
 - tool: nvda
   technique:

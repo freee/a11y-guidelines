@@ -1,9 +1,9 @@
 id: '1631'
-check:
-  ja: |-
-    音声コンテンツについて、充分に聴き取りやすい。
 severity: '[NORMAL]'
 target: design
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    音声コンテンツについて、充分に聴き取りやすい。

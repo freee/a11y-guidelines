@@ -1,4 +1,8 @@
 id: '0322'
+severity: '[MINOR]'
+target: product
+platform:
+- web
 check:
   ja: |-
     1280x1024のサイズのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに適切にリフローされ
@@ -10,7 +14,3 @@ check:
 
     *  no horizontal scrolling is necessary on left-to-right content, and no vertical scrolling is necessary on top-to-bottom content, and
     *  there is no unreadable content or unusable functionality
-severity: '[MINOR]'
-target: product
-platform:
-- web

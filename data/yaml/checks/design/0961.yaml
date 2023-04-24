@@ -1,4 +1,9 @@
 id: '0961'
+severity: '[MAJOR]'
+target: design
+platform:
+- web
+- mobile
 check:
   ja: |-
     フォームの入力に制限時間を設ける場合：
@@ -9,8 +14,3 @@ check:
     *  リアルタイムのイベント（例えば、オークション）において制限時間が必須の要素で、その制限時間に代わる手段が存在しない。又は、
     *  制限時間が必要不可欠なもので、制限時間を延長することがフォームを無効にすることになる。又は、
     *  制限時間が20時間よりも長い。
-severity: '[MAJOR]'
-target: design
-platform:
-- web
-- mobile

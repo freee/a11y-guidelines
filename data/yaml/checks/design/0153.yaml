@@ -1,8 +1,8 @@
 id: '0153'
-check:
-  ja: |-
-    スクリーン・リーダーのフォーカス箇所を示す表示が視認できる配色になっている
 severity: '[CRITICAL]'
 target: design
 platform:
 - mobile
+check:
+  ja: |-
+    スクリーン・リーダーのフォーカス箇所を示す表示が視認できる配色になっている

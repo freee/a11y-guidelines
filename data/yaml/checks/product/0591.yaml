@@ -1,14 +1,14 @@
 id: '0591'
-check:
-  ja: |-
-    静的なテキストではない部分（例：開閉するメニュー、タブ・パネル、日付選択UI）も、スクリーン・リーダーで問題なく操作できる。
-  en: |-
-    Non-static text (e.g., open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
 severity: '[CRITICAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    静的なテキストではない部分（例：開閉するメニュー、タブ・パネル、日付選択UI）も、スクリーン・リーダーで問題なく操作できる。
+  en: |-
+    Non-static text (e.g., open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
 techniques:
 - tool: nvda
   technique:

@@ -1,4 +1,9 @@
 id: '1071'
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のような挙動がないことを確認する：
@@ -12,8 +17,3 @@ check:
     *  The display content changes significantly.
     *  Automatic transition to another page/screen
     *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
-severity: '[CRITICAL]'
-target: product
-platform:
-- web
-- mobile

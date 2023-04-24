@@ -1,9 +1,9 @@
 id: '0991'
-check:
-  ja: |-
-    フォーム入力に制限時間が設けられていない。
 severity: '[MAJOR]'
 target: design
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    フォーム入力に制限時間が設けられていない。

@@ -1,4 +1,9 @@
 id: '1251'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  自動更新されるコンテンツがない。または
@@ -8,8 +13,3 @@ check:
     *  No content is automatically updated. or
     *  The user can change the interval and timing of automatic updates. or
     *  The user can stop automatic updates.
-severity: '[MAJOR]'
-target: product
-platform:
-- web
-- mobile

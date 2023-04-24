@@ -1,10 +1,10 @@
 id: '0891'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     line-heightを1.5em以上、段落に続く空白を2em以上、letter-spacingを0.12em以上に変更するユーザーCSSを適用しても、表示順序が変わる、文章を読めなくなるなど、コンテンツおよび機能に損失が生じない。
   en: |-
     Applying user CSS that changes line-height to 1.5em or more, spacing following paragraphs to 2em or more, and letter-spacing to 0.12em or more does not cause loss of content or functionality, such as changing the display order or making the content unreadable.
-severity: '[NORMAL]'
-target: product
-platform:
-- web

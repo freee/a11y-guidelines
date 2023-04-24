@@ -1,14 +1,14 @@
 id: '0413'
-check:
-  ja: |-
-    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられない。
-  en: |-
-    When icons are displayed along with text labels, the same content is not announced by the screen reader more than once.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられない。
+  en: |-
+    When icons are displayed along with text labels, the same content is not announced by the screen reader more than once.
 techniques:
 - tool: nvda
   technique:

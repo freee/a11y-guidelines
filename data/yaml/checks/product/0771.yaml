@@ -1,11 +1,11 @@
 id: '0771'
-check:
-  ja: |-
-    画面方向を検知できる端末において、端末の方向を変えると適切に画面が回転する。
-  en: |-
-    On devices that can detect screen orientation, the screen will rotate appropriately when the device orientation is changed.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    画面方向を検知できる端末において、端末の方向を変えると適切に画面が回転する。
+  en: |-
+    On devices that can detect screen orientation, the screen will rotate appropriately when the device orientation is changed.

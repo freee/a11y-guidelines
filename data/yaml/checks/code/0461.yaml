@@ -1,12 +1,12 @@
 id: '0461'
-check:
-  ja: |-
-    情報や機能性を一切持たない画像は、スクリーン・リーダーで無視されるようになっている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    情報や機能性を一切持たない画像は、スクリーン・リーダーで無視されるようになっている。
 implementations:
 - title: スクリーン・リーダーに無視させる
   methods:

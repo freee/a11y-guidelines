@@ -1,4 +1,9 @@
 id: '0031'
+severity: '[MAJOR]'
+target: design
+platform:
+- web
+- mobile
 check:
   ja: |-
     グレイスケール表示でも利用に支障が出ない配色になっている:
@@ -6,8 +11,3 @@ check:
     *  リンク箇所を判別できる
     *  画像、テキストの意図が伝わる
     *  入力フォームの必須項目、エラーを認知できる
-severity: '[MAJOR]'
-target: design
-platform:
-- web
-- mobile

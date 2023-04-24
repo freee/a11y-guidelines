@@ -1,14 +1,14 @@
 id: '0441'
-check:
-  ja: |-
-    画像の説明がスクリーン・リーダーで適切に読み上げられる。
-  en: |-
-    Image descriptions are properly announced by the screen reader.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    画像の説明がスクリーン・リーダーで適切に読み上げられる。
+  en: |-
+    Image descriptions are properly announced by the screen reader.
 techniques:
 - tool: nvda
   technique:

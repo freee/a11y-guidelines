@@ -1,4 +1,9 @@
 id: '0261'
+severity: '[MINOR]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  「○○はこちら」の「こちら」の部分だけがリンクになっていない。（この場合は「○○はこちら」全体をリンクにする。）、または
@@ -6,8 +11,3 @@ check:
   en: |-
     *  Only the here"" part of ""click here for *****"" is not a link. (In this case, the entire ""click here for *****"" should be a link.) or
     *  The intent of the link text is clear from its markup
-severity: '[MINOR]'
-target: product
-platform:
-- web
-- mobile

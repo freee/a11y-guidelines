@@ -1,4 +1,9 @@
 id: '1471'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  自動的に開始し5秒以上続く動画、アニメーションがない。または
@@ -6,8 +11,3 @@ check:
   en: |-
     *  There is no video or animation that starts automatically and lasts longer than 5 seconds. or
     *  Video or animation can be stopped, paused, or hidden.
-severity: '[MAJOR]'
-target: product
-platform:
-- web
-- mobile

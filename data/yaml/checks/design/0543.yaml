@@ -1,4 +1,8 @@
 id: '0543'
+severity: '[NORMAL]'
+target: design
+platform:
+- web
 check:
   ja: |-
     見出しには適切な見出しレベルが指定されている：
@@ -6,7 +10,3 @@ check:
     *  文書の階層構造を反映した見出しレベルが指定されている
     *  ページ全体では、見出しレベルは1から始まっている
     *  見出しレベルは、1の下位は2、2の下位は3のように1ずつ増加していて、抜けがない状態になっている
-severity: '[NORMAL]'
-target: design
-platform:
-- web

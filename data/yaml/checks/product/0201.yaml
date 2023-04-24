@@ -1,4 +1,8 @@
 id: '0201'
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     *  Tab/Shift+Tabキーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
@@ -23,7 +27,3 @@ techniques:
   technique:
     ja: |-
       Tabキーを使って、ページの先頭から末尾まで適切にフォーカスが移動することを確認し、もしフォーカスが抜け出せない状況が発生した場合は、矢印キー、ESCキー、または簡単なキーボード操作でその状態から抜け出せることを確認する。
-severity: '[CRITICAL]'
-target: product
-platform:
-- web

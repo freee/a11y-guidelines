@@ -1,10 +1,10 @@
 id: '0112'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ホバーで表示されるすべてのコンテンツは、ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
   en: |-
     All content displayed on hover does not disappear when the pointer is moved over it.
-severity: '[MAJOR]'
-target: product
-platform:
-- web

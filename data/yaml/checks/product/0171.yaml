@@ -1,4 +1,8 @@
 id: '0171'
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     Tab/Shift+Tabキーによるフォーカス移動時の挙動は以下のすべてを満たしている：
@@ -22,7 +26,3 @@ check:
       -  Page Transitions
       -  Display of modal dialogs
       -  Significant changes in displayed content
-severity: '[CRITICAL]'
-target: product
-platform:
-- web

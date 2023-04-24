@@ -1,10 +1,10 @@
 id: '0321'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ブラウザーのズーム機能で200パーセントまで拡大しても、コンテンツの理解を妨げるようなレイアウト崩れが起こらない。
   en: |-
     Magnifying text up to 200 percent using the zoom function of the browser does not cause layout collapses that interfere with understanding of the text.
-severity: '[MAJOR]'
-target: product
-platform:
-- web

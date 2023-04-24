@@ -1,9 +1,9 @@
 id: '0271'
-check:
-  ja: |-
-    見出しのテキストは、内容を適切に示す文言になっている。
 severity: '[NORMAL]'
 target: design
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    見出しのテキストは、内容を適切に示す文言になっている。
