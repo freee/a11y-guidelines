@@ -1,11 +1,11 @@
 id: '0552'
-check:
-  ja: |-
-    箇条書き、表などのセマンティクスが、設計資料に従って適切に実装されている。
 severity: '[MAJOR]'
 target: code
 platform:
 - web
+check:
+  ja: |-
+    箇条書き、表などのセマンティクスが、設計資料に従って適切に実装されている。
 implementations:
 - title: セマンティクスに応じた実装
   methods:

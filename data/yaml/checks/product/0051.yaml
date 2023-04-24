@@ -1,4 +1,9 @@
 id: '0051'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     グレイスケール表示でも利用に支障が出ない:
@@ -12,8 +17,3 @@ check:
     *  Links can be identified
     *  The intent of images and text is clear
     *  Required fields and errors in ininput forms can be recognized
-severity: '[MAJOR]'
-target: product
-platform:
-- web
-- mobile

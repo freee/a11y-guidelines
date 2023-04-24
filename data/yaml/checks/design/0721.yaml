@@ -1,8 +1,8 @@
 id: '0721'
-check:
-  ja: |-
-    ページ内の機能や内容の区切り、本文の先頭部分などに適切に見出しが配置されている。
 severity: '[NORMAL]'
 target: design
 platform:
 - web
+check:
+  ja: |-
+    ページ内の機能や内容の区切り、本文の先頭部分などに適切に見出しが配置されている。

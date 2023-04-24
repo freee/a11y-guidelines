@@ -1,4 +1,8 @@
 id: '0111'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ホバーで表示されるすべてのコンテンツは、以下のすべてを満たしている:
@@ -10,7 +14,3 @@ check:
 
     *  Content displayed on hover can be hidden without moving the pointer. (ESC key to make it disappear, etc.)
     *  Hide content displayed on hover only when it is no longer in hover state, when the user performs an action to hide it, or when the content is no longer valid.
-severity: '[NORMAL]'
-target: product
-platform:
-- web

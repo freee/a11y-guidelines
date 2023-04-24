@@ -1,13 +1,13 @@
 id: '0921'
+severity: '[MINOR]'
+target: product
+platform:
+- web
 check:
   ja: |-
     複数の言語が含まれているテキストについて、多言語対応している読み上げ環境を用いて読み上げさせたとき、適切な言語の音声エンジンで読み上げられる。
   en: |-
     When text containing multiple languages is read out loud using a reading environment that supports multiple languages, the text is read out loud by the appropriate language's speech engine.
-severity: '[MINOR]'
-target: product
-platform:
-- web
 techniques:
 - tool: nvda
   technique:

@@ -1,9 +1,9 @@
 id: '1351'
-check:
-  ja: |-
-    ログイン・セッションに有効期限が設定されていない。
 severity: '[MAJOR]'
 target: design
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    ログイン・セッションに有効期限が設定されていない。

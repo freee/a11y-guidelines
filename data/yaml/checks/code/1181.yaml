@@ -1,12 +1,12 @@
 id: '1181'
-check:
-  ja: |-
-    操作の結果などを伝えるステータス・メッセージが自動的に読み上げられるようにする。
 severity: '[MAJOR]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    操作の結果などを伝えるステータス・メッセージが自動的に読み上げられるようにする。
 implementations:
 - title: 自動的に読み上げられるようにする
   methods:

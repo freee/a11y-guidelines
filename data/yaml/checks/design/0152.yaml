@@ -1,4 +1,8 @@
 id: '0152'
+severity: '[CRITICAL]'
+target: design
+platform:
+- web
 check:
   ja: |-
     Tab/Shift+Tabキーでフォーカスを移動しているときに、以下のような変化を発生させる機能が設計資料にない：
@@ -8,7 +12,3 @@ check:
     *  ページの遷移
     *  モーダル・ダイアログの表示
     *  表示内容の大幅な変更、など
-severity: '[CRITICAL]'
-target: design
-platform:
-- web

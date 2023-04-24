@@ -1,4 +1,8 @@
 id: '0351'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ボタンやリンクになっている画像は、クリックやタッチに反応するサイズが、充分な大きさになっている。
@@ -10,7 +14,3 @@ check:
 
     *  for desktop Web: at least 24 x 24 CSS px, preferably larger than 44 x 44 CSS px
     *  for mobile Web: larger than 44 x 44 CSS px
-severity: '[NORMAL]'
-target: product
-platform:
-- web

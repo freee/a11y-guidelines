@@ -1,14 +1,14 @@
 id: '1191'
-check:
-  ja: |-
-    操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
-  en: |-
-    Status messages, such as the result of an operation, are automatically announced by the screen reader.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
+  en: |-
+    Status messages, such as the result of an operation, are automatically announced by the screen reader.
 techniques:
 - tool: nvda
   technique:

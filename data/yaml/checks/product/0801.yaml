@@ -1,4 +1,9 @@
 id: '0801'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている構成要素は、すべてのページ/画面で同じ出現順序になっている。かつ
@@ -6,11 +11,6 @@ check:
   en: |-
     *  Components commonly used on multiple pages/screens, such as global navigation, header, footer, breadcrumb list, and support UI, have the same order of appearance on all pages/screens. and
     *  The order of appearance of links and buttons within these components is the same on all pages/screens.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
-- mobile
 techniques:
 - tool: keyboard
   technique:

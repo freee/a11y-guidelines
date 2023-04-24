@@ -1,4 +1,9 @@
 id: '1561'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
@@ -8,8 +13,3 @@ check:
     *  For video content, visually presented information can be easily inferred from the content of the originally recorded audio track. Or
     *  Video includes audio description. OR
     *  A textual description of the video is provided.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
-- mobile

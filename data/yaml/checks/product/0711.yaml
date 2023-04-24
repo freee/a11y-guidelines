@@ -1,14 +1,14 @@
 id: '0711'
-check:
-  ja: |-
-    ページ/画面の状態が変化したときも含めて、スクリーン・リーダーで読み上げさせた時、内容的、および視覚的に自然な順序で読み上げられる。
-  en: |-
-    The content and visual order is natural when read by the screen reader, including when the page/screen state changes.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    ページ/画面の状態が変化したときも含めて、スクリーン・リーダーで読み上げさせた時、内容的、および視覚的に自然な順序で読み上げられる。
+  en: |-
+    The content and visual order is natural when read by the screen reader, including when the page/screen state changes.
 techniques:
 - tool: nvda
   technique:

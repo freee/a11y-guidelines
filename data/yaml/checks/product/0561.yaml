@@ -1,14 +1,14 @@
 id: '0561'
-check:
-  ja: |-
-    見出しは、設計資料で示されている見出しレベルの見出しとしてスクリーン・リーダーに認識されている。
-  en: |-
-    Headings are recognized by the screen reader as headings of the heading levels indicated in the design documents.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    見出しは、設計資料で示されている見出しレベルの見出しとしてスクリーン・リーダーに認識されている。
+  en: |-
+    Headings are recognized by the screen reader as headings of the heading levels indicated in the design documents.
 techniques:
 - tool: nvda
   technique:

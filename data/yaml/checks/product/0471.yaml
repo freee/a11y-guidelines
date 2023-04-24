@@ -1,14 +1,14 @@
 id: '0471'
-check:
-  ja: |-
-    情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
-  en: |-
-    Images that do not contain any information or functionality are ignored by the screen reader.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
+  en: |-
+    Images that do not contain any information or functionality are ignored by the screen reader.
 techniques:
 - tool: nvda
   technique:

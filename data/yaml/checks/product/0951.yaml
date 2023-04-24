@@ -1,4 +1,9 @@
 id: '0951'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     スクリーン・リーダーで、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールとラベルの関連付けが分かるような読み上げがされる。
@@ -8,11 +13,6 @@ check:
     The screen reader announces the association between the form control and the label.
 
     Note: For desktop web, clicking on a label moves focus to the form control with which it is associated.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
-- mobile
 techniques:
 - tool: axe
   technique:

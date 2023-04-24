@@ -1,4 +1,9 @@
 id: '0931'
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile
 check:
   ja: |-
     エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールの役割が分かるように、付加するべきラベルが設計資料で明示されている。
@@ -6,8 +11,3 @@ check:
     Webの場合
        *  画面上に表示されているテキストまたは代替テキストが付加された画像をラベルとして指定する。
        *  ``aria-label`` 属性値として指定すべきテキストを明示する。
-severity: '[NORMAL]'
-target: design
-platform:
-- web
-- mobile

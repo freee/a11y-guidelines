@@ -1,14 +1,14 @@
 id: '0531'
-check:
-  ja: |-
-    画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
-  en: |-
-    The screen reader announces the same content as the images of text.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
+  en: |-
+    The screen reader announces the same content as the images of text.
 techniques:
 - tool: nvda
   technique:

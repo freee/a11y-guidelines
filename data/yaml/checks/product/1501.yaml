@@ -1,11 +1,11 @@
 id: '1501'
-check:
-  ja: |-
-    音声・映像コンテンツは、そのコンテンツがなくても不足なく情報が伝わるような内容で、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
-  en: |-
-    EThe audio and video content is provided in such a way that it is not essential to perceive the information, and the content is explicitly labeled as a substitute or supplement to the textual information.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    音声・映像コンテンツは、そのコンテンツがなくても不足なく情報が伝わるような内容で、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
+  en: |-
+    EThe audio and video content is provided in such a way that it is not essential to perceive the information, and the content is explicitly labeled as a substitute or supplement to the textual information.

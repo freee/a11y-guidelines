@@ -1,8 +1,8 @@
 id: '0071'
-check:
-  ja: |-
-    マウス・ボタンのdownイベントをトリガーにしていない。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
+check:
+  ja: |-
+    マウス・ボタンのdownイベントをトリガーにしていない。

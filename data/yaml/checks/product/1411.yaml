@@ -1,4 +1,9 @@
 id: '1411'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     *  ページ内に埋め込まれる音声/動画プレイヤーについて、適切なラベル付けがされていてそこにプレイヤーがあることが容易に認知できるようになっている。または
@@ -6,8 +11,3 @@ check:
   en: |-
     *  For audio/video players that are embedded in the page, they are properly labeled so that it is easily recognizable that the player is there. OR
     *  It can be inferred from the text before and after that the player is there.
-severity: '[NORMAL]'
-target: product
-platform:
-- web
-- mobile
