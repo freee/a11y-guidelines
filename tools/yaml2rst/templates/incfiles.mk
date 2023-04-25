@@ -1,8 +1,9 @@
 guidelines_rst = {{ guidelines_rst }}
 
-incfiles: $(guidelines_rst)
+incfiles: $(guidelines_rst) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
 
 %.yaml: ;
+%.json: ;
 
 {{ wcag_mapping_target }}: {{ gl_yaml }} {{ wcag_sc }}
 	@$(YAML2RST) {{ wcag_mapping_target }}

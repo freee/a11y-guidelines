@@ -339,7 +339,7 @@ def main():
             'wcag_mapping_target': os.path.join(DESTDIR, WCAG_MAPPING_FILENAME),
             'priority_diff_target': os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME),
             'all_checks_target': os.path.join(DESTDIR, ALL_CHECKS_FILENAME),
-            'wcag_sc': os.path.join(DESTDIR, WCAG_SC),
+            'wcag_sc': WCAG_SC,
             'gl_yaml': " ".join(gl_yaml),
             'all_yaml': " ".join(all_yaml),
             'gl_deps': gl_deps,
