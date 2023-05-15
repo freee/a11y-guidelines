@@ -5,10 +5,10 @@ platform:
 - web
 check:
   ja: |-
-    ショートカットキーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
+    ショートカット・キーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
 
-    *  ユーザーがショートカットキーを無効にできる
-    *  ユーザーがショートカットキーの割当を変更できる
+    *  ユーザーがショートカット・キーを無効にできる
+    *  ユーザーがショートカット・キーの割当を変更できる
   en: |-
     If there are shortcut keys that work regardless of which part of the screen the focus is on, one of the following is true
 
