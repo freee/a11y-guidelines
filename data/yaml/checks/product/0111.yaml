@@ -7,10 +7,10 @@ check:
   ja: |-
     ホバーで表示されるすべてのコンテンツは、以下のすべてを満たしている:
 
-    *  ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。（ESCキーで消える、など）
+    *  マウス・ポインターを移動させることなく、ホバーで表示されたコンテンツを非表示にできる。（ESCキーで消える、など）
     *  ホバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、ホバーで表示されたコンテンツを非表示にする。
   en: |-
     All content displayed on hover meets all of the following 
 
-    *  Content displayed on hover can be hidden without moving the pointer. (ESC key to make it disappear, etc.)
+    *  Content displayed on hover can be hidden without moving the mouse pointer. (ESC key to make it disappear, etc.)
     *  Hide content displayed on hover only when it is no longer in hover state, when the user performs an action to hide it, or when the content is no longer valid.
