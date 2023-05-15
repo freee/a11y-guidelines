@@ -6,22 +6,41 @@ platform:
 - mobile
 check:
   ja: |-
-    フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序でフォーカスが移動する。
+    フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序で、以下のコンポーネント間をフォーカスが移動する。
 
     *  リンクとボタン
     *  フォーム・コントロール（エディット・ボックス、チェックボックス、ラジオボタンなど）
     *  その他、マウスやキーボード、タッチによる操作を受け付けるすべてのもの
   en: |-
-    When moving the focus, the focus moves in a natural order that is consistent with the context, layout, and operating procedures.
+    When moving the focus, the focus moves in a natural order that is consistent with the context, layout, and operating procedures among the following components.
 
     *  Links and Buttons
     *  Form controls
     *  Everything else that accepts mouse, keyboard, or touch operation
+procedure:
+  web:
+    ja: |-
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
+  mobile:
+    ja: |-
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
 techniques:
 - tool: keyboard
   technique:
     ja: |-
-      TabキーとShift+Tabキーでフォーカスを移動して確認する。
+      Tabキー、またはShift+Tabキーでフォーカスを移動して、以下を確認する：
+
+      *  すべてのリンク、ボタン、フォーム・コントロールおよび操作を受け付けるコンポーネントにフォーカスを移動できる
+      *  フォーカスの移動順序は、文脈、レイアウト、操作手順に即した自然な順序になっている
+    en: |-
+      Confirm the following by moving the focus using Tab key, or Shift+Tab key:
+
+      *  The focus moves to all the links, buttons, form controls, and components that accepts operation.
+      *  The focus moves in a natural order that is consistent with the context, layout, and operating procedures.
 - tool: ios-vo
   technique:
     ja: |-
@@ -32,6 +51,14 @@ techniques:
       *  画面上に表示されているもので読み上げられないものがない
 
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      Confirm the following by moving the focus with one-finger left/right flicks:
+
+      *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
+      *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
+      *  Everything displayed on the screen is announced.
+
+      CF： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
   technique:
     ja: |-
@@ -42,3 +69,11 @@ techniques:
       *  画面上に表示されているもので読み上げられないものがない
 
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      Confirm the following by moving the focus with one-finger left/right flicks:
+
+      *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
+      *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
+      *  Everything displayed on the screen is announced.
+
+      CF： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
