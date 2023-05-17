@@ -23,7 +23,14 @@
 チェック手順
 {%- endfilter %}
 
-{{ check.procedure }}
+{% for proc in check.procedure -%}
+{% if proc.platform == 'general' -%}
+{{ proc.text }}
+{%- else -%}
+{{ proc.platform }}
+   {{ proc.text }}
+{%- endif %}
+{% endfor -%}
 {% endif %}
 {% if check.inforefs is defined -%}
 {% filter make_header('=') -%}

@@ -54,7 +54,47 @@
         "properties": {
           "procedure": {
             "description": "suggested procedure for performing the check",
-            "$ref": "common.json#/definitions/i18nString"
+            "type": "object",
+            "properties": {
+              "web": {
+                "$ref": "common.json#/definitions/i18nString"
+              },
+              "mobile": {
+                "$ref": "common.json#/definitions/i18nString"
+              },
+              "general": {
+                "$ref": "common.json#/definitions/i18nString"
+              }
+            },
+            "anyOf": [
+              {
+                "required": ["web"]
+              },
+              {
+                "required": ["mobile"]
+              },
+              {
+                "required": ["general"]
+              }
+            ],
+            "dependencies": {
+              "web": {
+                "not": {
+                  "required": ["general"]
+                }
+              },
+              "mobile": {
+                "not": {
+                  "required": ["general"]
+                }
+              },
+              "general": {
+                "not": {
+                  "required": ["web", "mobile"]
+                }
+              }
+            },
+            "additionalProperties": false
           },
           "techniques": {
             "description": "one or more specific techniques for performing the check",

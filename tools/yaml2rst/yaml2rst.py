@@ -134,7 +134,19 @@ def main():
             'check': check['check'][LANG],
         }
         if 'procedure' in check:
-            check_str['procedure'] = check['procedure'][LANG]
+            check_str['procedure'] = []
+            if 'general' in check['procedure']:
+                check_str['procedure'].append({
+                    'platform': 'general',
+                    'text': check['procedure']['general'][LANG]
+                })
+            else:
+                for p in PLATFORM_NAMES.keys():
+                    if p in check['procedure']:
+                        check_str['procedure'].append({
+                            'platform': PLATFORM_NAMES[p],
+                            'text': check['procedure'][p][LANG]
+                        })
         if len(check['info']) > 0:
             check['info'] = uniq(check['info'])
             check_str['inforefs'] = []

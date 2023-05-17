@@ -58,7 +58,14 @@ SC {{ sc.sc }}：
 チェック手順
 {%- endfilter %}
 
-{{ check.procedure }}
+{% for proc in check.procedure -%}
+{% if proc.platform == 'general' -%}
+{{ proc.text }}
+{%- else -%}
+{{ proc.platform }}
+   {{ proc.text }}
+{%- endif %}
+{% endfor -%}
 {% endif %}
 {% if check.implementations is defined -%}
 {% for impl in check.implementations -%}
