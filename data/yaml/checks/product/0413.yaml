@@ -9,20 +9,41 @@ check:
     アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられない。
   en: |-
     When icons are displayed along with text labels, the same content is not announced by the screen reader more than once.
+procedure:
+  web:
+    ja: |-
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
+  mobile:
+    ja: |-
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
 techniques:
 - tool: nvda
   technique:
     ja: |-
-      ブラウズ・モードでのカーソルキー操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+      ブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+    en: |-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in browse mode.
 - tool: ios-vo
   technique:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+      1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
 
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
+
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
   technique:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+      1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
 
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
+
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
