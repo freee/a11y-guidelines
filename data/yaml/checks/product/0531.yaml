@@ -13,7 +13,9 @@ techniques:
 - tool: nvda
   technique:
     ja: |-
-      ブラウズ・モードでのカーソルキー操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+    en: |-
+      Confirm that the same text as contained in the image is announced when using arrow keys in browse mode.
 - tool: ios-vo
   technique:
     ja: |-
@@ -21,6 +23,11 @@ techniques:
       *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+      *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
+
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
   technique:
     ja: |-
@@ -28,3 +35,8 @@ techniques:
       *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+      *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
+
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
