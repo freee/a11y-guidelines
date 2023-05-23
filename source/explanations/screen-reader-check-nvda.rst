@@ -265,6 +265,13 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 その他
 ------
 
+参考動画
+   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/j1GzUGZbbzI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 :kbd:`NVDA + Q`
    NVDAの終了
 :kbd:`NVDA + N`
