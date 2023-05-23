@@ -8,11 +8,22 @@ check:
     スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
   en: |-
     The start of the main text can be found by using the heading jump function of the screen reader or the jump function between areas indicated by ARIA landmarks.
+procedure:
+  web:
+    ja: |-
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
 techniques:
 - tool: nvda
   technique:
     ja: |-
-      以下のいずれかの方法で、本文やその画面の中心的な機能の開始位置に移動することができる。
+      以下のいずれかの方法で、本文またはその画面の中心的な機能の開始位置を容易に見つけられることを確認する。
 
-      *  ブラウズ・モードで、次/前の見出しへの移動（H/Shift+Hキー）を実行して、容易に本文直前の見出しに移動できる
-      *  ブラウズ・モードで、次のランドマークへの移動（Dキー）でmain要素の先頭部分に容易に移動でき、その直後から本文が始まっている
+      *  ブラウズ・モードで、次/前の見出しへの移動（H/Shift+Hキー）を用いて、本文直前の見出しに移動できる
+      *  ブラウズ・モードで、次のランドマークへの移動（Dキー）でmain要素の先頭部分に移動でき、その直後から本文が始まっている
+    en: |-
+      Confirm that the beginning of the main body, or the main function of the page can be easily found using any of the following method.
+
+      *  Users can move to the position immediately before the main body using the jump to next/previous heading function in browse mode.
+      *  Users can move to the beginning of the main landmark using the jump to next landmark function (D key) in browse mode, and the main body begins immediately after that position.
