@@ -1,4 +1,8 @@
 id: '0141'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     ショートカットキーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
@@ -10,7 +14,3 @@ check:
 
     *  Users can disable the shortcut keys
     *  Users can change shortcut assignments
-severity: '[NORMAL]'
-target: product
-platform:
-- web

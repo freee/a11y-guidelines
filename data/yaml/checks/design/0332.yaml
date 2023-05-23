@@ -1,11 +1,11 @@
 id: '0332'
+severity: '[NORMAL]'
+target: design
+platform:
+- web
 check:
   ja: |-
     チェックボックス、ラジオボタン、ボタンなど、フォーム・コントロールの見た目をブラウザーのデフォルトのものから変更する場合、クリックやタッチに反応する領域が充分な大きさになっていて、その領域が設計資料で明示されている。
 
     *  デスクトップWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
     *  モバイルWebでは44 x 44 CSS px以上
-severity: '[NORMAL]'
-target: design
-platform:
-- web

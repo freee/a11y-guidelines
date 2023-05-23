@@ -1,11 +1,11 @@
 id: '1441'
-check:
-  ja: |-
-    3秒以上の長さの自動再生される音声コンテンツがない。
-  en: |-
-    There is no audio content that automatically plays for more than 3 seconds in length.
 severity: '[CRITICAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    3秒以上の長さの自動再生される音声コンテンツがない。
+  en: |-
+    There is no audio content that automatically plays for more than 3 seconds in length.

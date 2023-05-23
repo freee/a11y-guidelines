@@ -1,14 +1,14 @@
 id: '0411'
-check:
-  ja: |-
-    アイコンの役割や示している状態が分かるテキストが、スクリーン・リーダーで読み上げられる。
-  en: |-
-    Text that describes the purpose and the status of icons is announced by screen reader.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    アイコンの役割や示している状態が分かるテキストが、スクリーン・リーダーで読み上げられる。
+  en: |-
+    Text that describes the purpose and the status of icons is announced by screen reader.
 techniques:
 - tool: nvda
   technique:

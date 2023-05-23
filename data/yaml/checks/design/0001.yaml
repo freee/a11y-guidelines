@@ -1,4 +1,9 @@
 id: '0001'
+severity: '[NORMAL]'
+target: design
+platform:
+- web
+- mobile
 check:
   ja: |-
     アイコンや画像に関して、充分なコントラスト比 ([MUST]3:1以上、[SHOULD]4.5:1以上) が確保されている。
@@ -6,8 +11,3 @@ check:
     *  アイコンと背景色
     *  画像内の重要な情報とその背景色
     *  画像および画像化されたテキストとその隣接領域
-severity: '[NORMAL]'
-target: design
-platform:
-- web
-- mobile

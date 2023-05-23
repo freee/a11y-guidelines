@@ -1,4 +1,9 @@
 id: '0032'
+severity: '[MAJOR]'
+target: design
+platform:
+- web
+- mobile
 check:
   ja: |-
     形状、色、大きさ、視覚的な位置、方向、音などのうち、1つだけを用いた説明ではなく、複数の要素を用いた説明をしている。
@@ -15,8 +20,3 @@ check:
        *  右の表（表3）を参照してください
        *  青い「保存」ボタンを押してください
        *  画面右下の「新規作成」ボタンを押してください
-severity: '[MAJOR]'
-target: design
-platform:
-- web
-- mobile

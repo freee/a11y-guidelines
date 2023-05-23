@@ -1,14 +1,14 @@
 id: '0562'
-check:
-  ja: |-
-    スクリーン・リーダーが、表を適切に認識していて、表中のセルも適切に認識している。
-  en: |-
-    The screen reader properly recognizes tables and their cells.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    スクリーン・リーダーが、表を適切に認識していて、表中のセルも適切に認識している。
+  en: |-
+    The screen reader properly recognizes tables and their cells.
 techniques:
 - tool: nvda
   technique:

@@ -1,13 +1,13 @@
 id: '0621'
+severity: '[CRITICAL]'
+target: product
+platform:
+- web
 check:
   ja: |-
     スクリーン・リーダーで読み上げたとき、適切な言語の音声エンジンで読み上げられる。
   en: |-
     The screen reader uses text-to-speech engine of appropriate language when it reads the content.
-severity: '[CRITICAL]'
-target: product
-platform:
-- web
 techniques:
 - tool: nvda
   technique:

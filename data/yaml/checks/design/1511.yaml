@@ -1,9 +1,9 @@
 id: '1511'
-check:
-  ja: |-
-    音声を含むコンテンツには、同期したキャプションが提供されている。
 severity: '[NORMAL]'
 target: design
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    音声を含むコンテンツには、同期したキャプションが提供されている。

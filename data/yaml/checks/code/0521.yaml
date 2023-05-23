@@ -1,12 +1,12 @@
 id: '0521'
-check:
-  ja: |-
-    画像化されたテキストと同じ内容が、スクリーン・リーダーで確認できる形のテキスト・データとしても提供されている。
 severity: '[MAJOR]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    画像化されたテキストと同じ内容が、スクリーン・リーダーで確認できる形のテキスト・データとしても提供されている。
 implementations:
 - title: テキスト・データの提供
   methods:

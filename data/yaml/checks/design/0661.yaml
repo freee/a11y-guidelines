@@ -1,8 +1,8 @@
 id: '0661'
-check:
-  ja: |-
-    ページのどの部分がそれぞれ ``header``, ``nav``, ``main``, ``footer`` 要素でマークアップされるべきかが、複数のページで一貫した形で設計資料に明示されている。
 severity: '[NORMAL]'
 target: design
 platform:
 - web
+check:
+  ja: |-
+    ページのどの部分がそれぞれ ``header``, ``nav``, ``main``, ``footer`` 要素でマークアップされるべきかが、複数のページで一貫した形で設計資料に明示されている。

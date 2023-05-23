@@ -1,4 +1,9 @@
 id: '0021'
+severity: '[NORMAL]'
+target: product
+platform:
+- web
+- mobile
 check:
   ja: |-
     テキストの表示色と背景色には、充分なコントラスト比が確保されている。
@@ -12,11 +17,6 @@ check:
     *  Font Size: 30px（22pt）or larger; 3:1 or higher（[SHOULD] 4.5:1 or higher）
     *  Font Size: 22px（18pt）or larger and bold; 3:1 or higher（[SHOULD] 4.5:1 or higher）
     *  In other cases：4.5:1 or higher（[SHOULD] 7:1 or higher）
-severity: '[NORMAL]'
-target: product
-platform:
-- web
-- mobile
 techniques:
 - tool: axe
   technique:

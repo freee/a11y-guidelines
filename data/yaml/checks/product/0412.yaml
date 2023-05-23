@@ -1,11 +1,11 @@
 id: '0412'
-check:
-  ja: |-
-    テキストのラベルが併せて表示されていないアイコンで、形状とサイズが同じで色だけが違うものがない。（例：異なる状態を表す複数のアイコンが、色の違いだけで状態の違いを表していない。）
-  en: |-
-    There are no icons that do not have text labels, that are the same shape and size, and differ only in color. (e.g., multiple icons representing different states must be distiguishable not only by difference in color.)
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    テキストのラベルが併せて表示されていないアイコンで、形状とサイズが同じで色だけが違うものがない。（例：異なる状態を表す複数のアイコンが、色の違いだけで状態の違いを表していない。）
+  en: |-
+    There are no icons that do not have text labels, that are the same shape and size, and differ only in color. (e.g., multiple icons representing different states must be distiguishable not only by difference in color.)

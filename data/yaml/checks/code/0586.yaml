@@ -1,12 +1,12 @@
 id: '0586'
-check:
-  ja: |-
-    独自実装のUIコンポーネントは、スクリーン・リーダーなどの支援技術に適切にその役割や状態が伝わるようになっている。
 severity: '[CRITICAL]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    独自実装のUIコンポーネントは、スクリーン・リーダーなどの支援技術に適切にその役割や状態が伝わるようになっている。
 implementations:
 - title: スクリーン・リーダーに役割を伝える
   methods:

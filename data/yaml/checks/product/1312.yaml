@@ -1,4 +1,8 @@
 id: '1312'
+severity: '[MAJOR]'
+target: product
+platform:
+- web
 check:
   ja: |-
     モーダル・ダイアログが表示される場合：
@@ -12,7 +16,3 @@ check:
     *  Does not appear automatically at a time that interferes with the user's input operations or viewing of information
     *  Opening a modal dialog with a keyboard operation and pressing the Tab key moves the focus into the modal dialog, and the focus returns to its original position when the modal dialog is closed
     *  Focus does not move outside of a modal dialog when the focus is moved by pressing Tab or Shift+Tab within the modal dialog.
-severity: '[MAJOR]'
-target: product
-platform:
-- web

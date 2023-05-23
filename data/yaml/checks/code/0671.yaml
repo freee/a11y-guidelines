@@ -1,9 +1,9 @@
 id: '0671'
-check:
-  ja: |-
-    *  ``header``, ``main``, ``nav``, ``footer`` の各要素が適切に用いられている。または
-    *  これらが ``role`` 属性で明示されている。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
+check:
+  ja: |-
+    *  ``header``, ``main``, ``nav``, ``footer`` の各要素が適切に用いられている。または
+    *  これらが ``role`` 属性で明示されている。

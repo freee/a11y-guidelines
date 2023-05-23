@@ -1,14 +1,14 @@
 id: '0861'
-check:
-  ja: |-
-    スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
-  en: |-
-    The screen reader announces the location of current page within the global navigation and breadcrumb list.
 severity: '[NORMAL]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
+  en: |-
+    The screen reader announces the location of current page within the global navigation and breadcrumb list.
 techniques:
 - tool: nvda
   technique:

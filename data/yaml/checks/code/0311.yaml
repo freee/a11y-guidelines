@@ -1,8 +1,8 @@
 id: '0311'
-check:
-  ja: |-
-    CSSに絶対値指定（例：px）と相対値指定（例：rem）が混在していない。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
+check:
+  ja: |-
+    CSSに絶対値指定（例：px）と相対値指定（例：rem）が混在していない。

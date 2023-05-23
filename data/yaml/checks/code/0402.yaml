@@ -1,12 +1,12 @@
 id: '0402'
-check:
-  ja: |-
-    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられないようにする。
 severity: '[NORMAL]'
 target: code
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられないようにする。
 implementations:
 - title: スクリーン・リーダーに読み上げられないようにする
   methods:

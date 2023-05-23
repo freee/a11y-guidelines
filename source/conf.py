@@ -20,9 +20,9 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-version = 'Ver. 202304.1'
+version = 'Ver. 202305.0'
 release = version
-publishedDate = u'2023年4月21日'
+publishedDate = u'2023年5月23日'
 copyright = '2020-{pubYear}, freee株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )

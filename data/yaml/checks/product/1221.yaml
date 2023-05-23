@@ -1,11 +1,11 @@
 id: '1221'
-check:
-  ja: |-
-    点滅、スクロールを伴うコンテンツがない。
-  en: |-
-    There is no content with flashing or scrolling.
 severity: '[MAJOR]'
 target: product
 platform:
 - web
 - mobile
+check:
+  ja: |-
+    点滅、スクロールを伴うコンテンツがない。
+  en: |-
+    There is no content with flashing or scrolling.

@@ -105,6 +105,8 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
 以下、最初にしておくと良い設定について、カテゴリーごとに記します。
 
+.. _exp-screen-reader-check-nvda-settings-speech:
+
 音声
 ----
 
@@ -120,6 +122,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
 「サポートされている場合自動的に言語を切り替える」と「サポートされている場合自動的に方言を切り替える」の2項目は、日本語以外の自然言語の読み方に関するものです。
 この2項目をチェックしておくと、Webページで用いられている言語が適切に指定されているかどうかを確認する、 :ref:`check-0621` や :ref:`check-0921` を実施することが容易になります。
+なお、この設定をする場合、日本語以外の音声合成エンジンがWindowsにインストールされている必要があります。（ :ref:`exp-screen-reader-check-nvda-windows-tts` 参照）
 
 ビジョン
 --------
@@ -158,6 +161,25 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 画面表示を確認できない視覚障害者の場合、マウスを使うことは困難なので、アクセシビリティー・チェック実施の際にもマウスをなるべく使用せずにチェックを実施することが望ましいです。
 この項目がチェックされていると、マウス・ポインターが移動した先にあるテキストが自動的に読み上げられます。
 そのため、キーボードのみによる操作では読み上げられないものが、誤ったマウス操作によって読み上げられてしまう場合があり、チェック結果について誤った判断につながることがあります。
+
+.. _exp-screen-reader-check-nvda-windows-tts:
+
+音声合成エンジンの管理
+----------------------
+
+:ref:`exp-screen-reader-check-nvda-settings-speech` の項で触れた自然言語に関する設定について、これらの設定を反映した形でNVDAを動作させるには、Windowsに複数の音声合成エンジン（音声パッケージ）がインストールされている必要があります。
+ここでは、現在インストールされている音声パッケージの確認と、新たな音声パッケージの追加の方法を記します。
+
+1. スタート・ボタンなどから設定画面を表示
+2. 「時刻と言語」、「音声認識」の順にクリック
+3. この画面の下の方にある「インストールされている音声パッケージ」のプルダウンに表示されている、現在インストールされている音声パッケージの一覧を確認
+4. 日本語しかインストールされていない場合は、「音声を追加」をクリックして、「英語 (米国)」を追加
+
+.. image:: /img/win10-settings-speech-recognition.png
+   :alt: Windows 10の音声認識の設定画面のスクリーン・ショット
+
+一般的なチェックの場合、「英語 (米国)」を追加すれば、NVDAは意図した挙動になります。
+英語と日本語以外の言語が使われているサイトをチェックする場合は、その言語も合わせて追加すると良いでしょう。
 
 ************************
 最低限知っておきたいこと
@@ -243,6 +265,13 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 その他
 ------
 
+参考動画
+   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/j1GzUGZbbzI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 :kbd:`NVDA + Q`
    NVDAの終了
 :kbd:`NVDA + N`
@@ -256,7 +285,7 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 -----------------------
 
 ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`_ には、他のキー操作も含めてまとめられています。
-GitHub上では、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ と `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ が公開されていますが、以下これを画像化したものを掲載します。
+GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`_ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`_ が公開されています。以下にPNG版を転載します。
 
 .. image:: /img/nvdacheat.png
    :alt: 画像化したNVDAチートシート
