@@ -8,6 +8,12 @@ check:
     ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
   en: |-
     All content on the page is placed in the appropriate area indicated by ARIA landmarks.
+procedure:
+  web:
+    ja: |-
+      以下のaxe DevToolsによるチェックとLandmark Navigation via Keyboard or Pop-upによるチェックの両方を満たしていることを確認する。
+    en: |-
+      Confirm that both of the following checks pass: check by the Axe DevTools and check by the Landmark Navigation via Keyboard or Pop-up
 techniques:
 - tool: axe
   technique:
@@ -24,7 +30,22 @@ techniques:
       -  :ref:`axe-rule-landmark-one-main`
       -  :ref:`axe-rule-landmark-unique`
       -  :ref:`axe-rule-region`  
-- tool: misc
+    en: |-
+      Confirm that none of the following issues is reported against visible content.  (THere usually is no problem if these issues are reported against hidden content.)
+
+      -  :ref:`axe-rule-landmark-banner-is-top-level`
+      -  :ref:`axe-rule-landmark-complementary-is-top-level`
+      -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
+      -  :ref:`axe-rule-landmark-main-is-top-level`
+      -  :ref:`axe-rule-landmark-no-duplicate-banner`
+      -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
+      -  :ref:`axe-rule-landmark-no-duplicate-main`
+      -  :ref:`axe-rule-landmark-one-main`
+      -  :ref:`axe-rule-landmark-unique`
+      -  :ref:`axe-rule-region`  
+- tool: Landmark Navigation via Keyboard or Pop-up
   technique:
     ja: |-
-      `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、適切な領域にコンテンツが属していることを確認する。
+      `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属していることを確認する。
+    en: |-
+      Confirm that every part of the page content is contained in an appropriate ARIA landmark region when viewed using a browser with the `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ extention installed.
