@@ -11,24 +11,47 @@ check:
   en: |-
     *  Components commonly used on multiple pages/screens, such as global navigation, header, footer, breadcrumb list, and support UI, have the same order of appearance on all pages/screens. and
     *  The order of appearance of links and buttons within these components is the same on all pages/screens.
+procedure:
+  web:
+    ja: |-
+      以下のキーボードによるチェックとNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following checks by keyboard and NVDA pass.
+  mobile:
+    ja: |-
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
 techniques:
 - tool: keyboard
   technique:
     ja: |-
-      TabキーおよびShift+Tabキーでフォーカスを移動した際、移動順序が一貫していることを確認する。
+      TabキーおよびShift+Tabキーでフォーカスを移動した際、複数のページで移動順序が一貫していることを確認する。
+    en: |-
+      Confirm that the focus moves in a consistent order across multiple pages when moving the focus using the Tab key and Shift+Tab key.
 - tool: nvda
   technique:
     ja: |-
-      ブラウズ・モードで上下矢印キーで読み上げさせたとき、読み上げ順序が一貫していることを確認する。
+      ブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+    en: |-
+      Confirm that the reading order is consistent across multiple pages when reading the content using the up/down arrow keys in browse mode.
 - tool: ios-vo
   technique:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面一貫していることを確認する。
 
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
 - tool: android-tb
   technique:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、一貫していることを確認する。
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
 
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
