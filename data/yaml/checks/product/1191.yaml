@@ -16,3 +16,5 @@ techniques:
       設計資料に従ってステータス・メッセージが表示される操作を行い、ステータス・メッセージが自動的に読み上げられることを確認する。
 
       参考： 期待される挙動を確認する場合は、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+    en: |-
+      Perform the operation to display status messages according to the design documents, and confirm that the status messages are automatically announced.
