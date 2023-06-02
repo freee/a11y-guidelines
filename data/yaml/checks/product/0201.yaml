@@ -22,22 +22,23 @@ check:
     *  audio and/or video players
     *  pop-up menus
     *  modal dialogs
-procedure:
-  web:
+procedures:
+- platform: web
+  procedure:
     ja: |-
       以下のキーボード操作によるチェックを見足していることを確認する。
     en: |-
       Confirm the following check by keyboard operation passes.
-techniques:
-- tool: keyboard
-  technique:
-    ja: |-
-      Tabキーを使って、ページの先頭からフォーカスを順に移動し、以下を確認する：
+  techniques:
+  - tool: keyboard
+    technique:
+      ja: |-
+        Tabキーを使って、ページの先頭からフォーカスを順に移動し、以下を確認する：
 
-      *  TabキーまたはShift+Tabキーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
-      *  TabキーやShift+Tabキーの押下でフォーカスが抜け出せない場合に、矢印キーやEscキーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
-    en: |-
-      Use the Tab key to sequentially move the focus from the top of the page and confirm the following:
-      
-      *  Pressing the Tab key or Shift+Tab key does not cause a situation where the focus cannot escape from a specific location, or
-      *  If the focus cannot escape by pressing the Tab key or Shift+Tab key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the Esc key.
+        *  TabキーまたはShift+Tabキーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
+        *  TabキーやShift+Tabキーの押下でフォーカスが抜け出せない場合に、矢印キーやEscキーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
+      en: |-
+        Use the Tab key to sequentially move the focus from the top of the page and confirm the following:
+        
+        *  Pressing the Tab key or Shift+Tab key does not cause a situation where the focus cannot escape from a specific location, or
+        *  If the focus cannot escape by pressing the Tab key or Shift+Tab key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the Esc key.

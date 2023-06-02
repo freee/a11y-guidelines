@@ -9,16 +9,17 @@ check:
     スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
   en: |-
     The screen reader announces the location of current page within the global navigation and breadcrumb list.
-procedure:
-  web:
+procedures:
+- platform: web
+  procedure:
     ja: |-
       以下のNVDAによるチェックを見足していることを確認する。
     en: |-
       Confirm the following checks by NVDA passes.
-techniques:
-- tool: nvda
-  technique:
-    ja: |-
-      ブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
-    en: |-
-      Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content in browse mode using arrow keys.
+  techniques:
+  - tool: nvda
+    technique:
+      ja: |-
+        ブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+      en: |-
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content in browse mode using arrow keys.

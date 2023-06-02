@@ -9,8 +9,9 @@ check:
     グレイスケール表示でも利用に支障が出ない。
   en: |-
     Displaying content in grayscale does not interfere with its use.
-procedure:
-  general:
+procedures:
+- platform: general
+  procedure:
     ja: |-
       グレイスケール表示にして、以下を確認する：
 

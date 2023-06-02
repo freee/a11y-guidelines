@@ -9,71 +9,74 @@ check:
     画像の説明がスクリーン・リーダーで適切に読み上げられる。
   en: |-
     Image descriptions are properly announced by the screen reader.
-procedure:
-  web:
+procedures:
+- platform: web
+  procedure:
     ja: |-
       以下のaxe DevToolsによるチェックとNVDAによるチェックを見足していることを確認する。
     en: |-
       Confirm the following checks by axe DevTools and NVDA pass.
-  mobile:
+  techniques:
+  - tool: nvda
+    technique:
+      ja: |-
+        *  以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
+        
+          -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
+          -  その画像がリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+        
+        *  詳細な説明が必要な画像の場合、以下のいずれかを満たしていることを確認する
+        
+          -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
+          -  ブラウズ・モードで次/前の画像への移動（G/Shift+Gキー）を実行して当該の画像を読み上げさせたときに、詳細な説明が読み上げられる
+      en: |-
+        *  Confirm that a brief description of the image is announced when performing the following:
+        
+          -  When reading the part with the image using arrow keys in browse mode
+          -  When the image receives focus with Tab/Shift+Tab key operation, for focusable images, such as  links.
+        
+        *  Confirm that one of the following is true for images that require detailed description
+        
+          -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
+          -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
+  - tool: axe
+    technique:
+      ja: |-
+        「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
+      
+        ただし、画像に何かしらの代替テキストが入っていれば問題として検知されないため、適切ではない代替テキストの検出をすることはできません。
+      en: |-
+        Confirm that the issue :ref:`axe-rule-image-alt` is not reported.
+      
+        Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
+- platform: mobile
+  procedure:
     ja: |-
       以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
     en: |-
       Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-techniques:
-- tool: nvda
-  technique:
-    ja: |-
-      *  以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
-      
-         -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
-         -  その画像がリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
-      
-      *  詳細な説明が必要な画像の場合、以下のいずれかを満たしていることを確認する
-      
-         -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
-         -  ブラウズ・モードで次/前の画像への移動（G/Shift+Gキー）を実行して当該の画像を読み上げさせたときに、詳細な説明が読み上げられる
-    en: |-
-      *  Confirm that a brief description of the image is announced when performing the following:
-      
-         -  When reading the part with the image using arrow keys in browse mode
-         -  When the image receives focus with Tab/Shift+Tab key operation, for focusable images, such as  links.
-      
-      *  Confirm that one of the following is true for images that require detailed description
-      
-         -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
-         -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
-- tool: axe
-  technique:
-    ja: |-
-      「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
-    
-      ただし、画像に何かしらの代替テキストが入っていれば問題として検知されないため、適切ではない代替テキストの検出をすることはできません。
-    en: |-
-      Confirm that the issue :ref:`axe-rule-image-alt` is not reported.
-    
-      Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
-- tool: ios-vo
-  technique:
-    ja: |-
-      *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
-      *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認するる。
+  techniques:
+  - tool: ios-vo
+    technique:
+      ja: |-
+        *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
+        *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認するる。
 
-      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-    en: |-
-      *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
-      *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
+        *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
+        *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
 
-      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-- tool: android-tb
-  technique:
-    ja: |-
-      *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
-      *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認する。
+        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+  - tool: android-tb
+    technique:
+      ja: |-
+        *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
+        *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認する。
 
-      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-    en: |-
-      *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
-      *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
+        *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
+        *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
 
-      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

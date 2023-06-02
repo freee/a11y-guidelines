@@ -12,8 +12,9 @@ check:
     In objects that accept mouse clicks, such as links and buttons, it is possible to cancel the operation even after pressing the mouse button.
 
     Note： Objects for drag and drop are not subject to this check.
-procedure:
-  web:
+procedures:
+- platform: web
+  procedure:
     ja: |-
       マウスで以下の操作をして、何も実行されないことを確認する：
 
