@@ -47,7 +47,8 @@ TARGET_NAMES = {
 }
 PLATFORM_NAMES = {
     'web': 'Web',
-    'mobile': 'モバイル'
+    'mobile': 'モバイル',
+    'general': 'Web、モバイル'
 }
 
 
@@ -133,20 +134,6 @@ def main():
             'severity': check['severity'],
             'check': check['check'][LANG],
         }
-        if 'procedure' in check:
-            check_str['procedure'] = []
-            if 'general' in check['procedure']:
-                check_str['procedure'].append({
-                    'platform': 'general',
-                    'text': check['procedure']['general'][LANG]
-                })
-            else:
-                for p in PLATFORM_NAMES.keys():
-                    if p in check['procedure']:
-                        check_str['procedure'].append({
-                            'platform': PLATFORM_NAMES[p],
-                            'text': check['procedure'][p][LANG]
-                        })
         if len(check['info']) > 0:
             check['info'] = uniq(check['info'])
             check_str['inforefs'] = []
@@ -177,29 +164,40 @@ def main():
                         'method': impl['method']
                     })
                 check_str['implementations'].append(implementation)
-        elif check['target'] == 'product' and 'techniques' in check:
-            check['checkTools'] = []
-            check_str['techniques'] = []
-            for technique in check['techniques']:
-                if technique['tool'] in CHECK_TOOLS:
-                    tool_basename = technique['tool']
-                    tool_display_name = CHECK_TOOLS[technique['tool']]
-                else:
-                    tool_basename = 'misc'
-                    tool_display_name = technique['tool']
-
-                str_obj = {
-                    'tool_display_name': tool_display_name,
-                    'technique': technique['technique'][LANG],
-                    'tool': tool_basename,
-                    'id': check['id'],
-                    'check': check['check'][LANG],
+        elif check['target'] == 'product' and 'procedures' in check:
+            check_str['procedures'] = []
+            for procedure in check['procedures']:
+                procedure_str_obj = {}
+                procedure_str_obj = {
+                    'platform': PLATFORM_NAMES[procedure['platform']],
+                    'text': procedure['procedure'][LANG]
                 }
-                if 'note' in technique:
-                    str_obj['note'] = technique['note'][LANG]
-                check['checkTools'].append(tool_basename)
-                check_str['techniques'].append(str_obj)
-                check_examples[tool_basename].append(str_obj)
+
+                if 'techniques' in procedure:
+                    procedure_str_obj['techniques'] = []
+                    check['checkTools'] = []
+                    for technique in procedure['techniques']:
+                        if technique['tool'] in CHECK_TOOLS:
+                            tool_basename = technique['tool']
+                            tool_display_name = CHECK_TOOLS[technique['tool']]
+                        else:
+                            tool_basename = 'misc'
+                            tool_display_name = technique['tool']
+
+                        str_obj = {
+                            'tool_display_name': tool_display_name,
+                            'technique': technique['technique'][LANG],
+                            'tool': tool_basename,
+                            'id': check['id'],
+                            'check': check['check'][LANG],
+                        }
+                        if 'note' in technique:
+                            str_obj['note'] = technique['note'][LANG]
+                        check['checkTools'].append(tool_basename)
+                        procedure_str_obj['techniques'].append(str_obj)
+                        check_examples[tool_basename].append(str_obj)
+
+                check_str['procedures'].append(procedure_str_obj)
 
         allchecks.append(check_str)
         check['check_str'] = check_str
@@ -230,7 +228,7 @@ def main():
         gl['examples'] = []
         for check in gl['checks']:
             _check = [x for x in checks if x["id"] == check][0]
-            if 'techniques' in _check:
+            if 'checkTools' in _check:
                 gl['examples'].extend(list(_check['checkTools']))
             gl_str['checks'].append(_check['check_str'])
             gl['depends'].append(_check['src_path'])

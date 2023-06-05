@@ -18,20 +18,7 @@
 {%- endfor %}
 
 {{ check.check }}
-{% if check.procedure is defined %}
-{% filter make_header('=') -%}
-チェック手順
-{%- endfilter %}
 
-{% for proc in check.procedure -%}
-{% if proc.platform == 'general' -%}
-{{ proc.text }}
-{%- else -%}
-{{ proc.platform }}
-   {{ proc.text }}
-{%- endif %}
-{% endfor -%}
-{% endif %}
 {% if check.inforefs is defined -%}
 {% filter make_header('=') -%}
 参考情報
@@ -55,14 +42,19 @@
 {% endfor %}
 {%- endfor %}
 {%- endif %}
-{% if check.techniques is defined -%}
+{% if check.procedures is defined %}
+{% for proc in check.procedures -%}
 {% filter make_header('=') -%}
-チェック方法の例
+チェック手順： {{ proc.platform }}
 {%- endfilter %}
 
-{% for technique in check.techniques -%}
+{{ proc.text }}
+
+{% if proc.techniques is defined -%}
+
+{% for technique in proc.techniques -%}
 {% filter make_header('-') -%}
-{{ technique.tool_display_name }}によるチェック
+{{ technique.tool_display_name }}によるチェック方法の例
 {%- endfilter %}
 
 {{ technique.technique }}
@@ -71,4 +63,6 @@
 {% endif %}
 {% endfor %}
 {%- endif %}
+{%- endfor %}
+{% endif %}
 {%- endfor %}
