@@ -205,24 +205,13 @@ VoiceOver有効時に使われることが多い、基本的なジェスチャ�
 ここでは、用いられることが多い標準のUIコンポーネントについて、VoiceOver使用時の挙動と操作方法を記します。
 UIコンポーネントを独自に実装する場合は、これらを参考にしてVoiceOver使用時の挙動を定めると良いでしょう。
 
-button
+ボタン
 ======
 
 UIコンポーネント
-   *  system buttons
-   *  info buttons
+   ボタン
 参考
-   `Buttons - Menus and actions - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/menus-and-actions/buttons/>`_
-
-使用されている箇所の例
-----------------------
-
-system buttons
-   「探す」アプリの「人を探す」タブ内、位置情報を共有するためのボタン
-detail disclosure button
-   「カレンダー」アプリの「カレンダー」シート内、カレンダーのリストの各項目
-info buttons
-   「設定」アプリの各設定項目
+   `ボタン | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/buttons>`_
 
 VoiceOver利用時の挙動
 ---------------------
@@ -239,18 +228,13 @@ VoiceOver利用時の挙動
 *  ``trait`` に ``button`` を指定する
 *  ``label`` にボタンの役割を示すテキストを指定する
 
-label
-=====
+ラベル
+======
 
 UIコンポーネント
-   label
+   ラベル
 参考
-   `Labels - Layout and organization - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/layout-and-organization/labels/>`_
-
-使用されている箇所の例
-----------------------
-
-「ヘルスケア」アプリ、「概要」タブ内、 :menuselection:`プロフィール --> メディカルID` の画面内に表示されている項目
+   `ラベル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/labels>`_
 
 VoiceOver利用時の挙動
 ---------------------
@@ -258,13 +242,13 @@ VoiceOver利用時の挙動
 1本指で触れる、または1本指による右/左方向へのフリックでフォーカス
    ラベルの内容が読み上げられる
 
-page control
-============
+ページコントロール
+==================
 
 UIコンポーネント
-   page control
+   ページコントロール
 参考
-   `Page controls - Presentation - Components - Human Interface Guidelines - Design - Apple Developer <https://a11y-guidelines.freee.co.jp/explanations/screen-reader-check-ios-voiceover.html>`_
+   `ページコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/page-controls>`_
 
 使用されている箇所の例
 ----------------------
@@ -284,13 +268,13 @@ VoiceOver利用時の挙動
 
 ※このとき、ローターで「値を調整」が選択されている必要があります。通常は、フォーカスされた時に自動的にこの設定になります。
 
-picker
-======
+ピッカー
+========
 
 UIコンポーネント
-   picker
+   ピッカー
 参考
-   `Pickers - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/pickers/>`_
+   `ピッカー | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/pickers/>`_
 
 使用されている箇所の例
 ----------------------
@@ -309,13 +293,13 @@ VoiceOver利用時の挙動
 
 ※このとき、ローターで「値を調整」が選択されている必要があります。通常は、フォーカスされた時に自動的にこの設定になります。
 
-segmented control
-=================
+セグメントコントロール
+======================
 
 UIコンポーネント
-   segmented control
+   セグメントコントロール
 参考
-   `Segmented controls - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/segmented-controls/>`_
+   `セグメントコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/segmented-controls>`_
 
 使用されている箇所の例
 ----------------------
@@ -331,13 +315,13 @@ VoiceOver利用時の挙動
 1本指によるダブルタップ
    *  そのセグメントが選択状態になり、選択状態が変わったことが分かる読み上げがされる
 
-slider
-======
+スライダ
+========
 
 UIコンポーネント
-   slider
+   スライダ
 参考
-   `Sliders - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/sliders/>`_
+   `スライダ | Apple Developer Documentationr <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
 
 使用されている箇所の例
 ----------------------
@@ -363,13 +347,13 @@ VoiceOver利用時の挙動
 *  ``label`` に変更対象が分かるテキストを指定する
 *  ``value`` に現在の値を指定する
 
-toggle
+トグル
 ======
 
 UIコンポーネント
-   toggle
+   トグル
 参考
-   `Toggles - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/toggles/>`_
+   `トグル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/toggles>`_
 
 使用されている箇所の例
 ----------------------
@@ -385,13 +369,13 @@ VoiceOver利用時の挙動
 1本指によるダブルタップ
    選択状態が切り替わり、変更後の状態が読み上げられる
 
-text field
-==========
+テキストフィールド
+==================
 
 UIコンポーネント
-   text field
+   テキストフィールド
 参考
-   `Text fields - Selection and input - Components - Human Interface Guidelines - Design - Apple Developer - Google Chrome <https://developer.apple.com/design/human-interface-guidelines/components/selection-and-input/text-fields/>`_
+   `テキストフィールド | Apple Developer <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
 
 使用されている箇所の例
 ----------------------
