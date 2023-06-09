@@ -18,7 +18,7 @@ freeeで標準環境としているNVDAでも、音声設定を調整するこ�
 `lang-incorrect.html <../_static/samples/lang-incorrect.html>`_ ：
 
 .. raw:: html
-   
+
    <details><summary>コードを表示</summary>
 
 .. include:: ../_static/samples/lang-incorrect.html
@@ -42,7 +42,7 @@ Guidelines”のように数単語程度のフレーズであれば、このこ�
 `lang-partial.html <../_static/samples/lang-partial.html>`_ ：
 
 .. raw:: html
-   
+
    <details><summary>コードを表示</summary>
 
 .. include:: ../_static/samples/lang-partial.html
