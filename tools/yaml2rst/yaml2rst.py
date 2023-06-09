@@ -150,7 +150,7 @@ def main():
                 'category': gl_categories[ref],
                 'glref': ref
                 })
-            
+
         if check['target'] == 'code' and 'implementations' in check:
             check_str['implementations'] = []
             for detail in check['implementations']:
@@ -264,7 +264,7 @@ def main():
                 'gls': gls_str
             }
             sc_mapping.append(mapping)
-    
+
         sc_mapping_text = wcag21mapping_template.render({'mapping': sc_mapping})
         with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(sc_mapping_text)
