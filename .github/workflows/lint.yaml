@@ -1,0 +1,73 @@
+name: Lint
+
+on:
+  pull_request
+
+jobs:
+  schema_validation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+
+    - name: Install node modules
+      run: npm install
+
+    - name: Validate changed schema and data files
+      run: |
+        TARGET_BRANCH="${{ github.base_ref }}"
+        CHANGED_FILES=$(git diff --name-only origin/$TARGET_BRANCH HEAD)
+
+        for FILE in $CHANGED_FILES
+        do
+          echo "$FILE"
+          case "$FILE" in
+            data/json/schemas/common.json)
+              npx ajv compile --spec=draft2020 -s ${FILE}
+              ;;
+            data/json/schemas/check.json)
+              npx ajv compile --spec=draft2020 -s ${FILE} -r data/json/schemas/common.json
+              ;;
+            data/json/schemas/guideline.json)
+              npx ajv compile --spec=draft2020 -s ${FILE} -r data/json/schemas/common.json
+              ;;
+            data/yaml/gl/*.yaml)
+              npx ajv validate --spec=draft2020 -s data/json/schemas/guideline.json -r data/json/schemas/common.json -d ${FILE}
+              ;;
+            data/yaml/checks/*.yaml)
+              npx ajv validate --spec=draft2020 -s data/json/schemas/check.json -r data/json/schemas/common.json -d ${FILE}
+              ;;
+            esac
+        done
+
+  sphinx_build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout files
+      uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9.x'
+    - name: Install the Latest pip
+      run: python -m pip install --upgrade pip
+    - name: Install required modules
+      run: python -m pip install -r requirements.txt --upgrade
+    - name: Install sphinx-lint
+      run: python -m pip install --upgrade sphinx-lint
+    - name: Build HTML
+      env:
+        BASE_URL: https://a11y-guidelines.freee.co.jp/
+        TZ: JST-9
+      run: |
+        make SPHINXOPTS="-W -D html_baseurl=${BASE_URL}" clean html
+    - name: Run sphinx-lint
+      run: sphinx-lint ./source/**/*.rst
