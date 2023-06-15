@@ -81,10 +81,9 @@
             }
           }
         },
+        "required": ["platform", "procedure"],
         "additionalProperties": false
-      },
-      "additionalProperties": false,
-      "required": ["platform", "procedure"]
+      }
     },
     "implementations": {
       "description": "one or more examples of implementation methods that satisfy the check",
