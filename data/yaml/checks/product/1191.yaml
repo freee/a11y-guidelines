@@ -9,10 +9,12 @@ check:
     操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
   en: |-
     Status messages, such as the result of an operation, are automatically announced by the screen reader.
-techniques:
-- tool: nvda
-  technique:
+procedures:
+- platform: general
+  procedure:
     ja: |-
-      設計資料に従ってステータス・メッセージが表示される操作を行い、ステータス・メッセージが自動的に読み上げられることを確認する。
+      スクリーン・リーダーが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、ステータス・メッセージが自動的に読み上げられることを確認する。
 
       参考： 期待される挙動を確認する場合は、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+    en: |-
+      Perform the operation to display status messages according to the design documents while a screen reader is running, and confirm that the status messages are automatically announced.

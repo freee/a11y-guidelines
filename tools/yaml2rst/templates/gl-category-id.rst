@@ -53,13 +53,7 @@ SC {{ sc.sc }}：
 
 
 {{ check.check }}
-{% if check.procedure is defined %}
-{% filter make_header('^') -%}
-チェック手順
-{%- endfilter %}
 
-{{ check.procedure }}
-{% endif %}
 {% if check.implementations is defined -%}
 {% for impl in check.implementations -%}
 {% filter make_header('^') -%}
@@ -73,14 +67,19 @@ SC {{ sc.sc }}：
 {% endfor %}
 {%- endfor %}
 {%- endif %}
-{% if check.techniques is defined -%}
+{% if check.procedures is defined %}
+{% for proc in check.procedures -%}
 {% filter make_header('^') -%}
-チェック方法の例
+チェック手順： {{ proc.platform }}
 {%- endfilter %}
 
-{% for technique in check.techniques -%}
+{{ proc.text }}
+
+{% if proc.techniques is defined -%}
+
+{% for technique in proc.techniques -%}
 {% filter make_header('"') -%}
-{{ technique.tool_display_name }}によるチェック
+{{ technique.tool_display_name }}によるチェック方法の例
 {%- endfilter %}
 
 {{ technique.technique }}
@@ -89,4 +88,7 @@ SC {{ sc.sc }}：
 {% endif %}
 {% endfor %}
 {%- endif %}
+{%- endfor %}
+{% endif %}
+
 {%- endfor %}

@@ -41,19 +41,19 @@
           "mobile"
         ]
       }
-    }
-  },
-  "allOf": [
-    {
-      "if": {
+    },
+    "procedures": {
+      "description": "suggested procedures for performing the check",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
         "properties": {
-          "target": {"const": "product"}
-        }
-      },
-      "then": {
-        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["web", "mobile", "general"]
+          },
           "procedure": {
-            "description": "suggested procedure for performing the check",
             "$ref": "common.json#/definitions/i18nString"
           },
           "techniques": {
@@ -80,6 +80,58 @@
               "required": ["tool", "technique"]
             }
           }
+        },
+        "required": ["platform", "procedure"],
+        "additionalProperties": false
+      }
+    },
+    "implementations": {
+      "description": "one or more examples of implementation methods that satisfy the check",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "description": "purpose of the implementation",
+            "type": "string"
+          },
+          "methods": {
+            "description": "one or more methods of the implementation, set of target platform and the specific implementation method",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "platform": {
+                  "description": "platform the implementation method applies to",
+                  "enum": ["web", "ios", "android"]
+                },
+                "method": {
+                  "description": "an example of how to implement",
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false,
+              "required": ["platform", "method"]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": ["title", "methods"]
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "target": {"const": "product"}
+        }
+      },
+      "else": {
+        "not": {
+          "required": ["procedures"]
         }
       }
     },
@@ -89,49 +141,14 @@
           "target": {"const": "code"}
         }
       },
-      "then": {
-        "properties": {
-          "implementations": {
-            "description": "one or more examples of implementation methods that satisfy the check",
-            "type": "array",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "description": "purpose of the implementation",
-                  "type": "string"
-                },
-                "methods": {
-                  "description": "one or more methods of the implementation, set of target platform and the specific implementation method",
-                  "type": "array",
-                  "minItems": 1,
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "platform": {
-                        "description": "platform the implementation method applies to",
-                        "enum": ["web", "ios", "android"]
-                      },
-                      "method": {
-                        "description": "an example of how to implement",
-                        "type": "string"
-                      }
-                    },
-                    "additionalProperties": false,
-                    "required": ["platform", "method"]
-                  }
-                }
-              },
-              "additionalProperties": false,
-              "required": ["title", "methods"]
-            }
-          }
+      "else": {
+        "not": {
+          "required": ["implementations"]
         }
       }
     }
   ],
-  "unevaluatedProperties": false,
+  "additionalProperties": false,
   "required": [
     "id",
     "check",
@@ -139,5 +156,4 @@
     "target",
     "platform"
   ]
-
 }

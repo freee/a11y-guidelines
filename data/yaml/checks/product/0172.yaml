@@ -6,39 +6,77 @@ platform:
 - mobile
 check:
   ja: |-
-    フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序でフォーカスが移動する。
+    フォーカスの移動時、文脈、レイアウト、操作手順に即した自然な順序で、以下のコンポーネント間をフォーカスが移動する。
 
     *  リンクとボタン
     *  フォーム・コントロール（エディット・ボックス、チェックボックス、ラジオボタンなど）
     *  その他、マウスやキーボード、タッチによる操作を受け付けるすべてのもの
   en: |-
-    When moving the focus, the focus moves in a natural order that is consistent with the context, layout, and operating procedures.
+    When moving the focus, the focus moves in a natural order that is consistent with the context, layout, and operating procedures among the following components.
 
     *  Links and Buttons
     *  Form controls
     *  Everything else that accepts mouse, keyboard, or touch operation
-techniques:
-- tool: keyboard
-  technique:
+procedures:
+- platform: web
+  procedure:
     ja: |-
-      TabキーとShift+Tabキーでフォーカスを移動して確認する。
-- tool: ios-vo
-  technique:
+      以下のキーボードによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by keyboard passes.
+  techniques:
+  - tool: keyboard
+    technique:
+      ja: |-
+        Tabキー、またはShift+Tabキーでフォーカスを移動して、以下を確認する：
+
+        *  すべてのリンク、ボタン、フォーム・コントロールおよび操作を受け付けるコンポーネントにフォーカスを移動できる
+        *  フォーカスの移動順序は、文脈、レイアウト、操作手順に即した自然な順序になっている
+      en: |-
+        Confirm the following by moving the focus using Tab key, or Shift+Tab key:
+
+        *  The focus moves to all the links, buttons, form controls, and components that accepts operation.
+        *  The focus moves in a natural order that is consistent with the context, layout, and operating procedures.
+- platform: mobile
+  procedure:
     ja: |-
-      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
+  techniques:
+  - tool: ios-vo
+    technique:
+      ja: |-
+        1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
-      *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
-      *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
-      *  画面上に表示されているもので読み上げられないものがない
+        *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
+        *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
+        *  画面上に表示されているもので読み上げられないものがない
 
-      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-- tool: android-tb
-  technique:
-    ja: |-
-      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
+        Confirm the following by moving the focus with one-finger left/right flicks:
 
-      *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
-      *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
-      *  画面上に表示されているもので読み上げられないものがない
+        *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
+        *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
+        *  Everything displayed on the screen is announced.
 
-      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+        CF： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+  - tool: android-tb
+    technique:
+      ja: |-
+        1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+
+        *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
+        *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
+        *  画面上に表示されているもので読み上げられないものがない
+
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
+        Confirm the following by moving the focus with one-finger left/right flicks:
+
+        *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
+        *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
+        *  Everything displayed on the screen is announced.
+
+        CF： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

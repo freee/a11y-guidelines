@@ -9,20 +9,44 @@ check:
     情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
   en: |-
     Images that do not contain any information or functionality are ignored by the screen reader.
-techniques:
-- tool: nvda
-  technique:
+procedures:
+- platform: web
+  procedure:
     ja: |-
-      ブラウズ・モードでのカーソルキー操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされない
-- tool: ios-vo
-  technique:
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
+  techniques:
+  - tool: nvda
+    technique:
+      ja: |-
+        ブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
+      en: |-
+        Confirm that the presence of the image is not announced when passing over the image using arrow keys in browse mode.
+- platform: mobile
+  procedure:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
+  techniques:
+  - tool: ios-vo
+    technique:
+      ja: |-
+        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
 
-      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-- tool: android-tb
-  technique:
-    ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
+        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
 
-      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+  - tool: android-tb
+    technique:
+      ja: |-
+        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
+        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
+
+        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

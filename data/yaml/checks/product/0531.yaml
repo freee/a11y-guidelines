@@ -9,22 +9,48 @@ check:
     画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
   en: |-
     The screen reader announces the same content as the images of text.
-techniques:
-- tool: nvda
-  technique:
+procedures:
+- platform: web
+  procedure:
     ja: |-
-      ブラウズ・モードでのカーソルキー操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-- tool: ios-vo
-  technique:
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
+  techniques:
+  - tool: nvda
+    technique:
+      ja: |-
+        ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      en: |-
+        Confirm that the same text as contained in the image is announced when using arrow keys in browse mode.
+- platform: mobile
+  procedure:
     ja: |-
-      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+    en: |-
+      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
+  techniques:
+  - tool: ios-vo
+    technique:
+      ja: |-
+        *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
 
-      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-- tool: android-tb
-  technique:
-    ja: |-
-      *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
-      *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
+        *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+        *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
 
-      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+  - tool: android-tb
+    technique:
+      ja: |-
+        *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
+        *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
+        *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
+
+        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

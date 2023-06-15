@@ -6,14 +6,21 @@ platform:
 - mobile
 check:
   ja: |-
-    グレイスケール表示でも利用に支障が出ない:
-
-    *  リンク箇所を判別できる
-    *  画像、テキストの意図が伝わる
-    *  入力フォームの必須項目、エラーを認知できる
+    グレイスケール表示でも利用に支障が出ない。
   en: |-
-    Displaying content in grayscale does not interfere with its use:
+    Displaying content in grayscale does not interfere with its use.
+procedures:
+- platform: general
+  procedure:
+    ja: |-
+      グレイスケール表示にして、以下を確認する：
 
-    *  Links can be identified
-    *  The intent of images and text is clear
-    *  Required fields and errors in ininput forms can be recognized
+      *  リンク箇所を判別できる
+      *  画像、テキストの意図が伝わる
+      *  入力フォームの必須項目、エラーを認知できる
+    en: |-
+      Confirm the content meets the following when displayed in grayscale:
+
+      *  Links can be identified
+      *  The intent of images and text is clear
+      *  Required fields and errors in ininput forms can be recognized
