@@ -17,6 +17,16 @@ procedures:
     en: |-
       Confirm the following checks by axe DevTools and NVDA pass.
   techniques:
+  - tool: axe
+    technique:
+      ja: |-
+        「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
+      
+        ただし、画像に何かしらの代替テキストが入っていれば問題として検知されないため、適切ではない代替テキストの検出をすることはできません。
+      en: |-
+        Confirm that the issue :ref:`axe-rule-image-alt` is not reported.
+      
+        Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
   - tool: nvda
     technique:
       ja: |-
@@ -39,16 +49,6 @@ procedures:
         
           -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
           -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
-  - tool: axe
-    technique:
-      ja: |-
-        「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
-      
-        ただし、画像に何かしらの代替テキストが入っていれば問題として検知されないため、適切ではない代替テキストの検出をすることはできません。
-      en: |-
-        Confirm that the issue :ref:`axe-rule-image-alt` is not reported.
-      
-        Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
 - platform: mobile
   procedure:
     ja: |-

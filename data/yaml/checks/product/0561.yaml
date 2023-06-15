@@ -17,18 +17,6 @@ procedures:
     en: |-
       Confirm the following checks by axe DevTools and NVDA pass.
   techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
-
-        1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
-        2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
-      en: |-
-        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
-
-        1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
-        2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
   - tool: axe
     technique:
       ja: |-
@@ -43,6 +31,18 @@ procedures:
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
         *  :ref:`axe-rule-page-has-heading-one`
+  - tool: nvda
+    technique:
+      ja: |-
+        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+
+        1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
+        2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+      en: |-
+        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+
+        1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
+        2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
 - platform: mobile
   procedure:
     ja: |-
