@@ -3,6 +3,7 @@ import sys
 import re
 import yaml
 import json
+import unicodedata
 #from jsonschema import validate, ValidationError
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -64,7 +65,7 @@ def main():
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
         )
-    template_env.filters['make_header'] = make_header
+    template_env.filters['make_heading'] = make_heading
 
     tool_example_template = template_env.get_template('check-examples-tool.rst')
     allchecks_text_template = template_env.get_template('allchecks.rst')
@@ -399,27 +400,38 @@ def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
 
-def make_header(title, char, overline = False, className = ""):
+def make_heading(title, level, className=""):
+    
+    def _isMultiByte(c):
+        return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
+        
+    def _width(c):
+        return 2 if _isMultiByte(c) else 1
+
+    def width(s):
+        return sum([_width(c) for c in s])
+        
+    # Modify heading_styles accordingly
+    heading_styles = [('#', True), ('*', True), ('=', False), ('-', False), ('^', False), ('"', False)]
+    
+    if not 1 <= level <= len(heading_styles):
+        raise ValueError(f'Invalid level: {level}. Must be between 1 and {len(heading_styles)}')
+
+    char, overline = heading_styles[level - 1]
     line = char * width(title)
-    header = ""
-    if className != "":
-        header = f'.. rst-class:: {className}\n\n'
+
+    heading_lines = []
+
+    if className:
+        heading_lines.append(f'.. rst-class:: {className}\n')
 
     if overline:
-        header += f'{line}\n'
+        heading_lines.append(line)
 
-    header += f'{title}\n{line}'
-    return header
+    heading_lines.append(title)
+    heading_lines.append(line)
 
-def width(s):
-    return sum([_width(c) for c in s])
-
-def _width(c):
-    return 2 if _isMultiByte(c) else 1
-
-def _isMultiByte(c):
-    import unicodedata
-    return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
+    return '\n'.join(heading_lines)
 
 if __name__ == "__main__":
     main()
