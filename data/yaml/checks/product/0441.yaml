@@ -61,22 +61,24 @@ procedures:
       ja: |-
         *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
         *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認するる。
-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
         *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   - tool: android-tb
     technique:
       ja: |-
         *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
         *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認する。
-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
       en: |-
         *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
         *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

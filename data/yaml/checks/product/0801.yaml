@@ -42,19 +42,21 @@ procedures:
     technique:
       ja: |-
         1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面一貫していることを確認する。
-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   - tool: android-tb
     technique:
       ja: |-
         1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
       en: |-
         Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
