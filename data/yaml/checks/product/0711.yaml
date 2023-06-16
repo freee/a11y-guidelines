@@ -37,22 +37,24 @@ procedures:
       ja: |-
         *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
         *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
         *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   - tool: android-tb
     technique:
       ja: |-
         *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
         *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
       en: |-
         *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
         *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

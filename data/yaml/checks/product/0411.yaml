@@ -41,22 +41,24 @@ procedures:
       ja: |-
         *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
         *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
         *  Cofirm that text describing the role of the icon is announced when an icon is touched, instead of reaching it by flicking.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   - tool: android-tb
     technique:
       ja: |-
         *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
         *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
       en: |-
         *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
         *  Cofirm that text describing the role of the icon is announced when the icon is touched, instead of reaching it by flicking.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
         CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

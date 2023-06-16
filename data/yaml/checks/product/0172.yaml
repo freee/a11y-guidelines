@@ -52,15 +52,16 @@ procedures:
         *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
         *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
         *  画面上に表示されているもので読み上げられないものがない
-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         Confirm the following by moving the focus with one-finger left/right flicks:
 
         *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
         *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
         *  Everything displayed on the screen is announced.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+      en: |-
         CF： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
   - tool: android-tb
     technique:
@@ -70,13 +71,14 @@ procedures:
         *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
         *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
         *  画面上に表示されているもので読み上げられないものがない
-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
       en: |-
         Confirm the following by moving the focus with one-finger left/right flicks:
 
         *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
         *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
         *  Everything displayed on the screen is announced.
-
+    note:
+      ja: |-
+        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      en: |-
         CF： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

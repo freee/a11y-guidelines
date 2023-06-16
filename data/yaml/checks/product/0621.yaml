@@ -16,17 +16,6 @@ procedures:
     en: |-
       Confirm the following checks by axe DevTools and NVDA pass.
   techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられることを確認する。
-      en: |-
-        Confirm that displayed text is announced without any issue when reading with up and down arrow keys in browse mode.
-    note:
-      ja: |-
-        このチェックを正しく実施するためには、多言語処理のための設定を行う必要があります。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」および「音声合成エンジンの管理」の項を参照）
-      en: |-
-        To perform this check properly, the settings need to be done for processing multiple languages.
   - tool: axe
     technique:
       ja: |-
@@ -38,3 +27,14 @@ procedures:
         この問題が出た場合は、そのページの ``<html>`` 要素の記述を ``<html lang="ja">`` （主に利用されている言語が日本語の場合）のように修正する必要があります。
       en: |-
         If this issue is reported, the ``<html>`` element of the page needs to be modified such as ``<html lang="ja">`` (in the case where the primary language of the page being Japanese)
+  - tool: nvda
+    technique:
+      ja: |-
+        ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられることを確認する。
+      en: |-
+        Confirm that displayed text is announced without any issue when reading with up and down arrow keys in browse mode.
+    note:
+      ja: |-
+        このチェックを正しく実施するためには、多言語処理のための設定を行う必要があります。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」および「音声合成エンジンの管理」の項を参照）
+      en: |-
+        To perform this check properly, the settings need to be done for processing multiple languages.
