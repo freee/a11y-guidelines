@@ -23,4 +23,4 @@ DOMツリーとスクリーン・リーダー
 関連ガイドライン
 ****************
 
-*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree` 
+*  動的コンテンツ： :ref:`gl-dynamic-content-maintain-dom-tree`

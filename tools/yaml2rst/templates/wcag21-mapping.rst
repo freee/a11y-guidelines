@@ -4,3 +4,4 @@
 {% for item in mapping %}
    "{{ item.sc }}","{{ item.sc_en }}","{{ item.sc_ja }}","{{ item.level }}","{{ item.gls }}"
 {%- endfor %}
+

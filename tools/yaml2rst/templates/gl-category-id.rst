@@ -1,6 +1,7 @@
+{%- set check_heading_level = 4 -%}
 .. _{{ id }}:
 
-{{ title|make_header("*", True) }}
+{{ title|make_heading(2) }}
 
 優先度
    {{ priority }}
@@ -9,13 +10,13 @@
 
 {{ guideline }}
 
-{% filter make_header('=') -%}
+{% filter make_heading(3) -%}
 意図
 {%- endfilter %}
 
 {{ intent }}
 
-{% filter make_header('=') -%}
+{% filter make_heading(3) -%}
 対応するWCAG 2.1の達成基準
 {%- endfilter %}
 
@@ -26,7 +27,7 @@ SC {{ sc.sc }}：
 {% endfor %}
 
 {% if info is defined -%}
-{% filter make_header('=') -%}
+{% filter make_heading(3) -%}
 参考情報
 {%- endfilter %}
 
@@ -35,12 +36,12 @@ SC {{ sc.sc }}：
 {% endfor %}
 {%- endif %}
 
-{% filter make_header('=', False, 'checklist') -%}
+{% filter make_heading(3, 'checklist') -%}
 チェック内容
 {%- endfilter %}
 
 {% for check in checks -%}
-{% filter make_header('-') -%}
+{% filter make_heading(4) -%}
 :ref:`check-{{ check.id }}`
 {%- endfilter %}
 
@@ -51,42 +52,13 @@ SC {{ sc.sc }}：
 重篤度
    {{ check.severity }}
 
-
 {{ check.check }}
-{% if check.procedure is defined %}
-{% filter make_header('^') -%}
-チェック手順
-{%- endfilter %}
 
-{{ check.procedure }}
-{% endif %}
 {% if check.implementations is defined -%}
-{% for impl in check.implementations -%}
-{% filter make_header('^') -%}
-実装方法の例：{{ impl.title }}
-{%- endfilter %}
-
-{% for ex in impl.examples -%}
-{{ ex.platform }}
-   {{ ex.method | indent(3) }}
-
-{% endfor %}
-{%- endfor %}
+{% include 'check-implementation.rst' %}
 {%- endif %}
-{% if check.techniques is defined -%}
-{% filter make_header('^') -%}
-チェック方法の例
-{%- endfilter %}
-
-{% for technique in check.techniques -%}
-{% filter make_header('"') -%}
-{{ technique.tool_display_name }}によるチェック
-{%- endfilter %}
-
-{{ technique.technique }}
-{% if technique.note is defined %}
-{{ technique.note }}
+{% if check.procedures is defined %}
+{% include 'check-procedure.rst' %}
 {% endif %}
-{% endfor %}
-{%- endif %}
+
 {%- endfor %}

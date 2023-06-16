@@ -6,18 +6,34 @@ platform:
 - mobile
 check:
   ja: |-
-    スクリーン・リーダーで、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールとラベルの関連付けが分かるような読み上げがされる。
-
-    注：デスクトップWebの場合、ラベルをクリックするとそのラベルが関連付けられているフォーム・コントロールにフォーカスが移動する。
+    エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールは、適切にラベル付けされている。
   en: |-
-    The screen reader announces the association between the form control and the label.
-
-    Note: For desktop web, clicking on a label moves focus to the form control with which it is associated.
-techniques:
-- tool: axe
-  technique:
+    Form controls, such as edit boxes, check boxes, and radio buttons, are properly labeled.
+procedures:
+- platform: web
+  procedure:
     ja: |-
-      以下のいずれの問題も発生しないことを確認する。
+      以下のaxe DevToolsによるチェックとNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following checks by axe DevTools and NVDA pass.
+  techniques:
+  - tool: axe
+    technique:
+      ja: |-
+        以下のいずれの問題も発生しないことを確認する。
 
-      *  :ref:`axe-rule-label`
-      *  :ref:`axe-rule-select-name`
+        *  :ref:`axe-rule-label`
+        *  :ref:`axe-rule-select-name`
+        *  :ref:`axe-rule-form-field-multiple-labels`
+      en: |-
+        Confirm that none of the following issues are reported.
+
+        *  :ref:`axe-rule-label`
+        *  :ref:`axe-rule-select-name`
+        *  :ref:`axe-rule-form-field-multiple-labels`
+  - tool: nvda
+    technique:
+      ja: |-
+        フォーカス・モードでTabキーを用いてフォーカスを移動した際、そのフォーム・コントロールに対応した適切なテキストが読み上げられることを確認する。
+      en: |-
+        Confirm that appropriate labels associated to form controls are announced when moving the focus using the Tab key in focus mode.

@@ -9,13 +9,27 @@ check:
     静的なテキストではない部分（例：開閉するメニュー、タブ・パネル、日付選択UI）も、スクリーン・リーダーで問題なく操作できる。
   en: |-
     Non-static text (e.g., open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
-techniques:
-- tool: nvda
-  technique:
+procedures:
+- platform: web
+  procedure:
     ja: |-
-      以下のすべてを満たしている：
+      以下のNVDAによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by NVDA passes.
+  techniques:
+  - tool: nvda
+    technique:
+      ja: |-
+        以下のすべてを満たしていることを確認する：
 
-      *  ブラウズ・モードでその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
-      *  その部分で提供されているすべての機能を、最低限フォーカス・モードにおいてキーボードで操作できる
-      *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
-      *  操作の結果表示が変わる場合、ブラウズ・モードで変更後の表示内容を読み上げさせて確認できる
+        *  ブラウズ・モードでその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
+        *  その部分で提供されているすべての機能を、最低限フォーカス・モードにおいてキーボードで操作できる
+        *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
+        *  操作の結果表示が変わる場合、ブラウズ・モードで変更後の表示内容を読み上げさせて確認できる
+      en: |-
+        Confirm that all of the following are met:
+
+        *  Users can recognize that the component accepts some operation when reading the part in browse mode.
+        *  All of the functions provided in the part can be operated at least by keyboard in focus mode.
+        *  If the displayed content changes upon operation, users can recognize it through the announcement.
+        *  If the displayed content changes upon operation, users can read the updated content in browse mode.

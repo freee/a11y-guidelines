@@ -3,6 +3,7 @@ import sys
 import re
 import yaml
 import json
+import unicodedata
 #from jsonschema import validate, ValidationError
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -47,7 +48,8 @@ TARGET_NAMES = {
 }
 PLATFORM_NAMES = {
     'web': 'Web',
-    'mobile': 'モバイル'
+    'mobile': 'モバイル',
+    'general': 'Web、モバイル'
 }
 
 
@@ -63,7 +65,7 @@ def main():
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
         )
-    template_env.filters['make_header'] = make_header
+    template_env.filters['make_heading'] = make_heading
 
     tool_example_template = template_env.get_template('check-examples-tool.rst')
     allchecks_text_template = template_env.get_template('allchecks.rst')
@@ -133,8 +135,6 @@ def main():
             'severity': check['severity'],
             'check': check['check'][LANG],
         }
-        if 'procedure' in check:
-            check_str['procedure'] = check['procedure'][LANG]
         if len(check['info']) > 0:
             check['info'] = uniq(check['info'])
             check_str['inforefs'] = []
@@ -150,7 +150,7 @@ def main():
                 'category': gl_categories[ref],
                 'glref': ref
                 })
-            
+
         if check['target'] == 'code' and 'implementations' in check:
             check_str['implementations'] = []
             for detail in check['implementations']:
@@ -165,29 +165,40 @@ def main():
                         'method': impl['method']
                     })
                 check_str['implementations'].append(implementation)
-        elif check['target'] == 'product' and 'techniques' in check:
-            check['checkTools'] = []
-            check_str['techniques'] = []
-            for technique in check['techniques']:
-                if technique['tool'] in CHECK_TOOLS:
-                    tool_basename = technique['tool']
-                    tool_display_name = CHECK_TOOLS[technique['tool']]
-                else:
-                    tool_basename = 'misc'
-                    tool_display_name = technique['tool']
-
-                str_obj = {
-                    'tool_display_name': tool_display_name,
-                    'technique': technique['technique'][LANG],
-                    'tool': tool_basename,
-                    'id': check['id'],
-                    'check': check['check'][LANG],
+        elif check['target'] == 'product' and 'procedures' in check:
+            check_str['procedures'] = []
+            for procedure in check['procedures']:
+                procedure_str_obj = {}
+                procedure_str_obj = {
+                    'platform': PLATFORM_NAMES[procedure['platform']],
+                    'text': procedure['procedure'][LANG]
                 }
-                if 'note' in technique:
-                    str_obj['note'] = technique['note'][LANG]
-                check['checkTools'].append(tool_basename)
-                check_str['techniques'].append(str_obj)
-                check_examples[tool_basename].append(str_obj)
+
+                if 'techniques' in procedure:
+                    procedure_str_obj['techniques'] = []
+                    check['checkTools'] = []
+                    for technique in procedure['techniques']:
+                        if technique['tool'] in CHECK_TOOLS:
+                            tool_basename = technique['tool']
+                            tool_display_name = CHECK_TOOLS[technique['tool']]
+                        else:
+                            tool_basename = 'misc'
+                            tool_display_name = technique['tool']
+
+                        str_obj = {
+                            'tool_display_name': tool_display_name,
+                            'technique': technique['technique'][LANG],
+                            'tool': tool_basename,
+                            'id': check['id'],
+                            'check': check['check'][LANG],
+                        }
+                        if 'note' in technique:
+                            str_obj['note'] = technique['note'][LANG]
+                        check['checkTools'].append(tool_basename)
+                        procedure_str_obj['techniques'].append(str_obj)
+                        check_examples[tool_basename].append(str_obj)
+
+                check_str['procedures'].append(procedure_str_obj)
 
         allchecks.append(check_str)
         check['check_str'] = check_str
@@ -218,7 +229,7 @@ def main():
         gl['examples'] = []
         for check in gl['checks']:
             _check = [x for x in checks if x["id"] == check][0]
-            if 'techniques' in _check:
+            if 'checkTools' in _check:
                 gl['examples'].extend(list(_check['checkTools']))
             gl_str['checks'].append(_check['check_str'])
             gl['depends'].append(_check['src_path'])
@@ -264,7 +275,7 @@ def main():
                 'gls': gls_str
             }
             sc_mapping.append(mapping)
-    
+
         sc_mapping_text = wcag21mapping_template.render({'mapping': sc_mapping})
         with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(sc_mapping_text)
@@ -389,27 +400,38 @@ def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
 
-def make_header(title, char, overline = False, className = ""):
+def make_heading(title, level, className=""):
+    
+    def _isMultiByte(c):
+        return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
+        
+    def _width(c):
+        return 2 if _isMultiByte(c) else 1
+
+    def width(s):
+        return sum([_width(c) for c in s])
+        
+    # Modify heading_styles accordingly
+    heading_styles = [('#', True), ('*', True), ('=', False), ('-', False), ('^', False), ('"', False)]
+    
+    if not 1 <= level <= len(heading_styles):
+        raise ValueError(f'Invalid level: {level}. Must be between 1 and {len(heading_styles)}')
+
+    char, overline = heading_styles[level - 1]
     line = char * width(title)
-    header = ""
-    if className != "":
-        header = f'.. rst-class:: {className}\n\n'
+
+    heading_lines = []
+
+    if className:
+        heading_lines.append(f'.. rst-class:: {className}\n')
 
     if overline:
-        header += f'{line}\n'
+        heading_lines.append(line)
 
-    header += f'{title}\n{line}'
-    return header
+    heading_lines.append(title)
+    heading_lines.append(line)
 
-def width(s):
-    return sum([_width(c) for c in s])
-
-def _width(c):
-    return 2 if _isMultiByte(c) else 1
-
-def _isMultiByte(c):
-    import unicodedata
-    return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
+    return '\n'.join(heading_lines)
 
 if __name__ == "__main__":
     main()
