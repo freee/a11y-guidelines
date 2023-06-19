@@ -29,6 +29,9 @@ procedures:
 
         *  When the part with the icon is is read aloud using arrow keys in browse mode
         *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
+    YouTube:
+      id: OQrwQ4rnudY
+      title: アイコンの役割や示している状態【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-

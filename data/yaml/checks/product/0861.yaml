@@ -23,3 +23,6 @@ procedures:
         ブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
       en: |-
         Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content in browse mode using arrow keys.
+    YouTube:
+      id: wegzVOdnLJM
+      title: 現在のページ【NVDAでアクセシビリティー チェック】

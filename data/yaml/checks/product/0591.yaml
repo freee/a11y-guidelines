@@ -33,3 +33,6 @@ procedures:
         *  All of the functions provided in the part can be operated at least by keyboard in focus mode.
         *  If the displayed content changes upon operation, users can recognize it through the announcement.
         *  If the displayed content changes upon operation, users can read the updated content in browse mode.
+    YouTube:
+      id: Wl6cydtXNw4
+      title: 開閉するボタン【NVDAでアクセシビリティー チェック】

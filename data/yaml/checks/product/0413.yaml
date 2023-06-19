@@ -23,6 +23,9 @@ procedures:
         ブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
       en: |-
         Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in browse mode.
+    YouTube:
+      id: _Q1WaOtcX7c
+      title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-

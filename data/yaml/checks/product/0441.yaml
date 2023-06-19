@@ -49,6 +49,9 @@ procedures:
         
            -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
            -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
+    YouTube:
+      id: Xrl96WVEF9s
+      title: 画像の説明【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-
