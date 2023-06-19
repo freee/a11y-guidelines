@@ -23,6 +23,9 @@ procedures:
         ブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
         Confirm that the presence of the image is not announced when passing over the image using arrow keys in browse mode.
+    YouTube:
+      id: CPBzG2Zkl_Y
+      title: 情報や機能性を持たない画像【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-

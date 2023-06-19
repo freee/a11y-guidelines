@@ -43,6 +43,9 @@ procedures:
 
         1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
         2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
+    YouTube:
+      id: Gi2M1A0PB_0
+      title: 見出し【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-
