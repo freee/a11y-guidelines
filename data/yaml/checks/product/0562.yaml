@@ -24,13 +24,13 @@ procedures:
 
         *  以下の手順で表を発見できる：
 
-          1. ブラウズ・モードでページの先頭に移動（ :kbd:`Ctrl+Home` ）
-          2. 前後の表への移動（ :kbd:`T` または :kbd:`Shift+T` キー）で、表に移動
+           1. ブラウズ・モードでページの先頭に移動（ :kbd:`Ctrl+Home` ）
+           2. 前後の表への移動（ :kbd:`T` または :kbd:`Shift+T` キー）で、表に移動
 
         *  以下の手順で、表中のセル間を移動して、セルの内容が適切に読み上げられる：
 
-          1. ブラウズ・モードで表の先頭部分を探す
-          2. 以下のキー操作でセル間を移動：
+           1. ブラウズ・モードで表の先頭部分を探す
+           2. 以下のキー操作でセル間を移動：
 
               *  :kbd:`Ctrl+Alt+←` ： 左のセル
               *  :kbd:`Ctrl+Alt+→` ： 右のセル
@@ -42,13 +42,13 @@ procedures:
 
         *  The table can be found by the following steps:
 
-          1. Move to the beginning of the page in browse mode ():kbd:`Ctrl+Home`)
-          2. Move to the table using the go to next/previous table functions (:kbd:`T` or :kbd:`Shift+T`)
+           1. Move to the beginning of the page in browse mode ():kbd:`Ctrl+Home`)
+           2. Move to the table using the go to next/previous table functions (:kbd:`T` or :kbd:`Shift+T`)
 
         *  Content of the table cells are announced properly when moving among the cells using the following steps:
 
-          1. Find the beginning of the table in browse mode
-          2. Move among the cells using following keys:
+           1. Find the beginning of the table in browse mode
+           2. Move among the cells using following keys:
 
               *  :kbd:`Ctrl+Alt+←`: to the left cell
               *  :kbd:`Ctrl+Alt+→`: to the right cell

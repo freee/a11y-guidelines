@@ -32,23 +32,23 @@ procedures:
       ja: |-
         *  以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
         
-          -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
-          -  その画像がリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+           -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
+           -  その画像がリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
         
         *  詳細な説明が必要な画像の場合、以下のいずれかを満たしていることを確認する
         
-          -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
-          -  ブラウズ・モードで次/前の画像への移動（G/Shift+Gキー）を実行して当該の画像を読み上げさせたときに、詳細な説明が読み上げられる
+           -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
+           -  ブラウズ・モードで次/前の画像への移動（G/Shift+Gキー）を実行して当該の画像を読み上げさせたときに、詳細な説明が読み上げられる
       en: |-
         *  Confirm that a brief description of the image is announced when performing the following:
         
-          -  When reading the part with the image using arrow keys in browse mode
-          -  When the image receives focus with Tab/Shift+Tab key operation, for focusable images, such as  links.
+           -  When reading the part with the image using arrow keys in browse mode
+           -  When the image receives focus with Tab/Shift+Tab key operation, for focusable images, such as  links.
         
         *  Confirm that one of the following is true for images that require detailed description
         
-          -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
-          -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
+           -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
+           -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
 - platform: mobile
   procedure:
     ja: |-
