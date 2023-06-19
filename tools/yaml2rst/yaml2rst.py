@@ -194,6 +194,8 @@ def main():
                         }
                         if 'note' in technique:
                             str_obj['note'] = technique['note'][LANG]
+                        if 'YouTube' in technique:
+                            str_obj['YouTube'] = technique['YouTube']
                         check['checkTools'].append(tool_basename)
                         procedure_str_obj['techniques'].append(str_obj)
                         check_examples[tool_basename].append(str_obj)
