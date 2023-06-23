@@ -69,7 +69,7 @@ def main():
 
     tool_example_template = template_env.get_template('check-examples-tool.rst')
     allchecks_text_template = template_env.get_template('allchecks.rst')
-    gl_text_template = template_env.get_template('gl-category-id.rst')
+    category_page_template = template_env.get_template('gl-category.rst')
     wcag21mapping_template = template_env.get_template(WCAG_MAPPING_FILENAME)
     priority_diff_template = template_env.get_template(PRIORITY_DIFF_FILENAME)
     makefile_template = template_env.get_template(MAKEFILE_FILENAME)
@@ -101,6 +101,15 @@ def main():
         wcag_sc[sc]['gls'] = []
         wcag_sc[sc]['en']['linkCode'] = f'`{wcag_sc[sc]["en"]["title"]} <{wcag_sc[sc]["en"]["url"]}>`_'
         wcag_sc[sc]['ja']['linkCode'] = f'`{wcag_sc[sc]["ja"]["title"]} <{wcag_sc[sc]["ja"]["url"]}>`_'
+
+    category_pages = {}
+    guideline_category_rst = []
+    for cat in category_names:
+        category_pages[cat] = {
+            'guidelines': [],
+            'dependency': []
+        }
+        guideline_category_rst.append(os.path.join(DESTDIR, f'gl-category-{cat}.rst'))
 
     gl_categories = {}
     for gl in guidelines:
@@ -203,11 +212,8 @@ def main():
         allchecks.append(check_str)
         check['check_str'] = check_str
 
-    guidelines_rst = []
-    guidelines_rst_depends = []
-
     for gl in guidelines:
-        gl['depends'] = [gl['src_path']]
+        category_pages[gl['category']]['dependency'].append(gl['src_path'])
         gl_str = {
             'title': gl['title'][LANG],
             'intent': gl['intent'],
@@ -232,7 +238,7 @@ def main():
             if 'checkTools' in _check:
                 gl['examples'].extend(list(_check['checkTools']))
             gl_str['checks'].append(_check['check_str'])
-            gl['depends'].append(_check['src_path'])
+            category_pages[gl['category']]['dependency'].append(_check['src_path'])
 
         gl_str['scs'] = []
         for sc in gl['sc']:
@@ -242,21 +248,22 @@ def main():
                 'sc_ja': wcag_sc[sc]['ja']['linkCode']
             })
 
-        output = gl_text_template.render(gl_str)
+        category_pages[gl['category']]['guidelines'].append(gl_str)
 
-        filename = gl["id"] + '.rst'
-        make_target = os.path.join(DESTDIR, filename)
-        guidelines_rst.append(make_target)
-        guidelines_rst_depends.append("{0}: {1}".format(make_target, " ".join(gl['depends'])))
-        if build_all or make_target in targets:
-            os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
+        if len(gl['examples']):
+            build_examples.extend(gl['examples'])
+
+        build_examples = uniq(build_examples)
+
+    os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
+
+    for cat in category_pages:
+        filename = f'gl-category-{cat}.rst'
+        if build_all or os.path.join(DESTDIR, filename) in targets:
+            output = category_page_template.render(guidelines = category_pages[cat]['guidelines'])
             destfile = os.path.join(os.getcwd(), DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
-            if len(gl['examples']):
-                build_examples.extend(gl['examples'])
-
-            build_examples = uniq(build_examples)
 
     if build_all or os.path.join(DESTDIR, WCAG_MAPPING_FILENAME) in targets:
         sc_mapping = []
@@ -340,13 +347,16 @@ def main():
         for obj in guidelines+checks:
             all_yaml.append(obj['src_path'])
 
-        gl_deps = [{
-                'dep': dep,
-                'target': dep.split(":")[0]}
-                for dep in guidelines_rst_depends
-                ]
+        gl_deps = []
+        for cat in category_pages:
+            target = os.path.join(DESTDIR, f'gl-category-{cat}.rst')
+            deps = " ".join(uniq(category_pages[cat]['dependency']))
+            gl_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
         makefile_data = {
-            'guidelines_rst': " ".join(guidelines_rst),
+            'guideline_category_rst': " ".join(guideline_category_rst),
             'wcag_mapping_target': os.path.join(DESTDIR, WCAG_MAPPING_FILENAME),
             'priority_diff_target': os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME),
             'all_checks_target': os.path.join(DESTDIR, ALL_CHECKS_FILENAME),

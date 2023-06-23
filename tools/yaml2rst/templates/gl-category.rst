@@ -1,37 +1,38 @@
 {%- set check_heading_level = 4 -%}
-.. _{{ id }}:
+{% for gl in guidelines -%}
+.. _{{ gl.id }}:
 
-{{ title|make_heading(2) }}
+{{ gl.title|make_heading(2) }}
 
 優先度
-   {{ priority }}
+   {{ gl.priority }}
 対象プラットフォーム
-   {{ platform }}
+   {{ gl.platform }}
 
-{{ guideline }}
+{{ gl.guideline }}
 
 {% filter make_heading(3) -%}
 意図
 {%- endfilter %}
 
-{{ intent }}
+{{ gl.intent }}
 
 {% filter make_heading(3) -%}
 対応するWCAG 2.1の達成基準
 {%- endfilter %}
 
-{% for sc in scs -%}
+{% for sc in gl.scs -%}
 SC {{ sc.sc }}：
    -  {{ sc.sc_en }}
    -  {{ sc.sc_ja }}
 {% endfor %}
 
-{% if info is defined -%}
+{% if gl.info is defined -%}
 {% filter make_heading(3) -%}
 参考情報
 {%- endfilter %}
 
-{% for item in info -%}
+{% for item in gl.info -%}
 *  {{ item }}
 {% endfor %}
 {%- endif %}
@@ -40,7 +41,7 @@ SC {{ sc.sc }}：
 チェック内容
 {%- endfilter %}
 
-{% for check in checks -%}
+{% for check in gl.checks -%}
 {% filter make_heading(4) -%}
 :ref:`check-{{ check.id }}`
 {%- endfilter %}
@@ -62,3 +63,6 @@ SC {{ sc.sc }}：
 {% endif %}
 
 {%- endfor %}
+
+{% endfor %}
+
