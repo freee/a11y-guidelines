@@ -1,18 +1,22 @@
 id: gl-text-contrast
-sortKey: 1413
+sortKey: 1461
 category: text
 title:
   ja: コントラスト比の確保
 priority: '[MUST]'
 platform:
 - web
-- mobile
 guideline: |-
   文字色と背景色に十分なコントラストを確保する。
 
   -  テキストの文字サイズが30px（22pt）以上の場合： 3:1以上（[SHOULD] 4.5:1以上）
   -  テキストの文字サイズが22px（18pt）以上で太字の場合： 3:1以上（[SHOULD] 4.5:1以上）
   -  その他の場合： 4.5:1以上（[SHOULD] 7:1以上）
+
+  注：freeeのプロダクトやWebサイトにおいては、主に日本語が用いられているため、Understanding WCAG 2.1 [#]_ の日本語訳 [#]_ 中の訳注で示されている基準を用いています。
+
+  .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
+  .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
 sc:
 - 1.4.3
 - 1.4.6
