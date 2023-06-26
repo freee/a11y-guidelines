@@ -11,14 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-multimedia-perceivable.rst
-.. include:: /inc/gl-multimedia-operable.rst
-.. include:: /inc/gl-multimedia-pause-movement.rst
-.. include:: /inc/gl-multimedia-no-trap.rst
-.. include:: /inc/gl-multimedia-text-alternative.rst
-.. include:: /inc/gl-multimedia-caption.rst
-.. include:: /inc/gl-multimedia-transcript.rst
-.. include:: /inc/gl-multimedia-video-description.rst
-.. include:: /inc/gl-multimedia-video-description-no-exception.rst
-.. include:: /inc/gl-multimedia-sign-language.rst
-.. include:: /inc/gl-multimedia-background-sound.rst
+.. include:: /inc/gl-category-multimedia.rst

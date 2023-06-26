@@ -12,8 +12,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-image-description.rst
-.. include:: /inc/gl-image-decorative.rst
-.. include:: /inc/gl-image-color-only.rst
-.. include:: /inc/gl-image-adjacent-contrast.rst
-.. include:: /inc/gl-image-text-contrast.rst
+.. include:: /inc/gl-category-image.rst

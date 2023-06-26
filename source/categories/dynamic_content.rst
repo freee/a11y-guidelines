@@ -13,12 +13,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-dynamic-content-maintain-dom-tree.rst
-.. include:: /inc/gl-dynamic-content-focus.rst
-.. include:: /inc/gl-dynamic-content-hover-magnify.rst
-.. include:: /inc/gl-dynamic-content-hover.rst
-.. include:: /inc/gl-dynamic-content-status.rst
-.. include:: /inc/gl-dynamic-content-pause-movement.rst
-.. include:: /inc/gl-dynamic-content-pause-refresh.rst
-.. include:: /inc/gl-dynamic-content-no-flashing.rst
-.. include:: /inc/gl-dynamic-content-no-interrupt.rst
+.. include:: /inc/gl-category-dynamic_content.rst

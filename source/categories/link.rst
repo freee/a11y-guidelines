@@ -15,7 +15,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-link-color-only.rst
-.. include:: /inc/gl-link-text.rst
-.. include:: /inc/gl-link-consistent-text.rst
-.. include:: /inc/gl-link-tab-order.rst
+.. include:: /inc/gl-category-link.rst

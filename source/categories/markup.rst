@@ -13,7 +13,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-markup-semantics.rst
-.. include:: /inc/gl-markup-valid.rst
-.. include:: /inc/gl-markup-component-implementation.rst
-.. include:: /inc/gl-markup-component.rst
+.. include:: /inc/gl-category-markup.rst
