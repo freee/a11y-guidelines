@@ -11,17 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-form-label.rst
-.. include:: /inc/gl-form-hidden-label.rst
-.. include:: /inc/gl-form-color-only.rst
-.. include:: /inc/gl-form-timing.rst
-.. include:: /inc/gl-form-no-timing.rst
-.. include:: /inc/gl-form-continue.rst
-.. include:: /inc/gl-form-tab-order.rst
-.. include:: /inc/gl-form-dynamic-content-focus.rst
-.. include:: /inc/gl-form-dynamic-content-change.rst
-.. include:: /inc/gl-form-errors-identify.rst
-.. include:: /inc/gl-form-errors-correction.rst
-.. include:: /inc/gl-form-errors-cancel.rst
-.. include:: /inc/gl-form-target-size.rst
-.. include:: /inc/gl-form-target-size-mobile.rst
+.. include:: /inc/gl-category-form.rst

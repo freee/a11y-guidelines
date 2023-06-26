@@ -11,11 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-input-device-keyboard-operable.rst
-.. include:: /inc/gl-input-device-support-mobile-assistive-tech.rst
-.. include:: /inc/gl-input-device-focus.rst
-.. include:: /inc/gl-input-device-focus-indicator.rst
-.. include:: /inc/gl-input-device-no-trap.rst
-.. include:: /inc/gl-input-device-use-up-event.rst
-.. include:: /inc/gl-input-device-independent.rst
-.. include:: /inc/gl-input-device-shortcut-keys.rst
+.. include:: /inc/gl-category-input_device.rst
