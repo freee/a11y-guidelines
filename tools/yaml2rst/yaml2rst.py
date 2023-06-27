@@ -4,6 +4,7 @@ import re
 import yaml
 import json
 import unicodedata
+import copy
 #from jsonschema import validate, ValidationError
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -235,9 +236,16 @@ def main():
         gl['examples'] = []
         for check in gl['checks']:
             _check = [x for x in checks if x["id"] == check][0]
+            _check_str = copy.deepcopy(_check['check_str'])
             if 'checkTools' in _check:
                 gl['examples'].extend(list(_check['checkTools']))
-            gl_str['checks'].append(_check['check_str'])
+            if 'procedures' in _check:
+                for i, proc in enumerate(_check['procedures']):
+                    if proc['platform'] == 'general' or proc['platform'] in gl['platform']:
+                        continue
+                    del _check_str['procedures'][i]
+
+            gl_str['checks'].append(_check_str)
             category_pages[gl['category']]['dependency'].append(_check['src_path'])
 
         gl_str['scs'] = []
