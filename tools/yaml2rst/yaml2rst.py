@@ -6,6 +6,7 @@ import json
 import unicodedata
 import copy
 #from jsonschema import validate, ValidationError
+import argparse
 from jinja2 import Template, Environment, FileSystemLoader
 
 LANG = 'ja'
@@ -55,13 +56,12 @@ PLATFORM_NAMES = {
 
 
 def main():
-    args = sys.argv
-    argc = len(args)
-    if argc == 1:
+    args = parse_args()
+    if not args.files:
         build_all = True
     else:
         build_all = False
-        targets = args[1:argc]
+        targets = args.files
 
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
@@ -450,6 +450,12 @@ def make_heading(title, level, className=""):
     heading_lines.append(line)
 
     return '\n'.join(heading_lines)
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
+    parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
+    parser.add_argument('files', nargs='*', help='Filenames')
+    return parser.parse_args()
 
 if __name__ == "__main__":
     main()
