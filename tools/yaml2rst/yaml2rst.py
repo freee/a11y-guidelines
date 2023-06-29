@@ -82,6 +82,11 @@ def main():
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
     checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
 
+    if not args.no_check:
+        check_duplicate_values(guidelines, 'id', 'Guideline ID')
+        check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
+        check_duplicate_values(checks, 'id', 'Check ID')
+
     try:
         with open(WCAG_SC) as f:
             wcag_sc = json.load(f)
@@ -450,6 +455,20 @@ def make_heading(title, level, className=""):
     heading_lines.append(line)
 
     return '\n'.join(heading_lines)
+
+def check_duplicate_values(lst, key, dataset):
+    # Extract the values for the given key across the list of dictionaries
+    values = [d[key] for d in lst]
+
+    # Find the non-unique values
+    non_unique_values = [value for value in values if values.count(value) > 1]
+
+    # Convert to set to remove duplicates
+    non_unique_values = set(non_unique_values)
+
+    # Check if there are any non-unique values and raise error if so
+    if non_unique_values:
+        raise ValueError(f"Duplicate values in {dataset}: {non_unique_values}")
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
