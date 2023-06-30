@@ -5,7 +5,7 @@ import yaml
 import json
 import unicodedata
 import copy
-#from jsonschema import validate, ValidationError
+from jsonschema import validate, ValidationError, RefResolver
 import argparse
 from jinja2 import Template, Environment, FileSystemLoader
 
@@ -13,6 +13,7 @@ LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
+SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
 MAKEFILE_FILENAME = 'incfiles.mk'
 ALL_CHECKS_FILENAME = "allchecks.rst"
@@ -21,13 +22,14 @@ WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
 WCAG_MAPPING_PATH = os.path.join(os.getcwd(), DESTDIR, WCAG_MAPPING_FILENAME)
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), DESTDIR, PRIORITY_DIFF_FILENAME)
-#GUIDELINES_SCHEMA = 'data/json/schemas/guideline.json'
 MISCDEFS_FILENAME = "misc-defs.txt"
 MISCDEFS_PATH = os.path.join(os.getcwd(), DESTDIR, MISCDEFS_FILENAME)
-#CHECKS_SCHEMA = 'data/json/schemas/check.json'
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
 TEMPLATE_DIR = 'templates'
+GUIDELINES_SCHEMA = 'guideline.json'
+CHECKS_SCHEMA = 'check.json'
+COMMON_SCHEMA = 'common.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -78,11 +80,29 @@ def main():
 
     build_examples = []
 
+    if not args.no_check:
+        try:
+            with open(os.path.join(os.getcwd(), SCHEMA_SRCDIR, COMMON_SCHEMA)) as f:
+                common_schema = json.load(f)
+        except Exception as e:
+            print(f'Exception occurred while reading {COMMON_SCHEMA}...', file=sys.stderr)
+            print(e, file=sys.stderr)
+            sys.exit(1)
+
+        schema_path = 'file://{}'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
+        resolver = RefResolver(schema_path, common_schema)
 
     files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
     guidelines = []
     for f in files:
         guidelines.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(guidelines[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, GUIDELINES_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
         guidelines[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
 
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
@@ -91,6 +111,13 @@ def main():
     checks = []
     for f in files:
         checks.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(checks[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, CHECKS_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
         checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
 
     if not args.no_check:
@@ -415,7 +442,20 @@ def read_yaml_file(file):
 
     return data
 
-        
+def validate_data(data, schema_file, common_resolver=None):
+    try:
+        with open(schema_file) as f:
+            schema = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        validate(data, schema, resolver=common_resolver)
+    except ValidationError as e:
+        raise ValueError("Validation failed.") from e
+
 def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
