@@ -5,13 +5,15 @@ import yaml
 import json
 import unicodedata
 import copy
-#from jsonschema import validate, ValidationError
+from jsonschema import validate, ValidationError, RefResolver
+import argparse
 from jinja2 import Template, Environment, FileSystemLoader
 
 LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
+SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
 MAKEFILE_FILENAME = 'incfiles.mk'
 ALL_CHECKS_FILENAME = "allchecks.rst"
@@ -20,13 +22,14 @@ WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
 WCAG_MAPPING_PATH = os.path.join(os.getcwd(), DESTDIR, WCAG_MAPPING_FILENAME)
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), DESTDIR, PRIORITY_DIFF_FILENAME)
-#GUIDELINES_SCHEMA = 'data/json/schemas/guideline.json'
 MISCDEFS_FILENAME = "misc-defs.txt"
 MISCDEFS_PATH = os.path.join(os.getcwd(), DESTDIR, MISCDEFS_FILENAME)
-#CHECKS_SCHEMA = 'data/json/schemas/check.json'
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
 TEMPLATE_DIR = 'templates'
+GUIDELINES_SCHEMA = 'guideline.json'
+CHECKS_SCHEMA = 'check.json'
+COMMON_SCHEMA = 'common.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -55,13 +58,12 @@ PLATFORM_NAMES = {
 
 
 def main():
-    args = sys.argv
-    argc = len(args)
-    if argc == 1:
+    args = parse_args()
+    if not args.files:
         build_all = True
     else:
         build_all = False
-        targets = args[1:argc]
+        targets = args.files
 
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
@@ -78,9 +80,50 @@ def main():
 
     build_examples = []
 
-    guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+    if not args.no_check:
+        try:
+            with open(os.path.join(os.getcwd(), SCHEMA_SRCDIR, COMMON_SCHEMA)) as f:
+                common_schema = json.load(f)
+        except Exception as e:
+            print(f'Exception occurred while reading {COMMON_SCHEMA}...', file=sys.stderr)
+            print(e, file=sys.stderr)
+            sys.exit(1)
+
+        schema_path = 'file://{}'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
+        resolver = RefResolver(schema_path, common_schema)
+
+    files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+    guidelines = []
+    for f in files:
+        guidelines.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(guidelines[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, GUIDELINES_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
+        guidelines[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
-    checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+
+    files = ls_dir(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+    checks = []
+    for f in files:
+        checks.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(checks[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, CHECKS_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
+        checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
+    if not args.no_check:
+        check_duplicate_values(guidelines, 'id', 'Guideline ID')
+        check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
+        check_duplicate_values(checks, 'id', 'Check ID')
 
     try:
         with open(WCAG_SC) as f:
@@ -381,38 +424,37 @@ def main():
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(makefile_str)
 
-def read_yaml(dir):
-    src_files = []
-    for currentDir, dirs, files in os.walk(dir):
-        for f in files:
-            src_files.append(os.path.join(currentDir, f))
+def ls_dir(dir):
+    files = []
+    for currentDir, dirs, fs in os.walk(dir):
+        for f in fs:
+            files.append(os.path.join(currentDir, f))
+    return files
 
-    # try:
-    #     with open(schema_file) as f:
-    #         schema = json.load(f)
-    # except Exception as e:
-    #     print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
-    #     print(e, file=sys.stderr)
-    #     sys.exit(1)
+def read_yaml_file(file):
+    try:
+        with open(file, encoding="utf-8") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+    except Exception as e:
+        print(f'Exception occurred while loading YAML {file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
 
-    obj = []
-    for src in src_files:
-        try:
-            with open(src, encoding="utf-8") as f:
-                data = yaml.load(f, Loader=yaml.FullLoader)
-        except Exception as e:
-            print(f'Exception occurred while loading YAML {src}...', file=sys.stderr)
-            print(e, file=sys.stderr)
-            sys.exit(1)
-        # try:
-        #     validate(data, schema)
-        # except ValidationError as e:
-        #     print(f'Error occurred while validating {src}', file=sys.stderr)
-        #     print(e.message, file=sys.stderr)
-        #     sys.exit(1)
-        data['src_path'] = src.replace(os.getcwd() + "/", "")
-        obj.append(data)
-    return obj
+    return data
+
+def validate_data(data, schema_file, common_resolver=None):
+    try:
+        with open(schema_file) as f:
+            schema = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        validate(data, schema, resolver=common_resolver)
+    except ValidationError as e:
+        raise ValueError("Validation failed.") from e
 
 def uniq(seq):
     seen = []
@@ -450,6 +492,26 @@ def make_heading(title, level, className=""):
     heading_lines.append(line)
 
     return '\n'.join(heading_lines)
+
+def check_duplicate_values(lst, key, dataset):
+    # Extract the values for the given key across the list of dictionaries
+    values = [d[key] for d in lst]
+
+    # Find the non-unique values
+    non_unique_values = [value for value in values if values.count(value) > 1]
+
+    # Convert to set to remove duplicates
+    non_unique_values = set(non_unique_values)
+
+    # Check if there are any non-unique values and raise error if so
+    if non_unique_values:
+        raise ValueError(f"Duplicate values in {dataset}: {non_unique_values}")
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
+    parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
+    parser.add_argument('files', nargs='*', help='Filenames')
+    return parser.parse_args()
 
 if __name__ == "__main__":
     main()
