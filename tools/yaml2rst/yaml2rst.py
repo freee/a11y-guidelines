@@ -78,9 +78,20 @@ def main():
 
     build_examples = []
 
-    guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+
+    files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+    guidelines = []
+    for f in files:
+        guidelines.append(read_yaml_file(f))
+        guidelines[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
-    checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+
+    files = ls_dir(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+    checks = []
+    for f in files:
+        checks.append(read_yaml_file(f))
+        checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
 
     if not args.no_check:
         check_duplicate_values(guidelines, 'id', 'Guideline ID')
@@ -386,39 +397,25 @@ def main():
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(makefile_str)
 
-def read_yaml(dir):
-    src_files = []
-    for currentDir, dirs, files in os.walk(dir):
-        for f in files:
-            src_files.append(os.path.join(currentDir, f))
+def ls_dir(dir):
+    files = []
+    for currentDir, dirs, fs in os.walk(dir):
+        for f in fs:
+            files.append(os.path.join(currentDir, f))
+    return files
 
-    # try:
-    #     with open(schema_file) as f:
-    #         schema = json.load(f)
-    # except Exception as e:
-    #     print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
-    #     print(e, file=sys.stderr)
-    #     sys.exit(1)
+def read_yaml_file(file):
+    try:
+        with open(file, encoding="utf-8") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+    except Exception as e:
+        print(f'Exception occurred while loading YAML {file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
 
-    obj = []
-    for src in src_files:
-        try:
-            with open(src, encoding="utf-8") as f:
-                data = yaml.load(f, Loader=yaml.FullLoader)
-        except Exception as e:
-            print(f'Exception occurred while loading YAML {src}...', file=sys.stderr)
-            print(e, file=sys.stderr)
-            sys.exit(1)
-        # try:
-        #     validate(data, schema)
-        # except ValidationError as e:
-        #     print(f'Error occurred while validating {src}', file=sys.stderr)
-        #     print(e.message, file=sys.stderr)
-        #     sys.exit(1)
-        data['src_path'] = src.replace(os.getcwd() + "/", "")
-        obj.append(data)
-    return obj
+    return data
 
+        
 def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
