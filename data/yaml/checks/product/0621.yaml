@@ -38,3 +38,6 @@ procedures:
         このチェックを正しく実施するためには、多言語処理のための設定を行う必要があります。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」および「音声合成エンジンの管理」の項を参照）
       en: |-
         To perform this check properly, the settings need to be done for processing multiple languages.
+    YouTube:
+      id: 4eD8MBIeovk
+      title: 適切な言語の音声【NVDAでアクセシビリティー チェック】

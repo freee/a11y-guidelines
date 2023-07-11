@@ -23,6 +23,9 @@ procedures:
         ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       en: |-
         Confirm that the same text as contained in the image is announced when using arrow keys in browse mode.
+    YouTube:
+      id: 7vGc7p0FraE
+      title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-

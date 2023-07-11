@@ -31,6 +31,9 @@ procedures:
         ブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
       en: |-
         Confirm that the reading order is consistent across multiple pages when reading the content using the up/down arrow keys in browse mode.
+    YouTube:
+      id: GYKStFpsfUw
+      title: 同じ出現順序【NVDAでアクセシビリティー チェック】
 - platform: mobile
   procedure:
     ja: |-

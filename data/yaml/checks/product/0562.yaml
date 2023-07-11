@@ -80,3 +80,6 @@ procedures:
 
         *  up/down arrows: move to the previous/next cell and announce the cell content; only a part of the cell might be read if there are line-breaks within the cell.
         *  left/right arrows: move and announce character by character; the behavior on empty cells is as if there is only one space character
+    YouTube:
+      id: lnW6TRgkBg0
+      title: 表【NVDAでアクセシビリティー チェック】
