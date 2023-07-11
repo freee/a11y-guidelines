@@ -89,7 +89,7 @@ def main():
             print(e, file=sys.stderr)
             sys.exit(1)
 
-        schema_path = 'file://{}'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
+        schema_path = 'file://{}/'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
         resolver = RefResolver(schema_path, common_schema)
 
     files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
