@@ -110,6 +110,13 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 音声
 ----
 
+参考動画
+   *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/qrWLDZmZ5ek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 .. image:: /img/nvda-settings-speech.png
    :alt: NVDA設定画面のスクリーン・ショット（「音声」を選択）
 
@@ -166,6 +173,13 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
 音声合成エンジンの管理
 ----------------------
+
+参考動画
+   *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/BYtQZQNYiIM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 :ref:`exp-screen-reader-check-nvda-settings-speech` の項で触れた自然言語に関する設定について、これらの設定を反映した形でNVDAを動作させるには、Windowsに複数の音声合成エンジン（音声パッケージ）がインストールされている必要があります。
 ここでは、現在インストールされている音声パッケージの確認と、新たな音声パッケージの追加の方法を記します。
