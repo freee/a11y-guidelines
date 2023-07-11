@@ -280,20 +280,30 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 ------
 
 参考動画
+   *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`_
    *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/Q1xw4a0FGFU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 .. raw:: html
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/j1GzUGZbbzI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-:kbd:`NVDA + Q`
-   NVDAの終了
-:kbd:`NVDA + N`
-   NVDAメニューの表示
+:kbd:`Ctrl`
+   読み上げの停止
+:kbd:`Shift`
+`
+   読み上げの一時停止/再開
 :kbd:`NVDA + S`
    読み上げモードの変更（誤操作で音声が出なくなった場合などに何度か押下してみると良い場合があるかもしれない）
 :kbd:`NVDA + 1`
    入力ヘルプ（1度押下するとヘルプ・モードに入り、再度押下するとヘルプ・モードから抜ける。ヘルプ・モードでは、押下したキーの名称や役割が読み上げられる。）
+:kbd:`NVDA + Q`
+   NVDAの終了
+:kbd:`NVDA + N`
+   NVDAメニューの表示
 
 参考： NVDAチートシート
 -----------------------
