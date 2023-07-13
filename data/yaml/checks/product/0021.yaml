@@ -57,12 +57,12 @@ procedures:
       ja: |-
         WebAIM Contrast Checkerで、以下の基準を満たしていることを確認する：
 
-        *  文字サイズが29px（22pt）以上の場合：3:1以上（[SHOULD] 4.5:1以上）
-        *  文字サイズが24px（18pt）以上で太字の場合：3:1以上（[SHOULD] 4.5:1以上）
-        *  その他の場合：4.5:1以上（[SHOULD] 7:1以上）
+        *  文字サイズが29px（22pt）以上の場合：3:1以上
+        *  文字サイズが24px（18pt）以上で太字の場合：3:1以上
+        *  その他の場合：4.5:1以上
       en: |-
         Verify the content meets the following color contrast requirement using the WebAIM Color Contrast Checker:
 
-        *  Font Size: 29px（22pt）or larger; 3:1 or higher（[SHOULD] 4.5:1 or higher）
-        *  Font Size: 24px（18pt）or larger and bold; 3:1 or higher（[SHOULD] 4.5:1 or higher）
-        *  In other cases：4.5:1 or higher（[SHOULD] 7:1 or higher）
+        *  Font Size: 29px（22pt）or larger; 3:1 or higher
+        *  Font Size: 24px（18pt）or larger and bold; 3:1 or higher
+        *  In other cases：4.5:1 or higher
