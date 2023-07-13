@@ -8,7 +8,7 @@
 ロービジョンのユーザーの中には、低いコントラスト比の影響をより強く受けるユーザーがいます。
 
 ガイドラインでは、視覚的に提示される情報について、一定のコントラスト比を確保することを求めています。
-また、[SHOULD]ではより高いコントラスト比が求められます。
+当ガイドラインで示している基準は、WCAG 2.1の適合レベルAAのものですが、当ガイドラインでの優先度は[MUST]としていますので、必ず順守する必要があります。
 
 対象となるのは、テキストと画像の両方で、画像にはアイコンや画像化されたテキストも含まれます。
 テキストの場合、文字のサイズや書体によって基準が異なります。
@@ -29,5 +29,8 @@
 *  アイコン： :ref:`gl-icon-contrast`
 *  画像： :ref:`gl-image-adjacent-contrast`
 *  画像： :ref:`gl-image-text-contrast`
+*  画像： :ref:`gl-image-mobile-text-contrast`
 *  画像化されたテキスト： :ref:`gl-iot-text-contrast`
+*  画像化されたテキスト： :ref:`gl-iot-mobile-text-contrast`
 *  テキスト： :ref:`gl-text-contrast`
+*  テキスト： :ref:`gl-text-mobile-contrast`
