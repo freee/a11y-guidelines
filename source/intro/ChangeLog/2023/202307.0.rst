@@ -4,6 +4,8 @@
 `Ver. 202307.0 (2023年7月18日) <https://github.com/freee/a11y-guidelines/releases/202307.0>`_
 *********************************************************************************************
 
+参考： `freeeアクセシビリティー・ガイドラインVer. 202307.0を公開しました <https://developers.freee.co.jp/entry/a11y-guidelines-202307.0>`_
+
 *  コントラスト比関連のガイドラインで、これまで[SHOULD]として記載していた基準を削除
 
    -  テキスト： :ref:`gl-text-contrast`
