@@ -9,24 +9,24 @@
 *  コントラスト比関連のガイドラインで、これまで[SHOULD]として記載していた基準を削除
 
    -  テキスト： :ref:`gl-text-contrast`
-   -  画像化されたテキスト： :ref:`gl-iot-text-contrast` 
+   -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
    -  画像： :ref:`gl-image-text-contrast`
 
 *  コントラスト比関連のガイドラインの文字サイズの記述について、ウェブアクセシビリティ基盤委員会が示しているものに修正
 
    -  テキスト： :ref:`gl-text-contrast`
-   -  画像化されたテキスト： :ref:`gl-iot-text-contrast` 
+   -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
    -  画像： :ref:`gl-image-text-contrast`
 
 *  コントラスト比関連のガイドラインで指定されている文字サイズについて、モバイルでは異なる基準を用いることとし、対象プラットフォームをモバイルにしたガイドラインを追加
 
    変更
       -  テキスト： :ref:`gl-text-contrast`
-      -  画像化されたテキスト： :ref:`gl-iot-text-contrast` 
+      -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
       -  画像： :ref:`gl-image-text-contrast`
    追加
       -  テキスト： :ref:`gl-text-mobile-contrast`
-      -  画像化されたテキスト： :ref:`gl-iot-mobile-text-contrast` 
+      -  画像化されたテキスト： :ref:`gl-iot-mobile-text-contrast`
       -  画像： :ref:`gl-image-mobile-text-contrast`
 
 *  :ref:`exp-screen-reader-check-nvda` の更新
