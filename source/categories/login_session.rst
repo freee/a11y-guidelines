@@ -11,6 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-login-session-timing.rst
-.. include:: /inc/gl-login-session-no-timing.rst
-.. include:: /inc/gl-login-session-continue.rst
+.. include:: /inc/gl-category-login_session.rst

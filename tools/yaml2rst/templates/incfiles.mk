@@ -1,6 +1,6 @@
-guidelines_rst = {{ guidelines_rst }}
+guideline_category_rst = {{ guideline_category_rst }}
 
-incfiles: $(guidelines_rst) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
+incfiles: $(guideline_category_rst) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
 
 %.yaml: ;
 %.json: ;

@@ -28,3 +28,6 @@ procedures:
 
         *  Users can move to the position immediately before the main body using the jump to next/previous heading function in browse mode.
         *  Users can move to the beginning of the main landmark using the jump to next landmark function (D key) in browse mode, and the main body begins immediately after that position.
+    YouTube:
+      id: WP_2VExrCPU
+      title: 本文の開始位置【NVDAでアクセシビリティー チェック】

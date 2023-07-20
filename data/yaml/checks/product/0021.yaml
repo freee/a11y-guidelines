@@ -30,7 +30,7 @@ procedures:
         *  マウスホバーなどで背景色やテキスト色が変化する場合の、変化後のコントラスト比が不足する場合
         *  大きいテキストのコントラスト比が3:1以上4.5:1未満の場合
 
-           -  freeeの場合日本語テキストを想定しているため、「大きいテキスト」を30px（22pt）以上または22px（18pt）以上の太字としているが、WCAGでは欧文テキストを想定して18pt以上または14pt以上の太字としているため、18pt以上22pt未満（太字の場合は14pt以上18pt未満）の日本語のテキストについて、Axe DevToolsはコントラスト不足を検知できない
+           -  freeeの場合日本語テキストを想定しているため、「大きいテキスト」を29px（22pt）以上または24px（18pt）以上の太字としているが、WCAGでは欧文テキストを想定して18pt以上または14pt以上の太字としているため、18pt以上22pt未満（太字の場合は14pt以上18pt未満）の日本語のテキストについて、Axe DevToolsはコントラスト不足を検知できない
 
         *  テキスト以外のコントラスト比が不足している場合
 
@@ -44,7 +44,7 @@ procedures:
         *  When the contrast ratio is insufficient after the text and/or background color change, e.g. after mouse hover
         *  When the contrast ratio of large-scale text is 3:1 or more and less than 4.5:1
 
-           -  While large-scale text is defined as 30px(22pt) or larger font, or 22px(18pt) or larger bold font within freee's product as the primary text is assumed to be in Japanese, WCAG defines it as 18pt or larger font, or 14pt or larger bold font assuming euro-languages.  As Axe DevTools is based on the requirements set by the WCAG, it cannot detect insufficient color contrast of Japanese text whose font size is between 18pt and 22pt (14pt and 18pt if bold).
+           -  While large-scale text is defined as 29px(22pt) or larger font, or 24px(18pt) or larger bold font within freee's product as the primary text is assumed to be in Japanese, WCAG defines it as 18pt or larger font, or 14pt or larger bold font assuming euro-languages.  As Axe DevTools is based on the requirements set by the WCAG, it cannot detect insufficient color contrast of Japanese text whose font size is between 18pt and 22pt (14pt and 18pt if bold).
 
         *  When the contrast ratio of non-text content is insufficient.
 
@@ -57,12 +57,12 @@ procedures:
       ja: |-
         WebAIM Contrast Checkerで、以下の基準を満たしていることを確認する：
 
-        *  文字サイズが30px（22pt）以上の場合：3:1以上（[SHOULD] 4.5:1以上）
-        *  文字サイズが22px（18pt）以上で太字の場合：3:1以上（[SHOULD] 4.5:1以上）
-        *  その他の場合：4.5:1以上（[SHOULD] 7:1以上）
+        *  文字サイズが29px（22pt）以上の場合：3:1以上
+        *  文字サイズが24px（18pt）以上で太字の場合：3:1以上
+        *  その他の場合：4.5:1以上
       en: |-
         Verify the content meets the following color contrast requirement using the WebAIM Color Contrast Checker:
 
-        *  Font Size: 30px（22pt）or larger; 3:1 or higher（[SHOULD] 4.5:1 or higher）
-        *  Font Size: 22px（18pt）or larger and bold; 3:1 or higher（[SHOULD] 4.5:1 or higher）
-        *  In other cases：4.5:1 or higher（[SHOULD] 7:1 or higher）
+        *  Font Size: 29px（22pt）or larger; 3:1 or higher
+        *  Font Size: 24px（18pt）or larger and bold; 3:1 or higher
+        *  In other cases：4.5:1 or higher

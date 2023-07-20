@@ -1,0 +1,39 @@
+.. _ver-202307-0:
+
+*********************************************************************************************
+`Ver. 202307.0 (2023年7月20日) <https://github.com/freee/a11y-guidelines/releases/202307.0>`_
+*********************************************************************************************
+
+参考： `freeeアクセシビリティー・ガイドラインVer. 202307.0を公開しました <https://developers.freee.co.jp/entry/a11y-guidelines-202307.0>`_
+
+*  コントラスト比関連のガイドラインで、これまで[SHOULD]として記載していた基準を削除
+
+   -  テキスト： :ref:`gl-text-contrast`
+   -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
+   -  画像： :ref:`gl-image-text-contrast`
+
+*  コントラスト比関連のガイドラインの文字サイズの記述について、ウェブアクセシビリティ基盤委員会が示しているものに修正
+
+   -  テキスト： :ref:`gl-text-contrast`
+   -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
+   -  画像： :ref:`gl-image-text-contrast`
+
+*  コントラスト比関連のガイドラインで指定されている文字サイズについて、モバイルでは異なる基準を用いることとし、対象プラットフォームをモバイルにしたガイドラインを追加
+
+   変更
+      -  テキスト： :ref:`gl-text-contrast`
+      -  画像化されたテキスト： :ref:`gl-iot-text-contrast`
+      -  画像： :ref:`gl-image-text-contrast`
+   追加
+      -  テキスト： :ref:`gl-text-mobile-contrast`
+      -  画像化されたテキスト： :ref:`gl-iot-mobile-text-contrast`
+      -  画像： :ref:`gl-image-mobile-text-contrast`
+
+*  :ref:`exp-screen-reader-check-nvda` の更新
+
+   -  NVDAの読み上げに関連するキー操作についての記述と、関連する解説動画を追加
+   -  Windowsの音声合成エンジンの管理に関する解説動画を追加
+
+*  :ref:`check-example-nvda` に掲載しているチェック方法の多くについて、具体的なチェック実施方法を紹介する動画を追加（ :ref:`check-index` や各ガイドラインの当該チェックIDの項からも参照可能）
+*  アクセシビリティー・チェック・リストをV4.1.0に更新
+*  一部マークアップの修正

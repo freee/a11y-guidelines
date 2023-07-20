@@ -4,13 +4,16 @@ import re
 import yaml
 import json
 import unicodedata
-#from jsonschema import validate, ValidationError
+import copy
+from jsonschema import validate, ValidationError, RefResolver
+import argparse
 from jinja2 import Template, Environment, FileSystemLoader
 
 LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
+SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
 MAKEFILE_FILENAME = 'incfiles.mk'
 ALL_CHECKS_FILENAME = "allchecks.rst"
@@ -19,13 +22,14 @@ WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
 WCAG_MAPPING_PATH = os.path.join(os.getcwd(), DESTDIR, WCAG_MAPPING_FILENAME)
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), DESTDIR, PRIORITY_DIFF_FILENAME)
-#GUIDELINES_SCHEMA = 'data/json/schemas/guideline.json'
 MISCDEFS_FILENAME = "misc-defs.txt"
 MISCDEFS_PATH = os.path.join(os.getcwd(), DESTDIR, MISCDEFS_FILENAME)
-#CHECKS_SCHEMA = 'data/json/schemas/check.json'
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
 TEMPLATE_DIR = 'templates'
+GUIDELINES_SCHEMA = 'guideline.json'
+CHECKS_SCHEMA = 'check.json'
+COMMON_SCHEMA = 'common.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
@@ -54,13 +58,12 @@ PLATFORM_NAMES = {
 
 
 def main():
-    args = sys.argv
-    argc = len(args)
-    if argc == 1:
+    args = parse_args()
+    if not args.files:
         build_all = True
     else:
         build_all = False
-        targets = args[1:argc]
+        targets = args.files
 
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
@@ -69,7 +72,7 @@ def main():
 
     tool_example_template = template_env.get_template('check-examples-tool.rst')
     allchecks_text_template = template_env.get_template('allchecks.rst')
-    gl_text_template = template_env.get_template('gl-category-id.rst')
+    category_page_template = template_env.get_template('gl-category.rst')
     wcag21mapping_template = template_env.get_template(WCAG_MAPPING_FILENAME)
     priority_diff_template = template_env.get_template(PRIORITY_DIFF_FILENAME)
     makefile_template = template_env.get_template(MAKEFILE_FILENAME)
@@ -77,9 +80,50 @@ def main():
 
     build_examples = []
 
-    guidelines = read_yaml(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+    if not args.no_check:
+        try:
+            with open(os.path.join(os.getcwd(), SCHEMA_SRCDIR, COMMON_SCHEMA)) as f:
+                common_schema = json.load(f)
+        except Exception as e:
+            print(f'Exception occurred while reading {COMMON_SCHEMA}...', file=sys.stderr)
+            print(e, file=sys.stderr)
+            sys.exit(1)
+
+        schema_path = 'file://{}/'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
+        resolver = RefResolver(schema_path, common_schema)
+
+    files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
+    guidelines = []
+    for f in files:
+        guidelines.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(guidelines[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, GUIDELINES_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
+        guidelines[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
-    checks = read_yaml(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+
+    files = ls_dir(os.path.join(os.getcwd(), CHECKS_SRCDIR))
+    checks = []
+    for f in files:
+        checks.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(checks[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, CHECKS_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
+        checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
+    if not args.no_check:
+        check_duplicate_values(guidelines, 'id', 'Guideline ID')
+        check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
+        check_duplicate_values(checks, 'id', 'Check ID')
 
     try:
         with open(WCAG_SC) as f:
@@ -101,6 +145,15 @@ def main():
         wcag_sc[sc]['gls'] = []
         wcag_sc[sc]['en']['linkCode'] = f'`{wcag_sc[sc]["en"]["title"]} <{wcag_sc[sc]["en"]["url"]}>`_'
         wcag_sc[sc]['ja']['linkCode'] = f'`{wcag_sc[sc]["ja"]["title"]} <{wcag_sc[sc]["ja"]["url"]}>`_'
+
+    category_pages = {}
+    guideline_category_rst = []
+    for cat in category_names:
+        category_pages[cat] = {
+            'guidelines': [],
+            'dependency': []
+        }
+        guideline_category_rst.append(os.path.join(DESTDIR, f'gl-category-{cat}.rst'))
 
     gl_categories = {}
     for gl in guidelines:
@@ -194,6 +247,8 @@ def main():
                         }
                         if 'note' in technique:
                             str_obj['note'] = technique['note'][LANG]
+                        if 'YouTube' in technique:
+                            str_obj['YouTube'] = technique['YouTube']
                         check['checkTools'].append(tool_basename)
                         procedure_str_obj['techniques'].append(str_obj)
                         check_examples[tool_basename].append(str_obj)
@@ -203,11 +258,8 @@ def main():
         allchecks.append(check_str)
         check['check_str'] = check_str
 
-    guidelines_rst = []
-    guidelines_rst_depends = []
-
     for gl in guidelines:
-        gl['depends'] = [gl['src_path']]
+        category_pages[gl['category']]['dependency'].append(gl['src_path'])
         gl_str = {
             'title': gl['title'][LANG],
             'intent': gl['intent'],
@@ -229,10 +281,17 @@ def main():
         gl['examples'] = []
         for check in gl['checks']:
             _check = [x for x in checks if x["id"] == check][0]
+            _check_str = copy.deepcopy(_check['check_str'])
             if 'checkTools' in _check:
                 gl['examples'].extend(list(_check['checkTools']))
-            gl_str['checks'].append(_check['check_str'])
-            gl['depends'].append(_check['src_path'])
+            if 'procedures' in _check:
+                for i, proc in enumerate(_check['procedures']):
+                    if proc['platform'] == 'general' or proc['platform'] in gl['platform']:
+                        continue
+                    del _check_str['procedures'][i]
+
+            gl_str['checks'].append(_check_str)
+            category_pages[gl['category']]['dependency'].append(_check['src_path'])
 
         gl_str['scs'] = []
         for sc in gl['sc']:
@@ -242,21 +301,22 @@ def main():
                 'sc_ja': wcag_sc[sc]['ja']['linkCode']
             })
 
-        output = gl_text_template.render(gl_str)
+        category_pages[gl['category']]['guidelines'].append(gl_str)
 
-        filename = gl["id"] + '.rst'
-        make_target = os.path.join(DESTDIR, filename)
-        guidelines_rst.append(make_target)
-        guidelines_rst_depends.append("{0}: {1}".format(make_target, " ".join(gl['depends'])))
-        if build_all or make_target in targets:
-            os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
+        if len(gl['examples']):
+            build_examples.extend(gl['examples'])
+
+        build_examples = uniq(build_examples)
+
+    os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
+
+    for cat in category_pages:
+        filename = f'gl-category-{cat}.rst'
+        if build_all or os.path.join(DESTDIR, filename) in targets:
+            output = category_page_template.render(guidelines = category_pages[cat]['guidelines'])
             destfile = os.path.join(os.getcwd(), DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
-            if len(gl['examples']):
-                build_examples.extend(gl['examples'])
-
-            build_examples = uniq(build_examples)
 
     if build_all or os.path.join(DESTDIR, WCAG_MAPPING_FILENAME) in targets:
         sc_mapping = []
@@ -340,13 +400,16 @@ def main():
         for obj in guidelines+checks:
             all_yaml.append(obj['src_path'])
 
-        gl_deps = [{
-                'dep': dep,
-                'target': dep.split(":")[0]}
-                for dep in guidelines_rst_depends
-                ]
+        gl_deps = []
+        for cat in category_pages:
+            target = os.path.join(DESTDIR, f'gl-category-{cat}.rst')
+            deps = " ".join(uniq(category_pages[cat]['dependency']))
+            gl_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
         makefile_data = {
-            'guidelines_rst': " ".join(guidelines_rst),
+            'guideline_category_rst': " ".join(guideline_category_rst),
             'wcag_mapping_target': os.path.join(DESTDIR, WCAG_MAPPING_FILENAME),
             'priority_diff_target': os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME),
             'all_checks_target': os.path.join(DESTDIR, ALL_CHECKS_FILENAME),
@@ -363,38 +426,37 @@ def main():
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(makefile_str)
 
-def read_yaml(dir):
-    src_files = []
-    for currentDir, dirs, files in os.walk(dir):
-        for f in files:
-            src_files.append(os.path.join(currentDir, f))
+def ls_dir(dir):
+    files = []
+    for currentDir, dirs, fs in os.walk(dir):
+        for f in fs:
+            files.append(os.path.join(currentDir, f))
+    return files
 
-    # try:
-    #     with open(schema_file) as f:
-    #         schema = json.load(f)
-    # except Exception as e:
-    #     print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
-    #     print(e, file=sys.stderr)
-    #     sys.exit(1)
+def read_yaml_file(file):
+    try:
+        with open(file, encoding="utf-8") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+    except Exception as e:
+        print(f'Exception occurred while loading YAML {file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
 
-    obj = []
-    for src in src_files:
-        try:
-            with open(src, encoding="utf-8") as f:
-                data = yaml.load(f, Loader=yaml.FullLoader)
-        except Exception as e:
-            print(f'Exception occurred while loading YAML {src}...', file=sys.stderr)
-            print(e, file=sys.stderr)
-            sys.exit(1)
-        # try:
-        #     validate(data, schema)
-        # except ValidationError as e:
-        #     print(f'Error occurred while validating {src}', file=sys.stderr)
-        #     print(e.message, file=sys.stderr)
-        #     sys.exit(1)
-        data['src_path'] = src.replace(os.getcwd() + "/", "")
-        obj.append(data)
-    return obj
+    return data
+
+def validate_data(data, schema_file, common_resolver=None):
+    try:
+        with open(schema_file) as f:
+            schema = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while loading schema {schema_file}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        validate(data, schema, resolver=common_resolver)
+    except ValidationError as e:
+        raise ValueError("Validation failed.") from e
 
 def uniq(seq):
     seen = []
@@ -432,6 +494,26 @@ def make_heading(title, level, className=""):
     heading_lines.append(line)
 
     return '\n'.join(heading_lines)
+
+def check_duplicate_values(lst, key, dataset):
+    # Extract the values for the given key across the list of dictionaries
+    values = [d[key] for d in lst]
+
+    # Find the non-unique values
+    non_unique_values = [value for value in values if values.count(value) > 1]
+
+    # Convert to set to remove duplicates
+    non_unique_values = set(non_unique_values)
+
+    # Check if there are any non-unique values and raise error if so
+    if non_unique_values:
+        raise ValueError(f"Duplicate values in {dataset}: {non_unique_values}")
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
+    parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
+    parser.add_argument('files', nargs='*', help='Filenames')
+    return parser.parse_args()
 
 if __name__ == "__main__":
     main()

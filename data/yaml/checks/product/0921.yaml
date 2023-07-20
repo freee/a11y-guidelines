@@ -22,3 +22,6 @@ procedures:
         ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
       en: |-
         Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in browse mode.
+    YouTube:
+      id: 5syA78BshdY
+      title: 複数の言語の音声【NVDAでアクセシビリティー チェック】

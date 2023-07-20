@@ -15,6 +15,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-iot-avoid-usage.rst
-.. include:: /inc/gl-iot-provide-text.rst
-.. include:: /inc/gl-iot-text-contrast.rst
+.. include:: /inc/gl-category-images_of_text.rst

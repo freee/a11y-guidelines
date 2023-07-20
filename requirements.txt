@@ -3,4 +3,4 @@ sphinx >= 3.0
 sphinx_rtd_theme
 sphinxcontrib-trimblank
 pyyaml
-jsonschema
+jsonschema < 4.18.0

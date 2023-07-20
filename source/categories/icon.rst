@@ -16,9 +16,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-icon-visible-label.rst
-.. include:: /inc/gl-icon-color-only.rst
-.. include:: /inc/gl-icon-consistent.rst
-.. include:: /inc/gl-icon-contrast.rst
-.. include:: /inc/gl-icon-target-size.rst
-.. include:: /inc/gl-icon-target-size-mobile.rst
+.. include:: /inc/gl-category-icon.rst

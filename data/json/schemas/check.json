@@ -74,6 +74,21 @@
                 "note": {
                   "description": "additional info about the technique, which will be omitted from the checklist (the spreadsheet)",
                   "$ref": "common.json#/definitions/i18nString"
+                },
+                "YouTube": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "description": "YouTube video ID",
+                      "type": "string"
+                    },
+                    "title": {
+                      "description": "title of the video",
+                      "type": "string"
+                    }
+                  },
+                  "required": ["id", "title"],
+                  "additionalProperties": false
                 }
               },
               "additionalProperties": false,
