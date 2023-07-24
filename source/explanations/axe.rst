@@ -41,7 +41,7 @@ axe DevTools拡張機能はデベロッパーツール内で使用します。
 
 より多くの項目をチェックするために、以下の初期設定を行うと良いでしょう。
 
-1. :menuselection:`Options --> Settings` の順にクリッククリック
+1. :menuselection:`Options --> Settings` の順にクリック
 2. "Best Practices" で "Enable" をチェック
 3. 「保存」をクリック
 
