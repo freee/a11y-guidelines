@@ -25,12 +25,14 @@ procedures:
         *  :ref:`axe-rule-label`
         *  :ref:`axe-rule-select-name`
         *  :ref:`axe-rule-form-field-multiple-labels`
+        *  :ref:`axe-rule-label-title-only`
       en: |-
         Confirm that none of the following issues are reported.
 
         *  :ref:`axe-rule-label`
         *  :ref:`axe-rule-select-name`
         *  :ref:`axe-rule-form-field-multiple-labels`
+        *  :ref:`axe-rule-label-title-only`
   - tool: nvda
     technique:
       ja: |-
