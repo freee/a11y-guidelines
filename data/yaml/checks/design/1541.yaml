@@ -1,5 +1,5 @@
 id: '1541'
-severity: '[NORMAL]'
+severity: normal
 target: design
 platform:
 - web

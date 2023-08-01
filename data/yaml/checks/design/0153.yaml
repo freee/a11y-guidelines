@@ -1,5 +1,5 @@
 id: '0153'
-severity: '[CRITICAL]'
+severity: critical
 target: design
 platform:
 - mobile

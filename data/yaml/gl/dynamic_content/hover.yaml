@@ -3,7 +3,7 @@ sortKey: 2016
 category: dynamic_content
 title:
   ja: ホバーで表示されるコンテンツの非表示
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 guideline: |-

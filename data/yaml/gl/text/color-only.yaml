@@ -3,7 +3,7 @@ sortKey: 1406
 category: text
 title:
   ja: 複数の視覚的要素を用いた表現
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

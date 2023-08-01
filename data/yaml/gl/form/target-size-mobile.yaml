@@ -3,7 +3,7 @@ sortKey: 1966
 category: form
 title:
   ja: 十分な大きさのクリック/タッチのターゲット（モバイル）
-priority: '[SHOULD]'
+priority: should
 platform:
 - mobile
 guideline: |-

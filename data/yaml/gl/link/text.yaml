@@ -3,7 +3,7 @@ sortKey: 1806
 category: link
 title:
   ja: 適切なリンク・テキスト
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

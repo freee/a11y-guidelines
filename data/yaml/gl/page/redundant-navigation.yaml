@@ -3,7 +3,7 @@ sortKey: 1136
 category: page
 title:
   ja: 複数の到達手段
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

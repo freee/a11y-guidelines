@@ -3,7 +3,7 @@ sortKey: 1301
 category: input_device
 title:
   ja: キーボード操作を可能にする
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

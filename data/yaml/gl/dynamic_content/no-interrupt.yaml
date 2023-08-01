@@ -3,7 +3,7 @@ sortKey: 2041
 category: dynamic_content
 title:
   ja: 割り込み表示
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

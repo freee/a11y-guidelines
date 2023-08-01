@@ -3,7 +3,7 @@ sortKey: 2036
 category: dynamic_content
 title:
   ja: 閃光を放つコンテンツ
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

@@ -3,7 +3,7 @@ sortKey: 1201
 category: login_session
 title:
   ja: ログイン・セッションにタイムアウトを設ける場合
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

@@ -1,5 +1,5 @@
 id: '0681'
-severity: '[NORMAL]'
+severity: normal
 target: product
 platform:
 - web

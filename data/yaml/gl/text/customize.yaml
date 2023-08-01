@@ -3,7 +3,7 @@ sortKey: 1456
 category: text
 title:
   ja: テキスト表示のカスタマイズ
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

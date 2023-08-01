@@ -3,7 +3,7 @@ sortKey: 1621
 category: image
 title:
   ja: 画像内のテキストのコントラスト比
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

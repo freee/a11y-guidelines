@@ -1,5 +1,5 @@
 id: '0912'
-severity: '[MINOR]'
+severity: minor
 target: code
 platform:
 - web

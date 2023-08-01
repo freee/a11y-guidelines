@@ -3,7 +3,7 @@ sortKey: 2146
 category: multimedia
 title:
   ja: 手話の提供
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

@@ -3,7 +3,7 @@ sortKey: 1501
 category: images_of_text
 title:
   ja: 画像化されたテキストを使用しない
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile
