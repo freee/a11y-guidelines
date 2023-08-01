@@ -3,7 +3,7 @@ sortKey: 1101
 category: page
 title:
   ja: タイトルの指定
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

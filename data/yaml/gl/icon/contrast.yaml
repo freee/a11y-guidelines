@@ -3,7 +3,7 @@ sortKey: 1716
 category: icon
 title:
   ja: コントラスト比の確保
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

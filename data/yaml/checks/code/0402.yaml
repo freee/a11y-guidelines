@@ -1,5 +1,5 @@
 id: '0402'
-severity: '[NORMAL]'
+severity: normal
 target: code
 platform:
 - web

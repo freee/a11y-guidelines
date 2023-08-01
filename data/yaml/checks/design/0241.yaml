@@ -1,5 +1,5 @@
 id: '0241'
-severity: '[MINOR]'
+severity: minor
 target: design
 platform:
 - web

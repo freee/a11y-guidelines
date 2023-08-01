@@ -3,7 +3,7 @@ sortKey: 1951
 category: form
 title:
   ja: エラーの修正方法の提示
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

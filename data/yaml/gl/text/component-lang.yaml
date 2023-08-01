@@ -3,7 +3,7 @@ sortKey: 1426
 category: text
 title:
   ja: テキストを表示するUIコンポーネントの言語の明示
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

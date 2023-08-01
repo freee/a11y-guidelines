@@ -4,7 +4,7 @@ category: dynamic_content
 title:
   ja: OnFocus/OffFocus時の挙動
   en: OnFocus/OffFocus Behavior
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

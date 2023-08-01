@@ -3,7 +3,7 @@ sortKey: 2141
 category: multimedia
 title:
   ja: 音声解説の提供
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

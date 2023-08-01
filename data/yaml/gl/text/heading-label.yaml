@@ -3,7 +3,7 @@ sortKey: 1411
 category: text
 title:
   ja: 適切な文言の見出し
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

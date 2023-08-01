@@ -3,7 +3,7 @@ sortKey: 1916
 category: form
 title:
   ja: フォームの入力に制限時間を設ける場合
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

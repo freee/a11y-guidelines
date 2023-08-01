@@ -1,5 +1,5 @@
 id: '0542'
-severity: '[MAJOR]'
+severity: major
 target: design
 platform:
 - web

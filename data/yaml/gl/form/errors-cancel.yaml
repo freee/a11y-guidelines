@@ -3,7 +3,7 @@ sortKey: 1956
 category: form
 title:
   ja: 誤操作の防止
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

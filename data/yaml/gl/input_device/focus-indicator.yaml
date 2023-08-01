@@ -3,7 +3,7 @@ sortKey: 1316
 category: input_device
 title:
   ja: フォーカス箇所の可視化
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-
