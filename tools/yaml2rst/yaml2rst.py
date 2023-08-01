@@ -158,6 +158,7 @@ def main():
     gl_categories = {}
     for gl in guidelines:
         gl_categories[gl['id']] = category_names[gl['category']][LANG]
+        gl['priority'] = f"[{gl['priority'].upper()}]"
         for sc in gl['sc']:
             wcag_sc[sc]['gls'].append(gl['id'])
 
@@ -170,6 +171,7 @@ def main():
         if f'data/yaml/checks/{check["target"]}/{check["id"]}.yaml' != check['src_path']:
             raise Exception(f'The file path does not match the ID and/or the target in {check["src_path"]}')
 
+        check['severity'] = f"[{check['severity'].upper()}]"
         check['gl_ref'] = []
         check['info'] = []
         for gl in guidelines:
