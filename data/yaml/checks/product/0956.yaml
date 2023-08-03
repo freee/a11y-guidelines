@@ -1,0 +1,32 @@
+id: '0956'
+severity: major
+target: product
+platform:
+- web
+check:
+  ja: |-
+    ラジオボタンは、キーボードで操作できるようになっている。
+  en: |-
+    Radio buttons can be operated using the keyboard.
+procedures:
+- platform: web
+  procedure:
+    ja: |-
+      以下のキーボードによるチェックを見足していることを確認する。
+    en: |-
+      Confirm the following check by keyboard passes.
+  techniques:
+  - tool: keyboard
+    technique:
+      ja: |-
+        以下のすべてを満たしていることを確認する:
+
+        *  同じ質問に対する選択肢など、適切な単位でラジオボタンがグループ化されていて、Tab/Shift+Tabキーでフォーカスを移動した際、グループごとに1つのラジオボタンにしかフォーカスが移動しない。
+        *  グループ内のラジオボタンにフォーカスがある状態で、矢印キーでラジオボタンのグループ内の選択状態を変更でき、選択状態になったラジオボタンにフォーカスが移動する。
+        *  矢印キーでラジオボタンの選択状態を変更した際、そのグループに属さないラジオボタンへのフォーカスの移動や状態の変更が発生しない。
+      en: |-
+        Confirm that all of the following are satisfied:
+
+        *  Radio buttons are grouped in appropriate units, such as choices for the same question, and when moving the focus using the Tab/Shift+Tab keys, the focus moves to only one radio button in each group.
+        *  When the focus is on a radio button in a group, the selection state of the radio buttons in the group can be changed using the arrow keys, and the focus moves to the selected radio button.
+        *  When the selection state of a radio button is changed using the arrow keys, the state of a radio button that does not belong to the group is not affected or the focus does not move to such a radio button.
