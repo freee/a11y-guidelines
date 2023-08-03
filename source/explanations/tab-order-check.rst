@@ -73,6 +73,7 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
 
 *  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
 *  入力ディバイス： :ref:`gl-input-device-focus-indicator`
+*  フォーム: :ref:`gl-form-keyboard-operable` 
 
 ********************
 フォーカスの移動順序
