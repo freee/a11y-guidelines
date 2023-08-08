@@ -40,8 +40,8 @@
     "priority": {
       "description": "priority of the guideline",
       "enum": [
-        "[MUST]",
-        "[SHOULD]"
+        "must",
+        "should"
       ]
     },
     "platform": {

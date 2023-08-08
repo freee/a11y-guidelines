@@ -1,5 +1,5 @@
 id: '0411'
-severity: '[MAJOR]'
+severity: major
 target: product
 platform:
 - web
@@ -13,10 +13,16 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のaxe DevToolsによるチェックとNVDAによるチェックを見足していることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
+      Confirm the following checks by axe DevTools and NVDA pass.
   techniques:
+  - tool: axe
+    technique:
+      ja: |-
+        「 :ref:`axe-rule-button-name` 」という問題が出ないことを確認する。
+      en: |-
+        Confirm that the issue :ref:`axe-rule-button-name` is not reported.
   - tool: nvda
     technique:
       ja: |-

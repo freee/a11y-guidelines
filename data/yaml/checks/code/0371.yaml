@@ -1,5 +1,5 @@
 id: '0371'
-severity: '[MAJOR]'
+severity: major
 target: code
 platform:
 - mobile

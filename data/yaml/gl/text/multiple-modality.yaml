@@ -3,7 +3,7 @@ sortKey: 1401
 category: text
 title:
   ja: 特定の感覚に依存しない表現
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

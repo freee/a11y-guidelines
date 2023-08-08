@@ -1,5 +1,5 @@
 id: '0003'
-severity: '[NORMAL]'
+severity: normal
 target: design
 platform:
 - mobile

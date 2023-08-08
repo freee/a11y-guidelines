@@ -3,7 +3,7 @@ sortKey: 1451
 category: text
 title:
   ja: ズーム機能を用いた400パーセントの拡大表示
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 guideline: |-

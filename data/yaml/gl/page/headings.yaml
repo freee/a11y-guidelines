@@ -3,7 +3,7 @@ sortKey: 1121
 category: page
 title:
   ja: 適切なセクション分けと見出しの付与
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

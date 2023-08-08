@@ -3,7 +3,7 @@ sortKey: 1416
 category: text
 title:
   ja: ページの主たる言語の指定
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

@@ -17,10 +17,10 @@
     "severity": {
       "description": "severity of the issue if the check fails",
       "enum": [
-        "[CRITICAL]",
-        "[MAJOR]",
-        "[NORMAL]",
-        "[MINOR]"
+        "critical",
+        "major",
+        "normal",
+        "minor"
       ]
     },
     "target": {

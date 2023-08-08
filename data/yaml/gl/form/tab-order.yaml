@@ -3,7 +3,7 @@ sortKey: 1931
 category: form
 title:
   ja: 適切なフォーカス順序
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

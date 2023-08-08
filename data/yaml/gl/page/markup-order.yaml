@@ -3,7 +3,7 @@ sortKey: 1116
 category: page
 title:
   ja: 適切な記述順序
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

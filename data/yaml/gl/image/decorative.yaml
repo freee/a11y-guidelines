@@ -3,7 +3,7 @@ sortKey: 1606
 category: image
 title:
   ja: 装飾目的の画像の無視
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

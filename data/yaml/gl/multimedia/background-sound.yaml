@@ -3,7 +3,7 @@ sortKey: 2151
 category: multimedia
 title:
   ja: 充分に小さい背景音
-priority: '[SHOULD]'
+priority: should
 platform:
 - web
 - mobile

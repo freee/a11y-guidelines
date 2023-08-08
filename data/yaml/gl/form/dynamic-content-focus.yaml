@@ -3,7 +3,7 @@ sortKey: 1936
 category: form
 title:
   ja: フォーカス時の挙動
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile

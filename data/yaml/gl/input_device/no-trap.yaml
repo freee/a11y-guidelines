@@ -3,7 +3,7 @@ sortKey: 1321
 category: input_device
 title:
   ja: キーボード・トラップの回避
-priority: '[MUST]'
+priority: must
 platform:
 - web
 guideline: |-

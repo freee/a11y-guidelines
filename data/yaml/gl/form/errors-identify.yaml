@@ -3,7 +3,7 @@ sortKey: 1946
 category: form
 title:
   ja: テキスト情報によるエラーの特定
-priority: '[MUST]'
+priority: must
 platform:
 - web
 - mobile
