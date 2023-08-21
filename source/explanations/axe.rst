@@ -43,13 +43,13 @@ axe DevTools拡張機能はデベロッパーツール内で使用します。
 
 1. :menuselection:`Options --> Settings` の順にクリック
 
-.. image:: /img/axe-settings.png
-   :alt: OptionsからSettingsを開こうとしているスクリーンショット
+   .. image:: /img/axe-settings.png
+      :alt: OptionsからSettingsを開こうとしているスクリーンショット
 
 2. "Best Practices" で "Enable" をチェック
 
-.. image:: /img/axe-settings-best-practices.png
-   :alt: Best Practicesの項目のEnableをチェックしているスクリーンショット
+   .. image:: /img/axe-settings-best-practices.png
+      :alt: Best Practicesの項目のEnableをチェックしているスクリーンショット
 
 3. 「保存」をクリック
 
