@@ -4,8 +4,6 @@
 
 {{ gl.title|make_heading(2) }}
 
-優先度
-   {{ gl.priority }}
 対象プラットフォーム
    {{ gl.platform }}
 
@@ -22,7 +20,7 @@
 {%- endfilter %}
 
 {% for sc in gl.scs -%}
-SC {{ sc.sc }}：
+達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
    -  {{ sc.sc_en }}
    -  {{ sc.sc_ja }}
 {% endfor %}

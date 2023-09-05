@@ -300,7 +300,8 @@ def main():
             gl_str['scs'].append({
                 'sc': sc,
                 'sc_en': wcag_sc[sc]['en']['linkCode'],
-                'sc_ja': wcag_sc[sc]['ja']['linkCode']
+                'sc_ja': wcag_sc[sc]['ja']['linkCode'],
+                'sc_level': wcag_sc[sc]['level']
             })
 
         category_pages[gl['category']]['guidelines'].append(gl_str)
