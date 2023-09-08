@@ -4,34 +4,24 @@
 
 {{ gl.title|make_heading(2) }}
 
-対象プラットフォーム
-   {{ gl.platform }}
-
 {{ gl.guideline }}
 
-{% filter make_heading(3) -%}
+対象プラットフォーム
+   {{ gl.platform }}
 意図
-{%- endfilter %}
-
-{{ gl.intent }}
-
-{% filter make_heading(3) -%}
+   {{ gl.intent | indent(3) }}
 対応するWCAG 2.1の達成基準
-{%- endfilter %}
+{%- for sc in gl.scs %}
+   *  達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
 
-{% for sc in gl.scs -%}
-達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
-   -  {{ sc.sc_en }}
-   -  {{ sc.sc_ja }}
-{% endfor %}
+      -  {{ sc.sc_en }}
+      -  {{ sc.sc_ja }}
 
+{% endfor -%}
 {% if gl.info is defined -%}
-{% filter make_heading(3) -%}
 参考情報
-{%- endfilter %}
-
-{% for item in gl.info -%}
-*  {{ item }}
+{%- for item in gl.info %}
+   *  {{ item }}
 {% endfor %}
 {%- endif %}
 
