@@ -6,28 +6,23 @@
 チェックID：{{ check.id }}
 {%- endfilter %}
 
+{{ check.check }}
+
 対象
    {{ check.target }}
 対象プラットフォーム
    {{ check.platform }}
 重篤度
    {{ check.severity }}
-
 関連ガイドライン
 {%- for ref in check.gl_refs %}
    *  {{ ref.category }}： :ref:`{{ ref.glref }}`
 {%- endfor %}
-
-{{ check.check }}
-
 {% if check.inforefs is defined -%}
-{% filter make_heading(3) -%}
 参考情報
-{%- endfilter %}
-
-{% for item in check.inforefs -%}
-*  {{ item }}
-{% endfor %}
+{%- for item in check.inforefs %}
+   *  {{ item }}
+{%- endfor %}
 {%- endif %}
 
 {% if check.implementations is defined -%}

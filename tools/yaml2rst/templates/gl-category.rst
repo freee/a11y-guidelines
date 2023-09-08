@@ -34,14 +34,14 @@
 :ref:`check-{{ check.id }}`
 {%- endfilter %}
 
+{{ check.check }}
+
 対象
    {{ check.target }}
 対象プラットフォーム
    {{ check.platform }}
 重篤度
    {{ check.severity }}
-
-{{ check.check }}
 
 {% if check.implementations is defined -%}
 {% include 'check-implementation.rst' %}
