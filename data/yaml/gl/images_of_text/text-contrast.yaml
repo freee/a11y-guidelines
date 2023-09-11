@@ -3,7 +3,6 @@ sortKey: 1511
 category: images_of_text
 title:
   ja: 画像内のテキストのコントラスト比
-priority: must
 platform:
 - web
 guideline: |-

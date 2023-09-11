@@ -3,7 +3,6 @@ sortKey: 2026
 category: dynamic_content
 title:
   ja: 点滅、スクロールを伴うコンテンツ
-priority: must
 platform:
 - web
 - mobile

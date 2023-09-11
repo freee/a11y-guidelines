@@ -3,7 +3,6 @@ sortKey: 1206
 category: login_session
 title:
   ja: 制限時間を設けない
-priority: should
 platform:
 - web
 - mobile

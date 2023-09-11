@@ -3,7 +3,6 @@ sortKey: 1901
 category: form
 title:
   ja: 表示されているテキストをラベルとして用いる
-priority: must
 platform:
 - web
 - mobile

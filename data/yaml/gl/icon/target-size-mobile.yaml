@@ -3,7 +3,6 @@ sortKey: 1726
 category: icon
 title:
   ja: 十分な大きさのクリック/タッチのターゲット（モバイル）
-priority: should
 platform:
 - mobile
 guideline: |-

@@ -3,7 +3,6 @@ sortKey: 1929
 category: form
 title:
   ja: キーボード操作を可能にする
-priority: must
 platform:
 - web
 guideline: |-

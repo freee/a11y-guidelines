@@ -3,7 +3,6 @@ sortKey: 2121
 category: multimedia
 title:
   ja: テキスト情報と同等の内容にする
-priority: must
 platform:
 - web
 - mobile

@@ -3,7 +3,6 @@ sortKey: 1941
 category: form
 title:
   ja: フォームの値の変更時の挙動
-priority: must
 platform:
 - web
 - mobile
