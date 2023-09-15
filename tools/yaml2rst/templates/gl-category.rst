@@ -4,36 +4,24 @@
 
 {{ gl.title|make_heading(2) }}
 
-優先度
-   {{ gl.priority }}
-対象プラットフォーム
-   {{ gl.platform }}
-
 {{ gl.guideline }}
 
-{% filter make_heading(3) -%}
+対象プラットフォーム
+   {{ gl.platform }}
 意図
-{%- endfilter %}
-
-{{ gl.intent }}
-
-{% filter make_heading(3) -%}
+   {{ gl.intent | indent(3) }}
 対応するWCAG 2.1の達成基準
-{%- endfilter %}
+{%- for sc in gl.scs %}
+   *  達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
 
-{% for sc in gl.scs -%}
-SC {{ sc.sc }}：
-   -  {{ sc.sc_en }}
-   -  {{ sc.sc_ja }}
-{% endfor %}
+      -  {{ sc.sc_en }}
+      -  {{ sc.sc_ja }}
 
+{% endfor -%}
 {% if gl.info is defined -%}
-{% filter make_heading(3) -%}
 参考情報
-{%- endfilter %}
-
-{% for item in gl.info -%}
-*  {{ item }}
+{%- for item in gl.info %}
+   *  {{ item }}
 {% endfor %}
 {%- endif %}
 
@@ -46,14 +34,14 @@ SC {{ sc.sc }}：
 :ref:`check-{{ check.id }}`
 {%- endfilter %}
 
+{{ check.check }}
+
 対象
    {{ check.target }}
 対象プラットフォーム
    {{ check.platform }}
 重篤度
    {{ check.severity }}
-
-{{ check.check }}
 
 {% if check.implementations is defined -%}
 {% include 'check-implementation.rst' %}

@@ -3,7 +3,6 @@ sortKey: 1006
 category: markup
 title:
   ja: 文法的に正しいマークアップ
-priority: must
 platform:
 - web
 guideline: |-

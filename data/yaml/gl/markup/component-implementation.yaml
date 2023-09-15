@@ -3,7 +3,6 @@ sortKey: 1011
 category: markup
 title:
   ja: 対話的なUIコンポーネントの実装
-priority: must
 platform:
 - web
 - mobile

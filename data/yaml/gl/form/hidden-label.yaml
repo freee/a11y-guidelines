@@ -3,7 +3,6 @@ sortKey: 1906
 category: form
 title:
   ja: 表示されているテキストをラベルにできない場合
-priority: must
 platform:
 - web
 - mobile

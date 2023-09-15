@@ -3,7 +3,6 @@ sortKey: 1466
 category: text
 title:
   ja: モバイルOSでのコントラスト比の確保
-priority: must
 platform:
 - mobile
 guideline: |-

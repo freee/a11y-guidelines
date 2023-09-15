@@ -3,7 +3,6 @@ sortKey: 2021
 category: dynamic_content
 title:
   ja: ステータス・メッセージの適切な実装
-priority: must
 platform:
 - web
 - mobile

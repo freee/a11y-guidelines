@@ -3,7 +3,6 @@ sortKey: 1336
 category: input_device
 title:
   ja: ショートカット・キーを提供する場合
-priority: must
 platform:
 - web
 guideline: |-

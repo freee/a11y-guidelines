@@ -3,7 +3,6 @@ sortKey: 1311
 category: input_device
 title:
   ja: 適切なフォーカス順序
-priority: must
 platform:
 - web
 - mobile

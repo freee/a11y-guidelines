@@ -3,7 +3,6 @@ sortKey: 1441
 category: text
 title:
   ja: モバイルOSの文字サイズ設定の変更
-priority: must
 platform:
 - mobile
 guideline: |-

@@ -3,7 +3,6 @@ sortKey: 1961
 category: form
 title:
   ja: 十分な大きさのクリック/タッチのターゲット
-priority: should
 platform:
 - web
 guideline: |-
