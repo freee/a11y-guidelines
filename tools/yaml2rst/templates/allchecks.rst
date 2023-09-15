@@ -14,7 +14,7 @@
    {{ check.platform }}
 重篤度
    {{ check.severity }}
-関連ガイドライン
+関連ガイドライン項目
 {%- for ref in check.gl_refs %}
    *  {{ ref.category }}： :ref:`{{ ref.glref }}`
 {%- endfor %}

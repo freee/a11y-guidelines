@@ -22,9 +22,9 @@
 *  :ref:`exp-check-contrast`
 *  |Vibes Color Contrast|
 
-****************
-関連ガイドライン
-****************
+********************
+関連ガイドライン項目
+********************
 
 *  アイコン： :ref:`gl-icon-contrast`
 *  画像： :ref:`gl-image-adjacent-contrast`
