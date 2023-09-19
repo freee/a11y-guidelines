@@ -23,7 +23,7 @@ jobs:
     - name: Validate changed schema and data files
       run: |
         TARGET_BRANCH="${{ github.base_ref }}"
-        CHANGED_FILES=$(git diff --name-only origin/$TARGET_BRANCH HEAD)
+        CHANGED_FILES=$(git diff --name-status origin/$TARGET_BRANCH HEAD | sed -r '/^D/d;s/^[AM]\s+(.+)$/\1/')
 
         for FILE in $CHANGED_FILES
         do
