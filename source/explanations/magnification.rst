@@ -97,5 +97,4 @@ Androidの場合
 
 *  テキスト： :ref:`gl-text-zoom`
 *  テキスト： :ref:`gl-text-enlarge-settings`
-*  テキスト： :ref:`gl-text-enable-enlarge`
 *  テキスト： :ref:`gl-text-zoom-reflow`
