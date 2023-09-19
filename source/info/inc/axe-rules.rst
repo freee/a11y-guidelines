@@ -1,9 +1,9 @@
 ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`_ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
 
 バージョン
-   4.7.2
+   4.8.1
 更新日時
-   2023-08-29 18:58:09+0900
+   2023-09-12 06:45:57+0900
 
 .. _axe-rule-area-alt:
 
@@ -13,7 +13,7 @@
 
 イメージマップの<area>要素に代替テキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/area-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/area-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -37,13 +37,13 @@
 
 .. _axe-rule-aria-allowed-attr:
 
-***************************************************************************************************************
-要素には許可されているARIA属性のみを使用しなければなりません (Elements must only use supported ARIA attributes)
-***************************************************************************************************************
+*******************************************************************************************************************
+要素にはサポートされているARIA属性のみを使用しなければなりません (Elements must only use supported ARIA attributes)
+*******************************************************************************************************************
 
-要素のロールにARIA属性が許可されていることを確認します
+要素のロールがARIA属性をサポートしていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-allowed-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-allowed-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -67,7 +67,7 @@ aria-braille属性には、点じ以外の同等のものがなければなり�
 
 aria-braillelabelとaria-brailleroledescriptionには、点字以外の同等のものが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-braille-equivalent>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-braille-equivalent>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -91,7 +91,7 @@ ARIAコマンドにはアクセシブルな名前がなければなりません 
 
 すべてのARIA button、link、menuitemにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-command-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-command-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -115,7 +115,7 @@ ARIA属性は要素のロールの仕様に従って使用しなければなり�
 
 ARIA属性が要素のロールの仕様に従って使用されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-conditional-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-conditional-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -139,7 +139,7 @@ ARIA属性が要素のロールの仕様に従って使用されていること�
 
 要素に非推奨のロールが使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-deprecated-role>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-deprecated-role>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -158,12 +158,12 @@ ARIA属性が要素のロールの仕様に従って使用されていること�
 .. _axe-rule-aria-hidden-body:
 
 ************************************************************************************************************************
-ドキュメント本体にaria-hidden='true'が存在してはなりません (aria-hidden='true' must not be present on the document body)
+ドキュメント本体にaria-hidden="true"が存在してはなりません (aria-hidden="true" must not be present on the document body)
 ************************************************************************************************************************
 
-ドキュメント本体にaria-hidden='true'が存在しないことを確認します
+ドキュメント本体にaria-hidden="true"が存在しないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-hidden-body>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-hidden-body>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -187,7 +187,7 @@ aria-hiddenが指定されている要素は、フォーカス可能であった
 
 aria-hiddenが指定されている要素にフォーカスできないこと、その要素にフォーカス可能な要素が含まれていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-hidden-focus>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-hidden-focus>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -211,7 +211,7 @@ ARIA入力欄にはアクセシブルな名前がなければなりません (AR
 
 すべてのARIA入力欄にアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-input-field-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-input-field-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -235,7 +235,7 @@ ARIA meterノードにはアクセシブルな名前がなければなりませ�
 
 すべてのARIA meterノードにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-meter-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-meter-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -264,7 +264,7 @@ ARIA progressbarノードにはアクセシブルな名前がなければなり�
 
 すべてのARIA progressbarノードにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-progressbar-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-progressbar-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -293,7 +293,7 @@ ARIA progressbarノードにはアクセシブルな名前がなければなり�
 
 要素のロールでARIA属性が禁止されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-prohibited-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-prohibited-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -317,7 +317,7 @@ ARIA progressbarノードにはアクセシブルな名前がなければなり�
 
 ARIAロールのある要素にすべての必須ARIA属性が存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-required-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-required-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -341,7 +341,7 @@ ARIAロールのある要素にすべての必須ARIA属性が存在すること
 
 子ロールを必須とするARIAロールが指定された要素に、それらが含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-required-children>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-required-children>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -369,7 +369,7 @@ ARIAロールのある要素にすべての必須ARIA属性が存在すること
 
 親ロールを必須とするARIAロールが指定された要素に、それらが含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-required-parent>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-required-parent>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -397,7 +397,7 @@ aria-roledescriptionはセマンティックなロールを持った要素に使
 
 aria-roledescriptionが暗黙的もしくは明示的なロールを持った要素に使用されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-roledescription>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-roledescription>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -421,7 +421,7 @@ aria-roledescriptionが暗黙的もしくは明示的なロールを持った要
 
 すべてのrole属性が指定された要素で、有効な値が使用されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-roles>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-roles>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -445,7 +445,7 @@ ARIAトグル欄にはアクセシブルな名前がなければなりません 
 
 すべてのARIAトグル欄にアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-toggle-field-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-toggle-field-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -469,7 +469,7 @@ ARIA tooltipノードにはアクセシブルな名前がなければなりま�
 
 すべてのARIA tooltipノードにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-tooltip-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-tooltip-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -493,7 +493,7 @@ ARIA属性は有効な名前に一致しなければなりません (ARIA attrib
 
 aria- で始まる属性が有効なARIA属性であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-valid-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-valid-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -517,7 +517,7 @@ ARIA属性は有効な値に一致しなければなりません (ARIA attribute
 
 すべてのARIA属性に有効な値が存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-valid-attr-value>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-valid-attr-value>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -541,7 +541,7 @@ ARIA属性は有効な値に一致しなければなりません (ARIA attribute
 
 <audio>要素にキャプションが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/audio-caption>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/audio-caption>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -565,7 +565,7 @@ ARIA属性は有効な値に一致しなければなりません (ARIA attribute
 
 style属性で指定されたテキストの間隔は、カスタムスタイルシートにより調整可能であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/avoid-inline-spacing>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/avoid-inline-spacing>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -588,7 +588,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 
 <blink>要素が使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/blink>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/blink>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -613,7 +613,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 
 ボタンに認識可能なテキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/button-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/button-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -637,7 +637,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 
 各ページに少なくとも1つ、ユーザーがナビゲーション部分をスキップして直接本文へ移動できるメカニズムが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/bypass>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/bypass>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -660,7 +660,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 
 前景色と背景色のコントラストがWCAG 2のAAコントラスト比（最低限）のしきい値を満たすことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/color-contrast>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/color-contrast>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -688,7 +688,7 @@ style属性で指定されたテキストの間隔は、カスタムスタイル
 
 前景色と背景色のコントラストがWCAG 2のAAAコントラスト比（高度）のしきい値を満たすことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/color-contrast-enhanced>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/color-contrast-enhanced>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -716,7 +716,7 @@ CSSメディアクエリーはディスプレイの向きを固定するため�
 
 コンテンツが特定のディスプレイの向きに固定されていないこと、およびコンテンツがすべてのディスプレイの向きで操作可能なことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/css-orientation-lock>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/css-orientation-lock>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -739,7 +739,7 @@ CSSメディアクエリーはディスプレイの向きを固定するため�
 
 <dl>要素の構造が正しいことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/definition-list>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/definition-list>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -767,7 +767,7 @@ CSSメディアクエリーはディスプレイの向きを固定するため�
 
 <dt>および<dd>要素が<dl>に含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/dlitem>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/dlitem>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -795,7 +795,7 @@ CSSメディアクエリーはディスプレイの向きを固定するため�
 
 各HTMLドキュメントに空ではない<title>要素が含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/document-title>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/document-title>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -818,7 +818,7 @@ id属性の値は一意でなければなりません (id attribute value must b
 
 すべてのid属性の値が一意であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/duplicate-id>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/duplicate-id>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -841,7 +841,7 @@ id属性の値は一意でなければなりません (id attribute value must b
 
 アクティブな要素のid属性の値が一意であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/duplicate-id-active>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/duplicate-id-active>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -864,7 +864,7 @@ ARIAおよびラベルに使用されているIDは一意でなければなり�
 
 ARIAおよびラベルに使用されているすべてのid属性の値が一意であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/duplicate-id-aria>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/duplicate-id-aria>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -888,7 +888,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 フォームフィールドに複数のlabel要素が存在しないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/form-field-multiple-labels>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/form-field-multiple-labels>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -912,7 +912,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 フォーカス可能な<frame>と<iframe>要素に、tabindex=-1が指定されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/frame-focusable-content>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/frame-focusable-content>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -926,6 +926,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 ================
 
 *  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
+*  フォーム： :ref:`gl-form-keyboard-operable`
 
 .. _axe-rule-frame-title:
 
@@ -935,7 +936,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 <iframe>および<frame>要素にアクセシブルな名前が存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/frame-title>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/frame-title>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -959,7 +960,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 <iframe>および<frame>要素に一意のtitle属性が含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/frame-title-unique>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/frame-title-unique>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -983,7 +984,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 すべてのHTMLドキュメントにlang属性が存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/html-has-lang>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/html-has-lang>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1006,7 +1007,7 @@ ARIAおよびラベルに使用されているすべてのid属性の値が一�
 
 <html>要素のlang属性に有効な値があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/html-lang-valid>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/html-lang-valid>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1029,7 +1030,7 @@ HTML要素に指定されたlangおよびxml:lang属性は同じ基本言語を�
 
 HTML要素に指定された有効なlangおよびxml:lang属性の両方がページの基本言語と一致することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/html-xml-lang-mismatch>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/html-xml-lang-mismatch>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1052,7 +1053,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <img>要素に代替テキストが存在する、またはnoneまたはpresentationのロールが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/image-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/image-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1081,7 +1082,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 入力ボタンに認識可能なテキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/input-button-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/input-button-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1105,7 +1106,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <input type="image">要素に代替テキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/input-image-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/input-image-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1141,7 +1142,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 すべてのフォーム要素にラベルが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/label>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/label>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1165,7 +1166,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 コンテンツによってラベル付けされた要素は、それらの視認できるテキストがアクセシブルな名前の一部になっていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/label-content-name-mismatch>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/label-content-name-mismatch>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1188,7 +1189,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 リンクが色に依存しない形で周囲のテキストと区別できることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/link-in-text-block>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/link-in-text-block>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1215,7 +1216,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 リンクに認識可能なテキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/link-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/link-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1245,7 +1246,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 リストが正しく構造化されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/list>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/list>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1273,7 +1274,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <li>要素がセマンティックに使用されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/listitem>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/listitem>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1301,7 +1302,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <marquee>要素が使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/marquee>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/marquee>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1326,7 +1327,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 一定時間経過後のページの自動リロードのために<meta http-equiv="refresh">が使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/meta-refresh>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/meta-refresh>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1350,7 +1351,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 一定時間経過後のページの自動リロードのために<meta http-equiv="refresh">が使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/meta-refresh-no-exceptions>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/meta-refresh-no-exceptions>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1378,7 +1379,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <meta name="viewport">がテキストのサイズ変更やズームを無効化しないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/meta-viewport>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/meta-viewport>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1394,7 +1395,6 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 *  テキスト： :ref:`gl-text-zoom`
 *  テキスト： :ref:`gl-text-enlarge-settings`
 *  テキスト： :ref:`gl-text-mobile-enlarge-settings`
-*  テキスト： :ref:`gl-text-enable-enlarge`
 
 .. _axe-rule-nested-interactive:
 
@@ -1404,7 +1404,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 スクリーン・リーダーで必ずしもよみあげられなかったり支援技術のフォーカスに関する問題を引き起こす可能性があったりするため、対話的なコントロールがネストされていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/nested-interactive>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/nested-interactive>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1428,7 +1428,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <video> または <audio> 要素が音声を停止またはミュートするコントロールなしに音声を3秒より長く自動再生しないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/no-autoplay-audio>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/no-autoplay-audio>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1451,7 +1451,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <object>要素に代替テキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/object-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/object-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1480,7 +1480,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 <p>要素を見出しとしてスタイル付けするために太字、イタリック体、およびフォントサイズが使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/p-as-heading>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/p-as-heading>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1503,12 +1503,12 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 .. _axe-rule-role-img-alt:
 
 *************************************************************************************************************
-[role='img'] の要素には代替テキストがなければなりません ([role='img'] elements must have an alternative text)
+[role="img"] の要素には代替テキストがなければなりません ([role="img"] elements must have an alternative text)
 *************************************************************************************************************
 
-[role='img'] の要素に代替テキストが存在することを確認します
+[role="img"] の要素に代替テキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/role-img-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/role-img-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1537,7 +1537,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 
 スクロール可能なコンテンツを持つ要素がキーボードでアクセスできることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/scrollable-region-focusable>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/scrollable-region-focusable>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1551,6 +1551,7 @@ HTML要素に指定された有効なlangおよびxml:lang属性の両方がペ�
 ================
 
 *  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
+*  フォーム： :ref:`gl-form-keyboard-operable`
 
 .. _axe-rule-select-name:
 
@@ -1560,7 +1561,7 @@ select要素にはアクセシブルな名前がなければなりません (Sel
 
 select要素にはアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/select-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/select-name>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1584,7 +1585,7 @@ select要素にはアクセシブルな名前があることを確認します
 
 サーバーサイドのイメージマップが使用されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/server-side-image-map>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/server-side-image-map>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1598,6 +1599,7 @@ select要素にはアクセシブルな名前があることを確認します
 ================
 
 *  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
+*  フォーム： :ref:`gl-form-keyboard-operable`
 
 .. _axe-rule-svg-img-alt:
 
@@ -1607,7 +1609,7 @@ imgロールを持つ<svg>要素には代替テキストが存在しなければ
 
 img、graphics-documentまたはgraphics-symbolロールを持つsvg要素にアクセシブルなテキストがあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/svg-img-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/svg-img-alt>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1636,7 +1638,7 @@ img、graphics-documentまたはgraphics-symbolロールを持つsvg要素にア
 
 キャプション付きのテーブルが<caption>要素を用いていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/table-fake-caption>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/table-fake-caption>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1664,7 +1666,7 @@ img、graphics-documentまたはgraphics-symbolロールを持つsvg要素にア
 
 3×3より大きい<table>の空ではないデータセルにはそれぞれ1つ以上のテーブルヘッダーが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/td-has-header>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/td-has-header>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1692,7 +1694,7 @@ img、graphics-documentまたはgraphics-symbolロールを持つsvg要素にア
 
 テーブルでheaders属性を使用している各セルの参照先が同じテーブル内の他のセルであることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/td-headers-attr>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/td-headers-attr>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1720,7 +1722,7 @@ img、graphics-documentまたはgraphics-symbolロールを持つsvg要素にア
 
 すべての<th>要素およびrole=columnheader/rowheaderを持つ要素にはそれらが説明するデータセルがあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/th-has-data-cells>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/th-has-data-cells>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1748,7 +1750,7 @@ lang属性には有効な値がなければなりません (lang attribute must 
 
 lang属性に有効な値が存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/valid-lang>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/valid-lang>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1772,7 +1774,7 @@ lang属性に有効な値が存在することを確認します
 
 <video>要素にキャプションが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/video-caption>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/video-caption>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1796,7 +1798,7 @@ autocomplete属性は正しく使用しなければなりません (autocomplete
 
 autocomplete属性が正しく、かつフォームフィールドに対して適切であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/autocomplete-valid>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/autocomplete-valid>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1815,7 +1817,7 @@ autocomplete属性が正しく、かつフォームフィールドに対して�
 
 同じアクセシブルな名前を持つ複数のリンクが類似した目的を果たすことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/identical-links-same-purpose>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/identical-links-same-purpose>`__
 
 関連するWCAG 2.1の達成基準
 ==========================
@@ -1834,7 +1836,7 @@ accesskey属性の値は一意でなければなりません (accesskey attribut
 
 すべてのaccesskey属性の値が一意であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/accesskeys>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/accesskeys>`__
 
 
 .. _axe-rule-aria-allowed-role:
@@ -1845,7 +1847,7 @@ ARIAロールは要素に対して適切でなければなりません (ARIA rol
 
 role属性の値が要素に対して適切であることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-allowed-role>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-allowed-role>`__
 
 
 .. _axe-rule-aria-dialog-name:
@@ -1856,7 +1858,7 @@ ARIA dialogとalertdialogノードにはアクセシブルな名前がなけれ�
 
 すべてのARIA dialog、alertdialogノードにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-dialog-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-dialog-name>`__
 
 
 .. _axe-rule-aria-text:
@@ -1867,7 +1869,7 @@ ARIA dialogとalertdialogノードにはアクセシブルな名前がなけれ�
 
 role="text"が指定されている要素にフォーカス可能な子孫がないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-text>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-text>`__
 
 
 .. _axe-rule-aria-treeitem-name:
@@ -1878,7 +1880,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 すべてのARIA treeitemノードにアクセシブルな名前があることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/aria-treeitem-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/aria-treeitem-name>`__
 
 
 .. _axe-rule-empty-heading:
@@ -1889,7 +1891,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 見出しに認識可能なテキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/empty-heading>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/empty-heading>`__
 
 
 .. _axe-rule-empty-table-header:
@@ -1900,7 +1902,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 テーブルのヘッダーに認識可能なテキストが存在することを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/empty-table-header>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/empty-table-header>`__
 
 
 .. _axe-rule-focus-order-semantics:
@@ -1911,7 +1913,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 フォーカス順序に含まれる要素にインタラクティブコンテンツに適したロールがあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/focus-order-semantics>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/focus-order-semantics>`__
 
 
 .. _axe-rule-frame-tested:
@@ -1922,7 +1924,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 <iframe>および<frame>要素にaxe-coreスクリプトが含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/frame-tested>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/frame-tested>`__
 
 
 .. _axe-rule-heading-order:
@@ -1933,7 +1935,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 見出しの順序が意味的に正しいことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/heading-order>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/heading-order>`__
 
 
 .. _axe-rule-hidden-content:
@@ -1944,7 +1946,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 隠れているコンテンツについてユーザーに通知します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/hidden-content>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/hidden-content>`__
 
 
 .. _axe-rule-image-redundant-alt:
@@ -1955,7 +1957,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 画像の代替がテキストとして繰り返されていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/image-redundant-alt>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/image-redundant-alt>`__
 
 
 .. _axe-rule-label-title-only:
@@ -1966,7 +1968,7 @@ ARIA treeitemノードにはアクセシブルな名前がなければなりま�
 
 すべてのフォーム要素に視認できるラベルがあり、非表示のラベル、titleまたはaria-describedby属性のみを使用してラベル付けされていないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/label-title-only>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/label-title-only>`__
 
 
 .. _axe-rule-landmark-banner-is-top-level:
@@ -1977,7 +1979,7 @@ bannerランドマークは他のランドマークに含まれるべきでは�
 
 bannerランドマークがトップレベルにあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-banner-is-top-level>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-banner-is-top-level>`__
 
 
 .. _axe-rule-landmark-complementary-is-top-level:
@@ -1988,7 +1990,7 @@ asideは他の要素に含まれるべきではありません (Aside should not
 
 complementaryランドマークあるいはasideがトップレベルにあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-complementary-is-top-level>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-complementary-is-top-level>`__
 
 
 .. _axe-rule-landmark-contentinfo-is-top-level:
@@ -1999,7 +2001,7 @@ contentinfoランドマークは他のランドマークに含まれるべきで
 
 contentinfoランドマークがトップレベルにあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-contentinfo-is-top-level>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-contentinfo-is-top-level>`__
 
 
 .. _axe-rule-landmark-main-is-top-level:
@@ -2010,7 +2012,7 @@ mainランドマークは他のランドマークに含まれるべきではあ�
 
 mainランドマークがトップレベルにあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-main-is-top-level>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-main-is-top-level>`__
 
 
 .. _axe-rule-landmark-no-duplicate-banner:
@@ -2021,7 +2023,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ドキュメント内のbannerランドマークが最大で1つのみであることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-no-duplicate-banner>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-no-duplicate-banner>`__
 
 
 .. _axe-rule-landmark-no-duplicate-contentinfo:
@@ -2032,7 +2034,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ドキュメント内のcontentinfoランドマークが最大で1つのみであることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-no-duplicate-contentinfo>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-no-duplicate-contentinfo>`__
 
 
 .. _axe-rule-landmark-no-duplicate-main:
@@ -2043,7 +2045,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ドキュメント内のmainランドマークが最大で1つのみであることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-no-duplicate-main>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-no-duplicate-main>`__
 
 
 .. _axe-rule-landmark-one-main:
@@ -2054,7 +2056,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ドキュメントにmainランドマークが含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-one-main>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-one-main>`__
 
 
 .. _axe-rule-landmark-unique:
@@ -2065,7 +2067,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ランドマークには一意のロール又はロール／ラベル／タイトル (すなわちアクセシブルな名前) の組み合わせがなければなりません
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/landmark-unique>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/landmark-unique>`__
 
 
 .. _axe-rule-meta-viewport-large:
@@ -2076,7 +2078,7 @@ mainランドマークがトップレベルにあることを確認します
 
 <meta name="viewport">で大幅に拡大縮小できることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/meta-viewport-large>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/meta-viewport-large>`__
 
 
 .. _axe-rule-page-has-heading-one:
@@ -2087,7 +2089,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ページ、またはそのページ中のフレームの少なくとも1つにはレベル1の見出しが含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/page-has-heading-one>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/page-has-heading-one>`__
 
 
 .. _axe-rule-presentation-role-conflict:
@@ -2098,7 +2100,7 @@ mainランドマークがトップレベルにあることを確認します
 
 すべてのスクリーン・リーダーに確実に無視させるために、プレゼンテーション目的とされている要素にはグローバルなARIAまたはtabindexが指定されていてはなりません
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/presentation-role-conflict>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/presentation-role-conflict>`__
 
 
 .. _axe-rule-region:
@@ -2109,7 +2111,7 @@ mainランドマークがトップレベルにあることを確認します
 
 ページのすべてのコンテンツがlandmarkに含まれていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/region>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/region>`__
 
 
 .. _axe-rule-scope-attr-valid:
@@ -2120,7 +2122,7 @@ scope属性は正しく使用されなければなりません (scope attribute 
 
 scope属性がテーブルで正しく使用されていることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/scope-attr-valid>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/scope-attr-valid>`__
 
 
 .. _axe-rule-skip-link:
@@ -2131,7 +2133,7 @@ scope属性がテーブルで正しく使用されていることを確認しま
 
 すべてのスキップリンクにフォーカス可能なターゲットがあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/skip-link>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/skip-link>`__
 
 
 .. _axe-rule-tabindex:
@@ -2142,7 +2144,7 @@ scope属性がテーブルで正しく使用されていることを確認しま
 
 tabindex属性値が0より大きくないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/tabindex>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/tabindex>`__
 
 
 .. _axe-rule-table-duplicate-name:
@@ -2153,7 +2155,7 @@ tabindex属性値が0より大きくないことを確認します
 
 <caption>要素の内用がsummary属性のテキストと同一ではないことを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/table-duplicate-name>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/table-duplicate-name>`__
 
 
 .. _axe-rule-target-size:
@@ -2164,6 +2166,6 @@ tabindex属性値が0より大きくないことを確認します
 
 タッチターゲットのサイズとスペースが十分にあることを確認します
 
-参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.7/target-size>`__
+参考： `Deque Universityの解説（英語） <https://dequeuniversity.com/rules/axe/4.8/target-size>`__
 
 
