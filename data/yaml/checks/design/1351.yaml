@@ -1,9 +1,0 @@
-id: '1351'
-severity: major
-target: design
-platform:
-- web
-- mobile
-check:
-  ja: |-
-    ログイン・セッションに有効期限が設定されていない。
