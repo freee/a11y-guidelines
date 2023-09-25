@@ -1,9 +1,0 @@
-id: '0991'
-severity: major
-target: design
-platform:
-- web
-- mobile
-check:
-  ja: |-
-    フォーム入力に制限時間が設けられていない。
