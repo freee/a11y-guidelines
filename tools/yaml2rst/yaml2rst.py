@@ -158,7 +158,6 @@ def main():
     gl_categories = {}
     for gl in guidelines:
         gl_categories[gl['id']] = category_names[gl['category']][LANG]
-        gl['priority'] = f"[{gl['priority'].upper()}]"
         for sc in gl['sc']:
             wcag_sc[sc]['gls'].append(gl['id'])
 
@@ -266,7 +265,6 @@ def main():
             'title': gl['title'][LANG],
             'intent': gl['intent'],
             'id': gl['id'],
-            'priority': gl['priority'],
             'platform': '、'.join(list(map(lambda item: PLATFORM_NAMES[item], gl['platform']))),
             'guideline': gl['guideline']
         }
@@ -300,7 +298,8 @@ def main():
             gl_str['scs'].append({
                 'sc': sc,
                 'sc_en': wcag_sc[sc]['en']['linkCode'],
-                'sc_ja': wcag_sc[sc]['ja']['linkCode']
+                'sc_ja': wcag_sc[sc]['ja']['linkCode'],
+                'sc_level': wcag_sc[sc]['level']
             })
 
         category_pages[gl['category']]['guidelines'].append(gl_str)

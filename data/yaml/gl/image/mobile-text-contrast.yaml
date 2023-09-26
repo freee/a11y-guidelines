@@ -3,7 +3,6 @@ sortKey: 1626
 category: image
 title:
   ja: モバイルOSでの画像内のテキストのコントラスト比
-priority: must
 platform:
 - mobile
 guideline: |-

@@ -3,7 +3,6 @@ sortKey: 1306
 category: input_device
 title:
   ja: モバイルの支援技術のサポート
-priority: must
 platform:
 - mobile
 guideline: |-

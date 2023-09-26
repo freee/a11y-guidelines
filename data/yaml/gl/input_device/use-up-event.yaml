@@ -3,7 +3,6 @@ sortKey: 1326
 category: input_device
 title:
   ja: ダウン・イベントをトリガーにしない
-priority: must
 platform:
 - web
 - mobile

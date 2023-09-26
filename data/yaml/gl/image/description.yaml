@@ -3,7 +3,6 @@ sortKey: 1601
 category: image
 title:
   ja: 画像の説明の提供
-priority: must
 platform:
 - web
 - mobile

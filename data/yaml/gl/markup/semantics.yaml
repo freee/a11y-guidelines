@@ -3,7 +3,6 @@ sortKey: 1001
 category: markup
 title:
   ja: 文書構造を適切に示すマークアップ、実装を行う
-priority: must
 platform:
 - web
 - mobile

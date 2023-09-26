@@ -23,7 +23,7 @@ jobs:
     - name: Validate changed schema and data files
       run: |
         TARGET_BRANCH="${{ github.base_ref }}"
-        CHANGED_FILES=$(git diff --name-only origin/$TARGET_BRANCH HEAD)
+        CHANGED_FILES=$(git diff --name-only --diff-filter=AMR origin/$TARGET_BRANCH HEAD)
 
         for FILE in $CHANGED_FILES
         do
@@ -54,7 +54,7 @@ jobs:
     - name: Checkout files
       uses: actions/checkout@v3
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.9.x'
     - name: Install the Latest pip

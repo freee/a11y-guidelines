@@ -37,13 +37,6 @@
         "text"
       ]
     },
-    "priority": {
-      "description": "priority of the guideline",
-      "enum": [
-        "must",
-        "should"
-      ]
-    },
     "platform": {
       "description": "target platform of the guideline",
       "type": "array",
@@ -95,7 +88,6 @@
     "id",
     "sortKey",
     "title",
-    "priority",
     "platform",
     "guideline",
     "sc",

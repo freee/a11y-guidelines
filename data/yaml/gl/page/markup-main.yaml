@@ -3,7 +3,6 @@ sortKey: 1111
 category: page
 title:
   ja: 本文の開始位置の明示
-priority: must
 platform:
 - web
 guideline: |-
