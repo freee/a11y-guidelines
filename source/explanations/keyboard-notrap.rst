@@ -14,9 +14,4 @@
 
 Tab/Shift+Tabキー、矢印キー、Escキーなど、簡単な操作でフォーカスを外せるようにすることが必要です。
 
-********************
-関連ガイドライン項目
-********************
-
-*  入力ディバイス： :ref:`gl-input-device-no-trap`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-no-trap`
+.. include:: /inc/exp-keyboard-notrap.rst

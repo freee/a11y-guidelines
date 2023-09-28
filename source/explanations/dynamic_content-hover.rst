@@ -25,11 +25,4 @@
 
 なお、ホバーをトリガーとする場合、 :ref:`gl-input-device-keyboard-operable` を満たすために、キーボード・フォーカスも合わせてトリガーにする必要がある点に十分注意する必要があります。
 
-********************
-関連ガイドライン項目
-********************
-
-*  動的コンテンツ： :ref:`gl-dynamic-content-hover-magnify`
-*  動的コンテンツ： :ref:`gl-dynamic-content-hover`
-*  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
-
+.. include:: /inc/exp-dynamic-content-hover.rst

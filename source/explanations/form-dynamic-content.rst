@@ -13,9 +13,4 @@
 こういった挙動であっても、ユーザーが充分に予期できれば大きな問題はありませんが、なるべく回避するのが望ましいでしょう。
 
 
-********************
-関連ガイドライン項目
-********************
-
-*  フォーム： :ref:`gl-form-dynamic-content-change`
-*  フォーム： :ref:`gl-form-dynamic-content-focus`
+.. include:: /inc/exp-form-dynamic-content.rst

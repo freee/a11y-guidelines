@@ -16,10 +16,4 @@
 
 参考： :ref:`exp-check-contrast`
 
-********************
-関連ガイドライン項目
-********************
-
-*  画像： :ref:`gl-image-color-only`
-*  画像： :ref:`gl-image-adjacent-contrast`
-*  画像： :ref:`gl-image-text-contrast`
+.. include:: /inc/exp-image-visual.rst

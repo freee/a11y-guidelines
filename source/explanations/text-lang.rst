@@ -56,9 +56,4 @@ Guidelines”のように数単語程度のフレーズであれば、このこ�
 
    <iframe src="../_static/samples/lang-partial.html" width="100%" height="320px"></iframe>
 
-********************
-関連ガイドライン項目
-********************
-
-*  テキスト： :ref:`gl-text-page-lang`
-*  テキスト： :ref:`gl-text-phrase-lang`
+.. include:: /inc/exp-text-lang.rst

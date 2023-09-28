@@ -97,11 +97,4 @@ Android 11以前の場合
 #. 表示されている「ビルド番号」を7回連続してタップ
 #. 端末に設定されている暗証番号を入力
 
-********************
-関連ガイドライン項目
-********************
-
-*  画像： :ref:`gl-image-color-only`
-*  フォーム： :ref:`gl-form-color-only`
-*  リンク： :ref:`gl-link-color-only`
-*  テキスト： :ref:`gl-text-color-only`
+.. include:: /inc/exp-grayscale.rst

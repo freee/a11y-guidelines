@@ -52,11 +52,4 @@ CUDを行う場合、上記のポイントを満たすような配色を用い�
    -  `Android版 <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`_
    -  `Web版 <https://asada.website/webCVS/>`_
 
-********************
-関連ガイドライン項目
-********************
-
-*  画像： :ref:`gl-image-color-only`
-*  フォーム： :ref:`gl-form-color-only`
-*  リンク： :ref:`gl-link-color-only`
-*  テキスト： :ref:`gl-text-color-only`
+.. include:: /inc/exp-color-only.rst
