@@ -29,22 +29,4 @@
 テキスト情報の代替情報である場合とは、その音声・映像コンテンツがテキスト情報と併せて提供されていて、それぞれが同等の情報を提供している場合です。
 この場合、音声・映像コンテンツの利用が困難なユーザーも、テキスト情報を用いることで同等の情報を得ることができますが、そのコンテンツがテキスト情報の代替であることを明示することが必要です。
 
-********************
-関連ガイドライン項目
-********************
-
-*  音声・映像コンテンツ： :ref:`gl-multimedia-text-alternative`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-caption`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-transcript`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-video-description`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-video-description-no-exception`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-sign-language`
-*  音声・映像コンテンツ： :ref:`gl-multimedia-background-sound`
-
-
-
-
-
-
-
-
+.. include:: /inc/exp-multimedia-content-access.rst

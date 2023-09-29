@@ -73,6 +73,7 @@ def main():
     tool_example_template = template_env.get_template('check-examples-tool.rst')
     allchecks_text_template = template_env.get_template('allchecks.rst')
     category_page_template = template_env.get_template('gl-category.rst')
+    info_to_gl_template = template_env.get_template('info_to_gl.rst')
     wcag21mapping_template = template_env.get_template(WCAG_MAPPING_FILENAME)
     priority_diff_template = template_env.get_template(PRIORITY_DIFF_FILENAME)
     makefile_template = template_env.get_template(MAKEFILE_FILENAME)
@@ -156,10 +157,23 @@ def main():
         guideline_category_rst.append(os.path.join(DESTDIR, f'gl-category-{cat}.rst'))
 
     gl_categories = {}
+    info_to_gl = {}
     for gl in guidelines:
         gl_categories[gl['id']] = category_names[gl['category']][LANG]
         for sc in gl['sc']:
             wcag_sc[sc]['gls'].append(gl['id'])
+
+        if 'info' in gl:
+            for info in gl['info']:
+                if re.match(r'(https?://|\|.+\|)', info):
+                    continue
+                if info not in info_to_gl:
+                    info_to_gl[info] = []
+                info_to_gl[info].append({
+                    'id': gl['id'],
+                    'category': gl_categories[gl['id']],
+                    'sortKey': gl['sortKey']
+                })
 
     allchecks = []
     check_examples = {}
@@ -319,6 +333,14 @@ def main():
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
+    for info in info_to_gl:
+        filename = f'{info}.rst'
+        if build_all or os.path.join(DESTDIR, filename) in targets:
+            output = info_to_gl_template.render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
+            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(output)
+
     if build_all or os.path.join(DESTDIR, WCAG_MAPPING_FILENAME) in targets:
         sc_mapping = []
         for sc in wcag_sc:
@@ -401,11 +423,20 @@ def main():
         for obj in guidelines+checks:
             all_yaml.append(obj['src_path'])
 
-        gl_deps = []
+        other_deps = []
         for cat in category_pages:
             target = os.path.join(DESTDIR, f'gl-category-{cat}.rst')
             deps = " ".join(uniq(category_pages[cat]['dependency']))
-            gl_deps.append({
+            other_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
+        all_info = []
+        for info in info_to_gl:
+            target = os.path.join(DESTDIR, f'{info}.rst')
+            deps = " ".join([guideline['src_path'] for guideline in guidelines for id in [x['id'] for x in info_to_gl[info]] if guideline.get('id') == id])
+            all_info.append(target)
+            other_deps.append({
                 'dep': f'{target}: {deps}',
                 'target': target
             })
@@ -417,7 +448,8 @@ def main():
             'wcag_sc': WCAG_SC,
             'gl_yaml': " ".join(gl_yaml),
             'all_yaml': " ".join(all_yaml),
-            'gl_deps': gl_deps,
+            'all_info': " ".join(all_info),
+            'other_deps': other_deps,
             'miscdefs_target': os.path.join(DESTDIR, MISCDEFS_FILENAME),
             'info_src': INFO_SRC
         }

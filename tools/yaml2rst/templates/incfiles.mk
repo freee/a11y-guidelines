@@ -1,6 +1,7 @@
 guideline_category_rst = {{ guideline_category_rst }}
+all_info = {{ all_info }}
 
-incfiles: $(guideline_category_rst) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
+incfiles: $(guideline_category_rst) $(all_info) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
 
 %.yaml: ;
 %.json: ;
@@ -17,7 +18,7 @@ incfiles: $(guideline_category_rst) {{ wcag_mapping_target }} {{ all_checks_targ
 {{ miscdefs_target }}: {{ info_src }}
 	@$(YAML2RST) {{ miscdefs_target }}
 
-{% for item in gl_deps %}
+{% for item in other_deps %}
 {{ item.dep }}
 	@$(YAML2RST) {{ item.target }}
 {% endfor %}
