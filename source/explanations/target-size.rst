@@ -40,12 +40,4 @@
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 
-
-********************
-関連ガイドライン項目
-********************
-
-*  アイコン： :ref:`gl-icon-target-size`
-*  アイコン： :ref:`gl-icon-target-size-mobile`
-*  フォーム： :ref:`gl-form-target-size`
-*  フォーム： :ref:`gl-form-target-size-mobile`
+.. include:: /inc/exp-target-size.rst

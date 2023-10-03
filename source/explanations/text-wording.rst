@@ -25,14 +25,6 @@
 
 ラベルに関しても分かりやすい文言を用いることで、そのコンポーネントやフォーム・コントロールの目的を正確に伝えることができます。
 
-********************
-関連ガイドライン項目
-********************
-
-*  テキスト： :ref:`gl-text-multiple-modality`
-*  テキスト： :ref:`gl-text-color-only`
-*  テキスト： :ref:`gl-text-heading-label`
 
 
-
-
+.. include:: /inc/exp-text-wording.rst

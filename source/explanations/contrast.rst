@@ -22,15 +22,4 @@
 *  :ref:`exp-check-contrast`
 *  |Vibes Color Contrast|
 
-********************
-関連ガイドライン項目
-********************
-
-*  アイコン： :ref:`gl-icon-contrast`
-*  画像： :ref:`gl-image-adjacent-contrast`
-*  画像： :ref:`gl-image-text-contrast`
-*  画像： :ref:`gl-image-mobile-text-contrast`
-*  画像化されたテキスト： :ref:`gl-iot-text-contrast`
-*  画像化されたテキスト： :ref:`gl-iot-mobile-text-contrast`
-*  テキスト： :ref:`gl-text-contrast`
-*  テキスト： :ref:`gl-text-mobile-contrast`
+.. include:: /inc/exp-contrast.rst

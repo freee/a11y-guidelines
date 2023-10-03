@@ -33,18 +33,37 @@ jobs:
     - name: Install required modules
       run: python -m pip install -r requirements.txt --upgrade
 
-    - name: Build HTML with gtag.js, and OGP tags
+    - name: Prepare file upload directory with the archive directory
+      run: mkdir -p ${GITHUB_WORKSPACE}/upload/archive
+
+    - name: Download the existing archive files from S3
+      env:
+        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
+
+    - name: Build HTML of all releases, with gtag.js, and OGP tags
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
         BASE_URL: https://a11y-guidelines.freee.co.jp/
       run: |
         make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
         cp -r ./data/json/schemas ./build/html
+        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
+        for tag in `git tag` ; do \
+          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${tag} ] ; then \
+            git checkout ${tag} ; \
+            make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${tag}" clean html ; \
+            if [ -d ./data/json/schemas ]; then \
+              cp -r ./data/json/schemas ./build/html ; \
+            fi ; \
+            cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${tag} ; \
+          fi ; \
+        done
 
     - name: Publish to S3
       env:
         AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete build/html/ s3://${AWS_BUCKET}/ --quiet
+      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/ s3://${AWS_BUCKET}/ --quiet
 
     - name: Prepare the HTML Archive
       run: |
