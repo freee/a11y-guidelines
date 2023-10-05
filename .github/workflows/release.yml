@@ -49,14 +49,16 @@ jobs:
         make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
         cp -r ./data/json/schemas ./build/html
         cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
-        for tag in `git tag` ; do \
-          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${tag} ] ; then \
-            git checkout ${tag} ; \
-            make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${tag}" clean html ; \
+        make clean
+        for _tag in `git tag` ; do \
+          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
+            git checkout ${_tag} ; \
+            make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${_tag}" html ; \
             if [ -d ./data/json/schemas ]; then \
               cp -r ./data/json/schemas ./build/html ; \
             fi ; \
-            cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${tag} ; \
+            cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            make clean ; \
           fi ; \
         done
 
