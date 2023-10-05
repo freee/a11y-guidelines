@@ -50,6 +50,7 @@ jobs:
         cp -r ./data/json/schemas ./build/html
         cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
         make clean
+        current_commit=$(git rev-parse HEAD)
         for _tag in `git tag` ; do \
           if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
             git checkout ${_tag} ; \
@@ -59,6 +60,7 @@ jobs:
             fi ; \
             cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
             make clean ; \
+            git checkout ${current_commit} ; \
           fi ; \
         done
 
