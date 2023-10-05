@@ -52,6 +52,7 @@ jobs:
         make clean
         current_commit=$(git rev-parse HEAD)
         for _tag in `git tag` ; do \
+          echo "Processing ${_tag}..." ; \
           if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
             git checkout ${_tag} ; \
             make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${_tag}" html ; \
