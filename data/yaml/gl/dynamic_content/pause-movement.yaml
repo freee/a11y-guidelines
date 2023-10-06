@@ -2,14 +2,15 @@ id: gl-dynamic-content-pause-movement
 sortKey: 2026
 category: dynamic_content
 title:
-  ja: 点滅、スクロールを伴うコンテンツ
+  ja: 点滅、自動スクロールを伴うコンテンツ
+  en: Content That Blinks Or Scrolls Automatically
 platform:
 - web
 - mobile
 sc:
 - 2.2.2
 guideline: |-
-  同じページ上に、自動的に開始し5秒以上継続する、点滅やスクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
+  同じページ上に、自動的に開始し5秒以上継続する、点滅や自動スクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
   そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
 intent: |-
   ロービジョン者や認知障害者が、集中を阻害されないようにする。
