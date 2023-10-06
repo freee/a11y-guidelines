@@ -80,25 +80,11 @@ jobs:
         zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Ver. ${{ github.ref }}
-        body: |
-          Release note here
-        draft: true
-        prerelease: false
-
-    - name: Upload Release Artifact
-      id: upload_artifact
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ github.workspace }}/freee-a11y-guidelines-${{ env.TAG }}-html.zip
-        asset_name: freee-a11y-guidelines-${{ env.TAG }}-html.zip
-        asset_content_type: application/zip
+      run: |
+        gh release create ${TAG} \
+          --title "Ver. ${TAG}" \
+          --notes-file ./soruce/intro/ChangeLog/${TAG:0:4}/${TAG}.rst
+          --draft
+        gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
