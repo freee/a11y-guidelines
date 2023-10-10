@@ -31,6 +31,7 @@ if 'current' in tags:
   release = F'{version}+{today_numeric}（最新開発版）'
   publishedDate = today_str
 
+html_title = f'{project} {release}'
 copyright = '2020-{pubYear}, freee株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )
