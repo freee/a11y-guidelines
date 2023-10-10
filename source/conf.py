@@ -23,6 +23,14 @@ author = 'freee株式会社'
 version = 'Ver. 202310.0'
 release = version
 publishedDate = u'2023年10月3日'
+
+if 'current' in tags:
+  import datetime
+  today_numeric = datetime.date.today().strftime('%Y%m%d')
+  today_str = datetime.date.today().strftime('%Y年%-m月%-d日')
+  release = F'{version}+{today_numeric}（最新開発版）'
+  publishedDate = today_str
+
 copyright = '2020-{pubYear}, freee株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )
