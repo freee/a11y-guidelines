@@ -7,11 +7,9 @@ on:
 
 jobs:
   release:
+    if: github.repository == 'freee/a11y-guidelines' && startsWith(github.ref, 'refs/tags/')
 
     runs-on: ubuntu-latest
-
-    if: startsWith(github.ref, 'refs/tags/')
-
     steps:
     - name: Extract Branch/Tag Names
       run: |
@@ -94,10 +92,9 @@ jobs:
         gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
 
   current:
+    if: github.repository == 'freee/a11y-guidelines' && github.ref == 'refs/heads/develop'
 
     runs-on: ubuntu-latest
-
-    if: github.ref == 'refs/heads/develop'
 
     steps:
     - name: Extract Branch/Tag Names
