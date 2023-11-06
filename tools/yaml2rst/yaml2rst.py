@@ -244,7 +244,8 @@ def main():
 
                 if 'techniques' in procedure:
                     procedure_str_obj['techniques'] = []
-                    check['checkTools'] = []
+                    if 'checkTools' not in check:
+                        check['checkTools'] = []
                     for technique in procedure['techniques']:
                         if technique['tool'] in CHECK_TOOLS:
                             tool_basename = technique['tool']
