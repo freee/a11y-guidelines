@@ -244,7 +244,8 @@ def main():
 
                 if 'techniques' in procedure:
                     procedure_str_obj['techniques'] = []
-                    check['checkTools'] = []
+                    if 'checkTools' not in check:
+                        check['checkTools'] = []
                     for technique in procedure['techniques']:
                         if technique['tool'] in CHECK_TOOLS:
                             tool_basename = technique['tool']
@@ -317,10 +318,8 @@ def main():
             })
 
         category_pages[gl['category']]['guidelines'].append(gl_str)
-
-        if len(gl['examples']):
+        if len(gl['examples']) > 0:
             build_examples.extend(gl['examples'])
-
         build_examples = uniq(build_examples)
 
     os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
