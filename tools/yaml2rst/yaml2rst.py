@@ -34,6 +34,7 @@ COMMON_SCHEMA = 'common.json'
 # Values which needs to be changed if there are some changes in the checklist/item structure:
 CHECK_TOOLS = {
     'nvda': 'NVDA',
+    'macos-vo': 'macOS VoiceOver',
     'axe': 'axe DevTools',
     'ios-vo': 'iOS VoiceOver',
     'android-tb': 'Android TalkBack',
