@@ -13,9 +13,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のaxe DevToolsによるチェックとNVDAによるチェックを見足していることを確認する。
+      以下のaxe DevToolsによるチェックを満たしていて、かつNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following checks by axe DevTools and NVDA pass.
+      Confirm that the following check by axe DevTools passes, and also either the checks by NVDA or the checks by macOS VoiceOver passes.
   techniques:
   - tool: axe
     technique:
@@ -33,11 +33,23 @@ procedures:
       en: |-
         Confirm that the functionality of the icon, or the state the icon is indicating is announced when the following operations are performed:
 
-        *  When the part with the icon is is read aloud using arrow keys in browse mode
+        *  When the part with the icon is read aloud using arrow keys in browse mode
         *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
     YouTube:
       id: OQrwQ4rnudY
       title: アイコンの役割や示している状態【NVDAでアクセシビリティー チェック】
+  - tool: macos-vo
+    technique:
+      ja: |-
+        以下の操作をしたとき、アイコンの示す状態や機能が分かる読み上げがされることを確認する。
+
+        -  :kbd:`VO` キーと左右矢印キーでVoiceOverカーソルを操作し、アイコンがある箇所を読み上げさせたとき
+        -  そのアイコンがボタンやリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+      en: |-
+        Confirm that the functionality of the icon, or the state the icon is indicating is announced when the following operations are performed:
+
+        *  When the part with the icon is read aloud using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor
+        *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
 - platform: mobile
   procedure:
     ja: |-
