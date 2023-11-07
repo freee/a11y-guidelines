@@ -321,7 +321,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    スライダ
 参考
-   `スライダ | Apple Developer Documentationr <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
+   `スライダ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
 
 使用されている箇所の例
 ----------------------
@@ -375,7 +375,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    テキストフィールド
 参考
-   `テキストフィールド | Apple Developer <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
+   `テキストフィールド | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
 
 使用されている箇所の例
 ----------------------
