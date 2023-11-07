@@ -7,7 +7,7 @@ iOS VoiceOverを用いたチェックの実施方法
 iOS用スクリーン・リーダーのVoiceOverの推奨設定の方法、基本的な使い方と基本的なチェックの実施方法について記します。
 
 なお、macOSにも同名のスクリーン・リーダーが標準搭載されていますが、iOSのVoiceOverとはまったくの別物です。
-本稿ではiOSのVoiceOverについてのみ記、「VoiceOver」という記述はiOS VoiceOverを差します。
+本稿ではiOSのVoiceOverについてのみ記し、「VoiceOver」という記述はiOS VoiceOverを差します。
 
 本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/16.0/ios/16.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
 
@@ -321,7 +321,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    スライダ
 参考
-   `スライダ | Apple Developer Documentationr <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
+   `スライダ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
 
 使用されている箇所の例
 ----------------------
@@ -375,7 +375,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    テキストフィールド
 参考
-   `テキストフィールド | Apple Developer <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
+   `テキストフィールド | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
 
 使用されている箇所の例
 ----------------------
