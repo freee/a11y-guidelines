@@ -87,7 +87,7 @@ jobs:
       run: |
         gh release create ${TAG} \
           --title "Ver. ${TAG}" \
-          --notes-file ./soruce/intro/ChangeLog/${TAG:0:4}/${TAG}.rst
+          --notes-file ./source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst
           --draft
         gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
 
