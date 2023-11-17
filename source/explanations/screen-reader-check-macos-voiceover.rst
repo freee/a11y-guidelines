@@ -69,7 +69,7 @@ macOS Venturaでの設定手順を以下に示します。
    .. image:: /img/macvo-settings-fnkey.png
       :alt: スクリーン・ショット：ファンクションキーの設定
 
-参考： `Mac でファンクションキーを使う方法 - Apple サポート (日本) <https://support.apple.com/ja-jp/102439>`_ 
+参考： `Mac でファンクションキーを使う方法 - Apple サポート (日本) <https://support.apple.com/ja-jp/102439>`_
 
 初回起動時の操作
 ================
