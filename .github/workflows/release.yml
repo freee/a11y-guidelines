@@ -55,6 +55,7 @@ jobs:
         cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
         make clean
         current_commit=$(git rev-parse HEAD)
+        rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
         for _tag in `git tag` ; do \
           echo "Processing ${_tag}..." ; \
           if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
