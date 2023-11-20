@@ -38,7 +38,7 @@ procedures:
         *  詳細な説明が必要な画像の場合、以下のいずれかを満たしていることを確認する。
         
            -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
-           -  ブラウズ・モードで次/前の画像への移動（G/Shift+Gキー）を実行して当該の画像を読み上げさせたときに、詳細な説明が読み上げられる
+           -  ブラウズ・モードで矢印キーを操作して当該画像を読み上げさせたとき、詳細な説明が読み上げられる
 
         *  いずれの場合も、説明が画像の内容を適切に表していることを確認する。
       en: |-
@@ -50,7 +50,7 @@ procedures:
         *  Confirm that one of the following is true for images that require detailed description
         
            -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
-           -  Detailed description is announced when using the go to next/previous image function (G/Shift+G) in browse mode.
+           -  Detailed description is announced when reading the image using arrow keys in browse mode.
 
         *  In either case, confirm that the description properly represents the content of the image.
     YouTube:
