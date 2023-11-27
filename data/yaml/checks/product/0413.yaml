@@ -13,9 +13,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
+      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
   techniques:
   - tool: nvda
     technique:
@@ -26,6 +26,12 @@ procedures:
     YouTube:
       id: _Q1WaOtcX7c
       title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
+  - tool: macos-vo
+    technique:
+      ja: |-
+        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+      en: |-
+        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 - platform: mobile
   procedure:
     ja: |-

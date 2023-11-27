@@ -13,6 +13,7 @@
    keyboard
    axe
    nvda
+   macos-vo
    ios-vo
    android-tb
    misc

@@ -13,9 +13,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
+      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
   techniques:
   - tool: nvda
     technique:
@@ -26,6 +26,12 @@ procedures:
     YouTube:
       id: 7vGc7p0FraE
       title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
+  - tool: macos-vo
+    technique:
+      ja: |-
+        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+      en: |-
+        Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 - platform: mobile
   procedure:
     ja: |-
