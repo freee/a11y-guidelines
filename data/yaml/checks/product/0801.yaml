@@ -15,9 +15,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のキーボードによるチェックとNVDAによるチェックを見足していることを確認する。
+      以下のキーボードによるチェックを満たしていて、かつNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following checks by keyboard and NVDA pass.
+      Confirm that the following check by keyboard passes, and also either the checks by NVDA or the checks by macOS VoiceOver passes.
   techniques:
   - tool: keyboard
     technique:
@@ -34,6 +34,12 @@ procedures:
     YouTube:
       id: GYKStFpsfUw
       title: 同じ出現順序【NVDAでアクセシビリティー チェック】
+  - tool: macos-vo
+    technique:
+      ja: |-
+        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+      en: |-
+        Confirm that the reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 - platform: mobile
   procedure:
     ja: |-

@@ -13,9 +13,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following checks by NVDA passes.
+      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
   techniques:
   - tool: nvda
     technique:
@@ -26,3 +26,9 @@ procedures:
     YouTube:
       id: wegzVOdnLJM
       title: 現在のページ【NVDAでアクセシビリティー チェック】
+  - tool: macos-vo
+    technique:
+      ja: |-
+        :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+      en: |-
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys.

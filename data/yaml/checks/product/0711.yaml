@@ -13,9 +13,9 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを見足していることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
+      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
   techniques:
   - tool: nvda
     technique:
@@ -24,6 +24,14 @@ procedures:
         *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
       en: |-
         *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using arrow keys in browse mode.
+        *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
+  - tool: macos-vo
+    technique:
+      ja: |-
+        *  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作でページ先頭から読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
+        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
+      en: |-
+        *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
         *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
 - platform: mobile
   procedure:
