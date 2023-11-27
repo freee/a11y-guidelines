@@ -20,9 +20,9 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-version = 'Ver. 202311.0'
+version = 'Ver. 202311.1'
 release = version
-publishedDate = u'2023年11月7日'
+publishedDate = u'2023年11月27日'
 
 if 'current' in tags:
   import datetime
