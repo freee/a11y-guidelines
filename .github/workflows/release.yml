@@ -53,6 +53,11 @@ jobs:
         make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
         cp -r ./data/json/schemas ./build/html
         cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
+        make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/current/" clean html
+        cp -r ./data/json/schemas ./build/html
+        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
+        mkdir -p ${GITHUB_WORKSPACE}/upload/current
+        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload/current
         make clean
         current_commit=$(git rev-parse HEAD)
         rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
