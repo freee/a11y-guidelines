@@ -20,16 +20,22 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-version = 'Ver. 202311.1'
-release = version
+guidelines_version = 'Ver. 202311.1'
+checksheet_version = '4.3.2'
 publishedDate = u'2023年11月27日'
+guidelines_version_suffix = '-RELEASE'
+guidelines_version_date = ''
 
 if 'current' in tags:
+  guidelines_version_suffix = '-CURRENT'
   import datetime
-  today_numeric = datetime.date.today().strftime('%Y%m%d')
+  guidelines_version_date = f'.{datetime.date.today().strftime("%Y%m%d")}'
   today_str = datetime.date.today().strftime('%Y年%-m月%-d日')
-  release = F'{version}+{today_numeric}（最新開発版）'
   publishedDate = today_str
+
+version = guidelines_version + guidelines_version_suffix + f'+{checksheet_version}'
+release = guidelines_version + guidelines_version_suffix + guidelines_version_date + f'+{checksheet_version}'
+guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date
 
 html_title = f'{project} {release}'
 copyright = '2020-{pubYear}, freee株式会社'.format(
@@ -74,11 +80,15 @@ exclude_patterns = [
 rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
 .. |copyright| replace:: {copyright}
+.. |guidelines_version_string| replace:: {guidelines_version_string}
+.. |checksheet_version| replace:: {checksheet_version}
 
 .. include:: /inc/misc-defs.txt
 """.format(
   pubdate = publishedDate,
-  copyright = copyright
+  copyright = copyright,
+  guidelines_version_string = guidelines_version_string,
+  checksheet_version = checksheet_version
 )
 
 
