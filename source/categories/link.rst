@@ -15,4 +15,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-link.rst
+.. include:: /inc/gl/link.rst

@@ -15,7 +15,7 @@
 レベルを見直した達成基準
 ************************
 
-.. include:: /inc/priority-diff.rst
+.. include:: /inc/misc/priority-diff.rst
 
 ********************
 レベルを見直した理由

@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-markup.rst
+.. include:: /inc/gl/markup.rst

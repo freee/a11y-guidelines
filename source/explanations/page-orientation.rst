@@ -14,4 +14,4 @@ Webページは様々な端末で表示されることを前提にデザイン�
 また、このガイドラインではコンテンツの性質上必須の場合は、画面方向を固定することを許容しています。
 特定の画面方向を前提としなければ意図が伝わらない視覚的表現をする場合などがこれに当たります。
 
-.. include:: /inc/exp-page-orientation.rst
+.. include:: /inc/exp/exp-page-orientation.rst

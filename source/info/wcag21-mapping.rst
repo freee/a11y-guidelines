@@ -9,4 +9,4 @@ WCAG 2.1の各達成基準と当ガイドラインの項目との対応
 なお、freeeではWCAG 2.1の適合レベルAA相当を目標としていますので、WCAG 2.1のレベルAAAの達成基準の多くは「該当無し」となっています。
 参考までに、下表の「レベル」の欄に、WCAG 2.1で指定されているレベルを示します。
 
-.. include:: /inc/wcag21-mapping.rst
+.. include:: /inc/misc/wcag21-mapping.rst

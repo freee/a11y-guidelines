@@ -22,4 +22,4 @@
 *  :ref:`exp-check-contrast`
 *  |Vibes Color Contrast|
 
-.. include:: /inc/exp-contrast.rst
+.. include:: /inc/exp/exp-contrast.rst

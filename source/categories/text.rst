@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-text.rst
+.. include:: /inc/gl/text.rst

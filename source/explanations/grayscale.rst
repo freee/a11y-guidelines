@@ -97,4 +97,4 @@ Android 11以前の場合
 #. 表示されている「ビルド番号」を7回連続してタップ
 #. 端末に設定されている暗証番号を入力
 
-.. include:: /inc/exp-grayscale.rst
+.. include:: /inc/exp/exp-grayscale.rst

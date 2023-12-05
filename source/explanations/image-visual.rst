@@ -16,4 +16,4 @@
 
 参考： :ref:`exp-check-contrast`
 
-.. include:: /inc/exp-image-visual.rst
+.. include:: /inc/exp/exp-image-visual.rst

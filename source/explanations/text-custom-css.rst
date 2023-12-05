@@ -53,4 +53,4 @@
 
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 
-.. include:: /inc/exp-text-custom-css.rst
+.. include:: /inc/exp/exp-text-custom-css.rst

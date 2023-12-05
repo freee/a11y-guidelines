@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-page.rst
+.. include:: /inc/gl/page.rst

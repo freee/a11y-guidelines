@@ -8,4 +8,4 @@
 
 参考： :ref:`exp-tab-order-check`
 
-.. include:: /inc/check-examples-keyboard.rst
+.. include:: /inc/checks/examples-keyboard.rst

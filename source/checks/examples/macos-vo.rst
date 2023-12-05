@@ -8,4 +8,4 @@ macOS VoiceOverを用いたチェック実施方法の例
 
 macOS VoiceOverの初期設定や基本的な使い方などについては、 :ref:`exp-screen-reader-check-macos-vo` を参照してください。
 
-.. include:: /inc/check-examples-macos-vo.rst
+.. include:: /inc/checks/examples-macos-vo.rst
