@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-input_device.rst
+.. include:: /inc/gl/input_device.rst

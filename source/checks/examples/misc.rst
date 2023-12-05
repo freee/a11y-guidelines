@@ -6,4 +6,4 @@
 
 ここでは、各チェック内容で示したチェック方法の例について、その他のツールを用いて確認するものをまとめて記しています。
 
-.. include:: /inc/check-examples-misc.rst
+.. include:: /inc/checks/examples-misc.rst

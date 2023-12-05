@@ -8,4 +8,4 @@ NVDAを用いたチェック実施方法の例
 
 NVDAのインストール方法や基本的な使い方などについては、 :ref:`exp-screen-reader-check-nvda` を参照してください。
 
-.. include:: /inc/check-examples-nvda.rst
+.. include:: /inc/checks/examples-nvda.rst

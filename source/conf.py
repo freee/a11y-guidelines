@@ -83,7 +83,7 @@ rst_prolog = u"""
 .. |guidelines_version_string| replace:: {guidelines_version_string}
 .. |checksheet_version| replace:: {checksheet_version}
 
-.. include:: /inc/misc-defs.txt
+.. include:: /inc/misc/defs.txt
 """.format(
   pubdate = publishedDate,
   copyright = copyright,

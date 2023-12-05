@@ -14,4 +14,4 @@
 
 Tab/Shift+Tabキー、矢印キー、Escキーなど、簡単な操作でフォーカスを外せるようにすることが必要です。
 
-.. include:: /inc/exp-keyboard-notrap.rst
+.. include:: /inc/exp/exp-keyboard-notrap.rst

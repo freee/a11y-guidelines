@@ -8,4 +8,4 @@ Android TalkBackを用いたチェック実施方法の例
 
 Android TalkBackの基本的な使い方や推奨設定などについては、 :ref:`exp-screen-reader-check-android-talkback` を参照してください。
 
-.. include:: /inc/check-examples-android-tb.rst
+.. include:: /inc/checks/examples-android-tb.rst

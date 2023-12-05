@@ -42,4 +42,4 @@
 普段は主にスクリーン・リーダーを使っているロービジョンのユーザーの場合、そこにグラフがあることが分かればグラフは拡大表示して見てみようと考えることもあるでしょう。
 また、全盲のユーザーでも、そこにグラフがあることが分かれば、晴眼者とのコミュニケーションが容易になります。
 
-.. include:: /inc/exp-image-text-alternative.rst
+.. include:: /inc/exp/exp-image-text-alternative.rst

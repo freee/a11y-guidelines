@@ -12,4 +12,4 @@
 
 これに加えてエラーの修正方法を示すこと、そもそもエラー入力が発生しないようにすることが必要で、これらはWCAG 2.1ではレベルAAの達成基準として示されています。
 
-.. include:: /inc/exp-form-errors.rst
+.. include:: /inc/exp/exp-form-errors.rst

@@ -16,4 +16,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-icon.rst
+.. include:: /inc/gl/icon.rst

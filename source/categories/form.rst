@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-form.rst
+.. include:: /inc/gl/form.rst
