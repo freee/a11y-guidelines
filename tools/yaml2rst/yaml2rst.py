@@ -15,15 +15,19 @@ INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
 SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
+GUIDELINES_DESTDIR = DESTDIR + '/gl'
+CHECKS_DESTDIR = DESTDIR + '/checks'
+EXP_DESTDIR = DESTDIR + '/exp'
+MISC_DESTDIR = DESTDIR + '/misc'
 MAKEFILE_FILENAME = 'incfiles.mk'
 ALL_CHECKS_FILENAME = "allchecks.rst"
-ALL_CHECKS_PATH = os.path.join(os.getcwd(), DESTDIR, ALL_CHECKS_FILENAME)
+ALL_CHECKS_PATH = os.path.join(os.getcwd(), CHECKS_DESTDIR, ALL_CHECKS_FILENAME)
 WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
-WCAG_MAPPING_PATH = os.path.join(os.getcwd(), DESTDIR, WCAG_MAPPING_FILENAME)
+WCAG_MAPPING_PATH = os.path.join(os.getcwd(), MISC_DESTDIR, WCAG_MAPPING_FILENAME)
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
-PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), DESTDIR, PRIORITY_DIFF_FILENAME)
-MISCDEFS_FILENAME = "misc-defs.txt"
-MISCDEFS_PATH = os.path.join(os.getcwd(), DESTDIR, MISCDEFS_FILENAME)
+PRIORITY_DIFF_PATH = os.path.join(os.getcwd(), MISC_DESTDIR, PRIORITY_DIFF_FILENAME)
+MISCDEFS_FILENAME = "defs.txt"
+MISCDEFS_PATH = os.path.join(os.getcwd(), MISC_DESTDIR, MISCDEFS_FILENAME)
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
 TEMPLATE_DIR = 'templates'
@@ -155,7 +159,7 @@ def main():
             'guidelines': [],
             'dependency': []
         }
-        guideline_category_rst.append(os.path.join(DESTDIR, f'gl-category-{cat}.rst'))
+        guideline_category_rst.append(os.path.join(GUIDELINES_DESTDIR, f'{cat}.rst'))
 
     gl_categories = {}
     info_to_gl = {}
@@ -323,25 +327,26 @@ def main():
             build_examples.extend(gl['examples'])
         build_examples = uniq(build_examples)
 
-    os.makedirs(os.path.join(os.getcwd(), DESTDIR), exist_ok=True)
-
+    os.makedirs(os.path.join(os.getcwd(), GUIDELINES_DESTDIR), exist_ok=True)
     for cat in category_pages:
-        filename = f'gl-category-{cat}.rst'
-        if build_all or os.path.join(DESTDIR, filename) in targets:
+        filename = f'{cat}.rst'
+        if build_all or os.path.join(GUIDELINES_DESTDIR, filename) in targets:
             output = category_page_template.render(guidelines = category_pages[cat]['guidelines'])
-            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            destfile = os.path.join(os.getcwd(), GUIDELINES_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
+    os.makedirs(os.path.join(os.getcwd(), EXP_DESTDIR), exist_ok=True)
     for info in info_to_gl:
         filename = f'{info}.rst'
-        if build_all or os.path.join(DESTDIR, filename) in targets:
+        if build_all or os.path.join(EXP_DESTDIR, filename) in targets:
             output = info_to_gl_template.render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
-            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            destfile = os.path.join(os.getcwd(), EXP_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
-    if build_all or os.path.join(DESTDIR, WCAG_MAPPING_FILENAME) in targets:
+    os.makedirs(os.path.join(os.getcwd(), MISC_DESTDIR), exist_ok=True)
+    if build_all or os.path.join(MISC_DESTDIR, WCAG_MAPPING_FILENAME) in targets:
         sc_mapping = []
         for sc in wcag_sc:
             if len(wcag_sc[sc]['gls']) == 0:
@@ -363,7 +368,7 @@ def main():
         with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(sc_mapping_text)
 
-    if build_all or os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME) in targets:
+    if build_all or os.path.join(MISC_DESTDIR, PRIORITY_DIFF_FILENAME) in targets:
         diffs = []
         for sc in wcag_sc:
             if wcag_sc[sc]['level'] == wcag_sc[sc]['localPriority']:
@@ -381,12 +386,13 @@ def main():
         with open(PRIORITY_DIFF_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(diffs_text)
 
-    if build_all or os.path.join(DESTDIR, ALL_CHECKS_FILENAME) in targets:
+    os.makedirs(os.path.join(os.getcwd(), CHECKS_DESTDIR), exist_ok=True)
+    if build_all or os.path.join(CHECKS_DESTDIR, ALL_CHECKS_FILENAME) in targets:
         allcheck_text = allchecks_text_template.render({'allchecks': allchecks})
         with open(ALL_CHECKS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(allcheck_text)
 
-    if build_all or os.path.join(DESTDIR, MISCDEFS_FILENAME) in targets:
+    if build_all or os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME) in targets:
         try:
             with open(INFO_SRC, encoding='utf-8') as f:
                 info_links = json.load(f)
@@ -410,8 +416,8 @@ def main():
         for tool in check_examples:
             if check_examples[tool] == '' or not tool in build_examples:
                 continue
-            filename = f'check-examples-{tool}.rst'
-            destfile = os.path.join(os.getcwd(), DESTDIR, filename)
+            filename = f'examples-{tool}.rst'
+            destfile = os.path.join(os.getcwd(), CHECKS_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(tool_example_template.render({'examples': check_examples[tool]}))
 
@@ -425,7 +431,7 @@ def main():
 
         other_deps = []
         for cat in category_pages:
-            target = os.path.join(DESTDIR, f'gl-category-{cat}.rst')
+            target = os.path.join(GUIDELINES_DESTDIR, f'{cat}.rst')
             deps = " ".join(uniq(category_pages[cat]['dependency']))
             other_deps.append({
                 'dep': f'{target}: {deps}',
@@ -433,7 +439,7 @@ def main():
             })
         all_info = []
         for info in info_to_gl:
-            target = os.path.join(DESTDIR, f'{info}.rst')
+            target = os.path.join(EXP_DESTDIR, f'{info}.rst')
             deps = " ".join([guideline['src_path'] for guideline in guidelines for id in [x['id'] for x in info_to_gl[info]] if guideline.get('id') == id])
             all_info.append(target)
             other_deps.append({
@@ -442,15 +448,15 @@ def main():
             })
         makefile_data = {
             'guideline_category_rst': " ".join(guideline_category_rst),
-            'wcag_mapping_target': os.path.join(DESTDIR, WCAG_MAPPING_FILENAME),
-            'priority_diff_target': os.path.join(DESTDIR, PRIORITY_DIFF_FILENAME),
-            'all_checks_target': os.path.join(DESTDIR, ALL_CHECKS_FILENAME),
+            'wcag_mapping_target': os.path.join(MISC_DESTDIR, WCAG_MAPPING_FILENAME),
+            'priority_diff_target': os.path.join(MISC_DESTDIR, PRIORITY_DIFF_FILENAME),
+            'all_checks_target': os.path.join(CHECKS_DESTDIR, ALL_CHECKS_FILENAME),
             'wcag_sc': WCAG_SC,
             'gl_yaml': " ".join(gl_yaml),
             'all_yaml': " ".join(all_yaml),
             'all_info': " ".join(all_info),
             'other_deps': other_deps,
-            'miscdefs_target': os.path.join(DESTDIR, MISCDEFS_FILENAME),
+            'miscdefs_target': os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME),
             'info_src': INFO_SRC
         }
         makefile_str = makefile_template.render(makefile_data)
