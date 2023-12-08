@@ -19,10 +19,12 @@ DESTDIR = 'source/inc'
 GUIDELINES_DESTDIR = DESTDIR + '/gl'
 CHECKS_DESTDIR = DESTDIR + '/checks'
 FAQ_DESTDIR = 'source/faq'
-FAQ_ARTICLES_DESTDIR = FAQ_DESTDIR + '/articles'
-FAQ_TAGPAGES_DESTDIR = FAQ_DESTDIR + '/tags'
 FAQ_INDEX_FILENAME = 'index.rst'
 FAQ_INDEX_PATH = os.path.join(os.getcwd(), FAQ_DESTDIR, FAQ_INDEX_FILENAME)
+FAQ_ARTICLES_DESTDIR = FAQ_DESTDIR + '/articles'
+FAQ_ARTICLE_INDEX_PATH = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, FAQ_INDEX_FILENAME)
+FAQ_TAGPAGES_DESTDIR = FAQ_DESTDIR + '/tags'
+FAQ_TAG_INDEX_PATH = os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR, FAQ_INDEX_FILENAME)
 INFO_TO_GL_DESTDIR = DESTDIR + '/info2gl'
 INFO_TO_FAQ_DESTDIR = DESTDIR + '/info2faq'
 MISC_DESTDIR = DESTDIR + '/misc'
@@ -90,8 +92,10 @@ def main():
     info_to_gl_template = template_env.get_template('info_to_gl.rst')
     info_to_faq_template = template_env.get_template('info_to_faq.rst')
     faq_article_template = template_env.get_template('faq-article.rst')
-    faq_index_template = template_env.get_template('faq-index.rst')
     faq_tagpage_template = template_env.get_template('faq-tagpage.rst')
+    faq_index_template = template_env.get_template('faq-index.rst')
+    faq_tag_index_template = template_env.get_template('faq-tag-index.rst')
+    faq_article_index_template = template_env.get_template('faq-article-index.rst')
     wcag21mapping_template = template_env.get_template(WCAG_MAPPING_FILENAME)
     priority_diff_template = template_env.get_template(PRIORITY_DIFF_FILENAME)
     makefile_template = template_env.get_template(MAKEFILE_FILENAME)
@@ -481,6 +485,18 @@ def main():
     if build_all or FAQ_INDEX_PATH in targets:
         output = faq_index_template.render(files = allfaq_files, tags = sorted(faq_tagpages))
         destfile = FAQ_INDEX_PATH
+        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(output)
+
+    if build_all or FAQ_TAG_INDEX_PATH in targets:
+        output = faq_tag_index_template.render(tags = sorted(faq_tagpages))
+        destfile = FAQ_TAG_INDEX_PATH
+        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(output)
+
+    if build_all or FAQ_ARTICLE_INDEX_PATH in targets:
+        output = faq_article_index_template.render(files = allfaq_files)
+        destfile = FAQ_ARTICLE_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
 

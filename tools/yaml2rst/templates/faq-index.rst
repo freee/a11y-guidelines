@@ -7,14 +7,24 @@
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-
-{% for f in files %}
-   articles/{{ f }}
-{%- endfor %}
-
-.. toctree::
    :hidden:
-   :glob:
 
-   tags/*
+   articles/index
+   tags/index
+
+{% filter make_heading(2) -%}
+タグ一覧
+{%- endfilter %}
+
+{% for f in tags -%}
+*  :ref:`faq-tag-{{ f }}`
+{% endfor %}
+
+{% filter make_heading(2) -%}
+FAQ記事一覧
+{%- endfilter %}
+
+{% for f in files -%}
+*  :ref:`faq-{{ f }}`
+{% endfor %}
 
