@@ -25,6 +25,6 @@
 
 ラベルに関しても分かりやすい文言を用いることで、そのコンポーネントやフォーム・コントロールの目的を正確に伝えることができます。
 
-
-
 .. include:: /inc/info2gl/exp-text-wording.rst
+
+.. include:: /inc/info2faq/exp-text-wording.rst
