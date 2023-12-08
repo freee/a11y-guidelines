@@ -12,8 +12,9 @@
    articles/{{ f }}
 {%- endfor %}
 
-.. toctree:: 
+.. toctree::
    :hidden:
    :glob:
 
    tags/*
+
