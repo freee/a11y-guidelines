@@ -1,0 +1,60 @@
+id: sr-0001
+sortKey: 30000
+tags:
+- nvda
+- macos-vo
+- ios-vo
+- android-tb
+title:
+  ja: スクリーン・リーダーの読み上げ方がおかしい漢字や英単語がある
+  en: There are kanji or English words that are read in an unexpected way by the screen reader.
+problem:
+  ja: |-
+    読み上げられ方のおかしい漢字や英単語があるが、どのように対処するべきか。
+
+    例：
+
+    *  「寡婦」が「かふ」ではなく「やもめふ」と読み上げられる
+    *  「配偶者」が「はいぐうしゃ」ではなく「はいたましゃ」と読み上げられる
+    *  「折り畳む」が「おりたたむ」ではなく「おりりたたみむ」と読み上げられる
+  en: |-
+    There are kanji or English words that are read in an unexpected way. How should I deal with it?
+
+    Example:
+
+    *  "寡婦" is read as "やもめふ" instead of "かふ"
+    *  "配偶者" is read as "はいたましゃ" instead of "はいぐうしゃ"
+    *  "折り畳む" is read as "おりりたたみむ" instead of "おりたたむ"
+solution:
+  ja: |-
+    *  特に対処の必要はない
+    *  ただし、全く逆の意味として捉えられてしまうなど、明らかに誤解を招く可能性が高い場合は対処を検討する
+  en: |-
+    *  There is no need to deal with it in particular.
+    *  However, if there is a high possibility of causing misunderstanding, such as being perceived as the opposite meaning, consider dealing with it.
+explanation:
+  ja: |-
+    スクリーン・リーダーによる漢字や英単語の読み上げが誤っていることはよくあります。
+
+    スクリーン・リーダーには、1文字ずつ読み上げさせたり、「『にっぽん』の『にち』」のように文字の説明と一緒に読む「詳細読み」機能があり、誤った読み上げられ方をした場合も、これらの機能を使って表記を確認することができます。
+
+    スクリーン・リーダーが何をどう読み上げるかは、スクリーン・リーダーの種類やバージョン、利用している音声合成エンジンによっても変わってくるので、特定の環境で正しく読むようになっても、他の環境でも正しく読み上げられルとは限りません。
+    読み上げられ方を強制するために、ひらがなで表記すると、本来の漢字表記が失われたり、本来のアクセントとは違うかたちで読み上げられたり、点字表示が適切にできなくなったりして、かえってユーザーが意味を捉えにくくなってしまうおそれがあります。
+
+    上記の理由から、スクリーン・リーダーによる漢字の読み間違いについては、放置して問題ありません。無理に対処することで、かえって大きな問題を発生させるリスクがあります。
+
+    ただし、読み上げられ方によって、全く別の意味に捉えられてしまうような場合には注意が必要です。カッコ書きで読みを併記したり、表記を見直したりしたほうがいいでしょう。
+
+    例：「売」も「買」もどちらも「ばい」と読み上げられるので、「売り」、「買い」と表記した
+  en: |-
+    It is common for screen readers to misread kanji or English words.
+
+    Screen readers have a function to read one character at a time or read it together with a description of the character, such as "『にっぽん』の『にち』". Even if it is read incorrectly, users can use these functions to check the notation.
+
+    How a screen reader reads some text depends on the product and version of the screen reader and the speech synthesis engine used. Even if it is read correctly in a particular environment, it may not be read correctly in another environment.
+    If you force how the text is read by writing in hiragana, the original kanji notation may be lost, or it may be read in a form different from the original accent, or the braille translation may not be done correctly, making it difficult for the user to understand the meaning.
+    For the above reasons, there is no problem with leaving the misreading of kanji by the screen reader as it is. By trying to deal with it forcibly, there is a risk of causing a bigger problem.
+
+    However, if the way it is read makes it look like a completely different meaning, you need to be careful. It is better to write the reading in parentheses or review the notation.
+
+    Example: "売" and "買" are both read as "ばい", so write "売り" and "買い" instead.
