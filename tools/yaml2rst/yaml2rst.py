@@ -13,6 +13,7 @@ LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
+FAQ_SRCDIR = 'data/yaml/faq'
 SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
 GUIDELINES_DESTDIR = DESTDIR + '/gl'
@@ -36,9 +37,11 @@ MISCDEFS_FILENAME = "defs.txt"
 MISCDEFS_PATH = os.path.join(os.getcwd(), MISC_DESTDIR, MISCDEFS_FILENAME)
 WCAG_SC = 'data/json/wcag-sc.json'
 GUIDELINE_CATEGORIES = 'data/json/guideline-categories.json'
+FAQ_TAGS = 'data/json/faq-tags.json'
 TEMPLATE_DIR = 'templates'
 GUIDELINES_SCHEMA = 'guideline.json'
 CHECKS_SCHEMA = 'check.json'
+FAQS_SCHEMA = 'faq.json'
 COMMON_SCHEMA = 'common.json'
 
 # Values which needs to be changed if there are some changes in the checklist/item structure:
@@ -141,6 +144,21 @@ def main():
         check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
         check_duplicate_values(checks, 'id', 'Check ID')
 
+    files = ls_dir(os.path.join(os.getcwd(), FAQ_SRCDIR))
+    faqs = []
+    for f in files:
+        faqs.append(read_yaml_file(f))
+        if not args.no_check:
+            try:
+                validate_data(faqs[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, FAQS_SCHEMA), resolver)
+            except ValueError as e:
+                print(f'Exception occurred while validating {f}...', file=sys.stderr)
+                print(e, file=sys.stderr)
+                sys.exit(1)
+        faqs[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+
+    faqs = sorted(faqs, key=lambda x: x['sortKey'])
+
     try:
         with open(WCAG_SC) as f:
             wcag_sc = json.load(f)
@@ -154,6 +172,14 @@ def main():
             category_names = json.load(f)
     except Exception as e:
         print(f'Exception occurred while reading {GUIDELINE_CATEGORIES}...', file=sys.stderr)
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        with open(FAQ_TAGS) as f:
+            faq_tags = json.load(f)
+    except Exception as e:
+        print(f'Exception occurred while reading {FAQ_TAGS}...', file=sys.stderr)
         print(e, file=sys.stderr)
         sys.exit(1)
 
@@ -178,17 +204,26 @@ def main():
         for sc in gl['sc']:
             wcag_sc[sc]['gls'].append(gl['id'])
 
-        if 'info' in gl:
-            for info in gl['info']:
-                if re.match(r'(https?://|\|.+\|)', info):
-                    continue
-                if info not in info_to_gl:
-                    info_to_gl[info] = []
-                info_to_gl[info].append({
-                    'id': gl['id'],
-                    'category': gl_categories[gl['id']],
-                    'sortKey': gl['sortKey']
-                })
+        if not 'info' in gl:
+            continue
+        for info in gl['info']:
+            if re.match(r'(https?://|\|.+\|)', info):
+                continue
+            if info not in info_to_gl:
+                info_to_gl[info] = []
+            info_to_gl[info].append({
+                'id': gl['id'],
+                'category': gl_categories[gl['id']],
+                'sortKey': gl['sortKey']
+            })
+
+        for faq in faqs:
+            if not 'guidelines' in faq:
+                continue
+            if gl['id'] in faq['guidelines']:
+                if 'faqrefs' not in gl:
+                    gl['faq_ref'] = []
+                gl['faq_ref'].append(faq["id"])
 
     allchecks = []
     check_examples = {}
@@ -211,6 +246,13 @@ def main():
         if len(check['gl_ref']) == 0:
             raise Exception(f'The check {check["id"]} is not referred to from any guideline.')
 
+        check['faq_ref'] = []
+        for faq in faqs:
+            if not 'checks' in faq:
+                continue
+            if check["id"] in faq['checks']:
+                check['faq_ref'].append(faq["id"])
+
         check_str = {
             'target': TARGET_NAMES[check['target']],
             'platform': '、'.join(list(map(lambda item: PLATFORM_NAMES[item], check['platform']))),
@@ -226,6 +268,11 @@ def main():
                     check_str['inforefs'].append(info)
                 else:
                     check_str['inforefs'].append(f':ref:`{info}`')
+
+        if len(check['faq_ref']) > 0:
+            check_str['faqrefs'] = []
+            for faq in check['faq_ref']:
+                check_str['faqrefs'].append(f':ref:`faq-{faq}`')
 
         check_str['gl_refs'] = []
         for ref in check['gl_ref']:
@@ -289,6 +336,18 @@ def main():
         allchecks.append(check_str)
         check['check_str'] = check_str
 
+    info_to_faq = {}
+    for faq in faqs:
+        if not 'info' in faq:
+            continue
+        for info in faq['info']:
+            if not info in info_to_faq:
+                info_to_faq[info] = []
+            info_to_faq[info].append({
+                'id': f'faq-{faq["id"]}',
+                'sortKey': faq['sortKey']
+            })
+
     for gl in guidelines:
         category_pages[gl['category']]['dependency'].append(gl['src_path'])
         gl_str = {
@@ -306,6 +365,11 @@ def main():
                     gl_str['info'].append(ref)
                 else:
                     gl_str['info'].append(f':ref:`{ref}`')
+
+        if 'faq_ref' in gl:
+            gl_str['faqrefs'] = []
+            for faq in gl['faq_ref']:
+                gl_str['faqrefs'].append(f':ref:`faq-{faq}`')
 
         gl_str['checks'] = []
         gl['examples'] = []
@@ -354,6 +418,71 @@ def main():
             destfile = os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
+
+    os.makedirs(os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR), exist_ok=True)
+    for info in info_to_faq:
+        filename = f'{info}.rst'
+        if build_all or os.path.join(INFO_TO_FAQ_DESTDIR, filename) in targets:
+            output = info_to_faq_template.render(faqs = sorted(info_to_faq[info], key=lambda x: x['sortKey']))
+            destfile = os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR, filename)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(output)
+
+    os.makedirs(os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR), exist_ok=True)
+    allfaq_files = []
+    faq_tagpages = {}
+    for faq in faqs:
+        allfaq_files.append(faq['id'])
+        article_filename = f'{faq["id"]}.rst'
+        if build_all or os.path.join(FAQ_ARTICLES_DESTDIR, article_filename) in targets:
+            faq_obj = {
+                'id': faq['id'],
+                'title': faq['title'][LANG],
+                'tags': faq['tags'],
+                'problem': faq['problem'][LANG],
+                'solution': faq['solution'][LANG],
+                'explanation': faq['explanation'][LANG]
+            }
+            if 'checks' in faq:
+                faq_obj['checks'] = []
+                for c in faq['checks']:
+                    faq_obj['checks'].append({
+                        'id': _check['id'],
+                        'check': [x for x in checks if x["id"] == c][0]['check'][LANG],
+                    })
+            if 'info' in faq:
+                faq_obj['info'] = faq['info']
+            if 'guidelines' in faq:
+                faq_obj['guidelines'] = faq['guidelines']
+            output = faq_article_template.render(faq_obj)
+            destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(output)
+
+        for tag in faq['tags']:
+            if not tag in faq_tags:
+                tag = 'misc'
+            if not tag in faq_tagpages:
+                faq_tagpages[tag] = {
+                    'tag': tag,
+                    'label': faq_tags[tag][LANG],
+                    'articles': []
+                }
+            faq_tagpages[tag]['articles'].append(f'faq-{faq["id"]}')
+
+    os.makedirs(os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR), exist_ok=True)
+    for page in faq_tagpages: 
+        if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst') in targets:
+            output = faq_tagpage_template.render(faq_tagpages[page])
+            destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst')
+        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(output)
+
+    if build_all or FAQ_INDEX_PATH in targets:
+        output = faq_index_template.render(files = allfaq_files, tags = sorted(faq_tagpages))
+        destfile = FAQ_INDEX_PATH
+        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+            f.write(output)
 
     os.makedirs(os.path.join(os.getcwd(), MISC_DESTDIR), exist_ok=True)
     if build_all or os.path.join(MISC_DESTDIR, WCAG_MAPPING_FILENAME) in targets:
