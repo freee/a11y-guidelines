@@ -4,5 +4,6 @@ node_modules/*
 build/*
 source/__pycache__/*
 source/inc/*
+source/faq/*
 .DS_Store
 /incfiles.mk
