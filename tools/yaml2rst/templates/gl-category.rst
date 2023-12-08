@@ -22,6 +22,12 @@
 参考情報
 {%- for item in gl.info %}
    *  {{ item }}
+{% endfor -%}
+{%- endif %}
+{%- if gl.faqrefs is defined -%}
+関連FAQ
+{%- for item in gl.faqrefs %}
+   *  {{ item }}
 {% endfor %}
 {%- endif %}
 

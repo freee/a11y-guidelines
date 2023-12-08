@@ -18,6 +18,12 @@
 {%- for ref in check.gl_refs %}
    *  {{ ref.category }}： :ref:`{{ ref.glref }}`
 {%- endfor %}
+{% if check.faqrefs is defined -%}
+関連FAQ
+{%- for item in check.faqrefs %}
+   *  {{ item }}
+{%- endfor %}
+{%- endif %}
 {% if check.inforefs is defined -%}
 参考情報
 {%- for item in check.inforefs %}
