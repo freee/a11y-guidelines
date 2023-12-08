@@ -16,4 +16,4 @@
 
 こういったことから、なるべくlabel要素やaria-labelledby属性を用いて、表示されているテキストをラベルとして活用することが望ましく、aria-labelledby属性で非表示のテキストをラベルとして用いること、 ``aria-label`` 属性を使うことは避けるほうが良いでしょう。
 
-.. include:: /inc/exp/exp-form-labeling.rst
+.. include:: /inc/info2gl/exp-form-labeling.rst

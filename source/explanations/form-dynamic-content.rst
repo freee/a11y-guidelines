@@ -13,4 +13,4 @@
 こういった挙動であっても、ユーザーが充分に予期できれば大きな問題はありませんが、なるべく回避するのが望ましいでしょう。
 
 
-.. include:: /inc/exp/exp-form-dynamic-content.rst
+.. include:: /inc/info2gl/exp-form-dynamic-content.rst

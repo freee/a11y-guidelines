@@ -17,7 +17,7 @@ SCHEMA_SRCDIR = 'data/json/schemas'
 DESTDIR = 'source/inc'
 GUIDELINES_DESTDIR = DESTDIR + '/gl'
 CHECKS_DESTDIR = DESTDIR + '/checks'
-EXP_DESTDIR = DESTDIR + '/exp'
+INFO_TO_GL_DESTDIR = DESTDIR + '/info2gl'
 MISC_DESTDIR = DESTDIR + '/misc'
 MAKEFILE_FILENAME = 'incfiles.mk'
 ALL_CHECKS_FILENAME = "allchecks.rst"
@@ -336,12 +336,12 @@ def main():
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
-    os.makedirs(os.path.join(os.getcwd(), EXP_DESTDIR), exist_ok=True)
+    os.makedirs(os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR), exist_ok=True)
     for info in info_to_gl:
         filename = f'{info}.rst'
-        if build_all or os.path.join(EXP_DESTDIR, filename) in targets:
+        if build_all or os.path.join(INFO_TO_GL_DESTDIR, filename) in targets:
             output = info_to_gl_template.render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
-            destfile = os.path.join(os.getcwd(), EXP_DESTDIR, filename)
+            destfile = os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
@@ -439,7 +439,7 @@ def main():
             })
         all_info = []
         for info in info_to_gl:
-            target = os.path.join(EXP_DESTDIR, f'{info}.rst')
+            target = os.path.join(INFO_TO_GL_DESTDIR, f'{info}.rst')
             deps = " ".join([guideline['src_path'] for guideline in guidelines for id in [x['id'] for x in info_to_gl[info]] if guideline.get('id') == id])
             all_info.append(target)
             other_deps.append({

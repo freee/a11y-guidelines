@@ -27,4 +27,4 @@
 
 
 
-.. include:: /inc/exp/exp-text-wording.rst
+.. include:: /inc/info2gl/exp-text-wording.rst
