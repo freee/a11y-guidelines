@@ -38,17 +38,11 @@ jobs:
             data/json/schemas/guideline.json)
               npx ajv compile --spec=draft2020 -s ${FILE} -r data/json/schemas/common.json
               ;;
-            data/json/schemas/faq.json)
-              npx ajv compile --spec=draft2020 -s ${FILE} -r data/json/schemas/common.json
-              ;;
             data/yaml/gl/*.yaml)
               npx ajv validate --spec=draft2020 -s data/json/schemas/guideline.json -r data/json/schemas/common.json -d ${FILE}
               ;;
             data/yaml/checks/*.yaml)
               npx ajv validate --spec=draft2020 -s data/json/schemas/check.json -r data/json/schemas/common.json -d ${FILE}
-              ;;
-            data/yaml/faq/*.yaml)
-              npx ajv validate --spec=draft2020 -s data/json/schemas/faq.json -r data/json/schemas/common.json -d ${FILE}
               ;;
             esac
         done
