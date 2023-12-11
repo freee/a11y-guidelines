@@ -7,7 +7,8 @@
   "properties": {
     "id": {
       "description": "a unique identifier for the FAQ",
-      "type": "string"
+      "type": "string",
+      "pattern": "^[cdp][0-9]{4}$"
     },
     "sortKey": {
       "description": "an integer key to govern the order of the FAQs to appear in the document",
