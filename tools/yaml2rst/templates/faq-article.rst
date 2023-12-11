@@ -43,7 +43,7 @@
 {% for check in checks -%}
 :ref:`check-{{ check.id }}`
    {{ check.check | indent(3) }}
-{%- endfor %}
+{% endfor %}
 {%- endif %}
 
 {% if info is defined -%}
@@ -53,6 +53,6 @@
 
 {% for i in info -%}
 *  :ref:`{{ i }}`
-{%- endfor %}
+{% endfor %}
 {%- endif %}
 
