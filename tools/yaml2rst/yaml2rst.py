@@ -143,11 +143,6 @@ def main():
                 sys.exit(1)
         checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
 
-    if not args.no_check:
-        check_duplicate_values(guidelines, 'id', 'Guideline ID')
-        check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
-        check_duplicate_values(checks, 'id', 'Check ID')
-
     files = ls_dir(os.path.join(os.getcwd(), FAQ_SRCDIR))
     faqs = []
     for f in files:
@@ -162,6 +157,13 @@ def main():
         faqs[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
 
     faqs = sorted(faqs, key=lambda x: x['sortKey'])
+
+    if not args.no_check:
+        check_duplicate_values(guidelines, 'id', 'Guideline ID')
+        check_duplicate_values(guidelines, 'sortKey', 'Guideline sortKey')
+        check_duplicate_values(checks, 'id', 'Check ID')
+        check_duplicate_values(faqs, 'id', 'FAQ ID')
+        check_duplicate_values(faqs, 'sortKey', 'FAQ sortKey')
 
     try:
         with open(WCAG_SC) as f:
