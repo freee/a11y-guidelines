@@ -451,7 +451,7 @@ def main():
                 faq_obj['checks'] = []
                 for c in faq['checks']:
                     faq_obj['checks'].append({
-                        'id': _check['id'],
+                        'id': c,
                         'check': [x for x in checks if x["id"] == c][0]['check'][LANG],
                     })
             if 'info' in faq:
