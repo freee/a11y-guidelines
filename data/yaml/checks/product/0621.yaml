@@ -12,7 +12,7 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のaxe DevToolsによるチェックとNVDAによるチェックを見足していることを確認する。
+      以下のaxe DevToolsによるチェックとNVDAによるチェックを満たしていることを確認する。
     en: |-
       Confirm the following checks by axe DevTools and NVDA pass.
   techniques:

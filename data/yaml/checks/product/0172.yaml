@@ -21,7 +21,7 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のキーボードによるチェックを見足していることを確認する。
+      以下のキーボードによるチェックを満たしていることを確認する。
     en: |-
       Confirm the following check by keyboard passes.
   techniques:
@@ -40,7 +40,7 @@ procedures:
 - platform: mobile
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを見足していることを確認する。
+      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
     en: |-
       Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
   techniques:

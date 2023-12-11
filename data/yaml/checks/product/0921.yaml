@@ -12,7 +12,7 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のNVDAによるチェックを見足していることを確認する。
+      以下のNVDAによるチェックを満たしていることを確認する。
     en: |-
       Confirm the following check by NVDA passes.
   techniques:

@@ -26,7 +26,7 @@ procedures:
 - platform: web
   procedure:
     ja: |-
-      以下のキーボード操作によるチェックを見足していることを確認する。
+      以下のキーボード操作によるチェックを満たしていることを確認する。
     en: |-
       Confirm the following check by keyboard operation passes.
   techniques:
