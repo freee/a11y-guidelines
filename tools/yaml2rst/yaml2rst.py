@@ -8,6 +8,7 @@ import copy
 from jsonschema import validate, ValidationError, RefResolver
 import argparse
 from jinja2 import Template, Environment, FileSystemLoader
+import datetime
 
 LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
@@ -435,15 +436,23 @@ def main():
                 f.write(output)
 
     os.makedirs(os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR), exist_ok=True)
-    allfaq_files = []
+    faq_articles = []
     faq_tagpages = {}
     for faq in faqs:
-        allfaq_files.append(faq['id'])
+        faq_updated = datetime.datetime.fromisoformat(faq['updated'])
+        faq_articles.append({
+            'id': faq['id'],
+            'sortKey': faq['sortKey'],
+            'updated': faq_updated
+        })
         article_filename = f'{faq["id"]}.rst'
         if build_all or os.path.join(FAQ_ARTICLES_DESTDIR, article_filename) in targets:
             faq_obj = {
                 'id': faq['id'],
                 'title': faq['title'][LANG],
+                'updated_year': faq_updated.year,
+                'updated_month': faq_updated.month,
+                'updated_day': faq_updated.day,
                 'tags': faq['tags'],
                 'problem': faq['problem'][LANG],
                 'solution': faq['solution'][LANG],
@@ -490,7 +499,7 @@ def main():
             f.write(output)
 
     if build_all or FAQ_INDEX_PATH in targets:
-        output = faq_index_template.render(files = allfaq_files, tags = sorted(faq_tagpages))
+        output = faq_index_template.render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = sorted(faq_tagpages))
         destfile = FAQ_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
@@ -502,7 +511,7 @@ def main():
             f.write(output)
 
     if build_all or FAQ_ARTICLE_INDEX_PATH in targets:
-        output = faq_article_index_template.render(files = allfaq_files)
+        output = faq_article_index_template.render(files = sorted(faq_articles, key=lambda x: x['sortKey']))
         destfile = FAQ_ARTICLE_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)

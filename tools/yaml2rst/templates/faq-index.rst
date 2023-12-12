@@ -25,6 +25,6 @@ FAQ記事一覧
 {%- endfilter %}
 
 {% for f in files -%}
-*  :ref:`faq-{{ f }}`
+*  :ref:`faq-{{ f.id }}`
 {% endfor %}
 

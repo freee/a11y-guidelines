@@ -2,6 +2,8 @@
 
 {{ title|make_heading(1) }}
 
+最終更新：{{ updated_year }}年{{ updated_month }}月{{ updated_day }}日
+
 タグ：
 {%- for tag in tags -%}
 {%- if loop.first %} {% endif -%}:ref:`faq-tag-{{ tag }}`{%- if not loop.last %} 、 {% endif -%}

@@ -8,6 +8,6 @@ FAQ記事一覧
    :maxdepth: 1
    :titlesonly:
 {% for f in files %}
-   {{ f }}
+   {{ f.id }}
 {%- endfor %}
 
