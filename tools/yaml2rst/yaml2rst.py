@@ -459,7 +459,12 @@ def main():
             if 'info' in faq:
                 faq_obj['info'] = faq['info']
             if 'guidelines' in faq:
-                faq_obj['guidelines'] = faq['guidelines']
+                faq_obj['guidelines'] = []
+                for gl in faq['guidelines']:
+                    faq_obj['guidelines'].append({
+                        'id': gl,
+                        'category': gl_categories[gl]
+                    })
             output = faq_article_template.render(faq_obj)
             destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:

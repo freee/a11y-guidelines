@@ -31,7 +31,7 @@
 {%- endfilter %}
 
 {% for gl in guidelines -%}
-*  :ref:`{{ gl }}`
+*  {{ gl.category }}： :ref:`{{ gl.id }}`
 {%- endfor %}
 {%- endif %}
 
