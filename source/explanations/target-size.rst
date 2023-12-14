@@ -41,3 +41,5 @@
 #. チェック対象のページを表示した状態で、このブックマークレットを実行。
 
 .. include:: /inc/info2gl/exp-target-size.rst
+
+.. include:: /inc/info2faq/exp-target-size.rst
