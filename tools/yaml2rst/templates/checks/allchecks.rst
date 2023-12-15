@@ -32,9 +32,9 @@
 {%- endif %}
 
 {% if check.implementations is defined -%}
-{% include 'check-implementation.rst' %}
+{% include 'checks/implementation.rst' %}
 {%- endif %}
 {% if check.procedures is defined %}
-{% include 'check-procedure.rst' %}
+{% include 'checks/procedure.rst' %}
 {% endif %}
 {%- endfor %}
