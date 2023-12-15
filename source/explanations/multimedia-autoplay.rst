@@ -9,4 +9,4 @@
 
 なおWCAGでは、3秒以上の音声を自動再生する場合の条件を定めて長い音声の自動再生も認めていますが、ユーザーが音声の制御をできるようにすることなどを求めていて、実装コストがそれなりに高くなることが考えられますので、freeeにおいては基本的に自動再生は用いず、用いる場合も3秒より短い音声の利用にとどめるのが良いでしょう。
 
-.. include:: /inc/exp/exp-multimedia-autoplay.rst
+.. include:: /inc/info2gl/exp-multimedia-autoplay.rst

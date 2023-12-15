@@ -17,4 +17,4 @@ WCAGでは、レベルAの達成基準でより限定的な条件を示してい
 
 参考： この達成基準はいわゆる `ポケモンショック <https://ja.wikipedia.org/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%82%AF>`_ を受けて追加されたものです。
 
-.. include:: /inc/exp/exp-dynamic-content-auto-updated.rst
+.. include:: /inc/info2gl/exp-dynamic-content-auto-updated.rst

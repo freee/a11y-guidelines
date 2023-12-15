@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a11y-guidelines.freee.co.jp/schemas/faq.json",
+  "title": "FAQ item",
+  "description": "A Frequently Asked Question",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "a unique identifier for the FAQ",
+      "type": "string",
+      "pattern": "^[cdp][0-9]{4}$"
+    },
+    "sortKey": {
+      "description": "an integer key to govern the order of the FAQs to appear in the document",
+      "type": "integer"
+    },
+    "updated": {
+      "description": "the date the FAQ was last updated",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "tags": {
+      "description": "tags for the FAQ",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "title": {
+      "description": "title of the FAQ",
+      "$ref": "common.json#/definitions/i18nString"
+    },
+    "problem": {
+      "description": "the problem or the question",
+      "$ref": "common.json#/definitions/i18nString"
+    },
+    "solution": {
+      "description": "the solution or the answer",
+      "$ref": "common.json#/definitions/i18nString"
+    },
+    "explanation": {
+      "description": "detailed explanation",
+      "$ref": "common.json#/definitions/i18nString"
+    },
+    "guidelines": {
+      "description": "related guidelines, if any",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^gl-.+"
+      }
+    },
+    "checks": {
+      "description": "related checks, if any",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9]{4}"
+      }
+    },
+    "info": {
+      "description": "related additional info if any",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "sortKey",
+    "updated",
+    "tags",
+    "problem",
+    "solution",
+    "explanation"
+  ]
+
+}

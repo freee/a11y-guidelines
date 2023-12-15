@@ -12,4 +12,4 @@
 文字情報が数単語よりも短いような場合は、単純に ``alt`` 属性にその文字情報を指定すれば良いでしょう。
 一方、文字情報が多い場合は、 ``aria-describedby`` 属性の利用など、画像に対して詳細な説明を付与する場合の手法を用いるのが適当な場合が多いでしょう。
 
-.. include:: /inc/exp/exp-iot-text-alternative.rst
+.. include:: /inc/info2gl/exp-iot-text-alternative.rst

@@ -82,4 +82,4 @@ ARIAライブ・リージョンがページ中にあると、スクリーン・�
 
 このように、後からARIAライブ・リージョンを挿入する手法には不確実な点もあるので、なるべくページのロード時にARIAライブ・リージョンを設置するようにするのが良いでしょう。
 
-.. include:: /inc/exp/exp-dynamic-content-status.rst
+.. include:: /inc/info2gl/exp-dynamic-content-status.rst

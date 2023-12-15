@@ -1,0 +1,107 @@
+id: d0002
+updated: '2023-12-14'
+sortKey: 10100
+tags:
+- form
+title:
+  ja: ラジオボタンやチェックボックスのサイズ
+  en: Size of radio buttons and check boxes
+problem:
+  ja: |-
+    サイズが24×24pxより小さいラジオボタンやチェックボックスは、 :ref:`check-0331` と :ref:`check-0351` でNGとすべきか
+
+    .. image:: /img/faq/d0002/01.png
+       :alt: サイズが13×13pxのチェックボックス
+  en: |-
+    Should radio buttons and check boxes smaller than 24×24px fail checks 0331 and 0351?
+
+    .. image:: /img/faq/d0002/01.png
+       :alt: A checkbox with a size of 13×13px
+solution:
+  ja: |-
+    ブラウザーのデフォルトの表示から変更していない場合は問題ない。
+  en: |-
+    There is no problem if how they are displayed is not changed from the browser's default.
+explanation:
+  ja: |-
+    :ref:`check-0331` と :ref:`check-0351` は、ガイドライン項目 :ref:`gl-icon-target-size` を満たすための条件を示しています。
+    このガイドラインは、WCAG 2.1の達成基準2.5.5 `Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_ （ `ターゲットのサイズ <https://waic.jp/translations/WCAG21/#target-size>`_ ）が元になっています。
+
+    レベルAAAのこの達成基準では、マウスなどのポインティング・ディバイスの操作対象（チェックボックスやラジオボタンを含む）の大きさとして44×44px以上のサイズを求めています。
+    デスクトップ向けサービスの多いfreeeでは、44×44px以上を満たすのは難しいものの、何らかの基準は必要ということで、24×24pxという基準を設けています。
+
+    なお、WCAGの最新バージョンであるWCAG 2.2では、 `Target Size (Minimum) <https://www.w3.org/TR/WCAG22/#target-size-minimum>`_  として、24×24px以上を求めるレベルAAの達成基準2.5.8が追加されています。
+
+    これらの達成基準では、例外事項として、「ユーザエージェントのコントロールである: ターゲットのサイズがユーザエージェントによって定められており、かつコンテンツ制作者が変更していない。」という項目があるため、freeeのガイドライン/チェックリストでも、ブラウザーのデフォルトから変更していないものは対象外としています。
+    ブラウザーのデフォルトでラジオボタンやチェックボックスのサイズが小さいのはコンテンツ製作者の責任ではなく、またブラウザーのデフォルトにしてあればユーザー側で変更することも可能だろうという想定なのだと考えられます。
+
+    ブラウザーのデフォルトから変更しているかどうかの判断方法には、以下のようなものがあります。
+
+    *  MDNの `チェックボックスのサンプル <https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/checkbox>`_ や `ラジオボタンのサンプル <https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/radio>`_ と見比べてみて、明らかに見た目が違う場合は変更されている。
+    *  開発者ツールを用いてページのソースを確認する：
+
+       1. チェックボックスの上で右クリックしてメニューを開き、「検証」を選ぶ
+
+          .. image:: /img/faq/d0002/02.png
+             :alt: スクリーン・ショット：メニューで「検証」をハイライト
+
+       2. 開発者ツールが開くので、 `type="checkbox"` となっている `input` 要素がハイライトされた状態にする。
+
+          .. image:: /img/faq/d0002/03.png
+             :alt: スクリーン・ショット：開発者ツールでチェックボックスをハイライト
+
+          描画領域でも、チェックボックスの部分がハイライトされる。
+
+          .. image:: /img/faq/d0002/04.png
+             :alt: スクリーン・ショット：開発者ツールの描画領域でチェックボックスがハイライトされている
+
+       3. Stylesパネルで、user agent stylesheet以外の部分に、見た目を変更するようなスタイル指定がないかを確認する。
+
+          .. image:: /img/faq/d0002/05.png
+             :alt: スクリーン・ショット：Stylesパネル
+
+          上記のスクリーン・ショットでは `box-sizing: border-box` が上書きされているが、元の指定と同じで、見た目を変更する指定でもないので問題はない。
+  en: |-
+    Checks 0331 and 0351 indicate the conditions for satisfying Guideline Item :ref:`gl-icon-target-size` which is based on the Sucess Criterion 2.5.5 `Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_ of WCAG 2.1.
+
+    This Level AAA success criterion requires the size of pointer input targets, including checkboxes and radio buttons, to be 44×44px or more.
+    freee, which has many desktop services, finds it difficult to meet the requirement of 44×44px or more, but it is necessary to have some kind of standard, so we have set a standard of 24×24px.
+
+    In WCAG 2.2, the latest version of WCAG, Level AA Success Criterion 2.5.8 `Target Size (Minimum) <https://www.w3.org/TR/WCAG22/#target-size-minimum>`_ has been added, which requires a size of 24×24px or more.
+
+    These success criteria have an exception that "The size of the target is determined by the user agent and is not modified by the author." Therefore, in freee's guidelines/checklist, those that have not been changed from the browser's default are excluded.
+    When the check boxes and radio buttons are shown with the browser's default style, the content author does not owe the responsibility for it, and it can be assumed that the user can change the setting.
+
+    There are several ways to determine whether or not the browser's default has been changed.
+
+    *  If the appearance is clearly different from the MDN `checkbox sample <https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/checkbox>`_ or `radio button sample <https://developer.mozilla.org/ja/docs/Web/HTML/Element/input/radio>`_ , it has been changed.
+    *  Use the developer tools to check the page source:
+
+       1. Right-click on the checkbox to open the menu and select "Inspect".
+
+          .. image:: /img/faq/d0002/02.png
+             :alt: Screenshot: "Inspect" is highlighted in the menu
+
+       2. Once the developer tools open, highlight the `input` element with `type="checkbox"`.
+
+          .. image:: /img/faq/d0002/03.png
+             :alt: Screenshot: The checkbox is highlighted in the developer tools
+
+          The checkbox is also highlighted in the rendering area.
+
+          .. image:: /img/faq/d0002/04.png
+             :alt: Screenshot: The checkbox is highlighted in the rendering area of the developer tools
+
+       3. In the Styles panel, check to see if there are any style specifications that change the appearance other than the user agent stylesheet.
+  
+          .. image:: /img/faq/d0002/05.png
+             :alt: Screenshot: Styles panel
+
+          In the above screenshot, `box-sizing: border-box` is overwritten, but it is the same as the original specification and does not change the appearance, so there is no problem.
+guidelines:
+- gl-icon-target-size
+checks:
+- '0331'
+- '0351'
+info:
+- exp-target-size

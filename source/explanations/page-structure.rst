@@ -47,4 +47,4 @@ ARIAランドマークについて詳しくは、以下のMDNの記事を参考�
 なお、ユーザーの操作によって表示されるコンテンツが変化するようなページについては、さらに注意が必要です。
 :ref:`exp-dynamic-content-maintain-dom-tree` も合わせて参照してください。
 
-.. include:: /inc/exp/exp-page-structure.rst
+.. include:: /inc/info2gl/exp-page-structure.rst

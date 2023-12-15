@@ -56,4 +56,4 @@ Guidelines”のように数単語程度のフレーズであれば、このこ�
 
    <iframe src="../_static/samples/lang-partial.html" width="100%" height="320px"></iframe>
 
-.. include:: /inc/exp/exp-text-lang.rst
+.. include:: /inc/info2gl/exp-text-lang.rst

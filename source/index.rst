@@ -22,3 +22,4 @@ freeeアクセシビリティー・ガイドライン
    checks/index
    info/index
    explanations/index
+   faq/index

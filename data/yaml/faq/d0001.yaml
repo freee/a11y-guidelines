@@ -1,0 +1,39 @@
+id: d0001
+sortKey: 10000
+updated: '2023-12-05'
+tags:
+- markup
+title:
+  ja: 見出しレベルの指定
+  en: Heading level specification
+problem:
+  ja: |-
+    見出し、小見出しを設定するべきか、どの部分を見出しに指定すべきか分からない。
+  en: |-
+    Whether to set headings and subheadings, and which part to specify as headings.
+solution:
+  ja: |-
+    *  画面のタイトルや目的を示すような見出し（大見出し）は必ず配置する。
+    *  情報の区切りが視覚的に分かる形で表現されている場合、小見出しを配置する
+    *  検索欄の検索設定項目が多い、内容からグルーピングの意図が類推しづらい、などの場合、小見出しの配置を検討する
+    *  小見出しのレベルは、見出しのみを見て、または、「見出しレベル1のみ」「見出しレベル1と2のみ」「1と2と3のみ……」のように一定のレベル以上のものだけを読んだとき、画面の情報構成が類推できるように指定する
+  en: |-
+    *  Always place a heading (main heading) that indicates the title and purpose of the screen.
+    *  If the information is visually separated, place subheadings.
+    *  If there are many search settings in the search field, or if it is difficult to infer the intention of grouping from the content, consider placing subheadings.
+    *  When specifying the level of subheadings, specify them so that the information structure of the screen can be inferred when only the headings are read, or when only headings of a certain level or higher are read, such as "only heading level 1", "only heading levels 1 and 2", "only 1, 2, and 3", etc.
+explanation:
+  ja: |-
+    一般的なテクニックとして、使用する見出しレベルを3つ程度に抑えることで、コンテンツの構成が練りやすく、また分かりやすくなります。4段階以上のレベルが必要な場合には、別項目として切り出すなど、構成を検討してみるとよいでしょう。
+
+    見出しだけを読んでみて、ページにどんな情報が並んでいそうかを想像できなければ、見出しが足りていない可能性が高いです。
+  en: |-
+    As a general technique, limiting the number of heading levels to about three makes it easier to structure and understand the content. If you need more than four levels, you may want to consider structuring them separately.
+
+    If you can't imagine what kind of information is lined up on the page just by reading the headings, there probably are not enough headings.
+guidelines:
+- gl-text-heading-label
+checks:
+- '0271'
+info:
+- exp-text-wording

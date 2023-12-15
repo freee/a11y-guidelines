@@ -19,4 +19,4 @@ DOMツリーとスクリーン・リーダー
 
 開閉できるメニューやアコーディオンなども、同様の問題を引き起こしがちです。
 
-.. include:: /inc/exp/exp-dynamic-content-maintain-dom-tree.rst
+.. include:: /inc/info2gl/exp-dynamic-content-maintain-dom-tree.rst
