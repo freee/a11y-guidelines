@@ -8,4 +8,4 @@ iOS VoiceOverを用いたチェック実施方法の例
 
 iOS VoiceOverの基本的な使い方や推奨設定などについては、 :ref:`exp-screen-reader-check-ios-voiceover` を参照してください。
 
-.. include:: /inc/check-examples-ios-vo.rst
+.. include:: /inc/checks/examples-ios-vo.rst

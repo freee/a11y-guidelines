@@ -66,7 +66,7 @@ The Nu Html Checkerを用いたHTMLのバリデーション
 なお、jarファイルを使えばコマンド・ラインからThe Nu Html Checkerを実行することは可能ですが、この場合、ブラウザーにレンダーされる前のソースファイルに対するチェックになります。
 そのため、JavaScriptでコンテンツが更新されるようなページのチェックには不向きです。
 
-.. include:: /inc/exp-nu-html-checker.rst
+.. include:: /inc/info2gl/exp-nu-html-checker.rst
 
 .. _v.nu: https://github.com/validator/validator/
 .. _w3c_validator: https://validator.w3.org/nu/

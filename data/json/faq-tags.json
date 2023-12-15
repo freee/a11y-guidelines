@@ -1,0 +1,30 @@
+{
+    "markup": {
+        "ja": "マークアップ",
+        "en": "Markup"
+    },
+    "form": {
+        "ja": "フォーム",
+        "en": "Form"
+    },
+    "nvda": {
+        "ja": "NVDA",
+        "en": "NVDA"
+    },
+    "macos-vo": {
+        "ja": "macOS VoiceOver",
+        "en": "macOS VoiceOver"
+    },
+    "ios-vo": {
+        "ja": "iOS VoiceOver",
+        "en": "iOS VoiceOver"
+    },
+    "android-tb": {
+        "ja": "Android TalkBack",
+        "en": "Android TalkBack"
+    },
+    "misc": {
+        "ja": "その他",
+        "en": "Miscellaneous"
+    }
+}

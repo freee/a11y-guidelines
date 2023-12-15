@@ -38,7 +38,7 @@ $(PREDEFINED_TARGETS): incfiles.mk incfiles Makefile
 
 clean:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	@$(RM) -rf $(SOURCEDIR)/inc incfiles.mk
+	@$(RM) -rf $(SOURCEDIR)/inc $(SOURCEDIR)/faq incfiles.mk
 
 $(SOURCEDIR)/inc:
 	@$(YAML2RST)

@@ -58,4 +58,4 @@ axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定が�
 *  :ref:`exp-contrast`
 *  |Vibes Color Contrast|
 
-.. include:: /inc/exp-check-contrast.rst
+.. include:: /inc/info2gl/exp-check-contrast.rst

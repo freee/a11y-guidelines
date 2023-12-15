@@ -26,4 +26,4 @@
 *  ``aria-label`` 属性や ``aria-labelledby`` 属性を用いて、プレイヤーの存在を明示する。
 *   前後の文章の文言で、プレイヤーの存在に言及する。
 
-.. include:: /inc/exp-multimedia-perceivable.rst
+.. include:: /inc/info2gl/exp-multimedia-perceivable.rst

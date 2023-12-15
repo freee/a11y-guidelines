@@ -21,4 +21,4 @@
 *  「対象」が「コード」のものの中には、実装方法例を記しているものもあります
 *  「対象」が「プロダクト」のものの中には、チェック実施方法の例を記しているものもあります
 
-.. include:: /inc/allchecks.rst
+.. include:: /inc/checks/allchecks.rst

@@ -117,9 +117,4 @@ Tab/Shift+Tabキーでフォーカスを移動した際に、ユーザーが予�
 
 :ref:`exp-form-dynamic-content` も併せて参照。
 
-関連ガイドライン
-================
-
-*  動的コンテンツ： :ref:`gl-dynamic-content-focus`
-*  フォーム： :ref:`gl-form-dynamic-content-focus`
-*  フォーム： :ref:`gl-form-dynamic-content-change`
+.. include:: /inc/info2gl/exp-tab-order-check.rst

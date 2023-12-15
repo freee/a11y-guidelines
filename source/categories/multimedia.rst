@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-multimedia.rst
+.. include:: /inc/gl/multimedia.rst

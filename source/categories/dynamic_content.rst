@@ -13,4 +13,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-dynamic_content.rst
+.. include:: /inc/gl/dynamic_content.rst

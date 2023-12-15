@@ -9,4 +9,4 @@ axe DevToolsを用いたチェック実施方法の例
 axe DevToolsのインストールや基本的な使用方法については、 :ref:`exp-axe` を参照してください。
 また、 :ref:`info-axe-rules` も合わせて参照してください。
 
-.. include:: /inc/check-examples-axe.rst
+.. include:: /inc/checks/examples-axe.rst

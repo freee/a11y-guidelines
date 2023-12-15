@@ -4,8 +4,12 @@ freeeアクセシビリティー・ガイドライン
 
 **このガイドラインは、参考情報の追加や表現の改善などで、随時更新されます。**
 
-バージョン:
+リリース:
    |release|
+ガイドライン・バージョン：
+   |guidelines_version_string|
+チェックシート・バージョン：
+   |checksheet_version|
 更新日:
    |published_date|
 
@@ -18,3 +22,4 @@ freeeアクセシビリティー・ガイドライン
    checks/index
    info/index
    explanations/index
+   faq/index

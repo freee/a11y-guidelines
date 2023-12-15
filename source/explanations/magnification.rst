@@ -93,4 +93,4 @@ Androidの場合
 
 なお、この2つの設定を組み合わせて使用することも可能です。
 
-.. include:: /inc/exp-magnification.rst
+.. include:: /inc/info2gl/exp-magnification.rst

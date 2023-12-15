@@ -15,4 +15,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-images_of_text.rst
+.. include:: /inc/gl/images_of_text.rst

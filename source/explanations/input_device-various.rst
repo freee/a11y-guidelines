@@ -116,4 +116,4 @@ AccessibleNameについては、 :ref:`exp-markup-component` を参照してく�
    肢体不自由のユーザーの利用を阻害しないために、たとえば端末を振るなど、ユーザーの動きだけをトリガーとするような機能は作るべきではありません。
    ユーザーの動きに加えて、別の手段でその機能を利用できれば問題ありません。
 
-.. include:: /inc/exp-input-device-various.rst
+.. include:: /inc/info2gl/exp-input-device-various.rst

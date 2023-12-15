@@ -11,4 +11,4 @@
    :local:
    :backlinks: none
 
-.. include:: /inc/gl-category-login_session.rst
+.. include:: /inc/gl/login_session.rst
