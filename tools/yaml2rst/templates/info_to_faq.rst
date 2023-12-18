@@ -3,6 +3,6 @@
 {%- endfilter %}
 
 {% for faq in faqs -%}
-*  :ref:`{{ faq.id }}`
+*  :ref:`{{ faq.label }}`
 {% endfor %}
 
