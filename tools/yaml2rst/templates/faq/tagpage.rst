@@ -5,7 +5,7 @@
 {%- endfilter %}
 
 {% for item in articles %}
-*  :ref:`{{ item }}`
+*  :ref:`faq-{{ item }}`
 {%- endfor %}
 
 

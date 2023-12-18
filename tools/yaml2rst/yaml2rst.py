@@ -196,13 +196,13 @@ def main():
         wcag_sc[sc]['ja']['linkCode'] = f'`{wcag_sc[sc]["ja"]["title"]} <{wcag_sc[sc]["ja"]["url"]}>`_'
 
     category_pages = {}
-    guideline_category_rst = []
+    guideline_category_target = []
     for cat in category_names:
         category_pages[cat] = {
             'guidelines': [],
             'dependency': []
         }
-        guideline_category_rst.append(os.path.join(GUIDELINES_DESTDIR, f'{cat}.rst'))
+        guideline_category_target.append(os.path.join(GUIDELINES_DESTDIR, f'{cat}.rst'))
 
     gl_categories = {}
     info_to_gl = {}
@@ -351,7 +351,8 @@ def main():
             if not info in info_to_faq:
                 info_to_faq[info] = []
             info_to_faq[info].append({
-                'id': f'faq-{faq["id"]}',
+                'id': faq['id'],
+                'label': f'faq-{faq["id"]}',
                 'sortKey': faq['sortKey']
             })
 
@@ -474,6 +475,7 @@ def main():
                         'id': gl,
                         'category': gl_categories[gl]
                     })
+            faq['destpath'] = os.path.join(FAQ_ARTICLES_DESTDIR, article_filename)
             output = faq_article_template.render(faq_obj)
             destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
@@ -488,15 +490,15 @@ def main():
                     'label': faq_tags[tag][LANG],
                     'articles': []
                 }
-            faq_tagpages[tag]['articles'].append(f'faq-{faq["id"]}')
+            faq_tagpages[tag]['articles'].append(faq["id"])
 
     os.makedirs(os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR), exist_ok=True)
     for page in faq_tagpages: 
         if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst') in targets:
             output = faq_tagpage_template.render(faq_tagpages[page])
             destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst')
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(output)
+            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
+                f.write(output)
 
     if build_all or FAQ_INDEX_PATH in targets:
         output = faq_index_template.render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = sorted(faq_tagpages))
@@ -596,9 +598,13 @@ def main():
         gl_yaml = []
         for obj in guidelines:
             gl_yaml.append(obj['src_path'])
-        all_yaml = []
-        for obj in guidelines+checks:
-            all_yaml.append(obj['src_path'])
+        check_yaml = []
+        for obj in checks:
+            check_yaml.append(obj['src_path'])
+        faq_yaml = []
+        for obj in faqs:
+            faq_yaml.append(obj['src_path'])
+        all_yaml = gl_yaml + check_yaml + faq_yaml
 
         other_deps = []
         for cat in category_pages:
@@ -608,24 +614,90 @@ def main():
                 'dep': f'{target}: {deps}',
                 'target': target
             })
-        all_info = []
-        for info in info_to_gl:
-            target = os.path.join(INFO_TO_GL_DESTDIR, f'{info}.rst')
-            deps = " ".join([guideline['src_path'] for guideline in guidelines for id in [x['id'] for x in info_to_gl[info]] if guideline.get('id') == id])
-            all_info.append(target)
+        check_example_target = []
+        for tool in check_examples:
+            if check_examples[tool] == '' or not tool in build_examples:
+                continue
+            target = os.path.join(CHECKS_DESTDIR, f'examples-{tool}.rst')
+            check_example_target.append(target)
+            _deps = []
+            for ex in check_examples[tool]:
+                _deps.append([x for x in checks if x["id"] == ex['id']][0]['src_path'])
+            deps = " ".join(_deps)
             other_deps.append({
                 'dep': f'{target}: {deps}',
                 'target': target
             })
+        faq_article_target = []
+        for faq in faqs:
+            target = os.path.join(FAQ_ARTICLES_DESTDIR, f'{faq["id"]}.rst')
+            faq_article_target.append(target)
+            _deps = []
+            _deps.append(faq["src_path"])
+            if 'guidelines' in faq:
+                for gl in faq['guidelines']:
+                    _deps.append([x for x in guidelines if x["id"] == gl][0]['src_path'])
+            if 'checks' in faq:
+                for c in faq['checks']:
+                    _deps.append([x for x in checks if x["id"] == c][0]['src_path'])
+            deps = " ".join(_deps)
+            other_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
+        faq_tagpage_target = []
+        for tag in faq_tagpages:
+            target = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{tag}.rst')
+            faq_tagpage_target.append(target)
+            _deps = []
+            for faq in faq_tagpages[tag]['articles']:
+                _deps.append([x for x in faqs if x["id"] == faq][0]['src_path'])
+            deps = " ".join(_deps)
+            other_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
+
+        info_to_faq_target = []
+        for info in info_to_faq:
+            target = os.path.join(INFO_TO_FAQ_DESTDIR, f'{info}.rst')
+            deps = " ".join([faq['src_path'] for faq in faqs for id in [x['id'] for x in info_to_faq[info]] if faq.get('id') == id])
+            info_to_faq_target.append(target)
+            other_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
+            
+        info_to_gl_target = []
+        for info in info_to_gl:
+            target = os.path.join(INFO_TO_GL_DESTDIR, f'{info}.rst')
+            deps = " ".join([guideline['src_path'] for guideline in guidelines for id in [x['id'] for x in info_to_gl[info]] if guideline.get('id') == id])
+            info_to_gl_target.append(target)
+            other_deps.append({
+                'dep': f'{target}: {deps}',
+                'target': target
+            })
+        faq_index_pages = []
+        faq_index_pages.append(os.path.join(FAQ_DESTDIR, FAQ_INDEX_FILENAME))
+        faq_index_pages.append(os.path.join(FAQ_ARTICLES_DESTDIR, FAQ_INDEX_FILENAME))        
+        faq_index_pages.append(os.path.join(FAQ_TAGPAGES_DESTDIR, FAQ_INDEX_FILENAME))
+
         makefile_data = {
-            'guideline_category_rst': " ".join(guideline_category_rst),
+            'guideline_category_target': " ".join(guideline_category_target),
+            'check_example_target': " ".join(check_example_target),
+            'faq_tagpage_target': " ".join(faq_tagpage_target),
+            'faq_article_target': " ".join(faq_article_target),
+            'faq_index_target': " ".join(faq_index_pages),
             'wcag_mapping_target': os.path.join(MISC_DESTDIR, WCAG_MAPPING_FILENAME),
             'priority_diff_target': os.path.join(MISC_DESTDIR, PRIORITY_DIFF_FILENAME),
             'all_checks_target': os.path.join(CHECKS_DESTDIR, ALL_CHECKS_FILENAME),
             'wcag_sc': WCAG_SC,
             'gl_yaml': " ".join(gl_yaml),
+            'check_yaml': " ".join(check_yaml),
+            'faq_yaml': " ".join(faq_yaml),
             'all_yaml': " ".join(all_yaml),
-            'all_info': " ".join(all_info),
+            'info_to_gl_target': " ".join(info_to_gl_target),
+            'info_to_faq_target': " ".join(info_to_faq_target),
             'other_deps': other_deps,
             'miscdefs_target': os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME),
             'info_src': INFO_SRC

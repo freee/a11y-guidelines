@@ -1,22 +1,19 @@
-guideline_category_rst = {{ guideline_category_rst }}
-all_info = {{ all_info }}
-
-incfiles: $(guideline_category_rst) $(all_info) {{ wcag_mapping_target }} {{ all_checks_target }} {{ priority_diff_target }} {{ miscdefs_target }}
+ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_category_target }} {{ check_example_target }} {{ wcag_mapping_target }} {{ priority_diff_target }} {{ all_checks_target }}  {{ miscdefs_target }}
 
 %.yaml: ;
 %.json: ;
 
-{{ wcag_mapping_target }}: {{ gl_yaml }} {{ wcag_sc }}
-	@$(YAML2RST) {{ wcag_mapping_target }}
+{{ wcag_mapping_target }} {{ priority_diff_target }}: {{ gl_yaml }} {{ wcag_sc }}
+	@$(YAML2RST) $@
 
-{{ priority_diff_target }}: {{ gl_yaml }} {{ wcag_sc }}
-	@$(YAML2RST) {{ priority_diff_target }}
-
-{{ all_checks_target }}: {{ all_yaml }}
+{{ all_checks_target }}: {{ gl_yaml }} {{ check_yaml }} {{ faq_yaml }}
 	@$(YAML2RST) {{ all_checks_target }}
 
 {{ miscdefs_target }}: {{ info_src }}
 	@$(YAML2RST) {{ miscdefs_target }}
+
+{{ faq_index_target }}: {{ faq_yaml }}
+	@$(YAML2RST) $@
 
 {% for item in other_deps %}
 {{ item.dep }}
