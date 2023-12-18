@@ -200,7 +200,11 @@ Copyright © |copyright|
 
 この文書のバージョン：
    |release|
-公開日:
+ガイドライン・バージョン：
+   |guidelines_version_string|
+チェックシート・バージョン：
+   |checksheet_version|
+更新日:
    |published_date|
 
 .. _WCAG20: https://www.w3.org/TR/WCAG20/
