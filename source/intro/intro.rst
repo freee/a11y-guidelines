@@ -70,6 +70,11 @@ Web
 
 必要に応じて、「意図」をより良く理解するための参考情報や、チェック方法に関する補足情報へのリンクを掲載している場合があります。
 
+関連FAQ
+=======
+
+:ref:`faq-index` に掲載されているFAQのうち、そのガイドライン項目に関連するものへのリンクを掲載しています。
+
 .. _intro-intro-check:
 
 チェック内容
@@ -195,7 +200,11 @@ Copyright © |copyright|
 
 この文書のバージョン：
    |release|
-公開日:
+ガイドライン・バージョン：
+   |guidelines_version_string|
+チェックシート・バージョン：
+   |checksheet_version|
+更新日:
    |published_date|
 
 .. _WCAG20: https://www.w3.org/TR/WCAG20/
