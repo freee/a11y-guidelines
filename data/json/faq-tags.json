@@ -7,6 +7,10 @@
         "ja": "フォーム",
         "en": "Form"
     },
+    "axe": {
+        "ja": "axe DevTools",
+        "en": "axe DevTools"
+    },
     "nvda": {
         "ja": "NVDA",
         "en": "NVDA"
