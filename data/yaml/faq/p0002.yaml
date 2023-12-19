@@ -1,0 +1,41 @@
+id: p0002
+updated: '2023-12-19'
+sortKey: 75000
+tags:
+- axe
+title:
+  ja: axe DevToolsの警告への対処
+  en: Dealing with axe DevTools warnings
+problem:
+  ja: |-
+    axe DevToolsで出ている警告の意味や対処方法が分からない。
+  en: |-
+    I don't know what the warnings in axe DevTools mean or how to deal with them.
+solution:
+  ja: |-
+    1. :ref:`check-example-axe` で言及されている警告の場合、そのチェック内容と関連するガイドライン項目や参考情報を確認する。
+    2. :ref:`info-axe-rules` で、その警告と関連するガイドライン項目を確認する。
+    3. 充分な情報が見つけられない場合は、安易に判断せず、専門家に相談する。
+  en: |-
+    1. If the warning is mentioned in :ref:`check-example-axe`, check the related checks, guideline items and reference information.
+    2. Check the guidelines related to the warning in :ref:`info-axe-rules`.
+    3. If you cannot find enough information, do not make a hasty judgment and consult an expert.
+explanation:
+  ja: |-
+    :ref:`check-example-axe` には、チェック内容のうちaxe DevToolsで実施できるものとその方法がまとめられています。
+    ここに記載されて警告については、そのチェック内容と関連するガイドライン項目や参考情報を確認することで、対処方法のヒントを得られるでしょう。
+
+    一方 :ref:`info-axe-rules` には、axe DevToolsのすべての警告に関する情報をまとめています。
+    axe DevToolsの開発元が提供する情報へのリンクと合わせて、WCAGの達成基準と明確な関連がある警告については、その達成基準と関連するガイドライン項目を示している場合もあります。
+
+    これらの情報を確認しても警告の意味や対処方法が分からない場合は、安易に判断せず、専門家に相談することをおすすめします。
+  en: |-
+    :ref:`check-example-axe` summarizes the checks that can be performed with axe DevTools and how to do them.
+    By checking the related checks, guideline items and reference information for the warning described here, you will get hints on how to deal with it.
+
+    On the other hand, :ref:`info-axe-rules` summarizes information about all warnings of axe DevTools.
+    In addition to the links to the information provided by the developer of axe DevTools, some of the warnings have links to the guidelines related to the success criteria if there is a clear relationship with the success criteria of WCAG.
+
+    If you still don't understand the meaning or how to deal with the warning after checking this information, we recommend that you do not make a hasty judgment and consult an expert.
+info:
+- exp-axe
