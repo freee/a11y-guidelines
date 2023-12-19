@@ -23,17 +23,17 @@ axe DevTools拡張機能はデベロッパーツール内で使用します。
 分析対象のページを開いた状態で、ツールバー右端のボタンから :menuselection:`その他のツール --> デベロッパーツール` を選択するか、ショートカットキー（Windowsでは :kbd:`Ctrl+Shift+I` 、macOSでは :kbd:`Command+Option+I` ）を使用してください。
 
 .. image:: /img/axe-1.png
-   :alt: メニューからデベロッパーツールを開こうとしているスクリーンショット
+   :alt: スクリーン・ショット：メニューからデベロッパーツールを開こうとしている
 
 デベロッパーツールのタブから「axe DevTools」を選択します。
 
 .. image:: /img/axe-6.png
-   :alt: デベロッパーツールのタブバーのスクリーンショット。右端に「axe DevTools」がある
+   :alt: スクリーン・ショット：デベロッパーツールのタブバー、右端に「axe DevTools」がある
 
 デベロッパーツールの表示領域が狭い場合は 「>>」アイコンに隠されていることがあります。
 
 .. image:: /img/axe-2.png
-   :alt: axe DevToolsが「>>」アイコンに隠されているときのスクリーンショット。アイコンをクリックしたメニュー内に「axe DevTools」がある
+   :alt: スクリーン・ショット：axe DevToolsが「>>」アイコンに隠されている、アイコンをクリックしたメニュー内に「axe DevTools」がある
 
 ****************
 初期設定（推奨）
@@ -44,12 +44,12 @@ axe DevTools拡張機能はデベロッパーツール内で使用します。
 1. :menuselection:`Options --> Settings` の順にクリック
 
    .. image:: /img/axe-settings.png
-      :alt: OptionsからSettingsを開こうとしているスクリーンショット
+      :alt: スクリーン・ショット：OptionsからSettingsを開こうとしている
 
 2. "Best Practices" で "Enable" をチェック
 
    .. image:: /img/axe-settings-best-practices.png
-      :alt: Best Practicesの項目のEnableをチェックしているスクリーンショット
+      :alt: スクリーン・ショット：Best Practicesの項目のEnableをチェックしている
 
 3. 「保存」をクリック
 
@@ -60,12 +60,12 @@ axe DevToolsで今見ているページを分析する
 分析対象のページを開いた状態でデベロッパーツール内のaxe DevToolsのタブを開き、「SCAN ALL OF MY PAGE」ボタンをクリックします。
 
 .. image:: /img/axe-8.png
-   :alt: axe DevToolsタブのスクリーンショット
+   :alt: スクリーン・ショット：axe DevToolsタブ
 
 今見ているページの問題を瞬時に発見することができます。
 
 .. image:: /img/axe-9.png
-   :alt: 表示されているページの問題をaxe DevToolsで表示しているスクリーンショット
+   :alt: スクリーン・ショット：表示されているページの問題をaxe DevToolsで表示している
 
 **************
 レポートの見方
@@ -77,19 +77,19 @@ axe DevToolsの画面には発見された問題の件数が表示されるエ�
 ここで、axe DevTools内のUser Impact（当ガイドライン内での「重篤度」などの定義とは別のものです）や、「Best Practices」などを使ってリストをフィルターすることができます。
 
 .. image:: /img/axe-3.png
-   :alt: 発見された問題の件数が表示されるエリアのスクリーンショット
+   :alt: スクリーン・ショット：発見された問題の件数が表示されるエリア
 
 発見された問題のリストは、クリックで開くことでその問題の詳細ビューを見ることができます。
 
 詳細ビューにはその問題が起きているHTML上の場所や、修正するための情報が表示されています。
 
 .. image:: /img/axe-4.png
-   :alt: 問題の詳細部分のスクリーンショット
+   :alt: スクリーン・ショット：問題の詳細部分
 
 同じ問題が複数箇所で見つかっている場合は、リスト上にその件数が表示され、詳細ビューのページャーで1つ1つ確認していくことができます。
 
 .. image:: /img/axe-pager.png
-   :alt: 詳細ビューにあるページャーのスクリーンショット。
+   :alt: スクリーン・ショット：詳細ビューにあるページャー
 
 **********************************
 axe DevToolsを使用する上での注意点
