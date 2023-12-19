@@ -482,8 +482,12 @@ def main():
                 f.write(output)
 
         for tag in faq['tags']:
-            if not tag in faq_tags:
-                tag = 'misc'
+            try:
+                if not tag in faq_tags:
+                    raise ValueError(f'FAQ tag {tag} in {faq["id"]} is not defined in {FAQ_TAGS}')
+            except ValueError as e:
+                print(e, file=sys.stderr)
+                sys.exit(1)
             if not tag in faq_tagpages:
                 faq_tagpages[tag] = {
                     'tag': tag,
