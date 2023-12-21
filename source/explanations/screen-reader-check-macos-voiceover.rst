@@ -60,13 +60,13 @@ macOS Venturaでの設定手順を以下に示します。
 2. サイドバーで「キーボード」を選択
 3. 右側で「キーボードショートカット」をクリック
 
-   .. image:: /img/macvo-settings-keyboard.png
+   .. image:: /img/macvo/macvo-settings-keyboard.png
       :alt: スクリーン・ショット：システム設定でキーボードを選択
 
 4. サイドバーで「ファンクションキー」を選択
 5. 右側で「F1、F2 などのキーを標準のファンクションキーとして使用」をオンにする
 
-   .. image:: /img/macvo-settings-fnkey.png
+   .. image:: /img/macvo/macvo-settings-fnkey.png
       :alt: スクリーン・ショット：ファンクションキーの設定
 
 参考： `Mac でファンクションキーを使う方法 - Apple サポート (日本) <https://support.apple.com/ja-jp/102439>`_
@@ -76,7 +76,7 @@ macOS Venturaでの設定手順を以下に示します。
 
 VoiceOverを初めて起動したときは、以下のような「ようこそダイアログ」が表示され、画面の内容を読み上げる音声が再生されます。
 
-.. image:: /img/macvo-welcome-dialog.png
+.. image:: /img/macvo/macvo-welcome-dialog.png
    :alt: スクリーン・ショット：VoiceOverのようこそダイアログ
 
 このダイアログからVoiceOver Quick Startにアクセスすることができますが、この時点では :kbd:`V` キーを押してこの画面を閉じます。
@@ -95,7 +95,7 @@ VoiceOver動作中に :kbd:`VO + F8` を押下すると、VoiceOverユーティ�
 一般
 ----
 
-.. image:: /img/macvo-util-general.png
+.. image:: /img/macvo/macvo-util-general.png
    :alt: スクリーン・ショット：VoiceOverユーティリティ（「一般」を選択）
 
 「VoiceOver起動時にようこそダイアログを表示」のチェックを外します。
@@ -104,7 +104,7 @@ VoiceOver動作中に :kbd:`VO + F8` を押下すると、VoiceOverユーティ�
 ビジュアル
 ----------
 
-.. image:: /img/macvo-util-visual.png
+.. image:: /img/macvo/macvo-util-visual.png
    :alt: スクリーン・ショット：VoiceOverユーティリティ（「ビジュアル」を選択）
 
 「パネルとメニュー」タブの「キャプションパネルを表示」にチェックを入れます。
@@ -113,13 +113,13 @@ VoiceOver動作中に :kbd:`VO + F8` を押下すると、VoiceOverユーティ�
 コマンダー
 ----------
 
-.. image:: /img/macvo-util-commander-trackpad.png
+.. image:: /img/macvo/macvo-util-commander-trackpad.png
    :alt: スクリーン・ショット：VoiceOverユーティリティ（「コマンダー」の「トラックパッドコマンダー」タブを選択）
 
 「トラックパッドコマンダー」タブの「トラックパッドコマンダーを有効にする」のチェックを外します。
 この項目にチェックが入っていると、トラックパッドをVoiceOverの操作に用いることができるようになり、通常のマウス操作ができなくなります。
 
-.. image:: /img/macvo-util-commander-quicknav.png
+.. image:: /img/macvo/macvo-util-commander-quicknav.png
    :alt: スクリーン・ショット：VoiceOverユーティリティ（「コマンダー」の「クイックナビ」タブを選択）
 
 「クイックナビ」タブの「クイックナビを有効にする」のチェックを外します。
