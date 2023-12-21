@@ -54,7 +54,7 @@ NVDAが起動すると、いろいろな挙動が普段と異なった状態に�
 
 NVDAの初回起動時には、「ようこそ画面」が表示されます。
 
-.. image:: /img/nvda-welcome.png
+.. image:: /img/nvda/nvda-welcome.png
    :alt: スクリーン・ショット：NVDAの「ようこそ画面」
 
 以下を参考に、必要な設定をすると良いでしょう。
@@ -102,7 +102,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
 「設定」画面では、左側に設定カテゴリーが表示され、右側に選択中のカテゴリーの設定項目が表示されます。
 
-.. image:: /img/nvda-settings-general.png
+.. image:: /img/nvda/nvda-settings-general.png
    :alt: スクリーン・ショット：NVDA設定画面（「一般」を選択）
 
 以下、最初にしておくと良い設定について、カテゴリーごとに記します。
@@ -119,7 +119,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/qrWLDZmZ5ek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-.. image:: /img/nvda-settings-speech.png
+.. image:: /img/nvda/nvda-settings-speech.png
    :alt: スクリーン・ショット：NVDA設定画面（「音声」を選択）
 
 「音声エンジン」が、「Windows OneCore音声」になっていることを確認します。
@@ -136,7 +136,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 ビジョン
 --------
 
-.. image:: /img/nvda-settings-vision.png
+.. image:: /img/nvda/nvda-settings-vision.png
    :alt: スクリーン・ショット：NVDA設定画面（「ビジョン」を選択）
 
 「ハイライトあり」、「フォーカスをハイライト」、「ナビゲーターオブジェクトをハイライト」、「ブラウズモードのカーソルをハイライト」をチェックします。
@@ -145,7 +145,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 ブラウズモード
 --------------
 
-.. image:: /img/nvda-settings-browse_mode.png
+.. image:: /img/nvda/nvda-settings-browse_mode.png
    :alt: スクリーン・ショット：NVDA設定画面（「ブラウズモード」を選択）
 
 「サポートされている場合画面レイアウトを使用」のチェックを外します。
@@ -162,7 +162,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 マウス
 ------
 
-.. image:: /img/nvda-settings-mouse.png
+.. image:: /img/nvda/nvda-settings-mouse.png
    :alt: スクリーン・ショット：NVDA設定画面（「マウス」を選択）
 
 「マウスカーソル位置のテキストの報告」のチェックを外します。
@@ -191,7 +191,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 3. この画面の下の方にある「インストールされている音声パッケージ」のプルダウンに表示されている、現在インストールされている音声パッケージの一覧を確認
 4. 日本語しかインストールされていない場合は、「音声を追加」をクリックして、「英語 (米国)」を追加
 
-.. image:: /img/win10-settings-speech-recognition.png
+.. image:: /img/nvda/win10-settings-speech-recognition.png
    :alt: スクリーン・ショット：Windows 10の音声認識の設定画面
 
 一般的なチェックの場合、「英語 (米国)」を追加すれば、NVDAは意図した挙動になります。
@@ -312,7 +312,7 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`_ には、他のキー操作も含めてまとめられています。
 GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`_ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`_ が公開されています。以下にPNG版を転載します。
 
-.. image:: /img/nvdacheat.png
+.. image:: /img/nvda/nvdacheat.png
    :alt: 画像化したNVDAチートシート
 
 NVDAの更新
