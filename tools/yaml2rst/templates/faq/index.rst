@@ -21,8 +21,8 @@
 タグ一覧
 {%- endfilter %}
 
-{% for f in tags -%}
-*  :ref:`faq-tag-{{ f }}`
+{% for tag in tags -%}
+*  :ref:`faq-tag-{{ tag.tag }}`
 {% endfor %}
 
 {% filter make_heading(2) -%}

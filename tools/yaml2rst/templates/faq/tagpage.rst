@@ -4,6 +4,8 @@
 {{ label }}
 {%- endfilter %}
 
+{{ label }}のタグが付けられている記事の一覧です。
+
 {% for item in articles %}
 *  :ref:`faq-{{ item }}`
 {%- endfor %}
