@@ -7,6 +7,11 @@
         "ja": "フォーム",
         "en": "Form"
     },
+    "grayscale":
+    {
+        "ja": "グレースケール表示",
+        "en": "Grayscale View"
+    },
     "axe": {
         "ja": "axe DevTools",
         "en": "axe DevTools"

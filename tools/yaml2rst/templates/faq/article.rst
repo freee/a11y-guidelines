@@ -34,7 +34,7 @@
 
 {% for gl in guidelines -%}
 *  {{ gl.category }}： :ref:`{{ gl.id }}`
-{%- endfor %}
+{% endfor %}
 {%- endif %}
 
 {% if checks is defined -%}
