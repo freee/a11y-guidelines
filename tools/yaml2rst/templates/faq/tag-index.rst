@@ -10,7 +10,7 @@ FAQタグ一覧
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-{% for f in tags %}
-   {{ f }}
+{% for tag in tags %}
+   {{ tag.tag }}
 {%- endfor %}
 

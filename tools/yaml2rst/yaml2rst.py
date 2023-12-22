@@ -492,26 +492,30 @@ def main():
                 faq_tagpages[tag] = {
                     'tag': tag,
                     'label': faq_tags[tag][LANG],
-                    'articles': []
+                    'articles': [],
+                    'count': 0
                 }
             faq_tagpages[tag]['articles'].append(faq["id"])
+            faq_tagpages[tag]['count'] += 1
+
+    faq_tagpage_list = sorted(faq_tagpages.values(), key=lambda x: x['label'])
 
     os.makedirs(os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR), exist_ok=True)
-    for page in faq_tagpages: 
-        if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst') in targets:
-            output = faq_tagpage_template.render(faq_tagpages[page])
-            destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page}.rst')
+    for page in faq_tagpage_list:
+        if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst') in targets:
+            output = faq_tagpage_template.render(page)
+            destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst')
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
     if build_all or FAQ_INDEX_PATH in targets:
-        output = faq_index_template.render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = sorted(faq_tagpages))
+        output = faq_index_template.render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = faq_tagpage_list)
         destfile = FAQ_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
 
     if build_all or FAQ_TAG_INDEX_PATH in targets:
-        output = faq_tag_index_template.render(tags = sorted(faq_tagpages))
+        output = faq_tag_index_template.render(tags = faq_tagpage_list)
         destfile = FAQ_TAG_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
