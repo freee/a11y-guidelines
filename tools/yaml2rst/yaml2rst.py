@@ -444,7 +444,10 @@ def main():
         faq_articles.append({
             'id': faq['id'],
             'sortKey': faq['sortKey'],
-            'updated': faq_updated
+            'updated': faq_updated,
+            'updated_year': faq_updated.year,
+            'updated_month': faq_updated.month,
+            'updated_day': faq_updated.day
         })
         article_filename = f'{faq["id"]}.rst'
         if build_all or os.path.join(FAQ_ARTICLES_DESTDIR, article_filename) in targets:

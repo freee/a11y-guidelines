@@ -30,6 +30,6 @@ FAQ記事一覧
 {%- endfilter %}
 
 {% for f in files -%}
-*  :ref:`faq-{{ f.id }}`
+*  :ref:`faq-{{ f.id }}` （{{ f.updated_year }}年{{ f.updated_month }}月{{ f.updated_day }}日更新）
 {% endfor %}
 
