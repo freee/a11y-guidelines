@@ -20,9 +20,9 @@ import re
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
-guidelines_version = 'Ver. 202312.0'
+guidelines_version = 'Ver. 202312.1'
 checksheet_version = '4.3.3'
-publishedDate = u'2023年12月15日'
+publishedDate = u'2023年12月25日'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
