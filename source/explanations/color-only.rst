@@ -53,3 +53,5 @@ CUDを行う場合、上記のポイントを満たすような配色を用い�
    -  `Web版 <https://asada.website/webCVS/>`_
 
 .. include:: /inc/info2gl/exp-color-only.rst
+
+.. include:: /inc/info2faq/exp-color-only.rst

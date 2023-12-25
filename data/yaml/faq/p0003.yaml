@@ -1,0 +1,42 @@
+id: p0003
+updated: '2023-12-22'
+sortKey: 80000
+tags:
+- grayscale
+title:
+  ja: グレースケール表示にするブックマークレットで表示が崩れる
+  en: The bookmarklet to display in grayscale breaks the layout
+problem:
+  ja: |-
+    グレースケール表示した際の見え方を確認するために :ref:`exp-grayscale` で紹介されているブックマークレットを使うと表示が崩れる、関連するチェックの結果はNGとすべきか。
+  en: |-
+    When using the bookmarklet introduced in :ref:`exp-grayscale` to check the appearance when displaying in grayscale, the layout is broken. Should the result of the related checks be NG?
+solution:
+  ja: |-
+    *  ブックマークレットが正しく動作しない場合は、OSの表示切り替え機能でグレースケール表示にして確認する。
+  en: |-
+    *  If the bookmarklet does not work properly, use the OS display switching function to display in grayscale and check.
+explanation:
+  ja: |-
+    当該ブックマークレットは、簡易的にチェックを実施するために提供しているものです。
+    簡易的なものですので、ページによっては正しく動作しない場合も考えられ、実際に正しく動作しなかったという報告もいくつかあります。
+    そのような場合には、同じページで紹介しているOSの表示の切り替え機能を活用してください。
+
+    グレースケール表示に切り替えて実施するチェックの目的は、あくまでもグレースケール表示にした際にコンテンツが適切に利用できるかどうかを確認することで、ブックマークレットが正しく動作するかどうかを確認することではありません。
+  en: |-
+    The bookmarklet is provided for simple checks.
+    Since it is for simple checks, it may not work properly depending on the page, and there are some reports that it did not work properly.
+    In such cases, please use the display switching function of the operating systems introduced on the same page.
+
+    The purpose of the check to be performed by switching to grayscale is to check whether the content can be used properly when displayed in grayscale, and not to check whether the bookmarklet works properly.
+guidelines:
+- gl-text-color-only
+- gl-image-color-only
+- gl-link-color-only
+- gl-form-color-only
+checks:
+- '0031'
+- '0051'
+info:
+- exp-grayscale
+- exp-color-only
