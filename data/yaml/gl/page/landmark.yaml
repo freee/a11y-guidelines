@@ -3,6 +3,7 @@ sortKey: 1106
 category: page
 title:
   ja: ページを構成する領域の明示
+  en: Indicate Regions That Compose a Page
 platform:
 - web
 guideline: |-

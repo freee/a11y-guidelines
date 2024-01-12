@@ -3,6 +3,7 @@ sortKey: 2021
 category: dynamic_content
 title:
   ja: ステータス・メッセージの適切な実装
+  en: Appropriate Implementation of Status Messages
 platform:
 - web
 - mobile

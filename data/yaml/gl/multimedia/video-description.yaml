@@ -3,6 +3,7 @@ sortKey: 2136
 category: multimedia
 title:
   ja: テキスト情報または音声解説の提供
+  en: Provide Text or Audio Description
 platform:
 - web
 - mobile

@@ -3,6 +3,7 @@ sortKey: 1501
 category: images_of_text
 title:
   ja: 画像化されたテキストを使用しない
+  en: Avoid the Use of Images of Text
 platform:
 - web
 - mobile

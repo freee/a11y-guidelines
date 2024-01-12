@@ -3,6 +3,7 @@ sortKey: 1326
 category: input_device
 title:
   ja: ダウン・イベントをトリガーにしない
+  en: Do Not Use Down Events as Triggers
 platform:
 - web
 - mobile

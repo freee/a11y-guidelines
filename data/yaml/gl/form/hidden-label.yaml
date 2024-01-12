@@ -3,6 +3,7 @@ sortKey: 1906
 category: form
 title:
   ja: 表示されているテキストをラベルにできない場合
+  en: When Displayed Text Cannot Be Used as a Label
 platform:
 - web
 - mobile

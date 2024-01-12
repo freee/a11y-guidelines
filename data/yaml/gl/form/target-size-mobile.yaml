@@ -3,6 +3,7 @@ sortKey: 1966
 category: form
 title:
   ja: 十分な大きさのクリック/タッチのターゲット（モバイル）
+  en: Sufficiently Large Click/Touch Targets (Mobile)
 platform:
 - mobile
 guideline: |-

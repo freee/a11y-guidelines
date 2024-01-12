@@ -3,6 +3,7 @@ sortKey: 1426
 category: text
 title:
   ja: テキストを表示するUIコンポーネントの言語の明示
+  en: Explicit Specify the Language for Text-Displaying UI Components
 platform:
 - web
 - mobile

@@ -3,6 +3,7 @@ sortKey: 1301
 category: input_device
 title:
   ja: キーボード操作を可能にする
+  en: Enable Keyboard Operation
 platform:
 - web
 guideline: |-

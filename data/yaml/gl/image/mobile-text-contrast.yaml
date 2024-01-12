@@ -3,6 +3,7 @@ sortKey: 1626
 category: image
 title:
   ja: モバイルOSでの画像内のテキストのコントラスト比
+  en: Contrast Ratio of Text in Images on Mobile OS
 platform:
 - mobile
 guideline: |-

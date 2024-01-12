@@ -3,6 +3,7 @@ sortKey: 1456
 category: text
 title:
   ja: テキスト表示のカスタマイズ
+  en: Customization of Text Display
 platform:
 - web
 guideline: |-

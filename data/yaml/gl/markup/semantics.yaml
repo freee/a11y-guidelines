@@ -3,6 +3,7 @@ sortKey: 1001
 category: markup
 title:
   ja: 文書構造を適切に示すマークアップ、実装を行う
+  en: Implement or Utilize Markup to Accurately Represent Document Structure
 platform:
 - web
 - mobile

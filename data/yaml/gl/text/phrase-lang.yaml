@@ -3,6 +3,7 @@ sortKey: 1421
 category: text
 title:
   ja: 部分的に使用される言語の明示
+  en: Explicitly Indicate Partially Used Languages
 platform:
 - web
 guideline: |-
