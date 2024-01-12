@@ -3,6 +3,7 @@ sortKey: 1941
 category: form
 title:
   ja: フォームの値の変更時の挙動
+  en: Behavior When the Value of a Form Field Changes
 platform:
 - web
 - mobile

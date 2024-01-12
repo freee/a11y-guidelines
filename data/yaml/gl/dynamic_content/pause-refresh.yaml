@@ -3,6 +3,7 @@ sortKey: 2031
 category: dynamic_content
 title:
   ja: 自動更新されるコンテンツ
+  en: Content That Updates Automatically
 platform:
 - web
 - mobile

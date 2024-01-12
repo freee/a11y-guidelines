@@ -3,6 +3,7 @@ sortKey: 2011
 category: dynamic_content
 title:
   ja: マウスオーバー（ホバー）で表示されるコンテンツの拡大
+  en: Magnification of the Content Displayed by Mouseover (Hover)
 platform:
 - web
 guideline: |-

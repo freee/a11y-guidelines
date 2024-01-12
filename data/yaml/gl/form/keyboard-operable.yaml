@@ -3,6 +3,7 @@ sortKey: 1929
 category: form
 title:
   ja: キーボード操作を可能にする
+  en: Enable Keyboard Operation
 platform:
 - web
 guideline: |-

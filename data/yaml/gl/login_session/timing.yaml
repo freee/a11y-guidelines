@@ -3,6 +3,7 @@ sortKey: 1201
 category: login_session
 title:
   ja: ログイン・セッションの有効期限
+  en: Expiration of Login Sessions
 platform:
 - web
 - mobile

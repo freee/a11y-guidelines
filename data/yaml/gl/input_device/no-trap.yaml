@@ -3,6 +3,7 @@ sortKey: 1321
 category: input_device
 title:
   ja: キーボード・トラップの回避
+  en: Avoid Keyboard Traps
 platform:
 - web
 guideline: |-

@@ -3,6 +3,7 @@ sortKey: 2016
 category: dynamic_content
 title:
   ja: マウスオーバー（ホバー）で表示されるコンテンツの非表示
+  en: Hiding the Content Displayed by Mouseover (Hover)
 platform:
 - web
 guideline: |-

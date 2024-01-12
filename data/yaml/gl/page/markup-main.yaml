@@ -3,6 +3,7 @@ sortKey: 1111
 category: page
 title:
   ja: 本文の開始位置の明示
+  en: Indicate the Beginning of the Main Content
 platform:
 - web
 guideline: |-

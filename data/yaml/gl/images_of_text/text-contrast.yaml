@@ -3,6 +3,7 @@ sortKey: 1511
 category: images_of_text
 title:
   ja: 画像内のテキストのコントラスト比
+  en: Contrast Ratio of Text in Images
 platform:
 - web
 guideline: |-

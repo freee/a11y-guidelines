@@ -3,6 +3,7 @@ sortKey: 1916
 category: form
 title:
   ja: フォーム入力の制限時間
+  en: Time Limit for Form Input
 platform:
 - web
 - mobile

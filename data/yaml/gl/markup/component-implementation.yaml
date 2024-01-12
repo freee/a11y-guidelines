@@ -3,6 +3,7 @@ sortKey: 1011
 category: markup
 title:
   ja: 対話的なUIコンポーネントの実装
+  en: Implementation of Interactive UI Components
 platform:
 - web
 - mobile
