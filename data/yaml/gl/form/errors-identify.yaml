@@ -3,6 +3,7 @@ sortKey: 1946
 category: form
 title:
   ja: テキスト情報によるエラーの特定
+  en: Identify Errors by Text Information
 platform:
 - web
 - mobile

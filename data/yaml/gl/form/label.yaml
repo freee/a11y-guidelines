@@ -3,6 +3,7 @@ sortKey: 1901
 category: form
 title:
   ja: 表示されているテキストをラベルとして用いる
+  en: Use Displayed Text as Label
 platform:
 - web
 - mobile

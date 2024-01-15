@@ -3,6 +3,7 @@ sortKey: 1126
 category: page
 title:
   ja: 画面方向を固定しない
+  en: Do Not Lock Screen Orientation
 platform:
 - web
 - mobile

@@ -3,6 +3,7 @@ sortKey: 1211
 category: login_session
 title:
   ja: 制限時間超過後の操作の継続
+  en: Continuing Operation After Exceeding Time Limit
 platform:
 - web
 - mobile

@@ -3,6 +3,7 @@ sortKey: 1416
 category: text
 title:
   ja: ページの主たる言語の指定
+  en: Specify the Primary Language of the Page
 platform:
 - web
 guideline: |-

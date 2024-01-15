@@ -3,6 +3,7 @@ sortKey: 1961
 category: form
 title:
   ja: 十分な大きさのクリック/タッチのターゲット
+  en: Sufficiently Large Click/Touch Targets
 platform:
 - web
 guideline: |-

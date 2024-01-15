@@ -3,6 +3,7 @@ sortKey: 1956
 category: form
 title:
   ja: 誤操作の防止
+  en: Prevention of Misoperation
 platform:
 - web
 - mobile

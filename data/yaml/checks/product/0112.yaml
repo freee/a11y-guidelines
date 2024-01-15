@@ -5,6 +5,6 @@ platform:
 - web
 check:
   ja: |-
-    ホバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
+    マウスオーバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
   en: |-
     Content displayed on hover does not disappear when the mouse pointer is moved over it.

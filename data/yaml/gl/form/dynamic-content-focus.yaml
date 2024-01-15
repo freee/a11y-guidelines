@@ -3,6 +3,7 @@ sortKey: 1936
 category: form
 title:
   ja: フォーカス時の挙動
+  en: Behavior When Focused
 platform:
 - web
 - mobile

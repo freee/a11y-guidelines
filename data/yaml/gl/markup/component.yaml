@@ -3,6 +3,7 @@ sortKey: 1016
 category: markup
 title:
   ja: コンポーネントをアクセシブルにする
+  en: Make Components Accessible
 platform:
 - web
 - mobile
