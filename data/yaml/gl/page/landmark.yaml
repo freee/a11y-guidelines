@@ -6,15 +6,24 @@ title:
   en: Indicate Regions That Compose a Page
 platform:
 - web
-guideline: |-
-  ページを構成する領域を示すマークアップをする。
+guideline:
+  ja: |-
+    ページを構成する領域を示すマークアップをする。
+  en: |-
+    Mark up regions that compose a page.
 sc:
 - 1.3.1
-intent: |-
-  スクリーン・リーダーなどの支援技術が、ページの構成を適切にユーザーに提示できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術が、ページの構成を適切にユーザーに提示できるようにする。
 
-  -  多くのスクリーン・リーダーには、ARIAランドマークで示される領域間を移動する機能がある。
-  -  スクリーン・リーダーのユーザーは、ページ内の目的の部分に容易に移動できる。
+    -  多くのスクリーン・リーダーには、ARIAランドマークで示される領域間を移動する機能がある。
+    -  スクリーン・リーダーのユーザーは、ページ内の目的の部分に容易に移動できる。
+  en: |-
+    Ensure that assistive technologies such as screen readers can appropriately present the page structure to users.
+
+    -  Many screen readers have the ability to move between regions indicated by ARIA landmarks.
+    -  Screen reader users can easily move to the desired part of the page.
 checks:
 - '0661'
 - '0671'

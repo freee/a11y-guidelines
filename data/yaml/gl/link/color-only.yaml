@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  クリッカブルであることを、色だけで表現しない。
+guideline:
+  ja: |-
+    クリッカブルであることを、色だけで表現しない。
+  en: |-
+    Do not express that something is clickable using color alone.
 sc:
 - 1.4.1
-intent: |-
-  視覚障害者や色弱者がリンクを認知できるようにする。
+intent:
+  ja: |-
+    視覚障害者や色弱者がリンクを認知できるようにする。
+  en: |-
+    Ensure that users with visual impairments or color vision deficiencies can perceive links.
 checks:
 - '0031'
 - '0051'

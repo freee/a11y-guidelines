@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  特定の色に何らかの意味を持たせている場合、形状、模様など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
+guideline:
+  ja: |-
+    特定の色に何らかの意味を持たせている場合、形状、模様など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
+  en: |-
+    When associating specific meanings with certain colors, also use other visual elements such as shapes or patterns to ensure that the meaning is understandable even if the color cannot be discerned.
 sc:
 - 1.4.1
-intent: |-
-  視覚障害者や色弱者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    視覚障害者や色弱者が、コンテンツを利用できるようにする。
+  en: |-
+    Enable individuals with visual impairments or color vision deficiencies to use content.
 checks:
 - '0031'
 - '0051'

@@ -6,12 +6,18 @@ title:
   en: Change Text Size Settings
 platform:
 - web
-guideline: |-
-  ブラウザーの文字サイズ設定を200パーセントにしても、コンテンツの理解や機能が損なわれるような表示の崩れが発生せず、適切に拡大表示されるようにする。
+guideline:
+  ja: |-
+    ブラウザーの文字サイズ設定を200パーセントにしても、コンテンツの理解や機能が損なわれるような表示の崩れが発生せず、適切に拡大表示されるようにする。
+  en: |-
+    Ensure that the content is appropriately magnified and remains comprehensible and functional, without any disruption in display, even when the browser's text size setting is increased to 200 percent.
 sc:
 - 1.4.4
-intent: |-
-  ロービジョン者の中には、ブラウザーのズーム機能ではなく、文字サイズの変更機能を利用して、コンテンツを拡大表示する人もいる。このようなユーザーの利用に支障が出ないようにする。
+intent:
+  ja: |-
+    ロービジョン者の中には、ブラウザーのズーム機能ではなく、文字サイズの変更機能を利用して、コンテンツを拡大表示する人もいる。このようなユーザーの利用に支障が出ないようにする。
+  en: |-
+    Some individuals with low vision use the text size changing function, rather than the browser's zoom feature, to enlarge content. Ensure that this does not hinder the usage for such users.
 checks:
 - '0311'
 - '0323'

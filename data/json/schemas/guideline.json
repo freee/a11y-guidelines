@@ -50,7 +50,7 @@
     },
     "guideline": {
       "description": "main text of the guideline",
-      "type": "string"
+      "$ref": "common.json#/definitions/i18nString"
     },
     "sc": {
       "description": "WCAG SC the guideline corresponds to",
@@ -63,7 +63,7 @@
     },
     "intent": {
       "description": "who benefits and how from the guideline",
-      "type": "string"
+      "$ref": "common.json#/definitions/i18nString"
     },
     "checks": {
       "description": "IDs of the checks for conformance to the guideline",

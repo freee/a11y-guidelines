@@ -7,14 +7,22 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  そのページが、サイト構造のどこに位置しているかが分かるようにする。
+guideline:
+  ja: |-
+    そのページが、サイト構造のどこに位置しているかが分かるようにする。
+  en: |-
+    Make it clear where the page is located within the site structure.
 sc:
 - 2.4.8
-intent: |-
-  ページ全体を一望することができない視覚障害者が、目的のページにアクセスしているかどうか判断できるようにする。
+intent:
+  ja: |-
+    ページ全体を一望することができない視覚障害者が、目的のページにアクセスしているかどうか判断できるようにする。
 
-  -  スクリーン・リーダーによっては、 ``aria-current`` 属性が付与されているメニュー・アイテムなどに「現在のページ」などという読み上げが追加される。
+    -  スクリーン・リーダーによっては、 ``aria-current`` 属性が付与されているメニュー・アイテムなどに「現在のページ」などという読み上げが追加される。
+  en: |-
+    Make it possible for visually impaired users who cannot view the entire page to determine whether they have accessed the page they want.
+
+    *  Some screen readers add the phrase "current page" to menu items that have the ``aria-current`` attribute.
 checks:
 - '0841'
 - '0851'

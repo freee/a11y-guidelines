@@ -6,12 +6,18 @@ title:
   en: Appropriate Focus Order
 platform:
 - web
-guideline: |-
-  Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+guideline:
+  ja: |-
+    Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+  en: |-
+    When the focus is moved using the Tab/Shift+Tab keys, move the focus in an appropriate order that matches the meaning of the content.
 sc:
 - 2.4.3
-intent: |-
-  スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
+  en: |-
+    Enable assistive technologies such as screen readers to correctly recognize content and present it to users in an appropriate manner.
 checks:
 - '0172'
 info:

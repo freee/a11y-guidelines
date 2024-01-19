@@ -7,18 +7,29 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  そのプラットフォームで標準的ではない入力手段を使用しないとアクセスできない情報や利用できない機能がない。
-  
-  プラットフォームの標準的な入力手段とは、Webではキーボード、モバイルではOS標準のタッチ操作を指す。また、文字入力に関しては、Windowsのタッチ操作、iOSやAndroidでキーボードを接続した操作もプラットフォームの標準的な入力手段に当たる。
+guideline:
+  ja: |-
+    そのプラットフォームで標準的ではない入力手段を使用しないとアクセスできない情報や利用できない機能がない。
+    
+    プラットフォームの標準的な入力手段とは、Webではキーボード、モバイルではOS標準のタッチ操作を指す。また、文字入力に関しては、Windowsのタッチ操作、iOSやAndroidでキーボードを接続した操作もプラットフォームの標準的な入力手段に当たる。
+  en: |-
+    There are no inaccessible pieces of information or unusable functions that require non-standard input methods for that platform.
+
+    Standard input methods for the platform refer to the keyboard for the web, and OS-standard touch operations for mobile. Additionally, for text input, touch operations on Windows, and operations using a connected keyboard on iOS or Android, are also considered standard input methods for the platform.
 sc:
 - 2.5.4
 - 2.5.6
-intent: |-
-  ニーズに応じた異なる多様な入力手段の使用を妨げない。
+intent:
+  ja: |-
+    ニーズに応じた異なる多様な入力手段の使用を妨げない。
 
-  *  スマートフォンでタッチUIだけでなくキーボードを利用することも阻害しないことで、上肢障害や視覚障害があるユーザーの負担を軽減できる。
-  *  加速度センサーなど動きを伴う動作を前提とした操作（例：シェークで取り消し）だけで実行できる機能を作らないことで、肢体不自由のユーザーの利用を阻害しない。
+    *  スマートフォンでタッチUIだけでなくキーボードを利用することも阻害しないことで、上肢障害や視覚障害があるユーザーの負担を軽減できる。
+    *  加速度センサーなど動きを伴う動作を前提とした操作（例：シェークで取り消し）だけで実行できる機能を作らないことで、肢体不自由のユーザーの利用を阻害しない。
+  en: |-
+    Do not hinder the use of diverse input methods tailored to different needs.
+
+    *  By not impeding the use of keyboards on smartphones, in addition to touch UIs, the burden on users with upper limb disabilities or visual impairments can be reduced.
+    *  By not creating functions that can only be executed through operations that assume motion, such as using an accelerometer (for example, shake to undo), the use by users with physical disabilities is not hindered."
 checks:
 - '0362'
 - '0371'

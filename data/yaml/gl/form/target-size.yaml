@@ -6,15 +6,24 @@ title:
   en: Sufficiently Large Click/Touch Targets
 platform:
 - web
-guideline: |-
-  フォーム・コントロールの見た目をブラウザーのデフォルトのものから変更する場合、クリック/タッチのターゲット・サイズは充分に大きいものにする。
+guideline:
+  ja: |-
+    フォーム・コントロールの見た目をブラウザーのデフォルトのものから変更する場合、クリック/タッチのターゲット・サイズは充分に大きいものにする。
 
-  *  デスクトップ向けWebでは最低24 x 24 CSS px、可能であれば44 x 44 CSS px以上
-  *  モバイル向けWebでは44 x 44 CSS px以上
+    *  デスクトップ向けWebでは最低24 x 24 CSS px、可能であれば44 x 44 CSS px以上
+    *  モバイル向けWebでは44 x 44 CSS px以上
+  en: |-
+    When changing the appearance of form controls from the browser's default, ensure that the click/touch targets are sufficiently large.
+
+    *  For desktop web, 24 x 24 CSS px or larger, preferably 44 x 44 CSS px or larger.
+    *  For mobile web, 44 x 44 CSS px or larger.
 sc:
 - 2.5.5
-intent: |-
-  ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+intent:
+  ja: |-
+    ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+  en: |-
+    Prevent erroneous clicks/touches for users with low vision or those with physical disabilities that make fine hand movements difficult.
 checks:
 - '0332'
 - '0352'

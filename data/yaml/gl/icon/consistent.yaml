@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  同じ目的で用いられるアイコンには、サイト内で一貫性のある画像とテキストを用いる。
+guideline:
+  ja: |-
+    同じ目的で用いられるアイコンには、サイト内で一貫性のある画像とテキストを用いる。
+  en: |-
+    Use consistent images and text throughout the site for icons that serve the same purpose.
 sc:
 - 3.2.4
-intent: |-
-  予測可能性を上げ、混乱を防ぐ。
+intent:
+  ja: |-
+    予測可能性を上げ、混乱を防ぐ。
+  en: |-
+    Increase predictability and prevent confusion.
 checks:
 - '0242'
 - '0262'

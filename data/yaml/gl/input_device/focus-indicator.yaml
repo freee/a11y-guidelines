@@ -6,12 +6,18 @@ title:
   en: Visualization of Focus Areas
 platform:
 - web
-guideline: |-
-  キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
+guideline:
+  ja: |-
+    キーボードで操作可能な要素について、フォーカス・インジケーターを消さない。
+  en: |-
+    Do not remove focus indicators from elements that can be operated by keyboard.
 sc:
 - 2.4.7
-intent: |-
-  キーボードのみを使っている場合でも、フォーカスされている箇所が分かるようにし、操作を可能にする。
+intent:
+  ja: |-
+    キーボードのみを使っている場合でも、フォーカスされている箇所が分かるようにし、操作を可能にする。
+  en: |-
+    Ensure that the focused area is discernible and operable even when using only a keyboard.
 checks:
 - '0151'
 - '0171'

@@ -6,12 +6,18 @@ title:
   en: Avoid Keyboard Traps
 platform:
 - web
-guideline: |-
-  音声/動画のプレイヤーをページに埋め込む場合、そのコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーなどで抜け出すことができるようにする。
+guideline:
+  ja: |-
+    音声/動画のプレイヤーをページに埋め込む場合、そのコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーなどで抜け出すことができるようにする。
+  en: |-
+    When embedding an audio/video player in a page, ensure that it is possible to move the focus away from the component by using the Tab key , arrow keys, or Esc key.
 sc:
 - 2.1.2
-intent: |-
-  キーボードのみを利用している場合に、ページ中の特定のコンポーネントがページの他の部分へのアクセスを阻害しないようにする。
+intent:
+  ja: |-
+    キーボードのみを利用している場合に、ページ中の特定のコンポーネントがページの他の部分へのアクセスを阻害しないようにする。
+  en: |-
+    Ensure that specific components on a page do not prevent access to other parts of the page when using only a keyboard.
 checks:
 - '0201'
 info:

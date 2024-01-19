@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  そのページへの到達手段を複数提供する。ただし、そのページが何らかの手順の実行の過程や結果としてしか表示されない場合は除く。
+guideline:
+  ja: |-
+    そのページへの到達手段を複数提供する。ただし、そのページが何らかの手順の実行の過程や結果としてしか表示されない場合は除く。
+  en: |-
+    Provide multiple ways to reach that page. However, this does not apply if the page is displayed only as part of a process or as a result of performing certain procedures.
 sc:
 - 2.4.5
-intent: |-
-  利用環境や認知能力などの違いにかかわらず、そのページへのアクセスのしやすさを確保する。
+intent:
+  ja: |-
+    利用環境や認知能力の違いにかかわらず、そのページへのアクセスのしやすさを確保する。
+  en: |-
+    Ensure ease of access to that page, regardless of differences in usage environment, and cognitive abilities.
 checks:
 - '0811'
 info:

@@ -6,15 +6,24 @@ title:
   en: Appropriate Markup Order
 platform:
 - web
-guideline: |-
-  最初から順に読み進めた場合に、コンテンツの意味が正しく伝わるような順序でHTMLの各要素を記述する。
+guideline:
+  ja: |-
+    最初から順に読み進めた場合に、コンテンツの意味が正しく伝わるような順序でHTMLの各要素を記述する。
+  en: |-
+    Write HTML elements in an order that ensures the correct meaning of the content is conveyed when read through from the beginning.
 sc:
 - 1.3.2
-intent: |-
-  スクリーン・リーダーなどの支援技術のユーザーが、コンテンツを正しく理解できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術のユーザーが、コンテンツを正しく理解できるようにする。
 
-  -  画面上で近接して表示されているコンテンツは、HTMLソース中ても同様に近接して記述することで、スクリーン・リーダーのユーザーにも見つけやすく、認知しやすくなる。
-  -  CSSでレイアウトを制御しているような場合に注意が必要。
+    -  画面上で近接して表示されているコンテンツは、HTMLソース中ても同様に近接して記述することで、スクリーン・リーダーのユーザーにも見つけやすく、認知しやすくなる。
+    -  CSSでレイアウトを制御しているような場合に注意が必要。
+  en: |-
+    Ensure that users of assistive technologies, such as screen readers, can correctly understand the content.
+
+    *  Content that is displayed closely together on the screen should also be written closely together in the HTML source. This makes it easier for screen reader users to find and recognize the content.
+    *  Caution is needed in cases where the layout is controlled by CSS.
 checks:
 - '0711'
 info:

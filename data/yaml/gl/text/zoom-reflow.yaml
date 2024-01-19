@@ -6,12 +6,18 @@ title:
   en: 400 Percent Magnification Using Zoom Function
 platform:
 - web
-guideline: |-
-  ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときでも、横書きのコンテンツのように縦スクロールを前提としたコンテンツては横スクロールが、縦書きのコンテンツのように横スクロールを前提としたコンテンツでは縦スクロールが必要にならないようにする。
+guideline:
+  ja: |-
+    ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときでも、横書きのコンテンツのように縦スクロールを前提としたコンテンツては横スクロールが、縦書きのコンテンツのように横スクロールを前提としたコンテンツでは縦スクロールが必要にならないようにする。
+  en: |-
+    Ensure that even when using the browser's zoom function to magnify to 400 percent, horizontal scrolling is not required for content designed for vertical scrolling like horizontally written content, and vertical scrolling is not required for content designed for horizontal scrolling like vertically written content.
 sc:
 - 1.4.10
-intent: |-
-  ロービジョン者が、ズーム機能で拡大表示しても問題なくコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、ズーム機能で拡大表示しても問題なくコンテンツを利用できるようにする。
+  en: |-
+    Ensure that individuals with low vision can use the content without issues, even when magnifying it with the zoom function.
 checks:
 - '0322'
 info:

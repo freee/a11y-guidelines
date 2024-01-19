@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  画像の隣接領域の色とのコントラスト比を3:1以上にする。
+guideline:
+  ja: |-
+    画像の隣接領域の色とのコントラスト比を3:1以上にする。
+  en: |-
+    Ensure that the contrast ratio between the image and the adjacent color areas is at least 3:1.
 sc:
 - 1.4.11
-intent: |-
-  ロービジョン者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、コンテンツを利用できるようにする。
+  en: |-
+    Enable individuals with low vision to use content.
 checks:
 - '0001'
 info:

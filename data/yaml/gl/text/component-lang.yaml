@@ -3,16 +3,22 @@ sortKey: 1426
 category: text
 title:
   ja: テキストを表示するUIコンポーネントの言語の明示
-  en: Explicit Specify the Language for Text-Displaying UI Components
+  en: Explicitly Specify the Language for Text-Displaying UI Components
 platform:
 - web
 - mobile
-guideline: |-
-  テキストを表示するUIコンポーネントにおいて、言語やロケールを指定できる場合は、適切なものを指定する。
+guideline:
+  ja: |-
+    テキストを表示するUIコンポーネントにおいて、言語やロケールを指定できる場合は、適切なものを指定する。
+  en: |-
+    For UI components that display text, specify the appropriate language or locale if possible.
 sc:
 - 3.1.2
-intent: |-
-  音声/点字出力などが適切に行われるようにする。
+intent:
+  ja: |-
+    音声/点字出力などが適切に行われるようにする。
+  en: |-
+    Ensure that speech and braille output is performed appropriately.
 checks:
 - '0912'
 - '0922'

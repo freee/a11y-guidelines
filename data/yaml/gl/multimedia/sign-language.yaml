@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  収録済みコンテンツの音声情報には、同期した手話通訳を提供する。
+guideline:
+  ja: |-
+    収録済みコンテンツの音声情報には、同期した手話通訳を提供する。
+  en: |-
+    Provide synchronized sign language interpretation for the audio information in pre-recorded content.
 sc:
 - 1.2.6
-intent: |-
-  手話を主たる言語として使う聴覚障害者が、音声コンテンツまたは動画コンテンツ中の音声を理解できるようにする。
+intent:
+  ja: |-
+    手話を主たる言語として使う聴覚障害者が、音声コンテンツまたは動画コンテンツ中の音声を理解できるようにする。
+  en: |-
+    Make it possible for individuals with hearing impairments who use sign language as their primary language to understand the audio information in audio and video content.
 checks:
 - '1601'
 - '1621'

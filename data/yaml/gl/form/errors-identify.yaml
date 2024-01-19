@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  入力エラーがある場合、エラー箇所とエラー内容をテキストで知らせる。
+guideline:
+  ja: |-
+    入力エラーがある場合、エラー箇所とエラー内容をテキストで知らせる。
+  en: |-
+    When there are input errors, notify the user of the error location and error content by text.
 sc:
 - 3.3.1
-intent: |-
-  視覚障害者、色弱者が、エラー箇所を特定できるようにする。
+intent:
+  ja: |-
+    視覚障害者、色弱者が、エラー箇所を特定できるようにする。
+  en: |-
+    Enable individuals with visual impairments or color vision deficiencies to identify error locations.
 checks:
 - '1081'
 - '1101'

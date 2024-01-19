@@ -7,14 +7,22 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  テキストの代替情報ではない、映像がなく音声のみの収録済みコンテンツの場合は、書き起こしテキストを提供する。
+guideline:
+  ja: |-
+    テキストの代替情報ではない、映像がなく音声のみの収録済みコンテンツの場合は、書き起こしテキストを提供する。
+  en: |-
+    Provide a transcript for pre-recorded audio-only content that is not an alternative to text information.
 sc:
 - 1.2.1
-intent: |-
-  音声コンテンツを理解できなくてもサービスの利用が困難にならないようにする。
+intent:
+  ja: |-
+    音声コンテンツを理解できなくてもサービスの利用が困難にならないようにする。
 
-  聴覚障害者が音声のみのコンテンツを理解できるようにする。
+    聴覚障害者が音声のみのコンテンツを理解できるようにする。
+  en: |-
+    Ensure that the service remains accessible even for those who cannot understand the audio information.
+
+    Make it possible for individuals with hearing impairments to understand audio-only content.
 checks:
 - '1571'
 - '1591'

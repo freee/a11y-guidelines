@@ -7,15 +7,24 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  静的なテキスト・コンテンツは、文書構造などのセマンティクスを適切に表現するHTMLの要素やコンポーネントで実装する。
+guideline:
+  ja: |-
+    静的なテキスト・コンテンツは、文書構造などのセマンティクスを適切に表現するHTMLの要素やコンポーネントで実装する。
+  en: |-
+    Implement static text content using HTML elements or components that accurately represent semantics such as document structure.
 sc:
 - 1.3.1
-intent: |-
-  スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
 
-  -  適切なマークアップにより、スクリーン・リーダーで見出しや箇条書きの項目を探しやすくなる。
-  -  スクリーン・リーダーなどの支援技術には、見出しやリンクの一覧表示機能など、適切なマークアップを前提に実装されている機能がある。
+    -  適切なマークアップにより、スクリーン・リーダーで見出しや箇条書きの項目を探しやすくなる。
+    -  スクリーン・リーダーなどの支援技術には、見出しやリンクの一覧表示機能など、適切なマークアップを前提に実装されている機能がある。
+  en: |-
+    Ensure that assistive technologies such as screen readers can correctly recognize content and present it to users in an appropriate manner.
+
+    -  Appropriate markup makes it easier for screen readers to find headings and list items.
+    -  Assistive technologies such as screen readers have functions such as displaying a list of headings and links, which are implemented based on appropriate markup.
 checks:
 - '0541'
 - '0542'

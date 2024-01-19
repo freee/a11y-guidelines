@@ -7,15 +7,21 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  フォーム・コントロールに対して表示されているテキストを用いたラベル付けができない場合は、非表示のテキストを用いてラベルを付ける。
+guideline:
+  ja: |-
+    フォーム・コントロールに対して、表示されているテキストを用いたラベル付けができない場合は、非表示のテキストを用いてラベルを付ける。
+  en: |-
+    If the displayed text cannot be used as a label for a form control, use hidden text to label it.
 sc:
 - 1.1.1
 - 1.3.1
 - 2.4.6
 - 3.3.2
-intent: |-
-  視覚障害者が、フォーム・コントロールの目的を容易に判断することができるようにする。
+intent:
+  ja: |-
+    視覚障害者が、フォーム・コントロールの目的を容易に判断することができるようにする。
+  en: |-
+    Enable individuals with visual impairments to easily determine the purpose of form controls.
 checks:
 - '0931'
 - '0941'
