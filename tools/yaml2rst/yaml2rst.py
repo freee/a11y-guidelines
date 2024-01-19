@@ -86,14 +86,12 @@ def main():
     build_examples = []
 
     if not args.no_check:
+        common_schema_path = os.path.join(os.getcwd(), SCHEMA_SRCDIR, COMMON_SCHEMA)
         try:
-            with open(os.path.join(os.getcwd(), SCHEMA_SRCDIR, COMMON_SCHEMA)) as f:
-                common_schema = json.load(f)
+            file_content = read_file_content(common_schema_path)
+            common_schema = json.loads(file_content)
         except Exception as e:
-            print(f'Exception occurred while reading {COMMON_SCHEMA}...', file=sys.stderr)
-            print(e, file=sys.stderr)
-            sys.exit(1)
-
+            handle_file_error(e, common_schema_path)
         schema_path = 'file://{}/'.format(os.path.join(os.getcwd(), SCHEMA_SRCDIR))
         resolver = RefResolver(schema_path, common_schema)
 
@@ -124,28 +122,22 @@ def main():
         check_duplicate_values(faqs, 'sortKey', 'FAQ sortKey')
 
     try:
-        with open(WCAG_SC) as f:
-            wcag_sc = json.load(f)
+        file_content = read_file_content(WCAG_SC)
+        wcag_sc = json.loads(file_content)
     except Exception as e:
-        print(f'Exception occurred while reading {WCAG_SC}...', file=sys.stderr)
-        print(e, file=sys.stderr)
-        sys.exit(1)
+        handle_file_error(e, WCAG_SC)
 
     try:
-        with open(GUIDELINE_CATEGORIES) as f:
-            category_names = json.load(f)
+        file_content = read_file_content(GUIDELINE_CATEGORIES)
+        category_names = json.loads(file_content)
     except Exception as e:
-        print(f'Exception occurred while reading {GUIDELINE_CATEGORIES}...', file=sys.stderr)
-        print(e, file=sys.stderr)
-        sys.exit(1)
+        handle_file_error(e, GUIDELINE_CATEGORIES)
 
     try:
-        with open(FAQ_TAGS) as f:
-            faq_tags = json.load(f)
+        file_content = read_file_content(FAQ_TAGS)
+        faq_tags = json.loads(file_content)
     except Exception as e:
-        print(f'Exception occurred while reading {FAQ_TAGS}...', file=sys.stderr)
-        print(e, file=sys.stderr)
-        sys.exit(1)
+        handle_file_error(e, FAQ_TAGS)
 
     for sc in wcag_sc:
         wcag_sc[sc]['gls'] = []
@@ -509,12 +501,10 @@ def main():
 
     if build_all or MISCDEFS_PATH in targets:
         try:
-            with open(INFO_SRC, encoding='utf-8') as f:
-                info_links = json.load(f)
+            file_content = read_file_content(INFO_SRC)
+            info_links = json.loads(file_content)
         except Exception as e:
-            print(f'Exception occurred while reading {INFO_SRC}...', file=sys.stderr)
-            print(e, file=sys.stderr)
-            sys.exit(1)
+            handle_file_error(e, INFO_SRC)
 
         external_info_links = []
         for link in info_links:
@@ -650,6 +640,33 @@ def ls_dir(dir):
         for f in fs:
             files.append(os.path.join(currentDir, f))
     return files
+
+def read_file_content(file_path):
+    """
+    Read and return the content of a file.
+
+    Args:
+        file_path: Path to the file.
+
+    Returns:
+        The content of the file.
+    """
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    except Exception as e:
+        raise e
+
+def handle_file_error(e, file_path):
+    """
+    Handle file-related errors.
+
+    Args:
+        e: The exception object.
+        file_path: Path to the file that caused the error.
+    """
+    print(f"Error with file {file_path}: {e}", file=sys.stderr)
+    sys.exit(1)
 
 def read_yaml_file(file):
     try:
@@ -820,7 +837,7 @@ def load_templates(template_env):
         'makefile': MAKEFILE_FILENAME,
         'miscdefs': 'misc-defs.txt'
     }
-    
+
     templates = {name: template_env.get_template(filename) for name, filename in template_filenames.items()}
     return templates
 
