@@ -100,43 +100,19 @@ def main():
     files = ls_dir(os.path.join(os.getcwd(), GUIDELINES_SRCDIR))
     guidelines = []
     for f in files:
-        guidelines.append(read_yaml_file(f))
-        if not args.no_check:
-            try:
-                validate_data(guidelines[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, GUIDELINES_SCHEMA), resolver)
-            except ValueError as e:
-                print(f'Exception occurred while validating {f}...', file=sys.stderr)
-                print(e, file=sys.stderr)
-                sys.exit(1)
-        guidelines[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+        guidelines.append(process_yaml_file(f, os.path.join(os.getcwd(), SCHEMA_SRCDIR), GUIDELINES_SCHEMA, args.no_check, resolver))
 
     guidelines = sorted(guidelines, key=lambda x: x['sortKey'])
 
     files = ls_dir(os.path.join(os.getcwd(), CHECKS_SRCDIR))
     checks = []
     for f in files:
-        checks.append(read_yaml_file(f))
-        if not args.no_check:
-            try:
-                validate_data(checks[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, CHECKS_SCHEMA), resolver)
-            except ValueError as e:
-                print(f'Exception occurred while validating {f}...', file=sys.stderr)
-                print(e, file=sys.stderr)
-                sys.exit(1)
-        checks[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+        checks.append(process_yaml_file(f, os.path.join(os.getcwd(), SCHEMA_SRCDIR), CHECKS_SCHEMA, args.no_check, resolver))
 
     files = ls_dir(os.path.join(os.getcwd(), FAQ_SRCDIR))
     faqs = []
     for f in files:
-        faqs.append(read_yaml_file(f))
-        if not args.no_check:
-            try:
-                validate_data(faqs[-1], os.path.join(os.getcwd(), SCHEMA_SRCDIR, FAQS_SCHEMA), resolver)
-            except ValueError as e:
-                print(f'Exception occurred while validating {f}...', file=sys.stderr)
-                print(e, file=sys.stderr)
-                sys.exit(1)
-        faqs[-1]['src_path'] = f.replace(os.getcwd() + "/", "")
+        faqs.append(process_yaml_file(f, os.path.join(os.getcwd(), SCHEMA_SRCDIR), FAQS_SCHEMA, args.no_check, resolver))
 
     faqs = sorted(faqs, key=lambda x: x['sortKey'])
 
@@ -731,6 +707,33 @@ def validate_data(data, schema_file, common_resolver=None):
         validate(data, schema, resolver=common_resolver)
     except ValidationError as e:
         raise ValueError("Validation failed.") from e
+
+def process_yaml_file(file_path, schema_dir, schema_file, no_check, resolver):
+    """
+    Read, validate, and process a YAML file.
+
+    Args:
+        file_path: The path to the YAML file.
+        schema_dir: The directory containing the schema file.
+        schema_file: The schema file for validation.
+        no_check: Boolean indicating whether to skip validation.
+        resolver: The resolver for schema validation.
+
+    Returns:
+        The processed YAML data with an additional source path.
+    """
+    data = read_yaml_file(file_path)
+    
+    if not no_check:
+        try:
+            validate_data(data, os.path.join(schema_dir, schema_file), resolver)
+        except ValueError as e:
+            print(f'Exception occurred while validating {file_path}...', file=sys.stderr)
+            print(e, file=sys.stderr)
+            sys.exit(1)
+
+    data['src_path'] = os.path.relpath(file_path, start=os.getcwd())
+    return data
 
 def uniq(seq):
     seen = []
