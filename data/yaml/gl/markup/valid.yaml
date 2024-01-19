@@ -6,14 +6,22 @@ title:
   en: Valid Markup
 platform:
 - web
-guideline: |-
-  文法的に正しい、仕様に準拠したマークアップを行う。
+guideline:
+  ja: |-
+    文法的に正しい、仕様に準拠したマークアップを行う。
+  en: |-
+    Use valid markup that conforms to specifications.
 sc:
 - 4.1.1
-intent: |-
-  スクリーン・リーダーなどの支援技術が、Webページを正確に解析できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術が、Webページを正確に解析できるようにする。
 
-  HTML要素の開始タグと終了タグが適切に記述されていること、適切な入れ子構造になっていることで、様々なユーザー・エージェントや支援技術が期待した動作をする。
+    HTML要素の開始タグと終了タグが適切に記述されていること、適切な入れ子構造になっていることで、様々なユーザー・エージェントや支援技術が期待した動作をする。
+  en: |-
+    Ensure that user agents and assistive technologies can accurately parse Web pages.
+
+    User agents and assistive technologies behave as expected when HTML elements are properly opened and closed and have appropriate nesting.
 checks:
 - '0571'
 info:

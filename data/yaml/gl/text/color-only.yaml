@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  強調、引用など、何らかの意図を文字色を変えることによって表現している場合、書体など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
+guideline:
+  ja: |-
+    強調、引用など、何らかの意図を文字色を変えることによって表現している場合、書体など他の視覚的な要素も併せて用い、色が判別できなくてもその意味を理解できるようにする。
+  en: |-
+    When expressing emphasis, quotation, etc. by changing the text color, also use other visual elements like font styles to ensure that the meaning can be understood even if the color cannot be discerned.
 sc:
 - 1.4.1
-intent: |-
-  視覚障害者や色弱者がコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    視覚障害者や色弱者がコンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with visual impairments or color vision deficiencies can use content.
 checks:
 - '0031'
 - '0051'

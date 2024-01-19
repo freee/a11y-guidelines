@@ -7,13 +7,20 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  予め設定された間隔で自動的に内容が更新されたり非表示になったりするコンテンツを作らない。
-  そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、非表示にすることができるか、更新頻度を調整できるようにする。
+guideline:
+  ja: |-
+    予め設定された間隔で自動的に内容が更新されたり非表示になったりするコンテンツを作らない。
+    そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、非表示にすることができるか、更新頻度を調整できるようにする。
+  en: |-
+    Do not create content that is automatically updated or hidden at preset intervals.
+    If you create such content, ensure that users can pause, stop, or hide it, or adjust the update frequency.
 sc:
 - 2.2.2
-intent: |-
-  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+intent:
+  ja: |-
+    ロービジョン者や認知障害者が、集中を阻害されないようにする。
+  en: |-
+    Ensure that people with low vision or cognitive impairments are not distracted.
 checks:
 - '1231'
 - '1251'

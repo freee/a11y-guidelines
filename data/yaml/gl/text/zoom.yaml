@@ -6,12 +6,18 @@ title:
   en: 200 Percent Magnification Using Zoom Function
 platform:
 - web
-guideline: |-
-  コンテンツや機能を損なうことなく、ブラウザーのズーム機能で200パーセントまで拡大できるようにする。
+guideline:
+  ja: |-
+    コンテンツや機能を損なうことなく、ブラウザーのズーム機能で200パーセントまで拡大できるようにする。
+  en: |-
+    Ensure that content and functions can be magnified to 200 percent using the browser's zoom function without loss of content or functionality.
 sc:
 - 1.4.4
-intent: |-
-  ロービジョン者が、問題なくコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、問題なくコンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with low vision can use content without problems.
 checks:
 - '0321'
 info:

@@ -7,10 +7,16 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  純粋な装飾目的の画像は、スクリーン・リーダーなどの支援技術が無視するようにする。
-intent: |-
-  不要な情報が提示されないようにすることで、視覚障害者などの情報取得をスムースにする。
+guideline:
+  ja: |-
+    純粋な装飾目的の画像は、スクリーン・リーダーなどの支援技術が無視するようにする。
+  en: |-
+    Ensure that images used purely for decorative purposes are ignored by assistive technologies like screen readers.
+intent:
+  ja: |-
+    不要な情報が提示されないようにすることで、視覚障害者の情報取得をスムースにする。
+  en: |-
+    Ensure that unnecessary information is not presented, to facilitate smooth information acquisition for visually impaired individuals.
 checks:
 - '0451'
 - '0461'

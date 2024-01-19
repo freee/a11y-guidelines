@@ -7,15 +7,23 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  テキストの代替情報ではない音声・映像コンテンツにおいて、音声情報には、同期したキャプションを提供する。
+guideline:
+  ja: |-
+    テキストの代替情報ではない音声・映像コンテンツにおいて、音声情報には、同期したキャプションを提供する。
+  en: |-
+    In audio and video content that is not an alternative to text information, provide synchronized captions for the audio information.
 sc:
 - 1.2.2
 - 1.2.4
-intent: |-
-  音声情報を理解できなくてもサービスの利用が困難にならないようにする。
+intent:
+  ja: |-
+    音声情報を理解できなくてもサービスの利用が困難にならないようにする。
 
-  聴覚障害者が、音声コンテンツおよび動画コンテンツ内の音声を理解できるようにする。
+    聴覚障害者が、音声コンテンツおよび動画コンテンツ内の音声を理解できるようにする。
+  en: |-
+    Ensure that the service remains accessible even for those who cannot understand the audio information.
+
+    Make it possible for individuals with hearing impairments to understand the audio information in audio and video content.
 checks:
 - '1511'
 - '1531'

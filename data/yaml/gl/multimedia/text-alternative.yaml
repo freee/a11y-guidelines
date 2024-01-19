@@ -7,15 +7,21 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  テキスト情報の代替情報として音声・映像コンテンツを用い、そのコンテンツがテキスト情報の代替であることを明示する。
+guideline:
+  ja: |-
+    テキスト情報の代替情報として音声・映像コンテンツを用い、そのコンテンツがテキスト情報の代替であることを明示する。
+  en: |-
+    Use audio and video content as an alternative to text information, and explicitly indicate that the content is an alternative to text information.
 sc:
 - 1.2.1
 - 1.2.2
 - 1.2.3
 - 1.2.4
-intent: |-
-  音声・映像コンテンツの利用ができないユーザーも支障なくコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    音声・映像コンテンツの利用ができないユーザーも支障なくコンテンツを利用できるようにする。
+  en: |-
+    Ensure that users who cannot use audio and video content can use the content without any problems.
 checks:
 - '1481'
 - '1501'

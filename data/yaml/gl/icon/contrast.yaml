@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  背景色とのコントラスト比を3:1以上にする。
+guideline:
+  ja: |-
+    背景色とのコントラスト比を3:1以上にする。
+  en: |-
+    Ensure a contrast ratio of at least 3:1 with the background color.
 sc:
 - 1.4.11
-intent: |-
-  ロービジョン者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、コンテンツを利用できるようにする。
+  en: |-
+    Enable individuals with low vision to use content.
 checks:
 - '0001'
 info:

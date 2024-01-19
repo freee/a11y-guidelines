@@ -7,14 +7,22 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  ナビゲーション・メニューなど、複数のページに共通して用いられるコンポーネントは、すべてのページで同じ出現順序にし、コンポーネント内でのリンクの出現順序も同じにする。
+guideline:
+  ja: |-
+    ナビゲーション・メニューなど、複数のページに共通して用いられるコンポーネントは、すべてのページで同じ出現順序にし、コンポーネント内でのリンクの出現順序も同じにする。
+  en: |-
+    Ensure that components that are used across multiple pages, such as navigation menus, appear in the same sequence on every page, and that the sequence of links within each component is also the same.
 sc:
 - 3.2.3
-intent: |-
-  視覚障害者、認知障害者などが、ページの構成を容易に予測できるようにする。
+intent:
+  ja: |-
+    視覚障害者、認知障害者などが、ページの構成を容易に予測できるようにする。
 
-  -  共通部分に一貫性があれば、複数のページで毎回すべての表示内容を確認しなくても、推測に基づく操作がしやすくなる。
+    -  共通部分に一貫性があれば、複数のページで毎回すべての表示内容を確認しなくても、推測に基づく操作がしやすくなる。
+  en: |-
+    Ensure that users with visual or cognitive impairments can easily predict the structure of a page.
+
+    -  If there is consistency in the common parts, it is easier to perform operations based on prediction without having to check all the display contents every time on multiple pages.
 checks:
 - '0661'
 - '0781'

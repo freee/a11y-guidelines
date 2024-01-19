@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  ログイン・セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
+guideline:
+  ja: |-
+    ログイン・セッションが切れた場合は、再認証後でもデータを失うことなくユーザーが操作を継続できるようにする。
+  en: |-
+    Ensure that users can continue their operation without losing data even after re-authentication when a login session has expired.
 sc:
 - 2.2.5
-intent: |-
-  コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくサービスを利用できるようにする。
+intent:
+  ja: |-
+    コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくサービスを利用できるようにする。
+  en: |-
+    Ensure that users can use services without problems even when it takes time to read or understand content or to perform input operations.
 checks:
 - '1381'
 info:

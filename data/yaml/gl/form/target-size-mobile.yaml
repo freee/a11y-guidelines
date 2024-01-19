@@ -6,15 +6,24 @@ title:
   en: Sufficiently Large Click/Touch Targets (Mobile)
 platform:
 - mobile
-guideline: |-
-  操作を受け付けるもののタッチのターゲット・サイズは充分に大きいものにする。
+guideline:
+  ja: |-
+    操作を受け付けるもののタッチのターゲット・サイズは充分に大きいものにする。
 
-  *  44 x 44 CSS px以上、または
-  *  OSのインターフェイス・ガイドラインを満たすサイズ
+    *  44 x 44 CSS px以上、または
+    *  OSのインターフェイス・ガイドラインを満たすサイズ
+  en: |-
+    Ensure that the touch targets for interactive elements are sufficiently large.
+
+    *  44 x 44 CSS px or larger, or
+    *  A size that meets the interface guidelines of the operating system.
 sc:
 - 2.5.5
-intent: |-
-  ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+intent:
+  ja: |-
+    ロービジョン者、細かい手の動きが難しい肢体不自由者の、誤ったクリック/タッチ操作を防ぐ。
+  en: |-
+    Prevent people with low vision and people with disabilities who have difficulty with fine motor control from making erroneous clicks/touches.
 checks:
 - '0334'
 info:

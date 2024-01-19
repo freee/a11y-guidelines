@@ -7,19 +7,31 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  ユーザーの操作によってコンテンツが増減するようなページでは、どの状態においてもスクリーン・リーダーが適切に情報を取得できる状態を維持する。
+guideline:
+  ja: |-
+    ユーザーの操作によってコンテンツが増減するようなページでは、ページがどの状態にあってもスクリーン・リーダーが適切に情報を取得できる状態を維持する。
 
-  *  スクリーン・リーダーで最初から読み進めた場合に、コンテンツの意味が正しく伝わるコンテンツの順序
-  *  視覚的に提供されている情報と過不足のない情報が支援技術に伝わる状態
+    *  スクリーン・リーダーで最初から読み進めた場合に、コンテンツの意味が正しく伝わるコンテンツの順序
+    *  視覚的に提供されている情報と過不足のない情報が支援技術に伝わる状態
+  en: |-
+    In pages where content increases or decreases upon user actions, maintain a state in which screen readers can appropriately acquire information, regardless of the page's state.
+
+    *  The order of content that conveys the correct meaning of the content when read from the beginning by a screen reader.
+    *  A state where information provided visually is conveyed accurately and without omission to assistive technologies.
 sc:
 - 1.3.1
 - 1.3.2
-intent: |-
-  スクリーン・リーダーなどの支援技術のユーザーが、コンテンツを正しく理解できるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーなどの支援技術のユーザーが、コンテンツを正しく理解できるようにする。
 
-  -  Webの場合、動的に追加されるコンテンツが、DOMツリーの適切な位置に挿入されることで、スクリーン・リーダーのユーザーがそのコンテンツの存在を認知し、内容を理解することができる。
-  -  モーダル・ダイアログ、開閉するメニュー、アコーディオンなどで注意が必要。
+    -  Webの場合、動的に追加されるコンテンツが、DOMツリーの適切な位置に挿入されることで、スクリーン・リーダーのユーザーがそのコンテンツの存在を認知し、内容を理解することができる。
+    -  モーダル・ダイアログ、開閉するメニュー、アコーディオンなどで注意が必要。
+  en: |-
+    Ensure that users of assistive technologies such as screen readers can correctly understand the content.
+
+    -  In the case of Web content, dynamically added content is inserted at the appropriate position in the DOM tree, so that users of screen readers can recognize the existence of the content and understand its content.
+    -  Special attention is needed for modal dialogs, expandable/collapsible menus, accordions, and similar elements.
 checks:
 - '0711'
 - '1313'

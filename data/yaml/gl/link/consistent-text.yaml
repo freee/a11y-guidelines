@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  同じ機能を実行するリンクは、サイト内で一貫性のあるリンク・テキストを付与する。
+guideline:
+  ja: |-
+    同じ機能を実行するリンクには、サイト内で一貫性のあるリンク・テキストを付与する。
+  en: |-
+    Provide consistent link text for links that perform the same function within a site.
 sc:
 - 3.2.4
-intent: |-
-  予測可能性を上げ、混乱を防ぐ。
+intent:
+  ja: |-
+    予測可能性を上げ、混乱を防ぐ。
+  en: |-
+    Increase predictability and prevent confusion.
 checks:
 - '0242'
 - '0262'

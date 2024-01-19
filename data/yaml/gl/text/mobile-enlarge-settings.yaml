@@ -6,12 +6,18 @@ title:
   en: Change Text Size Settings of Mobile OS
 platform:
 - mobile
-guideline: |-
-  モバイルOSの設定で文字サイズを最大にしても、コンテンツの理解や機能が損なわれるような表示の崩れが発生せず、適切に拡大表示されるようにする。
+guideline:
+  ja: |-
+    モバイルOSの設定で文字サイズを最大にしても、コンテンツの理解や機能が損なわれるような表示の崩れが発生せず、適切に拡大表示されるようにする。
+  en: |-
+    Ensure that the content is appropriately magnified and remains comprehensible and functional, without any disruption in display, even when the text size setting of the mobile OS is increased to the maximum.
 sc:
 - 1.4.4
-intent: |-
-  ロービジョン者が、OSの文字サイズ変更設定で拡大表示を行う設定をした際、実際に拡大表示が行われるかどうかにかかわらず、表示が崩れるなど、コンテンツの利用に支障がでることがないようにする。
+intent:
+  ja: |-
+    ロービジョン者が、OSの文字サイズ変更設定で拡大表示を行う設定をした際、適切に拡大表示が行われ、表示が崩れるなど、コンテンツの利用に支障がでることがないようにする。
+  en: |-
+    Ensure that for individuals with low vision, when the text size enlargement setting is enabled in the OS, the content is appropriately magnified and there are no disruptions in usage, such as display distortion.
 checks:
 - '0325'
 - '0326'

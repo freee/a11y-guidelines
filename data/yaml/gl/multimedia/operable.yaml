@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  3秒以上の長さの音声を自動再生しない。
+guideline:
+  ja: |-
+    3秒以上の長さの音声を自動再生しない。
+  en: |-
+    Do not autoplay audio that is longer than 3 seconds.
 sc:
 - 1.4.2
-intent: |-
-  スクリーン・リーダーの音声出力を阻害しない。
+intent:
+  ja: |-
+    スクリーン・リーダーの音声出力を阻害しない。
+  en: |-
+    Do not interfere with the audio output of screen readers.
 checks:
 - '1421'
 - '1441'

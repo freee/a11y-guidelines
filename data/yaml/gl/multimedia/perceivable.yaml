@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  音声・映像コンテンツの存在を認知できるようにする。
+guideline:
+  ja: |-
+    音声・映像コンテンツの存在を認知できるようにする。
+  en: |-
+    Ensure that users can perceive the presence of audio and video content.
 sc:
 - 1.1.1
-intent: |-
-  視覚障害者、聴覚障害者が音声や映像を含むコンテンツの存在を認知できるようにする。
+intent:
+  ja: |-
+    視覚障害者、聴覚障害者が音声や映像を含むコンテンツの存在を認知できるようにする。
+  en: |-
+    Ensure that users with visual or hearing impairments can perceive the presence of content that includes audio or video.
 checks:
 - '1411'
 info:

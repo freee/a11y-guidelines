@@ -6,15 +6,24 @@ title:
   en: Specify a Title
 platform:
 - web
-guideline: |-
-  ``title`` 要素に、ページの主題又は目的を説明したタイトルを 記述する。
+guideline:
+  ja: |-
+    ``title`` 要素に、ページの主題又は目的を説明したタイトルを 記述する。
+  en: |-
+    Write a title in the ``title`` element that describes the main subject or purpose of the page.
 sc:
 - 2.4.2
-intent: |-
-  ページ全体を一望することができない視覚障害者が、目的のページにアクセスしているかどうか判断できるようにする。
+intent:
+  ja: |-
+    ページ全体を一望することができない視覚障害者が、目的のページにアクセスしているかどうか判断できるようにする。
 
-  -  多くのスクリーン・リーダーにはタイトルバーの内容を簡単に確認できる機能がある。
-  -  多くのスクリーン・リーダーでは、複数のウィンドウを切り替える操作をする際タイトルバーの内容が読み上げられる。
+    -  多くのスクリーン・リーダーにはタイトルバーの内容を簡単に確認できる機能がある。
+    -  多くのスクリーン・リーダーでは、複数のウィンドウを切り替える操作をする際タイトルバーの内容が読み上げられる。
+  en: |-
+    Ensure that visually impaired individuals who cannot view the entire page at once can determine whether they have accessed the intended page.
+
+    *  Many screen readers have the capability to quickly check the contents of the title bar.
+    *  Many screen readers read the contents of the title bar when switching between multiple windows.
 checks:
 - '0631'
 - '0651'

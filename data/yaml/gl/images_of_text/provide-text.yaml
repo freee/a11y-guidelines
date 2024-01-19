@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  画像化されたテキストに含まれる文字情報をテキストでも提供する。
+guideline:
+  ja: |-
+    画像化されたテキストに含まれる文字情報をテキストでも提供する。
+  en: |-
+    Provide character information included in images of text as text.
 sc:
 - 1.1.1
-intent: |-
-  スクリーン・リーダーのユーザーが画像化されたテキストにアクセスできるようにする。
+intent:
+  ja: |-
+    スクリーン・リーダーのユーザーが画像化されたテキストにアクセスできるようにする。
+  en: |-
+    Ensure that screen reader users can access images of text.
 checks:
 - '0511'
 - '0521'

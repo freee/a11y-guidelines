@@ -6,14 +6,20 @@ title:
   en: Enable Keyboard Operation
 platform:
 - web
-guideline: |-
-  すべてのフォーム・コントロールについて、キーボードによる操作を可能にする。
+guideline:
+  ja: |-
+    すべてのフォーム・コントロールについて、キーボードによる操作を可能にする。
+  en: |-
+    Enable keyboard operation for all form controls.
 sc:
 - 2.1.1
 - 2.1.3
 - 2.5.1
-intent: |-
-  マウスを使わない/使えない視覚障害者、肢体不自由者が、フォームの操作をできるようにする。
+intent:
+  ja: |-
+    マウスを使わない/使えない視覚障害者、肢体不自由者が、フォームの操作をできるようにする。
+  en: |-
+    Enable individuals with visual impairments or motor disabilities who do not use or cannot use a mouse to operate forms.
 checks:
 - '0172'
 - '0581'
