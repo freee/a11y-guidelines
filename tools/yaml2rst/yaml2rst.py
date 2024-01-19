@@ -76,11 +76,9 @@ PLATFORM_NAMES = {
 
 def main():
     args = parse_args()
-    if not args.files:
-        build_all = True
-    else:
-        build_all = False
-        targets = args.files
+    settings = process_arguments(args)
+    build_all = settings.get('build_all')
+    targets = settings.get('targets')
 
     template_env = Environment(
         loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
@@ -807,6 +805,27 @@ def parse_args():
     parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
     parser.add_argument('files', nargs='*', help='Filenames')
     return parser.parse_args()
+
+def process_arguments(args):
+    """
+    Process the command-line arguments to determine the build mode, target files, and other options.
+
+    Args:
+        args: The parsed command-line arguments.
+
+    Returns:
+        A dictionary containing settings derived from the command-line arguments.
+    """
+    settings = {
+        'build_all': not args.files,
+        'targets': args.files if args.files else []
+    }
+
+    # 例：新しいオプション 'verbose' の処理
+    # if hasattr(args, 'verbose'):
+    #     settings['verbose'] = args.verbose
+
+    return settings
 
 if __name__ == "__main__":
     main()
