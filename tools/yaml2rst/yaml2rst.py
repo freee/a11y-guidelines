@@ -360,10 +360,10 @@ def main():
         category_pages[gl['category']]['dependency'].append(gl['src_path'])
         gl_str = {
             'title': gl['title'][LANG],
-            'intent': gl['intent'],
+            'intent': gl['intent'][LANG],
             'id': gl['id'],
             'platform': '、'.join(list(map(lambda item: PLATFORM_NAMES[item], gl['platform']))),
-            'guideline': gl['guideline']
+            'guideline': gl['guideline'][LANG]
         }
 
         if 'info' in gl:
