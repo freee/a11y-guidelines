@@ -80,25 +80,8 @@ def main():
     build_all = settings.get('build_all')
     targets = settings.get('targets')
 
-    template_env = Environment(
-        loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
-        )
-    template_env.filters['make_heading'] = make_heading
-
-    tool_example_template = template_env.get_template('checks/examples-tool.rst')
-    allchecks_text_template = template_env.get_template('checks/allchecks.rst')
-    category_page_template = template_env.get_template('gl-category.rst')
-    info_to_gl_template = template_env.get_template('info_to_gl.rst')
-    info_to_faq_template = template_env.get_template('info_to_faq.rst')
-    faq_article_template = template_env.get_template('faq/article.rst')
-    faq_tagpage_template = template_env.get_template('faq/tagpage.rst')
-    faq_index_template = template_env.get_template('faq/index.rst')
-    faq_tag_index_template = template_env.get_template('faq/tag-index.rst')
-    faq_article_index_template = template_env.get_template('faq/article-index.rst')
-    wcag21mapping_template = template_env.get_template(WCAG_MAPPING_FILENAME)
-    priority_diff_template = template_env.get_template(PRIORITY_DIFF_FILENAME)
-    makefile_template = template_env.get_template(MAKEFILE_FILENAME)
-    miscdefs_template = template_env.get_template("misc-defs.txt")
+    template_env = setup_template_environment()
+    templates = load_templates(template_env)
 
     build_examples = []
 
@@ -411,7 +394,7 @@ def main():
     for cat in category_pages:
         filename = f'{cat}.rst'
         if build_all or os.path.join(GUIDELINES_DESTDIR, filename) in targets:
-            output = category_page_template.render(guidelines = category_pages[cat]['guidelines'])
+            output = templates['category_page'].render(guidelines = category_pages[cat]['guidelines'])
             destfile = os.path.join(os.getcwd(), GUIDELINES_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
@@ -420,7 +403,7 @@ def main():
     for info in info_to_gl:
         filename = f'{info}.rst'
         if build_all or os.path.join(INFO_TO_GL_DESTDIR, filename) in targets:
-            output = info_to_gl_template.render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
+            output = templates['info_to_gl'].render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
             destfile = os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
@@ -429,7 +412,7 @@ def main():
     for info in info_to_faq:
         filename = f'{info}.rst'
         if build_all or os.path.join(INFO_TO_FAQ_DESTDIR, filename) in targets:
-            output = info_to_faq_template.render(faqs = sorted(info_to_faq[info], key=lambda x: x['sortKey']))
+            output = templates['info_to_faq'].render(faqs = sorted(info_to_faq[info], key=lambda x: x['sortKey']))
             destfile = os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
@@ -477,7 +460,7 @@ def main():
                         'category': gl_categories[gl]
                     })
             faq['destpath'] = os.path.join(FAQ_ARTICLES_DESTDIR, article_filename)
-            output = faq_article_template.render(faq_obj)
+            output = templates['faq_article'].render(faq_obj)
             destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
@@ -504,25 +487,25 @@ def main():
     os.makedirs(os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR), exist_ok=True)
     for page in faq_tagpage_list:
         if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst') in targets:
-            output = faq_tagpage_template.render(page)
+            output = templates['faq_tagpage'].render(page)
             destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst')
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
                 f.write(output)
 
     if build_all or FAQ_INDEX_PATH in targets:
-        output = faq_index_template.render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = faq_tagpage_list)
+        output = templates['faq_index'].render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = faq_tagpage_list)
         destfile = FAQ_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
 
     if build_all or FAQ_TAG_INDEX_PATH in targets:
-        output = faq_tag_index_template.render(tags = faq_tagpage_list)
+        output = templates['faq_tag_index'].render(tags = faq_tagpage_list)
         destfile = FAQ_TAG_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
 
     if build_all or FAQ_ARTICLE_INDEX_PATH in targets:
-        output = faq_article_index_template.render(files = sorted(faq_articles, key=lambda x: x['sortKey']))
+        output = templates['faq_article_index'].render(files = sorted(faq_articles, key=lambda x: x['sortKey']))
         destfile = FAQ_ARTICLE_INDEX_PATH
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(output)
@@ -546,7 +529,7 @@ def main():
             }
             sc_mapping.append(mapping)
 
-        sc_mapping_text = wcag21mapping_template.render({'mapping': sc_mapping})
+        sc_mapping_text = templates['wcag21mapping'].render({'mapping': sc_mapping})
         with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(sc_mapping_text)
 
@@ -564,13 +547,13 @@ def main():
             }
             diffs.append(diff)
 
-        diffs_text = priority_diff_template.render({'diffs': diffs})
+        diffs_text = templates['priority_diff'].render({'diffs': diffs})
         with open(PRIORITY_DIFF_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(diffs_text)
 
     os.makedirs(os.path.join(os.getcwd(), CHECKS_DESTDIR), exist_ok=True)
     if build_all or os.path.join(CHECKS_DESTDIR, ALL_CHECKS_FILENAME) in targets:
-        allcheck_text = allchecks_text_template.render({'allchecks': allchecks})
+        allcheck_text = templates['allchecks_text'].render({'allchecks': allchecks})
         with open(ALL_CHECKS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(allcheck_text)
 
@@ -590,7 +573,7 @@ def main():
                 'text': info_links[link]['text'][LANG],
                 'url': info_links[link]['url'][LANG]
             })
-        miscdefs_text = miscdefs_template.render({'links': external_info_links})
+        miscdefs_text = templates['miscdefs'].render({'links': external_info_links})
         with open(MISCDEFS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
             f.write(miscdefs_text)
 
@@ -601,7 +584,7 @@ def main():
             filename = f'examples-{tool}.rst'
             destfile = os.path.join(os.getcwd(), CHECKS_DESTDIR, filename)
             with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(tool_example_template.render({'examples': check_examples[tool]}))
+                f.write(templates['tool_example'].render({'examples': check_examples[tool]}))
 
     if build_all or MAKEFILE_FILENAME in targets:
         gl_yaml = []
@@ -711,7 +694,7 @@ def main():
             'miscdefs_target': os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME),
             'info_src': INFO_SRC
         }
-        makefile_str = makefile_template.render(makefile_data)
+        makefile_str = templates['makefile'].render(makefile_data)
 
         destfile = os.path.join(os.getcwd(),  MAKEFILE_FILENAME)
         with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
@@ -826,6 +809,49 @@ def process_arguments(args):
     #     settings['verbose'] = args.verbose
 
     return settings
+
+def setup_template_environment():
+    """
+    Set up the Jinja2 template environment.
+
+    Returns:
+        The configured Jinja2 environment object.
+    """
+    template_env = Environment(
+        loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), TEMPLATE_DIR))
+    )
+    template_env.filters['make_heading'] = make_heading
+    return template_env
+
+def load_templates(template_env):
+    """
+    Load the necessary templates using the provided Jinja2 environment.
+
+    Args:
+        template_env: The Jinja2 environment object.
+
+    Returns:
+        A dictionary of Jinja2 templates.
+    """
+    template_filenames = {
+        'tool_example': 'checks/examples-tool.rst',
+        'allchecks_text': 'checks/allchecks.rst',
+        'category_page': 'gl-category.rst',
+        'info_to_gl': 'info_to_gl.rst',
+        'info_to_faq': 'info_to_faq.rst',
+        'faq_article': 'faq/article.rst',
+        'faq_tagpage': 'faq/tagpage.rst',
+        'faq_index': 'faq/index.rst',
+        'faq_tag_index': 'faq/tag-index.rst',
+        'faq_article_index': 'faq/article-index.rst',
+        'wcag21mapping': WCAG_MAPPING_FILENAME,
+        'priority_diff': PRIORITY_DIFF_FILENAME,
+        'makefile': MAKEFILE_FILENAME,
+        'miscdefs': 'misc-defs.txt'
+    }
+    
+    templates = {name: template_env.get_template(filename) for name, filename in template_filenames.items()}
+    return templates
 
 if __name__ == "__main__":
     main()
