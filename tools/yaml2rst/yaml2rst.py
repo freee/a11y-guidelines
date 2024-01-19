@@ -369,29 +369,23 @@ def main():
     os.makedirs(os.path.join(os.getcwd(), GUIDELINES_DESTDIR), exist_ok=True)
     for cat in category_pages:
         filename = f'{cat}.rst'
-        if build_all or os.path.join(GUIDELINES_DESTDIR, filename) in targets:
-            output = templates['category_page'].render(guidelines = category_pages[cat]['guidelines'])
-            destfile = os.path.join(os.getcwd(), GUIDELINES_DESTDIR, filename)
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(output)
+        destfile = os.path.join(os.getcwd(), GUIDELINES_DESTDIR, filename)
+        if build_all or destfile in targets:
+            write_rst(templates['category_page'], {'guidelines': category_pages[cat]['guidelines']}, destfile)
 
     os.makedirs(os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR), exist_ok=True)
     for info in info_to_gl:
         filename = f'{info}.rst'
-        if build_all or os.path.join(INFO_TO_GL_DESTDIR, filename) in targets:
-            output = templates['info_to_gl'].render(guidelines = sorted(info_to_gl[info], key=lambda x: x['sortKey']))
-            destfile = os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR, filename)
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(output)
+        destfile = os.path.join(os.getcwd(), INFO_TO_GL_DESTDIR, filename)
+        if build_all or destfile in targets:
+            write_rst(templates['info_to_gl'], {'guidelines': sorted(info_to_gl[info], key=lambda x: x['sortKey'])}, destfile)
 
     os.makedirs(os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR), exist_ok=True)
     for info in info_to_faq:
         filename = f'{info}.rst'
-        if build_all or os.path.join(INFO_TO_FAQ_DESTDIR, filename) in targets:
-            output = templates['info_to_faq'].render(faqs = sorted(info_to_faq[info], key=lambda x: x['sortKey']))
-            destfile = os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR, filename)
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(output)
+        destfile = os.path.join(os.getcwd(), INFO_TO_FAQ_DESTDIR, filename)
+        if build_all or destfile in targets:
+            write_rst(templates['info_to_faq'], {'faqs': sorted(info_to_faq[info], key=lambda x: x['sortKey'])}, destfile)
 
     os.makedirs(os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR), exist_ok=True)
     faq_articles = []
@@ -407,7 +401,8 @@ def main():
             'updated_day': faq_updated.day
         })
         article_filename = f'{faq["id"]}.rst'
-        if build_all or os.path.join(FAQ_ARTICLES_DESTDIR, article_filename) in targets:
+        destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
+        if build_all or destfile in targets:
             faq_obj = {
                 'id': faq['id'],
                 'title': faq['title'][LANG],
@@ -436,10 +431,7 @@ def main():
                         'category': gl_categories[gl]
                     })
             faq['destpath'] = os.path.join(FAQ_ARTICLES_DESTDIR, article_filename)
-            output = templates['faq_article'].render(faq_obj)
-            destfile = os.path.join(os.getcwd(), FAQ_ARTICLES_DESTDIR, article_filename)
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(output)
+            write_rst(templates['faq_article'], faq_obj, destfile)
 
         for tag in faq['tags']:
             try:
@@ -462,32 +454,22 @@ def main():
 
     os.makedirs(os.path.join(os.getcwd(), FAQ_TAGPAGES_DESTDIR), exist_ok=True)
     for page in faq_tagpage_list:
-        if build_all or os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst') in targets:
-            output = templates['faq_tagpage'].render(page)
-            destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, f'{page["tag"]}.rst')
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(output)
+        filename = f'{page["tag"]}.rst'
+        destfile = os.path.join(FAQ_TAGPAGES_DESTDIR, filename)
+        if build_all or destfile in targets:
+            write_rst(templates['faq_tagpage'], page, destfile)
 
     if build_all or FAQ_INDEX_PATH in targets:
-        output = templates['faq_index'].render(files = sorted(faq_articles, key=lambda x: x['updated'], reverse=True), tags = faq_tagpage_list)
-        destfile = FAQ_INDEX_PATH
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(output)
+        write_rst(templates['faq_index'], {'files': sorted(faq_articles, key=lambda x: x['updated'], reverse=True), 'tags': faq_tagpage_list}, FAQ_INDEX_PATH)
 
     if build_all or FAQ_TAG_INDEX_PATH in targets:
-        output = templates['faq_tag_index'].render(tags = faq_tagpage_list)
-        destfile = FAQ_TAG_INDEX_PATH
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(output)
+        write_rst(templates['faq_tag_index'], {'tags': faq_tagpage_list}, FAQ_TAG_INDEX_PATH)
 
     if build_all or FAQ_ARTICLE_INDEX_PATH in targets:
-        output = templates['faq_article_index'].render(files = sorted(faq_articles, key=lambda x: x['sortKey']))
-        destfile = FAQ_ARTICLE_INDEX_PATH
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(output)
+        write_rst(templates['faq_article_index'], {'files': sorted(faq_articles, key=lambda x: x['sortKey'])}, FAQ_ARTICLE_INDEX_PATH)
 
     os.makedirs(os.path.join(os.getcwd(), MISC_DESTDIR), exist_ok=True)
-    if build_all or os.path.join(MISC_DESTDIR, WCAG_MAPPING_FILENAME) in targets:
+    if build_all or WCAG_MAPPING_PATH in targets:
         sc_mapping = []
         for sc in wcag_sc:
             if len(wcag_sc[sc]['gls']) == 0:
@@ -504,12 +486,9 @@ def main():
                 'gls': gls_str
             }
             sc_mapping.append(mapping)
+        write_rst(templates['wcag21mapping'], {'mapping': sc_mapping}, WCAG_MAPPING_PATH)
 
-        sc_mapping_text = templates['wcag21mapping'].render({'mapping': sc_mapping})
-        with open(WCAG_MAPPING_PATH, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(sc_mapping_text)
-
-    if build_all or os.path.join(MISC_DESTDIR, PRIORITY_DIFF_FILENAME) in targets:
+    if build_all or PRIORITY_DIFF_PATH in targets:
         diffs = []
         for sc in wcag_sc:
             if wcag_sc[sc]['level'] == wcag_sc[sc]['localPriority']:
@@ -522,18 +501,13 @@ def main():
                 'LocalLevel': wcag_sc[sc]['localPriority']
             }
             diffs.append(diff)
-
-        diffs_text = templates['priority_diff'].render({'diffs': diffs})
-        with open(PRIORITY_DIFF_PATH, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(diffs_text)
+        write_rst(templates['priority_diff'], {'diffs': diffs}, PRIORITY_DIFF_PATH)
 
     os.makedirs(os.path.join(os.getcwd(), CHECKS_DESTDIR), exist_ok=True)
-    if build_all or os.path.join(CHECKS_DESTDIR, ALL_CHECKS_FILENAME) in targets:
-        allcheck_text = templates['allchecks_text'].render({'allchecks': allchecks})
-        with open(ALL_CHECKS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(allcheck_text)
+    if build_all or ALL_CHECKS_PATH in targets:
+        write_rst(templates['allchecks_text'], {'allchecks': allchecks}, ALL_CHECKS_PATH)
 
-    if build_all or os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME) in targets:
+    if build_all or MISCDEFS_PATH in targets:
         try:
             with open(INFO_SRC, encoding='utf-8') as f:
                 info_links = json.load(f)
@@ -549,9 +523,7 @@ def main():
                 'text': info_links[link]['text'][LANG],
                 'url': info_links[link]['url'][LANG]
             })
-        miscdefs_text = templates['miscdefs'].render({'links': external_info_links})
-        with open(MISCDEFS_PATH, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(miscdefs_text)
+        write_rst(templates['miscdefs'], {'links': external_info_links}, MISCDEFS_PATH)
 
     if build_all or len(build_examples):
         for tool in check_examples:
@@ -559,8 +531,7 @@ def main():
                 continue
             filename = f'examples-{tool}.rst'
             destfile = os.path.join(os.getcwd(), CHECKS_DESTDIR, filename)
-            with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-                f.write(templates['tool_example'].render({'examples': check_examples[tool]}))
+            write_rst(templates['tool_example'], {'examples': check_examples[tool]}, destfile)
 
     if build_all or MAKEFILE_FILENAME in targets:
         gl_yaml = []
@@ -670,11 +641,8 @@ def main():
             'miscdefs_target': os.path.join(MISC_DESTDIR, MISCDEFS_FILENAME),
             'info_src': INFO_SRC
         }
-        makefile_str = templates['makefile'].render(makefile_data)
-
         destfile = os.path.join(os.getcwd(),  MAKEFILE_FILENAME)
-        with open(destfile, mode="w", encoding="utf-8", newline="\n") as f:
-            f.write(makefile_str)
+        write_rst(templates['makefile'], makefile_data, destfile)
 
 def ls_dir(dir):
     files = []
@@ -855,6 +823,22 @@ def load_templates(template_env):
     
     templates = {name: template_env.get_template(filename) for name, filename in template_filenames.items()}
     return templates
+
+def write_rst(template, data, output_path):
+    """
+    Render a Jinja2 template with provided data and write the output to an RST file.
+
+    Args:
+        template: Jinja2 template object.
+        data: Data to be used in the template.
+        output_path: Path to the output RST file.
+
+    Returns:
+        None
+    """
+    rendered_content = template.render(data)
+    with open(output_path, mode='w', encoding='utf-8', newline='\n') as file:
+        file.write(rendered_content)
 
 if __name__ == "__main__":
     main()
