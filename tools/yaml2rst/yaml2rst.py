@@ -9,8 +9,8 @@ from jsonschema import validate, ValidationError, RefResolver
 import argparse
 from jinja2 import Template, Environment, FileSystemLoader
 import datetime
+from config import AVAILABLE_LANGUAGES
 
-LANG = 'ja'
 GUIDELINES_SRCDIR = 'data/yaml/gl'
 INFO_SRC = 'data/json/info.json'
 CHECKS_SRCDIR = 'data/yaml/checks'
@@ -79,6 +79,7 @@ def main():
     settings = process_arguments(args)
     build_all = settings.get('build_all')
     targets = settings.get('targets')
+    LANG = settings.get('lang')
 
     template_env = setup_template_environment()
     templates = load_templates(template_env)
@@ -774,6 +775,7 @@ def check_duplicate_values(lst, key, dataset):
 def parse_args():
     parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
     parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
+    parser.add_argument('--lang', '-l', type=str, choices=AVAILABLE_LANGUAGES, default='ja', help=f'the language of the output file ({" ".join(AVAILABLE_LANGUAGES)})')
     parser.add_argument('files', nargs='*', help='Filenames')
     return parser.parse_args()
 
@@ -789,7 +791,8 @@ def process_arguments(args):
     """
     settings = {
         'build_all': not args.files,
-        'targets': args.files if args.files else []
+        'targets': args.files if args.files else [],
+        'lang': args.lang
     }
 
     # 例：新しいオプション 'verbose' の処理
