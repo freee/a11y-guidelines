@@ -2,6 +2,9 @@
    :widths: auto
    :header: "達成基準","原文","日本語訳","レベル","対応するガイドライン"
 {% for item in mapping %}
-   "{{ item.sc }}","{{ item.sc_en }}","{{ item.sc_ja }}","{{ item.level }}","{{ item.gls }}"
+   "{{ item.sc }}","`{{ item.sc_en_title }} <{{ item.sc_en_url }}>`_","`{{ item.sc_ja_title }} <{{ item.sc_ja_url }}>`_","{{ item.level }}","
+{%- for gl in item.gls %}
+   *  {{ gl.category }}： :ref:`{{ gl.gl }}`
+{%- endfor %}"
 {%- endfor %}
 

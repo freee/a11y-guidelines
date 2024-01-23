@@ -14,8 +14,8 @@
 {%- for sc in gl.scs %}
    *  達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
 
-      -  {{ sc.sc_en }}
-      -  {{ sc.sc_ja }}
+      -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
+      -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
 
 {% endfor -%}
 {% if gl.info is defined -%}

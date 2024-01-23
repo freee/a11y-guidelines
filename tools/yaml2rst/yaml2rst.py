@@ -105,11 +105,6 @@ def main():
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['faq_tags'])
 
-    for sc in wcag_sc:
-        wcag_sc[sc]['gls'] = []
-        wcag_sc[sc]['en']['linkCode'] = f'`{wcag_sc[sc]["en"]["title"]} <{wcag_sc[sc]["en"]["url"]}>`_'
-        wcag_sc[sc]['ja']['linkCode'] = f'`{wcag_sc[sc]["ja"]["title"]} <{wcag_sc[sc]["ja"]["url"]}>`_'
-
     category_pages = {}
     guideline_category_target = []
     for cat in category_names:
@@ -124,6 +119,8 @@ def main():
     for gl in guidelines:
         gl_categories[gl['id']] = category_names[gl['category']][LANG]
         for sc in gl['sc']:
+            if not 'gls' in wcag_sc[sc]:
+                wcag_sc[sc]['gls'] = []
             wcag_sc[sc]['gls'].append(gl['id'])
 
         if not 'info' in gl:
@@ -314,8 +311,10 @@ def main():
         for sc in gl['sc']:
             gl_str['scs'].append({
                 'sc': sc,
-                'sc_en': wcag_sc[sc]['en']['linkCode'],
-                'sc_ja': wcag_sc[sc]['ja']['linkCode'],
+                'sc_en_title': wcag_sc[sc]['en']['title'],
+                'sc_en_url': wcag_sc[sc]['en']['url'],
+                'sc_ja_title': wcag_sc[sc]['ja']['title'],
+                'sc_ja_url': wcag_sc[sc]['ja']['url'],
                 'sc_level': wcag_sc[sc]['level']
             })
 
@@ -430,18 +429,22 @@ def main():
     if build_all or STATIC_FILES['wcag21mapping'] in targets:
         sc_mapping = []
         for sc in wcag_sc:
-            if len(wcag_sc[sc]['gls']) == 0:
+            if not 'gls' in wcag_sc[sc]:
                 continue
             gls = []
             for gl in wcag_sc[sc]['gls']:
-                gls.append(f'*  {gl_categories[gl]}： :ref:`{gl}`')
-            gls_str = '\n   '.join(gls)
+                gls.append({
+                    'category': gl_categories[gl],
+                    'gl': gl
+                })
             mapping = {
                 'sc': sc,
-                'sc_en': wcag_sc[sc]['en']['linkCode'],
-                'sc_ja': wcag_sc[sc]['ja']['linkCode'],
+                'sc_en_title': wcag_sc[sc]['en']['title'],
+                'sc_en_url': wcag_sc[sc]['en']['url'],
+                'sc_ja_title': wcag_sc[sc]['ja']['title'],
+                'sc_ja_url': wcag_sc[sc]['ja']['url'],
                 'level': wcag_sc[sc]['level'],
-                'gls': gls_str
+                'gls': gls
             }
             sc_mapping.append(mapping)
         write_rst(templates['wcag21mapping'], {'mapping': sc_mapping}, STATIC_FILES['wcag21mapping'])
@@ -453,8 +456,10 @@ def main():
                 continue
             diff = {
                 'sc': sc,
-                'sc_en': wcag_sc[sc]['en']['linkCode'],
-                'sc_ja': wcag_sc[sc]['ja']['linkCode'],
+                'sc_en_title': wcag_sc[sc]['en']['title'],
+                'sc_en_url': wcag_sc[sc]['en']['url'],
+                'sc_ja_title': wcag_sc[sc]['ja']['title'],
+                'sc_ja_url': wcag_sc[sc]['ja']['url'],
                 'level': wcag_sc[sc]['level'],
                 'LocalLevel': wcag_sc[sc]['localPriority']
             }
