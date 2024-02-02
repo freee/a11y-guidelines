@@ -3,6 +3,6 @@
 {%- endfilter %}
 
 {% for gl in guidelines -%}
-*  {{ gl.category }}： :ref:`{{ gl.id }}`
+*  {{ gl.category }}： :ref:`{{ gl.guideline }}`
 {% endfor %}
 

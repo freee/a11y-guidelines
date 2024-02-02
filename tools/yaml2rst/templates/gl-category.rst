@@ -22,12 +22,12 @@
 参考情報
 {%- for item in gl.info %}
    *  {{ item }}
-{% endfor -%}
+{%- endfor %}
 {%- endif %}
-{%- if gl.faqrefs is defined -%}
+{% if gl.faqs is defined -%}
 関連FAQ
-{%- for item in gl.faqrefs %}
-   *  {{ item }}
+{%- for item in gl.faqs %}
+   *  :ref:`faq-{{ item }}`
 {% endfor %}
 {%- endif %}
 
@@ -55,8 +55,6 @@
 {% if check.procedures is defined %}
 {% include 'checks/procedure.rst' %}
 {% endif %}
-
 {%- endfor %}
-
 {% endfor %}
 

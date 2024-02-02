@@ -15,18 +15,18 @@
 重篤度
    {{ check.severity }}
 関連ガイドライン項目
-{%- for ref in check.gl_refs %}
-   *  {{ ref.category }}： :ref:`{{ ref.glref }}`
+{%- for ref in check.guidelines %}
+   *  {{ ref.category }}： :ref:`{{ ref.guideline }}`
 {%- endfor %}
-{% if check.faqrefs is defined -%}
+{% if check.faqs is defined -%}
 関連FAQ
-{%- for item in check.faqrefs %}
-   *  {{ item }}
+{%- for item in check.faqs %}
+   *  :ref:`faq-{{ item }}`
 {%- endfor %}
 {%- endif %}
-{% if check.inforefs is defined -%}
+{% if check.info_refs is defined -%}
 参考情報
-{%- for item in check.inforefs %}
+{%- for item in check.info_refs %}
    *  {{ item }}
 {%- endfor %}
 {%- endif %}

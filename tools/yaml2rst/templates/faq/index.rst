@@ -29,7 +29,7 @@
 FAQ記事一覧
 {%- endfilter %}
 
-{% for f in files -%}
-*  :ref:`faq-{{ f.id }}` （{{ f.updated_year }}年{{ f.updated_month }}月{{ f.updated_day }}日更新）
+{% for article in articles -%}
+*  :ref:`faq-{{ article.id }}` （{{ article.updated_year }}年{{ article.updated_month }}月{{ article.updated_day }}日更新）
 {% endfor %}
 

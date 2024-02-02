@@ -3,8 +3,8 @@
 実装方法の例：{{ impl.title }}
 {%- endfilter %}
 
-{% for ex in impl.examples -%}
-{{ ex.platform }}
-   {{ ex.method | indent(3) }}
+{% for method in impl.methods -%}
+{{ method.platform }}
+   {{ method.method | indent(3) }}
 {% endfor %}
 {% endfor %}
