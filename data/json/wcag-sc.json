@@ -1,5 +1,6 @@
 {
   "1.1.1": {
+    "id": "1.1.1",
     "sortKey": "10101",
     "en": {
       "title": "Non-text Content",
@@ -13,6 +14,7 @@
     "localPriority": "A"
   },
   "1.2.1": {
+    "id": "1.2.1",
     "sortKey": "10201",
     "en": {
       "title": "Audio-only and Video-only (Prerecorded)",
@@ -26,6 +28,7 @@
     "localPriority": "A"
   },
   "1.2.2": {
+    "id": "1.2.2",
     "sortKey": "10202",
     "en": {
       "title": "Captions (Prerecorded)",
@@ -39,6 +42,7 @@
     "localPriority": "A"
   },
   "1.2.3": {
+    "id": "1.2.3",
     "sortKey": "10203",
     "en": {
       "title": "Audio Description or Media Alternative (Prerecorded)",
@@ -52,6 +56,7 @@
     "localPriority": "A"
   },
   "1.2.4": {
+    "id": "1.2.4",
     "sortKey": "10204",
     "en": {
       "title": "Captions (Live)",
@@ -65,6 +70,7 @@
     "localPriority": "AA"
   },
   "1.2.5": {
+    "id": "1.2.5",
     "sortKey": "10205",
     "en": {
       "title": "Audio Description (Prerecorded)",
@@ -78,6 +84,7 @@
     "localPriority": "AA"
   },
   "1.2.6": {
+    "id": "1.2.6",
     "sortKey": "10206",
     "en": {
       "title": "Sign Language (Prerecorded)",
@@ -91,6 +98,7 @@
     "localPriority": "AA"
   },
   "1.2.7": {
+    "id": "1.2.7",
     "sortKey": "10207",
     "en": {
       "title": "Extended Audio Description (Prerecorded)",
@@ -104,6 +112,7 @@
     "localPriority": "AAA"
   },
   "1.2.8": {
+    "id": "1.2.8",
     "sortKey": "10208",
     "en": {
       "title": "Media Alternative (Prerecorded)",
@@ -117,6 +126,7 @@
     "localPriority": "AAA"
   },
   "1.2.9": {
+    "id": "1.2.9",
     "sortKey": "10209",
     "en": {
       "title": "Audio-only (Live)",
@@ -130,6 +140,7 @@
     "localPriority": "AAA"
   },
   "1.3.1": {
+    "id": "1.3.1",
     "sortKey": "10301",
     "en": {
       "title": "Info and Relationships",
@@ -143,6 +154,7 @@
     "localPriority": "A"
   },
   "1.3.2": {
+    "id": "1.3.2",
     "sortKey": "10302",
     "en": {
       "title": "Meaningful Sequence",
@@ -156,6 +168,7 @@
     "localPriority": "A"
   },
   "1.3.3": {
+    "id": "1.3.3",
     "sortKey": "10303",
     "en": {
       "title": "Sensory Characteristics",
@@ -169,6 +182,7 @@
     "localPriority": "A"
   },
   "1.3.4": {
+    "id": "1.3.4",
     "sortKey": "10304",
     "en": {
       "title": "Orientation",
@@ -182,6 +196,7 @@
     "localPriority": "A"
   },
   "1.3.5": {
+    "id": "1.3.5",
     "sortKey": "10305",
     "en": {
       "title": "Identify Input Purpose",
@@ -195,6 +210,7 @@
     "localPriority": "AAA"
   },
   "1.3.6": {
+    "id": "1.3.6",
     "sortKey": "10306",
     "en": {
       "title": "Identify Purpose",
@@ -208,6 +224,7 @@
     "localPriority": "AAA"
   },
   "1.4.1": {
+    "id": "1.4.1",
     "sortKey": "10401",
     "en": {
       "title": "Use of Color",
@@ -221,6 +238,7 @@
     "localPriority": "A"
   },
   "1.4.2": {
+    "id": "1.4.2",
     "sortKey": "10402",
     "en": {
       "title": "Audio Control",
@@ -234,6 +252,7 @@
     "localPriority": "A"
   },
   "1.4.3": {
+    "id": "1.4.3",
     "sortKey": "10403",
     "en": {
       "title": "Contrast (Minimum)",
@@ -247,6 +266,7 @@
     "localPriority": "A"
   },
   "1.4.4": {
+    "id": "1.4.4",
     "sortKey": "10404",
     "en": {
       "title": "Resize text",
@@ -260,6 +280,7 @@
     "localPriority": "A"
   },
   "1.4.5": {
+    "id": "1.4.5",
     "sortKey": "10405",
     "en": {
       "title": "Images of Text",
@@ -273,6 +294,7 @@
     "localPriority": "AA"
   },
   "1.4.6": {
+    "id": "1.4.6",
     "sortKey": "10406",
     "en": {
       "title": "Contrast (Enhanced)",
@@ -286,6 +308,7 @@
     "localPriority": "AA"
   },
   "1.4.7": {
+    "id": "1.4.7",
     "sortKey": "10407",
     "en": {
       "title": "Low or No Background Audio",
@@ -299,6 +322,7 @@
     "localPriority": "AA"
   },
   "1.4.8": {
+    "id": "1.4.8",
     "sortKey": "10408",
     "en": {
       "title": "Visual Presentation",
@@ -312,6 +336,7 @@
     "localPriority": "AAA"
   },
   "1.4.9": {
+    "id": "1.4.9",
     "sortKey": "10409",
     "en": {
       "title": "Images of Text (No Exception)",
@@ -325,6 +350,7 @@
     "localPriority": "AA"
   },
   "1.4.10": {
+    "id": "1.4.10",
     "sortKey": "10410",
     "en": {
       "title": "Reflow",
@@ -338,6 +364,7 @@
     "localPriority": "AA"
   },
   "1.4.11": {
+    "id": "1.4.11",
     "sortKey": "10411",
     "en": {
       "title": "Non-text Contrast",
@@ -351,6 +378,7 @@
     "localPriority": "A"
   },
   "1.4.12": {
+    "id": "1.4.12",
     "sortKey": "10412",
     "en": {
       "title": "Text Spacing",
@@ -364,6 +392,7 @@
     "localPriority": "A"
   },
   "1.4.13": {
+    "id": "1.4.13",
     "sortKey": "10413",
     "en": {
       "title": "Content on Hover or Focus",
@@ -377,6 +406,7 @@
     "localPriority": "一部A"
   },
   "2.1.1": {
+    "id": "2.1.1",
     "sortKey": "20101",
     "en": {
       "title": "Keyboard",
@@ -390,6 +420,7 @@
     "localPriority": "A"
   },
   "2.1.2": {
+    "id": "2.1.2",
     "sortKey": "20102",
     "en": {
       "title": "No Keyboard Trap",
@@ -403,6 +434,7 @@
     "localPriority": "A"
   },
   "2.1.3": {
+    "id": "2.1.3",
     "sortKey": "20103",
     "en": {
       "title": "Keyboard (No Exception)",
@@ -416,6 +448,7 @@
     "localPriority": "A"
   },
   "2.1.4": {
+    "id": "2.1.4",
     "sortKey": "20104",
     "en": {
       "title": "Character Key Shortcuts",
@@ -429,6 +462,7 @@
     "localPriority": "A"
   },
   "2.2.1": {
+    "id": "2.2.1",
     "sortKey": "20201",
     "en": {
       "title": "Timing Adjustable",
@@ -442,6 +476,7 @@
     "localPriority": "A"
   },
   "2.2.2": {
+    "id": "2.2.2",
     "sortKey": "20202",
     "en": {
       "title": "Pause, Stop, Hide",
@@ -455,6 +490,7 @@
     "localPriority": "A"
   },
   "2.2.3": {
+    "id": "2.2.3",
     "sortKey": "20203",
     "en": {
       "title": "No Timing",
@@ -468,6 +504,7 @@
     "localPriority": "AA"
   },
   "2.2.4": {
+    "id": "2.2.4",
     "sortKey": "20204",
     "en": {
       "title": "Interruptions",
@@ -481,6 +518,7 @@
     "localPriority": "AA"
   },
   "2.2.5": {
+    "id": "2.2.5",
     "sortKey": "20205",
     "en": {
       "title": "Re-authenticating",
@@ -494,6 +532,7 @@
     "localPriority": "AA"
   },
   "2.2.6": {
+    "id": "2.2.6",
     "sortKey": "20206",
     "en": {
       "title": "Timeouts",
@@ -507,6 +546,7 @@
     "localPriority": "AAA"
   },
   "2.3.1": {
+    "id": "2.3.1",
     "sortKey": "20301",
     "en": {
       "title": "Three Flashes or Below Threshold",
@@ -520,6 +560,7 @@
     "localPriority": "A"
   },
   "2.3.2": {
+    "id": "2.3.2",
     "sortKey": "20302",
     "en": {
       "title": "Three Flashes",
@@ -533,6 +574,7 @@
     "localPriority": "A"
   },
   "2.3.3": {
+    "id": "2.3.3",
     "sortKey": "20303",
     "en": {
       "title": "Animation from Interactions",
@@ -546,6 +588,7 @@
     "localPriority": "AAA"
   },
   "2.4.1": {
+    "id": "2.4.1",
     "sortKey": "20401",
     "en": {
       "title": "Bypass Blocks",
@@ -559,6 +602,7 @@
     "localPriority": "A"
   },
   "2.4.2": {
+    "id": "2.4.2",
     "sortKey": "20402",
     "en": {
       "title": "Page Titled",
@@ -572,6 +616,7 @@
     "localPriority": "A"
   },
   "2.4.3": {
+    "id": "2.4.3",
     "sortKey": "20403",
     "en": {
       "title": "Focus Order",
@@ -585,6 +630,7 @@
     "localPriority": "A"
   },
   "2.4.4": {
+    "id": "2.4.4",
     "sortKey": "20404",
     "en": {
       "title": "Link Purpose (In Context)",
@@ -598,6 +644,7 @@
     "localPriority": "A"
   },
   "2.4.5": {
+    "id": "2.4.5",
     "sortKey": "20405",
     "en": {
       "title": "Multiple Ways",
@@ -611,6 +658,7 @@
     "localPriority": "AA"
   },
   "2.4.6": {
+    "id": "2.4.6",
     "sortKey": "20406",
     "en": {
       "title": "Headings and Labels",
@@ -624,6 +672,7 @@
     "localPriority": "A"
   },
   "2.4.7": {
+    "id": "2.4.7",
     "sortKey": "20407",
     "en": {
       "title": "Focus Visible",
@@ -637,6 +686,7 @@
     "localPriority": "A"
   },
   "2.4.8": {
+    "id": "2.4.8",
     "sortKey": "20408",
     "en": {
       "title": "Location",
@@ -650,6 +700,7 @@
     "localPriority": "AA"
   },
   "2.4.9": {
+    "id": "2.4.9",
     "sortKey": "20409",
     "en": {
       "title": "Link Purpose (Link Only)",
@@ -663,6 +714,7 @@
     "localPriority": "AAA"
   },
   "2.4.10": {
+    "id": "2.4.10",
     "sortKey": "20410",
     "en": {
       "title": "Section Headings",
@@ -676,6 +728,7 @@
     "localPriority": "AA"
   },
   "2.5.1": {
+    "id": "2.5.1",
     "sortKey": "20501",
     "en": {
       "title": "Pointer Gestures",
@@ -689,6 +742,7 @@
     "localPriority": "A"
   },
   "2.5.2": {
+    "id": "2.5.2",
     "sortKey": "20502",
     "en": {
       "title": "Pointer Cancellation",
@@ -702,6 +756,7 @@
     "localPriority": "A"
   },
   "2.5.3": {
+    "id": "2.5.3",
     "sortKey": "20503",
     "en": {
       "title": "Label in Name",
@@ -715,6 +770,7 @@
     "localPriority": "A"
   },
   "2.5.4": {
+    "id": "2.5.4",
     "sortKey": "20504",
     "en": {
       "title": "Motion Actuation",
@@ -728,6 +784,7 @@
     "localPriority": "A"
   },
   "2.5.5": {
+    "id": "2.5.5",
     "sortKey": "20505",
     "en": {
       "title": "Target Size",
@@ -741,6 +798,7 @@
     "localPriority": "AA"
   },
   "2.5.6": {
+    "id": "2.5.6",
     "sortKey": "20506",
     "en": {
       "title": "Concurrent Input Mechanisms",
@@ -754,6 +812,7 @@
     "localPriority": "AAA"
   },
   "3.1.1": {
+    "id": "3.1.1",
     "sortKey": "30101",
     "en": {
       "title": "Language of Page",
@@ -767,6 +826,7 @@
     "localPriority": "A"
   },
   "3.1.2": {
+    "id": "3.1.2",
     "sortKey": "30102",
     "en": {
       "title": "Language of Parts",
@@ -780,6 +840,7 @@
     "localPriority": "AA"
   },
   "3.1.3": {
+    "id": "3.1.3",
     "sortKey": "30103",
     "en": {
       "title": "Unusual Words",
@@ -793,6 +854,7 @@
     "localPriority": "AAA"
   },
   "3.1.4": {
+    "id": "3.1.4",
     "sortKey": "30104",
     "en": {
       "title": "Abbreviations",
@@ -806,6 +868,7 @@
     "localPriority": "AAA"
   },
   "3.1.5": {
+    "id": "3.1.5",
     "sortKey": "30105",
     "en": {
       "title": "Reading Level",
@@ -819,6 +882,7 @@
     "localPriority": "AAA"
   },
   "3.1.6": {
+    "id": "3.1.6",
     "sortKey": "30106",
     "en": {
       "title": "Pronunciation",
@@ -832,6 +896,7 @@
     "localPriority": "AAA"
   },
   "3.2.1": {
+    "id": "3.2.1",
     "sortKey": "30201",
     "en": {
       "title": "On Focus",
@@ -845,6 +910,7 @@
     "localPriority": "A"
   },
   "3.2.2": {
+    "id": "3.2.2",
     "sortKey": "30202",
     "en": {
       "title": "On Input",
@@ -858,6 +924,7 @@
     "localPriority": "A"
   },
   "3.2.3": {
+    "id": "3.2.3",
     "sortKey": "30203",
     "en": {
       "title": "Consistent Navigation",
@@ -871,6 +938,7 @@
     "localPriority": "A"
   },
   "3.2.4": {
+    "id": "3.2.4",
     "sortKey": "30204",
     "en": {
       "title": "Consistent Identification",
@@ -884,6 +952,7 @@
     "localPriority": "A"
   },
   "3.2.5": {
+    "id": "3.2.5",
     "sortKey": "30205",
     "en": {
       "title": "Change on Request",
@@ -897,6 +966,7 @@
     "localPriority": "AAA"
   },
   "3.3.1": {
+    "id": "3.3.1",
     "sortKey": "30301",
     "en": {
       "title": "Error Identification",
@@ -910,6 +980,7 @@
     "localPriority": "A"
   },
   "3.3.2": {
+    "id": "3.3.2",
     "sortKey": "30302",
     "en": {
       "title": "Labels or Instructions",
@@ -923,6 +994,7 @@
     "localPriority": "A"
   },
   "3.3.3": {
+    "id": "3.3.3",
     "sortKey": "30303",
     "en": {
       "title": "Error Suggestion",
@@ -936,6 +1008,7 @@
     "localPriority": "AA"
   },
   "3.3.4": {
+    "id": "3.3.4",
     "sortKey": "30304",
     "en": {
       "title": "Error Prevention (Legal, Financial, Data)",
@@ -949,6 +1022,7 @@
     "localPriority": "AA"
   },
   "3.3.5": {
+    "id": "3.3.5",
     "sortKey": "30305",
     "en": {
       "title": "Help",
@@ -962,6 +1036,7 @@
     "localPriority": "AAA"
   },
   "3.3.6": {
+    "id": "3.3.6",
     "sortKey": "30306",
     "en": {
       "title": "Error Prevention (All)",
@@ -975,6 +1050,7 @@
     "localPriority": "AAA"
   },
   "4.1.1": {
+    "id": "4.1.1",
     "sortKey": "40101",
     "en": {
       "title": "Parsing",
@@ -988,6 +1064,7 @@
     "localPriority": "A"
   },
   "4.1.2": {
+    "id": "4.1.2",
     "sortKey": "40102",
     "en": {
       "title": "Name, Role, Value",
@@ -1001,6 +1078,7 @@
     "localPriority": "A"
   },
   "4.1.3": {
+    "id": "4.1.3",
     "sortKey": "40103",
     "en": {
       "title": "Status Messages",
