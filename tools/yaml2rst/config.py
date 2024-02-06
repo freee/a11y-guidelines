@@ -106,8 +106,7 @@ IMPLEMENTATION_TARGETS = {
 }
 
 # Directories
-CWD = os.getcwd()
-DATA_DIR = os.path.join(CWD, 'data')
+DATA_DIR = 'data'
 YAML_DIR = os.path.join(DATA_DIR, 'yaml')
 JSON_DIR = os.path.join(DATA_DIR, 'json')
 DEST_DIR_BASE = 'source'
@@ -172,10 +171,10 @@ def get_dest_dirnames(lang):
     """
     if len(AVAILABLE_LANGUAGES) == 1:
         lang = ''
-    inc_dest_dir = os.path.join(CWD, lang, DEST_DIR_BASE, 'inc')
-    faq_dest_dir = os.path.join(CWD, lang, DEST_DIR_BASE, 'faq')
+    inc_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'inc')
+    faq_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'faq')
     return {
-        'base': os.path.join(CWD, lang),
+        'base': lang,
         'guidelines': os.path.join(inc_dest_dir, 'gl'),
         'checks': os.path.join(inc_dest_dir, 'checks'),
         'misc': os.path.join(inc_dest_dir, 'misc'),

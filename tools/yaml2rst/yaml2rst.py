@@ -175,7 +175,7 @@ def main():
     for info in InfoRef.get_all_internals():
         if len(info.guidelines) > 0:
             filename = f'{info.ref}.rst'
-            destfile = os.path.join(os.getcwd(), DEST_DIRS['info2gl'], filename)
+            destfile = os.path.join(DEST_DIRS['info2gl'], filename)
             if build_all or destfile in targets:
                 write_rst(templates['info_to_gl'], {'guidelines': info.get_guidelines(LANG)}, destfile)
 
@@ -183,7 +183,7 @@ def main():
     for info in InfoRef.get_all_internals():
         if len(info.faqs) > 0:
             filename = f'{info.ref}.rst'
-            destfile = os.path.join(os.getcwd(), DEST_DIRS['info2faq'], filename)
+            destfile = os.path.join(DEST_DIRS['info2faq'], filename)
             makefile_vars_list['info_to_faq_target'].append(destfile)
             if build_all or destfile in targets:
                 write_rst(templates['info_to_faq'], {'faqs': info.get_faqs()}, destfile)
@@ -244,13 +244,13 @@ def main():
         for info in InfoRef.get_all_internals():
             if len(info.guidelines) > 0:
                 filename = f'{info.ref}.rst'
-                destfile = os.path.join(os.getcwd(), DEST_DIRS['info2gl'], filename)
+                destfile = os.path.join(DEST_DIRS['info2gl'], filename)
                 makefile_vars_list['info_to_gl_target'].append(destfile)
                 build_depends.append({'target': destfile, 'depends': ' '.join([guideline.src_path for guideline in info.guidelines])})
 
             if info.internal and len(info.faqs) > 0:
                 filename = f'{info.ref}.rst'
-                destfile = os.path.join(os.getcwd(), DEST_DIRS['info2faq'], filename)
+                destfile = os.path.join(DEST_DIRS['info2faq'], filename)
                 makefile_vars_list['info_to_faq_target'].append(destfile)
                 build_depends.append({'target': destfile, 'depends': ' '.join([faq.src_path for faq in info.faqs])})
 
