@@ -15,7 +15,7 @@ ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_ca
 {{ faq_index_target }}: {{ faq_yaml }}
 	@$(YAML2RST) $@
 
-{% for item in other_deps %}
-{{ item.dep }}
+{% for item in depends %}
+{{ item.target }}: {{ item.depends }}
 	@$(YAML2RST) {{ item.target }}
 {% endfor %}

@@ -9,7 +9,7 @@ FAQ記事一覧
 .. toctree::
    :maxdepth: 1
    :titlesonly:
-{% for f in files %}
-   {{ f.id }}
+{% for article in articles %}
+   {{ article.id }}
 {%- endfor %}
 

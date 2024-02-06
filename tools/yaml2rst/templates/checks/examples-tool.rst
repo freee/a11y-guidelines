@@ -1,11 +1,11 @@
 {% for ex in examples -%}
-.. _check-example-{{ ex.tool }}-{{ ex.id }}:
+.. _check-example-{{ ex.tool }}-{{ ex.check_id }}:
 
 {% filter make_heading(2) -%}
-:ref:`check-{{ ex.id }}`
+:ref:`check-{{ ex.check_id }}`
 {%- endfilter %}
 
-   {{ ex.check | indent(3) }}
+   {{ ex.check_text | indent(3) }}
 
 {{ ex.technique }}
 {% if ex.note is defined %}

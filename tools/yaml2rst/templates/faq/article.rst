@@ -33,7 +33,7 @@
 {%- endfilter %}
 
 {% for gl in guidelines -%}
-*  {{ gl.category }}： :ref:`{{ gl.id }}`
+*  {{ gl.category }}： :ref:`{{ gl.guideline }}`
 {% endfor %}
 {%- endif %}
 
@@ -54,7 +54,7 @@
 {%- endfilter %}
 
 {% for i in info -%}
-*  :ref:`{{ i }}`
+*  {{ i }}
 {% endfor %}
 {%- endif %}
 

@@ -3,7 +3,7 @@
 チェック手順： {{ proc.platform }}
 {%- endfilter %}
 
-{{ proc.text }}
+{{ proc.procedure }}
 
 {% if proc.techniques is defined -%}
 

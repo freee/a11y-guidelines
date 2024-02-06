@@ -12,22 +12,22 @@
    {{ gl.intent | indent(3) }}
 対応するWCAG 2.1の達成基準
 {%- for sc in gl.scs %}
-   *  達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
+   *  達成基準{{ sc.sc }}(レベル{{ sc.level }})：
 
-      -  {{ sc.sc_en }}
-      -  {{ sc.sc_ja }}
+      -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
+      -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
 
 {% endfor -%}
 {% if gl.info is defined -%}
 参考情報
 {%- for item in gl.info %}
    *  {{ item }}
-{% endfor -%}
+{%- endfor %}
 {%- endif %}
-{%- if gl.faqrefs is defined -%}
+{% if gl.faqs is defined -%}
 関連FAQ
-{%- for item in gl.faqrefs %}
-   *  {{ item }}
+{%- for item in gl.faqs %}
+   *  :ref:`faq-{{ item }}`
 {% endfor %}
 {%- endif %}
 
@@ -55,8 +55,6 @@
 {% if check.procedures is defined %}
 {% include 'checks/procedure.rst' %}
 {% endif %}
-
 {%- endfor %}
-
 {% endfor %}
 
