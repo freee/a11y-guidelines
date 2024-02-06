@@ -401,7 +401,7 @@ class WCAG_SC:
     def template_object(self, lang):
         template_object =  {
             'sc': self.id,
-            'sc_level': self.level,
+            'level': self.level,
             'LocalLevel': self.localPriority,
             'sc_en_title': self.title['en'],
             'sc_ja_title': self.title['ja'],

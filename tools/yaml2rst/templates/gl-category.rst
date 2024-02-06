@@ -12,7 +12,7 @@
    {{ gl.intent | indent(3) }}
 対応するWCAG 2.1の達成基準
 {%- for sc in gl.scs %}
-   *  達成基準{{ sc.sc }}(レベル{{ sc.sc_level }})：
+   *  達成基準{{ sc.sc }}(レベル{{ sc.level }})：
 
       -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
       -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
