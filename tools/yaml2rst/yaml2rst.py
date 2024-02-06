@@ -44,7 +44,7 @@ def main():
     makefile_vars = {
         'all_checks_target': STATIC_FILES['all_checks'],
         'faq_index_target': " ".join([STATIC_FILES[key] for key in ['faq_index', 'faq_tag_index', 'faq_article_index']]),
-        'wcag21mapping_target': STATIC_FILES['wcag21mapping'],
+        'wcag_mapping_target': STATIC_FILES['wcag21mapping'],
         'priority_diff_target': STATIC_FILES['priority_diff'],
         'miscdefs_target': STATIC_FILES['miscdefs'],
         'wcag_sc': MISC_INFO_SRCFILES['wcag_sc'],
