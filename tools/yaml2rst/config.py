@@ -206,5 +206,3 @@ def get_static_dest_files(lang):
         'faq_tag_index': os.path.join(dest_dirnames['faq_tags'], FAQ_INDEX_FILENAME),
         'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME)
     }
-
-

@@ -619,7 +619,7 @@ class Technique:
             'technique': self.technique[lang]
         }
         if self.note:
-            template_object['note'] = self.note[lang]        
+            template_object['note'] = self.note[lang]
         if self.YouTube:
             template_object['YouTube'] = self.YouTube.template_object()
         return template_object
@@ -634,7 +634,7 @@ class YouTube:
             'id': self.id,
             'title': self.title
         }
-    
+
 class Implementation:
     def __init__(self, title, methods):
         self.title = title
@@ -671,7 +671,7 @@ class Method:
             'platform': IMPLEMENTATION_TARGETS[self.platform][lang],
             'method': self.method
         }
-    
+
 class CheckTool:
     all_tools = {}
 
@@ -702,7 +702,7 @@ class CheckTool:
         }
         example_objects = []
         for example in self.examples:
-            example_objects.append(example.template_object(lang)) 
+            example_objects.append(example.template_object(lang))
         template_object['examples'] = sorted(example_objects, key=lambda item: item['check_id'])
         return template_object
 
