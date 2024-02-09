@@ -391,8 +391,6 @@ class FAQ:
         if 'sort_by' in kwargs:
             if kwargs['sort_by'] == 'date':
                 return sorted(cls.all_faqs.values(), key=lambda faq: faq.updated, reverse=True)
-            elif kwargs['sort_by'] == 'sortKey':
-                return sorted(cls.all_faqs.values(), key=lambda faq: faq.sortKey)
         return sorted(cls.all_faqs.values(), key=lambda faq: faq.sortKey)
 
 class Category:
@@ -413,8 +411,7 @@ class Category:
     def get_name(self, lang):
         if lang in self.names:
             return self.names[lang]
-        else:
-            return self.names['ja']
+        return self.names['ja']
 
     def get_dependency(self):
         rel = RelationshipManager()
@@ -448,8 +445,7 @@ class FAQ_Tag:
     def get_name(self, lang):
         if lang in self.names:
             return self.names[lang]
-        else:
-            return self.names['en']
+        return self.names['en']
 
     def get_faqs_ids(self):
         return sorted([str(faq.id) for faq in self.faqs])
@@ -480,7 +476,7 @@ class FAQ_Tag:
         if 'sort_by' in kwargs:
             if kwargs['sort_by'] == 'count':
                 return sorted(cls.all_tags.values(), key=lambda tag: tag.article_count(), reverse=True)
-            elif kwargs['sort_by'] == 'label':
+            if kwargs['sort_by'] == 'label':
                 return sorted(cls.all_tags.values(), key=lambda tag: tag.names['en'])
         return cls.all_tags.values()
 
@@ -534,10 +530,9 @@ class InfoRef:
         ref_id = url_encode(ref)
         if ref_id in cls.all_inforefs:
             return cls.all_inforefs[ref_id]
-        else:
-            instance = super(InfoRef, cls).__new__(cls)
-            cls.all_inforefs[ref_id] = instance
-            return instance
+        instance = super(InfoRef, cls).__new__(cls)
+        cls.all_inforefs[ref_id] = instance
+        return instance
 
     def __init__(self, inforef):
         if hasattr(self, 'initialized'):
@@ -550,8 +545,7 @@ class InfoRef:
     def refstring(self):
         if self.internal:
             return f':ref:`{self.ref}`'
-        else:
-            return self.ref
+        return self.ref
 
     @classmethod
     def get_all_internals(cls):
@@ -687,8 +681,7 @@ class CheckTool:
     def get_name(self, lang):
         if lang in self.names:
             return self.names[lang]
-        else:
-            return self.names['ja']
+        return self.names['ja']
 
     def get_dependency(self):
         dependency = []
