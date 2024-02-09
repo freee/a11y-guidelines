@@ -447,13 +447,6 @@ class FAQ_Tag:
             return self.names[lang]
         return self.names['en']
 
-    def get_faqs_ids(self):
-        return sorted([str(faq.id) for faq in self.faqs])
-
-    def get_dependency(self):
-        dependency = [faq.src_path for faq in self.faqs]
-        return uniq(dependency)
-
     def template_object(self, lang):
         rel = RelationshipManager()
         faqs = rel.get_tag_to_faqs(self)
