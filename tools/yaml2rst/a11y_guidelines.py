@@ -45,12 +45,12 @@ class RelationshipManager:
     def get_guidelines_to_category(self):
         mapping = {}
         for category, guidelines in self.category_to_guidelines.items():
-            sorted_guidelines = sorted(guidelines, key=lambda item: item.sortKey)
+            sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
             mapping[category] = sorted_guidelines
         return mapping
 
     def get_category_to_guidelines(self, category):
-        return sorted(self.category_to_guidelines[category.id], key=lambda item: item.sortKey)
+        return sorted(self.category_to_guidelines[category.id], key=lambda item: item.sort_key)
 
     def associate_guideline_with_check(self, guideline, check):
         if guideline.id not in self.guideline_to_checks:
@@ -63,7 +63,7 @@ class RelationshipManager:
             self.check_to_guidelines[check.id].append(guideline)
 
     def get_check_to_guidelines(self, check):
-        return sorted(self.check_to_guidelines[check.id], key=lambda item: item.sortKey)
+        return sorted(self.check_to_guidelines[check.id], key=lambda item: item.sort_key)
 
     def get_guideline_to_checks(self, guideline):
         return sorted(self.guideline_to_checks[guideline.id], key=lambda item: item.id)
@@ -79,12 +79,12 @@ class RelationshipManager:
             self.sc_to_guidelines[sc.id].append(guideline)
 
     def get_guideline_to_scs(self, guideline):
-        return sorted(self.guideline_to_scs[guideline.id], key=lambda item: item.sortKey)
+        return sorted(self.guideline_to_scs[guideline.id], key=lambda item: item.sort_key)
 
     def get_sc_to_guidelines(self, sc):
         if sc.id not in self.sc_to_guidelines:
             return []
-        return sorted(self.sc_to_guidelines[sc.id], key=lambda item: item.sortKey)
+        return sorted(self.sc_to_guidelines[sc.id], key=lambda item: item.sort_key)
 
     def associate_guideline_with_info(self, guideline, info):
         if guideline.id not in self.guideline_to_info:
@@ -201,7 +201,7 @@ class Guideline:
 
     def __init__(self, gl):
         self.id = gl['id']
-        self.sortKey = gl['sortKey']
+        self.sort_key = gl['sortKey']
         self.title = gl['title']
         self.platform = gl['platform']
         self.guideline = gl['guideline']
@@ -213,7 +213,7 @@ class Guideline:
         for check_id in gl['checks']:
             rel.associate_guideline_with_check(self, Check.get_by_id(check_id))
         for sc in gl['sc']:
-            rel.associate_guideline_with_sc(self, WCAG_SC.get_by_id(sc))
+            rel.associate_guideline_with_sc(self, WcagSc.get_by_id(sc))
 
         if 'info' in gl:
             for info in gl['info']:
@@ -241,7 +241,7 @@ class Guideline:
         }
         faqs = rel.get_guideline_to_faqs(self)
         if len(faqs):
-            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sortKey)]
+            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
         info = rel.get_guideline_to_info(self)
         if len(info):
             template_object['info'] = [inforef.refstring() for inforef in info]
@@ -303,7 +303,7 @@ class Check:
             template_object['info_refs'] = [inforef.refstring() for inforef in info]
         faqs = rel.get_check_to_faqs(self)
         if len(faqs) > 0:
-            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sortKey)]
+            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
         for gl in rel.get_check_to_guidelines(self):
             template_object['guidelines'].append(gl.get_category_and_id(lang))
         return template_object
@@ -317,12 +317,12 @@ class Check:
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
         return [cls.all_checks[check_id].template_object(lang) for check_id in sorted_checks]
 
-class FAQ:
+class Faq:
     all_faqs = {}
 
     def __init__(self, faq):
         self.id = faq['id']
-        self.sortKey = faq['sortKey']
+        self.sort_key = faq['sortKey']
         self.updated = datetime.datetime.fromisoformat(faq['updated'])
         self.title = faq['title']
         self.problem = faq['problem']
@@ -336,7 +336,7 @@ class FAQ:
                 rel.associate_faq_with_guideline(self, Guideline.get_by_id(guideline_id))
 
         for tag in faq['tags']:
-            rel.associate_faq_with_tag(self, FAQ_Tag.get_by_id(tag))
+            rel.associate_faq_with_tag(self, FaqTag.get_by_id(tag))
 
         if 'checks' in faq:
             for check_id in faq['checks']:
@@ -346,7 +346,7 @@ class FAQ:
             for info in faq['info']:
                 rel.associate_faq_with_info(self, InfoRef(info))
 
-        FAQ.all_faqs[self.id] = self
+        Faq.all_faqs[self.id] = self
 
     def get_dependency(self):
         rel = RelationshipManager()
@@ -376,7 +376,7 @@ class FAQ:
         }
         guidelines = rel.get_faq_to_guidelines(self)
         if len(guidelines):
-            sorted_guidelines = sorted(guidelines, key=lambda item: item.sortKey)
+            sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
             template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in sorted_guidelines]
         checks = rel.get_faq_to_checks(self)
         if len(checks):
@@ -392,7 +392,7 @@ class FAQ:
         if 'sort_by' in kwargs:
             if kwargs['sort_by'] == 'date':
                 return sorted(cls.all_faqs.values(), key=lambda faq: faq.updated, reverse=True)
-        return sorted(cls.all_faqs.values(), key=lambda faq: faq.sortKey)
+        return sorted(cls.all_faqs.values(), key=lambda faq: faq.sort_key)
 
 class Category:
     all_categories = {}
@@ -431,13 +431,13 @@ class Category:
     def list_all(cls):
         return cls.all_categories.values()
 
-class FAQ_Tag:
+class FaqTag:
     all_tags = {}
 
     def __init__(self, tag_id, names):
         self.id = tag_id
         self.names = names
-        FAQ_Tag.all_tags[tag_id] = self
+        FaqTag.all_tags[tag_id] = self
 
     def article_count(self):
         rel = RelationshipManager()
@@ -453,7 +453,7 @@ class FAQ_Tag:
         faqs = rel.get_tag_to_faqs(self)
         if len(faqs) == 0:
             return None
-        sorted_faqs = sorted(faqs, key=lambda item: item.sortKey)
+        sorted_faqs = sorted(faqs, key=lambda item: item.sort_key)
         return {
             'tag': self.id,
             'label': self.names[lang],
@@ -474,14 +474,14 @@ class FAQ_Tag:
                 return sorted(cls.all_tags.values(), key=lambda tag: tag.names['en'])
         return cls.all_tags.values()
 
-class WCAG_SC:
+class WcagSc:
     all_scs = {}
 
     def __init__(self, sc):
         self.id = sc['id']
-        self.sortKey = sc['sortKey']
+        self.sort_key = sc['sortKey']
         self.level = sc['level']
-        self.localPriority = sc['localPriority']
+        self.local_priority = sc['localPriority']
         self.title = {
             'ja': sc['ja']['title'],
             'en': sc['en']['title']
@@ -490,14 +490,14 @@ class WCAG_SC:
             'ja': sc['ja']['url'],
             'en': sc['en']['url']
         }
-        WCAG_SC.all_scs[self.id] = self
+        WcagSc.all_scs[self.id] = self
 
     def template_object(self, lang):
         rel = RelationshipManager()
         template_object =  {
             'sc': self.id,
             'level': self.level,
-            'LocalLevel': self.localPriority,
+            'LocalLevel': self.local_priority,
             'sc_en_title': self.title['en'],
             'sc_ja_title': self.title['ja'],
             'sc_en_url': self.url['en'],
@@ -514,7 +514,7 @@ class WCAG_SC:
 
     @classmethod
     def get_all(cls):
-        sorted_keys = sorted(cls.all_scs.keys(), key=lambda sc: cls.all_scs[sc].sortKey)
+        sorted_keys = sorted(cls.all_scs.keys(), key=lambda sc: cls.all_scs[sc].sort_key)
         return {key: cls.get_by_id(key) for key in sorted_keys}
 
 class InfoRef:
@@ -595,9 +595,9 @@ class Technique:
         else:
             self.note = None
         if 'YouTube' in kwargs:
-            self.YouTube = YouTube(**kwargs['YouTube'])
+            self.youtube = YouTube(**kwargs['YouTube'])
         else:
-            self.YouTube = None
+            self.youtube = None
 
     def template_object(self, lang):
         if not self.tool_display_name:
@@ -608,8 +608,8 @@ class Technique:
         }
         if self.note:
             template_object['note'] = self.note[lang]
-        if self.YouTube:
-            template_object['YouTube'] = self.YouTube.template_object()
+        if self.youtube:
+            template_object['YouTube'] = self.youtube.template_object()
         return template_object
 
 class YouTube:
