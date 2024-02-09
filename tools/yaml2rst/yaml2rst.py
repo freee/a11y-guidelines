@@ -5,7 +5,7 @@ import argparse
 import unicodedata
 import yaml
 from jsonschema import validate, ValidationError, RefResolver
-from jinja2 import Template, Environment, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 from config import AVAILABLE_LANGUAGES, CHECK_TOOLS, SRCDIR, SCHEMA_FILENAMES, COMMON_SCHEMA_PATH, TEMPLATE_DIR, TEMPLATE_FILENAMES, MISC_INFO_SRCFILES, get_dest_dirnames, get_static_dest_files
 from a11y_guidelines import Category, WCAG_SC, InfoRef, Guideline, Check, FAQ, FAQ_Tag, CheckTool, RelationshipManager
 
