@@ -1,15 +1,13 @@
 import os
 import sys
-import re
-import yaml
 import json
-import unicodedata
-from jsonschema import validate, ValidationError, RefResolver
 import argparse
-from jinja2 import Template, Environment, FileSystemLoader
-import datetime
+import unicodedata
+import yaml
+from jsonschema import validate, ValidationError, RefResolver
+from jinja2 import Environment, FileSystemLoader
 from config import AVAILABLE_LANGUAGES, CHECK_TOOLS, SRCDIR, SCHEMA_FILENAMES, COMMON_SCHEMA_PATH, TEMPLATE_DIR, TEMPLATE_FILENAMES, MISC_INFO_SRCFILES, get_dest_dirnames, get_static_dest_files
-from a11y_guidelines import Category, WCAG_SC, InfoRef, Guideline, Check, FAQ, FAQ_Tag, CheckTool
+from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, RelationshipManager
 
 def main():
     args = parse_args()
@@ -65,7 +63,7 @@ def main():
     # Setup CheckTool instances
     for tool_id, tool_names in CHECK_TOOLS.items():
         CheckTool(tool_id, tool_names)
-    
+
     # Set up check instances
     files = ls_dir(SRCDIR['checks'])
     makefile_vars['check_yaml'] = ' '.join(files)
@@ -74,15 +72,15 @@ def main():
         check_duplicate_values(data['checks'], 'id', 'Check ID')
     for check in data['checks']:
         Check(check)
-    
+
     # Set up guideline category instances
     try:
         file_content = read_file_content(MISC_INFO_SRCFILES['gl_categories'])
         data['categories'] = json.loads(file_content)
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['gl_categories'])
-    for id, names in data['categories'].items():
-        Category(id, names)
+    for category_id, names in data['categories'].items():
+        Category(category_id, names)
 
     # Set up WCAG SC instances
     try:
@@ -91,8 +89,8 @@ def main():
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['wcag_sc'])
     for sc in data['wcag_sc'].values():
-        WCAG_SC(sc)
-    
+        WcagSc(sc)
+
     # Set up guideline instances
     files = ls_dir(SRCDIR['guidelines'])
     makefile_vars['gl_yaml'] = ' '.join(files)
@@ -109,8 +107,8 @@ def main():
         data['faq_tags'] = json.loads(file_content)
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['faq_tags'])
-    for id, names in data['faq_tags'].items():
-        FAQ_Tag(id, names)
+    for tag_id, names in data['faq_tags'].items():
+        FaqTag(tag_id, names)
 
     # Set up FAQ instances
     files = ls_dir(SRCDIR['faq'])
@@ -120,14 +118,15 @@ def main():
         check_duplicate_values(data['faqs'], 'id', 'FAQ ID')
         check_duplicate_values(data['faqs'], 'sortKey', 'FAQ sortKey')
     for faq in data['faqs']:
-        FAQ(faq)
+        Faq(faq)
 
+    rel = RelationshipManager()
     os.makedirs(DEST_DIRS['guidelines'], exist_ok=True)
-    for cat in Category.list_all():
-        filename = f'{cat.id}.rst'
+    for category, guidelines in rel.get_guidelines_to_category().items():
+        filename = f'{category}.rst'
         destfile = os.path.join(DEST_DIRS['guidelines'], filename)
         if build_all or destfile in targets:
-            gl_object = [gl.template_object(LANG) for gl in cat.get_guidelines()]
+            gl_object = [gl.template_object(LANG) for gl in guidelines]
             write_rst(templates['category_page'], {'lang': LANG, 'guidelines': gl_object}, destfile)
 
     os.makedirs(DEST_DIRS['checks'], exist_ok=True)
@@ -140,30 +139,30 @@ def main():
         destfile = os.path.join(DEST_DIRS['checks'], filename)
         if build_all or destfile:
             write_rst(templates['tool_example'], tool.example_template_object(LANG), destfile)
-        
+
     os.makedirs(DEST_DIRS['faq_articles'], exist_ok=True)
-    for faq in FAQ.list_all():
+    for faq in Faq.list_all():
         filename = f'{faq.id}.rst'
         destfile = os.path.join(DEST_DIRS['faq_articles'], filename)
         if build_all or destfile in targets:
             write_rst(templates['faq_article'], faq.template_object(LANG), destfile)
 
     os.makedirs(DEST_DIRS['faq_tags'], exist_ok=True)
-    for tag in FAQ_Tag.list_all():
+    for tag in FaqTag.list_all():
         filename = f'{tag.id}.rst'
         destfile = os.path.join(DEST_DIRS['faq_tags'], filename)
         if tag.article_count() > 0 and build_all or destfile in targets:
             write_rst(templates['faq_tagpage'], tag.template_object(LANG), destfile)
 
-    sorted_tags = sorted(FAQ_Tag.list_all(), key=lambda x: x.names[LANG])
+    sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[LANG])
     tags = [tag.template_object(LANG) for tag in sorted_tags if tag.article_count() > 0]
     tagpages = [tagpage.template_object(LANG) for tagpage in sorted_tags if tagpage.article_count() > 0]
-    sorted_articles_by_date = FAQ.list_all(sort_by='date')
-    sorted_articles_by_sortkey = FAQ.list_all(sort_by='sortKey')
+    sorted_articles_by_date = Faq.list_all(sort_by='date')
+    sorted_articles_by_sortkey = Faq.list_all(sort_by='sortKey')
     if build_all or STATIC_FILES['faq_index'] in targets:
         articles = [article.template_object(LANG) for article in sorted_articles_by_date]
         write_rst(templates['faq_index'], {'articles': articles, 'tags': tags}, STATIC_FILES['faq_index'])
-        
+
     if build_all or STATIC_FILES['faq_tag_index'] in targets:
         write_rst(templates['faq_tag_index'], {'tags': tagpages}, STATIC_FILES['faq_tag_index'])
 
@@ -173,28 +172,30 @@ def main():
 
     os.makedirs(DEST_DIRS['info2gl'], exist_ok=True)
     for info in InfoRef.get_all_internals():
-        if len(info.guidelines) > 0:
+        if len(rel.get_info_to_guidelines(info)) > 0:
             filename = f'{info.ref}.rst'
             destfile = os.path.join(DEST_DIRS['info2gl'], filename)
             if build_all or destfile in targets:
-                write_rst(templates['info_to_gl'], {'guidelines': info.get_guidelines(LANG)}, destfile)
+                sorted_guidelines = sorted(rel.get_info_to_guidelines(info), key=lambda item: item.sort_key)
+                guidelines = [guideline.get_category_and_id(LANG) for guideline in sorted_guidelines]
+                write_rst(templates['info_to_gl'], {'guidelines': guidelines}, destfile)
 
     os.makedirs(DEST_DIRS['info2faq'], exist_ok=True)
     for info in InfoRef.get_all_internals():
-        if len(info.faqs) > 0:
+        if len(rel.get_info_to_faqs(info)) > 0:
             filename = f'{info.ref}.rst'
             destfile = os.path.join(DEST_DIRS['info2faq'], filename)
             makefile_vars_list['info_to_faq_target'].append(destfile)
             if build_all or destfile in targets:
-                write_rst(templates['info_to_faq'], {'faqs': info.get_faqs()}, destfile)
+                write_rst(templates['info_to_faq'], {'faqs': [faq.id for faq in rel.get_info_to_faqs(info)]}, destfile)
 
     os.makedirs(DEST_DIRS['misc'], exist_ok=True)
     if build_all or STATIC_FILES['wcag21mapping'] in targets:
-        sc_mapping = [sc.template_object(LANG) for sc in WCAG_SC.get_all().values() if len(sc.guidelines) > 0]
+        sc_mapping = [sc.template_object(LANG) for sc in WcagSc.get_all().values() if len(rel.get_sc_to_guidelines(sc)) > 0]
         write_rst(templates['wcag21mapping'], {'mapping': sc_mapping}, STATIC_FILES['wcag21mapping'])
 
     if build_all or STATIC_FILES['priority_diff'] in targets:
-        diffs = [sc.template_object(LANG) for sc in WCAG_SC.get_all().values() if sc.level != sc.localPriority]
+        diffs = [sc.template_object(LANG) for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
         write_rst(templates['priority_diff'], {'diffs': diffs}, STATIC_FILES['priority_diff'])
 
     if build_all or STATIC_FILES['miscdefs'] in targets:
@@ -227,32 +228,32 @@ def main():
             makefile_vars_list['check_example_target'].append(destfile)
             build_depends.append({'target': destfile, 'depends': ' '.join(tool.get_dependency())})
 
-        for faq in FAQ.list_all():
+        for faq in Faq.list_all():
             filename = f'{faq.id}.rst'
             destfile = os.path.join(DEST_DIRS['faq_articles'], filename)
             makefile_vars_list['faq_article_target'].append(destfile)
             build_depends.append({'target': destfile, 'depends': ' '.join(faq.get_dependency())})
 
-        for tag in FAQ_Tag.list_all():
+        for tag in FaqTag.list_all():
             if tag.article_count() == 0:
                 continue
             filename = f'{tag.id}.rst'
             destfile = os.path.join(DEST_DIRS['faq_tags'], filename)
             makefile_vars_list['faq_tagpage_target'].append(destfile)
-            build_depends.append({'target': destfile, 'depends': [' '.join(faq.get_dependency()) for faq in tag.faqs]})
+            build_depends.append({'target': destfile, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
 
         for info in InfoRef.get_all_internals():
-            if len(info.guidelines) > 0:
+            if len(rel.get_info_to_guidelines(info)) > 0:
                 filename = f'{info.ref}.rst'
                 destfile = os.path.join(DEST_DIRS['info2gl'], filename)
                 makefile_vars_list['info_to_gl_target'].append(destfile)
-                build_depends.append({'target': destfile, 'depends': ' '.join([guideline.src_path for guideline in info.guidelines])})
+                build_depends.append({'target': destfile, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
 
-            if info.internal and len(info.faqs) > 0:
+            if info.internal and len(rel.get_info_to_faqs(info)) > 0:
                 filename = f'{info.ref}.rst'
                 destfile = os.path.join(DEST_DIRS['info2faq'], filename)
                 makefile_vars_list['info_to_faq_target'].append(destfile)
-                build_depends.append({'target': destfile, 'depends': ' '.join([faq.src_path for faq in info.faqs])})
+                build_depends.append({'target': destfile, 'depends': ' '.join([faq.src_path for faq in rel.get_info_to_faqs(info)])})
 
         for key, value in makefile_vars_list.items():
             makefile_vars[key] = ' '.join(value)
@@ -261,9 +262,9 @@ def main():
         write_rst(templates['makefile'], makefile_vars, destfile)
 
 
-def ls_dir(dir):
+def ls_dir(dirname):
     files = []
-    for currentDir, dirs, fs in os.walk(dir):
+    for currentDir, dirs, fs in os.walk(dirname):
         for f in fs:
             files.append(os.path.join(currentDir, f))
     return files
@@ -335,7 +336,7 @@ def process_yaml_file(file_path, schema_dir, schema_file, no_check, resolver):
         The processed YAML data with an additional source path.
     """
     data = read_yaml_file(file_path)
-    
+
     if not no_check:
         try:
             validate_data(data, os.path.join(schema_dir, schema_file), resolver)
@@ -348,19 +349,19 @@ def process_yaml_file(file_path, schema_dir, schema_file, no_check, resolver):
     return data
 
 def make_heading(title, level, className=""):
-    
+
     def _isMultiByte(c):
         return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
-        
+
     def _width(c):
         return 2 if _isMultiByte(c) else 1
 
     def width(s):
-        return sum([_width(c) for c in s])
-        
+        return sum(_width(c) for c in s)
+
     # Modify heading_styles accordingly
     heading_styles = [('#', True), ('*', True), ('=', False), ('-', False), ('^', False), ('"', False)]
-    
+
     if not 1 <= level <= len(heading_styles):
         raise ValueError(f'Invalid level: {level}. Must be between 1 and {len(heading_styles)}')
 

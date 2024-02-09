@@ -1,6 +1,6 @@
 import os
 
-# Default file locations and ohter configuration options for yaml2rst
+# Default file locations and other configuration options for yaml2rst
 #
 # List of languages that are available for file generation.
 AVAILABLE_LANGUAGES = ['ja']
@@ -206,5 +206,3 @@ def get_static_dest_files(lang):
         'faq_tag_index': os.path.join(dest_dirnames['faq_tags'], FAQ_INDEX_FILENAME),
         'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME)
     }
-
-
