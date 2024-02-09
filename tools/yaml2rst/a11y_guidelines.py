@@ -247,8 +247,8 @@ class Guideline:
         return template_object
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_guidelines.get(id)
+    def get_by_id(cls, guideline_id):
+        return cls.all_guidelines.get(guideline_id)
 
 class Check:
     all_checks = {}
@@ -308,8 +308,8 @@ class Check:
         return template_object
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_checks.get(id)
+    def get_by_id(cls, check_id):
+        return cls.all_checks.get(check_id)
 
     @classmethod
     def template_object_all(cls, lang):
@@ -398,11 +398,11 @@ class FAQ:
 class Category:
     all_categories = {}
 
-    def __init__(self, id, names):
-        self.id = id
+    def __init__(self, category_id, names):
+        self.id = category_id
         self.names = names
         self.guidelines = []
-        Category.all_categories[id] = self
+        Category.all_categories[category_id] = self
 
     def add_guideline(self, guideline):
         if guideline in self.guidelines:
@@ -426,8 +426,8 @@ class Category:
         return uniq(dependency)
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_categories.get(id)
+    def get_by_id(cls, category_id):
+        return cls.all_categories.get(category_id)
 
     @classmethod
     def list_all(cls):
@@ -436,10 +436,10 @@ class Category:
 class FAQ_Tag:
     all_tags = {}
 
-    def __init__(self, id, names):
-        self.id = id
+    def __init__(self, tag_id, names):
+        self.id = tag_id
         self.names = names
-        FAQ_Tag.all_tags[id] = self
+        FAQ_Tag.all_tags[tag_id] = self
 
     def article_count(self):
         rel = RelationshipManager()
@@ -472,8 +472,8 @@ class FAQ_Tag:
         }
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_tags.get(id)
+    def get_by_id(cls, tag_id):
+        return cls.all_tags.get(tag_id)
 
     @classmethod
     def list_all(cls, **kwargs):
@@ -519,8 +519,8 @@ class WCAG_SC:
         return template_object
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_scs.get(id)
+    def get_by_id(cls, sc_id):
+        return cls.all_scs.get(sc_id)
 
     @classmethod
     def get_all(cls):
@@ -531,12 +531,12 @@ class InfoRef:
     all_inforefs = {}
 
     def __new__(cls, ref, *args, **kwargs):
-        id = url_encode(ref)
-        if id in cls.all_inforefs:
-            return cls.all_inforefs[id]
+        ref_id = url_encode(ref)
+        if ref_id in cls.all_inforefs:
+            return cls.all_inforefs[ref_id]
         else:
             instance = super(InfoRef, cls).__new__(cls)
-            cls.all_inforefs[id] = instance
+            cls.all_inforefs[ref_id] = instance
             return instance
 
     def __init__(self, inforef):
@@ -625,9 +625,9 @@ class Technique:
         return template_object
 
 class YouTube:
-    def __init__(self, id, title):
-        self.id = id
-        self.title = title
+    def __init__(self, **kwargs):
+        self.id = kwargs['id']
+        self.title = kwargs['title']
 
     def template_object(self):
         return {
@@ -675,11 +675,11 @@ class Method:
 class CheckTool:
     all_tools = {}
 
-    def __init__(self, id, names):
-        self.id = id
+    def __init__(self, tool_id, names):
+        self.id = tool_id
         self.names = names
         self.examples = []
-        CheckTool.all_tools[id] = self
+        CheckTool.all_tools[tool_id] = self
 
     def add_example(self, example):
         self.examples.append(example)
@@ -715,8 +715,8 @@ class CheckTool:
         return cls.all_tools.keys()
 
     @classmethod
-    def get_by_id(cls, id):
-        return cls.all_tools.get(id)
+    def get_by_id(cls, tool_id):
+        return cls.all_tools.get(tool_id)
 
 # Utility functions
 def join_items(items, lang):

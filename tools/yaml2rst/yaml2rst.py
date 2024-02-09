@@ -63,7 +63,7 @@ def main():
     # Setup CheckTool instances
     for tool_id, tool_names in CHECK_TOOLS.items():
         CheckTool(tool_id, tool_names)
-    
+
     # Set up check instances
     files = ls_dir(SRCDIR['checks'])
     makefile_vars['check_yaml'] = ' '.join(files)
@@ -72,15 +72,15 @@ def main():
         check_duplicate_values(data['checks'], 'id', 'Check ID')
     for check in data['checks']:
         Check(check)
-    
+
     # Set up guideline category instances
     try:
         file_content = read_file_content(MISC_INFO_SRCFILES['gl_categories'])
         data['categories'] = json.loads(file_content)
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['gl_categories'])
-    for id, names in data['categories'].items():
-        Category(id, names)
+    for category_id, names in data['categories'].items():
+        Category(category_id, names)
 
     # Set up WCAG SC instances
     try:
@@ -90,7 +90,7 @@ def main():
         handle_file_error(e, MISC_INFO_SRCFILES['wcag_sc'])
     for sc in data['wcag_sc'].values():
         WCAG_SC(sc)
-    
+
     # Set up guideline instances
     files = ls_dir(SRCDIR['guidelines'])
     makefile_vars['gl_yaml'] = ' '.join(files)
@@ -107,8 +107,8 @@ def main():
         data['faq_tags'] = json.loads(file_content)
     except Exception as e:
         handle_file_error(e, MISC_INFO_SRCFILES['faq_tags'])
-    for id, names in data['faq_tags'].items():
-        FAQ_Tag(id, names)
+    for category_id, names in data['faq_tags'].items():
+        FAQ_Tag(category_id, names)
 
     # Set up FAQ instances
     files = ls_dir(SRCDIR['faq'])
@@ -139,7 +139,7 @@ def main():
         destfile = os.path.join(DEST_DIRS['checks'], filename)
         if build_all or destfile:
             write_rst(templates['tool_example'], tool.example_template_object(LANG), destfile)
-        
+
     os.makedirs(DEST_DIRS['faq_articles'], exist_ok=True)
     for faq in FAQ.list_all():
         filename = f'{faq.id}.rst'
@@ -162,7 +162,7 @@ def main():
     if build_all or STATIC_FILES['faq_index'] in targets:
         articles = [article.template_object(LANG) for article in sorted_articles_by_date]
         write_rst(templates['faq_index'], {'articles': articles, 'tags': tags}, STATIC_FILES['faq_index'])
-        
+
     if build_all or STATIC_FILES['faq_tag_index'] in targets:
         write_rst(templates['faq_tag_index'], {'tags': tagpages}, STATIC_FILES['faq_tag_index'])
 
@@ -262,9 +262,9 @@ def main():
         write_rst(templates['makefile'], makefile_vars, destfile)
 
 
-def ls_dir(dir):
+def ls_dir(dirname):
     files = []
-    for currentDir, dirs, fs in os.walk(dir):
+    for currentDir, dirs, fs in os.walk(dirname):
         for f in fs:
             files.append(os.path.join(currentDir, f))
     return files
@@ -336,7 +336,7 @@ def process_yaml_file(file_path, schema_dir, schema_file, no_check, resolver):
         The processed YAML data with an additional source path.
     """
     data = read_yaml_file(file_path)
-    
+
     if not no_check:
         try:
             validate_data(data, os.path.join(schema_dir, schema_file), resolver)
@@ -349,19 +349,19 @@ def process_yaml_file(file_path, schema_dir, schema_file, no_check, resolver):
     return data
 
 def make_heading(title, level, className=""):
-    
+
     def _isMultiByte(c):
         return unicodedata.east_asian_width(c) in ['F', 'W', 'A']
-        
+
     def _width(c):
         return 2 if _isMultiByte(c) else 1
 
     def width(s):
         return sum([_width(c) for c in s])
-        
+
     # Modify heading_styles accordingly
     heading_styles = [('#', True), ('*', True), ('=', False), ('-', False), ('^', False), ('"', False)]
-    
+
     if not 1 <= level <= len(heading_styles):
         raise ValueError(f'Invalid level: {level}. Must be between 1 and {len(heading_styles)}')
 
