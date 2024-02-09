@@ -357,7 +357,7 @@ def make_heading(title, level, className=""):
         return 2 if _isMultiByte(c) else 1
 
     def width(s):
-        return sum([_width(c) for c in s])
+        return sum(_width(c) for c in s)
 
     # Modify heading_styles accordingly
     heading_styles = [('#', True), ('*', True), ('=', False), ('-', False), ('^', False), ('"', False)]

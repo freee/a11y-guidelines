@@ -195,6 +195,7 @@ class RelationshipManager:
         if info.id in self.info_to_faqs:
             return self.info_to_faqs.get(info.id)
         return []
+
 class Guideline:
     all_guidelines = {}
 
@@ -270,14 +271,14 @@ class Check:
         Check.all_checks[self.id] = self
 
     def procedure_platforms(self):
-        return sorted(list(set([procedure.platform for procedure in self.procedures])))
+        return sorted({procedure.platform for procedure in self.procedures})
 
     def template_object(self, lang, **kwargs):
         rel = RelationshipManager()
-        if 'platform' in kwargs:
-            gl_platform = kwargs['platform']
-        else:
-            gl_platform = []
+        # if 'platform' in kwargs:
+        gl_platform = kwargs.get('platform')
+        # else:
+            # gl_platform = []
         template_object = {
             'id': self.id,
             'check': self.check[lang],
@@ -287,7 +288,7 @@ class Check:
             'guidelines': []
         }
         if len(self.procedures) > 0:
-            if len(gl_platform) == 0:
+            if not gl_platform:
                 template_object['procedures'] = [procedure.template_object(lang) for procedure in self.procedures]
             else:
                 template_object['procedures'] = []
@@ -503,7 +504,7 @@ class WCAG_SC:
             'sc_ja_url': self.url['ja']
         }
         guidelines = rel.get_sc_to_guidelines(self)
-        if len(guidelines):
+        if len(guidelines) > 0:
             template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
         return template_object
 
@@ -532,7 +533,7 @@ class InfoRef:
             return
         self.ref = inforef
         self.id = url_encode(self.ref)
-        self.internal = False if re.match(r'(https?://|\|.+\|)', self.ref) else True
+        self.internal = not bool(re.match(r'(https?://|\|.+\|)', self.ref))
         self.initialized = True
 
     def refstring(self):
