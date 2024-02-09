@@ -1,15 +1,13 @@
 import os
 import sys
-import re
-import yaml
 import json
-import unicodedata
-from jsonschema import validate, ValidationError, RefResolver
 import argparse
+import unicodedata
+import yaml
+from jsonschema import validate, ValidationError, RefResolver
 from jinja2 import Template, Environment, FileSystemLoader
-import datetime
 from config import AVAILABLE_LANGUAGES, CHECK_TOOLS, SRCDIR, SCHEMA_FILENAMES, COMMON_SCHEMA_PATH, TEMPLATE_DIR, TEMPLATE_FILENAMES, MISC_INFO_SRCFILES, get_dest_dirnames, get_static_dest_files
-from a11y_guidelines import Category, WCAG_SC, InfoRef, Guideline, Check, FAQ, FAQ_Tag, CheckTool
+from a11y_guidelines import Category, WCAG_SC, InfoRef, Guideline, Check, FAQ, FAQ_Tag, CheckTool, RelationshipManager
 
 def main():
     args = parse_args()
@@ -122,12 +120,13 @@ def main():
     for faq in data['faqs']:
         FAQ(faq)
 
+    rel = RelationshipManager()
     os.makedirs(DEST_DIRS['guidelines'], exist_ok=True)
-    for cat in Category.list_all():
-        filename = f'{cat.id}.rst'
+    for category, guidelines in rel.get_guidelines_to_category().items():
+        filename = f'{category}.rst'
         destfile = os.path.join(DEST_DIRS['guidelines'], filename)
         if build_all or destfile in targets:
-            gl_object = [gl.template_object(LANG) for gl in cat.get_guidelines()]
+            gl_object = [gl.template_object(LANG) for gl in guidelines]
             write_rst(templates['category_page'], {'lang': LANG, 'guidelines': gl_object}, destfile)
 
     os.makedirs(DEST_DIRS['checks'], exist_ok=True)
@@ -173,24 +172,26 @@ def main():
 
     os.makedirs(DEST_DIRS['info2gl'], exist_ok=True)
     for info in InfoRef.get_all_internals():
-        if len(info.guidelines) > 0:
+        if len(rel.get_info_to_guidelines(info)) > 0:
             filename = f'{info.ref}.rst'
             destfile = os.path.join(DEST_DIRS['info2gl'], filename)
             if build_all or destfile in targets:
-                write_rst(templates['info_to_gl'], {'guidelines': info.get_guidelines(LANG)}, destfile)
+                sorted_guidelines = sorted(rel.get_info_to_guidelines(info), key=lambda item: item.sortKey)
+                guidelines = [guideline.get_category_and_id(LANG) for guideline in sorted_guidelines]
+                write_rst(templates['info_to_gl'], {'guidelines': guidelines}, destfile)
 
     os.makedirs(DEST_DIRS['info2faq'], exist_ok=True)
     for info in InfoRef.get_all_internals():
-        if len(info.faqs) > 0:
+        if len(rel.get_info_to_faqs(info)) > 0:
             filename = f'{info.ref}.rst'
             destfile = os.path.join(DEST_DIRS['info2faq'], filename)
             makefile_vars_list['info_to_faq_target'].append(destfile)
             if build_all or destfile in targets:
-                write_rst(templates['info_to_faq'], {'faqs': info.get_faqs()}, destfile)
+                write_rst(templates['info_to_faq'], {'faqs': [faq.id for faq in rel.get_info_to_faqs(info)]}, destfile)
 
     os.makedirs(DEST_DIRS['misc'], exist_ok=True)
     if build_all or STATIC_FILES['wcag21mapping'] in targets:
-        sc_mapping = [sc.template_object(LANG) for sc in WCAG_SC.get_all().values() if len(sc.guidelines) > 0]
+        sc_mapping = [sc.template_object(LANG) for sc in WCAG_SC.get_all().values() if len(rel.get_sc_to_guidelines(sc)) > 0]
         write_rst(templates['wcag21mapping'], {'mapping': sc_mapping}, STATIC_FILES['wcag21mapping'])
 
     if build_all or STATIC_FILES['priority_diff'] in targets:
@@ -239,20 +240,20 @@ def main():
             filename = f'{tag.id}.rst'
             destfile = os.path.join(DEST_DIRS['faq_tags'], filename)
             makefile_vars_list['faq_tagpage_target'].append(destfile)
-            build_depends.append({'target': destfile, 'depends': [' '.join(faq.get_dependency()) for faq in tag.faqs]})
+            build_depends.append({'target': destfile, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
 
         for info in InfoRef.get_all_internals():
-            if len(info.guidelines) > 0:
+            if len(rel.get_info_to_guidelines(info)) > 0:
                 filename = f'{info.ref}.rst'
                 destfile = os.path.join(DEST_DIRS['info2gl'], filename)
                 makefile_vars_list['info_to_gl_target'].append(destfile)
-                build_depends.append({'target': destfile, 'depends': ' '.join([guideline.src_path for guideline in info.guidelines])})
+                build_depends.append({'target': destfile, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
 
-            if info.internal and len(info.faqs) > 0:
+            if info.internal and len(rel.get_info_to_faqs(info)) > 0:
                 filename = f'{info.ref}.rst'
                 destfile = os.path.join(DEST_DIRS['info2faq'], filename)
                 makefile_vars_list['info_to_faq_target'].append(destfile)
-                build_depends.append({'target': destfile, 'depends': ' '.join([faq.src_path for faq in info.faqs])})
+                build_depends.append({'target': destfile, 'depends': ' '.join([faq.src_path for faq in rel.get_info_to_faqs(info)])})
 
         for key, value in makefile_vars_list.items():
             makefile_vars[key] = ' '.join(value)
