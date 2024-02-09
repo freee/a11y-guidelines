@@ -157,17 +157,15 @@ def main():
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[LANG])
     tags = [tag.template_object(LANG) for tag in sorted_tags if tag.article_count() > 0]
     tagpages = [tagpage.template_object(LANG) for tagpage in sorted_tags if tagpage.article_count() > 0]
-    sorted_articles_by_date = Faq.list_all(sort_by='date')
-    sorted_articles_by_sortkey = Faq.list_all(sort_by='sortKey')
     if build_all or STATIC_FILES['faq_index'] in targets:
-        articles = [article.template_object(LANG) for article in sorted_articles_by_date]
+        articles = [article.template_object(LANG) for article in Faq.list_all(sort_by='date')]
         write_rst(templates['faq_index'], {'articles': articles, 'tags': tags}, STATIC_FILES['faq_index'])
 
     if build_all or STATIC_FILES['faq_tag_index'] in targets:
         write_rst(templates['faq_tag_index'], {'tags': tagpages}, STATIC_FILES['faq_tag_index'])
 
     if build_all or STATIC_FILES['FAQ_ARTICLE_INDEX_PATH'] in targets:
-        articles = [article.template_object(LANG) for article in sorted_articles_by_sortkey]
+        articles = [article.template_object(LANG) for article in Faq.list_all(sort_by='sortKey')]
         write_rst(templates['faq_article_index'], {'articles': articles}, STATIC_FILES['faq_article_index'])
 
     os.makedirs(DEST_DIRS['info2gl'], exist_ok=True)
