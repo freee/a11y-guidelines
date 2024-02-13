@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     音声コンテンツについて、充分に聴き取りやすい。
+  en: |-
+    The audio content is sufficiently easy to listen to.

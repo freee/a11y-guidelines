@@ -9,3 +9,7 @@ check:
     *  アイコンには、その役割や示している状態を表すテキスト・ラベルが併せて表示されている。または
     *  テキスト・ラベルを表示できない場合、色の違いだけでアイコンの意味の違いを表さず、形状（モチーフ）やサイズでも違いが示されている。かつ
     *  役割や意味がわかる ``alt`` 属性の値が設計資料で明示されている。
+  en: |-
+    *  Icons are accompanied by text labels that represent their role or the state they indicate. Or,
+    *  If text labels cannot be displayed, the difference in the meaning of icons is not represented solely by color differences but also by differences in shape (motif) or size. And,
+    *  The value of the `alt` attribute, which makes the role or meaning understandable, is explicitly specified in the design documentation.

@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     マウスオーバーで表示されるすべてのコンテンツは、ポインターをそのコンテンツ上に移動しても、コンテンツが消えない設計になっている。
+  en: |-
+    All content displayed on mouseover is designed so that the content does not disappear even when the pointer is moved over it.

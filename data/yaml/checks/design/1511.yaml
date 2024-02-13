@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     音声を含むコンテンツには、同期したキャプションが提供されている。
+  en: |-
+    Content that includes audio is provided with synchronized captions.

@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     画像化されたテキストを用いて実装する対象として、自社および他者のロゴ、バナー、図や写真の中の文字列以外のものが設計資料中に存在しない。
+  en: |-
+    The design documentation does not contain any instances of text that is to be implemented using images of text, except for the company's and others' logos, banners, and text within diagrams or photos.

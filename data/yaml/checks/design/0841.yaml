@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     グローバル・ナビゲーションやいわゆるパンくずリストがある場合、そのページ/画面のサイトやアプリケーション内での位置がグローバル・ナビゲーションやパンくずリスト内で示されている。
+  en: |-
+    If there is a global navigation or so-called breadcrumb list, the position of the page/screen within the site or application is indicated in the global navigation or breadcrumb list.

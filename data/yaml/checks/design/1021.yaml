@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     制限時間が設定されているフォームの入力中に制限時間が超過した場合、それまでの入力内容を失うことなく入力を再開できるようになっている。
+  en: |-
+    If the time limit is exceeded while entering information into a form with a set time limit, it is possible to resume input without losing the content entered up to that point.

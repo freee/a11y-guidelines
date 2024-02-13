@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     音声・映像コンテンツは、そのコンテンツがなくても不足なく情報が伝わるような内容で、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
+  en: |-
+    Audio and video content is clearly indicated as being supplementary to or an alternative to text information, and is designed so that information is conveyed adequately even when the content is not present.

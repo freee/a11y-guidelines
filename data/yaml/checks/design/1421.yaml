@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     3秒以上の長さの自動再生される音声コンテンツがない。
+  en: |-
+    There is no audio content that plays automatically for more than 3 seconds.

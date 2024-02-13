@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     そのページ/画面の目的を示し、かつ他のページ/画面とは異なるタイトルが設計資料で明示されている。
+  en: |-
+    The design documentation explicitly states a title that indicates the purpose of the page/screen and is different from the titles of other pages/screens.

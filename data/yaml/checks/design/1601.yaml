@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     動画の音声情報には同期した手話通訳が提供されている。
+  en: |-
+    Synchronized sign language interpretation is provided for the audio information in videos.

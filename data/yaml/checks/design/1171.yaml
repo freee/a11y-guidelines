@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     ステータス・メッセージとして扱われるべきメッセージ、すなわち表示時や変更時にスクリーン・リーダーによって自動的に読み上げられる必要があるメッセージが、設計資料で特定されている。
+  en: |-
+    Messages that should be treated as status messages, i.e., messages that need to be automatically read by screen readers when displayed or changed, are specified in the design documentation.

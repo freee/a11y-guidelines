@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     同じ文脈において、遷移先が同じリンク、目的が同じボタンには、一貫したテキストやアイコンが使われている。
+  en: |-
+    Consistent text and icons are used for links and buttons with the same destination or purpose in the same context.

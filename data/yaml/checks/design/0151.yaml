@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     デフォルトのフォーカス・インジケーターを用いない場合、代替となるフォーカス・インジケーターが設計資料で明示されている。
+  en: |-
+    When not using the default focus indicator, an alternative focus indicator is explicitly specified in the design documentation.

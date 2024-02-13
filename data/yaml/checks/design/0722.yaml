@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     複数の種類の情報を含む画面においては、情報の区切りに見出しが配置されている。
+  en: |-
+    In screens containing multiple types of information, headings are placed at the divisions of information.

@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     映像がない音声のみのコンテンツについて、音声を書き起こしたテキストが提供されている。
+  en: |-
+    For content that consists of audio only without video, a transcript of the audio is provided.

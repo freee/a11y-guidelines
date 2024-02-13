@@ -10,3 +10,9 @@ check:
     *  文字サイズが24px（18pt）以上の場合：3:1以上
     *  文字サイズが19px（14pt）以上で太字の場合：3:1以上
     *  その他の場合：4.5:1以上
+  en: |-
+    Sufficient contrast ratios are ensured for the display colors and background colors of text and images of text.
+
+    *  For text size 24px (18pt) or larger: at least 3:1
+    *  For bold text size 19px (14pt) or larger: at least 3:1
+    *  In other cases: at least 4.5:1

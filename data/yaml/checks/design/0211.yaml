@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     クリックやマウスオーバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できるように設計されている。
+  en: |-
+    Elements that accept mouse actions such as clicks or mouseovers are designed to be operable with the keyboard alone.

@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     ページのどの部分がそれぞれ ``header``, ``nav``, ``main``, ``footer`` 要素でマークアップされるべきかが、複数のページで一貫した形で設計資料に明示されている。
+  en: |-
+    The design documentation explicitly states in a consistent manner across multiple pages which parts of the page should be marked up with the ``header``, ``nav``, ``main``, and ``footer`` elements.

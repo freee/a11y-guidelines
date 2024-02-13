@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで表示される、モーダル・ダイアログがない。
+  en: |-
+    There are no modal dialogs that appear at times that would interfere with the user's input operations or information browsing.

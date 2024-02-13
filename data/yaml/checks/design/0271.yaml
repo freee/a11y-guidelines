@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     見出しのテキストは、内容を適切に示す文言になっている。
+  en: |-
+    The text of headings appropriately reflects the content.

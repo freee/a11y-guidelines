@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     特定の画面方向に固定した使用を前提としたデザインになっていない。
+  en: |-
+    The design does not assume use fixed to a specific screen orientation.

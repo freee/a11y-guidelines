@@ -9,3 +9,8 @@ check:
 
     *  デスクトップWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
     *  モバイルWebでは44 x 44 CSS px以上
+  en: |-
+    When altering the appearance of form controls such as checkboxes, radio buttons, and buttons from the browser's default, the area responsive to clicks or touches is sufficiently large, and this area is explicitly specified in the design documentation.
+
+    *  For desktop Web, at least 24 x 24 CSS px, preferably more than 44 x 44 CSS px
+    *  For mobile Web, more than 44 x 44 CSS px
