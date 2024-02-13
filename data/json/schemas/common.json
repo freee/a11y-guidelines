@@ -14,7 +14,7 @@
         }
       },
       "additionalProperties": false,
-      "required": ["ja"]
+      "required": ["ja", "en"]
     }
   }
 
