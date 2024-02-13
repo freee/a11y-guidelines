@@ -21,7 +21,7 @@ import re
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'freee株式会社'
 guidelines_version = 'Ver. 202401.0'
-checksheet_version = '4.3.4'
+checksheet_version = '4.3.6'
 publishedDate = u'2024年1月15日'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
