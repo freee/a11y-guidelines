@@ -7,16 +7,30 @@ platform:
 check:
   ja: |-
     独自実装のUIコンポーネントは、スクリーン・リーダーなどの支援技術に適切にその役割や状態が伝わるようになっている。
+  en: |-
+    Custom UI components are implemented so that their roles and states are appropriately conveyed to assistive technologies such as screen readers.
 implementations:
-- title: スクリーン・リーダーに役割を伝える
+- title:
+    ja: スクリーン・リーダーに役割を伝える
+    en: Conveying Roles to Screen Readers
   methods:
   - platform: web
-    method: |-
-      ``role`` 属性を適切に指定する。
+    method:
+      ja: |-
+        ``role`` 属性を適切に指定する。
+      en: |-
+        Specify the ``role`` attribute appropriately.
   - platform: ios
-    method: |-
-      *  適切な ``accessibilityTraits`` を指定する。
+    method:
+      ja: |-
+        *  適切な ``accessibilityTraits`` を指定する。
+      en: |-
+        *  Specify the appropriate ``accessibilityTraits``.
   - platform: android
-    method: |-
-      *  jetpack composeを使用している場合：role属性を適切に指定する
-      *  jetpack composeを使用していない場合：viewの ``getAccessibilityClassName()`` メソッドを、適切な値が返るもので上書きする。
+    method:
+      ja: |-
+        *  jetpack composeを使用している場合： ``role`` 属性を適切に指定する
+        *  jetpack composeを使用していない場合：viewの ``getAccessibilityClassName()`` メソッドを、適切な値が返るもので上書きする。
+      en: |-
+        *  If using jetpack compose: Specify the ``role`` attribute appropriately
+        *  If not using jetpack compose: Override the ``getAccessibilityClassName()`` method of the view to return an appropriate value.

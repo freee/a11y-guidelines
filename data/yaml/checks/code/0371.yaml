@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     エディット・ボックスや独自に実装した暗証番号入力のためのコンポーネントなど、ユーザーが文字列を入力する場面において、外付けキーボードが接続されたタイミングに関係なく、外付けキーボードによる入力が可能になっている。
+  en: |-
+    In situations where the user inputs text, such as in edit boxes or custom-implemented components for entering passwords, input via an external keyboard is possible, regardless of when the external keyboard is connected.

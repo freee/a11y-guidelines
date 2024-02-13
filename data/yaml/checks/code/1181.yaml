@@ -7,15 +7,28 @@ platform:
 check:
   ja: |-
     操作の結果などを伝えるステータス・メッセージが自動的に読み上げられるようにする。
+  en: |-
+    Status messages and the results of operations are automatically read out.
 implementations:
-- title: 自動的に読み上げられるようにする
+- title:
+    ja: 自動的に読み上げられるようにする
+    en: Automatically Read Out
   methods:
   - platform: web
-    method: |-
-      ``aria-live`` 属性を用いる。
+    method:
+      ja: |-
+        ``aria-live`` 属性を用いる。
+      en: |-
+        Use the ``aria-live`` attribute.
   - platform: ios
-    method: |-
-      ``UIAccessibility.post(notification:argument:)`` の 引数に  ``.announcement`` とメッセージを入れる。（参考： https://developer.apple.com/documentation/uikit/uiaccessibility/notification/1620176-announcement ）
+    method:
+      ja: |-
+        ``UIAccessibility.post(notification:argument:)`` の 引数に  ``.announcement`` とメッセージを入れる。（参考： https://developer.apple.com/documentation/uikit/uiaccessibility/notification/1620176-announcement ）
+      en: |-
+        Put ``.announcement`` and the message in the argument of ``UIAccessibility.post(notification:argument:)``. (Reference: https://developer.apple.com/documentation/uikit/uiaccessibility/notification/1620176-announcement )
   - platform: android
-    method: |-
-      ``Toast`` 、 ``SnackBar`` 等にメッセージを入れ、TalkBackで適切に読み上げられるようにする。
+    method:
+      ja: |-
+        ``Toast`` 、 ``SnackBar`` 等にメッセージを入れ、TalkBackで適切に読み上げられるようにする。
+      en: |-
+        Put the message in ``Toast``, ``SnackBar``, etc., and ensure that it is read out appropriately by TalkBack.

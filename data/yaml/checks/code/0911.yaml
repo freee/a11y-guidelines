@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     複数の言語が含まれているテキストについて、適切に ``lang`` 属性が指定されている。
+  en: |-
+    The ``lang`` attribute is correctly specified for text that contains multiple languages.

@@ -6,9 +6,16 @@ platform:
 check:
   ja: |-
     グローバル・ナビゲーションやパンくずリスト内でそのページ/画面の位置が明示されている。
+  en: |-
+    The position of that page/screen is explicitly indicated within the global navigation or breadcrumb list.
 implementations:
-- title: 位置の明示
+- title:
+    ja: 位置の明示
+    en: Indicating Position
   methods:
   - platform: web
-    method: |-
-      *  ``aria-current`` 属性の付与
+    method:
+      ja: |-
+        *  ``aria-current`` 属性の付与
+      en: |-
+        *  Assign the ``aria-current`` attribute.

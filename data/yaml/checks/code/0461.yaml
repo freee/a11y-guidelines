@@ -7,16 +7,30 @@ platform:
 check:
   ja: |-
     情報や機能性を一切持たない画像は、スクリーン・リーダーで無視されるようになっている。
+  en: |-
+    Images that have no information or functionality are ignored by screen readers.
 implementations:
-- title: スクリーン・リーダーに無視させる
+- title:
+    ja: スクリーン・リーダーに無視させる
+    en: Make It Ignored by Screen Readers
   methods:
   - platform: web
-    method: |-
-      *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
-      *  ``role="presentation"`` を指定。
+    method:
+      ja: |-
+        *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
+        *  ``role="presentation"`` を指定。
+      en: |-
+        *  Specify an empty ``alt`` attribute ( ``alt=""`` ). Or
+        *  Specify ``role="presentation"``.
   - platform: ios
-    method: |-
-      *  ``isAccessibilityElement`` を ``false`` にする。
+    method:
+      ja: |-
+        *  ``isAccessibilityElement`` を ``false`` にする。
+      en: |-
+        *  Set ``isAccessibilityElement`` to ``false``.
   - platform: android
-    method: |-
-      *  ``importantForAccessibility`` を ``no`` にする。
+    method:
+      ja: |-
+        *  ``importantForAccessibility`` を ``no`` にする。
+      en: |-
+        *  Set ``importantForAccessibility`` to ``no``.

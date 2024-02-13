@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     複数の状態を持つコンポーネントは、その状態が視覚的にもスクリーン・リーダーでも分かるようになっている。（例：タブUIの現在選択されているタブ、状態に応じて変化するアイコンなど）
+  en: |-
+    Components with multiple states are implemented so that their states are understandable both visually and by screen readers. (For example, the currently selected tab in a tab UI, icons that change according to their state, etc.)

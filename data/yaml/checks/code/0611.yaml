@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     日本語のページには、 ``<html lang="ja">`` の記述がある。
+  en: |-
+    Japanese pages have the ``<html lang="ja">`` specified.
