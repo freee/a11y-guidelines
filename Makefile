@@ -1,5 +1,5 @@
 PYTHON?= python
-YAML2RST= $(PYTHON) tools/yaml2rst/yaml2rst.py
+YAML2RST= $(PYTHON) tools/yaml2rst/yaml2rst.py;
 
 # Minimal makefile for Sphinx documentation
 #
