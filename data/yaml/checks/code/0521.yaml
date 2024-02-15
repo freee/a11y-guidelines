@@ -7,15 +7,28 @@ platform:
 check:
   ja: |-
     画像化されたテキストと同じ内容が、スクリーン・リーダーで確認できる形のテキスト・データとしても提供されている。
+  en: |-
+    The same content as images of text is also provided as text data in a form that can be recognized by screen readers.
 implementations:
-- title: テキスト・データの提供
+- title:
+    ja: テキスト・データの提供
+    en: Providing Text Data
   methods:
   - platform: web
-    method: |-
-      *  ``alt`` 属性、または ``aria-label`` 属性を用いる
+    method:
+      ja: |-
+        *  ``alt`` 属性、または ``aria-label`` 属性を用いる
+      en: |-
+        *  Use the ``alt`` attribute or the ``aria-label`` attribute
   - platform: ios
-    method: |-
-      *  ``accessibilityLabel`` を用いる
+    method:
+      ja: |-
+        *  ``accessibilityLabel`` を用いる
+      en: |-
+        *  Use the ``accessibilityLabel``
   - platform: android
-    method: |-
-      *  ``contentDescription`` を用いる
+    method:
+      ja: |-
+        *  ``contentDescription`` を用いる
+      en: |-
+        *  Use the ``contentDescription``

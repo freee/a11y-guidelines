@@ -7,16 +7,30 @@ platform:
 check:
   ja: |-
     アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられないようにする。
+  en: |-
+    If an icon is displayed together with a text label, ensure that the same content is not read out by the screen reader twice.
 implementations:
-- title: スクリーン・リーダーに読み上げられないようにする
+- title:
+    ja: スクリーン・リーダーに読み上げられないようにする
+    en: Ensure That the Content Is Not Read Out by the Screen Reader
   methods:
   - platform: web
-    method: |-
-      *  ``img`` 要素の場合、空の ``alt`` 属性（ ``alt=""`` ）を指定
-      *  ``img`` 要素以外の要素の場合、 ``aria-label`` 属性や ``aria-labelledby`` 属性を指定しない
+    method:
+      ja: |-
+        *  ``img`` 要素の場合、空の ``alt`` 属性（ ``alt=""`` ）を指定
+        *  ``img`` 要素以外の要素の場合、 ``aria-label`` 属性や ``aria-labelledby`` 属性を指定しない
+      en: |-
+        *  For the ``img`` element, specify an empty ``alt`` attribute ( ``alt=""`` ).
+        *  For elements other than the ``img`` element, do not specify the ``aria-label`` attribute or the ``aria-labelledby`` attribute.
   - platform: ios
-    method: |-
-      ``isAccessibilityElement`` を ``false`` にする。
+    method:
+      ja: |-
+        ``isAccessibilityElement`` を ``false`` にする。
+      en: |-
+        Set ``isAccessibilityElement`` to ``false``.
   - platform: android
-    method: |-
-      ``importantForAccessibility`` を ``no`` にする。
+    method:
+      ja: |-
+        ``importantForAccessibility`` を ``no`` にする。
+      en: |-
+        Set ``importantForAccessibility`` to ``no``.

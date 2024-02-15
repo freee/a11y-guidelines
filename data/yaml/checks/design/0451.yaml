@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     情報や機能性を一切持たない画像は、説明のテキストを付加してはならないことが設計資料で明示されている。
+  en: |-
+    It is explicitly stated in the design documentation that images which do not carry any information or functionality must not have descriptive text added to them.

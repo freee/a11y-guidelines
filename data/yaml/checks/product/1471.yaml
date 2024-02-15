@@ -7,7 +7,7 @@ platform:
 check:
   ja: |-
     *  自動的に開始し5秒以上続く動画、アニメーションがない。または
-    *  動画やアニメーションを呈し、一時停止、または非表示にすることができる。
+    *  動画やアニメーションを停止、一時停止、または非表示にすることができる。
   en: |-
     *  There is no video or animation that starts automatically and lasts longer than 5 seconds. or
     *  Video or animation can be stopped, paused, or hidden.

@@ -6,4 +6,6 @@ platform:
 - mobile
 check:
   ja: |-
-    フォーム入力でエラーが発生したとき、エラー内容が分かる具体的な表示文言が設計資料で明示されている。
+    設計資料には、フォーム入力でエラーが発生したときに表示される、エラー内容が分かる具体的な文言が明示されている。
+  en: |-
+    The design documentation explicitly specifies the specific phrases that are displayed when an error occurs in form input, clarifying the nature of the error.

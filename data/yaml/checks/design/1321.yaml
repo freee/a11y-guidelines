@@ -13,3 +13,11 @@ check:
     *  時間切れになる前にユーザーに警告し、かつ少なくとも20秒間の猶予をもって、例えば「スペースキーを押す」などの簡単な操作により、ユーザーが有効期限を10回以上延長することができる。又は、
     *  有効期限が必要不可欠なもので、有効期限を延長することがコンテンツの動作を無効にすることになる。又は、
     *  有効期限が20時間よりも長い。
+  en: |-
+    The login session is not set with an expiration time. Or, it meets one of the following conditions:
+
+    *  At the time of login, the user can disable the expiration setting. Or,
+    *  At the time of login, the user can significantly adjust the expiration time to exceed at least ten times the default setting. Or,
+    *  The user is warned before time expires, and with at least 20 seconds of grace, for example, by pressing the space bar, the user can extend the expiration time more than ten times. Or,
+    *  The expiration time is essential, and extending it would invalidate the content's functionality. Or,
+    *  The expiration time is longer than 20 hours.

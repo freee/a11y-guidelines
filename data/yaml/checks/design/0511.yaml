@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     画像化されたテキストと同じ内容のテキストが、その画像代替テキストとして設計資料で明示されている。
+  en: |-
+    The text that has the same content as images of text is explicitly stated as the alternative text for those images in the design documentation.

@@ -6,10 +6,18 @@ platform:
 check:
   ja: |-
     箇条書き、表などのセマンティクスが、設計資料に従って適切に実装されている。
+  en: |-
+    The semantics of lists, tables, etc. are implemented appropriately according to the design documentation.
 implementations:
-- title: セマンティクスに応じた実装
+- title:
+    ja: セマンティクスに応じた実装
+    en: Implementation According to Semantics
   methods:
   - platform: web
-    method: |-
-      *  箇条書き（ ``ul`` 、 ``ol`` 、 ``dl`` ）、表（ ``table`` ）などを使用する
-      *  デザイン・システムの適切なコンポーネントを使用する
+    method:
+      ja: |-
+        *  箇条書き（ ``ul`` 、 ``ol`` 、 ``dl`` ）、表（ ``table`` ）などを使用する
+        *  デザイン・システムの適切なコンポーネントを使用する
+      en: |-
+        *  Use lists (``ul``, ``ol``, ``dl``), tables (``table``), etc.
+        *  Use the appropriate components of the design system

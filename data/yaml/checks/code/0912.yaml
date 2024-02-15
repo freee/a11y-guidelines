@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     ロケールの指定が可能なUIコンポーネントにおいては、適切なロケールを指定している。
+  en: |-
+    For UI components that can have their locale specified, the appropriate locale is set.

@@ -9,3 +9,7 @@ check:
     *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
     *  動画には音声解説が含まれている。または
     *  映像に関するテキストによる説明が提供されている。
+  en: |-
+    *  The video allows for easy inference of the visual content from the originally recorded audio track. Or,
+    *  The video includes audio descriptions. Or,
+    *  Descriptions regarding the visuals are provided in text.

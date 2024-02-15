@@ -8,9 +8,18 @@ check:
   ja: |-
     フォーム入力に制限時間が設けられていない。または、以下のいずれかを満たしている：
 
-    *   事前にユーザーが制限時間を解除することができる。又は、
+    *  事前にユーザーが制限時間を解除することができる。又は、
     *  事前にユーザーが少なくともデフォルト設定の10倍を超える、大幅な制限時間の調整をすることができる。又は、
     *  時間切れになる前にユーザーに警告し、かつ少なくとも20秒間の猶予をもって、例えば「スペースキーを押す」などの簡単な操作により、ユーザーが制限時間を10回以上延長することができる。又は、
     *  リアルタイムのイベント（例えば、オークション）において制限時間が必須の要素で、その制限時間に代わる手段が存在しない。又は、
     *  制限時間が必要不可欠なもので、制限時間を延長することがフォームを無効にすることになる。又は、
     *  制限時間が20時間よりも長い。
+  en: |-
+    Form inputs are not subject to time limits. Or, they meet one of the following conditions:
+
+    *  Users can disable the time limit in advance. Or,
+    *  Users can make a significant adjustment to the time limit, exceeding at least ten times the default setting, in advance. Or,
+    *  Users are warned before time expires and can extend the time limit by at least 20 seconds with a simple action, such as pressing the space bar, at least ten times. Or,
+    *  The time limit is an essential element of a real-time event (e.g., an auction) and there is no alternative to the time limit. Or,
+    *  The time limit is essential and extending it would invalidate the form. Or,
+    *  The time limit is longer than 20 hours.

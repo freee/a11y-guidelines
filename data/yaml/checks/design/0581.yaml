@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     独自実装が必要なUIコンポーネントについて、スクリーン・リーダー利用時の挙動およびキーボードによる操作時の挙動が設計資料で明示されている。
+  en: |-
+    For UI components that require custom implementation, the behavior when using screen readers and the behavior when operating with a keyboard are explicitly stated in the design documentation.

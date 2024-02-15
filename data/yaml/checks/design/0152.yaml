@@ -12,3 +12,11 @@ check:
     *  ページの遷移
     *  モーダル・ダイアログの表示
     *  表示内容の大幅な変更、など
+  en: |-
+    The design documentation does not include features that cause the following changes when moving focus using the Tab/Shift+Tab keys:
+
+    *  Form submission
+    *  Layout changes
+    *  Page transitions
+    *  Display of modal dialogs
+    *  Significant changes in displayed content, etc.

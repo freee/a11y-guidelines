@@ -630,7 +630,7 @@ class Implementation:
 
     def template_object(self, lang):
         return {
-            'title': self.title,
+            'title': self.title[lang],
             'methods': [method.template_object(lang) for method in self.methods]
         }
 
@@ -657,7 +657,7 @@ class Method:
     def template_object(self, lang):
         return {
             'platform': IMPLEMENTATION_TARGETS[self.platform][lang],
-            'method': self.method
+            'method': self.method[lang]
         }
 
 class CheckTool:

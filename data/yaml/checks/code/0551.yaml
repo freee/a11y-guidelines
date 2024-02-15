@@ -7,15 +7,28 @@ platform:
 check:
   ja: |-
     見出しが、設計資料に従って適切に実装されている。
+  en: |-
+    Headings are implemented appropriately according to the design documentation.
 implementations:
-- title: 見出しの実装
+- title:
+    ja: 見出しの実装
+    en: Heading Implementation
   methods:
   - platform: web
-    method: |-
-      ``h1`` ～ ``h6`` でマークアップする。
+    method:
+      ja: |-
+        ``h1`` ～ ``h6`` でマークアップする。
+      en: |-
+        Mark up with ``h1`` to ``h6``.
   - platform: ios
-    method: |-
-      ``UIAccessibilityTraits.header`` をセットする。
+    method:
+      ja: |-
+        ``UIAccessibilityTraits.header`` をセットする。
+      en: |-
+        Set ``UIAccessibilityTraits.header``.
   - platform: android
-    method: |-
-      当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）
+    method:
+      ja: |-
+        当該テキストに対して ``android:accessiblityHeading`` を ``true`` に設定する（Android 9以降）
+      en: |-
+        Set ``android:accessiblityHeading`` to ``true`` for the text in question (Android 9 or later)

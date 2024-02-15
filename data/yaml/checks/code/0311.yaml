@@ -5,4 +5,6 @@ platform:
 - web
 check:
   ja: |-
-    CSSに絶対値指定（例：px）と相対値指定（例：rem）が混在していない。
+    CSSのサイズなどの指定で、絶対値指定（例：px）と相対値指定（例：rem）が混在していない。
+  en: |-
+    In CSS size specifications, absolute value specifications (e.g., px) and relative value specifications (e.g., rem) are not mixed.

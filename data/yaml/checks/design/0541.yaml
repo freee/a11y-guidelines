@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     見出しとして表現されるべきものが、設計資料で明示されている。
+  en: |-
+    It is explicitly stated in the design documentation what should be expressed as headings.

@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     スクリーン・リーダーのフォーカス箇所を示す表示が視認できる配色になっている
+  en: |-
+    The color scheme is designed to make it possible to see the color that indicates the focus area of the screen reader.

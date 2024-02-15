@@ -8,25 +8,49 @@ check:
   ja: |-
     *  アイコンの役割や示している状態を表すテキストが表示されていて、そのアイコンと明示的に関連付けられている。または
     *  そのようなテキストがアイコンに付加されている。
+  en: |-
+    *  Text that represents the role of the icon or the state it indicates is displayed and is explicitly associated with the icon. Or
+    *  Such text is added to the icon.
 implementations:
-- title: 表示されているテキストとアイコンを関連付ける
+- title:
+    ja: 表示されているテキストとアイコンを関連付ける
+    en: Associate the Displayed Text With the Icon
   methods:
   - platform: web
-    method: |-
-      *  ``aria-labelledby`` 属性を用いる
-- title: アイコンにラベルを付加する
+    method:
+      ja: |-
+        *  ``aria-labelledby`` 属性を用いる
+      en: |-
+        *  Use the ``aria-labelledby`` attribute.
+- title:
+    ja: アイコンにラベルを付加する
+    en: Add a Label to the Icon
   methods:
   - platform: web
-    method: |-
-      *  ``alt`` 属性または ``aria-label`` 属性を用いる
+    method:
+      ja: |-
+        *  ``alt`` 属性または ``aria-label`` 属性を用いる
+      en: |-
+        *  Use the ``alt`` attribute or the ``aria-label`` attribute.
   - platform: ios
-    method: |-
-      *  ``accessibilityLabel`` で指定する。
+    method:
+      ja: |-
+        *  ``accessibilityLabel`` で指定する。
+      en: |-
+        *  Specify with ``accessibilityLabel``.
   - platform: android
-    method: |-
-      *  ``contentDescription`` 属性で指定する。
-- title: 適切な状態の確認
+    method:
+      ja: |-
+        *  ``contentDescription`` 属性で指定する。
+      en: |-
+        *  Specify with the ``contentDescription`` attribute.
+- title:
+    ja: 適切な状態の確認
+    en: Confirm the Appropriate State
   methods:
   - platform: web
-    method: |-
-      *  開発者ツールで確認すると、Accessible Nameに適切なテキストが設定されている状態になっている。
+    method:
+      ja: |-
+        *  開発者ツールで確認すると、Accessible Nameに適切なテキストが設定されている状態になっている。
+      en: |-
+        *  When you check with developer tools, the Accessible Name is set to the appropriate text.

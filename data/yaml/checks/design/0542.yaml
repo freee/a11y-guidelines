@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     箇条書き、表などとして表現されるべきものが、使用するべきHTMLの要素やデザイン・システムのコンポーネントと共に、設計資料で明示されている。
+  en: |-
+    It is explicitly stated in the design documentation what should be expressed as lists, tables, etc., along with the HTML elements or the design system components to be used.

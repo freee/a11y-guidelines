@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     OSの設定で最大の文字サイズを指定しても、コンテンツの理解や利用を妨げるようなレイアウト崩れが起こらない。
+  en: |-
+    When the maximum text size is specified in the OS settings, layout issues that interfere with understanding and use of content do not occur.

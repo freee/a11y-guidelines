@@ -11,3 +11,9 @@ check:
     *  リンク箇所を判別できる
     *  画像、テキストの意図が伝わる
     *  入力フォームの必須項目、エラーを認知できる
+  en: |-
+    The color scheme is designed to not hinder usability even in grayscale display:
+
+    *  Links can be distinguished
+    *  The intent of images and text is conveyed
+    *  Required items and errors in input forms can be recognized

@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     ログイン・セッションがタイムアウトした場合、再認証後にデータを失うことなくユーザーが操作を継続できるようになっている。
+  en: |-
+    If the login session times out, users can continue their operations without losing data after re-authentication.
