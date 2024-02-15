@@ -3,21 +3,21 @@ import sys
 import json
 import yaml
 from jsonschema import validate, ValidationError, RefResolver
-import initialize
+import app_initializer
 from path import SRCDIR, SCHEMA_FILENAMES, COMMON_SCHEMA_PATH, MISC_INFO_SRCFILES
 from constants import CHECK_TOOLS
 from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, RelationshipManager
 
 def main():
-    settings = initialize.setup_parameters()
+    settings = app_initializer.setup_parameters()
     build_all, targets, lang, no_check = (
         settings.get('build_all'),
         settings.get('targets'),
         settings.get('lang'),
         settings.get('no_check')
     )
-    DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = initialize.setup_constants(lang)
-    templates = initialize.setup_templates()
+    DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(lang)
+    templates = app_initializer.setup_templates()
 
     if not no_check:
         try:
@@ -28,7 +28,7 @@ def main():
         schema_path = f'file://{SRCDIR["schema"]}/'
         resolver = RefResolver(schema_path, common_schema)
 
-    data, makefile_vars, makefile_vars_list = initialize.setup_variables()
+    data, makefile_vars, makefile_vars_list = app_initializer.setup_variables()
 
     # Setup CheckTool instances
     for tool_id, tool_names in CHECK_TOOLS.items():
