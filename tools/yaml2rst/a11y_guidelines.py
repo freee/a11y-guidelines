@@ -1,7 +1,7 @@
 import datetime
 import re
 from urllib.parse import quote as url_encode
-from config import CHECK_TARGETS, PLATFORM_NAMES, SEVERITY_TAGS, IMPLEMENTATION_TARGETS
+from constants import *
 
 class RelationshipManager:
     _instance = None
