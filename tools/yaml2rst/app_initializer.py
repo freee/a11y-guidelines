@@ -20,18 +20,10 @@ def setup_constants(lang):
             'wcag_sc': MISC_INFO_SRCFILES['wcag_sc'],
             'info_src': MISC_INFO_SRCFILES['info']
     }
-    
+
     return DEST_DIRS, STATIC_FILES, MAKEFILE_VARS
 
 def setup_variables():
-    data = {
-        'guidelines': [],
-        'checks': [],
-        'faqs': [],
-        'faq_tags': [],
-        'categories': [],
-        'wcag_sc': []
-    }
     makefile_vars = {
         'gl_yaml': '',
         'check_yaml': '',
@@ -45,14 +37,14 @@ def setup_variables():
         'info_to_gl_target': [],
         'info_to_faq_target': [],
     }
-    return data, makefile_vars, makefile_vars_list
+    return makefile_vars, makefile_vars_list
 
 def setup_templates():
     templates = {}
     for name, filename in TEMPLATE_FILENAMES.items():
         template = TemplateManager(TEMPLATE_DIR)
         templates[name] = template.load(filename)
-    return templates    
+    return templates
 
 def parse_args():
     languages = config.AVAILABLE_LANGUAGES
@@ -75,6 +67,7 @@ def process_arguments(args):
     settings = {
         'build_all': not args.files,
         'targets': args.files if args.files else [],
+        'no_check': args.no_check,
         'lang': args.lang
     }
     return settings
