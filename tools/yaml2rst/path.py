@@ -66,7 +66,7 @@ def get_dest_dirnames(lang):
         dict: Dictionary of destination directory names
     """
     if len(AVAILABLE_LANGUAGES) == 1:
-        lang = ''
+        lang = '.'
     inc_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'inc')
     faq_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'faq')
     return {

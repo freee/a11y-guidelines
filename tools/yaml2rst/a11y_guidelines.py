@@ -1,7 +1,7 @@
 import datetime
 import re
 from urllib.parse import quote as url_encode
-from constants import *
+from constants import PLATFORM_NAMES, SEVERITY_TAGS, CHECK_TARGETS, IMPLEMENTATION_TARGETS
 
 class RelationshipManager:
     _instance = None
@@ -201,7 +201,11 @@ class Guideline:
 
     def __init__(self, gl):
         self.id = gl['id']
+        if self.id in Guideline.all_guidelines:
+            raise ValueError(f'Duplicate guideline ID: {self.id}')
         self.sort_key = gl['sortKey']
+        if self.sort_key in [guideline.sort_key for guideline in Guideline.all_guidelines.values()]:
+            raise ValueError(f'Duplicate guideline sortKey: {self.sort_key}')
         self.title = gl['title']
         self.platform = gl['platform']
         self.guideline = gl['guideline']
@@ -251,11 +255,16 @@ class Guideline:
     def get_by_id(cls, guideline_id):
         return cls.all_guidelines.get(guideline_id)
 
+    @classmethod
+    def list_all_src_paths(cls):
+        return [guideline.src_path for guideline in cls.all_guidelines.values()]
 class Check:
     all_checks = {}
 
     def __init__(self, check):
         self.id = check['id']
+        if self.id in Check.all_checks:
+            raise ValueError(f'Duplicate check ID: {self.id}')
         self.check = check['check']
         self.severity = check['severity']
         self.target = check['target']
@@ -317,12 +326,20 @@ class Check:
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
         return [cls.all_checks[check_id].template_object(lang) for check_id in sorted_checks]
 
+    @classmethod
+    def list_all_src_paths(cls):
+        return [check.src_path for check in cls.all_checks.values()]
+
 class Faq:
     all_faqs = {}
 
     def __init__(self, faq):
         self.id = faq['id']
+        if self.id in Faq.all_faqs:
+            raise ValueError(f'Duplicate FAQ ID: {self.id}')
         self.sort_key = faq['sortKey']
+        if self.sort_key in [faq.sort_key for faq in Faq.all_faqs.values()]:
+            raise ValueError(f'Duplicate FAQ sortKey: {self.sort_key}')
         self.updated = datetime.datetime.fromisoformat(faq['updated'])
         self.title = faq['title']
         self.problem = faq['problem']
@@ -393,6 +410,10 @@ class Faq:
             if kwargs['sort_by'] == 'date':
                 return sorted(cls.all_faqs.values(), key=lambda faq: faq.updated, reverse=True)
         return sorted(cls.all_faqs.values(), key=lambda faq: faq.sort_key)
+
+    @classmethod
+    def list_all_src_paths(cls):
+        return [faq.src_path for faq in cls.all_faqs.values()]
 
 class Category:
     all_categories = {}
@@ -477,8 +498,9 @@ class FaqTag:
 class WcagSc:
     all_scs = {}
 
-    def __init__(self, sc):
-        self.id = sc['id']
+    def __init__(self, sc_id, sc):
+        self.id = sc_id
+        self.scnum = sc['id']
         self.sort_key = sc['sortKey']
         self.level = sc['level']
         self.local_priority = sc['localPriority']
@@ -495,7 +517,7 @@ class WcagSc:
     def template_object(self, lang):
         rel = RelationshipManager()
         template_object =  {
-            'sc': self.id,
+            'sc': self.scnum,
             'level': self.level,
             'LocalLevel': self.local_priority,
             'sc_en_title': self.title['en'],
@@ -520,7 +542,7 @@ class WcagSc:
 class InfoRef:
     all_inforefs = {}
 
-    def __new__(cls, ref, *args, **kwargs):
+    def __new__(cls, ref, *args):
         ref_id = url_encode(ref)
         if ref_id in cls.all_inforefs:
             return cls.all_inforefs[ref_id]
@@ -528,12 +550,15 @@ class InfoRef:
         cls.all_inforefs[ref_id] = instance
         return instance
 
-    def __init__(self, inforef):
+    def __init__(self, inforef, data=None):
         if hasattr(self, 'initialized'):
             return
         self.ref = inforef
         self.id = url_encode(self.ref)
         self.internal = not bool(re.match(r'(https?://|\|.+\|)', self.ref))
+        if not self.internal:
+            self.url = data['url']
+            self.text = data['text']
         self.initialized = True
 
     def refstring(self):
@@ -542,8 +567,13 @@ class InfoRef:
         return self.ref
 
     @classmethod
-    def get_all_internals(cls):
-        return [info for info in cls.all_inforefs.values() if info.internal]
+    def get_by_id(cls, ref_id):
+        return cls.all_inforefs.get(ref_id)
+
+    @classmethod
+    def list_all_external(cls):
+        return [inforef for inforef in cls.all_inforefs.values() if not inforef.internal]
+
 
 class Procedure:
     def __init__(self, procedure, check):

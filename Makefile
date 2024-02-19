@@ -11,7 +11,7 @@ SOURCEDIR     = source
 BUILDDIR      = build
 SPHINX_PREDEFINED_TARGETS := $(shell $(SPHINXBUILD) -M help . .|sed -r '/^\S+/d;s/^\s+(\S+).+/\1/;/^clean/d')
 PREDEFINED_TARGETS = $(SPHINX_PREDEFINED_TARGETS) check-includes
-INCLUDED_FILES := $(shell grep -ohRE '^\.\. include:: +.+' $(SOURCEDIR) | sed -r "s%^\.\. include:: +%$(SOURCEDIR)%")
+INCLUDED_FILES := $(shell grep -ohRE '^\.\. include:: +.+' $(SOURCEDIR) | sed -r "s%^\.\. include:: +%./$(SOURCEDIR)%")
 
 # Put it first so that "make" without argument is like "make help".
 help:
