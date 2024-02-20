@@ -1,4 +1,4 @@
-SUBDIRS = ja
+SUBDIRS = ja en
 export ROOTDIR = $(CURDIR)
 
 .PHONY: all $(SUBDIRS)
