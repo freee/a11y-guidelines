@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>ARIAライブ・リージョンをページのロード後に挿入する（要注意）</title>
+    <script>
+      function addText(elm, str) {
+        elm.appendChild(str);
+      }
+
+      function showStatus() {
+        let button = document.getElementById("button");
+        button.setAttribute("disabled", "true");
+        let statusRegion = document.getElementById("status-region");
+        let msgContainer = document.createElement("p");
+        msgContainer.setAttribute("aria-live", "polite");
+        statusRegion.appendChild(msgContainer);
+        let msg = document.createTextNode("ページが更新されました。");
+        setTimeout(addText, 1, msgContainer, msg);
+      }
+    </script>
+  </head>
+  <body>
+    <h1>aria-live属性を使って自動的にメッセージが読み上げられる</h1>
+    <div id="status-region"></div>
+    <p>下のボタンを押すと、「ページが更新されました。」というテキストが表示され、自動的に同じ内容が読み上げられます。</p>
+    <button id="button" onclick="javascript:showStatus()">ページを更新</button>
+  </body>
+</html>

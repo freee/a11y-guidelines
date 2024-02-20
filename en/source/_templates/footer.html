@@ -1,0 +1,9 @@
+{% extends "!footer.html" %}
+{% block extrafooter %}
+<p>
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><a xmlns:cc="http://creativecommons.org/ns#" href="https://www.freee.co.jp/" property="cc:attributionName" rel="cc:attributionURL">freee株式会社</a> 作『<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">freeeアクセシビリティー・ガイドライン</span>』は<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a>で提供されています。
+</p>
+{% if gtm_id %}
+<p>このサイトでは、アクセス状況の解析のためにGoogle Analyticsを用いています。Googleによるデータの使用については、<a href="https://www.google.com/intl/ja/policies/privacy/partners/">GOOGLE のサービスを使用するサイトやアプリから収集した情報の GOOGLE による使用</a>をご覧ください。また、これに伴い使用されるCookieの扱いなどについては、<a href="https://www.freee.co.jp/privacy_policy/">freee株式会社のプライバシー・ポリシー</a>をご覧ください。</p>
+{% endif %}
+{% endblock %}
