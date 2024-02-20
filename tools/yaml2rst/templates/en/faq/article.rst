@@ -2,44 +2,44 @@
 
 {{ title|make_heading(1) }}
 
-最終更新：{{ updated_year }}年{{ updated_month }}月{{ updated_day }}日
+Last Updated: {{ updated_year }}-{{ updated_month }}-{{ updated_day }}
 
-タグ：
+Tags:
 {%- for tag in tags -%}
-{%- if loop.first %} {% endif -%}:ref:`faq-tag-{{ tag }}`{%- if not loop.last %} 、 {% endif -%}
+{%- if loop.first %} {% endif -%}:ref:`faq-tag-{{ tag }}`{%- if not loop.last %} , {% endif -%}
 {%- endfor %}
 
 {% filter make_heading(2) -%}
-質問/問題
+Question / Problem
 {%- endfilter %}
 
 {{ problem }}
 
 {% filter make_heading(2) -%}
-回答/結論
+Answer / Conclusion
 {%- endfilter %}
 
 {{ solution }}
 
 {% filter make_heading(2) -%}
-解説
+Explanation
 {%- endfilter %}
 
 {{ explanation }}
 
 {% if guidelines is defined -%}
 {%- filter make_heading(2) -%}
-関連ガイドライン項目
+Related Guidelines
 {%- endfilter %}
 
 {% for gl in guidelines -%}
-*  {{ gl.category }}： :ref:`{{ gl.guideline }}`
+*  {{ gl.category }}: :ref:`{{ gl.guideline }}`
 {% endfor %}
 {%- endif %}
 
 {% if checks is defined -%}
 {%- filter make_heading(2) -%}
-関連チェック内容
+Related Checklist Items
 {%- endfilter %}
 
 {% for check in checks -%}
@@ -50,7 +50,7 @@
 
 {% if info is defined -%}
 {%- filter make_heading(2) -%}
-関連する参考情報
+Related Supplementary Information
 {%- endfilter %}
 
 {% for i in info -%}

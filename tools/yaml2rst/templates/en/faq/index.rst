@@ -1,13 +1,12 @@
 .. _faq-index:
 
 {% filter make_heading(1) -%}
-よくある質問と回答（FAQ）
+Frequently Asked Questions (FAQ)
 {%- endfilter %}
 
-ここでは、freee社内外から寄せられた質問の中で、比較的一般化できるものを「よくある質問と回答（FAQ）」としてまとめています。
+Here, we have compiled questions that can be relatively generalized from those received both internally and externally from freee, as "Frequently Asked Questions and Answers (FAQ)."
 
-各FAQ記事には、その内容に関連するキーワードをタグとして付与しています。
-また、関連するガイドライン項目、チェック内容や参考情報へのリンクも掲載しています。
+Each FAQ article is tagged with keywords related to its content. Additionally, links to related guidelines, checklist items, and supplemenmtary information are also provided.
 
 .. toctree::
    :maxdepth: 1
@@ -18,7 +17,7 @@
    tags/index
 
 {% filter make_heading(2) -%}
-タグ一覧
+List of Tags
 {%- endfilter %}
 
 {% for tag in tags -%}
@@ -26,10 +25,10 @@
 {% endfor %}
 
 {% filter make_heading(2) -%}
-FAQ記事一覧
+List of Articles
 {%- endfilter %}
 
 {% for article in articles -%}
-*  :ref:`faq-{{ article.id }}` （{{ article.updated_year }}年{{ article.updated_month }}月{{ article.updated_day }}日更新）
+*  :ref:`faq-{{ article.id }}` (updated on {{ article.updated_year }}-{{ article.updated_month }}-{{ article.updated_day }})
 {% endfor %}
 

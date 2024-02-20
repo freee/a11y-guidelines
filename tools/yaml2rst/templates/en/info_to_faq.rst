@@ -1,5 +1,5 @@
 {% filter make_heading(2) -%}
-関連FAQ
+Related FAQs
 {%- endfilter %}
 
 {% for faq in faqs -%}

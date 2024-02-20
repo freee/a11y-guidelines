@@ -1,6 +1,6 @@
 {% for impl in check.implementations -%}
 {% filter make_heading(check_heading_level + 1) -%}
-実装方法の例：{{ impl.title }}
+Implementation Example: {{ impl.title }}
 {%- endfilter %}
 
 {% for method in impl.methods -%}

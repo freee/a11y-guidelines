@@ -12,7 +12,7 @@
 {{ ex.note }}
 {% endif %}
 {% if ex.YouTube is defined %}
-参考動画： `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`_
+Reference Videos: `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`_
 
 .. raw:: html
 

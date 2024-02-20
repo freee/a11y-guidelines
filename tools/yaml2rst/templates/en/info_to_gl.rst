@@ -1,8 +1,8 @@
 {% filter make_heading(2) -%}
-関連ガイドライン項目
+Related Guidelines
 {%- endfilter %}
 
 {% for gl in guidelines -%}
-*  {{ gl.category }}： :ref:`{{ gl.guideline }}`
+*  {{ gl.category }}: :ref:`{{ gl.guideline }}`
 {% endfor %}
 

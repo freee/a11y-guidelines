@@ -1,10 +1,10 @@
 .. _faq-article-index:
 
 {% filter make_heading(1) -%}
-FAQ記事一覧
+FAQ Articles
 {%- endfilter %}
 
-よくある質問と回答（FAQ）の全記事一覧です。
+This is a list of all the FAQ articles in the system.
 
 .. toctree::
    :maxdepth: 1

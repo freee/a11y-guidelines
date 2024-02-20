@@ -3,29 +3,29 @@
 .. _check-{{ check.id }}:
 
 {% filter make_heading(2) -%}
-チェックID：{{ check.id }}
+Check ID: {{ check.id }}
 {%- endfilter %}
 
 {{ check.check }}
 
-対象
+Applicable Stages
    {{ check.target }}
-対象プラットフォーム
+Target Platforms
    {{ check.platform }}
-重篤度
+Severity
    {{ check.severity }}
-関連ガイドライン項目
+Related Guidelines
 {%- for ref in check.guidelines %}
-   *  {{ ref.category }}： :ref:`{{ ref.guideline }}`
+   *  {{ ref.category }}: :ref:`{{ ref.guideline }}`
 {%- endfor %}
 {% if check.faqs is defined -%}
-関連FAQ
+Related FAQs
 {%- for item in check.faqs %}
    *  :ref:`faq-{{ item }}`
 {%- endfor %}
 {%- endif %}
 {% if check.info_refs is defined -%}
-参考情報
+Supplementary Information
 {%- for item in check.info_refs %}
    *  {{ item }}
 {%- endfor %}

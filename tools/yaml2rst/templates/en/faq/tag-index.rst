@@ -1,11 +1,11 @@
 .. _faq-tag-index:
 
 {% filter make_heading(1) -%}
-FAQタグ一覧
+List of FAQ Rags
 {%- endfilter %}
 
-よくある質問と回答（FAQ）に付けられているタグの一覧です。
-タグをクリックすると、そのタグが付けられたFAQ記事の一覧が表示されます。
+Here is a list of tags associated with the Frequently Asked Questions and Answers (FAQ).
+Clicking on a tag will display a list of FAQ articles that have been tagged with it.
 
 .. toctree::
    :maxdepth: 1

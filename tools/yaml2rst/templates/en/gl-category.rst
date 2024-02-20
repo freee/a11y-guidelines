@@ -6,33 +6,29 @@
 
 {{ gl.guideline }}
 
-対象プラットフォーム
+Target Platforms
    {{ gl.platform }}
-意図
+Intent
    {{ gl.intent | indent(3) }}
-対応するWCAG 2.1の達成基準
+Corresponding Success Criteria of WCAG 2.1
 {%- for sc in gl.scs %}
-   *  達成基準{{ sc.sc }}(レベル{{ sc.level }})：
-
-      -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
-      -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
-
+   *  Success Criterion {{ sc.sc }} (Level {{ sc.level }}): `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
 {% endfor -%}
 {% if gl.info is defined -%}
-参考情報
+Supplementary Information
 {%- for item in gl.info %}
    *  {{ item }}
 {%- endfor %}
 {%- endif %}
 {% if gl.faqs is defined -%}
-関連FAQ
+Related FAQs
 {%- for item in gl.faqs %}
    *  :ref:`faq-{{ item }}`
 {% endfor %}
 {%- endif %}
 
 {% filter make_heading(3, 'checklist') -%}
-チェック内容
+Checklist Items
 {%- endfilter %}
 
 {% for check in gl.checks -%}
@@ -42,11 +38,11 @@
 
 {{ check.check }}
 
-対象
+Applicable Stages
    {{ check.target }}
-対象プラットフォーム
+Target Platforms
    {{ check.platform }}
-重篤度
+Severity
    {{ check.severity }}
 
 {% if check.implementations is defined -%}

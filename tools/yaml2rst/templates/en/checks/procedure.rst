@@ -1,6 +1,6 @@
 {% for proc in check.procedures -%}
 {% filter make_heading(check_heading_level + 1) -%}
-チェック手順： {{ proc.platform }}
+Check Procedure: {{ proc.platform }}
 {%- endfilter %}
 
 {{ proc.procedure }}
@@ -9,7 +9,7 @@
 
 {% for technique in proc.techniques -%}
 {% filter make_heading(check_heading_level + 2) -%}
-{{ technique.tool_display_name }}によるチェック方法の例
+An Example of Performin the Check with {{ technique.tool_display_name }}
 {%- endfilter %}
 
 {{ technique.technique }}
@@ -17,7 +17,7 @@
 {{ technique.note }}
 {% endif %}
 {% if technique.YouTube is defined %}
-参考動画： `{{ technique.YouTube.title }} <https://www.youtube.com/watch?v={{ technique.YouTube.id }}>`_
+Reference Videos: `{{ technique.YouTube.title }} <https://www.youtube.com/watch?v={{ technique.YouTube.id }}>`_
 
 .. raw:: html
 
