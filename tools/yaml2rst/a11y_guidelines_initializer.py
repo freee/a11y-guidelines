@@ -5,22 +5,30 @@ import yaml
 from jsonschema import validate, ValidationError, RefResolver
 from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, RelationshipManager
 from constants import CHECK_TOOLS
-from path import SRCDIR, SCHEMA_FILENAMES, COMMON_SCHEMA_PATH, MISC_INFO_SRCFILES
+from path import get_src_path
 
-def setup_instances(no_check=False):
+def setup_instances(settings):
+    no_check = settings['no_check']
+    basedir = settings['basedir']
+    src_path = get_src_path(basedir)
     # Mapping of entity type, srcdir, schema filename, and constructor.
     # The order is important for the initialization of the instances.
     entity_config = [
-        ('check', SRCDIR['checks'], SCHEMA_FILENAMES['checks'], Check),
-        ('guideline', SRCDIR['guidelines'], SCHEMA_FILENAMES['guidelines'], Guideline),
-        ('faq', SRCDIR['faq'], SCHEMA_FILENAMES['faq'], Faq)
+        ('check', src_path['checks'], src_path['schema_filenames']['checks'], Check),
+        ('guideline', src_path['guidelines'], src_path['schema_filenames']['guidelines'], Guideline),
+        ('faq', src_path['faq'], src_path['schema_filenames']['faq'], Faq)
     ]
     static_entity_config = [
-        ('category', MISC_INFO_SRCFILES['gl_categories'], Category),
-        ('wcag_sc', MISC_INFO_SRCFILES['wcag_sc'], WcagSc),
-        ('faq_tag', MISC_INFO_SRCFILES['faq_tags'], FaqTag),
-        ('external_info', MISC_INFO_SRCFILES['info'], InfoRef)
+        ('category', src_path['gl_categories'], Category),
+        ('wcag_sc', src_path['wcag_sc'], WcagSc),
+        ('faq_tag', src_path['faq_tags'], FaqTag),
+        ('external_info', src_path['info'], InfoRef)
     ]
+
+    if not no_check:
+        resolver = setup_resolver(src_path)
+    else:
+        resolver = None
 
     # Setup CheckTool instances
     for tool_id, tool_names in CHECK_TOOLS.items():
@@ -30,7 +38,7 @@ def setup_instances(no_check=False):
         process_static_entity_file(entity_type, srcfile, constructor)
 
     for entity_type, srcdir, schema_filename, constructor in entity_config:
-        process_entity_files(entity_type, srcdir, schema_filename, constructor, no_check)
+        process_entity_files(entity_type, srcdir, src_path['schema'], schema_filename, resolver, constructor)
 
     return RelationshipManager()
 
@@ -88,19 +96,17 @@ def validate_data(data, schema_file, common_resolver=None):
     except ValidationError as e:
         raise ValueError("Validation failed.") from e
 
-def setup_resolver():
+def setup_resolver(src_path):
     try:
-        file_content = read_file_content(COMMON_SCHEMA_PATH)
+        file_content = read_file_content(src_path['common_schema_path'])
         common_schema = json.loads(file_content)
     except Exception as e:
-        handle_file_error(e, COMMON_SCHEMA_PATH)
-    schema_path = f'file://{SRCDIR["schema"]}/'
+        handle_file_error(e, src_path['common_schema_path'])
+    schema_path = f'file://{src_path["schema"]}/'
     resolver = RefResolver(schema_path, common_schema)
     return resolver
 
-def process_entity_files(entity_type, srcdir, schema_filename, constructor, no_check):
-    if not no_check:
-        resolver = setup_resolver()
+def process_entity_files(entity_type, srcdir, schema_dir, schema_filename, resolver, constructor):
     files = ls_dir(srcdir)
     for file in files:
         try:
@@ -108,12 +114,12 @@ def process_entity_files(entity_type, srcdir, schema_filename, constructor, no_c
         except Exception as e:
             handle_file_error(e, file)
         parsed_data = yaml.safe_load(file_content)
-        if not no_check:
+        if resolver is not None:
             try:
-                validate_data(parsed_data, os.path.join(SRCDIR['schema'], schema_filename), resolver)
+                validate_data(parsed_data, os.path.join(schema_dir, schema_filename), resolver)
             except Exception as e:
                 handle_file_error(e, file)
-        parsed_data['src_path'] = os.path.relpath(file, start=os.getcwd())
+        parsed_data['src_path'] = os.path.abspath(file)
         try:
             constructor(parsed_data)
         except Exception as e:

@@ -1,15 +1,19 @@
+import os
 import argparse
 import config
-from path import get_dest_dirnames, get_static_dest_files, MISC_INFO_SRCFILES, TEMPLATE_DIR, TEMPLATE_FILENAMES
+from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, TEMPLATE_FILENAMES
 from template_manager import TemplateManager
 
 def setup_parameters():
     args = parse_args()
     return process_arguments(args)
 
-def setup_constants(lang):
-    DEST_DIRS = get_dest_dirnames(lang)
-    STATIC_FILES = get_static_dest_files(lang)
+def setup_constants(settings):
+    lang = settings['lang']
+    basedir = settings['basedir']
+    DEST_DIRS = get_dest_dirnames(basedir, lang)
+    STATIC_FILES = get_static_dest_files(basedir, lang)
+    src_path = get_src_path(basedir)
 
     MAKEFILE_VARS = {
             'all_checks_target': STATIC_FILES['all_checks'],
@@ -17,8 +21,8 @@ def setup_constants(lang):
             'wcag_mapping_target': STATIC_FILES['wcag21mapping'],
             'priority_diff_target': STATIC_FILES['priority_diff'],
             'miscdefs_target': STATIC_FILES['miscdefs'],
-            'wcag_sc': MISC_INFO_SRCFILES['wcag_sc'],
-            'info_src': MISC_INFO_SRCFILES['info']
+            'wcag_sc': src_path['wcag_sc'],
+            'info_src': src_path['info']
     }
 
     return DEST_DIRS, STATIC_FILES, MAKEFILE_VARS
@@ -39,10 +43,11 @@ def setup_variables():
     }
     return makefile_vars, makefile_vars_list
 
-def setup_templates():
+def setup_templates(lang):
     templates = {}
+    template_dir = os.path.join(TEMPLATE_DIR, lang)
     for name, filename in TEMPLATE_FILENAMES.items():
-        template = TemplateManager(TEMPLATE_DIR)
+        template = TemplateManager(template_dir)
         templates[name] = template.load(filename)
     return templates
 
@@ -51,6 +56,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
     parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
     parser.add_argument('--lang', '-l', type=str, choices=languages, default='ja', help=f'the language of the output file ({" ".join(languages)})')
+    parser.add_argument('--basedir', '-b', type=str, default='..', help='Base directory where the data directory is located.')
     parser.add_argument('files', nargs='*', help='Filenames')
     return parser.parse_args()
 
@@ -68,6 +74,7 @@ def process_arguments(args):
         'build_all': not args.files,
         'targets': args.files if args.files else [],
         'no_check': args.no_check,
-        'lang': args.lang
+        'lang': args.lang,
+        'basedir': args.basedir
     }
     return settings

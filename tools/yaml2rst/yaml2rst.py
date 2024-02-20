@@ -5,10 +5,10 @@ import a11y_guidelines_initializer
 
 def main():
     settings = app_initializer.setup_parameters()
-    DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings['lang'])
-    templates = app_initializer.setup_templates()
+    DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
+    templates = app_initializer.setup_templates(settings['lang'])
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    rel = a11y_guidelines_initializer.setup_instances(settings['no_check'])
+    rel = a11y_guidelines_initializer.setup_instances(settings)
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
