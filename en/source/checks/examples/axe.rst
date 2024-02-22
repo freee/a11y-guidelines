@@ -1,12 +1,12 @@
 .. _check-example-axe:
 
-########################################
-axe DevToolsを用いたチェック実施方法の例
-########################################
+####################################################
+Examples of How to Conduct Checks Using axe DevTools
+####################################################
 
-ここでは、各チェック内容で示したチェック方法の例について、axe DevToolsを用いて実施するものをまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item using axe DevTools.
 
-axe DevToolsのインストールや基本的な使用方法については、 :ref:`exp-axe` を参照してください。
-また、 :ref:`info-axe-rules` も合わせて参照してください。
+For installation and basic usage of axe DevTools, please refer to :ref:`exp-axe`.
+Please also refer to :ref:`info-axe-rules`.
 
 .. include:: /inc/checks/examples-axe.rst

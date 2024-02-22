@@ -1,11 +1,11 @@
 .. _check-example-android-tb:
 
-############################################
-Android TalkBackを用いたチェック実施方法の例
-############################################
+########################################################
+Examples of How to Conduct Checks Using Android TalkBack
+########################################################
 
-ここでは、各チェック内容で示したチェック方法の例について、Android TalkBackを用いて実施するものをまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item using Android TalkBack.
 
-Android TalkBackの基本的な使い方や推奨設定などについては、 :ref:`exp-screen-reader-check-android-talkback` を参照してください。
+For basic usage of Android TalkBack and recommended settings, please refer to :ref:`exp-screen-reader-check-android-talkback`.
 
 .. include:: /inc/checks/examples-android-tb.rst

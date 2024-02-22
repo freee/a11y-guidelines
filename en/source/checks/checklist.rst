@@ -2,24 +2,24 @@
 
 .. rst-class:: checklist
 
-######################################
-アクセシビリティー・チェック全項目一覧
-######################################
+##########################################
+Complete List of Accessibility Check Items
+##########################################
 
-書くガイドライン項目の「チェック内容」に示したものを、チェックID順に掲載しています。
+The items listed in the "Checklist Items" of each guideline are presented in order of check ID.
 
-それぞれ、以下の項目を記しています。
-各項目については、 :ref:`intro-intro-check` に詳述しています。
+For each, the following details are provided.
+For more information on each item, see :ref:`intro-intro-check`.
 
-*  チェックID
-*  チェック内容
-*  対象：デザイン、コード、またはプロダクト
-*  対象プラットフォーム：Web、モバイルのいずれかまたは両方
-*  重篤度：[CRITICAL]/[MAJOR]/[NORMAL]/[MINOR]
-*  関連ガイドライン項目：そのチェックによって対応状況を確認することができるガイドライン項目
-*  参考情報：そのチェックの意図や実施方法に関する情報が記されているものもあります（各関連ガイドライン項目で掲載しているものと同じです。）
-*  関連FAQ： :ref:`faq-index` に掲載しているFAQのうち、そのチェックに関連するものへのリンク
-*  「対象」が「コード」のものの中には、実装方法例を記しているものもあります
-*  「対象」が「プロダクト」のものの中には、チェック実施方法の例を記しているものもあります
+*  Check ID
+*  Check Content
+*  Applicable Stages: Design, Code, or Product
+*  Target Platform: Either Web, Mobile, or both
+*  Severity: [CRITICAL]/[MAJOR]/[NORMAL]/[MINOR]
+*  Related Guidelines: Guideline that can be checked for compliance through this checklist item
+*  Supplementary Information: Some include information about the intent or method of conducting the check (same as those published in each related guideline).
+*  Related FAQs: Links to FAQs listed in :ref:`faq-index` that are related to the checklist item
+*  Among those applicable to "Code," some include examples of implementation methods.
+*  Among those applicable to "Product," some include examples of how to conduct the checks.
 
 .. include:: /inc/checks/allchecks.rst

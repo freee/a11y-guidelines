@@ -1,10 +1,10 @@
 .. _check-example-index:
 
-####################
-チェック実施方法の例
-####################
+#################################
+Examples of How to Conduct Checks
+#################################
 
-ここでは、各チェック内容で示したチェック方法の例について、チェックに使用するツールごとにまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item, organized by each tool used for the checks.
 
 .. toctree::
    :maxdepth: 1

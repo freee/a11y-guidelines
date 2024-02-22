@@ -1,11 +1,11 @@
 .. _check-example-nvda:
 
-################################
-NVDAを用いたチェック実施方法の例
-################################
+############################################
+Examples of How to Conduct Checks Using NVDA
+############################################
 
-ここでは、各チェック内容で示したチェック方法の例について、NVDAを用いて実施するものをまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item using NVDA.
 
-NVDAのインストール方法や基本的な使い方などについては、 :ref:`exp-screen-reader-check-nvda` を参照してください。
+For installation and basic usage of NVDA, please refer to :ref:`exp-screen-reader-check-nvda`.
 
 .. include:: /inc/checks/examples-nvda.rst

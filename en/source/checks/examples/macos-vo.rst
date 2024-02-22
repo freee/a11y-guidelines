@@ -1,11 +1,11 @@
 .. _check-example-macos-vo:
 
-###########################################
-macOS VoiceOverを用いたチェック実施方法の例
-###########################################
+#######################################################
+Examples of How to Conduct Checks Using macOS VoiceOver
+#######################################################
 
-ここでは、各チェック内容で示したチェック方法の例について、macOS VoiceOverを用いて実施するものをまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item using macOS VoiceOver.
 
-macOS VoiceOverの初期設定や基本的な使い方などについては、 :ref:`exp-screen-reader-check-macos-vo` を参照してください。
+For basic usage of macOS VoiceOver and recommended settings, please refer to :ref:`exp-screen-reader-check-macos-vo`.
 
 .. include:: /inc/checks/examples-macos-vo.rst

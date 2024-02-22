@@ -1,11 +1,11 @@
 .. _check-example-keyboard:
 
-########################################
-キーボード操作によるチェック実施方法の例
-########################################
+###########################################################
+Examples of How to Conduct Checks Using Keyboard Operations
+###########################################################
 
-ここでは、各チェック内容で示したチェック方法の例について、キーボード操作によって確認するものをまとめて記しています。
+Here, we compile examples of how to conduct the check methods indicated for each checklist item using keyboard operations.
 
-参考： :ref:`exp-tab-order-check`
+See Also: :ref:`exp-tab-order-check`
 
 .. include:: /inc/checks/examples-keyboard.rst
