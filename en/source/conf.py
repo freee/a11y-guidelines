@@ -18,11 +18,11 @@ import re
 
 # -- Project information -----------------------------------------------------
 
-project = 'freeeアクセシビリティー・ガイドライン'
-author = 'freee株式会社'
+project = 'freee Accessibility Guidelines'
+author = 'freee, k.k.'
 guidelines_version = 'Ver. 202401.0'
 checksheet_version = '4.3.7'
-publishedDate = u'2024年1月15日'
+publishedDate = u'Jan 15 2024'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
@@ -38,8 +38,8 @@ release = guidelines_version + guidelines_version_suffix + guidelines_version_da
 guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date
 
 html_title = f'{project} {release}'
-copyright = '2020-{pubYear}, freee株式会社'.format(
-  pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
+copyright = '2020-{pubYear}, freee, k.k'.format(
+  pubYear = re.search(r'(\d{4})$', publishedDate).group(1)
 )
 
 # -- General configuration ---------------------------------------------------
@@ -60,7 +60,7 @@ templates_path = ['_templates']
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'ja'
+language = 'en'
 
 # For i18n
 #gettext_compact = False
