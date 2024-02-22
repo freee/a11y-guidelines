@@ -1,12 +1,12 @@
 .. _category-page:
 
-##########
-ページ全体
-##########
+################
+Pages in General
+################
 
-これらのガイドラインは、ページ全体に関するもので、すべてのページが対象です。
+These guidelines pertain to the entire page and are applicable to all pages.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

@@ -1,12 +1,12 @@
 .. _category-login-session:
 
-####################
-ログイン・セッション
-####################
+##############
+Login Sessions
+##############
 
-これらのガイドラインは、ログイン・セッション管理に関するものです。
+These guidelines are about login session management.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

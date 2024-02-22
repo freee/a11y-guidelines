@@ -1,14 +1,14 @@
 .. _category-dynamic-content:
 
-##############
-動的コンテンツ
-##############
+###############
+Dynamic Content
+###############
 
-これらのガイドラインは、動的コンテンツに関するものです。
+These guidelines are about dynamic content.
 
-動的コンテンツとは、自動的、またはユーザーの操作を受けて変化するものです。そのような変化には、表示されているものの変更に加えて、ページ遷移なども含まれる場合があります。
+Dynamic content refers to content that changes automatically or in response to user interactions. Such changes may include modifications to the displayed content as well as page transitions.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

@@ -1,12 +1,12 @@
 .. _category-form:
 
-########
-フォーム
-########
+#####
+Forms
+#####
 
-これらのガイドラインは、一般的な入力フォームに加え、input要素などフォーム・コントロールを利用している、一見フォームとは思えないようなコンテンツも対象としています。
+These guidelines cover general input forms as well as content that uses form controls such as input elements, even if it doesn't look like a form at first glance.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

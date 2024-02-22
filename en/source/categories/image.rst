@@ -1,12 +1,12 @@
 .. _category-image:
 
-####
-画像
-####
+######
+Images
+######
 
-これらのガイドラインは、画像に関するものです。
+These guidelines are for images.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

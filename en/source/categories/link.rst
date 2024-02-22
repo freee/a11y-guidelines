@@ -1,16 +1,15 @@
 .. _category-link:
 
-######
-リンク
-######
+#####
+Links
+#####
 
-これらのガイドラインは、リンクに関するものです。
+These guidelines are for links.
 
-ここでリンクとは、ユーザーがクリック（タッチ）することでページ遷移や何らかの機能が実行されるものを差します。
-リンクにはテキストのみで構成されているもの、アイコンが用いられているもの、画像とテキストの一方又は両方が用いられているものが含まれます。
-また、 ``a`` 要素で実装されているものに加えて、 ``button`` 要素で実装されていたり、適切な ``role`` 属性が付加されて実装されているものも含みます。
+Here, links refer to elements that users can click (or touch) to navigate to another page or perform some action. Links can be text-only, icon-only, or a combination of text and image.
+In addition to those implemented with the ``a`` element, this also includes those implemented with the ``button`` element or implemented with the appropriate ``role`` attribute attached.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

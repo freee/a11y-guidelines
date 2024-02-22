@@ -1,12 +1,12 @@
 .. _category-text:
 
-########
-テキスト
-########
+####
+Text
+####
 
-これらのガイドラインは、テキスト情報に関するものです。テキスト情報とは、大ざっぱにいえば文字情報ですが、文字情報を画像化して表示するものはこれらのガイドラインの対象ではありません。これについては、「画像化されたテキストに関するガイドライン」を参照してください。
+These guidelines are about text information. Text information is, roughly speaking, information in the form of characters. These guidelines do not cover text information that has been rendered as images. For that, see the guidelines for "Images of Text".
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

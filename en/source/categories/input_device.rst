@@ -1,12 +1,12 @@
 .. _category-input-device:
 
-##############
-入力ディバイス
-##############
+#############
+Input Devices
+#############
 
-これらのガイドラインは、様々な入力ディバイスの利用を可能にするためのもので、すべてのコンテンツが対象です。
+These guidelines are for all content to enable the use of various input devices.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

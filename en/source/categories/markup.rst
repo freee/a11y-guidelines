@@ -1,12 +1,12 @@
 .. _category-markup:
 
-##################
-マークアップと実装
-##################
+#########################
+Markup and Implementation
+#########################
 
-これらのガイドラインは、マークアップと実装全般に関するもので、すべてのコンテンツが対象です。
+These guidelines are about markup and implementation in general, and apply to all content.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

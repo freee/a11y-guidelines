@@ -1,12 +1,12 @@
 .. _category-multimedia:
 
-####################
-音声・映像コンテンツ
-####################
+#######################
+Audio and Video Content
+#######################
 
-これらのガイドラインは、音声のみのコンテンツ、音声を含む動画コンテンツ、映像のみの動画コンテンツに関するものです。
+These guidelines are for audio-only content, video content with audio, and video-only content.
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

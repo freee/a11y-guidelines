@@ -1,17 +1,17 @@
 .. _category-icon:
 
-########
-アイコン
-########
+#####
+Icons
+#####
 
-これらのガイドラインは、アイコンを対象にしたものです。
+These guidelines are for icons.
 
-ここでアイコンとは、以下の目的で用いられている画像を指します：
+Here, an icon refers to an image used for the following purposes:
 
--  オブジェクトの状態を表す
--  クリック可能なボタンやリンクを提供する
+-  Representing the state of an object
+-  Providing clickable buttons or links
 
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none

@@ -1,16 +1,15 @@
 .. _category-images-of-text:
 
-####################
-画像化されたテキスト
-####################
+##############
+Images of Text
+##############
 
-これらのガイドラインは、テキストを画像化して利用する場合を対象としています。
+These guidelines are for images of text.
+Images of text are text that is presented as a graphical image.
 
-たとえば写真に写っている人物の名札にある名前、図中のテキスト・ラベルなど、文字情報以外の視覚的情報が、コンテンツのより重要な要素となっているようなものは、このガイドラインの対象外です。
+Textual information that is part of content where other visual information is more significant, such as names on nametags of people in photos or text labels in diagrams, is not covered by these guidelines.
 
-注： WCAG 2.1では "images of text" という用語が用いられ、WCAG 2.1日本語訳では「文字画像」という訳語が当てられています。
-
-.. contents:: 目次
+.. contents:: Table of Contents
    :depth: 1
    :local:
    :backlinks: none
