@@ -3,24 +3,9 @@ from config import AVAILABLE_LANGUAGES
 
 # Directories
 DATA_DIR = 'data'
-YAML_DIR = os.path.join(DATA_DIR, 'yaml')
-JSON_DIR = os.path.join(DATA_DIR, 'json')
+YAML_DIR = 'yaml'
+JSON_DIR = 'json'
 DEST_DIR_BASE = 'source'
-
-SRCDIR = {
-    'guidelines': os.path.join(YAML_DIR, "gl"),
-    'checks': os.path.join(YAML_DIR, 'checks'),
-    'faq': os.path.join(YAML_DIR, 'faq'),
-    'schema': os.path.join(JSON_DIR, 'schemas')
-}
-
-SCHEMA_FILENAMES = {
-    'guidelines': 'guideline.json',
-    'checks': 'check.json',
-    'faq': 'faq.json',
-    'common': 'common.json'
-}
-COMMON_SCHEMA_PATH = os.path.join(SRCDIR['schema'], SCHEMA_FILENAMES['common'])
 
 # File paths
 FAQ_INDEX_FILENAME = 'index.rst'
@@ -29,13 +14,6 @@ ALL_CHECKS_FILENAME = "allchecks.rst"
 WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 MISCDEFS_FILENAME = "defs.txt"
-
-MISC_INFO_SRCFILES = {
-    'wcag_sc': os.path.join(JSON_DIR, 'wcag-sc.json'),
-    'gl_categories': os.path.join(JSON_DIR, 'guideline-categories.json'),
-    'faq_tags': os.path.join(JSON_DIR, 'faq-tags.json'),
-    'info': os.path.join(JSON_DIR, 'info.json')
-}
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 TEMPLATE_FILENAMES = {
@@ -55,7 +33,7 @@ TEMPLATE_FILENAMES = {
     'miscdefs': 'misc-defs.txt'
 }
 
-def get_dest_dirnames(lang):
+def get_dest_dirnames(basedir, lang):
     """
     Returns a dictionary of destination directory names for the given language.
 
@@ -65,12 +43,13 @@ def get_dest_dirnames(lang):
     Returns:
         dict: Dictionary of destination directory names
     """
+    langdir = os.path.join(basedir, lang)
     if len(AVAILABLE_LANGUAGES) == 1:
-        lang = '.'
-    inc_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'inc')
-    faq_dest_dir = os.path.join(lang, DEST_DIR_BASE, 'faq')
+        langdir = basedir
+    inc_dest_dir = os.path.join(langdir, DEST_DIR_BASE, 'inc')
+    faq_dest_dir = os.path.join(langdir, DEST_DIR_BASE, 'faq')
     return {
-        'base': lang,
+        'base': langdir,
         'guidelines': os.path.join(inc_dest_dir, 'gl'),
         'checks': os.path.join(inc_dest_dir, 'checks'),
         'misc': os.path.join(inc_dest_dir, 'misc'),
@@ -81,7 +60,7 @@ def get_dest_dirnames(lang):
         'faq_tags': os.path.join(faq_dest_dir, 'tags')
     }
 
-def get_static_dest_files(lang):
+def get_static_dest_files(basedir, lang):
     """
     Returns a dictionary of static destination file paths for the given language.
 
@@ -91,7 +70,7 @@ def get_static_dest_files(lang):
     Returns:
         dict: Dictionary of static destination file paths
     """
-    dest_dirnames = get_dest_dirnames(lang)
+    dest_dirnames = get_dest_dirnames(basedir, lang)
     return {
         'all_checks': os.path.join(dest_dirnames['checks'], ALL_CHECKS_FILENAME),
         'wcag21mapping': os.path.join(dest_dirnames['misc'], WCAG_MAPPING_FILENAME),
@@ -102,3 +81,27 @@ def get_static_dest_files(lang):
         'faq_tag_index': os.path.join(dest_dirnames['faq_tags'], FAQ_INDEX_FILENAME),
         'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME)
     }
+
+def get_src_path(basedir):
+    data_basedir = os.path.join(basedir, DATA_DIR)
+    yaml_basedir = os.path.join(data_basedir, YAML_DIR)
+    json_basedir = os.path.join(data_basedir, JSON_DIR)
+    
+    src_path = {
+        'guidelines': os.path.join(yaml_basedir, "gl"),
+        'checks': os.path.join(yaml_basedir, 'checks'),
+        'faq': os.path.join(yaml_basedir, 'faq'),
+        'schema': os.path.join(json_basedir, 'schemas'),
+        'schema_filenames': {
+            'guidelines': 'guideline.json',
+            'checks': 'check.json',
+            'faq': 'faq.json',
+            'common': 'common.json'
+        },
+        'common_schema_path': os.path.join(json_basedir, 'schemas', 'common.json'),
+        'wcag_sc': os.path.join(json_basedir, 'wcag-sc.json'),
+        'gl_categories': os.path.join(json_basedir, 'guideline-categories.json'),
+        'faq_tags': os.path.join(json_basedir, 'faq-tags.json'),
+        'info': os.path.join(json_basedir, 'info.json')
+    }
+    return src_path

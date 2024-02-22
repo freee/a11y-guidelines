@@ -74,8 +74,10 @@ jobs:
         BASE_URL: https://a11y-guidelines.freee.co.jp/
         TZ: JST-9
       run: |
-        make SPHINXOPTS="-W -D html_baseurl=${BASE_URL}" clean html
+        make sphinx_options="-W" clean html
     - name: Check for unreferenced include files
       run: make check-includes
     - name: Run sphinx-lint
-      run: sphinx-lint ./source/**/*.rst
+      run: |
+        sphinx-lint ./ja/source/**/*.rst
+        sphinx-lint ./en/source/**/*.rst

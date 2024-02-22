@@ -1,10 +1,9 @@
 html/*
 node_modules/*
 .vscode/*
-build/*
-source/__pycache__/*
-source/inc/*
-source/faq/*
+*/build/*
+*/source/inc/*
+*/source/faq/*
 .DS_Store
-/incfiles.mk
+*/incfiles.mk
 __pycache__/
