@@ -30,7 +30,7 @@ if 'current' in tags:
   guidelines_version_suffix = '-CURRENT'
   import datetime
   guidelines_version_date = f'.{datetime.date.today().strftime("%Y%m%d")}'
-  today_str = datetime.date.today().strftime('%Y年%-m月%-d日')
+  today_str = datetime.date.today().strftime('%b %d %Y')
   publishedDate = today_str
 
 version = guidelines_version + guidelines_version_suffix + f'+{checksheet_version}'
