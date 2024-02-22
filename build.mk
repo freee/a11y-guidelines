@@ -2,7 +2,11 @@ rootdir = $(ROOTDIR)
 PYTHON?= python
 YAML2RST= $(PYTHON) $(rootdir)/tools/yaml2rst/yaml2rst.py -b $(rootdir) -l $(lang)
 
-SPHINXOPTS    ?=
+ifneq ($(BASE_URL),)
+base_url_option= -D html_baseurl=$(BASE_URL)$(base_url_suffix)
+endif
+
+SPHINXOPTS= $(sphinx_options) $(base_url_option)
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build

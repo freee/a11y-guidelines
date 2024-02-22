@@ -140,9 +140,10 @@ jobs:
         GTM_ID: ${{ secrets.GTM_ID }}
         BASE_URL: https://a11y-guidelines.freee.co.jp/current/
       run: |
-        make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} -t current" clean html
-        cp -r ./data/json/schemas ./build/html
-        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload/current/
+        make sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
+        cp -r ./data/json/schemas ./ja/build/html
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current/
+        cp -r ./en/build/html ${GITHUB_WORKSPACE}/upload/current/en
 
     - name: Publish to S3
       env:
