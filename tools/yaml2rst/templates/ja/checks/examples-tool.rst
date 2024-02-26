@@ -20,3 +20,6 @@
 
 {% endif %}
 {% endfor %}
+
+.. translated:: true
+

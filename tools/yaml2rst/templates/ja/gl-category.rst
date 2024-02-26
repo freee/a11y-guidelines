@@ -58,3 +58,6 @@
 {%- endfor %}
 {% endfor %}
 
+
+.. translated:: true
+

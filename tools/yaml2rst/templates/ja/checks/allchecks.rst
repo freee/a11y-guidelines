@@ -38,3 +38,6 @@
 {% include 'checks/procedure.rst' %}
 {% endif %}
 {%- endfor %}
+
+.. translated:: true
+

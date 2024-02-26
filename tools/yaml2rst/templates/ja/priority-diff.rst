@@ -5,3 +5,6 @@
    "{{ item.sc }}","`{{ item.sc_en_title }} <{{ item.sc_en_url }}>`_","`{{ item.sc_ja_title }} <{{ item.sc_ja_url }}>`_","{{ item.level }}","{{ item.LocalLevel }}"
 {%- endfor %}
 
+
+.. translated:: true
+

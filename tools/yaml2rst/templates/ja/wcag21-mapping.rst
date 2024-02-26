@@ -9,3 +9,5 @@
 {%- endfor %}{%- endif -%}"
 {%- endfor %}
 
+.. translated:: true
+

@@ -33,3 +33,6 @@ FAQ記事一覧
 *  :ref:`faq-{{ article.id }}` （{{ article.updated_year }}年{{ article.updated_month }}月{{ article.updated_day }}日更新）
 {% endfor %}
 
+
+.. translated:: true
+
