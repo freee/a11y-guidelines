@@ -76,7 +76,7 @@ exclude_patterns = [
   "intro/ChangeLog/*"
 ]
 
-# substitution definitions:
+# substitution definitions and the disclaimer for all pages:
 rst_prolog = u"""
 .. |published_date| replace:: {pubdate}
 .. |copyright| replace:: {copyright}
@@ -84,6 +84,11 @@ rst_prolog = u"""
 .. |checksheet_version| replace:: {checksheet_version}
 
 .. include:: /inc/misc/defs.txt
+
+.. caution::
+
+   This document is an English translation of the "freee Accessibility Guidelines." The normative version of this document is in Japanese, and the English version is informational. The English translation is incomplete, and any links with their link texts left in Japanese are untranslated. Please be aware that there may be inaccuracies in the translation or parts that are outdated.
+
 """.format(
   pubdate = publishedDate,
   copyright = copyright,
