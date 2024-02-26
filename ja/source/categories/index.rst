@@ -18,3 +18,4 @@
    dynamic_content
    multimedia
 
+.. translated:: true

@@ -17,3 +17,5 @@
    ios-vo
    android-tb
    misc
+
+.. translated:: true

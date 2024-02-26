@@ -1,12 +1,12 @@
 .. _info-wcag21-mapping:
 
-##################################################
-WCAG 2.1の各達成基準と当ガイドラインの項目との対応
-##################################################
+###################################################################
+Correspondence Between WCAG 2.1 Success Criteria and Our Guidelines
+###################################################################
 
-ここでは、Web Content Accessibility Guidelines (WCAG) 2.1の各達成基準について、当ガイドラインで対応する項目を示しています。
+Here, we show our guidelines that correspond to each success criterion of the Web Content Accessibility Guidelines (WCAG) 2.1.
 
-なお、freeeではWCAG 2.1の適合レベルAA相当を目標としていますので、WCAG 2.1のレベルAAAの達成基準の多くは「該当無し」となっています。
-参考までに、下表の「レベル」の欄に、WCAG 2.1で指定されているレベルを示します。
+Please note that freee aims to meet Level AA of WCAG 2.1, so many of the Level AAA success criteria are marked as "N/A (Not Applicable)."
+For reference, the "Level" column in the table below indicates the levels as specified in WCAG 2.1.
 
 .. include:: /inc/misc/wcag21-mapping.rst

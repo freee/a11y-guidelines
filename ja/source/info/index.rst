@@ -10,3 +10,5 @@
    wcag21-mapping
    priority
    axe-rules
+
+.. translated:: true
