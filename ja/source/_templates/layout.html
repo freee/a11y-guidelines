@@ -38,4 +38,9 @@
     <meta property="og:url" content="{{ theme_canonical_url }}{{ pagename }}{{ file_suffix }}" />
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
+  {% if meta is defined %}
+    {% if meta.translated %}
+      <p></p><a href="/en/{{ pagename }}.html">An English translation of this page is available.</a></p>
+    {% endif %}
+  {% endif %}
 {% endblock %}
