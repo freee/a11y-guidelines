@@ -1,16 +1,16 @@
-######################################
-freeeアクセシビリティー・ガイドライン
-######################################
+##############################
+freee Accessibility Guidelines
+##############################
 
-**このガイドラインは、参考情報の追加や表現の改善などで、随時更新されます。**
+**This document is a work in progress and will be updated as needed to include additional reference information and to enhance its clarity and expression.**
 
-リリース:
+Release:
    |release|
-ガイドライン・バージョン：
+Guidelines Version:
    |guidelines_version_string|
-チェックシート・バージョン：
+Checksheet Version:
    |checksheet_version|
-更新日:
+updated:
    |published_date|
 
 .. toctree::
