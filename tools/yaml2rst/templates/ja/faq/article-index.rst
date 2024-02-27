@@ -13,3 +13,6 @@ FAQ記事一覧
    {{ article.id }}
 {%- endfor %}
 
+
+.. translated:: true
+

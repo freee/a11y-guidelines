@@ -15,6 +15,9 @@ import sys
 sys.path.insert(0, os.path.abspath('.'))
 import datetime
 import re
+from docutils import nodes
+from docutils.parsers.rst import Directive
+from sphinx.util.docutils import SphinxDirective
 
 # -- Project information -----------------------------------------------------
 
@@ -113,5 +116,14 @@ html_permalinks = False
 
 linkcheck_ignore = [r'http://localhost:\d+/']
 
+class TranslatedDirective(SphinxDirective):
+  has_content = False
+  required_arguments = 1
+
+  def run(self):
+    self.env.metadata[self.env.docname]['translated'] = self.arguments[0] == 'true'
+    return []
+
 def setup(app):
   app.add_css_file('a11y-gl.css')
+  app.add_directive("translated", TranslatedDirective)

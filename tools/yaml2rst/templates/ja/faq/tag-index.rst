@@ -14,3 +14,6 @@ FAQタグ一覧
    {{ tag.tag }}
 {%- endfor %}
 
+
+.. translated:: true
+

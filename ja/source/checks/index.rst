@@ -9,3 +9,5 @@
    checklist
    examples/index
    checksheet
+
+.. translated:: true

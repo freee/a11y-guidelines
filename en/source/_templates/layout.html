@@ -39,3 +39,7 @@
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
 {% endblock %}
+{% block content %}
+  <p><a href="/{{ pagename }}.html">The normative (Japanese) version of this page is here.</a></p>
+  {{ super() }}
+{% endblock %}

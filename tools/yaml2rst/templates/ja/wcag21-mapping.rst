@@ -3,8 +3,11 @@
    :header: "達成基準","原文","日本語訳","レベル","対応するガイドライン"
 {% for item in mapping %}
    "{{ item.sc }}","`{{ item.sc_en_title }} <{{ item.sc_en_url }}>`_","`{{ item.sc_ja_title }} <{{ item.sc_ja_url }}>`_","{{ item.level }}","
+{%- if item.guidelines|length == 0 -%}該当無し{%- else -%}
 {%- for gl in item.guidelines %}
    *  {{ gl.category }}： :ref:`{{ gl.guideline }}`
-{%- endfor %}"
+{%- endfor %}{%- endif -%}"
 {%- endfor %}
+
+.. translated:: true
 

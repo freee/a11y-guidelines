@@ -39,3 +39,11 @@
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
 {% endblock %}
+{% block content %}
+  {% if meta is defined %}
+    {% if meta.translated %}
+      <p><a href="/en/{{ pagename }}.html">An English translation of this page is available.</a></p>
+    {% endif %}
+  {% endif %}
+  {{ super() }}
+{% endblock %}

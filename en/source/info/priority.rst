@@ -1,58 +1,60 @@
 .. _info-priority-diff:
 
-############################################
-当ガイドラインとWCAG 2.1の各達成基準のレベル
-############################################
+#########################################################
+Our Guidelines and the Level of WCAG 2.1 Success Criteria
+#########################################################
 
-当ガイドラインは、WCAG 2.1の適合レベルAAを達成できる内容とすることを方針として策定しています。
-そのため、各ガイドライン項目は基本的にWCAG 2.1のレベルAとレベルAAの達成基準に基づいていますが、一部例外もあります。
-ガイドライン項目の検討に際して、レベルAAAのものも含めて、WCAG 2.1のすべての達成基準を検討しました。
-各達成基準に割り当てられているレベルについて、freeeのプロダクトの性質などを考慮して見直し、一部の達成基準についてはWCAG 2.1が示すものとは異なるレベルを前提とすることにしたためです。
+Our guidelines have been formulated with the policy of ensuring content can achieve Conformance Level AA of WCAG 2.1.
+Therefore, each guideline is based primarily on the success criteria of Levels A and AA of WCAG 2.1, though there are some exceptions.
+In considering the guidelines, we have reviewed all success criteria of WCAG 2.1, including those of Level AAA.
+The levels assigned to each success criterion have been reconsidered in light of the nature of freee's products, and for some criteria, it has been decided to assume levels different from those indicated by WCAG 2.1.
 
-ここでは、見直しの結果WCAG 2.1が示しているものとは異なるレベルを前提とすることになった達成基準の一覧と、レベルを見直した理由を示します。
+Here, we present a list of the success criteria for which the levels have been revised from those indicated by WCAG 2.1, along with the reasons for the revision.
 
-************************
-レベルを見直した達成基準
-************************
+************************************
+Success Criteria with Revised Levels
+************************************
 
 .. include:: /inc/misc/priority-diff.rst
 
-********************
-レベルを見直した理由
-********************
+*******************************
+Reasons for Revising the Levels
+*******************************
 
-レベルを見直した多くの達成基準は、freeeのプロダクトにおいてより重要性が高いものであるという判断の下に、WCAG 2.1に示されているより高いレベルを前提とすることにしたものです。
-これとは異なる理由でレベルを見直した達成基準について、その理由を以下に示します。
+Many of the success criteria for which the levels were revised have been assumed to be of a higher level than those indicated in WCAG 2.1, under the judgment that they hold greater importance in freee's products.
+For success criteria that were revised for reasons different from this, those reasons are provided below.
 
-達成基準1.2.6
-^^^^^^^^^^^^^
+Success Criterion 1.2.6
+^^^^^^^^^^^^^^^^^^^^^^^
 
-音声情報を聴覚障害者にも利用できるようにするための手段として、字幕を付ける方法と手話通訳を付ける方法があります。
-聴覚障害者の中には、文字を用いたコミュニケーションがより得意な人と手話を用いたコミュニケーションがより得意な人がいます。
-（もちろん両方を同等に行える人もいます。）
+To make audio information accessible to individuals with hearing impairments, there are methods such as providing captions and sign language interpretation.
+Among the hearing impaired, some are more adept at communication using written text, while others may prefer communication through sign language.
+(Of course, there are also individuals who are equally proficient in both.)
 
-文字情報と手話のどちらが有効化はユーザーによって異なるため、情報保障の観点からはどちらも同等に重要です。
-当ガイドラインではWCAG 2.1でレベルがAAAの達成基準は対象としない方針なので、WCAG 2.1が示すレベルのままでは、仮に可能でも手話通訳の提供が考慮されないという事態が発生することが考えられます。
+Since the effectiveness of text information versus sign language varies from user to user, from the perspective of ensuring information access, both are equally important.
+Our guidelines do not target success criteria at Level AAA as per WCAG 2.1, hence, adhering strictly to the levels indicated by WCAG 2.1 could potentially overlook the provision of sign language interpretation, even if it were feasible.
 
-本来は字幕同様、Aとして扱うことが望ましいものですが、実現するための難易度も考慮して、AAとすることにしました。
+Ideally, like captions, it would be preferable to treat it as Level A, but considering the difficulty of implementation, we have decided to designate it as Level AA.
 
-達成基準1.3.5
-^^^^^^^^^^^^^
+Success Criterion 1.3.5
+^^^^^^^^^^^^^^^^^^^^^^^
 
-この達成基準では、ユーザーの入力を求めるフォーム・コントロールにおいて、入力が期待される情報の種類を明示することを求めています。
-この達成基準に関する解説 `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`_ （ `日本語訳 <https://waic.jp/translations/WCAG21/Understanding/identify-input-purpose.html>`_ ）では、 ``autocomplete`` 属性の活用を具体的な方法として示しています。
+This success criterion requires that for form controls asking for user input, the type of information expected to be input is clearly identified.
+The explanation for this success criterion in `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`_  suggests the use of the ``autocomplete`` attribute as a specific method.
 
-``autocomplete`` 属性が用いられているフォーム・コントロールは、常に決まった値を入力する場合、入力すべき項目が少ない場合などには、入力を容易にする効果が期待できます。
-しかし、そうではない場合には、誤入力を誘発することにつながります。
+Form controls utilizing the ``autocomplete`` attribute can facilitate easier input in situations where the inputs are consistently the same values or when there are few items to input.
+However, in other cases, it may lead to inadvertent errors.
 
-freeeのプロダクトにおいては、その性質上フォーム・コントロールが多数存在するページも少なくなく、また常に一定の値を入力するわけではない項目も多数存在します。
-したがって、ガイドラインが示す条件を満たすために安易に ``autocomplete`` 属性が用いられるようなことがあると、かえってユーザビリティーを損なう結果につながることが考えられます。
+In freee's products, due to their nature, there are pages with numerous form controls, and many items do not always require the input of fixed values.
+Therefore, using the ``autocomplete`` attribute carelessly to meet the guideline's criteria could potentially detract from usability.
 
-このようなことを考慮して、当ガイドラインではこの達成基準に対応する項目を設けないという判断に至りました。
+Considering these factors, we have decided not to include an item corresponding to this success criterion in our guidelines.
 
-達成基準1.4.13
-^^^^^^^^^^^^^^
+Success Criterion 1.4.13
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-この達成基準は、拡大表示を利用しているユーザーがマウスオーバー（ホバー）によって表示されるコンテンツを利用しやすくすることを意図しています。具体的には、ユーザーの意図に反してそのコンテンツが非表示にならないようにすることや、必要なタイミングでそのコンテンツを非表示にできるようにすることを目的としたものです。
+This success criterion aims to make content displayed via mouseover (hover) more accessible to users utilizing magnification.
+Specifically, it intends to prevent the content from becoming hidden contrary to the user's intent and to allow the user to hide the content when necessary.
 
-このうち、ユーザーの意図に反してコンテンツが非表示になってしまうという現象は、場合によってはユーザーのコンテンツ利用を不可能にする可能性があるものだと考え、当ガイドラインではこの部分を取り出し、レベルA相当の項目として扱うことにしました。
+Among these, the phenomenon where content becomes hidden contrary to the user's intent could potentially make it impossible for users to utilize the content depending on the situation.
+Considering this, our guidelines have singled out this aspect and treated it as an item equivalent to Level A.

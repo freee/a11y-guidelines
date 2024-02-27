@@ -11,3 +11,6 @@
 {%- endfor %}
 
 
+
+.. translated:: true
+

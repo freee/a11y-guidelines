@@ -23,3 +23,5 @@ freeeアクセシビリティー・ガイドライン
    info/index
    explanations/index
    faq/index
+
+.. translated:: true
