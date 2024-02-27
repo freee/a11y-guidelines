@@ -38,5 +38,8 @@
     <meta property="og:url" content="{{ theme_canonical_url }}{{ pagename }}{{ file_suffix }}" />
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
+{% endblock %}
+{% block content %}
   <p><a href="/{{ pagename }}.html">The normative (Japanese) version of this page is here.</a></p>
+  {{ super() }}
 {% endblock %}
