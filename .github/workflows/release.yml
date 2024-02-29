@@ -128,12 +128,7 @@ jobs:
       run: python -m pip install -r requirements.txt --upgrade
 
     - name: Prepare file upload directory with the archive directory
-      run: mkdir -p ${GITHUB_WORKSPACE}/upload/current
-
-    - name: Download the existing archive files from S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete s3://${AWS_BUCKET}/current/ ${GITHUB_WORKSPACE}/upload/current/ --quiet
+      run: mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
 
     - name: Build HTML with gtag.js, and OGP tags
       env:
@@ -143,7 +138,7 @@ jobs:
         make sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
         cp -r ./data/json/schemas ./ja/build/html
         cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current/
-        cp -r ./en/build/html ${GITHUB_WORKSPACE}/upload/current/en
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
 
     - name: Publish to S3
       env:
