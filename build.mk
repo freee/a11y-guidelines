@@ -3,10 +3,15 @@ PYTHON?= python
 YAML2RST= $(PYTHON) $(rootdir)/tools/yaml2rst/yaml2rst.py -b $(rootdir) -l $(lang)
 
 ifneq ($(BASE_URL),)
-base_url_option= -D html_baseurl=$(BASE_URL)$(base_url_suffix)
+html_baseurl = $(BASE_URL)
+else
+html_baseurl =
 endif
+baseurl_ja = $(html_baseurl)
+baseurl_en = $(html_baseurl)en/
+base_url_options=-D html_baseurl=$(html_baseurl)$(base_url_suffix) -A baseurl_ja=$(baseurl_ja) -A baseurl_en=$(baseurl_en)
 
-SPHINXOPTS= $(sphinx_options) $(base_url_option)
+SPHINXOPTS= $(sphinx_options) $(base_url_options)
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build

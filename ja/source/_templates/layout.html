@@ -42,7 +42,7 @@
 {% block content %}
   {% if meta is defined %}
     {% if meta.translated %}
-      <p><a href="/en/{{ pagename }}.html">An English translation of this page is available.</a></p>
+      <p><a href="{{ baseurl_en }}{{ pagename }}.html">An English translation of this page is available.</a></p>
     {% endif %}
   {% endif %}
   {{ super() }}
