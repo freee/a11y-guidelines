@@ -40,6 +40,6 @@
   {% endif %}
 {% endblock %}
 {% block content %}
-  <p><a href="/{{ pagename }}.html">The normative (Japanese) version of this page is here.</a></p>
+  <p><a href="{{ baseurl_ja }}{{ pagename }}.html">The normative (Japanese) version of this page is here.</a></p>
   {{ super() }}
 {% endblock %}
