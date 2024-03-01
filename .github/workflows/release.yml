@@ -38,7 +38,9 @@ jobs:
       run: python -m pip install -r requirements.txt --upgrade
 
     - name: Prepare file upload directory with the archive directory
-      run: mkdir -p ${GITHUB_WORKSPACE}/upload/archive
+      run: |
+        mkdir -p ${GITHUB_WORKSPACE}/upload/archive
+        mkdir -p ${GITHUB_WORKSPACE}/upload/en
 
     - name: Download the existing archive files from S3
       env:
@@ -48,16 +50,16 @@ jobs:
     - name: Build HTML of all releases, with gtag.js, and OGP tags
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
-        BASE_URL: https://a11y-guidelines.freee.co.jp/
       run: |
-        make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
-        cp -r ./data/json/schemas ./build/html
-        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
-        make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/current/" clean html
-        cp -r ./data/json/schemas ./build/html
-        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload
-        mkdir -p ${GITHUB_WORKSPACE}/upload/current
-        cp -r ./build/html/* ${GITHUB_WORKSPACE}/upload/current
+        make BASE_URL=https://a11y-guidelines.freee.co.jp/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/en
+        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload
+        make BASE_URL=https://a11y-guidelines.freee.co.jp/current/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+        mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
+        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/current
         make clean
         current_commit=$(git rev-parse HEAD)
         rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
@@ -65,11 +67,27 @@ jobs:
           echo "Processing ${_tag}..." ; \
           if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
             git checkout ${_tag} ; \
-            make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${_tag}" html ; \
-            if [ -d ./data/json/schemas ]; then \
-              cp -r ./data/json/schemas ./build/html ; \
+            if [ ! -f ./build.mk ]; then
+              build_procedure=0 ; \
+            else \
+              build_procedure=`make build-procedure-version` ; \
             fi ; \
-            cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            if [ ${build_procedure} -eq 0 ]; then
+              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${_tag}" html ; \
+              if [ -d ./data/json/schemas ]; then \
+                cp -r ./data/json/schemas ./build/html ; \
+              fi ; \
+              cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            elif [ ${build_procedure} -eq 1 ]; then \
+              make BASE_URL=${BASE_URL}/${_tag} sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
+              mkdir -p ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en ; \
+              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+              cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en
+              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            else \
+              echo "Unknown build procedure version: ${build_procedure}" ; \
+              exit 1 ; \
+            fi ; \
             make clean ; \
             git checkout ${current_commit} ; \
           fi ; \
@@ -82,9 +100,10 @@ jobs:
 
     - name: Prepare the HTML Archive
       run: |
-        make clean html
-        cp -r ./data/json/schemas ./build/html
-        mv ./build/html ./freee-a11y-guidelines-${TAG}
+        make BASE_URL=/ clean html
+        mv ./ja/build/html ./freee-a11y-guidelines-${TAG}
+        cp -r ./data/json/schemas ./freee-a11y-guidelines-${TAG}
+        cp -r ./en/build/html ./freee-a11y-guidelines-${TAG}/en
         zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
     - name: Create Release
