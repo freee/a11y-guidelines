@@ -12,18 +12,15 @@ baseurl_en = $(html_baseurl)en/
 base_url_options=-D html_baseurl=$(html_baseurl)$(base_url_suffix) -A baseurl_ja=$(baseurl_ja) -A baseurl_en=$(baseurl_en)
 
 SPHINXOPTS= $(sphinx_options) $(base_url_options)
-SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
-SPHINX_PREDEFINED_TARGETS := $(shell $(SPHINXBUILD) -M help . .|sed -r '/^\S+/d;s/^\s+(\S+).+/\1/;/^clean/d')
-PREDEFINED_TARGETS = $(SPHINX_PREDEFINED_TARGETS) check-includes
 INCLUDED_FILES := $(shell grep -ohRE '^\.\. include:: +.+' $(SOURCEDIR) | sed -r "s%^\.\. include:: +%$(CURDIR)/$(SOURCEDIR)%")
 
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help incfiles clean Makefile
+.PHONY: help incfiles clean Makefile $(SPHINX_PREDEFINED_TARGETS)
 
 incfiles.mk: $(wildcard $(rootdir)/data/yaml/gl/*/*.yaml $(rootdir)/data/yaml/checks/*/*.yaml $(rootdir)/data/yaml/faq/**/*.yaml)
 	@if [ ! -f incfiles.mk ]; then \
@@ -34,7 +31,7 @@ incfiles.mk: $(wildcard $(rootdir)/data/yaml/gl/*/*.yaml $(rootdir)/data/yaml/ch
 
 incfiles:| $(SOURCEDIR)/inc
 
-ifneq ($(filter $(MAKECMDGOALS),$(PREDEFINED_TARGETS)),)
+ifneq ($(filter $(MAKECMDGOALS),$(ALL_PREDEFINED_TARGETS)),)
 include incfiles.mk
 endif
 
