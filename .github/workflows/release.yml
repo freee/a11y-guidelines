@@ -42,10 +42,11 @@ jobs:
         mkdir -p ${GITHUB_WORKSPACE}/upload/archive
         mkdir -p ${GITHUB_WORKSPACE}/upload/en
 
-    - name: Download the existing archive files from S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
+    # Disable this for the time being, until we have a proper archive
+    # - name: Download the existing archive files from S3
+    #   env:
+    #     AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+    #   run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
 
     - name: Build HTML of all releases, with gtag.js, and OGP tags
       env:
