@@ -19,7 +19,7 @@ import re
 # -- Project information -----------------------------------------------------
 
 project = 'freee Accessibility Guidelines'
-author = 'freee, k.k.'
+author = 'freee K.K.'
 guidelines_version = 'Ver. 202401.0'
 checksheet_version = '4.3.7'
 publishedDate = u'Jan 15 2024'
@@ -38,7 +38,7 @@ release = guidelines_version + guidelines_version_suffix + guidelines_version_da
 guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date
 
 html_title = f'{project} {release}'
-copyright = '2020-{pubYear}, freee, k.k'.format(
+copyright = '2020-{pubYear}, freee K.K'.format(
   pubYear = re.search(r'(\d{4})$', publishedDate).group(1)
 )
 

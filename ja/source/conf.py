@@ -22,7 +22,7 @@ from sphinx.util.docutils import SphinxDirective
 # -- Project information -----------------------------------------------------
 
 project = 'freeeアクセシビリティー・ガイドライン'
-author = 'freee株式会社'
+author = 'フリー株式会社'
 guidelines_version = 'Ver. 202401.0'
 checksheet_version = '4.3.7'
 publishedDate = u'2024年1月15日'
@@ -41,7 +41,7 @@ release = guidelines_version + guidelines_version_suffix + guidelines_version_da
 guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date
 
 html_title = f'{project} {release}'
-copyright = '2020-{pubYear}, freee株式会社'.format(
+copyright = '2020-{pubYear}, フリー株式会社'.format(
   pubYear = re.search(r'^(\d{4})年', publishedDate).group(1)
 )
 
