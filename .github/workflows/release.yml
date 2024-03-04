@@ -42,11 +42,10 @@ jobs:
         mkdir -p ${GITHUB_WORKSPACE}/upload/archive
         mkdir -p ${GITHUB_WORKSPACE}/upload/en
 
-    # Disable this for the time being, until we have a proper archive
-    # - name: Download the existing archive files from S3
-    #   env:
-    #     AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-    #   run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
+    - name: Download the existing archive files from S3
+      env:
+        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
 
     - name: Build HTML of all releases, with gtag.js, and OGP tags
       env:
@@ -113,7 +112,7 @@ jobs:
       run: |
         gh release create ${TAG} \
           --title "Ver. ${TAG}" \
-          --notes-file ./source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
+          --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
           --draft
         gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
 
