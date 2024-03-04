@@ -7,3 +7,6 @@ check:
   ja: |-
     *  ``main`` 要素が本文の開始位置を反映している。または
     *  本文の先頭部分に ``h1`` 要素や ``h2`` 要素でマークアップされた見出しがある。
+  en: |-
+    *  The ``main`` element reflects the start of the main content, or
+    *  there is a heading marked up with an ``h1`` or ``h2`` element at the beginning of the main content.

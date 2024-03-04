@@ -7,15 +7,24 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  ステータス・メッセージについて、以下のすべてを満たす。
-  
-  -  スクリーン・リーダーに自動的に読み上げられるようにする。
-  -  ステータス・メッセージであることやその内容が、 ``role`` やその他のプロパティーを通して分かるようにする。
+guideline:
+  ja: |-
+    ステータス・メッセージについて、以下のすべてを満たす。
+    
+    -  スクリーン・リーダーに自動的に読み上げられるようにする。
+    -  ステータス・メッセージであることやその内容が、 ``role`` やその他のプロパティーを通して分かるようにする。
+  en: |-
+    Ensure that status messages meet all of the following criteria:
+    
+    -  They are read out automatically by a screen reader.
+    -  They are recognized as status messages and their content is understood through the ``role`` and other properties.
 sc:
 - 4.1.3
-intent: |-
-  視覚障害者が、ステータス・メッセージを遅滞なく確認できるようにする。
+intent:
+  ja: |-
+    視覚障害者が、ステータス・メッセージを遅滞なく確認できるようにする。
+  en: |-
+    Ensure that people with visual impairments can check status messages without delay.
 checks:
 - '1171'
 - '1181'

@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     マウス・ボタンのdownイベントをトリガーにしていない。
+  en: |-
+    The mouse button's down event is not used as a trigger.

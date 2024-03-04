@@ -7,3 +7,6 @@ check:
   ja: |-
     *  ``header``, ``main``, ``nav``, ``footer`` の各要素が適切に用いられている。または
     *  これらが ``role`` 属性で明示されている。
+  en: |-
+    *  The ``header``, ``main``, ``nav``, and ``footer`` elements are used appropriately, or
+    *  they are explicitly indicated by the ``role`` attribute.

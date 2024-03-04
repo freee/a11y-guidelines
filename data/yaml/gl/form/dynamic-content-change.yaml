@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  値が変更されたときに、コンテンツの意味の変更、ページ全体に及ぶような変化、他のフォーム・フィールドの値の変更などを引き起こすようなフォーム・フィールドを作らない、またはそのようなフォーム・フィールドの挙動について、事前にユーザーに知らせる。
+guideline:
+  ja: |-
+    値が変更されたときに、コンテンツの意味の変更、ページ全体に及ぶような変化、他のフォーム・フィールドの値の変更などを引き起こすようなフォーム・フィールドを作らない、またはそのようなフォーム・フィールドの挙動について、事前にユーザーに知らせる。
+  en: |-
+    Do not create form fields that, when their values are changed, lead to changes in the meaning of the content, significant alterations across the entire page, or changes in the values of other form fields. Alternatively, inform users in advance about the behavior of such form fields.
 sc:
 - 3.2.2
-intent: |-
-  視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+intent:
+  ja: |-
+    視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+  en: |-
+    Do not cause behaviors that are unexpected for users with visual or cognitive impairments.
 checks:
 - '1051'
 - '1071'

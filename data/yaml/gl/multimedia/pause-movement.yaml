@@ -7,13 +7,20 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  自動的に開始し5秒以上継続する、アニメーションや動画のなどの視覚的な動きを伴うコンテンツを作らない。
-  そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
+guideline:
+  ja: |-
+    自動的に開始し5秒以上継続する、アニメーションや動画のなどの視覚的な動きを伴うコンテンツを作らない。
+    そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
+  en: |-
+    Do not create content that automatically starts and lasts for more than 5 seconds, such as animations and videos that include visual movement.
+    If you create such content, ensure that users can pause, stop, or hide it.
 sc:
 - 2.2.2
-intent: |-
-  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+intent:
+  ja: |-
+    ロービジョン者や認知障害者が、集中を阻害されないようにする。
+  en: |-
+    Ensure that users with low vision or cognitive disabilities are not distracted.
 checks:
 - '1451'
 - '1471'

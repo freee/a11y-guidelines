@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     UIコンポーネントは、OSや開発フレームワークの標準コンポーネントを用いて実装されている。
+  en: |-
+    UI components are implemented using standard components of the OS or development framework.

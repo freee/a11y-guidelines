@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  特定の感覚だけを前提とした表現を用いない。
+guideline:
+  ja: |-
+    特定の感覚だけを前提とした表現を用いない。
+  en: |-
+    Do not use expressions that rely solely on a specific sense.
 sc:
 - 1.3.3
-intent: |-
-  視覚障害者、色弱者がコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    視覚障害者、色弱者がコンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with visual impairments and color vision deficiencies can use content.
 checks:
 - '0032'
 info:

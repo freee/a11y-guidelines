@@ -8,3 +8,6 @@ check:
   ja: |-
     *  自動更新されるコンテンツがない。または
     *  ユーザーが自動更新の間隔やタイミングの変更、自動更新の停止をできる。
+  en: |-
+    *  There is no content that updates automatically. Or
+    *  Users can change the interval and timing of automatic updates, or stop automatic updates.

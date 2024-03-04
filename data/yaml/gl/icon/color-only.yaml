@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  アイコンに付与されているラベルが非表示のテキストの場合は、形状、サイズが同じで色だけが違う複数のアイコンを用いない。
+guideline:
+  ja: |-
+    アイコンに付与されているラベルが非表示のテキストの場合は、形状、サイズが同じで色だけが違う複数のアイコンを用いない。
+  en: |-
+    If labels attached to icons are non-visible text, do not use multiple icons that are identical in shape and size but differ only in color.
 sc:
 - 1.4.1
-intent: |-
-  視覚障害者や色弱者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    視覚障害者や色弱者が、コンテンツを利用できるようにする。
+  en: |-
+    Enable individuals with visual impairments or color vision deficiencies to use content.
 checks:
 - '0391'
 - '0412'

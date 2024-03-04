@@ -6,22 +6,37 @@ title:
   en: Ensure Sufficient Contrast Ratio on Mobile OS
 platform:
 - mobile
-guideline: |-
-  文字色と背景色に十分なコントラストを確保する。
+guideline:
+  ja: |-
+    文字色と背景色に十分なコントラストを確保する。
 
-  -  テキストの文字サイズが24px（18pt）以上の場合：3:1以上
-  -  テキストの文字サイズが19px（14pt）以上で太字の場合：3:1以上
-  -  その他の場合： 4.5:1以上
+    -  テキストの文字サイズが24px（18pt）以上の場合：3:1以上
+    -  テキストの文字サイズが19px（14pt）以上で太字の場合：3:1以上
+    -  その他の場合： 4.5:1以上
 
-  注：モバイル・アプリケーションにおいては、デスクトップのWebと比較して文字サイズの変更方法が広く知られていると推測されること、各プラットフォームのガイドライン [#]_ [#]_ においてもWCAG 2.1に準じた基準を用いていることから、上記の基準としています。
+    注：モバイル・アプリケーションにおいては、デスクトップのWebと比較して文字サイズの変更方法が広く知られていると推測されること、各プラットフォームのガイドライン [#]_ [#]_ においてもWCAG 2.1に準じた基準を用いていることから、上記の基準としています。
 
-  .. [#] `アクセシビリティ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/accessibility>`_
-  .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`_
+    .. [#] `アクセシビリティ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/accessibility>`_
+    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`_
+  en: |-
+    Ensure sufficient contrast between the colors of text and their background colors.
+
+    -  For text size 24px (18pt) or larger: a contrast ratio of at least 3:1.
+    -  For bold text 19px (14pt) or larger: a contrast ratio of at least 3:1.
+    -  In other cases: a contrast ratio of at least 4.5:1.
+
+    Note: In mobile applications, it is assumed that methods for changing text size are more widely known compared to desktop web, and the guidelines of each platform [#]_ [#]_ also use standards in line with WCAG 2.1, hence the above criteria are set.
+
+    .. [#] `Accessibility | Apple Developer Documentation <https://developer.apple.com/design/human-interface-guidelines/accessibility>`_
+    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`_
 sc:
 - 1.4.3
 - 1.4.6
-intent: |-
-  ロービジョン者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、コンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with low vision can use the content.
 checks:
 - '0003'
 - '0021'

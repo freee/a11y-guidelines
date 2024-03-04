@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  制限時間を超過した場合も、データを失うことなくユーザーが操作を継続できるようにする。
+guideline:
+  ja: |-
+    制限時間を超過した場合も、データを失うことなくユーザーが操作を継続できるようにする。
+  en: |-
+    Ensure that users can continue their operation without losing data even after exceeding the time limit.
 sc:
 - 2.2.5
-intent: |-
-  コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくフォームを利用できるようにする。
+intent:
+  ja: |-
+    コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくフォームを利用できるようにする。
+  en: |-
+    Ensure that forms can be used without issue even when it takes time to read or understand the content, or when input operations take time.
 checks:
 - '1021'
 info:

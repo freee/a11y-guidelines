@@ -1,0 +1,35 @@
+.. _ver-202209-0:
+
+********************************************************************************************
+`Ver. 202209.0 (2022年9月6日) <https://github.com/freee/a11y-guidelines/releases/202209.0>`_
+********************************************************************************************
+
+参考： `freeeアクセシビリティー・ガイドラインVer. 202209.0を公開しました <https://developers.freee.co.jp/entry/a11y-guidelines-202209.0>`_
+
+*  各ガイドラインに「対象プラットフォーム」欄を追加
+*  ガイドラインの優先度の記述箇所を変更
+*  チェック内容の更新情報を分離して :ref:`checksheet-history` として掲載するように変更
+*  テキスト： :ref:`gl-text-customize` の記述をWCAGが示す条件と一致するように変更し、関連する参考情報（ :ref:`exp-text-custom-css` ）に掲載しているブックマークレットを修正
+*  モバイル・アプリケーションの観点からガイドラインとチェック内容を全体的に見直し
+
+   -  意図の変更を伴わない文言変更：
+
+      -  マークアップと実装： :ref:`gl-markup-semantics` （タイトルのみ）
+      -  ページ全体： :ref:`gl-page-headings`
+      -  入力ディバイス： :ref:`gl-input-device-focus`
+      -  入力ディバイス： :ref:`gl-input-device-use-up-event`
+      -  入力ディバイス： :ref:`gl-input-device-independent`
+      -  アイコン： :ref:`gl-icon-target-size`
+      -  フォーム： :ref:`gl-form-target-size`
+      -  動的コンテンツ： :ref:`gl-dynamic-content-status`
+
+   -  追加：
+
+      -  入力ディバイス： :ref:`gl-input-device-support-mobile-assistive-tech`
+      -  テキスト： :ref:`gl-text-component-lang`
+      -  テキスト： :ref:`gl-text-mobile-enlarge-settings`
+      -  アイコン： :ref:`gl-icon-target-size-mobile`
+      -  フォーム： :ref:`gl-form-target-size-mobile`
+
+*  NVDAの設定に関して加筆： :ref:`exp-screen-reader-check-nvda`
+*  キーボードのみによる操作に関して加筆： :ref:`exp-tab-order-check`

@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  フォーカスを受け取ったときに、コンテンツの意味を変える、またはページ全体に及ぶような動的な変化を引き起こすフォーム・コントロールやコンポーネントを用いない。
+guideline:
+  ja: |-
+    フォーカスを受け取ったときに、コンテンツの意味を変える、またはページ全体に及ぶような動的な変化を引き起こすフォーム・コントロールやコンポーネントを用いない。
+  en: |-
+    Do not use form controls or components that, upon receiving focus, change the meaning of the content or cause dynamic changes affecting the entire page.
 sc:
 - 3.2.1
-intent: |-
-  視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+intent:
+  ja: |-
+    視覚障害、認知障害があるユーザーが予期できない挙動を発生させない。
+  en: |-
+    Do not cause behaviors that are unexpected for users with visual or cognitive impairments.
 checks:
 - '0152'
 - '0171'

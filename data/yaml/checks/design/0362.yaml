@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     本体を振る操作など、標準的なタッチ操作以外の方法を用いないと利用できない機能や情報がない。
+  en: |-
+    There are no features or information that can only be accessed by using methods other than standard touch operations, such as shaking the device.

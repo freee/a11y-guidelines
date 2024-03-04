@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     1秒間に3回以上光るコンテンツがない。
+  en: |-
+    There is no content that flashes more than three times per second.

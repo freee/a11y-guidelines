@@ -8,3 +8,6 @@ check:
   ja: |-
     *  グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている構成要素は、すべてのページ/画面で同じ出現順序になっている。かつ
     *  これらの構成要素の中でのリンクやボタンの出現順序は、すべてのページ/画面で同じになっている。
+  en: |-
+    *  Components commonly used across multiple pages/screens, such as global navigation, headers, footers, breadcrumb lists, and support UI, appear in the same order on all pages/screens. And,
+    *  The appearance order of links and buttons within these components is the same on all pages/screens.

@@ -1,0 +1,28 @@
+body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
+}
+
+.header-logo {
+    width: 8.1875rem;
+    height: 2.75rem;
+    fill: #fff;
+    display: block;
+    margin: 0 auto 1rem;
+}
+
+.rst-content blockquote {
+    border-left: 4px solid #e3e3e3;
+    padding: 8px 24px;
+    margin-left: 0;
+    background-color: #efefef;
+}
+
+.rst-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.checklist > section {
+    margin: 16px;
+    border: 1px solid #ccc;
+    padding: 16px;
+}

@@ -20,3 +20,18 @@ check:
        *  右の表（表3）を参照してください
        *  青い「保存」ボタンを押してください
        *  画面右下の「新規作成」ボタンを押してください
+  en: |-
+    Descriptions are not based solely on one characteristic such as shape, color, size, visual position, direction, or sound, but use multiple elements for explanations.
+   
+    Example:
+
+    Expressions to avoid
+       *  Items in red are required fields.
+       *  Refer to the table on the right
+       *  Press the blue button
+       *  Press the button in the lower right of the screen
+    Acceptable expressions
+       *  Items marked with a red asterisk (*) are required fields.
+       *  Refer to the table on the right (Table 3)
+       *  Press the blue "Save" button
+       *  Press the "New" button in the lower right of the screen

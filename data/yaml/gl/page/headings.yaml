@@ -7,15 +7,24 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  コンテンツを適切にセクション分けし、スクリーン・リーダーが認識できる形で見出しを付ける。
+guideline:
+  ja: |-
+    コンテンツを適切にセクション分けし、スクリーン・リーダーが認識できる形で見出しを付ける。
+  en: |-
+    Section content appropriately and provide headings in a form that screen readers can recognize.
 sc:
 - 2.4.10
-intent: |-
-  視覚障害者が、ページ内で目的のコンテンツを見つけやすくする。
+intent:
+  ja: |-
+    視覚障害者が、ページ内で目的のコンテンツを見つけやすくする。
 
-  -  多くのスクリーン・リーダーは、見出し間で移動する機能、見出しのリストを表示する機能がある。
-  -  適切な見出しが付けられていれば、見出しを追うことで斜め読みのような読み方ができる。
+    -  多くのスクリーン・リーダーは、見出し間で移動する機能、見出しのリストを表示する機能がある。
+    -  適切な見出しが付けられていれば、見出しを追うことで斜め読みのような読み方ができる。
+  en: |-
+    Make it easier for visually impaired individuals to find the content they need on a page.
+
+    *  Many screen readers have the ability to navigate between headings and display a list of headings.
+    *  If appropriate headings are provided, users can skim through the page content, by following the headings.
 checks:
 - '0541'
 - '0543'

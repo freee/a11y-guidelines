@@ -9,11 +9,18 @@ platform:
 - mobile
 sc:
 - 2.2.2
-guideline: |-
-  同じページ上に、自動的に開始し5秒以上継続する、点滅や自動スクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
-  そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
-intent: |-
-  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+guideline:
+  ja: |-
+    同じページ上に、自動的に開始し5秒以上継続する、点滅や自動スクロールを伴うコンテンツと、他のコンテンツを一緒に配置しない。
+    そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
+  en: |-
+    Do not place content that blinks for more than five seconds or scrolls automatically on the same page as other content.
+    If you create such content, ensure that users can pause, stop, or hide it.  
+intent:
+  ja: |-
+    ロービジョン者や認知障害者が、集中を阻害されないようにする。
+  en: |-
+    Ensure that people with low vision or cognitive impairments are not distracted.
 checks:
 - '1201'
 - '1221'

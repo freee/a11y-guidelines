@@ -9,3 +9,8 @@ check:
 
     *  ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーで消える、など）
     *  マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツを非表示にする。
+  en: |-
+    All content displayed on mouseover is designed to meet all of the following criteria:
+
+    *  It is possible to hide the content displayed on mouseover without moving the pointer (e.g., it disappears when the ESC key is pressed).
+    *  The content displayed on mouseover is hidden only if the mouseover state is no longer active, the user performs an action to hide it, or the content becomes invalid.

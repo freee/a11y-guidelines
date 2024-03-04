@@ -1,0 +1,35 @@
+.. _ver-202010-0:
+
+**********************************************************************************************
+`Ver. 202010.0 (2020年10月27日) <https://github.com/freee/a11y-guidelines/releases/202010.0>`_
+**********************************************************************************************
+
+参考： `freeeアクセシビリティー・ガイドラインVer. 202010.0を公開しました <https://developers.freee.co.jp/entry/a11y-guidelines-202010.0>`_
+
+**注意** ：以下のチェック実施方法の例の追加に伴い、チェック内容の全項目一覧のURLが変更されています：
+
+旧： \https://a11y-guidelines.freee.co.jp/checks/index.html
+
+新： https://a11y-guidelines.freee.co.jp/checks/checklist.html
+
+*  チェック内容の追加
+
+   -  :ref:`check-0621`
+
+*  いくつかのチェック内容について、チェックの実施方法を例として追加
+
+   -  :ref:`check-example-nvda`
+   -  :ref:`check-example-axe`
+
+*  参考情報の追加
+
+   -  :ref:`exp-axe`
+   -  :ref:`exp-link-text`
+
+*  参考情報の更新
+
+   -  ARIAライブ・リージョンの実装例と実装時の注意点を追加： :ref:`exp-dynamic-content-status`
+   -  ``lang`` 属性に関する具体的な説明を追加： :ref:`exp-text-lang`
+   -  ナビゲーションの一貫性について加筆： :ref:`exp-page-navigation`
+
+*  誤字修正

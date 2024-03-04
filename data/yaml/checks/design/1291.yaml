@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで表示される、画面の内容を大きく変更するような通知がない。
+  en: |-
+    There are no notifications that significantly alter the content of the screen at times that would interfere with the user's input operations or information browsing.

@@ -6,12 +6,18 @@ title:
   en: Explicitly Indicate Partially Used Languages
 platform:
 - web
-guideline: |-
-  段落単位など、比較的長いテキストの言語が ``html`` 要素の ``lang`` 属性で指定したものと異なる場合は、その部分に対して適切に ``lang`` 属性を指定する。
+guideline:
+  ja: |-
+    段落単位など、比較的長いテキストの言語が ``html`` 要素の ``lang`` 属性で指定したものと異なる場合は、その部分に対して適切に ``lang`` 属性を指定する。
+  en: |-
+    If the language of a relatively long text, such as a paragraph, is different from the one specified by the ``lang`` attribute of the ``html`` element, specify the ``lang`` attribute appropriately for that part.
 sc:
 - 3.1.2
-intent: |-
-  音声/点字出力などが適切に行われるようにする。
+intent:
+  ja: |-
+    音声/点字出力などが適切に行われるようにする。
+  en: |-
+    Ensure that speech and braille output is performed appropriately.
 checks:
 - '0911'
 - '0921'

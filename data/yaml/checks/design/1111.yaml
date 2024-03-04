@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     フォーム入力に関するエラーについて、エラーの修正方法が分かるエラー・メッセージが設計資料で明示されている。
+  en: |-
+    The design documentation explicitly specifies error messages that indicate how to correct errors in form input.

@@ -7,13 +7,19 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  どの1秒間においても3回を超える閃光を放つものがないようにする。
+guideline:
+  ja: |-
+    どの1秒間においても3回を超える閃光を放つものがないようにする。
+  en: |-
+    Ensure that there are no elements emitting flashes more than three times in any one-second period.
 sc:
 - 2.3.1
 - 2.3.2
-intent: |-
-  光感受性の発作を防ぐ。
+intent:
+  ja: |-
+    光感受性の発作を防ぐ。
+  en: |-
+    Prevent photosensitive seizures.
 checks:
 - '1261'
 - '1281'

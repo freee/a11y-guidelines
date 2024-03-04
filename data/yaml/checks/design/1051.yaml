@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     フォーム中のフィールドの値の変更や、値変更後のフォーカス移動がトリガーとなって、ページ/画面全体に及ぶような大幅な表示内容の変更、ページ/画面遷移、別のフィールドの値の変更が起こるような機能が設計資料に存在しない。
+  en: |-
+    There are no functions in the design documentation where changing the value of a field in a form, or moving the focus after changing a value, triggers significant changes to the display content affecting the entire page/screen, page/screen transitions, or changes to the values of other fields.

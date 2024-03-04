@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  映像がなく音声のみの収録済みコンテンツの場合で主たる発話音声があるとき、背景音がない、もしくは主たる発話音声に対して背景音の音量が少なくとも20db小さい状態にする。
+guideline:
+  ja: |-
+    映像がなく音声のみの収録済みコンテンツの場合で主たる発話音声があるとき、背景音がない、もしくは主たる発話音声に対して背景音の音量が少なくとも20db小さい状態にする。
+  en: |-
+    In the case of pre-recorded content that only contains audio and no video, when there is a primary spoken voice, ensure there is no background sound, or that the volume of the background sound is at least 20db lower than the primary spoken voice.
 sc:
 - 1.4.7
-intent: |-
-  音声コンテンツの内容を聞き取りやすいものにする。
+intent:
+  ja: |-
+    音声コンテンツの内容を聞き取りやすいものにする。
+  en: |-
+    Make the content of audio easily comprehensible.
 checks:
 - '1631'
 - '1651'

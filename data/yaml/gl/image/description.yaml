@@ -7,10 +7,16 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  画像に関する過不足のない説明をテキストで提供する。
-intent: |-
-  視覚障害者が画像の存在を認知し、内容を理解できるようにする。
+guideline:
+  ja: |-
+    画像に関する過不足のない説明をテキストで提供する。
+  en: |-
+    Provide a text description for images that conveys equivalent information.
+intent:
+  ja: |-
+    視覚障害者が画像の存在を認知し、内容を理解できるようにする。
+  en: |-
+    Ensure that users with visual impairments can perceive the presence of images and understand their content.
 checks:
 - '0421'
 - '0431'

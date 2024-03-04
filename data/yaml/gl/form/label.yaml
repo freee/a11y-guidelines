@@ -7,16 +7,22 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  フォーム・コントロールには、表示されているテキストをラベルとして明示的に関連付ける。
+guideline:
+  ja: |-
+    フォーム・コントロールには、表示されているテキストをラベルとして明示的に関連付ける。
+  en: |-
+    Explicitly associate displayed text with form controls as labels.
 sc:
 - 1.1.1
 - 1.3.1
 - 2.4.6
 - 2.5.3
 - 3.3.2
-intent: |-
-  視覚障害者が、フォーム・コントロールの目的を容易に判断することができるようにする。
+intent:
+  ja: |-
+    視覚障害者が、フォーム・コントロールの目的を容易に判断することができるようにする。
+  en: |-
+    Enable individuals with visual impairments to easily determine the purpose of form controls.
 checks:
 - '0931'
 - '0941'

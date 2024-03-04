@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     文字の拡大表示に対応している場合は、最大の文字サイズでの表示をしたときに、利用を困難にするような表示崩れが発生しない。
+  en: |-
+    When supporting text magnification, displaying at the maximum text size does not result in display issues that make it difficult to use.

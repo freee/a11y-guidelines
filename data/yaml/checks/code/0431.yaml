@@ -8,21 +8,41 @@ check:
   ja: |-
     *  画像に関する簡潔で過不足ない説明が付加されている。かつ
     *  詳細な説明が必要な場合には、その説明が当該の画像の直前または直後に表示されている、または関連付けられている。
+  en: |-
+    *  A concise and sufficient description is added to the image. And
+    *  If a detailed description is necessary, it is displayed immediately before or after the image, or it is associated with the image.
 implementations:
-- title: 簡潔な説明の付加
+- title:
+    ja: 簡潔な説明の付加
+    en: Adding a Concise Description
   methods:
   - platform: web
-    method: |-
-      *  ``alt`` 属性または ``aria-label`` 属性で指定する
-      *  表示されているテキストを簡潔な説明として利用する場合は、 ``aria-labelledby`` 属性でそのテキストと画像を関連付ける
+    method:
+      ja: |-
+        *  ``alt`` 属性または ``aria-label`` 属性で指定する
+        *  表示されているテキストを簡潔な説明として利用する場合は、 ``aria-labelledby`` 属性でそのテキストと画像を関連付ける
+      en: |-
+        *  Specify with the ``alt`` attribute or the ``aria-label`` attribute.
+        *  To use the displayed text as a concise description, associate that text with the image using the ``aria-labelledby`` attribute.
   - platform: ios
-    method: |-
-      *  ``accessibilityLabel`` で指定する
+    method:
+      ja: |-
+        *  ``accessibilityLabel`` で指定する
+      en: |-
+        *  Specify with ``accessibilityLabel``.
   - platform: android
-    method: |-
-      *  ``contentDescription`` で指定する
-- title: 詳細な説明を付加する
+    method:
+      ja: |-
+        *  ``contentDescription`` で指定する
+      en: |-
+        *  Specify with ``contentDescription``.
+- title:
+    ja: 詳細な説明を付加する
+    en: Adding a Detailed Description
   methods:
   - platform: web
-    method: |-
-      *  詳細な説明と画像がDOMツリー上で離れている場合などには、 ``aria-describedby`` 属性で関連付ける
+    method:
+      ja: |-
+        *  詳細な説明と画像がDOMツリー上で離れている場合などには、 ``aria-describedby`` 属性で関連付ける
+      en: |-
+        *  If the detailed description and the image are not close to each other in the DOM tree, associate them using the ``aria-describedby`` attribute.

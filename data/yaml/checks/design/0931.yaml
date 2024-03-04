@@ -11,3 +11,9 @@ check:
     Webの場合
        *  画面上に表示されているテキストまたは代替テキストが付加された画像をラベルとして指定する。
        *  ``aria-label`` 属性値として指定すべきテキストを明示する。
+  en: |-
+    In order to make the roles of form controls, such as edit boxes, checkboxes, and radio buttons understandable, design documentation explicitly specifies the labels to be added.
+
+    For the web:
+       *  Specify text displayed on the screen or images with alternative text as labels.
+       *  Explicitly specify the text that should be designated as the ``aria-label`` attribute value.

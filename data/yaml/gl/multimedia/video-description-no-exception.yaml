@@ -7,15 +7,23 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  すべての音声・映像コンテンツにおいて、映像がある収録済みコンテンツの場合、映像の内容が分かるような同期した音声情報を提供する。
+guideline:
+  ja: |-
+    すべての音声・映像コンテンツにおいて、映像がある収録済みコンテンツの場合、映像の内容が分かるような同期した音声情報を提供する。
+  en: |-
+    In all audio and video content, for pre-recorded content with video, provide synchronized audio information that makes the content of the video understandable.
 sc:
 - 1.2.3
 - 1.2.5
-intent: |-
-  映像情報を理解できなくてもサービスの利用が困難にならないようにする。
+intent:
+  ja: |-
+    映像情報を理解できなくてもサービスの利用が困難にならないようにする。
 
-  視覚障害者が、映像コンテンツを理解できるようにする。
+    視覚障害者が、映像コンテンツを理解できるようにする。
+  en: |-
+    Ensure that the service remains accessible even for those who cannot understand the video information.
+
+    Make it possible for individuals with visual impairments to understand video content.
 checks:
 - '1542'
 - '1562'

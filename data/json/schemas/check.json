@@ -109,7 +109,7 @@
         "properties": {
           "title": {
             "description": "purpose of the implementation",
-            "type": "string"
+            "$ref": "common.json#/definitions/i18nString"
           },
           "methods": {
             "description": "one or more methods of the implementation, set of target platform and the specific implementation method",
@@ -124,7 +124,7 @@
                 },
                 "method": {
                   "description": "an example of how to implement",
-                  "type": "string"
+                  "$ref": "common.json#/definitions/i18nString"
                 }
               },
               "additionalProperties": false,

@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正を可能にする。
+guideline:
+  ja: |-
+    法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正を可能にする。
+  en: |-
+    For functions involving legal commitments, financial transactions, or the alteration or deletion of data, enable cancellation, pre-submission confirmation and modification, or error checking and correction at the time of submission.
 sc:
 - 3.3.4
-intent: |-
-  誤操作による影響を少なくする。
+intent:
+  ja: |-
+    誤操作による影響を少なくする。
+  en: |-
+    Minimize the impact of misoperation.
 checks:
 - '1141'
 info:

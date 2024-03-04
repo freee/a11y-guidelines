@@ -7,20 +7,33 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  フォームの入力や操作に制限時間を設けない。制限時間を設ける場合は、次に挙げる事項のうち、少なくとも1つを満たす。
+guideline:
+  ja: |-
+    フォームの入力や操作に制限時間を設けない。制限時間を設ける場合は、次に挙げる事項のうち、少なくとも1つを満たす。
 
-  -  解除： 制限時間があるフォームを利用する前に、ユーザーがその制限時間を解除することができる。又は、
-  -  調整： 制限時間があるフォームを利用する前に、ユーザーが少なくともデフォルト設定の10倍を超える、大幅な制限時間の調整をすることができる。又は、
-  -  延長： 時間切れになる前にユーザーに警告し、かつ少なくとも20秒間の猶予をもって、例えば「スペースキーを押す」などの簡単な操作により、ユーザーが制限時間を10回以上延長することができる。又は、
-  -  リアルタイムの例外： リアルタイムのイベント（例えば、オークション）において制限時間が必須の要素で、その制限時間に代わる手段が存在しない。又は、
-  -  必要不可欠な例外： 制限時間が必要不可欠なもので、制限時間を延長することがフォームを無効にすることになる。又は、
-  -  20時間の例外： 制限時間が20時間よりも長い。
+    -  解除： 制限時間があるフォームを利用する前に、ユーザーがその制限時間を解除することができる。又は、
+    -  調整： 制限時間があるフォームを利用する前に、ユーザーが少なくともデフォルト設定の10倍を超える、大幅な制限時間の調整をすることができる。又は、
+    -  延長： 時間切れになる前にユーザーに警告し、かつ少なくとも20秒間の猶予をもって、例えば「スペースキーを押す」などの簡単な操作により、ユーザーが制限時間を10回以上延長することができる。又は、
+    -  リアルタイムの例外： リアルタイムのイベント（例えば、オークション）において制限時間が必須の要素で、その制限時間に代わる手段が存在しない。又は、
+    -  必要不可欠な例外： 制限時間が必要不可欠なもので、制限時間を延長することがフォームを無効にすることになる。又は、
+    -  20時間の例外： 制限時間が20時間よりも長い。
+  en: |-
+    Do not set time limits for form input and operation. If time limits are set, at least one of the following conditions must be met:
+
+    -  Disabling: Users can disable the time limit before using a form with a time limit. Or,
+    -  Adjustment: Users can significantly adjust the time limit to exceed at least ten times the default setting before using a form with a time limit. Or,
+    -  Extension: Warn users before time expires, and allow them to extend the time limit by at least 20 seconds with a simple action, such as pressing the space key, at least ten times. Or,
+    -  Real-time Exception: The time limit is an essential part of a real-time event (e.g., an auction) where no alternative to the time limit exists. Or,
+    -  Essential Exception: The time limit is essential and extending it would invalidate the form. Or,
+    -  20-hour Exception: The time limit is longer than 20 hours.
 sc:
 - 2.2.1
 - 2.2.3
-intent: |-
-  コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくフォームを利用できるようにする。
+intent:
+  ja: |-
+    コンテンツの読み取りや理解に時間がかかる場合や、入力操作などに時間がかかる場合にも問題なくフォームを利用できるようにする。
+  en: |-
+    Ensure that forms can be used without issue even when it takes time to read or understand the content, or when input operations take time.
 checks:
 - '0961'
 info:

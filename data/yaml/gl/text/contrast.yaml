@@ -6,22 +6,37 @@ title:
   en: Ensure Sufficient Contrast Ratio
 platform:
 - web
-guideline: |-
-  文字色と背景色に十分なコントラストを確保する。
+guideline:
+  ja: |-
+    文字色と背景色に十分なコントラストを確保する。
 
-  -  テキストの文字サイズが29px（22pt）以上の場合： 3:1以上
-  -  テキストの文字サイズが24px（18pt）以上で太字の場合： 3:1以上
-  -  その他の場合： 4.5:1以上
+    -  テキストの文字サイズが29px（22pt）以上の場合： 3:1以上
+    -  テキストの文字サイズが24px（18pt）以上で太字の場合： 3:1以上
+    -  その他の場合： 4.5:1以上
 
-  注：freeeのプロダクトやWebサイトにおいては、主に日本語が用いられているため、Understanding WCAG 2.1 [#]_ の日本語訳 [#]_ 中の訳注で示されている基準を用いています。
+    注：freeeのプロダクトやWebサイトにおいては、主に日本語が用いられているため、Understanding WCAG 2.1 [#]_ の日本語訳 [#]_ 中の訳注で示されている基準を用いています。
 
-  .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
-  .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
+    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
+    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
+  en: |-
+    Ensure sufficient contrast between the colors of text and their background colors.
+
+    -  For text size 29px (22pt) or larger: a contrast ratio of at least 3:1.
+    -  For bold text 24px (18pt) or larger: a contrast ratio of at least 3:1.
+    -  In other cases: a contrast ratio of at least 4.5:1.
+
+    Note: In freee products and websites, Japanese is mainly used, so the criteria indicated in the translation notes in Understanding WCAG 2.1 [#]_ [#]_ are used.
+
+    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
+    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
 sc:
 - 1.4.3
 - 1.4.6
-intent: |-
-  ロービジョン者が、コンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、コンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with low vision can use the content.
 checks:
 - '0002'
 - '0021'

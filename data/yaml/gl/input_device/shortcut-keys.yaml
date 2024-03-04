@@ -6,16 +6,26 @@ title:
   en: When Providing Shortcut Keys
 platform:
 - web
-guideline: |-
-  ショートカットキーを提供する場合は、以下のいずれかを満たす。
+guideline:
+  ja: |-
+    ショートカットキーを提供する場合は、以下のいずれかを満たす。
 
-  -  ショートカットキーを無効にする設定を可能にする。
-  -  ショートカットキーの割り当ての変更を可能にする。
-  -  操作対象にフォーカスがあるときのみショートカットキーが有効になるようにする。
+    -  ショートカットキーを無効にする設定を可能にする。
+    -  ショートカットキーの割り当ての変更を可能にする。
+    -  操作対象にフォーカスがあるときのみショートカットキーが有効になるようにする。
+  en: |-
+    When providing shortcut keys, satisfy one of the following:
+
+    -  Allow users to disable shortcut keys.
+    -  Allow users to change the assignment of shortcut keys.
+    -  Enable shortcut keys only when the target of the operation has focus.
 sc:
 - 2.1.4
-intent: |-
-  音声認識で操作している場合に、ショートカットキーに割り当てられている機能が誤って実行されないようにする。
+intent:
+  ja: |-
+    音声認識で操作している場合に、ショートカットキーに割り当てられている機能が誤って実行されないようにする。
+  en: |-
+    Ensure that functions assigned to shortcut keys are not executed accidentally when operating with voice recognition.
 checks:
 - '0141'
 info:

@@ -6,12 +6,18 @@ title:
   en: Specify the Primary Language of the Page
 platform:
 - web
-guideline: |-
-  ``html`` 要素に適切にlang属性を指定する。
+guideline:
+  ja: |-
+    ``html`` 要素に適切にlang属性を指定する。
+  en: |-
+    Specify the ``lang`` attribute for the ``html`` element appropriately.
 sc:
 - 3.1.1
-intent: |-
-  音声/点字出力などが適切に行われるようにする。
+intent:
+  ja: |-
+    音声/点字出力などが適切に行われるようにする。
+  en: |-
+    Ensure that speech and braille output is performed appropriately.
 checks:
 - '0611'
 - '0621'

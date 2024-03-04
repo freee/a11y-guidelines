@@ -6,3 +6,5 @@ platform:
 check:
   ja: |-
     validatorやlinterでチェックが通る。
+  en: |-
+    The code passes checks by a validator or linter.

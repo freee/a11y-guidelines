@@ -6,22 +6,35 @@ title:
   en: Support for Mobile Assistive Technologies
 platform:
 - mobile
-guideline: |-
-  OS標準のスクリーン・リーダーの利用時、以下を満たす。
+guideline:
+  ja: |-
+    OS標準のスクリーン・リーダーの利用時、以下を満たす。
 
-  *  操作を受け付けるすべてのUIコンポーネントは、スクリーン・リーダーでフォーカスし、操作することができる
-  *  画面に表示されているすべての情報は、スクリーン・リーダーでフォーカスし、内容を確認できる
-  *  スクリーン・リーダーのフォーカス箇所を示す表示が視認できる配色になっている
+    *  操作を受け付けるすべてのUIコンポーネントは、スクリーン・リーダーでフォーカスし、操作することができる
+    *  画面に表示されているすべての情報は、スクリーン・リーダーでフォーカスし、内容を確認できる
+    *  スクリーン・リーダーのフォーカス箇所を示す表示が視認できる配色になっている
 
-  OS標準のスクリーン・リーダーとは、iOS、iPadOSではVoiceOver、AndroidではTalkBackを差す。
+    OS標準のスクリーン・リーダーとは、iOS、iPadOSではVoiceOver、AndroidではTalkBackを差す。
+  en: |-
+    When using the standard screen readers of the OS, the following must be met:
+
+    *  All UI components that receive operations can be focused on and operated by the screen reader.
+    *  All information displayed on the screen can be focused on by the screen reader and its content can be read.
+    *  The display indicating the focus area of the screen reader is in a color scheme that is visible.
+
+    The standard screen readers for the OS refer to VoiceOver for iOS and iPadOS, and TalkBack for Android.
 sc:
 - 1.4.11
 - 4.1.2
-intent: |-
-  -  視覚障害者がコンテンツを利用できるようにする。
-  -  音声入力やスイッチを用いたインターフェースなど、スクリーン・リーダー以外の支援技術による利用を可能にする。
+intent:
+  ja: |-
+    -  視覚障害者がコンテンツを利用できるようにする。
+    -  音声入力やスイッチを用いたインターフェースなど、スクリーン・リーダー以外の支援技術による利用を可能にする。
+  en: |-
+    -  Ensure that people with visual impairments can use content.
+    -  Enable the use of assistive technologies other than screen readers, such as voice input and switch interfaces.
 checks:
-  - '0153'
-  - '0172'
-  - '0581'
-  - '0586'
+- '0153'
+- '0172'
+- '0581'
+- '0586'

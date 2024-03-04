@@ -12,3 +12,11 @@ check:
     *  ナビゲーション・メニューといわゆるハブ・ページの両方から遷移できる。
     *  特定のページ中のリンクから遷移することに加えて、サイト内検索機能からも遷移できる。
     *  ヘルプ・ページ中のリンクからも遷移できる。
+  en: |-
+    There are multiple ways to reach that page. However, this does not apply to pages displayed as a result of specific actions or those shown during a process (e.g., a wizard).
+
+    Examples:
+
+    *  It can be accessed from both the navigation menu and so-called hub pages.
+    *  In addition to transitioning from links on a specific page, it can also be accessed through the site's search function.
+    *  It can also be accessed from links within the help page.

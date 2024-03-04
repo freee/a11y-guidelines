@@ -6,12 +6,18 @@ title:
   en: Customization of Text Display
 platform:
 - web
-guideline: |-
-  ユーザーがline-heightを1.5em以上、段落に続く空白を2em以上、letter-spacingを0.12em以上に変更し、その他のプロパティーを一切変更していない状況において、コンテンツおよび機能に損失が生じないようにする。
+guideline:
+  ja: |-
+    ユーザーが ``line-height`` を1.5em以上、段落に続く空白を2em以上、 ``letter-spacing`` を0.12em以上に変更し、その他のプロパティーを一切変更していない状況において、コンテンツおよび機能に損失が生じないようにする。
+  en: |-
+    Ensure that there is no loss of content or functionality when the user changes the ``line-height`` to 1.5em or more, the space following a paragraph to 2em or more, and the ``letter-spacing`` to 0.12em or more, and does not change any other properties.
 sc:
 - 1.4.12
-intent: |-
-  ロービジョン者が、問題なくコンテンツを利用できるようにする。
+intent:
+  ja: |-
+    ロービジョン者が、問題なくコンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with low vision can use content without problems.
 checks:
 - '0891'
 info:

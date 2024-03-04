@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  緊急性が高い情報を提示する場合を除いて、プッシュ通知や自動更新などによる割り込みを発生させない。
+guideline:
+  ja: |-
+    緊急性が高い情報を提示する場合を除いて、プッシュ通知や自動更新などによる割り込みを発生させない。
+  en: |-
+    Except when presenting highly urgent information, avoid causing interruptions through push notifications or automatic updates.
 sc:
 - 2.2.4
-intent: |-
-  ロービジョン者や認知障害者が、集中を阻害されないようにする。
+intent:
+  ja: |-
+    ロービジョン者や認知障害者が、集中を阻害されないようにする。
+  en: |-
+    Ensure that people with low vision or cognitive impairments are not distracted.
 checks:
 - '1291'
 - '1292'

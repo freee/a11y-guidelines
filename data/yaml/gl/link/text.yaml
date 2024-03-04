@@ -7,13 +7,20 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  リンク・テキスト（``a`` 要素の中身、アイコンのラベルなど）は、そのリンクの目的を判断できるものにする。
+guideline:
+  ja: |-
+    リンク・テキスト（``a`` 要素の中身、アイコンのラベルなど）は、そのリンクの目的を判断できるものにする。
+  en: |-
+    Make the link text (such as the content of an `a` element, labels for icons) such that the purpose of the link can be determined.
 sc:
 - 2.4.4
-intent: |-
-  *  リンク先を閲覧するかどうかの判断を容易にして、肢体不自由者の不必要な操作の抑制につなげる。
-  *  スクリーン・リーダーが提供するリンクの一覧機能を使う視覚障害者が、リンク先について容易に判断できるようにする。
+intent:
+  ja: |-
+    *  リンク先を閲覧するかどうかの判断を容易にして、肢体不自由者の不必要な操作の抑制につなげる。
+    *  スクリーン・リーダーが提供するリンクの一覧機能を使う視覚障害者が、リンク先について容易に判断できるようにする。
+  en: |-
+    *  Facilitate the decision-making process of whether to visit a link destination, thereby reducing unnecessary operations for individuals with physical disabilities.
+    *  Ensure that visually impaired individuals using screen readers' link listing functions can easily determine the link destination
 checks:
 - '0241'
 - '0261'

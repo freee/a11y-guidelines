@@ -7,17 +7,28 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  クリックやタップで実行される機能の実行、完了のトリガーには、ダウン・イベント（mousedown, touchdownなど）を使わず、アップ・イベント（mouseup, touchupなど）やクリック・イベント（clickなど）を使い、誤った操作を中断できるようにする。
+guideline:
+  ja: |-
+    クリックやタップで実行される機能の実行、完了のトリガーには、ダウン・イベント（mousedown, touchdownなど）を使わず、アップ・イベント（mouseup, touchupなど）やクリック・イベント（clickなど）を使い、誤った操作を中断できるようにする。
+  en: |-
+    For functions that are executed by clicking or tapping, use up events (like mouseup, touchup) or click events (like click) instead of down events (like mousedown, touchdown) as triggers for execution and completion. This allows for the interruption of accidental operations.
 sc:
 - 2.5.2
-intent: |-
-  ポインティング・ディバイスやタッチUIでのタップの誤操作の影響を小さくする。
+intent:
+  ja: |-
+    ポインティング・ディバイスやタッチUIでのタップの誤操作の影響を小さくする。
 
-  -  意図しない場所でマウス・ボタンを押下してしまった場合に、ターゲットから外れた場所でボタンをリリースすることで、操作をキャンセルできる。
-  -  ドラッグ&ドロップの操作で誤った場所でマウス・ボタンを押下した場合、元の位置にマウス・ポインターを戻したうえでマウス・ボタンを放すと、ドラッグ&ドロップの操作をキャンセルできる。
-  -  タッチUIにおいて意図しない場所に触れてしまった場合に、ターゲットから外れた場所に指を移動して離すすることで、操作をキャンセルできる。
-  -  タッチUIでのドラッグ&ドロップの操作で誤った場所に触れた場合、元の位置に指を戻したうえで放すと、ドラッグ&ドロップの操作をキャンセルできる。
+    -  意図しない場所でマウス・ボタンを押下してしまった場合に、ターゲットから外れた場所でボタンをリリースすることで、操作をキャンセルできる。
+    -  ドラッグ&ドロップの操作で誤った場所でマウス・ボタンを押下した場合、元の位置にマウス・ポインターを戻したうえでマウス・ボタンを放すと、ドラッグ&ドロップの操作をキャンセルできる。
+    -  タッチUIにおいて意図しない場所に触れてしまった場合に、ターゲットから外れた場所に指を移動して離すすることで、操作をキャンセルできる。
+    -  タッチUIでのドラッグ&ドロップの操作で誤った場所に触れた場合、元の位置に指を戻したうえで放すと、ドラッグ&ドロップの操作をキャンセルできる。
+  en: |-
+    Minimize the impact of accidental actions with pointing devices and touch UI taps.
+
+    -  If you accidentally press the mouse button in an unintended place, you can cancel the operation by releasing the button outside of the target area.
+    -  In drag & drop operations, if the mouse button is pressed in the wrong place, moving the mouse pointer back to its original position and then releasing the button can cancel the drag & drop action.
+    -  In touch UI, if you accidentally touch an unintended area, moving your finger off the target and then releasing it can cancel the operation.
+    -  For drag & drop operations in touch UI, if you touch the wrong place, moving your finger back to the original position and then releasing it can cancel the drag & drop action.
 checks:
 - '0071'
 - '0081'

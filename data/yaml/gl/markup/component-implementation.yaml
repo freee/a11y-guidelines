@@ -7,14 +7,22 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  リンクやボタン、フォーム・コントロールなど、ユーザーの操作を受け付けるUIコンポーネントは、なるべくHTMLの適切な要素、または使用している開発フレームワークの標準的なコンポーネントを用いて実装する。
+guideline:
+  ja: |-
+    リンクやボタン、フォーム・コントロールなど、ユーザーの操作を受け付けるUIコンポーネントは、なるべくHTMLの適切な要素、または使用している開発フレームワークの標準的なコンポーネントを用いて実装する。
+  en: |-
+    UI components that accept user input, such as links, buttons, and form controls, should be implemented using appropriate HTML elements or standard components of the development framework being used.
 sc:
 - 1.3.1
-intent: |-
-  -  スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
-  -  支援技術のユーザーが適切に操作することができるようにする。
-  -  キーボードによる操作を可能にする。
+intent:
+  ja: |-
+    -  スクリーン・リーダーなどの支援技術がコンテンツを正しく認識し、ユーザーに適切な形で提示できるようにする。
+    -  支援技術のユーザーが適切に操作することができるようにする。
+    -  キーボードによる操作を可能にする。
+  en: |-
+    -  Ensure that assistive technologies such as screen readers can correctly recognize content and present it to users in an appropriate manner.
+    -  Ensure that users of assistive technologies can operate content appropriately.
+    -  Ensure that content can be operated using a keyboard.
 checks:
 - '0553'
 - '0554'

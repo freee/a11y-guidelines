@@ -7,21 +7,40 @@ platform:
 check:
   ja: |-
     エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールにはその役割が分かるラベルが付けられている。
+  en: |-
+    Form controls such as edit boxes, check boxes, and radio buttons have labels that indicate their purposes.
 implementations:
-- title: フォーム・コントロールのラベル付け
+- title:
+    ja: フォーム・コントロールのラベル付け
+    en: Labeling Form Controls
   methods:
   - platform: web
-    method: |-
-      *  ``label`` 要素、または ``aria-labelledby`` 属性を用いて表示されているテキストまたは画像と関連付ける、または
-      *  ``aria-label`` 属性でラベルを指定する
+    method:
+      ja: |-
+        *  ``label`` 要素、または ``aria-labelledby`` 属性を用いて表示されているテキストまたは画像と関連付ける、または
+        *  ``aria-label`` 属性でラベルを指定する
+      en: |-
+        *  Associate the displayed text or image with the ``label`` element or the ``aria-labelledby`` attribute, or
+        *  Specify the label with the ``aria-label`` attribute.
   - platform: ios
-    method: |-
-      *  ``accessibilityLabel`` を用いる。
+    method:
+      ja: |-
+        *  ``accessibilityLabel`` を用いる。
+      en: |-
+        *  Use ``accessibilityLabel``.
   - platform: android
-    method: |-
-      *  ``labelFor`` を用いる。
-- title: 適切な状態の確認
+    method:
+      ja: |-
+        *  ``labelFor`` を用いる。
+      en: |-
+        *  Use ``labelFor``.
+- title:
+    ja: 適切な状態の確認
+    en: Checking for Appropriate States
   methods:
   - platform: web
-    method: |-
-      *  開発者ツールで確認するとフォーム・コントロールのaccessible nameに役割が分かるテキストが指定されている状態
+    method:
+      ja: |-
+        *  開発者ツールで確認するとフォーム・コントロールのaccessible nameに役割が分かるテキストが指定されている状態
+      en: |-
+        *  When checked with developer tools, the accessible name of the form control specifies text that indicates its purpose.

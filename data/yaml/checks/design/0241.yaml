@@ -7,3 +7,5 @@ platform:
 check:
   ja: |-
     リンク・テキストは「こちら」などになっておらず、リンク・テキストの文言から遷移先をある程度推測できるようになっている。
+  en: |-
+    Link text is not merely 'click here' or similar phrases, and is designed so that the destination can be somewhat inferred from the wording of the link text.

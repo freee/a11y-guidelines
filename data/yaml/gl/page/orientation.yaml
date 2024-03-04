@@ -7,12 +7,18 @@ title:
 platform:
 - web
 - mobile
-guideline: |-
-  コンテンツの性質上必要不可欠な場合を除いて、特定の画面方向（縦置き/横置き）での利用を強制しない。
+guideline:
+  ja: |-
+    コンテンツの性質上必要不可欠な場合を除いて、特定の画面方向（縦置き/横置き）での利用を強制しない。
+  en: |-
+    Do not force the use of a specific screen orientation (portrait/landscape) unless it is essential for the nature of the content.
 sc:
 - 1.3.4
-intent: |-
-  タブレットなどの端末を、特定の方向（縦置き/横置き）に固定して使う必要がある肢体不自由者などが、コンテンツを利用することを妨げない。
+intent:
+  ja: |-
+    タブレットなどの端末を、特定の方向（縦置き/横置き）に固定して使う必要がある肢体不自由者などが、コンテンツを利用することを妨げない。
+  en: |-
+    Ensure that content is accessible to individuals with physical disabilities, such as those who need to use devices like tablets in a fixed orientation (portrait/landscape).
 checks:
 - '0751'
 - '0771'

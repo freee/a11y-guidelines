@@ -5,4 +5,6 @@ platform:
 - web
 check:
   ja: |-
-    マウスのマウスオーバー時にしか表示されない情報や実行できない機能が、設計資料に存在しない。
+    マウスオーバー時に表示される情報や実行できる機能は、キーボードだけで操作している場合やタッチUIで操作している場合にも表示・実行できるような設計になっている。
+  en: |-
+    Design such that information displayed or functions executable on mouseover can also be displayed or executed when operating solely with a keyboard, or with a touch UI.

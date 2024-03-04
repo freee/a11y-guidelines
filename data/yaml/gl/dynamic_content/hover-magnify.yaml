@@ -6,12 +6,18 @@ title:
   en: Magnification of the Content Displayed by Mouseover (Hover)
 platform:
 - web
-guideline: |-
-  マウスオーバー（ホバー）で表示されるコンテンツについて、ポインターをマウスオーバーで表示されたコンテンツ上に移動しても、コンテンツが消えないようにすることで、そのコンテンツを拡大表示して利用することを可能にする。
+guideline:
+  ja: |-
+    マウスオーバー（ホバー）で表示されるコンテンツについて、マウスオーバーで表示されたコンテンツ上にポインターを移動しても、コンテンツが消えないようにすることで、そのコンテンツを拡大表示して利用することを可能にする。
+  en: |-
+    Regarding content displayed on mouseover (hover), ensure that the content does not disappear when the pointer is moved over the mouseover-displayed content, to allow for the use of that content with magnification.
 sc:
 - 1.4.13
-intent: |-
-  拡大表示を利用しているロービジョン者が、マウスオーバーで表示される内容を利用できるようにする。
+intent:
+  ja: |-
+    拡大表示を利用しているロービジョン者が、マウスオーバーで表示される内容を利用できるようにする。
+  en: |-
+    Allow users with low vision who use magnification to use the content displayed by mouseover.
 checks:
 - '0092'
 - '0112'

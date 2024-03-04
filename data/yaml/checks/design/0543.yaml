@@ -10,3 +10,9 @@ check:
     *  文書の階層構造を反映した見出しレベルが指定されている
     *  ページ全体では、見出しレベルは1から始まっている
     *  見出しレベルは、1の下位は2、2の下位は3のように1ずつ増加していて、抜けがない状態になっている
+  en: |-
+    Appropriate heading levels are specified for headings:
+
+    *  Heading levels reflect the document's hierarchical structure
+    *  Across the entire page, heading levels start from 1
+    *  Heading levels increase sequentially by one at each level, such as 2 being subordinate to 1, and 3 to 2, ensuring there are no gaps

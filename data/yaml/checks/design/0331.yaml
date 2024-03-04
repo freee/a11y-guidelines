@@ -9,3 +9,8 @@ check:
 
     *  デスクトップWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
     *  モバイルWebでは44 x 44 CSS px以上
+  en: |-
+    When an image is used as a link or button, the area that responds to clicks or touches is sufficiently large, and this area is explicitly specified in the design documentation.
+
+    *  For desktop Web, at least 24 x 24 CSS pixels, preferably more than 44 x 44 CSS pixels
+    *  For mobile Web, more than 44 x 44 CSS pixels"

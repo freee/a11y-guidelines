@@ -1,0 +1,36 @@
+.. _ver-202005-0:
+
+*********************************************************************************************************************************
+`Ver. 202005.0 (2020年5月21日、Global Accessibility Awareness Day) <https://github.com/freee/a11y-guidelines/releases/202005.0>`_
+*********************************************************************************************************************************
+
+参考： `freeeアクセシビリティー・ガイドラインVer. 202005.0を公開しました <https://developers.freee.co.jp/entry/a11y-guidelines-202005.0>`_
+
+*  一部文言を修正
+*  色に関するガイドラインについて、色弱者に加えて視覚障害者のアクセスに影響することを「意図」に明記
+*  参考情報の追加:
+
+   -  :ref:`exp-dynamic-content-auto-updated`
+   -  :ref:`exp-form-labeling`
+   -  :ref:`exp-color-only`
+   -  :ref:`exp-form-dynamic-content`
+   -  :ref:`exp-form-errors`
+   -  :ref:`exp-target-size`
+   -  :ref:`exp-iot-usage`
+   -  :ref:`exp-iot-text-alternative`
+   -  :ref:`exp-contrast`
+   -  :ref:`exp-text-custom-css`
+   -  :ref:`exp-keyboard-notrap`
+   -  :ref:`exp-input-device-various`
+   -  :ref:`exp-multimedia-perceivable`
+   -  :ref:`exp-multimedia-autoplay`
+   -  :ref:`exp-multimedia-content-access`
+   -  :ref:`exp-tab-order-check`
+
+*  参考情報の更新:
+
+   -  :ref:`exp-markup-component` : AccessibleNameとroleについて加筆
+
+*  誤字修正
+*  CSSなど修正
+
