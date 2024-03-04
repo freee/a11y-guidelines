@@ -73,13 +73,13 @@ jobs:
               build_procedure=`make build-procedure-version` ; \
             fi ; \
             if [ ${build_procedure} -eq 0 ]; then
-              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}/${_tag}" html ; \
+              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=https://a11y-guidelines.freee.co.jp/archive/${_tag}/" html ; \
               if [ -d ./data/json/schemas ]; then \
                 cp -r ./data/json/schemas ./build/html ; \
               fi ; \
               cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
             elif [ ${build_procedure} -eq 1 ]; then \
-              make BASE_URL=${BASE_URL}/${_tag} sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
+              make BASE_URL=https://a11y-guidelines.freee.co.jp/archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
               mkdir -p ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en ; \
               cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
               cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en
