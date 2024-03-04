@@ -1,0 +1,3 @@
+[submodule "vendor/axe-core"]
+	path = vendor/axe-core
+	url = https://github.com/dequelabs/axe-core
