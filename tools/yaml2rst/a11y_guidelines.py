@@ -284,10 +284,7 @@ class Check:
 
     def template_object(self, lang, **kwargs):
         rel = RelationshipManager()
-        # if 'platform' in kwargs:
         gl_platform = kwargs.get('platform')
-        # else:
-            # gl_platform = []
         template_object = {
             'id': self.id,
             'check': self.check[lang],

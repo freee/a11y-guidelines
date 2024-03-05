@@ -121,60 +121,6 @@ def get_miscdefs(lang):
         })
     yield {'links': data}
 
-# def generate_makefile(destfile, template, build_all, targets, lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_list):
-#     rel = RelationshipManager()
-#     if build_all or destfile in targets:
-#         build_depends = []
-#         makefile_vars['check_yaml'] = ' '.join(Check.list_all_src_paths())
-#         makefile_vars['gl_yaml'] = ' '.join(Guideline.list_all_src_paths())
-#         makefile_vars['faq_yaml'] = ' '.join(Faq.list_all_src_paths())
-#         for cat in Category.list_all():
-#             filename = f'{cat.id}.rst'
-#             target = os.path.join(DEST_DIRS['guidelines'], filename)
-#             makefile_vars_list['guideline_category_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(cat.get_dependency())})
-
-#         for tool in CheckTool.list_all():
-#             filename = f'examples-{tool.id}.rst'
-#             target = os.path.join(DEST_DIRS['checks'], filename)
-#             makefile_vars_list['check_example_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(tool.get_dependency())})
-
-#         for faq in Faq.list_all():
-#             filename = f'{faq.id}.rst'
-#             target = os.path.join(DEST_DIRS['faq_articles'], filename)
-#             makefile_vars_list['faq_article_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(faq.get_dependency())})
-
-#         for tag in FaqTag.list_all():
-#             if tag.article_count() == 0:
-#                 continue
-#             filename = f'{tag.id}.rst'
-#             target = os.path.join(DEST_DIRS['faq_tags'], filename)
-#             makefile_vars_list['faq_tagpage_target'].append(target)
-#             build_depends.append({'target': target, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
-
-#         for info_id in rel.info_to_guidelines:
-#             info = InfoRef.get_by_id(info_id)
-#             if not info.internal:
-#                 continue
-#             filename = f'{info.ref}.rst'
-#             target = os.path.join(DEST_DIRS['info2gl'], filename)
-#             makefile_vars_list['info_to_gl_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
-
-#         for info_id in rel.info_to_faqs:
-#             info = InfoRef.get_by_id(info_id)
-#             filename = f'{info.ref}.rst'
-#             target = os.path.join(DEST_DIRS['info2faq'], filename)
-#             makefile_vars_list['info_to_faq_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join([faq.src_path for faq in rel.get_info_to_faqs(info)])})
-
-#         for key, value in makefile_vars_list.items():
-#             makefile_vars[key] = ' '.join(value)
-#             makefile_vars['depends'] = build_depends
-#         template.write_rst({**makefile_vars, **MAKEFILE_VARS}, destfile)
-
 def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_list):
     rel = RelationshipManager()
     build_depends = []
