@@ -102,8 +102,14 @@ def get_info_to_faqs(lang):
 
 def get_wcag21mapping(lang):
     rel = RelationshipManager()
-    sc_mapping = [sc.template_object(lang) for sc in WcagSc.get_all().values()]
-    yield {'mapping': sc_mapping}
+    mappings = []
+    for sc in WcagSc.get_all().values():
+        sc_object = sc.template_object(lang)
+        guidelines = rel.get_sc_to_guidelines(sc)
+        if len(guidelines) > 0:
+            sc_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
+        mappings.append(sc_object)
+    return [{'mapping': mappings}]
 
 def get_priority_diff(lang):
     diffs = [sc.template_object(lang) for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]

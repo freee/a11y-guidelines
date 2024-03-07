@@ -527,9 +527,6 @@ class WcagSc:
             'sc_en_url': self.url['en'],
             'sc_ja_url': self.url['ja']
         }
-        guidelines = rel.get_sc_to_guidelines(self)
-        if len(guidelines) > 0:
-            template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
         return template_object
 
     @classmethod
