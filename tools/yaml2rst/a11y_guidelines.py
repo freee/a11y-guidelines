@@ -257,7 +257,9 @@ class Guideline:
 
     @classmethod
     def list_all_src_paths(cls):
-        return [guideline.src_path for guideline in cls.all_guidelines.values()]
+        for guideline in cls.all_guidelines.values():
+            yield guideline.src_path
+
 class Check:
     all_checks = {}
 
@@ -321,11 +323,13 @@ class Check:
     @classmethod
     def template_object_all(cls, lang):
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
-        return [cls.all_checks[check_id].template_object(lang) for check_id in sorted_checks]
+        for check_id in sorted_checks:
+            yield cls.all_checks[check_id].template_object(lang)
 
     @classmethod
     def list_all_src_paths(cls):
-        return [check.src_path for check in cls.all_checks.values()]
+        for check in cls.all_checks.values():
+            yield check.src_path
 
 class Faq:
     all_faqs = {}
@@ -410,7 +414,8 @@ class Faq:
 
     @classmethod
     def list_all_src_paths(cls):
-        return [faq.src_path for faq in cls.all_faqs.values()]
+        for faq in cls.all_faqs.values():
+            yield faq.src_path
 
 class Category:
     all_categories = {}
@@ -569,8 +574,9 @@ class InfoRef:
 
     @classmethod
     def list_all_external(cls):
-        return [inforef for inforef in cls.all_inforefs.values() if not inforef.internal]
-
+        for inforef in cls.all_inforefs.values():
+            if not inforef.internal:
+                yield inforef
 
 class Procedure:
     def __init__(self, procedure, check):

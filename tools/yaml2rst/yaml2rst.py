@@ -36,16 +36,15 @@ def main():
 def get_category_pages(lang):
     rel = RelationshipManager()
     for category, guidelines in rel.get_guidelines_to_category().items():
-        data = {
+        yield {
             'filename': category,
             'lang': lang,
             'guidelines': [gl.template_object(lang) for gl in guidelines]
         }
-        yield data
 
 def get_allchecks(lang):
     allchecks = Check.template_object_all(lang)
-    yield {'allchecks': allchecks}
+    return [{'allchecks': allchecks}]
 
 def get_example_pages(lang):
     for tool in CheckTool.list_all():
@@ -60,28 +59,27 @@ def get_faq_tagpages(lang):
     for tag in FaqTag.list_all():
         if tag.article_count() == 0:
             continue
-        data = {
+        yield {
             'filename': tag.id,
             'tag': tag.id,
             'label': tag.names[lang],
             'articles': [faq.id for faq in rel.get_tag_to_faqs(tag)]
         }
-        yield data
 
 def get_faq_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
     tags = [tag.template_object(lang) for tag in sorted_tags if tag.article_count() > 0]
     articles = [article.template_object(lang) for article in Faq.list_all(sort_by='date')]
-    yield {'articles': articles, 'tags': tags}
+    return [{'articles': articles, 'tags': tags}]
 
 def get_faq_tag_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
     tagpages = [tagpage.template_object(lang) for tagpage in sorted_tags if tagpage.article_count() > 0]
-    yield {'tags': tagpages}
+    return [{'tags': tagpages}]
 
 def get_faq_article_index(lang):
     articles = [article.template_object(lang) for article in Faq.list_all(sort_by='sortKey')]
-    yield {'articles': articles}
+    return [{'articles': articles}]
 
 def get_info_to_guidelines(lang):
     rel = RelationshipManager()
@@ -109,7 +107,7 @@ def get_wcag21mapping(lang):
 
 def get_priority_diff(lang):
     diffs = [sc.template_object(lang) for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
-    yield {'diffs': diffs}
+    return [{'diffs': diffs}]
 
 def get_miscdefs(lang):
     data = []
@@ -119,7 +117,7 @@ def get_miscdefs(lang):
             'text': info.text[lang],
             'url': info.url[lang]
         })
-    yield {'links': data}
+    return [{'links': data}]
 
 def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_list):
     rel = RelationshipManager()
