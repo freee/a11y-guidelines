@@ -1,4 +1,4 @@
-ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_category_target }} {{ check_example_target }} {{ wcag_mapping_target }} {{ priority_diff_target }} {{ all_checks_target }}  {{ miscdefs_target }}
+ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_category_target }} {{ check_example_target }} {{ wcag_mapping_target }} {{ priority_diff_target }} {{ all_checks_target }}  {{ miscdefs_target }} {{ axe_rules_target }}
 
 %.yaml: ;
 %.json: ;
