@@ -33,6 +33,8 @@ class RelationshipManager:
         self.check_to_info = {}
         self.faq_to_info = {}
         self.info_to_faqs = {}
+        self.axe_to_scs = {}
+        self.axe_to_guidelines = {}
         self._initialized = True
 
     def set_guideline_category(self, guideline):
@@ -195,6 +197,18 @@ class RelationshipManager:
         if info.id in self.info_to_faqs:
             return self.info_to_faqs.get(info.id)
         return []
+
+    def associate_axe_with_scs(self, rule, sc):
+        if rule.id not in self.axe_to_scs:
+            self.axe_to_scs[rule.id] = []
+        if sc not in self.axe_to_scs[rule.id]:
+            self.axe_to_scs[rule.id].append(sc)
+        if sc.id in self.sc_to_guidelines:
+            for guideline in self.sc_to_guidelines[sc.id]:
+                if rule.id not in self.axe_to_guidelines:
+                    self.axe_to_guidelines[rule.id] = []
+                if guideline not in self.axe_to_guidelines[rule.id]:
+                    self.axe_to_guidelines[rule.id].append(guideline)
 
 class Guideline:
     all_guidelines = {}
@@ -735,6 +749,79 @@ class CheckTool:
     def get_by_id(cls, tool_id):
         return cls.all_tools.get(tool_id)
 
+class AxeRule:
+    all_rules = {}
+    timestamp = None
+    version = None
+    major_version = None
+    deque_url = None
+
+    def __init__(self, rule, messages_ja):
+        rule_id = rule['id']
+        if rule_id in AxeRule.all_rules:
+            raise ValueError(f'Duplicate rule ID: {rule_id}')
+        self.id = rule_id
+        if not rule_id in messages_ja['rules']:
+            msg_ja = {
+                'help': rule['metadata']['help'],
+                'description': rule['metadata']['description']
+            }
+            self.translated = None
+        else:
+            msg_ja = messages_ja['rules'][rule_id]
+            self.translated = True
+        self.message = {
+            'help': {
+                'en': rule['metadata']['help'],
+                'ja': msg_ja['help']
+            },
+            'description': {
+                'en': rule['metadata']['description'],
+                'ja': msg_ja['description']
+            }
+        }
+        wcag_scs = [tag2sc(tag) for tag in rule['tags'] if re.match(r'wcag\d{3,}', tag) ]
+        rel = RelationshipManager()
+        for sc in wcag_scs:
+            if sc not in WcagSc.all_scs:
+                continue
+                # raise ValueError(f'Unknown SC: {sc} in rule {rule_id}')
+            rel.associate_axe_with_scs(self, WcagSc.get_by_id(sc))
+        AxeRule.all_rules[rule_id] = self
+
+    def template_object(self, lang):
+        rel = RelationshipManager()
+        data = {
+            'id': self.id,
+            'help': self.message['help'],
+            'description': self.message['description']
+        }
+        if self.translated:
+            data['translated'] = True
+        if self.id in rel.axe_to_scs:
+            scs = sorted(rel.axe_to_scs[self.id], key=lambda item: item.sort_key)
+            data['scs'] = [sc.template_object(lang) for sc in scs]
+        if self.id in rel.axe_to_guidelines:
+            guidelines = sorted(rel.axe_to_guidelines[self.id], key=lambda item: item.sort_key)
+            data['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
+        return data
+
+    @classmethod
+    def list_all(cls):
+        rel = RelationshipManager()
+        sorted_all_rules = sorted(cls.all_rules, key=lambda rule: cls.all_rules[rule].id)  
+        with_guidelines = []
+        with_sc = []
+        without_sc = []
+        for rule in sorted_all_rules:
+            if rule in rel.axe_to_guidelines:
+                with_guidelines.append(cls.all_rules[rule])
+            elif rule in rel.axe_to_scs:
+                with_sc.append(cls.all_rules[rule])
+            else:
+                without_sc.append(cls.all_rules[rule])
+        return with_guidelines + with_sc + without_sc
+
 # Utility functions
 def join_items(items, lang):
     if lang == 'ja':
@@ -746,3 +833,6 @@ def join_items(items, lang):
 def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
+
+def tag2sc(tag):
+    return re.sub(r'wcag(\d)(\d)(\d+)', r'\1.\2.\3', tag)
