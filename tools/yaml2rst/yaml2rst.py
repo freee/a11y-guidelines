@@ -1,6 +1,6 @@
 import os
 import app_initializer
-from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, RelationshipManager
+from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 import a11y_guidelines_initializer
 
 def main():
@@ -24,7 +24,7 @@ def main():
     generate_files(DEST_DIRS['info2gl'], templates['info_to_gl'], get_info_to_guidelines, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(DEST_DIRS['info2faq'], templates['info_to_faq'], get_info_to_faqs, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['wcag21mapping'], templates['wcag21mapping'], get_wcag21mapping, settings['build_all'], settings['targets'], settings['lang'])
-    generate_files(STATIC_FILES['priority_diff'], templates['priority_diff'], get_priority_diff,  settings['build_all'], settings['targets'], settings['lang'])
+    generate_files(STATIC_FILES['priority_diff'], templates['priority_diff'], get_priority_diff, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['miscdefs'], templates['miscdefs'], get_miscdefs, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['makefile'], templates['makefile'], get_makefile, settings['build_all'], settings['targets'], settings['lang'], {
         'DEST_DIRS': DEST_DIRS,
@@ -32,6 +32,7 @@ def main():
         'makefile_vars': makefile_vars,
         'makefile_vars_list': makefile_vars_list
     })
+    generate_files(STATIC_FILES['axe_rules'], templates['axe_rules'], get_axe_rules, settings['build_all'], settings['targets'], settings['lang'])
 
 def get_category_pages(lang):
     rel = RelationshipManager()
@@ -176,8 +177,16 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
     for key, value in makefile_vars_list.items():
         makefile_vars[key] = ' '.join(value)
         makefile_vars['depends'] = build_depends
-    yield {**makefile_vars, **MAKEFILE_VARS}
+    return [{**makefile_vars, **MAKEFILE_VARS}]
 
+def get_axe_rules(lang):
+    return [{
+        'version': AxeRule.version,
+        'major_version': AxeRule.major_version,
+        'deque_url': AxeRule.deque_url,
+        'timestamp': AxeRule.timestamp,
+        'rules': [rule.template_object(lang) for rule in AxeRule.list_all()]
+    }]
 
 def generate_file(dest_path, template, data):
     """
