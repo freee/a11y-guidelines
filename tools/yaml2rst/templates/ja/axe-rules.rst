@@ -1,0 +1,44 @@
+ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`_ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
+
+バージョン
+   {{ version }}
+更新日時
+   {{ timestamp }}
+
+{% for rule in rules -%}
+.. _axe-rule-{{ rule.id }}:
+
+{% filter make_heading(2) -%}
+{% if rule.translated is defined %}{{ rule.help.ja }} ({% endif -%}{{ rule.help.en }}{%- if rule.translated is defined %}){% endif %}
+{%- endfilter %}
+
+{{ rule.description.ja }}
+
+参考： `Deque Universityの解説（英語） <{{ deque_url }}{{ major_version }}/{{ rule.id }}>`__
+
+{% if rule.scs is defined -%}
+{% filter make_heading(3) -%}
+関連するWCAG 2.1の達成基準
+{%- endfilter %}
+
+{% for sc in rule.scs -%}
+*  達成基準 {{ sc.sc }}
+
+   -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
+   -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
+
+{% endfor %}
+{%- endif %}
+{%- if rule.guidelines is defined -%}
+{% filter make_heading(3) -%}
+関連ガイドライン
+{%- endfilter %}
+
+{% for gl in rule.guidelines -%}
+*  {{ gl.category }}： :ref:`{{ gl.guideline }}`
+{% endfor %}
+{%- endif %}
+{% endfor %}
+
+.. translated:: true
+

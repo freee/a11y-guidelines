@@ -97,3 +97,7 @@ IMPLEMENTATION_TARGETS = {
         'en': 'iOS'
     }
 }
+
+# for axe rules
+DEQUE_URL = 'https://dequeuniversity.com/rules/axe/'
+

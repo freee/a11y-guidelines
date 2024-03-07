@@ -11,4 +11,4 @@ axe DevToolsのルールと当ガイドラインの対応
 *  :ref:`exp-axe`
 *  :ref:`check-example-axe`
 
-.. include:: inc/axe-rules.rst
+.. include:: /inc/misc/axe-rules.rst

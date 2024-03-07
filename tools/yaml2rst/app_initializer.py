@@ -22,7 +22,8 @@ def setup_constants(settings):
             'priority_diff_target': STATIC_FILES['priority_diff'],
             'miscdefs_target': STATIC_FILES['miscdefs'],
             'wcag_sc': src_path['wcag_sc'],
-            'info_src': src_path['info']
+            'info_src': src_path['info'],
+            'axe_rules_target': STATIC_FILES['axe_rules'],
     }
 
     return DEST_DIRS, STATIC_FILES, MAKEFILE_VARS
