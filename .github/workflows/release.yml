@@ -51,6 +51,7 @@ jobs:
     - name: Build HTML of all releases, with gtag.js, and OGP tags
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
+        TZ: Asia/Tokyo
       run: |
         make BASE_URL=https://a11y-guidelines.freee.co.jp/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
         cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload
@@ -102,6 +103,8 @@ jobs:
       run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/ s3://${AWS_BUCKET}/ --quiet
 
     - name: Prepare the HTML Archive
+      env:
+        TZ: Asia/Tokyo
       run: |
         make BASE_URL=/ clean html
         mv ./ja/build/html ./freee-a11y-guidelines-${TAG}
@@ -158,6 +161,7 @@ jobs:
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
         BASE_URL: https://a11y-guidelines.freee.co.jp/current/
+        TZ: Asia/Tokyo
       run: |
         make sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
         cp -r ./data/json/schemas ./ja/build/html
