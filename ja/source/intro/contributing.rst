@@ -149,3 +149,5 @@ yaml2rstの実行
 .. _日本翻訳連盟: https://www.jtf.jp/
 .. _JTF日本語標準スタイルガイド(翻訳用）: https://www.jtf.jp/tips/styleguide
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
+
+.. translated:: true
