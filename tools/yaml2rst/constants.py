@@ -100,4 +100,3 @@ IMPLEMENTATION_TARGETS = {
 
 # for axe rules
 DEQUE_URL = 'https://dequeuniversity.com/rules/axe/'
-

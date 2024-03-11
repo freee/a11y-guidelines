@@ -2,9 +2,9 @@ import os
 import sys
 import re
 import json
+import time
 import yaml
-import datetime, time
-from git import *
+from git import Repo
 from jsonschema import validate, ValidationError, RefResolver
 from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 from constants import CHECK_TOOLS, DEQUE_URL
@@ -38,10 +38,10 @@ def setup_instances(settings):
         CheckTool(tool_id, tool_names)
 
     for entity_type, srcfile, constructor in static_entity_config:
-        process_static_entity_file(entity_type, srcfile, constructor)
+        process_static_entity_file(srcfile, constructor)
 
     for entity_type, srcdir, schema_filename, constructor in entity_config:
-        process_entity_files(entity_type, srcdir, src_path['schema'], schema_filename, resolver, constructor)
+        process_entity_files(srcdir, src_path['schema'], schema_filename, resolver, constructor)
 
     process_axe_rules(src_path['axe_rules'], src_path['axe_msg_ja'], src_path['axe_pkg'], DEQUE_URL)
 
@@ -51,7 +51,7 @@ def process_axe_rules(axe_rules_dir, axe_msg_ja_file, axe_pkg_file, base_url):
     try:
         file_content = read_file_content(axe_msg_ja_file)
     except Exception as e:
-        handle_file_error(e, rule_file)
+        handle_file_error(e, axe_msg_ja_file)
     messages_ja = json.loads(file_content)
     rule_files = ls_dir(axe_rules_dir, '.json')
     for rule_file in rule_files:
@@ -64,7 +64,7 @@ def process_axe_rules(axe_rules_dir, axe_msg_ja_file, axe_pkg_file, base_url):
     try:
         file_content = read_file_content(axe_pkg_file)
     except Exception as e:
-        handle_file_error(e, rule_file)
+        handle_file_error(e, axe_pkg_file)
     parsed_data = json.loads(file_content)
     version = parsed_data['version']
     AxeRule.version = version
@@ -138,7 +138,7 @@ def setup_resolver(src_path):
     resolver = RefResolver(schema_path, common_schema)
     return resolver
 
-def process_entity_files(entity_type, srcdir, schema_dir, schema_filename, resolver, constructor):
+def process_entity_files(srcdir, schema_dir, schema_filename, resolver, constructor):
     files = ls_dir(srcdir)
     for file in files:
         try:
@@ -157,7 +157,7 @@ def process_entity_files(entity_type, srcdir, schema_dir, schema_filename, resol
         except Exception as e:
             handle_file_error(e, file)
 
-def process_static_entity_file(entity_type, srcfile, constructor):
+def process_static_entity_file(srcfile, constructor):
     try:
         file_content = read_file_content(srcfile)
     except Exception as e:
