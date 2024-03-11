@@ -9,12 +9,12 @@ platform:
 guideline:
   ja: |-
     マウスオーバー（ホバー）で表示されるコンテンツについて、以下のすべてを満たす。
-    
+
     -  ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（Escキーで消える、など）
     -  マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツを非表示にする。
   en: |-
     Regarding content displayed on mouseover (hover), ensure that all of the following are satisfied:
-    
+
     -  The mouseover-displayed content can be hidden without moving the pointer. (For example, it disappears when the Esc key is pressed.)
     -  The mouseover-displayed content is hidden only when the mouseover state is no longer present, the user performs an operation to hide it, or the content becomes invalid.
 sc:

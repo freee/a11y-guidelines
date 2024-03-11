@@ -93,7 +93,7 @@ explanation:
              :alt: Screenshot: The checkbox is highlighted in the rendering area of the developer tools
 
        3. In the Styles panel, check to see if there are any style specifications that change the appearance other than the user agent stylesheet.
-  
+
           .. image:: /img/faq/d0002/05.png
              :alt: Screenshot: Styles panel
 
