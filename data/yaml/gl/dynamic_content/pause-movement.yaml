@@ -15,7 +15,7 @@ guideline:
     そのようなコンテンツを作る場合は、ユーザーが一時停止、停止、または非表示にすることができるようにする。
   en: |-
     Do not place content that blinks for more than five seconds or scrolls automatically on the same page as other content.
-    If you create such content, ensure that users can pause, stop, or hide it.  
+    If you create such content, ensure that users can pause, stop, or hide it.
 intent:
   ja: |-
     ロービジョン者や認知障害者が、集中を阻害されないようにする。
