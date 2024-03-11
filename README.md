@@ -24,7 +24,7 @@
 ![クリエイティブ・コモンズ・ライセンス](https://i.creativecommons.org/l/by/4.0/88x31.png)
 「freeeアクセシビリティー・ガイドライン」は、フリー株式会社が作成したもので、[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/)で提供されています。
 
-Copyright © 2020-2023, フリー株式会社
+Copyright © 2020-2024, フリー株式会社
 
 ## 更新履歴
 
