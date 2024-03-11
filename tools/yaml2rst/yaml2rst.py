@@ -8,7 +8,7 @@ def main():
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
     templates = app_initializer.setup_templates(settings['lang'])
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    rel = a11y_guidelines_initializer.setup_instances(settings)
+    a11y_guidelines_initializer.setup_instances(settings)
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
@@ -84,8 +84,7 @@ def get_faq_article_index(lang):
 
 def get_info_to_guidelines(lang):
     rel = RelationshipManager()
-    for info_id in rel.info_to_guidelines:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_guidelines():
         if not info.internal:
             continue
         sorted_guidelines = sorted(rel.get_info_to_guidelines(info), key=lambda item: item.sort_key)
@@ -94,8 +93,7 @@ def get_info_to_guidelines(lang):
 
 def get_info_to_faqs(lang):
     rel = RelationshipManager()
-    for info_id in rel.info_to_faqs:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_faqs():
         if not info.internal:
             continue
         faqs = [faq.id for faq in rel.get_info_to_faqs(info)]
@@ -105,7 +103,7 @@ def get_wcag21mapping(lang):
     rel = RelationshipManager()
     mappings = []
     for sc in WcagSc.get_all().values():
-        sc_object = sc.template_object(lang)
+        sc_object = sc.template_object()
         guidelines = rel.get_sc_to_guidelines(sc)
         if len(guidelines) > 0:
             sc_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
@@ -113,7 +111,7 @@ def get_wcag21mapping(lang):
     return [{'mapping': mappings}]
 
 def get_priority_diff(lang):
-    diffs = [sc.template_object(lang) for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
+    diffs = [sc.template_object() for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
     return [{'diffs': diffs}]
 
 def get_miscdefs(lang):
@@ -158,8 +156,7 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
         makefile_vars_list['faq_tagpage_target'].append(target)
         build_depends.append({'target': target, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
 
-    for info_id in rel.info_to_guidelines:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_guidelines():
         if not info.internal:
             continue
         filename = f'{info.ref}.rst'
@@ -167,8 +164,7 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
         makefile_vars_list['info_to_gl_target'].append(target)
         build_depends.append({'target': target, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
 
-    for info_id in rel.info_to_faqs:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_faqs():
         filename = f'{info.ref}.rst'
         target = os.path.join(DEST_DIRS['info2faq'], filename)
         makefile_vars_list['info_to_faq_target'].append(target)

@@ -96,7 +96,7 @@ def get_src_path(basedir):
     data_basedir = os.path.join(basedir, DATA_DIR)
     yaml_basedir = os.path.join(data_basedir, YAML_DIR)
     json_basedir = os.path.join(data_basedir, JSON_DIR)
-    
+
     src_path = {
         'guidelines': os.path.join(yaml_basedir, "gl"),
         'checks': os.path.join(yaml_basedir, 'checks'),
