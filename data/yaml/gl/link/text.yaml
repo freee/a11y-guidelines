@@ -11,7 +11,7 @@ guideline:
   ja: |-
     リンク・テキスト（``a`` 要素の中身、アイコンのラベルなど）は、そのリンクの目的を判断できるものにする。
   en: |-
-    Make the link text (such as the content of an `a` element, labels for icons) such that the purpose of the link can be determined.
+    Make the link text (such as the content of an ``a`` element, labels for icons) such that the purpose of the link can be determined.
 sc:
 - 2.4.4
 intent:

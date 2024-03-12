@@ -70,7 +70,7 @@ procedures:
       ja: |-
         ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
       en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing `headings` by the rotor gesture.
+        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture.
     note:
       ja: |-
         参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
@@ -81,7 +81,7 @@ procedures:
       ja: |-
         読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
       en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing `headings` for reading controls.
+        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls.
     note:
       ja: |-
         参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`

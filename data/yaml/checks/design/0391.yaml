@@ -12,4 +12,4 @@ check:
   en: |-
     *  Icons are accompanied by text labels that represent their role or the state they indicate. Or,
     *  If text labels cannot be displayed, the difference in the meaning of icons is not represented solely by color differences but also by differences in shape (motif) or size. And,
-    *  The value of the `alt` attribute, which makes the role or meaning understandable, is explicitly specified in the design documentation.
+    *  The value of the ``alt`` attribute, which makes the role or meaning understandable, is explicitly specified in the design documentation.

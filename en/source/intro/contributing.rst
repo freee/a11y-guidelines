@@ -28,7 +28,7 @@ Building the Development Environment
 ====================================
 
 First, clone the forked git repository.
-This repository includes the `Deque Systems Inc.'s axe-core repository`_ as a submodule, so please specify the `--recursive` option when executing `git clone`:
+This repository includes the `Deque Systems Inc.'s axe-core repository`_ as a submodule, so please specify the ``--recursive`` option when executing ``git clone``:
 
 .. code:: shell
 
@@ -57,13 +57,13 @@ Execute the following in the repository's top directory to generate HTML files:
 
    make html
 
-In environments where it is necessary to run the python command as an alias such as `python3`, execute it as follows:
+In environments where it is necessary to run the ``python`` command as an alias such as ``python3``, execute it as follows:
 
 .. code:: shell
 
    make PYTHON=python3 html
 
-The generated HTML files are output under `ja/build/html` for the Japanese version and under `en/build/html` for the English version.
+The generated HTML files are output under :file:`ja/build/html` for the Japanese version and under :file:`en/build/html` for the English version.
 
 Source Code
 ===========
@@ -73,57 +73,57 @@ Overall, it is written in reStructuredText, but guidelines, checklist items, and
 
 The repository's root directory contains the following directories:
 
-`ja`
+:file:`ja`
    Files written in Japanese reStructuredText are included.
-`en`
-   Contains files translated from the `ja` directory into English. Untranslated files are included in Japanese as they are.
-`data`
-   `yaml`
+:file:`en`
+   Contains files translated from the :file:`ja` directory into English. Untranslated files are included in Japanese as they are.
+:file:`data`
+   :file:`yaml`
       Contains YAML files describing the contents of guidelines, checklist items, FAQs, and related information.
-   `json`
-      Contains schema definitions for files in the `yaml` directory and files needed to process these files.
-`tools`
-   `yaml2rst`
+   :file:`json`
+      Contains schema definitions for files in the :file:`yaml` directory and files needed to process these files.
+:file:`tools`
+   :file:`yaml2rst`
       Contains scripts and related files needed to generate the required reStructuredText.
       Originally, it was a script for processing YAML files and outputting reStructuredText files, thus this name, but now it also includes the functionality to process the source code of axe-core and output the necessary reStructuredText file.
-`vendor`
+:file:`vendor`
    Contains the source code of repositories referenced as submodules.
-   Currently, this includes the source code of `axe-core`.
+   Currently, this includes the source code of axe-core.
 
-Executing yaml2rst
-==================
+Executing ``yaml2rst``
+======================
 
-Executing the `tools/yaml2rst/yaml2rst.py` script allows you to generate the necessary reStructuredText files.
+Executing the ``tools/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reStructuredText files.
 There are several command-line options, but the following two are necessary for manual execution:
 
-`--lang` or `-l` option
-   Specifies the language of the reStructuredText files to output. Specify `ja` for Japanese and `en` for English.
-`--basedir` or `-b` option
-   Specifies the directory where the `data` directory is located. This processes the YAML files in this directory to output reStructuredText files.
+``--lang`` or ``-l`` option
+   Specifies the language of the reStructuredText files to output. Specify :samp:`ja` for Japanese and :samp:`en` for English.
+``--basedir`` or ``-b`` option
+   Specifies the directory where the :file:`data` directory is located. This processes the YAML files in this directory to output reStructuredText files.
 
-For example, executing the following in the repository's root directory outputs the Japanese reStructuredText files in the `ja/source/inc` and `ja/source/faq` directories.
+For example, executing the following in the repository's root directory outputs the Japanese reStructuredText files in the :file:`ja/source/inc` and :file:`ja/source/faq` directories.
 
 .. code:: shell
 
    python tools/yaml2rst/yaml2rst.py -l ja -b .
 
-Note that executing `make html` in the root directory also includes the execution of this script, along with the necessary processes to output HTML for both the Japanese and English versions.
+Note that executing ``make html`` in the root directory also includes the execution of this script, along with the necessary processes to output HTML for both the Japanese and English versions.
 
 *************
 Editing Files
 *************
 
-Guidelines, checklist items, and FAQs are edited by modifying the YAML files under the `data/yaml` directory.
-Pages that contain these items are structured to `include` reStructuredText files generated from these YAML files.
+Guidelines, checklist items, and FAQs are edited by modifying the YAML files under the :file:`data/yaml` directory.
+Pages that contain these items are structured to ``include`` reStructuredText files generated from these YAML files.
 
-On the other hand, there are files primarily written in reStructuredText, such as those in the `source/explanations` directory.
+On the other hand, there are files primarily written in reStructuredText, such as those in the :file:`source/explanations` directory.
 To modify these pages, edit the relevant reStructuredText files directly.
 
 Notation Rules
 ==============
 
 The Japanese part of this document is written in accordance with the `JTF Style Guide for Translators Working into Japanese`_ published by the `Japan Translation Federation`_.
-The `.textlintrc` in the repository's root directory contains the rules of textlint currently in use, though it is not yet complete.
+The :file:`.textlintrc` in the repository's root directory contains the rules of textlint currently in use, though it is not yet complete.
 
 About the English Version
 =========================
