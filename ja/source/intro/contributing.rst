@@ -30,7 +30,7 @@ forkしたリポジトリーで作業用のブランチを作製し、必要な�
 ==============
 
 まず、forkしたgitリポジトリーをcloneします。
-このリポジトリーでは、 `Deque Systems Inc.のaxe-coreのリポジトリー`_ をサブモジュールとして含んでいますので、`git clone` 実行時には、 `--recursive` オプションを指定してください：
+このリポジトリーでは、 `Deque Systems Inc.のaxe-coreのリポジトリー`_ をサブモジュールとして含んでいますので、:command:`git clone` 実行時には、 :option:`--recursive` オプションを指定してください：
 
 .. code:: shell
 
@@ -59,13 +59,13 @@ HTMLファイルの生成のために必要な情報はMakefileに記述され�
 
    make html
 
-pythonコマンドを `python3` などの別名で実行する必要がある環境では、以下のように実行します：
+:command:`python` コマンドを :command:`python3` などの別名で実行する必要がある環境では、以下のように実行します：
 
 .. code:: shell
 
    make PYTHON=python3 html
 
-生成されたHTMLファイルは、 `ja/build/html` 以下に日本語版が、 `en/build/html` 以下に英語版が出力されます。
+生成されたHTMLファイルは、 :file:`ja/build/html` 以下に日本語版が、 :file:`en/build/html` 以下に英語版が出力されます。
 
 ソース・コード
 ==============
@@ -75,57 +75,57 @@ pythonコマンドを `python3` などの別名で実行する必要がある環
 
 リポジトリーのルート・ディレクトリーには、以下のディレクトリーがあります。
 
-`ja`
+:file:`ja`
    reStructuredTextで記述した日本語版のファイルが含まれています。
-`en`
-   `ja` ディレクトリー内のファイルを英訳したものが含まれています。なお、未訳のファイルについては、日本語のファイルがそのまま含まれています。
-`data`
-   `yaml`
+:file:`en`
+   :file:`ja` ディレクトリー内のファイルを英訳したものが含まれています。なお、未訳のファイルについては、日本語のファイルがそのまま含まれています。
+:file:`data`
+   :file:`yaml`
       ガイドライン項目とチェック内容、FAQの内容や関連情報を記述したYAMLファイルが含まれています。
-   `json`
-      `yaml` ディレクトリー内のファイルのスキーマ定義と、これらのファイルを処理するために必要なファイルが含まれています。
-`tools`
-   `yaml2rst`
+   :file:`json`
+      :file:`yaml` ディレクトリー内のファイルのスキーマ定義と、これらのファイルを処理するために必要なファイルが含まれています。
+:file:`tools`
+   :file:`yaml2rst`
       必要なreStructuredTextを生成するためのスクリプトと関連ファイルが含まれています。
       元々はYAMLファイルを処理してreStructuredTextファイルを出力するためのスクリプトだったのでこのような名前になっていますが、現在はaxe-coreのソース・コードを処理して必要なreStructuredTextのファイルを出力する機能も追加されています。
-`vendor`
+:file:`vendor`
    サブモジュールとして参照しているリポジトリーのソース・コードが含まれています。
-   現時点では、 `axe-core` のソース・コードが含まれています。
+   現時点では、axe-coreのソース・コードが含まれています。
 
-yaml2rstの実行
-==============
+:command:`yaml2rst` の実行
+==========================
 
-`tools/yaml2rst/yaml2rst.py` スクリプトを実行すると、必要なreStructuredTextファイルを生成することができます。
+:command:`tools/yaml2rst/yaml2rst.py` スクリプトを実行すると、必要なreStructuredTextファイルを生成することができます。
 いくつかのコマンド・ライン・オプションがありますが、手動で実行する場合は以下の2つのオプションが必要です。
 
-`--lang` または `-l` オプション
-   出力するreStructuredTextファイルの言語を指定します。日本語の場合は `ja` を、英語の場合は `en` を指定します。
-`--basedir` または `-b` オプション
-   `data` ディレクトリーがあるディレクトリーを指定します。このディレクトリー内のYAMLファイルを処理してreStructuredTextファイルを出力します。
+:option:`--lang` または :option:`-l` オプション
+   出力するreStructuredTextファイルの言語を指定します。日本語の場合は :samp:`ja` を、英語の場合は :samp:`en` を指定します。
+:option:`--basedir` または :option:`-b` オプション
+   :file:`data` ディレクトリーがあるディレクトリーを指定します。このディレクトリー内のYAMLファイルを処理してreStructuredTextファイルを出力します。
 
-例えば、リポジトリーのルート・ディレクトリーで以下のように実行すると、日本語版のreStructuredTextファイルが `ja/source/inc` と `ja/source/faq` の各ディレクトリーに出力されます。
+例えば、リポジトリーのルート・ディレクトリーで以下のように実行すると、日本語版のreStructuredTextファイルが :file:`ja/source/inc` と :file:`ja/source/faq` の各ディレクトリーに出力されます。
 
 .. code:: shell
 
    python tools/yaml2rst/yaml2rst.py -l ja -b .
 
-なお、ルート・ディレクトリーで `make html` を実行すると、このスクリプトの実行も含めて、日本語版、英語版のHTMLを出力するために必要な処理が実行されます。
+なお、ルート・ディレクトリーで :command:`make html` を実行すると、このスクリプトの実行も含めて、日本語版、英語版のHTMLを出力するために必要な処理が実行されます。
 
 **************
 ファイルの編集
 **************
 
-ガイドライン項目、チェック内容とFAQについては、 `data/yaml` 以下のYAMLファイルを編集します。
-これらの内容を含むページを中心に、多くのページはYAMLファイルから生成されたreStructuredTextファイルを `include` するような構造になっています。
+ガイドライン項目、チェック内容とFAQについては、 :file:`data/yaml` 以下のYAMLファイルを編集します。
+これらの内容を含むページを中心に、多くのページはYAMLファイルから生成されたreStructuredTextファイルを ``include`` する構造になっています。
 
-一方、 `source/explanations` ディレクトリーにあるファイルを中心に、基本的にreStructuredTextで記述されているファイルもあります。
+一方、 :file:`source/explanations` ディレクトリーにあるファイルを中心に、基本的にreStructuredTextで記述されているファイルもあります。
 これらのページの修正に当たっては、当該のreStructuredTextファイルを編集します。
 
 表記ルール
 ==========
 
 この文書の日本語部分は、原則として `日本翻訳連盟`_ が公開している `JTF日本語標準スタイルガイド(翻訳用）`_ に従って記述しています。
-リポジトリーのルート・ディレクトリーの `.textlintrc` に、現在使用しているtextlintのルールが含まれていますが、現時点では不完全な状態です。
+リポジトリーのルート・ディレクトリーの :fie:`.textlintrc` に、現在使用しているtextlintのルールが含まれていますが、現時点では不完全な状態です。
 
 英語版の位置づけ
 ================
