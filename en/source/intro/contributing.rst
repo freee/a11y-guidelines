@@ -28,7 +28,7 @@ Building the Development Environment
 ====================================
 
 First, clone the forked git repository.
-This repository includes the `Deque Systems Inc.'s axe-core repository`_ as a submodule, so please specify the :otpion:`--recursive` option when executing :command:`git clone`:
+This repository includes the `Deque Systems Inc.'s axe-core repository`_ as a submodule, so please specify the ``--recursive`` option when executing ``git clone``:
 
 .. code:: shell
 
@@ -57,7 +57,7 @@ Execute the following in the repository's top directory to generate HTML files:
 
    make html
 
-In environments where it is necessary to run the :command:`python` command as an alias such as :command:`python3`, execute it as follows:
+In environments where it is necessary to run the ``python`` command as an alias such as ``python3``, execute it as follows:
 
 .. code:: shell
 
@@ -90,15 +90,15 @@ The repository's root directory contains the following directories:
    Contains the source code of repositories referenced as submodules.
    Currently, this includes the source code of axe-core.
 
-Executing :command:`yaml2rst`
-=============================
+Executing ``yaml2rst``
+======================
 
-Executing the :command:`tools/yaml2rst/yaml2rst.py` script allows you to generate the necessary reStructuredText files.
+Executing the ``tools/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reStructuredText files.
 There are several command-line options, but the following two are necessary for manual execution:
 
-:option:`--lang` or :option:`-l` option
+``--lang`` or ``-l`` option
    Specifies the language of the reStructuredText files to output. Specify :samp:`ja` for Japanese and :samp:`en` for English.
-:option:`--basedir` or :option:`-b` option
+``--basedir`` or ``-b`` option
    Specifies the directory where the :file:`data` directory is located. This processes the YAML files in this directory to output reStructuredText files.
 
 For example, executing the following in the repository's root directory outputs the Japanese reStructuredText files in the :file:`ja/source/inc` and :file:`ja/source/faq` directories.
@@ -107,7 +107,7 @@ For example, executing the following in the repository's root directory outputs 
 
    python tools/yaml2rst/yaml2rst.py -l ja -b .
 
-Note that executing :command:`make html` in the root directory also includes the execution of this script, along with the necessary processes to output HTML for both the Japanese and English versions.
+Note that executing ``make html`` in the root directory also includes the execution of this script, along with the necessary processes to output HTML for both the Japanese and English versions.
 
 *************
 Editing Files
