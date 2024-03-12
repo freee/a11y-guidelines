@@ -122,9 +122,8 @@ To modify these pages, edit the relevant reStructuredText files directly.
 Notation Rules
 ==============
 
-The Japanese part of this document is written in accordance with the `JTF Japanese Standard Style Guide (for translation)`_ published by the `Japan Translation Federation`_.
+The Japanese part of this document is written in accordance with the `JTF Style Guide for Translators Working into Japanese`_ published by the `Japan Translation Federation`_.
 The `.textlintrc` in the repository's root directory contains the rules of textlint currently in use, though it is not yet complete.
-
 
 About the English Version
 =========================
@@ -145,5 +144,5 @@ For pages where an English translation exists, including the following code in t
 
 .. _Deque Systems Inc.'s axe-core repository: https://github.com/dequelabs/axe-core
 .. _Japan Translation Federation: https://www.jtf.jp/
-.. _JTF Japanese Standard Style Guide (for translation): https://www.jtf.jp/tips/styleguide
+.. _JTF Style Guide for Translators Working into Japanese: https://www.jtf.jp/tips/styleguide
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
