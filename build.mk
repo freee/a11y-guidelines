@@ -37,6 +37,7 @@ $(SPHINX_PREDEFINED_TARGETS): incfiles.mk incfiles Makefile $(BUILDDIR)/.all-rst
 
 $(BUILDDIR)/.all-rst:
 	@$(YAML2RST)
+	@mkdir -p $(BUILDDIR)
 	@touch $@
 
 clean:
