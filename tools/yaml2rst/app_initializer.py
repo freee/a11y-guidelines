@@ -71,11 +71,14 @@ def process_arguments(args):
     Returns:
         A dictionary containing settings derived from the command-line arguments.
     """
-    settings = {
+    basedir = os.path.abspath(args.basedir)
+    files = []
+    if args.files:
+        files = [os.path.abspath(f) for f in args.files]
+    return {
         'build_all': not args.files,
-        'targets': args.files if args.files else [],
+        'targets': files,
         'no_check': args.no_check,
         'lang': args.lang,
-        'basedir': args.basedir
+        'basedir': basedir
     }
-    return settings
