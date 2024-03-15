@@ -1,4 +1,6 @@
 ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_category_target }} {{ check_example_target }} {{ wcag_mapping_target }} {{ priority_diff_target }} {{ all_checks_target }}  {{ miscdefs_target }} {{ axe_rules_target }}
+ALL_FAQ_FILES = {{ faq_index_target }} {{ faq_article_target }} {{ faq_tagpage_target }}
+ALL_RST_FILES = $(ALL_INC_FILES) $(ALL_FAQ_FILES)
 
 %.yaml: ;
 %.json: ;
