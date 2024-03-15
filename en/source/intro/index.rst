@@ -1,12 +1,12 @@
 .. _intro:
 
-########
-はじめに
-########
+#######
+Preface
+#######
 
-freeeアクセシビリティー・ガイドラインは、アクセシビリティーが高いWebコンテンツの実現に必要な事項をまとめたものです。
-加えて、モバイル・アプリケーションにこれらの考え方を適用し、アクセシビリティーを向上させるために必要な情報についてもまとめています。
-freee株式会社でのプロダクト開発において使いやすいガイドラインを提供することを目的に、 `Web Content Accessibility Guidelines (WCAG) 2.1 <WCAG21_>`_ に基づいて策定されています。
+The freee Accessibility Guidelines are a compilation of the essential elements needed to achieve highly accessible Web content.
+In addition, they also compile information necessary for applying these concepts to mobile applications to enhance accessibility.
+Aimed at providing user-friendly guidelines for product development at freee K.K., they are established based on the `Web Content Accessibility Guidelines (WCAG) 2.1 <WCAG21_>`_.
 
 .. toctree::
    :maxdepth: 2
