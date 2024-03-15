@@ -6,6 +6,9 @@ ALL_INC_FILES = {{ info_to_gl_target }} {{ info_to_faq_target }} {{ guideline_ca
 {{ wcag_mapping_target }} {{ priority_diff_target }}: {{ gl_yaml }} {{ wcag_sc }}
 	@$(YAML2RST) $@
 
+{{ axe_rules_target }}: {{ gl_yaml }}
+	@$(YAML2RST) $@
+
 {{ all_checks_target }}: {{ gl_yaml }} {{ check_yaml }} {{ faq_yaml }}
 	@$(YAML2RST) {{ all_checks_target }}
 
