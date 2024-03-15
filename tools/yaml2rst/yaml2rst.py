@@ -218,7 +218,7 @@ def generate_files(dest_path, template, get_data_func, build_all, targets, lang,
     """
     extra_args = extra_args or {}
     for data in get_data_func(lang=lang, **extra_args):
-        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, data['filename']) in targets):
+        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, f'{data["filename"]}.rst') in targets):
             generate_file(dest_path, template, data)
 
 if __name__ == "__main__":
