@@ -24,7 +24,7 @@ MISCDEFS_FILENAME = "defs.txt"
 AXE_RULES_FILENAME = 'axe-rules.rst'
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-TEMPLATE_FILENAMES = {
+LOCALIZED_TEMPLATE_FILENAMES = {
     'tool_example': 'checks/examples-tool.rst',
     'allchecks_text': 'checks/allchecks.rst',
     'category_page': 'gl-category.rst',
@@ -37,11 +37,12 @@ TEMPLATE_FILENAMES = {
     'faq_article_index': 'faq/article-index.rst',
     'wcag21mapping': 'wcag21-mapping.rst',
     'priority_diff': 'priority-diff.rst',
-    'makefile': 'incfiles.mk',
     'miscdefs': 'misc-defs.txt',
     'axe_rules': 'axe-rules.rst'
 }
-
+TEMPLATE_FILENAMES = {
+    'makefile': 'incfiles.mk',
+}
 def get_dest_dirnames(basedir, lang):
     """
     Returns a dictionary of destination directory names for the given language.

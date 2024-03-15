@@ -154,7 +154,10 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
         filename = f'{tag.id}.rst'
         target = os.path.join(DEST_DIRS['faq_tags'], filename)
         makefile_vars_list['faq_tagpage_target'].append(target)
-        build_depends.append({'target': target, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
+        dependency = []
+        for faq in rel.get_tag_to_faqs(tag):
+            dependency.extend(faq.get_dependency())
+        build_depends.append({'target': target, 'depends': ' '.join(dependency)})
 
     for info in InfoRef.list_has_guidelines():
         if not info.internal:
@@ -218,7 +221,7 @@ def generate_files(dest_path, template, get_data_func, build_all, targets, lang,
     """
     extra_args = extra_args or {}
     for data in get_data_func(lang=lang, **extra_args):
-        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, data['filename']) in targets):
+        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, f'{data["filename"]}.rst') in targets):
             generate_file(dest_path, template, data)
 
 if __name__ == "__main__":
