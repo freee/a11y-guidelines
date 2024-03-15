@@ -69,12 +69,12 @@ Source Code
 ===========
 
 This document is created with the assumption that it will be processed by `Sphinx`_.
-Overall, it is written in reStructuredText, but guidelines, checklist items, and FAQs are processed by converting files written in YAML into reStructuredText.
+Overall, it is written in reStructuredText (reST), but guidelines, checklist items, and FAQs are processed by converting files written in YAML into reST.
 
 The repository's root directory contains the following directories:
 
 :file:`ja`
-   Files written in Japanese reStructuredText are included.
+   Files written in Japanese reST are included.
 :file:`en`
    Contains files translated from the :file:`ja` directory into English. Untranslated files are included in Japanese as they are.
 :file:`data`
@@ -84,8 +84,8 @@ The repository's root directory contains the following directories:
       Contains schema definitions for files in the :file:`yaml` directory and files needed to process these files.
 :file:`tools`
    :file:`yaml2rst`
-      Contains scripts and related files needed to generate the required reStructuredText.
-      Originally, it was a script for processing YAML files and outputting reStructuredText files, thus this name, but now it also includes the functionality to process the source code of axe-core and output the necessary reStructuredText file.
+      Contains scripts and related files needed to generate the required reST files.
+      Originally, it was a script for processing YAML files and outputting reST files, thus the name, but now it also includes the functionality to process the source code of axe-core and output the necessary reST file.
 :file:`vendor`
    Contains the source code of repositories referenced as submodules.
    Currently, this includes the source code of axe-core.
@@ -93,15 +93,15 @@ The repository's root directory contains the following directories:
 Executing ``yaml2rst``
 ======================
 
-Executing the ``tools/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reStructuredText files.
+Executing the ``tools/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reST files.
 There are several command-line options, but the following two are necessary for manual execution:
 
 ``--lang`` or ``-l`` option
-   Specifies the language of the reStructuredText files to output. Specify :samp:`ja` for Japanese and :samp:`en` for English.
+   Specifies the language of the reST files to output. Specify :samp:`ja` for Japanese and :samp:`en` for English.
 ``--basedir`` or ``-b`` option
-   Specifies the directory where the :file:`data` directory is located. This processes the YAML files in this directory to output reStructuredText files.
+   Specifies the directory where the :file:`data` directory is located. This processes the YAML files in this directory to output reST files.
 
-For example, executing the following in the repository's root directory outputs the Japanese reStructuredText files in the :file:`ja/source/inc` and :file:`ja/source/faq` directories.
+For example, executing the following in the repository's root directory outputs the Japanese reST files in the :file:`ja/source/inc` and :file:`ja/source/faq` directories.
 
 .. code:: shell
 
@@ -114,10 +114,10 @@ Editing Files
 *************
 
 Guidelines, checklist items, and FAQs are edited by modifying the YAML files under the :file:`data/yaml` directory.
-Pages that contain these items are structured to ``include`` reStructuredText files generated from these YAML files.
+Pages that contain these items are structured to ``include`` reST files generated from these YAML files.
 
-On the other hand, there are files primarily written in reStructuredText, such as those in the :file:`source/explanations` directory.
-To modify these pages, edit the relevant reStructuredText files directly.
+On the other hand, there are files primarily written in reST, such as those in the :file:`source/explanations` directory.
+To modify these pages, edit the relevant reST files directly.
 
 Notation Rules
 ==============
