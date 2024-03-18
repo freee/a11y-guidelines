@@ -1,60 +1,61 @@
 .. _intro-usage:
 
-###############################################
-freeeアクセシビリティー・ガイドラインの活用方法
-###############################################
+#################################################
+How to Utilize the freee Accessibility Guidelines
+#################################################
 
-ここでは、当ガイドラインの想定される活用方法を紹介します。
+This section introduces the intended ways of utilizing these guidelines.
 
-****************
-計画段階での活用
-****************
+*******************
+Use During Planning
+*******************
 
-開発やアクセシビリティー改善の取り組みの計画段階では、対象となるコンテンツなどの性質を考慮して、まず当ガイドラインのどのカテゴリーが関係するかを検討すると良いでしょう。
-初めてアクセシビリティー改善に取り組む場合などは、これらのカテゴリーの各ガイドライン項目の本文と意図、リンクされている参考情報を確認することで、どのようなことをなぜ実施することになるのかということへの理解が進むと思います。
+At the planning stage of development or accessibility improvement initiatives, it's beneficial to consider the nature of the content in question and first identify which categories of these guidelines are relevant.
+For those tackling accessibility improvements for the first time, reviewing the text and intent of each guideline within these categories, along with the linked reference information, can help understand what actions are necessary and why.
 
-********************
-チェックリストの活用
-********************
+***********************
+Utilizing the Checklist
+***********************
 
-以下で示すチェックの実施に当たってfreee社内では、 :ref:`checks-checksheet` で紹介しているような、チェック内容をGoogleスプレッドシートにまとめたものを活用しています。
+For conducting checks, freee K.K. utilizes a Google Spreadsheet that compiles the checklist items, as introduced in :ref:`checks-checksheet`.
 
-このスプレッドシートは、チェックの対象に応じて複数のシートに分かれています。
-必要なシートを選んで、チェックの結果を記入していくだけのものですが、各チェック内容には関連するガイドライン項目や参考情報へのリンクも掲載していますので、改めてガイドライン項目を確認するような場合にも利用しやすくなっています。
+This spreadsheet is divided into multiple sheets depending on the applicable stage of the check.
+These sheets, organized by the stage of development, are to be filled with the check results.
+Each checklist item also includes links to related guidelines and reference information, making it easy to revisit guidelines if necessary.
 
-チェックの結果について、freee社内ではOK/NG/から選ぶようにしています。
-チェック内容によっては、対象となるページや画面には関係のないものもありますので、そのような場合には「該当無し」を選ぶようにしています。
+Within freee K.K., the results are marked as PASS/FAIL/Not Applicable.
+For checklist items unrelated to a specific page or screen, "Not Applicable" is selected.
 
-すべてのチェック結果がOKとなるのが理想ですが、影響の大きさや代替手段の提供状況などを考慮した結果として、NGを許容することもあり得ます。
-重要なことは、チェック結果が良いことではなくて、なるべく多くのユーザーにとって利用しやすいものを製作するということです。
+Ideally, all check results would be PASS. However, allowing FAIL results may be acceptable based on the impact's magnitude or the provision of alternative methods.
+The important thing is not merely having good check results but creating something as accessible as possible to as many users as possible.
 
-****************
-設計段階での活用
-****************
+*****************
+Use During Design
+*****************
 
-計画段階で確認した当ガイドラインの内容を意識してプロダクトの設計を進めることで、基本的な考え方を考慮した設計を行えると思います。
-しかし、具体的な注意点などを網羅して設計を進めるのは、アクセシビリティーに関して経験が豊富な人でも容易なことではありません。
-そこで、ある程度設計資料※の作成が進み、実装にはいる前の段階で、設計段階でアクセシビリティーに関する問題が混入していないことを確認すると良いでしょう。
+Keeping the contents of these guidelines in mind while designing products allows for a design that considers basic principles of accessibility.
+However, comprehensively covering specific points of attention in the design is not easy, even for those with extensive experience in accessibility.
+Therefore, it's advisable to verify that no accessibility issues have crept into the design before moving on to implementation, once the design documentation [#]_ has somewhat progressed.
 
-具体的には、各ガイドライン項目でチェック内容として上げられているもののうち、対象が「デザイン」となっているものについて、設計資料をチェックします。
-この段階で見つかった問題をなるべく実装前に解決しておくことで、アクセシビリティーの確保が容易になります。
+Specifically, check the design documentation for checklist items applicable to "Design" in each guideline.
+Resolving issues found at this stage before implementation makes it easier to ensure accessibility.
 
-※ここで「設計資料」とは、実装を行う人に対して提供するあらゆる資料を指します。仕様書、ビジュアル・デザインを示す資料、UIコンポーネントの使用に関する指示などが含まれます。
+.. [#] Here, "design documentation" refers to all materials provided to those who will implement the design, including specifications, visual design documents, and instructions on using UI components.
 
-****************
-実装段階での活用
-****************
+*************************
+Use During Implementation
+*************************
 
-設計資料でアクセシビリティーについて十分に考慮されていれば、設計資料に従って実装を行うことで、アクセシビリティーに関する問題が発生する可能性は低くなります。
-これに加えて、対象が「コード」となっているチェック内容を確認することで、発生することが多い問題を回避することができます。
+If accessibility has been adequately considered in the design documentation, following this documentation during implementation reduces the likelihood of accessibility-related issues arising.
+Additionally, verifying checklist items applicable to "Code" can help avoid common problems.
 
-また、対象が「プロダクト」のチェック内容には実装物の期待される挙動が示されている場合もありますので、実装前に内容を確認しておくと良いでしょう。
+Checklist items applicable to "Product" may also outline the expected behavior of the implementation, so reviewing these before implementation is beneficial.
 
-**************************
-品質保証（QA）段階での活用
-**************************
+*********************************
+Use During Quality Assurance (QA)
+*********************************
 
-品質保証（QA）の工程で、プロダクトの様々な機能のテストと合わせて、アクセシビリティーについても問題がないことを確認すると良いでしょう。
-対象が「プロダクト」のチェック内容が、この段階でのチェックを想定したものです。
+During the QA process, along with testing various functions of the product, it's advisable to verify that there are no accessibility issues.
+Checklist items applicable to "Product" are intended for checks at this stage.
 
-この段階でのチェック結果にNGがある場合は、そのチェック内容の重篤度なども考慮して対応方針を検討すると良いでしょう。
+If there are FAIL results during this stage, considering the severity of the checklist item and other factors to determine the approach to resolution would be beneficial.
