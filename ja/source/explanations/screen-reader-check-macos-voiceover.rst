@@ -296,3 +296,5 @@ VoiceOver起動中は、以下に挙げるようなキー操作でコンテン�
       -  次、前のフォーム・コントロール
    *  -  :kbd:`VO + Command + T` 、 :kbd:`Shift + VO + Command + T`
       -  次、前の表
+
+.. translated:: true
