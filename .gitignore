@@ -1,9 +1,8 @@
-html/*
-node_modules/*
-.vscode/*
-*/build/*
-*/source/inc/*
-*/source/faq/*
+node_modules/
+.vscode/
+build/
+*/source/inc/
+*/source/faq/
 .DS_Store
-*/incfiles.mk
+incfiles.mk
 __pycache__/
