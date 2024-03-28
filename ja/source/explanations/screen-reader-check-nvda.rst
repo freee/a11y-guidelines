@@ -200,18 +200,18 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/BYtQZQNYiIM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-:ref:`exp-screen-reader-check-nvda-settings-speech` の項で触れた自然言語に関する設定について、これらの設定を反映した形でNVDAを動作させるには、Windowsに複数の音声合成エンジン（音声パッケージ）がインストールされている必要があります。
+:ref:`exp-screen-reader-check-nvda-settings-speech` の項で触れた自然言語に関する設定について、これらの設定を反映した形でNVDAを動作させるには、Windowsに複数言語の音声合成エンジン（音声パッケージ）がインストールされている必要があります。
 ここでは、現在インストールされている音声パッケージの確認と、新たな音声パッケージの追加の方法を記します。
 
 1. スタート・ボタンなどから設定画面を表示
 2. 「時刻と言語」、「音声認識」の順にクリック
 3. この画面の下の方にある「インストールされている音声パッケージ」のプルダウンに表示されている、現在インストールされている音声パッケージの一覧を確認
-4. 日本語しかインストールされていない場合は、「音声を追加」をクリックして、「英語 (米国)」を追加
+4. 1つの言語しかインストールされていない場合は、「音声を追加」をクリックして、「英語 (米国)」、「日本語」など、別の言語を追加
 
 .. image:: /img/nvda/win10-settings-speech-recognition.png
    :alt: スクリーン・ショット：Windows 10の音声認識の設定画面
 
-一般的なチェックの場合、「英語 (米国)」を追加すれば、NVDAは意図した挙動になります。
+一般的なチェックの場合、「日本語」と「英語 (米国)」がインストールされていれば、NVDAは意図した挙動になります。
 英語と日本語以外の言語が使われているサイトをチェックする場合は、その言語も合わせて追加すると良いでしょう。
 
 ************************
