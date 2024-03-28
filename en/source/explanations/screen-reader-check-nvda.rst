@@ -1,120 +1,121 @@
 .. _exp-screen-reader-check-nvda:
 
-##############################
-NVDAを用いたチェックの実施方法
-##############################
+###############################
+How to Perform Checks With NVDA
+###############################
 
-Windows用スクリーン・リーダーのNVDAの初期設定の方法と、基本的な使い方について記します。
+This section details the initial configuration and basic instructions for using NVDA, a screen reader designed for Windows.
 
-なお、本稿のキー操作の説明では、 :kbd:`NVDA + N` のような表記をしていますが、これは :ref:`nvda-welcome-screen` の項で説明する「NVDA制御キー」を押しながら :kbd:`N` を押すことを意味します。
+Note that within this guide, notations like :kbd:`NVDA + N` indicate pressing the "NVDA control key", which is explained in :ref:`nvda-welcome-screen`, simultaneously with :kbd:`N`.
 
-********
-標準環境
-********
+************************************
+Environment for Accessibility Checks
+************************************
 
-freeeでは、スクリーン・リーダーを用いて行う必要があるチェックについては、Windows上でNVDAとGoogle Chromeのそれぞれ最新版で実施することにしています。
+At freee, for checks that need to be conducted using a screen reader, we have decided to perform them on the latest versions of NVDA and Google Chrome on Windows.
 
-macOSではなくWindowsを採用しているのは、日本においてはスクリーン・リーダーを利用している視覚障害者のほとんどがWindowsを利用していると考えられるためです。 [#]_
-NVDAを採用しているのは、WAI-ARIAなどの最新のWeb技術への対応が最も進んでいるスクリーン・リーダーであると考えられるためです。
-Google Chromeを採用しているのは、freeeでは最新版のGoogle Chromeを推奨環境としているためです。
+The reason for choosing Windows over macOS is that it can be assumed that the majority of visually impaired users utilizing screen readers in Japan are using Windows. [#]_
+The adoption of NVDA is because it is considered to be the screen reader with the most advanced support for the latest Web technologies, such as WAI-ARIA.
+Google Chrome is chosen because, at freee, the latest version of Google Chrome is recommended as the preferred environment.
 
-様々な環境で問題なく動作するものを実現できるのが理想ですが、こういった理由で、freeeでは最低限NVDAで問題なく動作するものを目指しています。
+While it is ideal to create something that works flawlessly in various environments, for these reasons, at freee, we aim to at least achieve seamless functionality with NVDA.
 
 .. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`_
 
-********
-事前準備
-********
+***********
+Preparation
+***********
 
-参考動画
+Reference Video
    *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`_
 
 .. raw:: html
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/KKQXZHCmjUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-NVDAのインストール
-==================
+Installation of NVDA
+====================
 
-以下の手順でNVDA日本語版の最新版をインストールします。
-インストール完了後の画面で、NVDAが自動的に起動します。
-NVDAが起動すると、いろいろな挙動が普段と異なった状態になりますので、後述するNVDAの終了方法を予め確認しておくことをお勧めします。
+Follow the steps below to install the latest version of the Japanese edition of NVDA.
+After the installation is complete, NVDA will automatically start.
+When NVDA is running, various behaviors will be different from usual, so it is recommended to check the method to exit NVDA mentioned later in advance.
 
-1. `NVDA日本語チームのサイト <https://www.nvda.jp/>`_ から、NVDA日本語版の最新リリースをダウンロード（ https://i.nvda.jp/ にアクセスすると、自動的にダウンロードが開始される）
-2. ダウンロードしたファイルを実行（実行すると音が出るので注意）
-3. 使用許諾条件を確認後、「同意する」をチェック
-4. 「このコンピューターにNVDAをインストール」をクリック
-5. 「ログオン画面でNVDAを使用」のチェックを外す
-6. 「継続」をクリック
-7. Windowsのユーザーアカウント制御の確認ダイアログでインストールを許可
-8. インストールが完了したら「OK」をクリック
+1. Download the latest release of the Japanese edition of NVDA from the `NVDA Japanese team's site <https://www.nvda.jp/>`_ (visiting https://i.nvda.jp/ will automatically start the download).
+2. Run the downloaded file (be aware that it will make a sound upon running).
+3. After reviewing the license agreement, check "Agree."
+4. Click on "Install NVDA on this computer."
+5. Uncheck "Use NVDA on the logon screen."
+6. Click "Continue."
+7. Allow the installation in the Windows User Account Control confirmation dialog.
+8. Once the installation is complete, click "OK."
 
 .. _nvda-welcome-screen:
 
-初回起動時の設定
-================
+Settings Required at First Launch
+=================================
 
-NVDAの初回起動時には、「ようこそ画面」が表示されます。
+Upon the first launch of NVDA, a "Welcome dialog" will be displayed.
 
 .. image:: /img/nvda/nvda-welcome.png
-   :alt: スクリーン・ショット：NVDAの「ようこそ画面」
+   :alt: Screenshot: NVDA's "Welcome dialog"
 
-以下を参考に、必要な設定をすると良いでしょう。
+It is advisable to make the necessary settings following the guidance below.
+If you wish to display this screen again after installation, click on :menuselection:`Help --> Welcome dialog` in the NVDA menu as mentioned later.
 
-なお、インストール後にこの画面を再度表示したい場合は、後述するNVDAメニューで :menuselection:`ヘルプ --> ようこそ画面` の順にクリックします。
+Keyboard Layout
+---------------
 
-キーボード配列
+You should typically select "Desktop."
+
+The "Laptop" setting provides a default keymap that is useful for keyboards lacking a numeric keypad.
+However, in most standard checks, the functions assigned to the numeric keypad are rarely needed, so either option is generally acceptable.
+Nonetheless, considering that most online resources and guides are written with the desktop layout in mind, it is advisable to keep the setting on "Desktop" for consistency.
+
+NVDA Control Key
+----------------
+
+The NVDA control key is a key used to execute NVDA functions in combination with other keys, and by default, it is assigned to the :kbd:`Insert (Ins)` key.
+However, some laptops and other devices may not have an :kbd:`Ins` key, and to accommodate such environments, it is possible to configure another key to serve as the NVDA control key.
+
+If there is a numeric keypad, you can use the :kbd:`0` key with NumLock turned off, so no specific settings are required on the welcome dialog.
+
+In cases where there is no numeric keypad or no :kbd:`Ins` key, it is advisable to configure either the :kbd:`Conversion` or :kbd:`Non-conversion` keys, or both, to act as the NVDA control key.
+Depending on the language and the keyboard layout settings of Windows, :kbd:`Caps Lock` may be used as the NVDA control key.
+
+The option to use the :kbd:`Esc` key is intended for environments lacking any of the aforementioned keys, specifically useful for scenarios like using NVDA within a virtual Windows environment on macOS.
+
+For the purposes of this article, the NVDA control key will be referred to as :kbd:`NVDA`.
+For example, the notation :kbd:`NVDA + N` means to press the :kbd:`N` key while holding down the NVDA control key set here.
+
+Other Settings
 --------------
 
-通常は「デスクトップ」を選択します。
+If you only use NVDA for accessibility checks, uncheck "Start NVDA after I sign in."
 
-「ラップトップ」は、テンキーがないキーボードを使っている場合に便利なキーマップがデフォルト設定になっています。
-ただ、通常のチェック作業においては、テンキーに割り当てられた機能を使うことはほとんどありませんので、どちらを選んでも問題ありませんが、Web上の情報などはデスクトップ配列を想定して書かれているものが多いので、デスクトップのままにしておくと良いでしょう。
+The settings on this screen needs to be changed seldom in the future, and it is possible to modify them from the Settings screen, so it is advisable to uncheck "Show this dialog when NVDA starts."
 
-NVDA制御キー
-------------
+Other Initial Settings
+======================
 
-NVDA制御キーは、他のキーと組み合わせて押下することでNVDAの機能を実行するためのキーで、デフォルトでは :kbd:`Insert (Ins)` キーになっています。
-ただ、ノートPCなど :kbd:`Ins` キーを搭載していない機種もあり、そのような環境での利用を可能にするために、他のキーをNVDA制御キーとして使う設定ができるようになっています。
+NVDA has many more settings available beyond those configurable via the welcome dialog, within its settings screen.
+Here, we'll discuss settings that are particularly useful when using NVDA for accessibility checks.
 
-テンキーがある場合、NumLockをオフにした状態で :kbd:`0` キーを使うことが可能ですので、ようこそ画面では特になにも設定する必要はありません。
+The settings screen can be accessed by clicking on the NVDA icon in the system tray at the bottom right of the screen.
+This menu can also be displayed by pressing :kbd:`NVDA + N`.
 
-テンキーがない場合や :kbd:`Ins` キーがない場合は、 :kbd:`変換` か :kbd:`無変換` 、あるいはその両方を使う設定にすると良いでしょう。
-
-:kbd:`Esc` キーを指定できるようになっているのは、上記のいずれのキーもないような環境を想定したもので、具体的にはmac OS上の仮想Windows環境でNVDAを使用しているような場合に便利です。
-
-なお本稿の説明では、NVDA制御キーを :kbd:`NVDA` と表記します。
-例えば、 :kbd:`NVDA + N` と表記した場合、ここで設定したNVDA制御キーを押しながら :kbd:`N` キーを押すことを意味します。
-
-その他の設定
-------------
-
-検証作業の際のみNVDAを使う場合は、「Windowsへのログオン後に自動的にNVDAを起動」のチェックを外します。
-
-この画面での設定は、今後変更することはほとんどありませんし、設定メニューから変更することも可能ですので、「NVDA起動時にこのダイアログを表示」のチェックは外しておくと良いでしょう。
-
-その他の初期設定
-================
-
-NVDAには、ようこそ画面で設定できる項目以外にも、設定画面にかなり多くの設定項目があります。
-ここでは、NVDAを検証作業に使う場合に便利な設定について記します。
-
-設定画面は、画面右下のシステムトレイにあるNVDAのアイコンをクリックして表示されるメニューから開くことができます。
-このメニューは :kbd:`NVDA + N` を押下することでも表示できます。
-
-「設定」画面では、左側に設定カテゴリーが表示され、右側に選択中のカテゴリーの設定項目が表示されます。
+In the "Settings" screen, setting categories are displayed on the left side, and the settings for the selected category are shown on the right side.
 
 .. image:: /img/nvda/nvda-settings-general.png
-   :alt: スクリーン・ショット：NVDA設定画面（「一般」を選択）
+   :alt: Screenshot: NVDA settings screen ("General" selected)
 
-以下、最初にしておくと良い設定について、カテゴリーごとに記します。
+Below, we describe recommended initial settings for some of the categories.
 
 .. _exp-screen-reader-check-nvda-settings-speech:
 
-音声
-----
+Speech
+------
 
-参考動画
+Reference Video
    *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`_
 
 .. raw:: html
@@ -122,124 +123,126 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
    <iframe width="560" height="315" src="https://www.youtube.com/embed/qrWLDZmZ5ek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 .. image:: /img/nvda/nvda-settings-speech.png
-   :alt: スクリーン・ショット：NVDA設定画面（「音声」を選択）
+   :alt: Screenshot: NVDA settings screen ("Speech" selected)
 
-「音声エンジン」が、「Windows OneCore音声」になっていることを確認します。
+Confirm that the "Synthesizer" is set to "Windows OneCore voices."
 
-「早さ」や「高さ」を、好みに合わせて変更します。
-もし高速な音声に慣れてきて、「早さ」を最高にしても遅く感じる場合は、「高速読み上げ」をチェックしたうえで、「早さ」を調整してみると良いでしょう。
+Adjust the "Rate" and "Pitch" according to your preferences.
+If you become accustomed to fast speech and feel that the "Rate" is too slow even at its maximum, you might want to check "Rate boost" and then adjust the "Rate" to find a comfortable speed.
 
-なお、後述するように、音声の速度や高さは、この設定画面を開かなくても変更できるショートカット・キーがあります。
+As mentioned later, there are shortcut keys that allow you to change the speech rate and pitch without having to open this settings screen.
 
-「サポートされている場合自動的に言語を切り替える」と「サポートされている場合自動的に方言を切り替える」の2項目は、日本語以外の自然言語の読み方に関するものです。
-この2項目をチェックしておくと、Webページで用いられている言語が適切に指定されているかどうかを確認する、 :ref:`check-0621` や :ref:`check-0921` を実施することが容易になります。
-なお、この設定をする場合、日本語以外の音声合成エンジンがWindowsにインストールされている必要があります。（ :ref:`exp-screen-reader-check-nvda-windows-tts` 参照）
+The two options, "Automaticlanguage switching (when supported)" and "Automatic dialect switching (when supported)," relate to the reading of languages other than Japanese.
+Checking these options makes it easier to perform checks like :ref:`check-0621` and :ref:`check-0921`, which verify whether the language used on Web pages is appropriately specified.
+Note that to use this setting, a speech synthesis engine for languages other than Japanese must be installed on Windows (see :ref:`exp-screen-reader-check-nvda-windows-tts`).
 
-ビジョン
---------
-
-.. image:: /img/nvda/nvda-settings-vision.png
-   :alt: スクリーン・ショット：NVDA設定画面（「ビジョン」を選択）
-
-「ハイライトあり」、「フォーカスをハイライト」、「ナビゲーターオブジェクトをハイライト」、「ブラウズモードのカーソルをハイライト」をチェックします。
-これらをチェックすることで、現在読み上げられている箇所を可視化することができます。
-
-ブラウズモード
---------------
-
-.. image:: /img/nvda/nvda-settings-browse_mode.png
-   :alt: スクリーン・ショット：NVDA設定画面（「ブラウズモード」を選択）
-
-「サポートされている場合画面レイアウトを使用」のチェックを外します。
-この項目がチェックされている場合、ブラウズ・モードでの読み上げ時に画面上の1行分のテキストがまとめて読み上げられます。
-このテキストの一部がリンクになっている場合、リンク箇所とそうでない箇所がまとめて読み上げられるため、リンク・テキストの確認などの際に分かりづらくなる可能性があります。
-なおこの設定は、 :kbd:`NVDA + V` で変更することも可能です。
-
-「フォーカスの変化を追跡する自動フォーカスモード」と「テキストカーソルの移動を追跡する自動フォーカスモード」のチェックを外します。
-これらの項目がチェックされていると、ブラウズ・モードで操作している際に、状況に応じて自動的にフォーカス・モードに切り替わるため、混乱を生じやすくなります。
-
-「フォーカスモードとブラウズモードの切り替えを音で報告」のチェックを外します。
-この項目がチェックされていると、フォーカス・モードとブラウズ・モードの切り替わりが効果音で通知されますが、チェックされていないと音声で通知され、慣れていない場合にはモードの切り替わりを意識しやすくなります。
-
-マウス
+Vision
 ------
 
+.. image:: /img/nvda/nvda-settings-vision.png
+   :alt: Screenshot: NVDA settings screen ("Vision" selected)
+
+Check "Enable Highlighting," "Highlight system focus," "Highlight navigator object," and "Highlight browse mode cursor."
+By checking these options, you can visualize the location currently being read aloud.
+
+Browse Mode
+-----------
+
+.. image:: /img/nvda/nvda-settings-browse_mode.png
+   :alt: Screenshot: NVDA settings screen ("Browse Mode" selected)
+
+Uncheck "Use screen layout (when supported)."
+When this option is checked, during browse mode, a whole line of text on the screen is read aloud together.
+If part of this text is a link, both the linked and non-linked parts are read together, which can make it difficult to distinguish link text during checks.
+Note that this setting can also be changed with :kbd:`NVDA + V`.
+
+Uncheck both "Automatic focus mode for focus changes" and "Automatic focus mode for caret movement."
+When these options are checked, it can lead to confusion because NVDA may automatically switch to focus mode depending on your actions in browse mode.
+
+Uncheck "Audio indication for focus and browse modes."
+When this option is checked, switching between focus mode and browse mode is notified by a sound effect, but if unchecked, it is announced by voice, which can make it easier for users unfamiliar with the modes to be aware of the mode changes.
+
+Mouse
+-----
+
 .. image:: /img/nvda/nvda-settings-mouse.png
-   :alt: スクリーン・ショット：NVDA設定画面（「マウス」を選択）
+   :alt: Screenshot: NVDA settings screen ("Mouse" selected)
 
-「マウスカーソル位置のテキストの報告」のチェックを外します。
+Uncheck "Enable mouse tracking."
 
-画面表示を確認できない視覚障害者の場合、マウスを使うことは困難なので、アクセシビリティー・チェック実施の際にもマウスをなるべく使用せずにチェックを実施することが望ましいです。
-この項目がチェックされていると、マウス・ポインターが移動した先にあるテキストが自動的に読み上げられます。
-そのため、キーボードのみによる操作では読み上げられないものが、誤ったマウス操作によって読み上げられてしまう場合があり、チェック結果について誤った判断につながることがあります。
+For visually impaired users who cannot see the screen, using a mouse is challenging, so it is preferable to perform accessibility checks without relying on the mouse as much as possible.
+When this option is checked, text located under the mouse pointer is automatically read aloud.
+Consequently, text that would not be read aloud through keyboard-only operations may be read aloud due to inadvertent mouse movements, potentially leading to incorrect assessments during the checks.
 
-書式とドキュメント情報
-----------------------
+
+Document Formatting
+-------------------
 
 .. image:: /img/nvda/nvda-settings-format.png
-   :alt: スクリーン・ショット：NVDA設定画面（「書式とドキュメント情報」を選択）
+   :alt: Screenshot: NVDA settings screen ("Document Formatting" selected)
 
-「クリック可能」のチェックを外します。
+Uncheck "Clickable."
 
-この項目がチェックされていると、リンクでもボタンでもない要素に ``onclick`` 属性がある場合など、クリック操作時に何らかの処理が行われるようになっている要素を読み上げる際に、「クリック可能」という読み上げが追加されます。
+When this option is checked, elements that are not links or buttons but have an ``onclick`` attribute or are otherwise designed to perform some action when clicked, will be announced with "clickable" added to their description.
 
-本来クリック可能な要素にはボタンやリンクなどの適切なロールが指定されているべきですが、現実には ``span`` 要素や ``div`` 要素を適切な ``role`` 属性を指定せずに用いているなど、アクセシビリティーの観点から望ましくない実装が少なくありません。
-こういった要素がクリック可能であるという情報は、視覚障害があるユーザーにとっては有益なものとなり得ますが、適切に実装されている場合は不要な情報です。
+Ideally, elements that are intended to be clickable should be assigned appropriate roles such as buttons or links.
+However, in reality, there are many instances of suboptimal accessibility implementations, such as using ``span`` or ``div`` elements without specifying a proper ``role`` attribute.
+While having information about such elements being clickable can be beneficial for users with visual impairments, it becomes unnecessary if the elements are implemented correctly.
 
-アクセシビリティー・チェックの実施に当たっては、この情報が読み上げられることで、実際には適切に実装されていないものについての問題を見落とすことにつながる可能性が考えられます。
+During accessibility checks, having this information read aloud can lead to overlooking issues with elements that are not implemented correctly.
 
 .. _exp-screen-reader-check-nvda-windows-tts:
 
-音声合成エンジンの管理
-----------------------
+Managing Voice Synthesizers
+---------------------------
 
-参考動画
+Reference Video
    *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`_
 
 .. raw:: html
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/BYtQZQNYiIM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-:ref:`exp-screen-reader-check-nvda-settings-speech` の項で触れた自然言語に関する設定について、これらの設定を反映した形でNVDAを動作させるには、Windowsに複数の音声合成エンジン（音声パッケージ）がインストールされている必要があります。
-ここでは、現在インストールされている音声パッケージの確認と、新たな音声パッケージの追加の方法を記します。
+To operate NVDA with the settings related to natural languages mentioned in :ref:`exp-screen-reader-check-nvda-settings-speech`, Windows must have speech synthesis engines (voice packages) for multiple languages installed.
+Here, we describe how to check the voice packages currently installed and how to add new voice packages.
 
-1. スタート・ボタンなどから設定画面を表示
-2. 「時刻と言語」、「音声認識」の順にクリック
-3. この画面の下の方にある「インストールされている音声パッケージ」のプルダウンに表示されている、現在インストールされている音声パッケージの一覧を確認
-4. 日本語しかインストールされていない場合は、「音声を追加」をクリックして、「英語 (米国)」を追加
+1. Open the Settings screen from the Start button or similar.
+2. Click on "Time & Language" and then "Speech."
+3. At the bottom of this screen, check the list of currently installed voice packages in the dropdown menu under "Installed voice packages."
+4. If only one language is installed, click on "Add voices" and add another language such as "English (United States)," and "Japanese."
 
-.. image:: /img/nvda/win10-settings-speech-recognition.png
-   :alt: スクリーン・ショット：Windows 10の音声認識の設定画面
+.. image:: /img/nvda/win11-settings-speech-recognition.png
+   :alt: Screenshot: the Speech Settings screen of Windows 10
 
-一般的なチェックの場合、「英語 (米国)」を追加すれば、NVDAは意図した挙動になります。
-英語と日本語以外の言語が使われているサイトをチェックする場合は、その言語も合わせて追加すると良いでしょう。
+For general checks, having "English (United States)," and "Japanese" installed should make NVDA behave as intended.
+If checking sites in languages other than English and Japanese, it's a good idea to add those languages as well.
 
-************************
-最低限知っておきたいこと
-************************
+**********************
+Things You Should Know
+**********************
 
-NVDAメニュー
-============
+NVDA Menu
+=========
 
-NVDAメニューは、NVDAの各種画面やツールへのアクセスを提供するメニューです。
-このメニューは、以下のいずれかの方法で表示することができます。
+The NVDA menu provides access to various screens and tools of NVDA.
+This menu can be displayed by either of the following:
 
-*  :kbd:`nvda + N` を押下
-*  デスクトップ右下のシステムトレイにあるNVDAのアイコンをクリック
+*  Press :kbd:`NVDA + N`
+*  Click on the NVDA icon in the system tray at the bottom right of the desktop
 
-起動と終了
-==========
+Starting and Stopping NVDA
+==========================
 
-インストールの際にデスクトップにショートカットを作成している場合、デスクトップのショートカットをクリックするか、 :kbd:`Ctrl + Alt + N` キーの押下で起動することができます。
-ショートカットがない場合は、「ファイル名を指定して実行」で :command:`nvda` と入力して起動します。
+If a desktop shortcut was created during installation, NVDA can be launched either by clicking the desktop shortcut or by pressing :kbd:`Ctrl + Alt + N`.
+If there is no shortcut, launch NVDA by typing :command:`nvda` in the "Run" dialog (accessed by pressing :kbd:`Windows + R`).
 
-終了は、 :kbd:`NVDA + Q` の押下で可能です。
-このキー操作が何らかの理由で使えない場合は、前述のNVDAメニューから終了することができます。
+Exiting NVDA can be done by pressing :kbd:`NVDA + Q`.
+If this key combination is not available for some reason, NVDA can also be exited via the previously mentioned NVDA menu.
 
-フォーカス・モードとブラウズ・モード
-====================================
+Focus Mode and Browse Mode
+==========================
 
-参考動画
+Reference Videos
    *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`_
    *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`_
 
@@ -248,57 +251,59 @@ NVDAメニューは、NVDAの各種画面やツールへのアクセスを提供
    <iframe width="560" height="315" src="https://www.youtube.com/embed/WE3q9PwHdu0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
    <iframe width="560" height="315" src="https://www.youtube.com/embed/Qu2K_LjM4Wo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-NVDAには「フォーカス・モード」と「ブラウズ・モード」という2つの動作モードがあります。
+NVDA has two operating modes: "Focus Mode" and "Browse Mode."
 
-2つのモードの最も大きな違いは、フォーカス・モードではNVDA制御キーを用いたものを除いて、すべてのキー操作がそのままOSや現在フォーカス中のアプリケーションに渡されるのに対して、ブラウズ・モードではキー操作はNVDAが受け取り、NVDAの様々な機能の実行に用いられるという点です。
+The most significant difference between the two modes is that in Focus Mode, except for operations using the NVDA control key, all keyboard actions are passed directly to the OS or the application currently in focus.
+In contrast, in Browse Mode, keyboard actions are intercepted by NVDA and used to execute various NVDA functions.
 
-フォーカス・モードは通常の動作モードであるのに対して、ブラウズ・モードは主にWeb閲覧時だけに利用できるモードです。
+While Focus Mode is the standard operating mode, Browse Mode is primarily available only when browsing the Web.
 
-Webブラウザーのコンテンツ表示領域にフォーカスがある場合など、ブラウズ・モードが利用できるときには、 :kbd:`NVDA + Spc` で2つのモードを切り替えることができます。
+If Browse Mode is available, such as when the focus is on the content area of a Web browser, you can switch between the two modes by pressing :kbd:`NVDA + Space`.
 
-Web閲覧時は、通常はブラウズ・モードでコンテンツを確認し、フォーム入力時などにフォーカス・モードに切り替えるというのが一般的な使い方です。
-ただし、アプリケーションのような振る舞いをするWebコンテンツにおいては、主にフォーカス・モードで操作することもあります。
+During Web browsing, it's common to review content in Browse Mode and switch to Focus Mode for form inputs.
+However, for Web content that behaves more like an application, it may primarily be operated in Focus Mode.
 
-参考： Windows上で動作するスクリーン・リーダーの多くには、同様の動作モードが存在します。
-Microsoft Narratorでは、「スキャン・モード」がオンの状態がブラウズ・モード、オフの状態がフォーカス・モードに当たります。
-JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォーム・モード」がフォーカス・モードに当たります。
+Note: Many screen readers for Windows have similar modes of operation.
+In Microsoft Narrator, having "Scan Mode" on corresponds to Browse Mode, and off corresponds to Focus Mode.
+In JAWS, "Virtual PC Cursor" is analogous to Browse Mode, while "Forms Mode" corresponds to Focus Mode.
 
-スピーチビューアーの活用
-========================
+Utilizing the Speech Viewer
+===========================
 
-参考動画
+Reference Video
    *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`_
 
 .. raw:: html
 
    <iframe width="560" height="315" src="https://www.youtube.com/embed/ZyzzgXw11oI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-スピーチビューアーは、NVDAが音声出力した内容を文字で表示する機能です。
-音声出力がよく聴き取れない場合や、そもそも音を出せない状況で読み上げられる内容を確認する必要があるときは、スピーチビューアーを使うと便利です。
+The Speech Viewer is a feature of NVDA that displays the text of what NVDA vocalizes.
+It is useful when you cannot clearly hear the audio output or when you need to check what is being read aloud in situations where sound cannot be played.
 
-スピーチビューアーは、NVDAメニューを開いて :menuselection:`ツール --> スピーチビューアー` の順に実行することで利用できます。
-実行するとスピーチビューアーのウィンドウが開き、NVDAが発声した内容が表示されます。
+The Speech Viewer can be accessed by opening the NVDA menu and selecting :menuselection:`Tools --> Speech Viewer`.
+Once executed, the Speech Viewer window will open, displaying the content spoken by NVDA.
 
-スピーチビューアーが不要になったときは、再度NVDAメニューを開いて :menuselection:`ツール --> スピーチビューアー` の順に実行することで、スピーチビューアーのウィンドウを閉じることができます。
+When the Speech Viewer is no longer needed, close the Speech Viewer window.
+It can also be closed by reopening the NVDA menu and selecting :menuselection:`Tools --> Speech Viewer` again.
 
+Key Commands to Know
+====================
 
-知っておきたいキー操作
-======================
+Changing Speech Settings
+------------------------
 
-音声設定の変更
+You can temporarily change the speech settings without opening the settings screen.
+Use :kbd:`NVDA + Ctrl` in combination with the arrow keys.
+
+Pressing :kbd:`NVDA + Ctrl + ←` or :kbd:`NVDA + Ctrl + →` will read out the name of the setting being adjusted and its current value, like "Pitch 50."
+Continue using one of these key combinations until the desired setting is announced.
+Once the setting you want to adjust is read out loud, use :kbd:`NVDA + Ctrl + ↑` or :kbd:`NVDA + Ctrl + ↓` to adjust the value for the setting.
+
+Other Commands
 --------------
 
-前述の設定画面での音声設定を一時的に変更したい場合などに、設定画面を開かずに設定変更を行う方法があります。
-使用するのは、:kbd:`NVDA + Ctrl` と上下左右の矢印キーです。
 
-:kbd:`NVDA + Ctrl + ←` または :kbd:`NVDA + Ctrl + →` を押下すると、「高さ50」のように、設定対象の項目名と現在の設定値が読み上げられます。
-目的の設定項目が読み上げられるまで、このいずれかのキー操作を続けます。
-目的の設定項目が読み上げられたら、 :kbd:`NVDA + Ctrl + ↑` または :kbd:`NVDA + Ctrl + ↓` キーで設定値を調整します。
-
-その他
-------
-
-参考動画
+Reference Videos
    *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`_
    *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
 
@@ -311,103 +316,131 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
    <iframe width="560" height="315" src="https://www.youtube.com/embed/j1GzUGZbbzI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 :kbd:`Ctrl`
-   読み上げの停止
+   Stop reading.
 :kbd:`Shift`
-   読み上げの一時停止/再開
+   Pause/resume reading.
 :kbd:`NVDA + S`
-   読み上げモードの変更（誤操作で音声が出なくなった場合などに何度か押下してみると良い場合があるかもしれない）
+   Change the reading mode (If the sound unexpectedly stops, pressing this a few times might be helpful in some cases).
 :kbd:`NVDA + 1`
-   入力ヘルプ（1度押下するとヘルプ・モードに入り、再度押下するとヘルプ・モードから抜ける。ヘルプ・モードでは、押下したキーの名称や役割が読み上げられる。）
+   Input Help (Press once to enter Help mode, and press again to exit Help mode. In Help mode, the names and roles of the keys pressed are read aloud.)
 :kbd:`NVDA + Q`
-   NVDAの終了
+   Quit NVDA.
 :kbd:`NVDA + N`
-   NVDAメニューの表示
+   Show NVDA Menu.
 
-参考： NVDAチートシート
------------------------
+Updating NVDA
+=============
 
-ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`_ には、他のキー操作も含めてまとめられています。
-GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`_ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`_ が公開されています。以下にPNG版を転載します。
+NVDA is updated approximately every three months with a new release.
+In addition, minor version releases may occur between these major version releases.
 
-.. image:: /img/nvda/nvdacheat.png
-   :alt: 画像化したNVDAチートシート
+NVDA is continuously improved, including updates for the latest browsers and Web technologies, so it's important to always use the latest version.
 
-NVDAの更新
-==========
-
-NVDAは3カ月に1回程度、更新版がリリースされます。
-また、これらのメジャー・バージョンのリリースの間に、マイナー・バージョンがリリースされることもあります。
-
-NVDAは、最新のブラウザーへの対応やWeb技術への対応など、継続的に改良されていますので、必ず最新版を使うようにしましょう。
-
-デフォルトでは、NVDAの起動時に更新版がリリースされていないかチェックするようになっています。
-これに加えて、NVDAメニューを開いて  :menuselection:`ヘルプ --> 更新を確認` を実行することで、明示的に更新版のリリースを確認することができます。
+By default, NVDA checks for updates upon startup.
+Additionally, you can explicitly check for updates by opening the NVDA menu and selecting :menuselection:`Help --> Check for updates`.
 
 
-***********************
-Webコンテンツのチェック
-***********************
+******************
+Web Content Checks
+******************
 
-ここでは、Webコンテンツのチェックを実施する場合の基本的な考え方やよく実行する操作について説明します。
-チェック内容に応じた具体的なチェック実施方法については、 :ref:`check-example-nvda` を参照してください。
+Here, we explain the basic concepts and frequently performed operations when checking Web content.
+For specific methods of conducting checks based on specific checklist items, please refer to :ref:`check-example-nvda`.
 
-Webコンテンツのチェックをする場合、基本的にはブラウズ・モードですべての情報にアクセスできることを確認することが必要です。
+When checking Web content, it's fundamentally necessary to ensure that all information can be accessed in Browse Mode.
 
-ブラウズ・モードでは、 :kbd:`↓` キーで読み進め、 :kbd:`↑` キーで戻って読むというのが基本的な操作です。
-上下の矢印キーで進む/戻る長さは、概ねHTMLソースの要素単位です。
-途中にリンクや ``span`` 要素でマークアップされた部分がないような段落であれば、 ``p`` 要素が1つのまとまりとして扱われます。
-一方、リンクがあればリンク部分が1つのまとまり、 ``span`` 要素があればその部分が1つのまとまりとして扱われ、上下矢印キーによる移動の単位になります。
+In Browse Mode, the basic operation is to read forward with the :kbd:`↓` key and to read back with the :kbd:`↑` key.
+The length of movement forward/backward with the arrow keys is generally based on the HTML source's elements.
+For paragraphs without any links or parts marked up with ``span`` elements, a ``p`` element is treated as a single unit.
+Conversely, if there are links, each link portion is treated as a unit, and if there are ``span`` elements, each part is treated as a unit, serving as the units of movement for the arrow keys.
 
-:kbd:`NVDA + ↑` を押下すると、直前に読み上げられた内容を再度読み上げさせることができます。
-（正確には、この操作はカーソルが現在ある行を読み上げさせる操作です。）
+If the text judged as a single unit exceeds a certain length, reading aloud will stop midway when pressing the :kbd:`↓` key.
+In this case, pressing the :kbd:`↓` key again will continue reading the next part.
 
-なお、左右の矢印キーは1文字単位の読み上げのために使います。
+Pressing :kbd:`NVDA + ↑` allows you to reread the content that was just read aloud.
+(Precisely, this action makes NVDA read aloud the line where the cursor is currently located.)
 
-ページ全体を読み上げさせる
-==========================
+The left and right arrow keys are used for reading aloud by character.
 
-以下の手順で、ページ全体を読み上げさせることができます。
+Having the Entire Page Read Aloud
+=================================
 
-1. :kbd:`Ctrl + Home` でページの先頭に移動
-2. :kbd:`NVDA + ↓` で読み上げを開始
+You can have the entire page read aloud by following these steps:
 
-途中で読み上げを停止したい場合は、 :kbd:`Ctrl` キーを押下します。
+1. Move to the beginning of the page with :kbd:`Ctrl + Home`.
+2. Start reading aloud with :kbd:`NVDA + ↓`.
 
-再度 :kbd:`NVDA + 下矢印` を押下すると、続きを読み上げさせることができます。
+If you want to stop the reading aloud partway through, press the :kbd:`Ctrl` key.
 
-操作を受け付けるコンポーネント
-==============================
+Pressing :kbd:`NVDA + ↓` again will allow you to continue having the rest read aloud.
 
-開閉できるメニュー、アコーディオンなど、何らかの操作を受け付けるコンポーネントについては、ブラウズ・モードでも操作ができることを確認する必要があります。
+Interactable Components
+=======================
 
-具体的には、ブラウズ・モードでそのコンポーネントを探し、そのコンポーネント上でキー操作を実行してみます。
-コンポーネントに対する操作のうち、 :kbd:`Enter` 、 :kbd:`Spc` 、 :kbd:`Esc` による操作はブラウズ・モードでも想定した挙動となることを確認します。
-その結果として新たなコンテンツが表示された場合は、そのコンテンツをブラウズ・モードで読み上げ可能なことを確認します。
+For components that accept some form of action, such as expandable menus and accordions, it's necessary to verify that they can be operated even in Browse Mode.
 
-これら以外のキー操作については、 :kbd:`NVDA + Spc` でフォーカス・モードに切り替えた上で確認します。
+Specifically, find the component in Browse Mode and try performing key operations on it.
+Ensure that operations with :kbd:`Enter`, :kbd:`Space`, and :kbd:`Esc` keys result in the expected behavior in Browse Mode.
+If new content is displayed as a result of these operations, verify that this content can be read aloud in Browse Mode.
 
+For key operations other than these, switch to Focus Mode by pressing :kbd:`NVDA + Space` before checking.
 
-移動のための様々なキー操作
-==========================
+Reading Tables
+==============
 
-ブラウズ・モードでは、以下に挙げるようなキー操作でコンテンツ内を移動することができます。
+NVDA provides key commands to efficiently read tables.
+Using these commands makes it easier to understand the spatial relationships between cells in a table, making it important to ensure these commands function correctly during accessibility checks of tabulated content.
 
-.. list-table:: ブラウズ・モードで使用できるキー操作（抜粋）
+Below are the main key commands related to reading tables.
+These all work in Browse Mode.
+
+.. list-table:: Key Commands Related to Reading Tables
    :header-rows: 1
 
-   *  -  キー操作
-      -  説明
-   *  -  :kbd:`D` 、 :kbd:`Shift + D`
-      -  次、前のランドマーク（領域）
-   *  -  :kbd:`H` 、 :kbd:`Shift + H`
-      -  次、前の見出し
-   *  -  :kbd:`L` 、 :kbd:`Shift + L`
-      -  次、前のリスト （ ``ul`` 、 ``ol`` 、 ``dl`` 要素）
-   *  -  :kbd:`G` 、 :kbd:`Shift + G`
-      -  次、前の画像
-   *  -  :kbd:`F` 、 :kbd:`Shift + F`
-      -  次、前のフォーム・コントロール
-   *  -  :kbd:`T` 、 :kbd:`Shift + T`
-      -  次、前の表
+   *  -  Key Command
+      -  Description
+   *  -  :kbd:`T`, :kbd:`Shift + T`
+      -  Move to the next or previous table
+   *  -  :kbd:`Ctrl + Alt + ↑`
+      -  Move to and read the cell above
+   *  -  :kbd:`Ctrl + Alt + ↓`
+      -  Move to and read the cell below
+   *  -  :kbd:`Ctrl + Alt + ←`
+      -  Move to and read the cell to the left
+   *  -  :kbd:`Ctrl + Alt + →`
+      -  Move to and read the cell to the right
 
-これらのキー操作に加えて、 :kbd:`NVDA + F7` の押下でページ内の要素ごとのリストを表示することができ、このリストを用いて移動することも可能です。
+The following content is announced when moving among cells using the functions listed above.
+
+*  move to left/right: the column header, column number, and the content of the destination cell
+*  move up/down: the row header, row number, and the content of the destination cell
+
+The following is announced if arrow keys are simply used in browse mode:
+
+*  up/down arrows: move to the previous/next cell and announce the cell content; only a part of the cell might be read if there are line-breaks within the cell.
+*  left/right arrows: move and announce character by character; the behavior on empty cells is as if there is only one space character
+
+Various Key Commands for Navigation
+===================================
+
+In Browse Mode, you can navigate through the content using key commands such as the following:
+
+.. list-table:: Key Commands Available in Browse Mode (excerpt)
+   :header-rows: 1
+
+   *  -  Key Command
+      -  Description
+   *  -  :kbd:`D`, :kbd:`Shift + D`
+      -  Next, previous landmark (region)
+   *  -  :kbd:`H`, :kbd:`Shift + H`
+      -  Next, previous heading
+   *  -  :kbd:`L`, :kbd:`Shift + L`
+      -  Next, previous list
+   *  -  :kbd:`G`, :kbd:`Shift + G`
+      -  Next, previous graphic
+   *  -  :kbd:`F`, :kbd:`Shift + F`
+      -  Next, previous form field
+   *  -  :kbd:`T`, :kbd:`Shift + T`
+      -  Next, previous table
+
+In addition to these key commands, pressing :kbd:`NVDA + F7` displays a list of elements within the page, and it is possible to navigate using this list.

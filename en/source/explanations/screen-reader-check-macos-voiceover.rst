@@ -1,7 +1,7 @@
 .. _exp-screen-reader-check-macos-vo:
 
 ##########################################
-How to Perform Checks with macOS VoiceOver
+How to Perform Checks With macOS VoiceOver
 ##########################################
 
 This document outlines the recommended settings for VoiceOver, the screen reader for macOS, its basic usage, and how to perform basic checks.
@@ -275,7 +275,7 @@ By default, the VoiceOver cursor and keyboard focus are synchronized, but if the
 When performing key operations, press keys such as the arrow keys, :kbd:`Enter`, :kbd:`Spc`, and :kbd:`Esc` without combining them with the :kbd:`VO` key to check their behavior.
 If new content is displayed as a result, verify that this content can be read with the VoiceOver cursor.
 
-VoiceOver Key Commands for navigation
+VoiceOver Key Commands for Navigation
 =====================================
 
 When VoiceOver is active, you can navigate through the content using key commands such as the following:
