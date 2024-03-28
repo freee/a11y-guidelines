@@ -6,3 +6,4 @@ build/
 .DS_Store
 incfiles.mk
 __pycache__/
+*:Zone.Identifier
