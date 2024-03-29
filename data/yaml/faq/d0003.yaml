@@ -2,8 +2,7 @@ id: d0003
 updated: '2024-03-28'
 sortKey: 10150
 tags:
-- text
-- link
+- target-size
 title:
   ja: テキスト・リンクのクリック可能な領域が小さい
   en: The clickable area of a text link is small
@@ -19,19 +18,21 @@ solution:
     If the text size of the link is the same as the text outside the link, there is no problem.
 explanation:
   ja: |-
-    当ガイドラインでクリック/タップ可能な領域のサイズについて定めているものは、アイコンとフォーム・コントロールを対象としていて、テキストのリンクは対象としていません。
+    当ガイドラインでクリック/タップ可能な領域のサイズ（ターゲット・サイズ）について定めているものは、アイコンとフォーム・コントロールを対象としていて、テキストのリンクは対象としていません。
     また、WCAG 2.1の達成基準2.5.5 `Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_ （ `ターゲットのサイズ <https://waic.jp/translations/WCAG21/#target-size>`_ ）においても、インラインである場合の例外として、クリック/タップのターゲットが文中、又はテキスト・ブロック内に存在する場合には、サイズの基準の対象外としています。
 
-    クリック/タップできる部分のサイズは大きい方が操作しやすいというのは事実ですから、幅に関してはリンクにするテキストの内容を工夫することでより広くすることはできますし、可能な範囲でそういった工夫をすることは推奨されます。
+    ターゲット・サイズは大きい方が操作しやすいというのは事実ですから、幅に関してはリンクにするテキストの内容を工夫することでより広くすることはできますし、可能な範囲でそういった工夫をすることは推奨されます。
     一方高さに関しては、ターゲット・サイズの基準を満たすだけの目的で調整する必要はありません。
   en: |-
-    In our guidelines, the specified sizes for clickable/tappable areas are intended for icons and form controls, and do not apply to text links.
+    In our guidelines, the specified sizes for clickable/tappable areas (target size) are intended for icons and form controls, and do not apply to text links.
     Similarly, in WCAG 2.1 `Success Criterion 2.5.5 Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_, there's an exception for inline elements, where targets that are within sentences or text blocks are exempt from the size criteria.
 
-    It is true that larger clickable/tappable areas are easier to interact with, so it is recommended to creatively adjust the content of the text being linked to make its width broader, within feasible limits.
+    It is true that larger target size makes it easier to interact with, so it is recommended to creatively adjust the content of the text being linked to make its width broader, within feasible limits.
     However, there is no need to adjust the height solely to meet the target size criteria.
 checks:
 - '0331'
 - '0351'
 info:
 - exp-target-size
+faqs:
+- d0002
