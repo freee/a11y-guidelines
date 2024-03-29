@@ -26,19 +26,17 @@ Explanation
 {%- endfilter %}
 
 {{ explanation }}
-
-{% if guidelines is defined -%}
-{%- filter make_heading(2) -%}
+{% if guidelines is defined %}
+{% filter make_heading(2) -%}
 Related Guidelines
 {%- endfilter %}
 
 {% for gl in guidelines -%}
 *  {{ gl.category }}: :ref:`{{ gl.guideline }}`
 {% endfor %}
-{%- endif %}
-
-{% if checks is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if checks is defined %}
+{% filter make_heading(2) -%}
 Related Checklist Items
 {%- endfilter %}
 
@@ -46,10 +44,9 @@ Related Checklist Items
 :ref:`check-{{ check.id }}`
    {{ check.check | indent(3) }}
 {% endfor %}
-{%- endif %}
-
-{% if info is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if info is defined %}
+{% filter make_heading(2) -%}
 Related Supplementary Information
 {%- endfilter %}
 
@@ -57,4 +54,3 @@ Related Supplementary Information
 *  {{ i }}
 {% endfor %}
 {%- endif %}
-

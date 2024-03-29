@@ -27,18 +27,17 @@
 
 {{ explanation }}
 
-{% if guidelines is defined -%}
-{%- filter make_heading(2) -%}
+{% if guidelines is defined %}
+{% filter make_heading(2) -%}
 関連ガイドライン項目
 {%- endfilter %}
 
 {% for gl in guidelines -%}
 *  {{ gl.category }}： :ref:`{{ gl.guideline }}`
 {% endfor %}
-{%- endif %}
-
-{% if checks is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if checks is defined %}
+{% filter make_heading(2) -%}
 関連チェック内容
 {%- endfilter %}
 
@@ -46,10 +45,9 @@
 :ref:`check-{{ check.id }}`
    {{ check.check | indent(3) }}
 {% endfor %}
-{%- endif %}
-
-{% if info is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if info is defined %}
+{% filter make_heading(2) -%}
 関連する参考情報
 {%- endfilter %}
 
@@ -57,7 +55,4 @@
 *  {{ i }}
 {% endfor %}
 {%- endif %}
-
-
 .. translated:: true
-
