@@ -16,6 +16,7 @@ class RelationshipManager:
         if self._initialized:
             return
         self._data = {}
+        self._unresolved_faqs = {}
         self._initialized = True
 
     def associate_objects(self, obj1, obj2):
@@ -40,6 +41,23 @@ class RelationshipManager:
             self._data[obj2_type][obj2_id][obj1_type] = []
         if obj1 not in self._data[obj2_type][obj2_id][obj1_type]:
             self._data[obj2_type][obj2_id][obj1_type].append(obj1)
+
+    def add_unresolved_faqs(self, faq1, faq2):
+        if faq1 not in self._unresolved_faqs:
+            self._unresolved_faqs[faq1] = []
+        if faq2 not in self._unresolved_faqs[faq1]:
+            self._unresolved_faqs[faq1].append(faq2)
+        if faq2 not in self._unresolved_faqs:
+            self._unresolved_faqs[faq2] = []
+        if faq1 not in self._unresolved_faqs[faq2]:
+            self._unresolved_faqs[faq2].append(faq1)
+
+    def resolve_faqs(self):
+        for faq_id in self._unresolved_faqs:
+            for faq2_id in self._unresolved_faqs[faq_id]:
+                faq1 = Faq.get_by_id(faq_id)
+                faq2 = Faq.get_by_id(faq2_id)
+                self.associate_objects(faq1, faq2)
 
     def get_guidelines_to_category(self):
         mapping = {}
@@ -118,6 +136,11 @@ class RelationshipManager:
         if 'faq' in self._data['info_ref'][info.id]:
             return self._data['info_ref'][info.id]['faq']
         return []
+
+    def get_related_faqs(self, faq):
+        if faq.id not in self._unresolved_faqs:
+            return []
+        return sorted(self._data['faq'][faq.id]['faq'], key=lambda item: item.sort_key)
 
     def get_axe_to_wcagsc(self, axe_rule):
         if 'wcag_sc' in self._data['axe_rule'][axe_rule.id]:
@@ -304,7 +327,9 @@ class Faq:
         if 'info' in faq:
             for info in faq['info']:
                 rel.associate_objects(self, InfoRef(info))
-
+        if 'faqs' in faq:
+            for related_faq in faq['faqs']:
+                rel.add_unresolved_faqs(self.id, related_faq)
         Faq.all_faqs[self.id] = self
 
     def get_dependency(self):
@@ -344,6 +369,9 @@ class Faq:
         info = rel.get_faq_to_info(self)
         if len(info):
             template_object['info'] = [inforef.refstring() for inforef in info]
+        related_faqs = rel.get_related_faqs(self)
+        if len(related_faqs) > 0:
+            template_object['related_faqs'] = [faq.id for faq in related_faqs]
         return template_object
 
     @classmethod
@@ -357,6 +385,10 @@ class Faq:
     def list_all_src_paths(cls):
         for faq in cls.all_faqs.values():
             yield faq.src_path
+
+    @classmethod
+    def get_by_id(cls, faq_id):
+        return cls.all_faqs.get(faq_id)
 
 class Category:
     all_categories = {}

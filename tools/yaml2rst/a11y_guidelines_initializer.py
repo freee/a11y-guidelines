@@ -45,7 +45,9 @@ def setup_instances(settings):
 
     process_axe_rules(src_path['axe_rules'], src_path['axe_msg_ja'], src_path['axe_pkg'], DEQUE_URL)
 
-    return RelationshipManager()
+    rel = RelationshipManager()
+    rel.resolve_faqs()
+    return rel
 
 def process_axe_rules(axe_rules_dir, axe_msg_ja_file, axe_pkg_file, base_url):
     try:

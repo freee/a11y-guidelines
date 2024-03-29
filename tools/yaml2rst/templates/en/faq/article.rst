@@ -26,6 +26,15 @@ Explanation
 {%- endfilter %}
 
 {{ explanation }}
+{% if related_faqs is defined %}
+{% filter make_heading(2) -%}
+Related FAQs
+{%- endfilter %}
+
+{% for faq in related_faqs -%}
+*  :ref:`faq-{{ faq }}`
+{% endfor %}
+{%- endif -%}
 {% if guidelines is defined %}
 {% filter make_heading(2) -%}
 Related Guidelines
