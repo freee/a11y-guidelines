@@ -22,31 +22,31 @@ help:
 
 .PHONY: help incfiles clean Makefile $(SPHINX_PREDEFINED_TARGETS)
 
-incfiles.mk: $(wildcard $(rootdir)/data/yaml/gl/*/*.yaml $(rootdir)/data/yaml/checks/*/*.yaml $(rootdir)/data/yaml/faq/**/*.yaml)
-	@if [ ! -f incfiles.mk ]; then \
-		${YAML2RST}; \
-	else \
-		${YAML2RST} incfiles.mk; \
-	fi
+incfiles.mk:
+	@${YAML2RST} incfiles.mk 
 
-incfiles:| $(SOURCEDIR)/inc
+incfiles:| $(SOURCEDIR)/inc $(SOURCEDIR)/faq
 
-ifneq ($(filter $(MAKECMDGOALS),$(ALL_PREDEFINED_TARGETS)),)
 include incfiles.mk
-endif
 
 #
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-$(SPHINX_PREDEFINED_TARGETS): incfiles.mk incfiles Makefile
+$(SPHINX_PREDEFINED_TARGETS): incfiles.mk incfiles Makefile $(BUILDDIR)/.all-rst $(ALL_RST_FILES)
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+$(BUILDDIR)/.all-rst:
+	@$(YAML2RST)
+	@mkdir -p $(BUILDDIR)
+	@touch $@
 
 clean:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	@$(RM) -rf $(SOURCEDIR)/inc $(SOURCEDIR)/faq incfiles.mk
 
-$(SOURCEDIR)/inc:
+$(SOURCEDIR)/inc $(SOURCEDIR)/faq:
 	@$(YAML2RST)
+	@touch $(BUILDDIR)/.all-rst
 
 check-includes:
 	@for file in $(ALL_INC_FILES); do \

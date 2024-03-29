@@ -4,4 +4,5 @@ export default {
   'data/yaml/gl/**/*.yaml': (files) => files.map((file) => `ajv validate --spec=draft2020 -s data/json/schemas/guideline.json -r data/json/schemas/common.json -d ${file}`),
   'data/yaml/checks/**/*.yaml': (files) => files.map((file) => `ajv validate --spec=draft2020 -s data/json/schemas/check.json -r data/json/schemas/common.json -d ${file}`),
   'data/yaml/faq/**/*.yaml': (files) => files.map((file) => `ajv validate --spec=draft2020 -s data/json/schemas/faq.json -r data/json/schemas/common.json -d ${file}`),
+  '(ja|en)/**/*.rst': 'sphinx-lint --enable all --disable line-too-long',
 }

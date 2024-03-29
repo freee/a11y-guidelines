@@ -15,185 +15,141 @@ class RelationshipManager:
     def __init__(self):
         if self._initialized:
             return
-        self.category_to_guidelines = {}
-        self.guideline_to_category = {}
-        self.guideline_to_scs = {}
-        self.sc_to_guidelines = {}
-        self.guideline_to_checks = {}
-        self.check_to_guidelines = {}
-        self.guideline_to_info = {}
-        self.info_to_guidelines = {}
-        self.faq_to_guidelines = {}
-        self.guideline_to_faqs = {}
-        self.faq_to_checks = {}
-        self.check_to_faqs = {}
-        self.faq_to_tags = {}
-        self.tag_to_faqs = {}
-        self.info_to_checks = {}
-        self.check_to_info = {}
-        self.faq_to_info = {}
-        self.info_to_faqs = {}
+        self._data = {}
+        self._unresolved_faqs = {}
         self._initialized = True
 
-    def set_guideline_category(self, guideline):
-        category = guideline.category
-        if category.id not in self.category_to_guidelines:
-            self.category_to_guidelines[category.id] = []
-        self.category_to_guidelines[category.id].append(guideline)
-        self.guideline_to_category[guideline.id] = category
+    def associate_objects(self, obj1, obj2):
+        obj1_type = obj1.object_type
+        obj2_type = obj2.object_type
+        obj1_id = obj1.id
+        obj2_id = obj2.id
+        if obj1_type not in self._data:
+            self._data[obj1_type] = {}
+        if obj1_id not in self._data[obj1_type]:
+            self._data[obj1_type][obj1_id] = {}
+        if obj2_type not in self._data[obj1_type][obj1_id]:
+            self._data[obj1_type][obj1_id][obj2_type] = []
+        if obj2 not in self._data[obj1_type][obj1_id][obj2_type]:
+            self._data[obj1_type][obj1_id][obj2_type].append(obj2)
+
+        if obj2_type not in self._data:
+            self._data[obj2_type] = {}
+        if obj2_id not in self._data[obj2_type]:
+            self._data[obj2_type][obj2_id] = {}
+        if obj1_type not in self._data[obj2_type][obj2_id]:
+            self._data[obj2_type][obj2_id][obj1_type] = []
+        if obj1 not in self._data[obj2_type][obj2_id][obj1_type]:
+            self._data[obj2_type][obj2_id][obj1_type].append(obj1)
+
+    def add_unresolved_faqs(self, faq1, faq2):
+        if faq1 not in self._unresolved_faqs:
+            self._unresolved_faqs[faq1] = []
+        if faq2 not in self._unresolved_faqs[faq1]:
+            self._unresolved_faqs[faq1].append(faq2)
+        if faq2 not in self._unresolved_faqs:
+            self._unresolved_faqs[faq2] = []
+        if faq1 not in self._unresolved_faqs[faq2]:
+            self._unresolved_faqs[faq2].append(faq1)
+
+    def resolve_faqs(self):
+        for faq_id in self._unresolved_faqs:
+            for faq2_id in self._unresolved_faqs[faq_id]:
+                faq1 = Faq.get_by_id(faq_id)
+                faq2 = Faq.get_by_id(faq2_id)
+                self.associate_objects(faq1, faq2)
 
     def get_guidelines_to_category(self):
         mapping = {}
-        for category, guidelines in self.category_to_guidelines.items():
+        for category in self._data['category']:
+            guidelines = self._data['category'][category]['guideline']
             sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
             mapping[category] = sorted_guidelines
         return mapping
 
     def get_category_to_guidelines(self, category):
-        return sorted(self.category_to_guidelines[category.id], key=lambda item: item.sort_key)
-
-    def associate_guideline_with_check(self, guideline, check):
-        if guideline.id not in self.guideline_to_checks:
-            self.guideline_to_checks[guideline.id] = []
-        if check not in self.guideline_to_checks[guideline.id]:
-            self.guideline_to_checks[guideline.id].append(check)
-        if check.id not in self.check_to_guidelines:
-            self.check_to_guidelines[check.id] = []
-        if  guideline not in self.check_to_guidelines[check.id]:
-            self.check_to_guidelines[check.id].append(guideline)
+        return sorted(self._data['category'][category.id]['guideline'], key=lambda item: item.sort_key)
 
     def get_check_to_guidelines(self, check):
-        return sorted(self.check_to_guidelines[check.id], key=lambda item: item.sort_key)
+        return sorted(self._data['check'][check.id]['guideline'], key=lambda item: item.sort_key)
 
     def get_guideline_to_checks(self, guideline):
-        return sorted(self.guideline_to_checks[guideline.id], key=lambda item: item.id)
-
-    def associate_guideline_with_sc(self, guideline, sc):
-        if guideline.id not in self.guideline_to_scs:
-            self.guideline_to_scs[guideline.id] = []
-        if sc not in self.guideline_to_scs[guideline.id]:
-            self.guideline_to_scs[guideline.id].append(sc)
-        if sc.id not in self.sc_to_guidelines:
-            self.sc_to_guidelines[sc.id] = []
-        if guideline not in self.sc_to_guidelines[sc.id]:
-            self.sc_to_guidelines[sc.id].append(guideline)
+        return sorted(self._data['guideline'][guideline.id]['check'], key=lambda item: item.id)
 
     def get_guideline_to_scs(self, guideline):
-        return sorted(self.guideline_to_scs[guideline.id], key=lambda item: item.sort_key)
+        return sorted(self._data['guideline'][guideline.id]['wcag_sc'], key=lambda item: item.sort_key)
 
     def get_sc_to_guidelines(self, sc):
-        if sc.id not in self.sc_to_guidelines:
+        if sc.id not in self._data['wcag_sc'] or 'guideline' not in self._data['wcag_sc'][sc.id]:
             return []
-        return sorted(self.sc_to_guidelines[sc.id], key=lambda item: item.sort_key)
-
-    def associate_guideline_with_info(self, guideline, info):
-        if guideline.id not in self.guideline_to_info:
-            self.guideline_to_info[guideline.id] = []
-        if info not in self.guideline_to_info[guideline.id]:
-            self.guideline_to_info[guideline.id].append(info)
-        if info.id not in self.info_to_guidelines:
-            self.info_to_guidelines[info.id] = []
-        if info.internal and guideline not in self.info_to_guidelines[info.id]:
-            self.info_to_guidelines[info.id].append(guideline)
-        for check in self.guideline_to_checks.get(guideline.id):
-            if check.id not in self.check_to_info:
-                self.check_to_info[check.id] = []
-            if info not in self.check_to_info.get(check.id):
-                self.check_to_info[check.id].append(info)
+        return sorted(self._data['wcag_sc'][sc.id]['guideline'], key=lambda item: item.sort_key)
 
     def get_guideline_to_info(self, guideline):
-        if guideline.id in self.guideline_to_info:
-            return self.guideline_to_info.get(guideline.id)
+        if 'info_ref' in self._data['guideline'][guideline.id]:
+            return self._data['guideline'][guideline.id]['info_ref']
         return []
 
     def get_info_to_guidelines(self, info):
-        if info.id in self.info_to_guidelines:
-            return self.info_to_guidelines.get(info.id)
+        if 'guideline' in self._data['info_ref'][info.id]:
+            return self._data['info_ref'][info.id]['guideline']
         return []
 
     def get_check_to_info(self, check):
-        if check.id in self.check_to_info:
-            return self.check_to_info.get(check.id)
+        if 'info_ref' in self._data['check'][check.id]:
+            return self._data['check'][check.id]['info_ref']
         return []
 
-    def associate_faq_with_guideline(self, faq, guideline):
-        if faq.id not in self.faq_to_guidelines:
-            self.faq_to_guidelines[faq.id] = []
-        if guideline not in self.faq_to_guidelines[faq.id]:
-            self.faq_to_guidelines[faq.id].append(guideline)
-        if guideline.id not in self.guideline_to_faqs:
-            self.guideline_to_faqs[guideline.id] = []
-        if faq not in self.guideline_to_faqs[guideline.id]:
-            self.guideline_to_faqs[guideline.id].append(faq)
-
     def get_guideline_to_faqs(self, guideline):
-        if guideline.id in self.guideline_to_faqs:
-            return self.guideline_to_faqs.get(guideline.id)
+        if 'faq' in self._data['guideline'][guideline.id]:
+            return self._data['guideline'][guideline.id]['faq']
         return []
 
     def get_faq_to_guidelines(self, faq):
-        if faq.id in self.faq_to_guidelines:
-            return self.faq_to_guidelines.get(faq.id)
-        return []
-
-    def associate_faq_with_check(self, faq, check):
-        if faq.id not in self.faq_to_checks:
-            self.faq_to_checks[faq.id] = []
-        if check not in self.faq_to_checks[faq.id]:
-            self.faq_to_checks[faq.id].append(check)
-        if check.id not in self.check_to_faqs:
-            self.check_to_faqs[check.id] = []
-        if faq not in self.check_to_faqs[check.id]:
-            self.check_to_faqs[check.id].append(faq)
+        if faq.id not in self._data['faq'] or 'guideline' not in self._data['faq'][faq.id]:
+            return []
+        return self._data['faq'][faq.id]['guideline']
 
     def get_faq_to_checks(self, faq):
-        if faq.id in self.faq_to_checks:
-            return self.faq_to_checks.get(faq.id)
-        return []
+        if faq.id not in self._data['faq'] or 'check' not in self._data['faq'][faq.id]:
+            return []
+        return self._data['faq'][faq.id]['check']
 
     def get_check_to_faqs(self, check):
-        if check.id in self.check_to_faqs:
-            return self.check_to_faqs.get(check.id)
+        if 'faq' in self._data['check'][check.id]:
+            return self._data['check'][check.id]['faq']
         return []
-
-    def associate_faq_with_tag(self, faq, tag):
-        if faq.id not in self.faq_to_tags:
-            self.faq_to_tags[faq.id] = []
-        if tag not in self.faq_to_tags[faq.id]:
-            self.faq_to_tags[faq.id].append(tag)
-        if tag.id not in self.tag_to_faqs:
-            self.tag_to_faqs[tag.id] = []
-        if faq not in self.tag_to_faqs[tag.id]:
-            self.tag_to_faqs[tag.id].append(faq)
 
     def get_faq_to_tags(self, faq):
-        if faq.id in self.faq_to_tags:
-            return sorted(self.faq_to_tags.get(faq.id), key=lambda item: item.id)
-        return []
+        return sorted(self._data['faq'][faq.id]['faq_tag'], key=lambda item: item.id)
 
     def get_tag_to_faqs(self, tag):
-        if tag.id in self.tag_to_faqs:
-            return self.tag_to_faqs.get(tag.id)
-        return []
-
-    def associate_faq_with_info(self, faq, info):
-        if faq.id not in self.faq_to_info:
-            self.faq_to_info[faq.id] = []
-        if info not in self.faq_to_info[faq.id]:
-            self.faq_to_info[faq.id].append(info)
-        if info.id not in self.info_to_faqs:
-            self.info_to_faqs[info.id] = []
-        if faq not in self.info_to_faqs[info.id]:
-            self.info_to_faqs[info.id].append(faq)
+        if tag.id not in self._data['faq_tag'] or 'faq' not in self._data['faq_tag'][tag.id]:
+            return []
+        return self._data['faq_tag'][tag.id]['faq']
 
     def get_faq_to_info(self, faq):
-        if faq.id in self.faq_to_info:
-            return self.faq_to_info.get(faq.id)
+        if 'info_ref' in self._data['faq'][faq.id]:
+            return self._data['faq'][faq.id]['info_ref']
         return []
 
     def get_info_to_faqs(self, info):
-        if info.id in self.info_to_faqs:
-            return self.info_to_faqs.get(info.id)
+        if 'faq' in self._data['info_ref'][info.id]:
+            return self._data['info_ref'][info.id]['faq']
+        return []
+
+    def get_related_faqs(self, faq):
+        if faq.id not in self._unresolved_faqs:
+            return []
+        return sorted(self._data['faq'][faq.id]['faq'], key=lambda item: item.sort_key)
+
+    def get_axe_to_wcagsc(self, axe_rule):
+        if 'wcag_sc' in self._data['axe_rule'][axe_rule.id]:
+            return self._data['axe_rule'][axe_rule.id]['wcag_sc']
+        return []
+
+    def get_axe_to_guidelines(self, axe_rule):
+        if 'guideline' in self._data['axe_rule'][axe_rule.id]:
+            return self._data['axe_rule'][axe_rule.id]['guideline']
         return []
 
 class Guideline:
@@ -201,6 +157,7 @@ class Guideline:
 
     def __init__(self, gl):
         self.id = gl['id']
+        self.object_type = 'guideline'
         if self.id in Guideline.all_guidelines:
             raise ValueError(f'Duplicate guideline ID: {self.id}')
         self.sort_key = gl['sortKey']
@@ -213,15 +170,20 @@ class Guideline:
         self.src_path = gl['src_path']
         self.category = Category.get_by_id(gl['category'])
         rel = RelationshipManager()
-        rel.set_guideline_category(self)
+        rel.associate_objects(self, Category.get_by_id(gl['category']))
         for check_id in gl['checks']:
-            rel.associate_guideline_with_check(self, Check.get_by_id(check_id))
+            rel.associate_objects(self, Check.get_by_id(check_id))
         for sc in gl['sc']:
-            rel.associate_guideline_with_sc(self, WcagSc.get_by_id(sc))
+            rel.associate_objects(self, WcagSc.get_by_id(sc))
 
         if 'info' in gl:
             for info in gl['info']:
-                rel.associate_guideline_with_info(self, InfoRef(info))
+                info_ref = InfoRef(info)
+                rel.associate_objects(self, info_ref)
+                if info_ref.internal:
+                    rel.associate_objects(self, info_ref)
+                for check in rel.get_guideline_to_checks(self):
+                    rel.associate_objects(check, info_ref)
 
         Guideline.all_guidelines[self.id] = self
 
@@ -240,8 +202,8 @@ class Guideline:
             'guideline': self.guideline[lang],
             'intent': self.intent[lang],
             'category': self.category.names[lang],
-            'checks': [check.template_object(lang, platform=self.platform) for check in rel.guideline_to_checks.get(self.id)],
-            'scs': [sc.template_object(lang) for sc in rel.get_guideline_to_scs(self)],
+            'checks': [check.template_object(lang, platform=self.platform) for check in rel.get_guideline_to_checks(self)],
+            'scs': [sc.template_object() for sc in rel.get_guideline_to_scs(self)],
         }
         faqs = rel.get_guideline_to_faqs(self)
         if len(faqs):
@@ -257,12 +219,15 @@ class Guideline:
 
     @classmethod
     def list_all_src_paths(cls):
-        return [guideline.src_path for guideline in cls.all_guidelines.values()]
+        for guideline in cls.all_guidelines.values():
+            yield guideline.src_path
+
 class Check:
     all_checks = {}
 
     def __init__(self, check):
         self.id = check['id']
+        self.object_type = 'check'
         if self.id in Check.all_checks:
             raise ValueError(f'Duplicate check ID: {self.id}')
         self.check = check['check']
@@ -284,10 +249,7 @@ class Check:
 
     def template_object(self, lang, **kwargs):
         rel = RelationshipManager()
-        # if 'platform' in kwargs:
         gl_platform = kwargs.get('platform')
-        # else:
-            # gl_platform = []
         template_object = {
             'id': self.id,
             'check': self.check[lang],
@@ -324,17 +286,20 @@ class Check:
     @classmethod
     def template_object_all(cls, lang):
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
-        return [cls.all_checks[check_id].template_object(lang) for check_id in sorted_checks]
+        for check_id in sorted_checks:
+            yield cls.all_checks[check_id].template_object(lang)
 
     @classmethod
     def list_all_src_paths(cls):
-        return [check.src_path for check in cls.all_checks.values()]
+        for check in cls.all_checks.values():
+            yield check.src_path
 
 class Faq:
     all_faqs = {}
 
     def __init__(self, faq):
         self.id = faq['id']
+        self.object_type = 'faq'
         if self.id in Faq.all_faqs:
             raise ValueError(f'Duplicate FAQ ID: {self.id}')
         self.sort_key = faq['sortKey']
@@ -350,29 +315,31 @@ class Faq:
         rel = RelationshipManager()
         if 'guidelines' in faq:
             for guideline_id in faq['guidelines']:
-                rel.associate_faq_with_guideline(self, Guideline.get_by_id(guideline_id))
+                rel.associate_objects(self, Guideline.get_by_id(guideline_id))
 
         for tag in faq['tags']:
-            rel.associate_faq_with_tag(self, FaqTag.get_by_id(tag))
+            rel.associate_objects(self, FaqTag.get_by_id(tag))
 
         if 'checks' in faq:
             for check_id in faq['checks']:
-                rel.associate_faq_with_check(self, Check.get_by_id(check_id))
+                rel.associate_objects(self, Check.get_by_id(check_id))
 
         if 'info' in faq:
             for info in faq['info']:
-                rel.associate_faq_with_info(self, InfoRef(info))
-
+                rel.associate_objects(self, InfoRef(info))
+        if 'faqs' in faq:
+            for related_faq in faq['faqs']:
+                rel.add_unresolved_faqs(self.id, related_faq)
         Faq.all_faqs[self.id] = self
 
     def get_dependency(self):
         rel = RelationshipManager()
         dependency = [self.src_path]
         guidelines = rel.get_faq_to_guidelines(self)
-        if len(guidelines):
+        if len(guidelines) > 0:
             dependency.extend([guideline.src_path for guideline in guidelines])
         checks = rel.get_faq_to_checks(self)
-        if len(checks):
+        if len(checks) > 0:
             dependency.extend([check.src_path for check in checks])
         return uniq(dependency)
 
@@ -392,16 +359,19 @@ class Faq:
             'tags': [tag.id for tag in tags],
         }
         guidelines = rel.get_faq_to_guidelines(self)
-        if len(guidelines):
+        if len(guidelines) > 0:
             sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
             template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in sorted_guidelines]
         checks = rel.get_faq_to_checks(self)
-        if len(checks):
+        if len(checks) > 0:
             sorted_checks = sorted(checks, key=lambda item: item.id)
             template_object['checks'] = [{'id': check.id, 'check': check.check[lang]} for check in sorted_checks]
         info = rel.get_faq_to_info(self)
         if len(info):
             template_object['info'] = [inforef.refstring() for inforef in info]
+        related_faqs = rel.get_related_faqs(self)
+        if len(related_faqs) > 0:
+            template_object['related_faqs'] = [faq.id for faq in related_faqs]
         return template_object
 
     @classmethod
@@ -413,22 +383,28 @@ class Faq:
 
     @classmethod
     def list_all_src_paths(cls):
-        return [faq.src_path for faq in cls.all_faqs.values()]
+        for faq in cls.all_faqs.values():
+            yield faq.src_path
+
+    @classmethod
+    def get_by_id(cls, faq_id):
+        return cls.all_faqs.get(faq_id)
 
 class Category:
     all_categories = {}
 
     def __init__(self, category_id, names):
         self.id = category_id
+        self.object_type = 'category'
         self.names = names
         self.guidelines = []
         Category.all_categories[category_id] = self
 
-    def add_guideline(self, guideline):
-        if guideline in self.guidelines:
-            return
-        self.guidelines.append(guideline)
-        guideline.set_category(self)
+    # def add_guideline(self, guideline):
+    #     if guideline in self.guidelines:
+    #         return
+    #     self.guidelines.append(guideline)
+    #     guideline.set_category(self)
 
     def get_name(self, lang):
         if lang in self.names:
@@ -457,6 +433,7 @@ class FaqTag:
 
     def __init__(self, tag_id, names):
         self.id = tag_id
+        self.object_type = 'faq_tag'
         self.names = names
         FaqTag.all_tags[tag_id] = self
 
@@ -500,6 +477,7 @@ class WcagSc:
 
     def __init__(self, sc_id, sc):
         self.id = sc_id
+        self.object_type = 'wcag_sc'
         self.scnum = sc['id']
         self.sort_key = sc['sortKey']
         self.level = sc['level']
@@ -514,9 +492,8 @@ class WcagSc:
         }
         WcagSc.all_scs[self.id] = self
 
-    def template_object(self, lang):
-        rel = RelationshipManager()
-        template_object =  {
+    def template_object(self):
+        return {
             'sc': self.scnum,
             'level': self.level,
             'LocalLevel': self.local_priority,
@@ -525,10 +502,6 @@ class WcagSc:
             'sc_en_url': self.url['en'],
             'sc_ja_url': self.url['ja']
         }
-        guidelines = rel.get_sc_to_guidelines(self)
-        if len(guidelines) > 0:
-            template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
-        return template_object
 
     @classmethod
     def get_by_id(cls, sc_id):
@@ -555,6 +528,7 @@ class InfoRef:
             return
         self.ref = inforef
         self.id = url_encode(self.ref)
+        self.object_type = 'info_ref'
         self.internal = not bool(re.match(r'(https?://|\|.+\|)', self.ref))
         if not self.internal:
             self.url = data['url']
@@ -572,8 +546,23 @@ class InfoRef:
 
     @classmethod
     def list_all_external(cls):
-        return [inforef for inforef in cls.all_inforefs.values() if not inforef.internal]
+        for inforef in cls.all_inforefs.values():
+            if not inforef.internal:
+                yield inforef
 
+    @classmethod
+    def list_has_guidelines(cls):
+        rel = RelationshipManager()
+        for inforef in cls.all_inforefs.values():
+            if len(rel.get_info_to_guidelines(inforef)):
+                yield inforef
+
+    @classmethod
+    def list_has_faqs(cls):
+        rel = RelationshipManager()
+        for inforef in cls.all_inforefs.values():
+            if len(rel.get_info_to_faqs(inforef)):
+                yield inforef
 
 class Procedure:
     def __init__(self, procedure, check):
@@ -735,6 +724,85 @@ class CheckTool:
     def get_by_id(cls, tool_id):
         return cls.all_tools.get(tool_id)
 
+class AxeRule:
+    all_rules = {}
+    timestamp = None
+    version = None
+    major_version = None
+    deque_url = None
+
+    def __init__(self, rule, messages_ja):
+        rule_id = rule['id']
+        if rule_id in AxeRule.all_rules:
+            raise ValueError(f'Duplicate rule ID: {rule_id}')
+        self.id = rule_id
+        self.object_type = 'axe_rule'
+        if not rule_id in messages_ja['rules']:
+            msg_ja = {
+                'help': rule['metadata']['help'],
+                'description': rule['metadata']['description']
+            }
+            self.translated = None
+        else:
+            msg_ja = messages_ja['rules'][rule_id]
+            self.translated = True
+        self.message = {
+            'help': {
+                'en': rule['metadata']['help'],
+                'ja': msg_ja['help']
+            },
+            'description': {
+                'en': rule['metadata']['description'],
+                'ja': msg_ja['description']
+            }
+        }
+        self.has_wcag_sc = None
+        self.has_guideline = None
+        wcag_scs = [tag2sc(tag) for tag in rule['tags'] if re.match(r'wcag\d{3,}', tag) ]
+        rel = RelationshipManager()
+        for sc in wcag_scs:
+            if sc not in WcagSc.all_scs:
+                continue
+            rel.associate_objects(self, WcagSc.get_by_id(sc))
+            self.has_wcag_sc = True
+            for guideline in rel.get_sc_to_guidelines(WcagSc.get_by_id(sc)):
+                rel.associate_objects(self, guideline)
+                self.has_guideline = True
+        AxeRule.all_rules[rule_id] = self
+
+    def template_object(self, lang):
+        rel = RelationshipManager()
+        data = {
+            'id': self.id,
+            'help': self.message['help'],
+            'description': self.message['description']
+        }
+        if self.translated:
+            data['translated'] = True
+        if self.has_wcag_sc:
+            scs = sorted(rel.get_axe_to_wcagsc(self), key=lambda item: item.sort_key)
+            data['scs'] = [sc.template_object() for sc in scs]
+        if self.has_guideline:
+            guidelines = sorted(rel.get_axe_to_guidelines(self), key=lambda item: item.sort_key)
+            data['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
+        return data
+
+    @classmethod
+    def list_all(cls):
+        sorted_all_rules = sorted(cls.all_rules, key=lambda rule: cls.all_rules[rule].id)
+        with_guidelines = []
+        with_sc = []
+        without_sc = []
+        for rule_id in sorted_all_rules:
+            rule = cls.all_rules[rule_id]
+            if rule.has_guideline:
+                with_guidelines.append(rule)
+            elif rule.has_wcag_sc:
+                with_sc.append(rule)
+            else:
+                without_sc.append(rule)
+        return with_guidelines + with_sc + without_sc
+
 # Utility functions
 def join_items(items, lang):
     if lang == 'ja':
@@ -746,3 +814,6 @@ def join_items(items, lang):
 def uniq(seq):
     seen = []
     return [x for x in seq if x not in seen and not seen.append(x)]
+
+def tag2sc(tag):
+    return re.sub(r'wcag(\d)(\d)(\d+)', r'\1.\2.\3', tag)

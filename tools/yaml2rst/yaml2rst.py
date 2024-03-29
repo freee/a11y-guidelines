@@ -1,6 +1,6 @@
 import os
 import app_initializer
-from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, RelationshipManager
+from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 import a11y_guidelines_initializer
 
 def main():
@@ -8,7 +8,7 @@ def main():
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
     templates = app_initializer.setup_templates(settings['lang'])
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    rel = a11y_guidelines_initializer.setup_instances(settings)
+    a11y_guidelines_initializer.setup_instances(settings)
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
@@ -24,7 +24,7 @@ def main():
     generate_files(DEST_DIRS['info2gl'], templates['info_to_gl'], get_info_to_guidelines, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(DEST_DIRS['info2faq'], templates['info_to_faq'], get_info_to_faqs, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['wcag21mapping'], templates['wcag21mapping'], get_wcag21mapping, settings['build_all'], settings['targets'], settings['lang'])
-    generate_files(STATIC_FILES['priority_diff'], templates['priority_diff'], get_priority_diff,  settings['build_all'], settings['targets'], settings['lang'])
+    generate_files(STATIC_FILES['priority_diff'], templates['priority_diff'], get_priority_diff, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['miscdefs'], templates['miscdefs'], get_miscdefs, settings['build_all'], settings['targets'], settings['lang'])
     generate_files(STATIC_FILES['makefile'], templates['makefile'], get_makefile, settings['build_all'], settings['targets'], settings['lang'], {
         'DEST_DIRS': DEST_DIRS,
@@ -32,20 +32,20 @@ def main():
         'makefile_vars': makefile_vars,
         'makefile_vars_list': makefile_vars_list
     })
+    generate_files(STATIC_FILES['axe_rules'], templates['axe_rules'], get_axe_rules, settings['build_all'], settings['targets'], settings['lang'])
 
 def get_category_pages(lang):
     rel = RelationshipManager()
     for category, guidelines in rel.get_guidelines_to_category().items():
-        data = {
+        yield {
             'filename': category,
             'lang': lang,
             'guidelines': [gl.template_object(lang) for gl in guidelines]
         }
-        yield data
 
 def get_allchecks(lang):
     allchecks = Check.template_object_all(lang)
-    yield {'allchecks': allchecks}
+    return [{'allchecks': allchecks}]
 
 def get_example_pages(lang):
     for tool in CheckTool.list_all():
@@ -60,33 +60,31 @@ def get_faq_tagpages(lang):
     for tag in FaqTag.list_all():
         if tag.article_count() == 0:
             continue
-        data = {
+        yield {
             'filename': tag.id,
             'tag': tag.id,
             'label': tag.names[lang],
             'articles': [faq.id for faq in rel.get_tag_to_faqs(tag)]
         }
-        yield data
 
 def get_faq_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
     tags = [tag.template_object(lang) for tag in sorted_tags if tag.article_count() > 0]
     articles = [article.template_object(lang) for article in Faq.list_all(sort_by='date')]
-    yield {'articles': articles, 'tags': tags}
+    return [{'articles': articles, 'tags': tags}]
 
 def get_faq_tag_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
     tagpages = [tagpage.template_object(lang) for tagpage in sorted_tags if tagpage.article_count() > 0]
-    yield {'tags': tagpages}
+    return [{'tags': tagpages}]
 
 def get_faq_article_index(lang):
     articles = [article.template_object(lang) for article in Faq.list_all(sort_by='sortKey')]
-    yield {'articles': articles}
+    return [{'articles': articles}]
 
 def get_info_to_guidelines(lang):
     rel = RelationshipManager()
-    for info_id in rel.info_to_guidelines:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_guidelines():
         if not info.internal:
             continue
         sorted_guidelines = sorted(rel.get_info_to_guidelines(info), key=lambda item: item.sort_key)
@@ -95,8 +93,7 @@ def get_info_to_guidelines(lang):
 
 def get_info_to_faqs(lang):
     rel = RelationshipManager()
-    for info_id in rel.info_to_faqs:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_faqs():
         if not info.internal:
             continue
         faqs = [faq.id for faq in rel.get_info_to_faqs(info)]
@@ -104,12 +101,18 @@ def get_info_to_faqs(lang):
 
 def get_wcag21mapping(lang):
     rel = RelationshipManager()
-    sc_mapping = [sc.template_object(lang) for sc in WcagSc.get_all().values()]
-    yield {'mapping': sc_mapping}
+    mappings = []
+    for sc in WcagSc.get_all().values():
+        sc_object = sc.template_object()
+        guidelines = rel.get_sc_to_guidelines(sc)
+        if len(guidelines) > 0:
+            sc_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
+        mappings.append(sc_object)
+    return [{'mapping': mappings}]
 
 def get_priority_diff(lang):
-    diffs = [sc.template_object(lang) for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
-    yield {'diffs': diffs}
+    diffs = [sc.template_object() for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
+    return [{'diffs': diffs}]
 
 def get_miscdefs(lang):
     data = []
@@ -119,61 +122,7 @@ def get_miscdefs(lang):
             'text': info.text[lang],
             'url': info.url[lang]
         })
-    yield {'links': data}
-
-# def generate_makefile(destfile, template, build_all, targets, lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_list):
-#     rel = RelationshipManager()
-#     if build_all or destfile in targets:
-#         build_depends = []
-#         makefile_vars['check_yaml'] = ' '.join(Check.list_all_src_paths())
-#         makefile_vars['gl_yaml'] = ' '.join(Guideline.list_all_src_paths())
-#         makefile_vars['faq_yaml'] = ' '.join(Faq.list_all_src_paths())
-#         for cat in Category.list_all():
-#             filename = f'{cat.id}.rst'
-#             target = os.path.join(DEST_DIRS['guidelines'], filename)
-#             makefile_vars_list['guideline_category_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(cat.get_dependency())})
-
-#         for tool in CheckTool.list_all():
-#             filename = f'examples-{tool.id}.rst'
-#             target = os.path.join(DEST_DIRS['checks'], filename)
-#             makefile_vars_list['check_example_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(tool.get_dependency())})
-
-#         for faq in Faq.list_all():
-#             filename = f'{faq.id}.rst'
-#             target = os.path.join(DEST_DIRS['faq_articles'], filename)
-#             makefile_vars_list['faq_article_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join(faq.get_dependency())})
-
-#         for tag in FaqTag.list_all():
-#             if tag.article_count() == 0:
-#                 continue
-#             filename = f'{tag.id}.rst'
-#             target = os.path.join(DEST_DIRS['faq_tags'], filename)
-#             makefile_vars_list['faq_tagpage_target'].append(target)
-#             build_depends.append({'target': target, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
-
-#         for info_id in rel.info_to_guidelines:
-#             info = InfoRef.get_by_id(info_id)
-#             if not info.internal:
-#                 continue
-#             filename = f'{info.ref}.rst'
-#             target = os.path.join(DEST_DIRS['info2gl'], filename)
-#             makefile_vars_list['info_to_gl_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
-
-#         for info_id in rel.info_to_faqs:
-#             info = InfoRef.get_by_id(info_id)
-#             filename = f'{info.ref}.rst'
-#             target = os.path.join(DEST_DIRS['info2faq'], filename)
-#             makefile_vars_list['info_to_faq_target'].append(target)
-#             build_depends.append({'target': target, 'depends': ' '.join([faq.src_path for faq in rel.get_info_to_faqs(info)])})
-
-#         for key, value in makefile_vars_list.items():
-#             makefile_vars[key] = ' '.join(value)
-#             makefile_vars['depends'] = build_depends
-#         template.write_rst({**makefile_vars, **MAKEFILE_VARS}, destfile)
+    return [{'links': data}]
 
 def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_list):
     rel = RelationshipManager()
@@ -205,10 +154,12 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
         filename = f'{tag.id}.rst'
         target = os.path.join(DEST_DIRS['faq_tags'], filename)
         makefile_vars_list['faq_tagpage_target'].append(target)
-        build_depends.append({'target': target, 'depends': [' '.join(faq.get_dependency()) for faq in rel.get_tag_to_faqs(tag)]})
+        dependency = []
+        for faq in rel.get_tag_to_faqs(tag):
+            dependency.extend(faq.get_dependency())
+        build_depends.append({'target': target, 'depends': ' '.join(dependency)})
 
-    for info_id in rel.info_to_guidelines:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_guidelines():
         if not info.internal:
             continue
         filename = f'{info.ref}.rst'
@@ -216,8 +167,7 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
         makefile_vars_list['info_to_gl_target'].append(target)
         build_depends.append({'target': target, 'depends': ' '.join([guideline.src_path for guideline in rel.get_info_to_guidelines(info)])})
 
-    for info_id in rel.info_to_faqs:
-        info = InfoRef.get_by_id(info_id)
+    for info in InfoRef.list_has_faqs():
         filename = f'{info.ref}.rst'
         target = os.path.join(DEST_DIRS['info2faq'], filename)
         makefile_vars_list['info_to_faq_target'].append(target)
@@ -226,8 +176,16 @@ def get_makefile(lang, DEST_DIRS, MAKEFILE_VARS, makefile_vars, makefile_vars_li
     for key, value in makefile_vars_list.items():
         makefile_vars[key] = ' '.join(value)
         makefile_vars['depends'] = build_depends
-    yield {**makefile_vars, **MAKEFILE_VARS}
+    return [{**makefile_vars, **MAKEFILE_VARS}]
 
+def get_axe_rules(lang):
+    return [{
+        'version': AxeRule.version,
+        'major_version': AxeRule.major_version,
+        'deque_url': AxeRule.deque_url,
+        'timestamp': AxeRule.timestamp,
+        'rules': [rule.template_object(lang) for rule in AxeRule.list_all()]
+    }]
 
 def generate_file(dest_path, template, data):
     """
@@ -263,7 +221,7 @@ def generate_files(dest_path, template, get_data_func, build_all, targets, lang,
     """
     extra_args = extra_args or {}
     for data in get_data_func(lang=lang, **extra_args):
-        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, data['filename']) in targets):
+        if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, f'{data["filename"]}.rst') in targets):
             generate_file(dest_path, template, data)
 
 if __name__ == "__main__":

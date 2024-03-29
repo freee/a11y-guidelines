@@ -68,6 +68,14 @@
       "items": {
         "type": "string"
       }
+    },
+    "faqs": {
+      "description": "related FAQ entry if any",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
     }
   },
   "additionalProperties": false,

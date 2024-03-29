@@ -3,6 +3,7 @@ updated: '2023-12-14'
 sortKey: 10100
 tags:
 - form
+- target-size
 title:
   ja: ラジオボタンやチェックボックスのサイズ
   en: Size of radio buttons and check boxes
@@ -45,7 +46,7 @@ explanation:
           .. image:: /img/faq/d0002/02.png
              :alt: スクリーン・ショット：メニューで「検証」をハイライト
 
-       2. 開発者ツールが開くので、 `type="checkbox"` となっている `input` 要素がハイライトされた状態にする。
+       2. 開発者ツールが開くので、 ``type="checkbox"`` となっている ``input`` 要素がハイライトされた状態にする。
 
           .. image:: /img/faq/d0002/03.png
              :alt: スクリーン・ショット：開発者ツールでチェックボックスをハイライト
@@ -60,9 +61,9 @@ explanation:
           .. image:: /img/faq/d0002/05.png
              :alt: スクリーン・ショット：Stylesパネル
 
-          上記のスクリーン・ショットでは `box-sizing: border-box` が上書きされているが、元の指定と同じで、見た目を変更する指定でもないので問題はない。
+          上記のスクリーン・ショットでは ``box-sizing: border-box`` が上書きされているが、元の指定と同じで、見た目を変更する指定でもないので問題はない。
   en: |-
-    Checks 0331 and 0351 indicate the conditions for satisfying Guideline Item :ref:`gl-icon-target-size` which is based on the Sucess Criterion 2.5.5 `Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_ of WCAG 2.1.
+    Checks 0331 and 0351 indicate the conditions for satisfying Guideline Item :ref:`gl-icon-target-size` which is based on the Success Criterion 2.5.5 `Target Size <https://www.w3.org/TR/WCAG21/#target-size>`_ of WCAG 2.1.
 
     This Level AAA success criterion requires the size of pointer input targets, including checkboxes and radio buttons, to be 44×44px or more.
     freee, which has many desktop services, finds it difficult to meet the requirement of 44×44px or more, but it is necessary to have some kind of standard, so we have set a standard of 24×24px.
@@ -82,7 +83,7 @@ explanation:
           .. image:: /img/faq/d0002/02.png
              :alt: Screenshot: "Inspect" is highlighted in the menu
 
-       2. Once the developer tools open, highlight the `input` element with `type="checkbox"`.
+       2. Once the developer tools open, highlight the ``input`` element with ``type="checkbox"``.
 
           .. image:: /img/faq/d0002/03.png
              :alt: Screenshot: The checkbox is highlighted in the developer tools
@@ -93,11 +94,11 @@ explanation:
              :alt: Screenshot: The checkbox is highlighted in the rendering area of the developer tools
 
        3. In the Styles panel, check to see if there are any style specifications that change the appearance other than the user agent stylesheet.
-  
+
           .. image:: /img/faq/d0002/05.png
              :alt: Screenshot: Styles panel
 
-          In the above screenshot, `box-sizing: border-box` is overwritten, but it is the same as the original specification and does not change the appearance, so there is no problem.
+          In the above screenshot, ``box-sizing: border-box`` is overwritten, but it is the same as the original specification and does not change the appearance, so there is no problem.
 guidelines:
 - gl-icon-target-size
 checks:

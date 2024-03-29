@@ -26,19 +26,26 @@ Explanation
 {%- endfilter %}
 
 {{ explanation }}
+{% if related_faqs is defined %}
+{% filter make_heading(2) -%}
+Related FAQs
+{%- endfilter %}
 
-{% if guidelines is defined -%}
-{%- filter make_heading(2) -%}
+{% for faq in related_faqs -%}
+*  :ref:`faq-{{ faq }}`
+{% endfor %}
+{%- endif -%}
+{% if guidelines is defined %}
+{% filter make_heading(2) -%}
 Related Guidelines
 {%- endfilter %}
 
 {% for gl in guidelines -%}
 *  {{ gl.category }}: :ref:`{{ gl.guideline }}`
 {% endfor %}
-{%- endif %}
-
-{% if checks is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if checks is defined %}
+{% filter make_heading(2) -%}
 Related Checklist Items
 {%- endfilter %}
 
@@ -46,10 +53,9 @@ Related Checklist Items
 :ref:`check-{{ check.id }}`
    {{ check.check | indent(3) }}
 {% endfor %}
-{%- endif %}
-
-{% if info is defined -%}
-{%- filter make_heading(2) -%}
+{%- endif -%}
+{% if info is defined %}
+{% filter make_heading(2) -%}
 Related Supplementary Information
 {%- endfilter %}
 

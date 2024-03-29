@@ -1,7 +1,7 @@
 import os
 import argparse
 import config
-from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, TEMPLATE_FILENAMES
+from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, LOCALIZED_TEMPLATE_FILENAMES, TEMPLATE_FILENAMES
 from template_manager import TemplateManager
 
 def setup_parameters():
@@ -22,7 +22,8 @@ def setup_constants(settings):
             'priority_diff_target': STATIC_FILES['priority_diff'],
             'miscdefs_target': STATIC_FILES['miscdefs'],
             'wcag_sc': src_path['wcag_sc'],
-            'info_src': src_path['info']
+            'info_src': src_path['info'],
+            'axe_rules_target': STATIC_FILES['axe_rules'],
     }
 
     return DEST_DIRS, STATIC_FILES, MAKEFILE_VARS
@@ -45,9 +46,12 @@ def setup_variables():
 
 def setup_templates(lang):
     templates = {}
-    template_dir = os.path.join(TEMPLATE_DIR, lang)
+    localized_template_dir = os.path.join(TEMPLATE_DIR, lang)
     for name, filename in TEMPLATE_FILENAMES.items():
-        template = TemplateManager(template_dir)
+        template = TemplateManager(TEMPLATE_DIR)
+        templates[name] = template.load(filename)
+    for name, filename in LOCALIZED_TEMPLATE_FILENAMES.items():
+        template = TemplateManager(localized_template_dir)
         templates[name] = template.load(filename)
     return templates
 
@@ -70,11 +74,14 @@ def process_arguments(args):
     Returns:
         A dictionary containing settings derived from the command-line arguments.
     """
-    settings = {
+    basedir = os.path.abspath(args.basedir)
+    files = []
+    if args.files:
+        files = [os.path.abspath(f) for f in args.files]
+    return {
         'build_all': not args.files,
-        'targets': args.files if args.files else [],
+        'targets': files,
         'no_check': args.no_check,
         'lang': args.lang,
-        'basedir': args.basedir
+        'basedir': basedir
     }
-    return settings

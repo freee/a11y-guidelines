@@ -10,7 +10,7 @@ platform:
 guideline:
   ja: |-
     そのプラットフォームで標準的ではない入力手段を使用しないとアクセスできない情報や利用できない機能がない。
-    
+
     プラットフォームの標準的な入力手段とは、Webではキーボード、モバイルではOS標準のタッチ操作を指す。また、文字入力に関しては、Windowsのタッチ操作、iOSやAndroidでキーボードを接続した操作もプラットフォームの標準的な入力手段に当たる。
   en: |-
     There are no inaccessible pieces of information or unusable functions that require non-standard input methods for that platform.

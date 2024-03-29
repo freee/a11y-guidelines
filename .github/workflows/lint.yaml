@@ -12,6 +12,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        submodules: true
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
@@ -59,6 +60,8 @@ jobs:
     steps:
     - name: Checkout files
       uses: actions/checkout@v3
+      with:
+        submodules: true
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
@@ -67,17 +70,14 @@ jobs:
       run: python -m pip install --upgrade pip
     - name: Install required modules
       run: python -m pip install -r requirements.txt --upgrade
-    - name: Install sphinx-lint
-      run: python -m pip install --upgrade sphinx-lint
     - name: Build HTML
       env:
         BASE_URL: https://a11y-guidelines.freee.co.jp/
         TZ: JST-9
-      run: |
-        make sphinx_options="-W" clean html
+      run: make sphinx_options="-W" clean html
     - name: Check for unreferenced include files
       run: make check-includes
     - name: Run sphinx-lint
       run: |
-        sphinx-lint ./ja/source/**/*.rst
-        sphinx-lint ./en/source/**/*.rst
+        sphinx-lint --enable all --disable line-too-long ./ja/source
+        sphinx-lint --enable all --disable line-too-long ./en/source

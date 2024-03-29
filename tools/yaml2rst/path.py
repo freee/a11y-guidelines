@@ -7,6 +7,13 @@ YAML_DIR = 'yaml'
 JSON_DIR = 'json'
 DEST_DIR_BASE = 'source'
 
+# axe-core directories
+AXE_SRC_BASE = 'vendor/axe-core'
+AXE_RULES_DIR = 'lib/rules'
+AXE_LOCALE_DIR = 'locales'
+AXE_LOCALE_JA_FILE = 'ja.json'
+AXE_PKG_FILE = 'package.json'
+
 # File paths
 FAQ_INDEX_FILENAME = 'index.rst'
 MAKEFILE_FILENAME = 'incfiles.mk'
@@ -14,9 +21,10 @@ ALL_CHECKS_FILENAME = "allchecks.rst"
 WCAG_MAPPING_FILENAME = "wcag21-mapping.rst"
 PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 MISCDEFS_FILENAME = "defs.txt"
+AXE_RULES_FILENAME = 'axe-rules.rst'
 
 TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-TEMPLATE_FILENAMES = {
+LOCALIZED_TEMPLATE_FILENAMES = {
     'tool_example': 'checks/examples-tool.rst',
     'allchecks_text': 'checks/allchecks.rst',
     'category_page': 'gl-category.rst',
@@ -29,10 +37,12 @@ TEMPLATE_FILENAMES = {
     'faq_article_index': 'faq/article-index.rst',
     'wcag21mapping': 'wcag21-mapping.rst',
     'priority_diff': 'priority-diff.rst',
-    'makefile': 'incfiles.mk',
-    'miscdefs': 'misc-defs.txt'
+    'miscdefs': 'misc-defs.txt',
+    'axe_rules': 'axe-rules.rst'
 }
-
+TEMPLATE_FILENAMES = {
+    'makefile': 'incfiles.mk',
+}
 def get_dest_dirnames(basedir, lang):
     """
     Returns a dictionary of destination directory names for the given language.
@@ -79,14 +89,15 @@ def get_static_dest_files(basedir, lang):
         'faq_index': os.path.join(dest_dirnames['faq_base'], FAQ_INDEX_FILENAME),
         'faq_article_index': os.path.join(dest_dirnames['faq_articles'], FAQ_INDEX_FILENAME),
         'faq_tag_index': os.path.join(dest_dirnames['faq_tags'], FAQ_INDEX_FILENAME),
-        'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME)
+        'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME),
+        'axe_rules': os.path.join(dest_dirnames['misc'], AXE_RULES_FILENAME)
     }
 
 def get_src_path(basedir):
     data_basedir = os.path.join(basedir, DATA_DIR)
     yaml_basedir = os.path.join(data_basedir, YAML_DIR)
     json_basedir = os.path.join(data_basedir, JSON_DIR)
-    
+
     src_path = {
         'guidelines': os.path.join(yaml_basedir, "gl"),
         'checks': os.path.join(yaml_basedir, 'checks'),
@@ -102,6 +113,9 @@ def get_src_path(basedir):
         'wcag_sc': os.path.join(json_basedir, 'wcag-sc.json'),
         'gl_categories': os.path.join(json_basedir, 'guideline-categories.json'),
         'faq_tags': os.path.join(json_basedir, 'faq-tags.json'),
-        'info': os.path.join(json_basedir, 'info.json')
+        'info': os.path.join(json_basedir, 'info.json'),
+        'axe_rules': os.path.join(basedir, AXE_SRC_BASE, AXE_RULES_DIR),
+        'axe_msg_ja': os.path.join(basedir, AXE_SRC_BASE, AXE_LOCALE_DIR, AXE_LOCALE_JA_FILE),
+        'axe_pkg': os.path.join(basedir, AXE_SRC_BASE, AXE_PKG_FILE)
     }
     return src_path

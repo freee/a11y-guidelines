@@ -1,8 +1,8 @@
 # freee Accessibility Guidelines
 
-freee株式会社が作成しているアクセシビリティー・ガイドラインのリポジトリーです。現在作成中で、随時更新する予定です。
+フリー株式会社が作成しているアクセシビリティー・ガイドラインのリポジトリーです。現在作成中で、随時更新する予定です。
 
-このガイドラインの作成の経緯などについて詳しくは、[ガイドラインのイントロダクション](https://a11y-guidelines.freee.co.jp/intro/index.html)と、[freee Developers Blogの記事](https://developers.freee.co.jp/entry/a11y-guidelines-202004.0)をご覧ください。
+このガイドラインの作成の経緯などについて詳しくは、[ガイドラインのイントロダクション](https://a11y-guidelines.freee.co.jp/intro/index.html)と、[freee Developers Hubの記事](https://developers.freee.co.jp/entry/a11y-guidelines-202004.0)をご覧ください。
 
 ## 最新ファイルの入手
 
@@ -22,9 +22,9 @@ freee株式会社が作成しているアクセシビリティー・ガイドラ
 ## ライセンス
 
 ![クリエイティブ・コモンズ・ライセンス](https://i.creativecommons.org/l/by/4.0/88x31.png)
-「freeeアクセシビリティー・ガイドライン」は、freee株式会社が作成したもので、[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/)で提供されています。
+「freeeアクセシビリティー・ガイドライン」は、フリー株式会社が作成したもので、[クリエイティブ・コモンズ 表示 4.0 国際 ライセンス](https://creativecommons.org/licenses/by/4.0/)で提供されています。
 
-Copyright © 2020-2023, freee株式会社
+Copyright © 2020-2024, フリー株式会社
 
 ## 更新履歴
 

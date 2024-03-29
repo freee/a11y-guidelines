@@ -23,9 +23,9 @@ from sphinx.util.docutils import SphinxDirective
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'フリー株式会社'
-guidelines_version = 'Ver. 202403.0'
+guidelines_version = 'Ver. 202403.1'
 checksheet_version = '4.3.7'
-publishedDate = u'2024年3月4日'
+publishedDate = u'2024年3月29日'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 

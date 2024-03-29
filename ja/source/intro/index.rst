@@ -18,3 +18,5 @@ freeeアクセシビリティー・ガイドラインは、アクセシビリテ
    history
 
 .. _WCAG21: https://www.w3.org/TR/WCAG21/
+
+.. translated:: true

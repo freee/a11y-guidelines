@@ -1,7 +1,7 @@
 .. _faq-tag-index:
 
 {% filter make_heading(1) -%}
-List of FAQ Rags
+List of FAQ Tags
 {%- endfilter %}
 
 Here is a list of tags associated with the Frequently Asked Questions and Answers (FAQ).
