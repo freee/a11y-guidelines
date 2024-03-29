@@ -20,9 +20,9 @@ import re
 
 project = 'freee Accessibility Guidelines'
 author = 'freee K.K.'
-guidelines_version = 'Ver. 202403.0'
+guidelines_version = 'Ver. 202403.1'
 checksheet_version = '4.3.7'
-publishedDate = u'Mar 4 2024'
+publishedDate = u'Mar 29 2024'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
