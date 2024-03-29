@@ -32,6 +32,10 @@
         "ja": "Android TalkBack",
         "en": "Android TalkBack"
     },
+    "target-size": {
+        "ja": "ターゲット・サイズ",
+        "en": "Target Size"
+    },
     "misc": {
         "ja": "その他",
         "en": "Miscellaneous"
