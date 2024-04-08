@@ -6,7 +6,7 @@ import a11y_guidelines_initializer
 def main():
     settings = app_initializer.setup_parameters()
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
-    templates = app_initializer.setup_templates(settings['lang'])
+    templates = app_initializer.setup_templates()
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
     a11y_guidelines_initializer.setup_instances(settings)
 
@@ -39,7 +39,6 @@ def get_category_pages(lang):
     for category, guidelines in rel.get_guidelines_to_category().items():
         yield {
             'filename': category,
-            'lang': lang,
             'guidelines': [gl.template_object(lang) for gl in guidelines]
         }
 
@@ -222,6 +221,7 @@ def generate_files(dest_path, template, get_data_func, build_all, targets, lang,
     extra_args = extra_args or {}
     for data in get_data_func(lang=lang, **extra_args):
         if build_all or dest_path in targets or ('filename' in data and os.path.join(dest_path, f'{data["filename"]}.rst') in targets):
+            data['lang'] = lang
             generate_file(dest_path, template, data)
 
 if __name__ == "__main__":
