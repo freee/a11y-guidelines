@@ -26,3 +26,18 @@ body {
     border: 1px solid #ccc;
     padding: 16px;
 }
+
+button.copy-link{
+    margin-left: 0.5em;
+    cursor: pointer;
+    border: 0;
+    font-size: 1rem;
+    background: transparent;
+    color: #2779B0;
+    padding: 0;
+    height: 1.5rem;
+}
+
+button.copy-link:hover {
+    color: #236D9F;
+}
