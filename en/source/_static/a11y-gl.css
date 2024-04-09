@@ -26,3 +26,8 @@ body {
     border: 1px solid #ccc;
     padding: 16px;
 }
+
+button.copy-link {
+    margin-left: 5px;
+    cursor: pointer;
+}
