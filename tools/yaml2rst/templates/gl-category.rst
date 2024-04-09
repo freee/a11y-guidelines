@@ -2,7 +2,7 @@
 {% for gl in guidelines -%}
 .. _{{ gl.id }}:
 
-{{ gl.title|make_heading(2) }}
+{{ gl.title|make_heading(2, 'permalink') }}
 
 {{ gl.guideline }}
 

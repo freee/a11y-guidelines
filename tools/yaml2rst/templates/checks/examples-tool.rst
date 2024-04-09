@@ -1,7 +1,7 @@
 {% for ex in examples -%}
 .. _check-example-{{ ex.tool }}-{{ ex.check_id }}:
 
-{% filter make_heading(2) -%}
+{% filter make_heading(2, 'permalink') -%}
 :ref:`check-{{ ex.check_id }}`
 {%- endfilter %}
 

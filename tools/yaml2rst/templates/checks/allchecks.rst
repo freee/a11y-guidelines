@@ -7,7 +7,7 @@
 {% for check in allchecks -%}
 .. _check-{{ check.id }}:
 
-{% filter make_heading(2) -%}
+{% filter make_heading(2, 'permalink') -%}
 {%- if lang == 'ja' -%}
 チェックID：{{ check.id }}
 {%- elif lang == 'en' -%}
