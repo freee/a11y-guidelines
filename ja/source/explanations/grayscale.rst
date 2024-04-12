@@ -121,3 +121,7 @@ Android 11以前の場合
 .. include:: /inc/info2gl/exp-grayscale.rst
 
 .. include:: /inc/info2faq/exp-grayscale.rst
+
+.. translated:: true
+
+
