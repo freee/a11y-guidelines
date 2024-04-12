@@ -5,7 +5,7 @@ tags:
 - axe
 title:
   ja: axe DevToolsの警告への対処
-  en: Dealing with axe DevTools warnings
+  en: Dealing With axe DevTools Warnings
 problem:
   ja: |-
     axe DevToolsで出ている警告の意味や対処方法が分からない。
