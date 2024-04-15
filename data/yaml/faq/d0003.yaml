@@ -5,7 +5,7 @@ tags:
 - target-size
 title:
   ja: テキスト・リンクのクリック可能な領域が小さい
-  en: The clickable area of a text link is small
+  en: The Clickable Area of a Text Link Is Small
 problem:
   ja: |-
     文中のテキストがリンクになっている箇所について、クリック/タップできる領域のサイズ、特に高さが基準を満たしていないが、修正する必要があるか。

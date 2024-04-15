@@ -44,6 +44,7 @@
 
 .. include:: /inc/info2gl/exp-image-text-alternative.rst
 
+.. include:: /inc/info2faq/exp-image-text-alternative.rst
 
 .. translated:: true
 

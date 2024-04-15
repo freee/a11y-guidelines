@@ -5,7 +5,7 @@ tags:
 - grayscale
 title:
   ja: グレースケール表示にするブックマークレットで表示が崩れる
-  en: The bookmarklet to display in grayscale breaks the layout
+  en: The Bookmarklet to Display in Grayscale Breaks the Layout
 problem:
   ja: |-
     グレースケール表示した際の見え方を確認するために :ref:`exp-grayscale` で紹介されているブックマークレットを使うと表示が崩れる、関連するチェックの結果はNGとすべきか。

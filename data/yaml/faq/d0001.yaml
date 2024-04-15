@@ -5,7 +5,7 @@ tags:
 - markup
 title:
   ja: 見出しレベルの指定
-  en: Heading level specification
+  en: Heading Level Specification
 problem:
   ja: |-
     見出し、小見出しを設定するべきか、どの部分を見出しに指定すべきか分からない。

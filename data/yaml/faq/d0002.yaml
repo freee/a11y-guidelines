@@ -6,7 +6,7 @@ tags:
 - target-size
 title:
   ja: ラジオボタンやチェックボックスのサイズ
-  en: Size of radio buttons and check boxes
+  en: Size of Radio Buttons And Check Boxes
 problem:
   ja: |-
     サイズが24×24pxより小さいラジオボタンやチェックボックスは、 :ref:`check-0331` と :ref:`check-0351` でNGとすべきか
