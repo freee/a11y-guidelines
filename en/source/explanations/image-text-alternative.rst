@@ -44,3 +44,4 @@ Also, knowing that there is a graph can facilitate communication with sighted in
 
 .. include:: /inc/info2gl/exp-image-text-alternative.rst
 
+.. include:: /inc/info2faq/exp-image-text-alternative.rst
