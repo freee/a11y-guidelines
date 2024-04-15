@@ -11,7 +11,7 @@ problem:
     スクリーン・リーダーが ``hr`` 要素を読み上げるようにするべきか分からない。
     また、読み上げるようにした場合にその読み上げられ方に違和感がある。
   en: |-
-    I am unsure whether screen readers should read aloud the `hr` element.
+    I am unsure whether screen readers should read aloud the ``hr`` element.
     Additionally, if it is set to be read aloud, the way it is read feels unnatural.
 solution:
   ja: |-
