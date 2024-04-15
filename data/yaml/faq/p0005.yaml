@@ -1,0 +1,49 @@
+id: p0005
+updated: '2024-04-12'
+sortKey: 70060
+tags:
+- screen-reader
+title:
+  ja: "``hr`` 要素はスクリーン・リーダーにどのように読み上げられるべきか"
+  en: Should the ``hr`` Element Be Read Aloud by Screen Readers, And How Should It Be Read?
+problem:
+  ja: |-
+    スクリーン・リーダーが ``hr`` 要素を読み上げるようにするべきか分からない。
+    また、読み上げるようにした場合にその読み上げられ方に違和感がある。
+  en: |-
+    I am unsure whether screen readers should read aloud the `hr` element.
+    Additionally, if it is set to be read aloud, the way it is read feels unnatural.
+solution:
+  ja: |-
+    *  ``hr`` 要素は、基本的に情報の区切りを示すために使用されるため、スクリーン・リーダーでも読み上げるようにする。
+    *  ``hr`` 要素の読み上げられ方はスクリーン・リーダーごとに異なるもので、コンテンツ製作者は制御できない
+  en: |-
+    *  The ``hr`` element is generally used to indicate a separation in information, so it should be also read aloud by screen readers.
+    *  The way the ``hr`` element is read aloud varies depending on the screen reader, and content authors cannot control it.
+explanation:
+  ja: |-
+    一般的に ``hr`` 要素は、情報の区切りを示すために使用されます。
+    無意味に使用されている要素でない以上、当然同じ情報はスクリーン・リーダーのユーザーにも伝わるようにする必要があります。
+
+    もし、 ``hr`` 要素の存在をスクリーン・リーダーのユーザーに伝えない方が、情報の理解などの観点でより良いと考えられる場合、そもそも視覚的に ``hr`` 要素が必要なのかを検討すると良いでしょう。
+    それでもやはりスクリーン・リーダーに読み上げられない方が良いと判断した場合は、 ``role="presentation"`` を指定するなどの方法で、スクリーン・リーダーが無視するようにすると良いでしょう。
+
+    スクリーン・リーダーが ``hr`` 要素をどのように読み上げるかは、スクリーン・リーダーごとに異なっています。
+    例えばNVDAでは「区切り」と読み上げ、macOS VoiceOverでは「横方向分割バー」と読み上げます。
+    各スクリーン・リーダーのユーザーは、これらの読み上げを聞いて ``hr`` 要素の存在を判断していますから、コンテンツ製作者が違和感を持ったとしても、これらの読み上げを変更するべきではありませんし、そもそも変更することはできません。
+
+    また、スクリーン・リーダーの中には、前後の ``hr`` 要素にジャンプする機能を提供しているものもあり、このような場合は ``hr`` 要素の存在が効率的な情報取得につながることもあります。
+  en: |-
+    Generally, the ``hr`` element is used to indicate a separation in information.
+    If it is not being used meaninglessly, it is essential that the same information be conveyed to screen reader users as well.
+
+    If you believe that not communicating the presence of the ``hr`` element to screen reader users would better aid in understanding the information, it might be worthwhile to reconsider whether the ``hr`` element is visually necessary at all.
+    If you still decide it's better not to have it read by screen readers, you might make screen readers ignore it by applying methods such as specifying ``role="presentation"``.
+
+    How screen readers announce the ``hr`` element varies between different readers.
+    For example, NVDA reads it as "separator" and macOS VoiceOver announces it as "horizontal splitter."
+    Since users of various screen readers recognize the presence of the ``hr`` element through these announcements, content creators, even if they feel these readings are odd, should not change these announcements nor can they generally make such changes.
+    
+    Furthermore, some screen readers offer features to jump to previous or next ``hr`` elements, which can make the presence of these elements conducive to efficient information retrieval.
+faqs:
+- p0004

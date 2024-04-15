@@ -1,0 +1,53 @@
+id: p0004
+updated: '2024-04-12'
+sortKey: 70050
+tags:
+- screen-reader
+title:
+  ja: どのような情報をスクリーン・リーダーで読み上げられないようにするべきか
+  en: What Information Should Not Be Read Aloud by Screen Readers?
+problem:
+  ja: |-
+    スクリーン・リーダーを使用する際、どのような要素が読み上げられるべきか、または読み上げられるべきではないかの判断をどのようにするべきか分からない。
+  en: |-
+    It is unclear how to determine which elements should be read aloud and which should not by a screen reader.
+solution:
+  ja: |-
+    *  スクリーン・リーダーで読み上げられるようにするべきか迷う場合は、読み上げられるようにする。
+    *  装飾的に挿入されている意味を持たない画像や、アイコンなどの画像で直後に全く同じ意味のテキストがある場合、それらは読み上げられないようにする。
+    *  それ以外の要素は、原則として読み上げられるようにする。
+  en: |-
+    *  If you are unsure whether something should be read aloud by a screen reader, make it read aloud.
+    *  If there is an image that is inserted decoratively and has no meaning, or an image such as an icon, and there is exactly the same text immediately after it, it should not be read aloud.
+    *  Other elements should generally be read aloud.
+explanation:
+  ja: |-
+    情報の取捨選択は、最終的にユーザーに委ねられるべきです。
+    ですから、意味のある情報は原則としてすべて読み上げられるようにするべきです。
+
+    ただし、装飾的に挿入されている意味を持たない画像は読み上げられないようにします。
+    
+    また、アイコンなどの画像で直後に全く同じ意味のテキストがある場合、それらの画像は読み上げられないようにします。
+    こうすることで、情報の重複を避けることができます。
+    
+    それ以外で読み上げられないようにしても問題がない情報は、そもそも画面上に表示されている必要がない情報の可能性があります。
+  en: |-
+    The decision on what information to filter should ultimately be left to the user.
+    Therefore, as a principle, all meaningful information should be made readable.
+
+    However, images inserted purely for decoration without any meaning should not be read aloud.
+
+    Images such as icons where identical meaning text immediately follows, also should not be read aloud.
+    This helps avoid the duplication of information.
+
+    Information that does not pose a problem even if not read aloud may not need to be displayed on the screen at all.
+guidelines:
+- gl-image-decorative
+checks:
+- '0402'
+- '0413'
+- '0451'
+- '0461'
+- '0471'
+info:
+- exp-image-text-alternative
