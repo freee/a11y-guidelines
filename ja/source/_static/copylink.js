@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const buttonLabel = 'リンクをコピー';
   function appendCopyButton(element, textToCopy) {
     const button = document.createElement('button');
     button.textContent = buttonLabel;
