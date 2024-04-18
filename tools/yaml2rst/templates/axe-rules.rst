@@ -22,7 +22,7 @@ Updated
 {% for rule in rules -%}
 .. _axe-rule-{{ rule.id }}:
 
-{% filter make_heading(2) -%}
+{% filter make_heading(2, 'permalink') -%}
 {%- if lang == 'ja' -%}
 {% if rule.translated is defined %}{{ rule.help.ja }} ({% endif -%}{{ rule.help.en }}{%- if rule.translated is defined %}){% endif %}
 {%- elif lang == 'en' -%}
