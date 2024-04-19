@@ -3,6 +3,7 @@ updated: '2024-04-12'
 sortKey: 70060
 tags:
 - screen-reader
+- markup
 title:
   ja: "``hr`` 要素はスクリーン・リーダーにどのように読み上げられるべきか"
   en: Should the ``hr`` Element Be Read Aloud by Screen Readers, And How Should It Be Read?
@@ -47,3 +48,7 @@ explanation:
     Furthermore, some screen readers offer features to jump to previous or next ``hr`` elements, which can make the presence of these elements conducive to efficient information retrieval.
 faqs:
 - p0004
+guidelines:
+- gl-markup-semantics
+info:
+- exp-markup-semantics
