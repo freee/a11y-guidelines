@@ -33,7 +33,9 @@ explanation:
     If you can't imagine what kind of information is lined up on the page just by reading the headings, there probably are not enough headings.
 guidelines:
 - gl-text-heading-label
+- gl-markup-semantics
 checks:
 - '0271'
 info:
 - exp-text-wording
+- exp-markup-semantics
