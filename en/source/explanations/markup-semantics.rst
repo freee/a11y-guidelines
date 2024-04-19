@@ -1,27 +1,29 @@
 .. _exp-markup-semantics:
 
-############################################
-セマンティクスを適切にマークアップする重要性
-############################################
+###############################################
+The Importance of Properly Marking Up Semantics
+###############################################
 
-文書の構造を示すような情報を「セマンティクス（意味情報）」と呼びます。
-見出し、段落、箇条書きとそれを構成する項目などを例として挙げることができます。
+We refer to the information that indicates the structure of a document as "semantics."
+Examples include headings, paragraphs, lists, and the items that compose them.
 
-視覚的にコンテンツを利用する多くの場合において、文字のサイズやフォントの種類、レイアウトなどの視覚的情報からそのセマンティクス（意味情報）を判断します。
-例えば、大きめの文字で画面上部中央に表示されているフレーズを、そのページの内容を表す見出しだと判断する、といった具合です。
+In many cases where content is received visually, we determine the semantics from visual information such as text size, font type, and layout.
+For example, a phrase displayed in large letters at the center of the top of the screen is judged as the heading that represents the content of the page.
 
-ところが、スクリーン・リーダーを初めとする支援技術は、少なくとも現時点ではこのようなセマンティクスを視覚的な特徴から正確に推測することができません。
-そのため支援技術は、HTMLでどのように記述されているかという情報に基づいてセマンティクスを判断しています。
-上記の例の場合、見出しのテキストが ``h1`` 要素になっていれば、支援技術はそれが見出しであることを理解してユーザーに伝えることができますが、``div`` 要素や ``span`` 要素になっていてCSSで文字サイズなどが変更されているだけの場合、支援技術がそれを見出しだと判断することはできません。
+However, assistive technologies, including screen readers, currently cannot accurately infer such semantics from visual characteristics.
+Therefore, assistive technologies determine semantics based on how they are described in HTML.
+In the example mentioned earlier, if the heading text is in an ``h1`` element, assistive technology can understand that it is a heading and communicate this to the user.
+However, if it is in a ``div`` or ``span`` element and only the text size has been altered using CSS, the assistive technology cannot recognize it as a heading.
 
-支援技術、特にスクリーン・リーダーが正しいセマンティクスをユーザーに伝えられることは、より効率的なコンテンツ利用につながります。
-例として、見出しジャンプ機能を用いた斜め読みを挙げることができます。
+The ability of assistive technologies, particularly screen readers, to convey correct semantics to users leads to more efficient content utilization.
+An example of this can be the use of the "heading jump" feature to skim through content.
 
-多くのスクリーン・リーダーには、複数の ``h1`` ～ ``h6`` 要素があるページにおいて、前後の見出しにジャンプして読み上げさせる機能があります。
-この機能を使って見出しの拾い読みをしたり、見出しの直後のテキストだけを読んだりして、いわば斜め読みのようなことが可能になります。
-スクリーン・リーダーを利用している視覚障害者の多くは、画面全体を一度に見ることができず、アクセスしたページに必要としている情報が掲載されているかどうかの判断を短時間にすることができませんので、このような手法でコンテンツを利用できることは、効率的なコンテンツ利用につながります。
+Many screen readers have the capability to jump between multiple ``h1`` to ``h6`` elements on a page, allowing for the reading of headings in sequence.
+This feature enables users to skim by picking up headings or by reading only the text immediately following a heading, similar to skimming.
+Since many visually impaired users who utilize screen readers cannot see the entire screen at once, they are unable to quickly determine whether the accessed page contains the information they need.
+Thus, being able to utilize content through such techniques leads to more efficient content utilization.
 
-支援技術が適切にコンテンツを解析し、ユーザーに伝えられるようにするために、コンテンツの内容に応じたセマンティクスを表す適切なマークアップを行うことが極めて重要です。
+It is extremely important to use appropriate markup that represents the semantics corresponding to the content in order to enable assistive technologies to properly analyze and communicate the content to users.
 
 .. include:: /inc/info2gl/exp-markup-semantics.rst
 

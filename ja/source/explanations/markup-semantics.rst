@@ -26,3 +26,6 @@
 .. include:: /inc/info2gl/exp-markup-semantics.rst
 
 .. include:: /inc/info2faq/exp-markup-semantics.rst
+
+.. translated:: true
+
