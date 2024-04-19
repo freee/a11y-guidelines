@@ -1,9 +1,17 @@
 {% extends "!footer.html" %}
 {% block extrafooter %}
 <p>
-  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><a xmlns:cc="http://creativecommons.org/ns#" href="https://www.freee.co.jp/" property="cc:attributionName" rel="cc:attributionURL">フリー株式会社</a> 作『<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">freeeアクセシビリティー・ガイドライン</span>』は<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a>で提供されています。
+  {% if language == 'ja' -%}
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="クリエイティブ・コモンズ・ライセンス" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />  <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.freee.co.jp/" property="cc:attributionName" rel="cc:attributionURL">フリー株式会社</a> 作『<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">freeeアクセシビリティー・ガイドライン</span>』は<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">クリエイティブ・コモンズ 表示 4.0 国際 ライセンス</a>で提供されています。
+  {%- else -%}
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />"<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">freee Accessibility Guidelines</span>" by <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.freee.co.jp/" property="cc:attributionName" rel="cc:attributionURL">freee K.K.</a> is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+  {%- endif %}
 </p>
 {% if gtm_id %}
-<p>このサイトでは、アクセス状況の解析のためにGoogle Analyticsを用いています。Googleによるデータの使用については、<a href="https://www.google.com/intl/ja/policies/privacy/partners/">GOOGLE のサービスを使用するサイトやアプリから収集した情報の GOOGLE による使用</a>をご覧ください。また、これに伴い使用されるCookieの扱いなどについては、<a href="https://www.freee.co.jp/privacy_policy/">フリー株式会社のプライバシー・ポリシー</a>をご覧ください。</p>
+  {% if language == 'ja' -%}
+    <p>このサイトでは、アクセス状況の解析のためにGoogle Analyticsを用いています。Googleによるデータの使用については、<a href="https://www.google.com/intl/ja/policies/privacy/partners/">GOOGLE のサービスを使用するサイトやアプリから収集した情報の GOOGLE による使用</a>をご覧ください。また、これに伴い使用されるCookieの扱いなどについては、<a href="https://www.freee.co.jp/privacy_policy/">フリー株式会社のプライバシー・ポリシー</a>をご覧ください。</p>
+  {%- else -%}
+    <p>This site uses Google Analytics for access analysis. Please refer to <a href="https://www.google.com/intl/en/policies/privacy/partners/">HOW GOOGLE USES INFORMATION FROM SITES OR APPS THAT USE OUR SERVICES</a> for hwo Google uses the data.  Please also refer to the <a href="https://www.freee.co.jp/privacy_policy/">privacy policy of freee K.K.</a> for how Cookies are used.</p>
+  {%- endif %}
 {% endif %}
 {% endblock %}
