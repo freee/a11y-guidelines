@@ -24,3 +24,6 @@
 支援技術が適切にコンテンツを解析し、ユーザーに伝えられるようにするために、コンテンツの内容に応じたセマンティクスを表す適切なマークアップを行うことが極めて重要です。
 
 .. include:: /inc/info2gl/exp-markup-semantics.rst
+
+.. include:: /inc/info2faq/exp-markup-semantics.rst
+
