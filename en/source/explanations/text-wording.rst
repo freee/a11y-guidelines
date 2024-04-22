@@ -1,29 +1,39 @@
 .. _exp-text-wording:
 
-######################################
-テキスト情報の文言とアクセシビリティー
-######################################
+#########################################################
+The Role of Wording in Text Information and Accessibility
+#########################################################
 
-テキスト情報においてどれだけ多くの人に情報が伝わるかは、用いられている文言次第です。
-当然、分かりやすい表現や一貫した表記を心掛けるといったことは必要ですが、これらはアクセシビリティー以前の問題です。
-テキストの品質を一定以上に保つために、ライティング・ガイドラインを別に定めると良いでしょう。
+The extent to which text information is comprehensible to a broad audience depends on the wording used.
+Naturally, it is essential to strive for clear expressions and consistent notation; however, these are pre-requisites to accessibility concerns.
+To maintain text quality above a certain level, it would be beneficial to establish separate writing guidelines.
 
-テキスト情報の文言について、アクセシビリティーの観点から特に重要なのは、特定の感覚を前提とした表現を単独で用いないということです。
+*************************************
+Sensory Perceptions and Accessibility
+*************************************
 
-例えば、「赤色のアイコンをクリック」というテキストがあったとします。
-もし赤色のアイコンが画面上に1つだけしかない場合、多くの人にとってはこの説明で十分ですし、それが一番分かりやすい説明になり得るでしょう。
-しかし、色弱のユーザーには他の色の同じ形状のアイコンとの区別ができない可能性があります。
-さらに、スクリーン・リーダーのユーザーには、全く伝わらない可能性が高いでしょう。
+From an accessibility perspective, it is particularly important not to solely use expressions that assume specific sensory perceptions.
 
-ではこのような表現を避けるべきかというと、全くそんなことはありません。
-この表現では伝わらない可能性がある人にも理解しやすい表現を併用すれば問題ありません。
-この場合なら、アイコンの色だけではなく、形状、表示位置、アイコンに付与されているテキストのラベルなど、必要に応じていくつかの情報を提示することで、この問題を回避することができます。
+For example, consider the text "Click the red icon."
+If there is only one red icon on the screen, this description might be sufficient and the clearest explanation for most people.
+However, users with color vision deficiencies might not be able to distinguish it from other icons of the same shape but different colors.
+Moreover, this description is likely to be completely ineffective for users of screen readers.
 
-テキスト情報の文言についてもう1つ重要な点は、見出しやラベルに用いるテキストの文言を分かりやすいものにする、という点です。
-見出しに適切な文言が用いられていれば、そのセクションに書かれている情報が自分にとって必要なものかどうかの判断が容易になります。
-これは、特にスクリーン・リーダーのユーザーには重要です。
+However, this doesn't mean that such expressions should be completely avoided.
+There's no problem as long as expressions are supplemented with descriptions that are easier for everyone to understand.
+In this case, not just relying on the color of the icon but also providing additional information such as its shape, position on the screen, and any text labels associated with the icon can help avoid this issue.
 
-ラベルに関しても分かりやすい文言を用いることで、そのコンポーネントやフォーム・コントロールの目的を正確に伝えることができます。
+******************************
+Clarity in Headings and Labels
+******************************
+
+Another crucial aspect of the wording in text information is ensuring that the text used for headings and labels is clear and understandable.
+When appropriate terms are used for headings, it becomes easier to determine whether the information in that section is relevant or not.
+This is particularly important for users of screen readers.
+
+Similarly, using clear and precise language for labels helps accurately convey the purpose of a component or form control.
+
+Clear wording in text information aids all users, but especially those who rely on assistive technologies, in navigating and understanding the content more effectively.
 
 .. include:: /inc/info2gl/exp-text-wording.rst
 
