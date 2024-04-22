@@ -21,3 +21,6 @@ PC向けWeb
    screen-reader-check-macos-voiceover
    screen-reader-check-ios-voiceover
    screen-reader-check-android-talkback
+
+.. translated:: true
+

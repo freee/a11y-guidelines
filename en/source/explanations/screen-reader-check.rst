@@ -1,18 +1,18 @@
 .. _exp-screen-reader-check:
 
-##############################################
-スクリーン・リーダーを用いたチェックの実施方法
-##############################################
+#########################################
+How to Perform Checks with Screen Readers
+#########################################
 
-ここでは、主要なスクリーン・リーダーを用いてチェックする場合に推奨される設定や最低限知っておくべき事項について説明します。
+Here, we will explain the recommended settings and essential knowledge for checking with major screen readers.
 
-なお、freeeでは以下の方針でスクリーン・リーダーによるチェックを実施しています。
+At freee, we conduct accessibility checks using screen readers according to the following policy:
 
-PC向けWeb
-   *  Windows上のNVDAとGoogle Chromeで動作確認し、動作しない場合は当該チェックの結果をNGとする
-   *  macOS VoiceOverによるチェックは、スタティックなコンテンツや既にNVDAでの動作確認が完了しているUIコンポーネントに限定し、その他のチェックはNVDAで実施する
-モバイル・アプリケーション
-   *  iOS VoiceOver、Android TalkBackそれぞれでで動作確認し、動作しない場合は当該チェックの結果をNGとする
+For PC Web:
+   *  Verify functionality with NVDA and Google Chrome on Windows, and consider the check result as FAIL if it does not function.
+   *  Limit checks with macOS VoiceOver to static content and UI components that have already been verified with NVDA; perform other checks with NVDA.
+For Mobile Applications:
+   *  Verify functionality with iOS VoiceOver and Android TalkBack; consider the check result as FAIL if it does not function.
 
 .. toctree::
    :titlesonly:

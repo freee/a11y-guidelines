@@ -40,3 +40,5 @@
    multimedia-autoplay
    multimedia-content-access
    check-tools
+
+.. translated:: true
