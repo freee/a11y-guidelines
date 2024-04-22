@@ -4,14 +4,14 @@
 {%- set colon = ':' -%}
 {%- endif -%}
 {% if lang == 'ja' -%}
-ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`_ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
+ここで掲載している情報は、 `axe-coreのGitHubリポジトリー <https://github.com/dequelabs/axe-core/>`__ の以下に示す時点におけるdevelopブランチの内容に基づいて自動的に生成したものです。axe DevToolsの内容とは一致していない場合もあることにご注意ください。
 
 バージョン
    {{ version }}
 更新日時
    {{ timestamp }}
 {%- elif lang == 'en' -%}
-The information below is automatically generated based on the content of the develop branch of the `axe-core GitHub repository <https://github.com/dequelabs/axe-core/>`_ as of the time indicated below. Please note that it may not always match the content of axe DevTools.
+The information below is automatically generated based on the content of the develop branch of the `axe-core GitHub repository <https://github.com/dequelabs/axe-core/>`__ as of the time indicated below. Please note that it may not always match the content of axe DevTools.
 
 Version
    {{ version }}
@@ -52,10 +52,10 @@ Related WCAG 2.1 Success Criteria
 {%- if lang == 'ja' -%}
 *  達成基準 {{ sc.sc }}
 
-   -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
-   -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
+   -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`__
+   -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`__
 {% elif lang == 'en' -%}
-*  Success Criterion {{ sc.sc }}: `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
+*  Success Criterion {{ sc.sc }}: `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`__
 {%- endif %}
 {% endfor -%}
 {%- endif %}

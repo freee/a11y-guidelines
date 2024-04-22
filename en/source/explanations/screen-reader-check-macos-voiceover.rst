@@ -31,7 +31,7 @@ For new components, it's highly recommended to conduct checks with NVDA from an 
 There may be instances where something works without issues on macOS VoiceOver but has problems on NVDA, or vice versa.
 The ideal is to achieve functionality that works flawlessly in both environments, but at freee, the minimum goal is to ensure it works correctly with NVDA.
 
-.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`_
+.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`__
 
 ***********
 Preparation
@@ -71,7 +71,7 @@ Here are the steps for setting up in macOS Ventura:
    .. image:: /img/macvo/macvo-settings-fnkey.png
       :alt: Screenshot: Setting Function Keys
 
-CF: `How to use the function keys on your Mac - Apple Support <https://support.apple.com/en-us/102439>`_
+CF: `How to use the function keys on your Mac - Apple Support <https://support.apple.com/en-us/102439>`__
 
 Operation for First-time VoiceOver Users
 ========================================
@@ -223,7 +223,7 @@ Reference Information
 The information provided here is only a small part of what VoiceOver can do.
 For more detailed information on how to use VoiceOver and its features, refer to the following:
 
-*  `VoiceOver User Guide for Mac <https://support.apple.com/guide/voiceover/welcome/mac>`_
+*  `VoiceOver User Guide for Mac <https://support.apple.com/guide/voiceover/welcome/mac>`__
 
 This guide can also be accessed from the help menu which appears when :kbd:`VO + H` is pressed.
 

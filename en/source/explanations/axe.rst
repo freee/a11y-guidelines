@@ -5,7 +5,7 @@ Checking Accessibility With axe DevTools
 ########################################
 
 axe DevTools is a very commonly used accessibility checking tool.
-Its core functionality is implemented as `axe-core <https://github.com/dequelabs/axe-core>`_ which allows it to be used in various ways.
+Its core functionality is implemented as `axe-core <https://github.com/dequelabs/axe-core>`__ which allows it to be used in various ways.
 Here, we will introduce how to use it as a browser extension to check the accessibility status of existing Web pages.
 
 For specific instructions on how to conduct checks using axe DevTools, please refer to :ref:`check-example-axe`.
@@ -17,7 +17,7 @@ How to Install and Launch axe DevTools
 
 You can install the Chrome extension from the Chrome Web Store.
 
-`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_
+`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__
 
 The axe DevTools extension is used within the developer tools.
 

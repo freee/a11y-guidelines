@@ -16,20 +16,20 @@
 ARIAランドマークで示される領域とは、 ``header`` 要素、 ``nav`` 要素、 ``main`` 要素、 ``footer`` 要素、 ``aside`` 要素などで、ページを構成する領域を示したものです。
 これらの要素の代わりに、 ``div`` 要素などに対して ``role`` 属性を用いて明示する方法もあります。
 
-ページ上に存在する領域を確認するには、ページのソースを確認するか、Chrome拡張、Firefoxアドオン、Opera拡張、Edgeアドオンとして提供されている `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`_ のようなツールを活用すると良いでしょう。
+ページ上に存在する領域を確認するには、ページのソースを確認するか、Chrome拡張、Firefoxアドオン、Opera拡張、Edgeアドオンとして提供されている `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ のようなツールを活用すると良いでしょう。
 
 ページを構成するすべての要素が適切な領域に含まれていれば、ユーザーは斜め読みのような形でページ全体の構成を把握することができ、また目的の情報が掲載されているかどうかの判断や目的の情報を迅速に見つけることに役立てることができます。
 
 ARIAランドマークについて詳しくは、以下のMDNの記事を参考にしてください：
 
-*  `ARIA: banner ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Banner_role>`_
-*  `ARIA: complementary ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Complementary_role>`_
-*  `ARIA: contentinfo ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Contentinfo_role>`_
-*  `ARIA: form ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Form_Role>`_
-*  `ARIA: main ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Main_role>`_
-*  `ARIA: navigation ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Navigation_Role>`_
-*  `ARIA: region ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Region_role>`_
-*  `ARIA: search ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Search_role>`_
+*  `ARIA: banner ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Banner_role>`__
+*  `ARIA: complementary ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Complementary_role>`__
+*  `ARIA: contentinfo ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Contentinfo_role>`__
+*  `ARIA: form ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Form_Role>`__
+*  `ARIA: main ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Main_role>`__
+*  `ARIA: navigation ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Navigation_Role>`__
+*  `ARIA: region ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Region_role>`__
+*  `ARIA: search ロール <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/Roles/Search_role>`__
 
 さらに、特に長いページにおいてより効率的な斜め読みを可能にするためには、 ``h?`` 要素を用いてページ内に複数の見出しを配置することが有効です。
 ただ、コンテンツの量や性質によっては、複数の見出しを配置することが必ずしも適当ではない場合もありますので注意が必要です。

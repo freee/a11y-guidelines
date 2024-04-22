@@ -23,14 +23,14 @@ Intent
 {%- for sc in gl.scs %}
    *  達成基準{{ sc.sc }}(レベル{{ sc.level }})：
 
-      -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
-      -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`_
+      -  `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`__
+      -  `{{ sc.sc_ja_title }} <{{ sc.sc_ja_url }}>`__
 
 {% endfor -%}
 {%- elif lang == 'en' -%}
 Corresponding Success Criteria of WCAG 2.1
 {%- for sc in gl.scs %}
-   *  Success Criterion {{ sc.sc }} (Level {{ sc.level }}): `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`_
+   *  Success Criterion {{ sc.sc }} (Level {{ sc.level }}): `{{ sc.sc_en_title }} <{{ sc.sc_en_url }}>`__
 {% endfor -%}
 {%- endif %}
 {%- if gl.info is defined -%}

@@ -5,7 +5,7 @@ axe DevToolsを使用したアクセシビリティー・チェック
 ##################################################
 
 axe DevToolsは非常によく使われているアクセシビリティー・チェック・ツールです。
-基本機能が `axe-core <https://github.com/dequelabs/axe-core>`_ として実装されているため様々な方法で使用することができますが、ここではブラウザー拡張機能として利用して、出来上がっているWebページのアクセシビリティーの対応状況をチェックする方法を紹介します。
+基本機能が `axe-core <https://github.com/dequelabs/axe-core>`__ として実装されているため様々な方法で使用することができますが、ここではブラウザー拡張機能として利用して、出来上がっているWebページのアクセシビリティーの対応状況をチェックする方法を紹介します。
 
 なお、axe DevToolsを用いた具体的なチェックの実施方法については、 :ref:`check-example-axe` を参照してください。
 また、 :ref:`info-axe-rules` も合わせて参照してください。
@@ -16,7 +16,7 @@ axe DevToolsのインストールと起動の仕方
 
 ChromeウェブストアからChrome拡張をインストールできます。
 
-`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_
+`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__
 
 axe DevTools拡張機能はデベロッパーツール内で使用します。
 

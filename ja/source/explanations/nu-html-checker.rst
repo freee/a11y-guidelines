@@ -4,7 +4,7 @@
 The Nu Html Checkerを用いたHTMLのバリデーション
 ###############################################
 
-`The Nu Html Checker <v.nu_>`_ は、 `W3C <w3c_validator_>`_ や `WhatWG <https://whatwg.org/validator/>`_ でも利用されているHTMLのバリデーターです。
+`The Nu Html Checker <v.nu_>`_ は、 `W3C <w3c_validator_>`_ や `WhatWG <https://whatwg.org/validator/>`__ でも利用されているHTMLのバリデーターです。
 上記W3CまたはWhatWGのページにアクセスして、チェック対象のページのURLを入力して、HTMLの仕様に準拠しているかどうかをチェックするというのが一般的な使い方です。
 
 しかし、この方法には以下の問題があります：

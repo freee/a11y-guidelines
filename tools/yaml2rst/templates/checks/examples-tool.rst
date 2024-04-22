@@ -16,7 +16,7 @@
 参考動画：
 {%- elif lang == 'en' -%}
 Reference Videos:
-{%- endif %} `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`_
+{%- endif %} `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`__
 
 .. raw:: html
 

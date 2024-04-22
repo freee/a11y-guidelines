@@ -6,7 +6,7 @@
 
 各チェック内容ごとの情報をまとめたGoogleスプレッドシートを公開しています。
 
--  `アクセシビリティー・チェック・リスト一般公開用 <https://docs.google.com/spreadsheets/u/0/d/1nRnqXG2tRQ7wLTkEAE1o8N-7s9500h4B2Gj3l7AbKL4/edit>`_
+-  `アクセシビリティー・チェック・リスト一般公開用 <https://docs.google.com/spreadsheets/u/0/d/1nRnqXG2tRQ7wLTkEAE1o8N-7s9500h4B2Gj3l7AbKL4/edit>`__
 
 Google Drive上でこのスプレッドシートのコピーを作成してご利用ください。
 
