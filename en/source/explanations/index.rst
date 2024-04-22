@@ -1,8 +1,8 @@
 .. _appendix:
 
-########
-参考情報
-########
+#########################
+Supplementary Information
+#########################
 
 .. toctree::
    :maxdepth: 1
