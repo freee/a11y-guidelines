@@ -29,7 +29,7 @@ An Example of Performin the Check with {{ technique.tool_display_name }}
 参考動画：
 {%- elif lang == 'en' -%}
 Reference Videos:
-{%- endif %} `{{ technique.YouTube.title }} <https://www.youtube.com/watch?v={{ technique.YouTube.id }}>`_
+{%- endif %} `{{ technique.YouTube.title }} <https://www.youtube.com/watch?v={{ technique.YouTube.id }}>`__
 
 .. raw:: html
 

@@ -40,7 +40,7 @@
 ^^^^^^^^^^^^^
 
 この達成基準では、ユーザーの入力を求めるフォーム・コントロールにおいて、入力が期待される情報の種類を明示することを求めています。
-この達成基準に関する解説 `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`_ （ `日本語訳 <https://waic.jp/translations/WCAG21/Understanding/identify-input-purpose.html>`_ ）では、 ``autocomplete`` 属性の活用を具体的な方法として示しています。
+この達成基準に関する解説 `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`__ （ `日本語訳 <https://waic.jp/translations/WCAG21/Understanding/identify-input-purpose.html>`__ ）では、 ``autocomplete`` 属性の活用を具体的な方法として示しています。
 
 ``autocomplete`` 属性が用いられているフォーム・コントロールは、常に決まった値を入力する場合、入力すべき項目が少ない場合などには、入力を容易にする効果が期待できます。
 しかし、そうではない場合には、誤入力を誘発することにつながります。

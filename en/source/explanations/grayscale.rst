@@ -27,7 +27,7 @@ Enabling this setting allows you to toggle the color filters on and off at any t
 .. image:: /img/grayscale/win-settings-2.png
    :alt: Screenshot: the Color Filters settings with Keyboard Shortcut enabled
 
-Reference: `Make Windows easier to see - Microsoft Support <https://support.microsoft.com/en-us/windows/make-windows-easier-to-see-c97c2b0d-cadb-93f0-5fd1-59ccfe19345d>`_
+Reference: `Make Windows easier to see - Microsoft Support <https://support.microsoft.com/en-us/windows/make-windows-easier-to-see-c97c2b0d-cadb-93f0-5fd1-59ccfe19345d>`__
 
 *****
 macOS
@@ -48,7 +48,7 @@ The following instructions and screenshots are for macOS Ventura.
    .. image:: /img/grayscale/mac-settings-2.png
       :alt: Screenshot: the Color Filters settings
 
-Reference: `Change Display settings for accessibility on Mac - Apple Support <https://support.apple.com/en-us/guide/mac-help/unac089/mac>`_
+Reference: `Change Display settings for accessibility on Mac - Apple Support <https://support.apple.com/en-us/guide/mac-help/unac089/mac>`__
 
 ***
 iOS
@@ -60,7 +60,7 @@ Note: The following steps are based on iOS 17.4.
 2. Turn on "Color Filters."
 3. Select "Grayscale."
 
-Reference: `Change color on iPhone to make it easier to see items onscreen - Apple Support <https://support.apple.com/guide/iphone/change-color-and-brightness-iph3e2e1fb0/ios#:~:text=%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%99%E3%82%8B-,%E3%80%8C%E8%A8%AD%E5%AE%9A%E3%80%8D%20%EF%BC%9E%E3%80%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%80%8D%EF%BC%9E%E3%80%8C%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%81%A8,%E8%89%B2%E7%9B%B8%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82>`_
+Reference: `Change color on iPhone to make it easier to see items onscreen - Apple Support <https://support.apple.com/guide/iphone/change-color-and-brightness-iph3e2e1fb0/ios#:~:text=%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%99%E3%82%8B-,%E3%80%8C%E8%A8%AD%E5%AE%9A%E3%80%8D%20%EF%BC%9E%E3%80%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%80%8D%EF%BC%9E%E3%80%8C%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%81%A8,%E8%89%B2%E7%9B%B8%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82>`__
 
 *******
 Android
@@ -78,7 +78,7 @@ Note: The following steps are based on Android 14 on a Pixel 8. The procedure ma
 2. Check "Use color correction."
 3. Select "Grayscale" for "Correction mode."
 
-Reference: `Change text & display settings - Android Accessibility Help <https://support.google.com/accessibility/android/answer/11183305?hl=en#zippy=%2Cuse-color-correction>`_
+Reference: `Change text & display settings - Android Accessibility Help <https://support.google.com/accessibility/android/answer/11183305?hl=en#zippy=%2Cuse-color-correction>`__
 
 For Android 11 And Earlier
 ==========================

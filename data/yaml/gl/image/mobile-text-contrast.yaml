@@ -16,8 +16,8 @@ guideline:
 
     注：モバイル・アプリケーションにおいては、デスクトップのWebと比較して文字サイズの変更方法が広く知られていると推測されること、各プラットフォームのガイドライン [#]_ [#]_ においてもWCAG 2.1に準じた基準を用いていることから、上記の基準としています。
 
-    .. [#] `アクセシビリティ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/accessibility>`_
-    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`_
+    .. [#] `アクセシビリティ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/accessibility>`__
+    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`__
   en: |-
     Ensure sufficient contrast between the colors of text within images and key visual elements conveying important information, and their background colors.
 
@@ -27,8 +27,8 @@ guideline:
 
     Note: In mobile applications, it is assumed that methods for changing text size are more widely known compared to desktop web, and the guidelines of each platform [#]_ [#]_ also use standards in line with WCAG 2.1, hence the above criteria are set.
 
-    .. [#] `Accessibility | Apple Developer Documentation <https://developer.apple.com/design/human-interface-guidelines/accessibility>`_
-    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`_
+    .. [#] `Accessibility | Apple Developer Documentation <https://developer.apple.com/design/human-interface-guidelines/accessibility>`__
+    .. [#] `Accessibility – Material Design 3 <https://m3.material.io/foundations/accessible-design/patterns#f72f3851-5184-4132-b871-bc8224e062e2>`__
 sc:
 - 1.4.3
 - 1.4.6

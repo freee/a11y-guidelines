@@ -20,14 +20,14 @@ Google Chromeを採用しているのは、freeeでは最新版のGoogle Chrome�
 
 様々な環境で問題なく動作するものを実現できるのが理想ですが、こういった理由で、freeeでは最低限NVDAで問題なく動作するものを目指しています。
 
-.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`_
+.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`__
 
 ********
 事前準備
 ********
 
 参考動画
-   *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`_
+   *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`__
 
 .. raw:: html
 
@@ -40,7 +40,7 @@ NVDAのインストール
 インストール完了後の画面で、NVDAが自動的に起動します。
 NVDAが起動すると、いろいろな挙動が普段と異なった状態になりますので、後述するNVDAの終了方法を予め確認しておくことをお勧めします。
 
-1. `NVDA日本語チームのサイト <https://www.nvda.jp/>`_ から、NVDA日本語版の最新リリースをダウンロード（ https://i.nvda.jp/ にアクセスすると、自動的にダウンロードが開始される）
+1. `NVDA日本語チームのサイト <https://www.nvda.jp/>`__ から、NVDA日本語版の最新リリースをダウンロード（ https://i.nvda.jp/ にアクセスすると、自動的にダウンロードが開始される）
 2. ダウンロードしたファイルを実行（実行すると音が出るので注意）
 3. 使用許諾条件を確認後、「同意する」をチェック
 4. 「このコンピューターにNVDAをインストール」をクリック
@@ -115,7 +115,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 ----
 
 参考動画
-   *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`_
+   *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`__
 
 .. raw:: html
 
@@ -194,7 +194,7 @@ NVDAには、ようこそ画面で設定できる項目以外にも、設定画�
 ----------------------
 
 参考動画
-   *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`_
+   *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`__
 
 .. raw:: html
 
@@ -240,8 +240,8 @@ NVDAメニューは、NVDAの各種画面やツールへのアクセスを提供
 ====================================
 
 参考動画
-   *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`_
-   *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`_
+   *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`__
+   *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`__
 
 .. raw:: html
 
@@ -267,7 +267,7 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 ========================
 
 参考動画
-   *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`_
+   *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`__
 
 .. raw:: html
 
@@ -299,8 +299,8 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 ------
 
 参考動画
-   *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`_
-   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
+   *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`__
+   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`__
 
 .. raw:: html
 
@@ -326,8 +326,8 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 参考： NVDAチートシート
 -----------------------
 
-ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`_ には、他のキー操作も含めてまとめられています。
-GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`_ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`_ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`_ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`_ が公開されています。以下にPNG版を転載します。
+ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`__ には、他のキー操作も含めてまとめられています。
+GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`__ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`__ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`__ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`__ が公開されています。以下にPNG版を転載します。
 
 .. image:: /img/nvda/nvdacheat.png
    :alt: 画像化したNVDAチートシート

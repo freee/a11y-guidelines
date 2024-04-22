@@ -15,7 +15,7 @@ freeeで標準環境としているNVDAでも、音声設定を調整するこ�
 
 例えば、以下のように ``html`` 要素の ``lang`` 属性に誤った値が指定されているページは、画面表示に問題はありませんが、多言語の読み上げに対応しているスクリーン・リーダーでは適切に読み上げられません。
 
-`lang-incorrect.html <../_static/samples/lang-incorrect.html>`_ ：
+`lang-incorrect.html <../_static/samples/lang-incorrect.html>`__ ：
 
 .. raw:: html
 
@@ -39,7 +39,7 @@ Guidelines”のように数単語程度のフレーズであれば、このこ�
 
 以下のように、引用されている英文の箇所に ``lang="en"`` を指定してある場合（12行目）、この部分と他の日本語で書かれた部分で読み上げに用いられる音声が変わります。
 
-`lang-partial.html <../_static/samples/lang-partial.html>`_ ：
+`lang-partial.html <../_static/samples/lang-partial.html>`__ ：
 
 .. raw:: html
 

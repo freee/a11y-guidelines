@@ -17,7 +17,7 @@ TalkBackバージョン
    12.1
 
 本稿ではごく一部の機能や設定について紹介しています。
-より詳しくは、Googleが提供する `Androidのユーザー補助機能に関するヘルプ <https://support.google.com/accessibility/android/>`_ 内、「スクリーン リーダーを使用する」にあるTalkBackに関する情報を参照してください。
+より詳しくは、Googleが提供する `Androidのユーザー補助機能に関するヘルプ <https://support.google.com/accessibility/android/>`__ 内、「スクリーン リーダーを使用する」にあるTalkBackに関する情報を参照してください。
 
 **********
 起動と終了
@@ -176,8 +176,8 @@ UIコンポーネント
    *  button
    *  FAB
 参考
-   *  `Common buttons – Material Design 3 <https://m3.material.io/components/buttons/overview>`_
-   *  `FAB – Material Design 3 <https://m3.material.io/components/floating-action-button/overview>`_
+   *  `Common buttons – Material Design 3 <https://m3.material.io/components/buttons/overview>`__
+   *  `FAB – Material Design 3 <https://m3.material.io/components/floating-action-button/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -202,7 +202,7 @@ checkbox
 UIコンポーネント
    checkbox
 参考
-   `Checkbox – Material Design 3 <https://m3.material.io/components/checkbox/overview>`_
+   `Checkbox – Material Design 3 <https://m3.material.io/components/checkbox/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -224,7 +224,7 @@ switch
 UIコンポーネント
    switch
 参考
-   `Switch – Material Design 3 <https://m3.material.io/components/switch/overview>`_
+   `Switch – Material Design 3 <https://m3.material.io/components/switch/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -247,7 +247,7 @@ radio button
 UIコンポーネント
    radio button
 参考
-   `Radio button – Material Design 3 <https://m3.material.io/components/radio-button/overview>`_
+   `Radio button – Material Design 3 <https://m3.material.io/components/radio-button/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -270,7 +270,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    menu
 参考
-   `Menus – Material Design 3 <https://m3.material.io/components/menus/overview>`_
+   `Menus – Material Design 3 <https://m3.material.io/components/menus/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -297,7 +297,7 @@ time picker
 UIコンポーネント
    time picker
 参考
-   `Time pickers – Material Design 3 <https://m3.material.io/components/time-pickers/overview>`_
+   `Time pickers – Material Design 3 <https://m3.material.io/components/time-pickers/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -319,7 +319,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    snackbar
 参考
-   `Snackbars – Material Design 3 <https://m3.material.io/components/snackbar/overview>`_
+   `Snackbars – Material Design 3 <https://m3.material.io/components/snackbar/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -337,7 +337,7 @@ dialog
 UIコンポーネント
    dialog
 参考
-   `Dialogs – Material Design 3 <https://m3.material.io/components/dialogs/overview>`_
+   `Dialogs – Material Design 3 <https://m3.material.io/components/dialogs/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -362,7 +362,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    navigation drawer
 参考
-   `Navigation drawer – Material Design 3 <https://m3.material.io/components/navigation-drawer/overview>`_
+   `Navigation drawer – Material Design 3 <https://m3.material.io/components/navigation-drawer/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -388,7 +388,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    top app bar
 参考
-   `Top app bar – Material Design 3 <https://m3.material.io/components/top-app-bar/overview>`_
+   `Top app bar – Material Design 3 <https://m3.material.io/components/top-app-bar/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -414,7 +414,7 @@ tab
 UIコンポーネント
    tab
 参考
-   `Tabs – Material Design 3 <https://m3.material.io/components/tabs/overview>`_
+   `Tabs – Material Design 3 <https://m3.material.io/components/tabs/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -436,7 +436,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    list
 参考
-   `Lists – Material Design 3 <https://m3.material.io/components/lists/overview>`_
+   `Lists – Material Design 3 <https://m3.material.io/components/lists/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -456,7 +456,7 @@ text field
 UIコンポーネント
    text field
 参考
-   `Text fields – Material Design 3 <https://m3.material.io/components/text-fields/overview>`_
+   `Text fields – Material Design 3 <https://m3.material.io/components/text-fields/overview>`__
 
 使用されている箇所の例
 ----------------------
@@ -485,7 +485,7 @@ TalkBack利用時の挙動
 UIコンポーネント
    search
 参考
-   `Search – Material Design 3 <https://m3.material.io/components/search/overview>`_
+   `Search – Material Design 3 <https://m3.material.io/components/search/overview>`__
 
 使用されている箇所の例
 ----------------------

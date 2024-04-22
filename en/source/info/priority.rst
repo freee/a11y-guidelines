@@ -40,7 +40,7 @@ Success Criterion 1.3.5
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 This success criterion requires that for form controls asking for user input, the type of information expected to be input is clearly identified.
-The explanation for this success criterion in `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`_  suggests the use of the ``autocomplete`` attribute as a specific method.
+The explanation for this success criterion in `Understanding Identify Input Purpose <https://www.w3.org/WAI/WCAG21/Understanding/identify-input-purpose.html>`__  suggests the use of the ``autocomplete`` attribute as a specific method.
 
 Form controls utilizing the ``autocomplete`` attribute can facilitate easier input in situations where the inputs are consistently the same values or when there are few items to input.
 However, in other cases, it may lead to inadvertent errors.

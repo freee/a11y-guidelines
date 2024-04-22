@@ -6,17 +6,17 @@
 
 ロービジョン者でもコンテンツを知覚できるよう、テキストやUIコンポーネントにはそれぞれコントラスト比の基準を満たす色が使われることが求められます。
 
-実際のWebページから色のコントラスト比が不足している場所を発見するには `axe DevTools <https://www.deque.com/axe/>`_ のようなチェックツールを使用し、
-具体的な色同士のコントラスト比の計算には `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`_ のような計算ツールを使用します。
+実際のWebページから色のコントラスト比が不足している場所を発見するには `axe DevTools <https://www.deque.com/axe/>`__ のようなチェックツールを使用し、
+具体的な色同士のコントラスト比の計算には `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`__ のような計算ツールを使用します。
 
 ****************************************
 アクセシビリティー・チェックツールの使用
 ****************************************
 
-`axe DevTools <https://www.deque.com/axe/>`_ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
+`axe DevTools <https://www.deque.com/axe/>`__ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
 
 Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe DevToolsが使用されています。
-また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_ を使用すると、結果を日本語で読むこともできます。
+また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__ を使用すると、結果を日本語で読むこともできます。
 
 コントラスト比の自動判定ができない場合
 ======================================
@@ -33,8 +33,8 @@ axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定が�
 コントラスト比の計算ツールの使用
 ********************************
 
-コントラスト比の計算式は非常に複雑であるため、 `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`_ のような計算ツールを使用することが一般的です。
-`contrast.app <https://usecontrast.com/>`_ のように、インストールして常駐させるタイプのチェッカーも存在します。
+コントラスト比の計算式は非常に複雑であるため、 `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`__ のような計算ツールを使用することが一般的です。
+`contrast.app <https://usecontrast.com/>`__ のように、インストールして常駐させるタイプのチェッカーも存在します。
 
 このようなコントラスト比計算ツールを使用する場合は以下の点に注意が必要です。
 
@@ -44,7 +44,7 @@ axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定が�
 
 *  カラーピッカーを使用する場合、macOSではディスプレイのカラープロファイルの影響を受けることがあるため、これを防ぐ必要がある。
 
-   -  `macOSのカラープロファイル設定 <https://support.apple.com/ja-jp/guide/mac-help/mchlf3ddc60d/mac>`_ で、「このディスプレイのプロファイルのみを表示」のチェックを外してから ``SRGB IEC61966-2.1`` を選択。
+   -  `macOSのカラープロファイル設定 <https://support.apple.com/ja-jp/guide/mac-help/mchlf3ddc60d/mac>`__ で、「このディスプレイのプロファイルのみを表示」のチェックを外してから ``SRGB IEC61966-2.1`` を選択。
    -  SketchではPreferences➝General➝Color Profileで「SRGB IEC61966-2.1」を選択。
 
       上記はデフォルト設定なので、既存のドキュメントのカラープロファイルは異なったままになっている可能性があります。ファイルのカラープロファイルを変えたい場合は :menuselection:`File --> Document Settings` から変更します。

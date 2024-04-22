@@ -32,29 +32,28 @@ It is crucial to express intent through means other than just color differences.
 Additionally, employing color combinations that consider those with color vision deficiencies—known as Color Universal Design (CUD)—is also effective.
 While using expressions that do not rely on color alone can make the information accessible to those who have significant difficulties with color perception, implementing CUD can make the information even more comprehensible for people with color blindness.
 
-The `Color Universal Design Organization (CUDO) <https://cudo.jp/>`_ [#]_ highlights the following three points of CUD:
+The `Color Universal Design Organization (CUDO) <https://cudo.jp/>`__ [#]_ highlights the following three points of CUD:
 
    a. Choose color schemes that are easily distinguishable by as many people as possible.
    b. Ensure information is clear to both people who have difficulty distinguishing colors and in situations where colors are hard to distinguish.
    c. Facilitate communication using color names.
 
-   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`_
+   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`__
 
 When implementing CUD, use color schemes that meet the points above.
-Specifically, you can consider using color palettes like the ones published as the `Color Universal Design Recommended Color Set <https://jfly.uni-koeln.de/colorset/>`_. [#]_
+Specifically, you can consider using color palettes like the ones published as the `Color Universal Design Recommended Color Set <https://jfly.uni-koeln.de/colorset/>`__. [#]_
 However, color choices often need to align with the brand colors of products or services.
 Taking such constraints into account, it is advisable to predefine your own color palette.
 
 When verifying whether a design or implementation is accessible to people with color vision deficiencies, it is advisable to use simulators like the ones listed below.
 
-*  `Chromatic Vision Simulator <https://asada.website/cvsimulator/e/>`_
+*  `Chromatic Vision Simulator <https://asada.website/cvsimulator/e/>`__
 
-   -  `for iOS <https://apps.apple.com/us/app/chromatic-vision-simulator/id389310222>`_
-   -  `for Android <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`_
-   -  `Web Edition <https://asada.website/webCVS/>`_
+   -  `for iOS <https://apps.apple.com/us/app/chromatic-vision-simulator/id389310222>`__
+   -  `for Android <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`__
+   -  `Web Edition <https://asada.website/webCVS/>`__
 
 .. [#] The Color Universal Design Organization (CUDO) provides `some information in English here <https://cudo.jp/?page_id=1936>`__.
-
 .. [#] The author of the Color Universal Design Recommended Color Set provides `some information in English here <https://jfly.uni-koeln.de/color/index.html>`__.
 
 .. include:: /inc/info2gl/exp-color-only.rst
