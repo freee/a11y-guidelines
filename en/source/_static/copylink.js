@@ -1,0 +1,1 @@
+../../../ja/source/_static/copylink.js

@@ -186,12 +186,12 @@ HTML version
 GitHub Release Page
    https://github.com/freee/a11y-guidelines/releases/latest
 
-For proposals for the improvement of this document, please notify us on `GitHub <https://github.com/freee/a11y-guidelines/>`_.
+For proposals for the improvement of this document, please notify us on `GitHub <https://github.com/freee/a11y-guidelines/>`__.
 
 Copyright and License Conditions
 ================================
 
-|cclogo| The "freee Accessibility Guidelines" are created by freee K.K. and are provided under the Creative Commons Attribution 4.0 International License.
+|cclogo| The "freee Accessibility Guidelines" are created by freee K.K. and are provided under the `Creative Commons Attribution 4.0 International License <https://creativecommons.org/licenses/by/4.0/>`__.
 
 Copyright © |copyright|.
 

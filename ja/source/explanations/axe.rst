@@ -5,7 +5,7 @@ axe DevToolsを使用したアクセシビリティー・チェック
 ##################################################
 
 axe DevToolsは非常によく使われているアクセシビリティー・チェック・ツールです。
-基本機能が `axe-core <https://github.com/dequelabs/axe-core>`_ として実装されているため様々な方法で使用することができますが、ここではブラウザー拡張機能として利用して、出来上がっているWebページのアクセシビリティーの対応状況をチェックする方法を紹介します。
+基本機能が `axe-core <https://github.com/dequelabs/axe-core>`__ として実装されているため様々な方法で使用することができますが、ここではブラウザー拡張機能として利用して、出来上がっているWebページのアクセシビリティーの対応状況をチェックする方法を紹介します。
 
 なお、axe DevToolsを用いた具体的なチェックの実施方法については、 :ref:`check-example-axe` を参照してください。
 また、 :ref:`info-axe-rules` も合わせて参照してください。
@@ -16,7 +16,7 @@ axe DevToolsのインストールと起動の仕方
 
 ChromeウェブストアからChrome拡張をインストールできます。
 
-`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_
+`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__
 
 axe DevTools拡張機能はデベロッパーツール内で使用します。
 
@@ -95,8 +95,10 @@ axe DevToolsの画面には発見された問題の件数が表示されるエ�
 axe DevToolsを使用する上での注意点
 **********************************
 
-*  モーダルやアコーディオンが開閉するような場所では、開いた状態や閉じた状態で何度かaxe DevToolsで分析してみる必要があります
+*  モーダル・ダイアログやアコーディオンが開閉するような場所では、開いた状態や閉じた状態で何度かaxe DevToolsで分析してみる必要があります
 *  axe DevToolsだけではすべての問題を発見することはできませんが、機械的に発見できる問題を瞬時に発見することができます。また、調査の必要そうな場所を発見するために非常に有用です。
 
 .. include:: /inc/info2faq/exp-axe.rst
+
+.. translated:: true
 

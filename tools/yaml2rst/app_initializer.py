@@ -1,7 +1,7 @@
 import os
 import argparse
 import config
-from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, LOCALIZED_TEMPLATE_FILENAMES, TEMPLATE_FILENAMES
+from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, TEMPLATE_FILENAMES
 from template_manager import TemplateManager
 
 def setup_parameters():
@@ -44,14 +44,10 @@ def setup_variables():
     }
     return makefile_vars, makefile_vars_list
 
-def setup_templates(lang):
+def setup_templates():
     templates = {}
-    localized_template_dir = os.path.join(TEMPLATE_DIR, lang)
     for name, filename in TEMPLATE_FILENAMES.items():
         template = TemplateManager(TEMPLATE_DIR)
-        templates[name] = template.load(filename)
-    for name, filename in LOCALIZED_TEMPLATE_FILENAMES.items():
-        template = TemplateManager(localized_template_dir)
         templates[name] = template.load(filename)
     return templates
 

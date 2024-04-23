@@ -1,45 +1,47 @@
 .. _exp-image-text-alternative:
 
-########################
-テキストによる画像の説明
-########################
+##############################
+Describing Images Through Text
+##############################
 
-画像は、全盲やロービジョンのユーザーなどが適切に利用できない可能性があります。
+Images may not be adequately accessible to users who are totally blind or have low vision.
 
-まず全盲のユーザーの場合、当然ですが画像を見ることができません。
-また、一部のスクリーン・リーダーに搭載されている画像の認識・推測を行う機能も完璧とはほど遠いのが現状で、こういった機能の使用を前提とすることはできません。
+For users who are totally blind, it is clear that they cannot see the images.
+Additionally, the current capabilities of image recognition and prediction features in some screen readers are far from perfect, and it is not feasible to rely solely on these features.
 
-一方ロービジョンなどの要因で見ることに困難があるユーザーの場合、画像のサイズや用いられている色の組み合わせなどによって見づらいという場合が考えられます。
+On the other hand, users with low vision may find images difficult to view due to factors such as the size of the image or the color combinations used.
 
-このような問題を回避するためには、その画像が提供しているのと同等の情報をテキストでも提供することが必要です。
-より具体的には、画像の説明をテキストで提供します。
-この際重要なことは、 **過不足なく** 情報を提供するということです。
-情報が不足しているのはもちろん良くないのですが、過剰なのも良くありません。
+To avoid these problems, it is necessary to provide text that conveys the same information as the image.
+More specifically, a text description of the image should be provided.
+It is important that the information is neither insufficient nor excessive.
+It is certainly not good if the information provided is insufficient, but providing too much is also undesirable.
 
-提供すべき説明の分量や詳しさは、その画像の内容によっても、その画像が使われている文脈によっても異なります。
+The amount and detail of the description needed depend on the content of the image and the context in which it is used.
 
-例1:
-何らかの機能を実行するためのアイコンについて、そのアイコンがどのような機能を実行するためのものなのか広く一般に認知されている場合、その機能を示すテキストを提供するのが妥当でしょう。
-一方、そのアイコンの意味がほとんどの人にとって分からない場合は、そのアイコンの形状など視覚的特徴を説明する必要があるかもしれません。（これは製作者の意図次第です。）
+Example 1:
+For an icon that performs a specific function, if the function of the icon is widely recognized, it is appropriate to provide text that describes that function.
+However, if the meaning of the icon is not clear to most people, it may be necessary to describe its visual characteristics (depending on the creator's intent).
 
-例2:
-グラフを示す画像があるとき、その画像の前後のテキストを読めばそのグラフの内容が充分理解でき、画像には理解を補助する意味合いしかないような場合には、それがグラフであることが分かるテキストを提供すれば良いでしょう。
-一方、その画像を見なければ意味のある情報を得られない場合は、グラフの傾向の説明や、グラフ上の数値などをテキストで提供する必要があるでしょう。
+Example 2:
+If there is an image depicting a graph, and the surrounding text sufficiently explains the content of the graph such that the image only aids in understanding, then it is sufficient to provide text that indicates it is a graph.
+However, if meaningful information cannot be obtained without viewing the image, it will be necessary to provide a textual description of the graph's trends or the numerical data on the graph.
 
-文脈や内容に応じて説明を検討する必要がありますが、可能な限り一貫性がある説明にすべきです。
-どのような説明にすべきか検討する際に活用できる事例集を、今後整備する予定です。
+It is necessary to consider the context and content when preparing descriptions, aiming for as much consistency as possible.
+A collection of examples to help determine the appropriate descriptions is planned to be developed.
 
-画像の説明を提供する方法としては、短い説明の場合は ``img`` 要素の ``alt`` 属性や、場合によっては ``aria-label`` 属性や ``aria-labelledby`` 属性を用いると良いでしょう。
-長い説明の場合は、 ``aria-describedby`` 属性や ``longdesc`` 属性を用いる方法に加えて、詳細な説明を掲載したページへのリンクを画像の周囲に配置する方法なども考えられます。
+For short descriptions, using the ``alt`` attribute of the ``img`` element, or possibly the ``aria-label`` or ``aria-labelledby`` attributes, would be suitable.
+For longer descriptions, methods such as using the ``aria-describedby`` attribute, the ``longdesc`` attribute, or placing links to pages with detailed descriptions around the image can also be considered.
 
-以上は、画像に何らかの意味がある情報が含まれている場合です。
-画像が純粋に装飾目的で、意味のある情報を含んでいない場合は、スクリーン・リーダーなどの支援技術がその画像の存在を無視するような記述をする必要があります。
+The above is applicable when the image contains meaningful information.
+If the image is purely decorative and contains no meaningful information, it is necessary to write in such a way that assistive technologies like screen readers can ignore the presence of the image.
 
-具体的には、 ``img`` 要素に空の ``alt`` 属性を付ける（ ``<img src="image.png" alt="">`` ）、 ``role="presentation"`` を付与するなどの方法が考えられます。
+Specifically, an empty ``alt`` attribute can be added to the ``img`` element (``<img src="image.png" alt="">``), or ``role="presentation"`` can be used.
 
-なお、上記例2のような場合において、グラフの画像は情報を提供していますので、適切な説明を付与する必要があります。
-画像の説明がなくてもコンテンツの意味が伝わるのだから説明は不要だと考えるかもしれませんが、テキストの説明を活用するのは決して全盲のユーザーだけではありません。
-普段は主にスクリーン・リーダーを使っているロービジョンのユーザーの場合、そこにグラフがあることが分かればグラフは拡大表示して見てみようと考えることもあるでしょう。
-また、全盲のユーザーでも、そこにグラフがあることが分かれば、晴眼者とのコミュニケーションが容易になります。
+Moreover, in situations like Example 2 above, an appropriate description must be attached since the graph image provides information.
+While one might think that the image description is not needed when the content's meaning is clear without the description, text descriptions are useful not only for totally blind users.
+Low vision users who primarily rely on screen readers might realize there is a graph and decide to enlarge it for a closer look.
+Also, knowing that there is a graph can facilitate communication with sighted individuals for a totally blind user.
 
 .. include:: /inc/info2gl/exp-image-text-alternative.rst
+
+.. include:: /inc/info2faq/exp-image-text-alternative.rst

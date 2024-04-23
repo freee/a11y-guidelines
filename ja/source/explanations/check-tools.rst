@@ -10,3 +10,6 @@
    check-contrast
    screen-reader-check
    axe
+
+.. translated:: true
+

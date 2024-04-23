@@ -1,7 +1,7 @@
 {% for ex in examples -%}
 .. _check-example-{{ ex.tool }}-{{ ex.check_id }}:
 
-{% filter make_heading(2) -%}
+{% filter make_heading(2, 'permalink') -%}
 :ref:`check-{{ ex.check_id }}`
 {%- endfilter %}
 
@@ -12,7 +12,11 @@
 {{ ex.note }}
 {% endif %}
 {% if ex.YouTube is defined %}
-参考動画： `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`_
+{% if lang == 'ja' -%}
+参考動画：
+{%- elif lang == 'en' -%}
+Reference Videos:
+{%- endif %} `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`__
 
 .. raw:: html
 
@@ -20,6 +24,6 @@
 
 {% endif %}
 {% endfor %}
-
+{% if lang == 'ja' -%}
 .. translated:: true
-
+{% endif %}

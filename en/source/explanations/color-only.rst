@@ -1,56 +1,60 @@
 .. _exp-color-only:
 
-############################
-色を用いた表現に関する注意点
-############################
+#############################################
+Considerations for Using Color in Expressions
+#############################################
 
-参考： :ref:`exp-grayscale`
+Reference: :ref:`exp-grayscale`
 
-なにかを表現する際に色を用いることがしばしばあります。
+Color is often used to convey information.
 
-色を用いた表現としてよく見られるものとして、以下のような例が挙げられます：
+Common examples of expressions that utilize color include:
 
-*  フォーム中で入力が必須の項目のラベルを赤色で表示する
-*  エラー・メッセージを赤色で表示する
-*  リンクなど、クリッカブルであることを色を変えて示す
-*  強調するためにテキストの色を変える
-*  円グラフの画像で、回答の分目状況を色で示す
+*  Displaying labels of required fields in forms in red.
+*  Showing error messages in red.
+*  Indicating clickable links by changing their color.
+*  Changing the color of text to emphasize it.
+*  Using different colors in a pie chart to represent the distribution of responses.
 
-色を用いた表現そのものには問題はありませんが、その意味するところが色の違い以外の手段で表現されていないと、色弱者や視覚障害者にその意図が伝わりません。
+Using color in expressions is not problematic in itself, but if the intended meaning is not conveyed through means other than color differences, it will not be accessible to people with color blindness or visual impairments.
 
-テキスト情報であれば、その意図が伝わるような文言を工夫して色を用いた表現と併用すれば良いでしょう。
+For text information, it's advisable to use clever wording in combination with color to ensure the intent is communicated.
 
-上記のリンクの場合は、色に加えて下線など、別の視覚的要素も併せて用いれば問題ありません。
+Reference: :ref:`exp-text-wording`
 
-画像の場合、テキストによる説明を併記する方法がまず考えられます。
-また、上記の円グラフの例であれば、背景の模様を変えるといった方法が考えられるでしょう。
+In the case of links, it's acceptable to use color along with another visual element like an underline.
 
-このように、色の違いに加えて、別の手段で意図を表現することが重要です。
+For images, one approach is to provide textual descriptions alongside them.
+In the example of a pie chart, altering the background pattern could be one strategy.
 
-さらに、色弱者に配慮した色の組み合わせを用いる、いわゆるカラー・ユニバーサル・デザイン（CUD）を行うことも有効です。
-色に依存しない表現を用いれば、色の認識が著しく困難な人にも伝わる情報になりますが、CUDを行えば、色弱者にとってはより理解しやすい情報になります。
+It is crucial to express intent through means other than just color differences.
 
-`カラーユニバーサルデザイン機構（CUDO） <https://cudo.jp/>`_ は、CUDのポイントとして以下の3つを挙げています。
+Additionally, employing color combinations that consider those with color vision deficiencies—known as Color Universal Design (CUD)—is also effective.
+While using expressions that do not rely on color alone can make the information accessible to those who have significant difficulties with color perception, implementing CUD can make the information even more comprehensible for people with color blindness.
 
-   a. 出来るだけ多くの人に見分けやすい配色を選ぶ。
-   b. 色を見分けにくい人（場合）でも情報が伝わるようにする。
-   c. 色の名前を用いたコミュニケーションを可能にする。
+The `Color Universal Design Organization (CUDO) <https://cudo.jp/>`__ [#]_ highlights the following three points of CUD:
 
-   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`_
+   a. Choose color schemes that are easily distinguishable by as many people as possible.
+   b. Ensure information is clear to both people who have difficulty distinguishing colors and in situations where colors are hard to distinguish.
+   c. Facilitate communication using color names.
 
-CUDを行う場合、上記のポイントを満たすような配色を用います。
-具体的には、例えば
-`カラーユニバーサルデザイン推奨配色セット <https://jfly.uni-koeln.de/colorset/>`_
-として公開されているカラー・パレットを用いるといった方法が考えられます。
-ただ、配色についてはプロダクトやサービスのブランド・カラーなどとの兼ね合いもあることが多く、こういった制約を考慮して独自のカラー・パレットを予め定義しておくのが良いでしょう。
+   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`__
 
-実際にデザインしたものや実装したものが色弱者にとって利用しやすいものかを検証する場合は、以下に挙げるようなシミュレーターを用いると良いでしょう。
+When implementing CUD, use color schemes that meet the points above.
+Specifically, you can consider using color palettes like the ones published as the `Color Universal Design Recommended Color Set <https://jfly.uni-koeln.de/colorset/>`__. [#]_
+However, color choices often need to align with the brand colors of products or services.
+Taking such constraints into account, it is advisable to predefine your own color palette.
 
-*  `色のシミュレータ <https://asada.website/cvsimulator/j/>`_
+When verifying whether a design or implementation is accessible to people with color vision deficiencies, it is advisable to use simulators like the ones listed below.
 
-   -  `iOS版 <https://apps.apple.com/jp/app/cvsimulator/id389310222>`_
-   -  `Android版 <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`_
-   -  `Web版 <https://asada.website/webCVS/>`_
+*  `Chromatic Vision Simulator <https://asada.website/cvsimulator/e/>`__
+
+   -  `for iOS <https://apps.apple.com/us/app/chromatic-vision-simulator/id389310222>`__
+   -  `for Android <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`__
+   -  `Web Edition <https://asada.website/webCVS/>`__
+
+.. [#] The Color Universal Design Organization (CUDO) provides `some information in English here <https://cudo.jp/?page_id=1936>`__.
+.. [#] The author of the Color Universal Design Recommended Color Set provides `some information in English here <https://jfly.uni-koeln.de/color/index.html>`__.
 
 .. include:: /inc/info2gl/exp-color-only.rst
 

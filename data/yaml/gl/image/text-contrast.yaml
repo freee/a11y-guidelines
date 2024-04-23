@@ -16,8 +16,8 @@ guideline:
 
     注：freeeのプロダクトやWebサイトにおいては、主に日本語が用いられているため、Understanding WCAG 2.1 [#]_ の日本語訳 [#]_ 中の訳注で示されている基準を用いています。
 
-    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
-    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
+    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`__
+    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`__
   en: |-
     Ensure sufficient contrast between the colors of text within images and key visual elements conveying important information, and their background colors.
 
@@ -27,8 +27,8 @@ guideline:
 
     Note: In freee products and websites, Japanese is mainly used, so the criteria indicated in the translation notes in Understanding WCAG 2.1 [#]_ [#]_  are used.
 
-    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`_
-    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`_
+    .. [#] `Understanding Success Criterion 1.4.3: Contrast (Minimum) <https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html>`__
+    .. [#] `達成基準 1.4.3: コントラスト (最低限)を理解する <https://waic.jp/translations/WCAG21/Understanding/contrast-minimum.html>`__
 sc:
 - 1.4.3
 - 1.4.6

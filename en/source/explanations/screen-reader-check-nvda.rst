@@ -20,14 +20,14 @@ Google Chrome is chosen because, at freee, the latest version of Google Chrome i
 
 While it is ideal to create something that works flawlessly in various environments, for these reasons, at freee, we aim to at least achieve seamless functionality with NVDA.
 
-.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`_
+.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`__
 
 ***********
 Preparation
 ***********
 
 Reference Video
-   *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`_
+   *  `NVDAのインストールと初期設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=KKQXZHCmjUU>`__
 
 .. raw:: html
 
@@ -40,7 +40,7 @@ Follow the steps below to install the latest version of the Japanese edition of 
 After the installation is complete, NVDA will automatically start.
 When NVDA is running, various behaviors will be different from usual, so it is recommended to check the method to exit NVDA mentioned later in advance.
 
-1. Download the latest release of the Japanese edition of NVDA from the `NVDA Japanese team's site <https://www.nvda.jp/>`_ (visiting https://i.nvda.jp/ will automatically start the download).
+1. Download the latest release of the Japanese edition of NVDA from the `NVDA Japanese team's site <https://www.nvda.jp/>`__ (visiting https://i.nvda.jp/ will automatically start the download).
 2. Run the downloaded file (be aware that it will make a sound upon running).
 3. After reviewing the license agreement, check "Agree."
 4. Click on "Install NVDA on this computer."
@@ -116,7 +116,7 @@ Speech
 ------
 
 Reference Video
-   *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`_
+   *  `NVDA音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=qrWLDZmZ5ek>`__
 
 .. raw:: html
 
@@ -197,7 +197,7 @@ Managing Voice Synthesizers
 ---------------------------
 
 Reference Video
-   *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`_
+   *  `Windows音声の設定【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=BYtQZQNYiIM>`__
 
 .. raw:: html
 
@@ -243,8 +243,8 @@ Focus Mode and Browse Mode
 ==========================
 
 Reference Videos
-   *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`_
-   *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`_
+   *  `ブラウズモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=WE3q9PwHdu0>`__
+   *  `ブラウズモードとフォーカスモードの違い【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Qu2K_LjM4Wo>`__
 
 .. raw:: html
 
@@ -271,7 +271,7 @@ Utilizing the Speech Viewer
 ===========================
 
 Reference Video
-   *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`_
+   *  `スピーチビューアー【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=ZyzzgXw11oI>`__
 
 .. raw:: html
 
@@ -304,8 +304,8 @@ Other Commands
 
 
 Reference Videos
-   *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`_
-   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`_
+   *  `読み上げの停止と読み上げモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=Q1xw4a0FGFU>`__
+   *  `入力ヘルプモード【NVDAでアクセシビリティー チェック】 <https://www.youtube.com/watch?v=j1GzUGZbbzI>`__
 
 .. raw:: html
 

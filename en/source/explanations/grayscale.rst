@@ -1,110 +1,122 @@
 .. _exp-grayscale:
 
-################################
-グレースケール表示への切り替え方
-################################
+##################################
+How to Switch to Grayscale Display
+##################################
 
-参考： :ref:`exp-color-only`
+Reference: :ref:`exp-color-only`
 
-グレースケール表示にした際の見え方を確認する場合、基本的にはOSが提供する表示切り替え機能を用います。
-以下に各OSごとの表示切り替え機能の利用方法を示します。
+To check how things look in grayscale display, you generally use the display switching function provided by the operating system.
+Below, we will show you how to use the display switching functions for each operating system.
 
-**********************
-Windows 10、Windows 11
-**********************
+*************************
+Windows 10 And Windows 11
+*************************
 
-#. 「設定」画面を開き、「アクセシビリティ」（Windows 10では「簡単操作」）をクリック（ :kbd:`Win + U` ）。
-#. 「カラーフィルター」をクリック。
-#. ウィンドウの右側にある「カラーフィルター」のスイッチをオンにして、その下にあるドロップダウンをクリックして関連オプションを表示。
-#. 「グレースケール」を選択。
+1. Open the "Settings" screen and click on "Accessibility" (in Windows 10, it's called "Ease of Access") (the :kbd:`Win + U` keyboard shortcut can be used).
+2. Click on "Color filters."
+3. Turn on the "Color filters" switch on the right side of the window, then click the dropdown below it to show the related options.
+4. Select "Grayscale."
 
    .. image:: /img/grayscale/win-settings-1.png
-      :alt: スクリーン・ショット：カラーフィルターの設定画面
+      :alt: Screenshot: the Color Filters settings
 
-頻繁に利用する場合は、同じ画面で「カラーフィルターのキーボードショートカット」を有効にすると便利でしょう。
-この設定を有効にすると、 :kbd:`Win + Ctrl + C` キーの押下でいつでもカラーフィルターのオン・オフを切り替えることができるようになります。
+If you frequently use this feature, it would be useful to enable "Keyboard shortcut for color filters" on the same screen.
+Enabling this setting allows you to toggle the color filters on and off at any time by pressing :kbd:`Win + Ctrl + C`.
 
 .. image:: /img/grayscale/win-settings-2.png
-   :alt: スクリーン・ショット：カラーフィルターの設定画面でキーボードショートカットを有効にする
+   :alt: Screenshot: the Color Filters settings with Keyboard Shortcut enabled
+
+Reference: `Make Windows easier to see - Microsoft Support <https://support.microsoft.com/en-us/windows/make-windows-easier-to-see-c97c2b0d-cadb-93f0-5fd1-59ccfe19345d>`__
 
 *****
 macOS
 *****
 
-以下の手順やスクリーン・ショットは、macOS Venturaでのものです。
+The following instructions and screenshots are for macOS Ventura.
 
-#. :menuselection:`Appleメニュー --> システム設定` の順に選択
-#. サイドバーで「アクセシビリティ」を選択
-#. 右側で「ディスプレイ」をクリック
+1. Select :menuselection:`Apple menu --> System Settings`.
+2. In the sidebar, choose "Accessibility."
+3. Click on "Display" on the right side.
 
    .. image:: /img/grayscale/mac-settings-1.png
-      :alt: スクリーン・ショット：アクセシビリティ、ディスプレイの設定画面
+      :alt: Screenshot: the Accessibility, Display settings
 
-#. 画面下方の「カラーフィルタ」のセクションで、「カラーフィルタ」のスイッチをオンにする
-#. 「フィルタタイプ」で「グレイスケール」を選択
+4. In the "Color Filters" section at the bottom of the screen, turn on the "Color Filters" switch.
+5. Select "Grayscale" for the "Filter Type."
 
    .. image:: /img/grayscale/mac-settings-2.png
-      :alt: スクリーン・ショット：カラーフィルタの設定
+      :alt: Screenshot: the Color Filters settings
 
-参考： `Macでアクセシビリティの「ディスプレイ」環境設定を変更する - Apple サポート <https://support.apple.com/ja-jp/guide/mac-help/unac089/mac>`_
+Reference: `Change Display settings for accessibility on Mac - Apple Support <https://support.apple.com/en-us/guide/mac-help/unac089/mac>`__
 
 ***
 iOS
 ***
 
-#. 「設定」アプリ、 :menuselection:`アクセシビリティ --> カラー表示とテキストサイズ --> カラーフィルタ` の順にタップ
-#. 「カラーフィルタ」をオンにする
-#. 「グレイスケール」を選択する
+Note: The following steps are based on iOS 17.4.
+
+1. Tap on the "Settings" app, then select :menuselection:`Accessibility --> Display & Text Size --> Color Filters`.
+2. Turn on "Color Filters."
+3. Select "Grayscale."
+
+Reference: `Change color on iPhone to make it easier to see items onscreen - Apple Support <https://support.apple.com/guide/iphone/change-color-and-brightness-iph3e2e1fb0/ios#:~:text=%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%99%E3%82%8B-,%E3%80%8C%E8%A8%AD%E5%AE%9A%E3%80%8D%20%EF%BC%9E%E3%80%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%80%8D%EF%BC%9E%E3%80%8C%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%81%A8,%E8%89%B2%E7%9B%B8%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82>`__
 
 *******
 Android
 *******
 
-Android 12の場合
-================
+For Android 13 or Later
+=======================
 
-注：以下の記述はPixel 6上のAndroid 12における操作手順です。機種によって異なっている場合があります。
+Note: The following steps are based on Android 14 on a Pixel 8. The procedure may vary depending on the device and OS version.
 
-#. 「設定」アプリ、 :menuselection:`ユーザー補助 --> テキストと表示 --> 色補正` の順にタップ
-#. 「色補正を使用」をチェック
-#. 「補正モード」で「グレースケール」を選択
+1. Tap on the "Settings" app, then select :menuselection:`Accessibility -->  Color and motion --> Color correction`.
 
-Android 11以前の場合
-====================
+   Note: Depending on Android version, tap on Text and display, instead of Color and motion.
 
-注：以下の記述はPixel 3A上のAndroid 11における操作手順です。端末の機種やAndroidのバージョンによって異なっている場合があります。
+2. Check "Use color correction."
+3. Select "Grayscale" for "Correction mode."
 
-#. 「設定」アプリ、 :menuselection:`システム --> 詳細設定` の順にタップ
-#. :menuselection:`開発者向けオプション` をタップ（「開発者向けオプション」が表示されていない場合は、後述の手順で「開発者向けオプション」を有効にします）
-#. :menuselection:`色空間シミュレート` をタップ
-#. 「全色盲」を選択
+Reference: `Change text & display settings - Android Accessibility Help <https://support.google.com/accessibility/android/answer/11183305?hl=en#zippy=%2Cuse-color-correction>`__
 
-「色空間シミュレート」で「無効」を選択するか、「設定」アプリの :menuselection:`ユーザー補助 --> 色補正` を無効にすることで、標準の表示モードに戻すことができます。
+For Android 11 And Earlier
+==========================
 
-参考：開発者向けオプションの有効化
-==================================
+Note: The following steps are based on Android 11 on a Pixel 3A.
+The procedure may vary depending on the device model and the version of Android.
 
-「開発者向けオプション」が表示されない場合は、以下の手順で開発者向けオプションを有効にします。
+1. Tap on the "Settings" app, then go to :menuselection:`System --> Advanced`.
+2. Tap on :menuselection:`Developer options` (If "Developer options" is not visible, follow the steps mentioned later to enable "Developer options").
+3. Tap on :menuselection:`Simulate color space`.
+4. Select "Monochromacy."
 
-#. 「設定」アプリ、 :menuselection:`端末情報` をタップ
-#. 表示されている「ビルド番号」を7回連続してタップ
-#. 端末に設定されている暗証番号を入力
+You can revert to the standard display mode by selecting "Disabled" in "Simulate color space" or by disabling "Color correction" in the "Settings" app under :menuselection:`Accessibility --> Color correction`.
 
-******************************
-参考：ブックマークレットの利用
-******************************
+Reference: Enabling Developer Options
+=====================================
 
-簡易的なチェックの方法として、ブラウザーに表示中のページをグレースケール表示にするブックマークレットを利用する方法があります。
-以下の手順でブックマークレットを作成することができます。
+If "Developer Options" is not visible, follow these steps to enable it:
 
-なお、このブックマークレットが正常に動作せず、実行すると表示が崩れてしまうような場合があることが報告されています。
-そのような場合やこのブックマークレットが正常に動作しないブラウザーを使用している場合、モバイル・アプリケーションなどWebページ以外のものの表示を確認する場合には、各OSの表示切り替え機能を使います。
+1. Tap on the "Settings" app, then select :menuselection:`About phone`.
+2. Tap on "Build number" seven times in succession.
+3. Enter the PIN set for the device.
 
-#. 以下のコードをターゲットとするブックマーク（ブックマークレット）を作成。
+****************************
+Reference: Using Bookmarklet
+****************************
+
+As a simple method for checking, you can use a bookmarklet that turns the display of the page currently viewed in your browser into grayscale.
+You can create a bookmarklet by following the steps below.
+
+Please note that there have been reports that this bookmarklet may not function properly and can cause the display to distort when executed.
+In such cases, or if you are using a browser where the bookmarklet does not function correctly, or if your are checking the display of non-web page items like mobile applications, use the display switching features of the operating system.
+
+1. Create a bookmark (bookmarklet) with the following code.
 
    .. raw:: html
 
-      <details><summary>コードを表示</summary>
+      <details><summary>display the code</summary>
 
    .. code-block:: javascript
 
@@ -113,10 +125,9 @@ Android 11以前の場合
    .. raw:: html
 
       </details>
-      <a href='javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})();'>表示中のページをグレースケール表示にするブックマークレット</a>
+      <a href='javascript:(function(){var d=document;s=d.createElement("style");s.innerHTML="*{filter:grayscale(100%) !important}";d.body.appendChild(s)})();'>A Bookmarklet to Turn the Displayed Page Into Grayscale</a>
 
-#. チェック対象のページを表示した状態で、このブックマークレットを実行。
-
+2. With the target page displayed, execute this bookmarklet.
 
 .. include:: /inc/info2gl/exp-grayscale.rst
 

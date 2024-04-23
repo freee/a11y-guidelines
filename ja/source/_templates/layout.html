@@ -38,12 +38,17 @@
     <meta property="og:url" content="{{ theme_canonical_url }}{{ pagename }}{{ file_suffix }}" />
     <meta name="twitter:card" content="summary_large_image" />
   {% endif %}
+  <script src="{{ pathto('_static/copylink.js', 1) }}"></script>
 {% endblock %}
 {% block content %}
-  {% if meta is defined %}
-    {% if meta.translated %}
-      <p><a href="{{ baseurl_en }}{{ pagename }}.html">An English translation of this page is available.</a></p>
+  {% if language == 'ja' %}
+    {% if meta is defined %}
+      {% if meta.translated %}
+        <p><a href="{{ baseurl_en }}{{ pagename }}.html">An English translation of this page is available.</a></p>
+      {% endif %}
     {% endif %}
+  {% else %}
+    <p><a href="{{ baseurl_ja }}{{ pagename }}.html">The normative (Japanese) version of this page is here.</a></p>
   {% endif %}
   {{ super() }}
 {% endblock %}

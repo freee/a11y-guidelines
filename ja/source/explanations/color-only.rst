@@ -14,11 +14,13 @@
 *  エラー・メッセージを赤色で表示する
 *  リンクなど、クリッカブルであることを色を変えて示す
 *  強調するためにテキストの色を変える
-*  円グラフの画像で、回答の分目状況を色で示す
+*  円グラフの画像で、回答の分布状況を色で示す
 
 色を用いた表現そのものには問題はありませんが、その意味するところが色の違い以外の手段で表現されていないと、色弱者や視覚障害者にその意図が伝わりません。
 
 テキスト情報であれば、その意図が伝わるような文言を工夫して色を用いた表現と併用すれば良いでしょう。
+
+参考： :ref:`exp-text-wording`
 
 上記のリンクの場合は、色に加えて下線など、別の視覚的要素も併せて用いれば問題ありません。
 
@@ -30,28 +32,31 @@
 さらに、色弱者に配慮した色の組み合わせを用いる、いわゆるカラー・ユニバーサル・デザイン（CUD）を行うことも有効です。
 色に依存しない表現を用いれば、色の認識が著しく困難な人にも伝わる情報になりますが、CUDを行えば、色弱者にとってはより理解しやすい情報になります。
 
-`カラーユニバーサルデザイン機構（CUDO） <https://cudo.jp/>`_ は、CUDのポイントとして以下の3つを挙げています。
+`カラーユニバーサルデザイン機構（CUDO） <https://cudo.jp/>`__ は、CUDのポイントとして以下の3つを挙げています。
 
    a. 出来るだけ多くの人に見分けやすい配色を選ぶ。
    b. 色を見分けにくい人（場合）でも情報が伝わるようにする。
    c. 色の名前を用いたコミュニケーションを可能にする。
 
-   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`_
+   -- `「カラーユニバーサルデザイン３つのポイント」とは？ – NPO法人 カラーユニバーサルデザイン機構 CUDO <https://cudo.jp/?page_id=86>`__
 
 CUDを行う場合、上記のポイントを満たすような配色を用います。
 具体的には、例えば
-`カラーユニバーサルデザイン推奨配色セット <https://jfly.uni-koeln.de/colorset/>`_
+`カラーユニバーサルデザイン推奨配色セット <https://jfly.uni-koeln.de/colorset/>`__
 として公開されているカラー・パレットを用いるといった方法が考えられます。
 ただ、配色についてはプロダクトやサービスのブランド・カラーなどとの兼ね合いもあることが多く、こういった制約を考慮して独自のカラー・パレットを予め定義しておくのが良いでしょう。
 
 実際にデザインしたものや実装したものが色弱者にとって利用しやすいものかを検証する場合は、以下に挙げるようなシミュレーターを用いると良いでしょう。
 
-*  `色のシミュレータ <https://asada.website/cvsimulator/j/>`_
+*  `色のシミュレータ <https://asada.website/cvsimulator/j/>`__
 
-   -  `iOS版 <https://apps.apple.com/jp/app/cvsimulator/id389310222>`_
-   -  `Android版 <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`_
-   -  `Web版 <https://asada.website/webCVS/>`_
+   -  `iOS版 <https://apps.apple.com/jp/app/cvsimulator/id389310222>`__
+   -  `Android版 <https://play.google.com/store/apps/details?id=asada0.android.cvsimulator>`__
+   -  `Web版 <https://asada.website/webCVS/>`__
 
 .. include:: /inc/info2gl/exp-color-only.rst
 
 .. include:: /inc/info2faq/exp-color-only.rst
+
+.. translated:: true
+

@@ -32,6 +32,10 @@
         "ja": "Android TalkBack",
         "en": "Android TalkBack"
     },
+    "screen-reader": {
+        "ja": "スクリーン・リーダー",
+        "en": "Screen Reader"
+    },
     "target-size": {
         "ja": "ターゲット・サイズ",
         "en": "Target Size"

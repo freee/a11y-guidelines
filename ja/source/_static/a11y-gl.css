@@ -26,3 +26,64 @@ body {
     border: 1px solid #ccc;
     padding: 16px;
 }
+
+/* ドロップダウンコンテナのスタイリング */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* ドロップダウンボタンのスタイリング */
+.copy-link {
+    padding: 2px 8px;
+    font-size: 12px;
+    margin: 0 0 0 8px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    vertical-align: middle;
+}
+.copy-link:hover, .copy-link:focus {
+    background-color: #e0e0e0;
+}
+
+/* ドロップダウンメニューのスタイリング */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    z-index: 1000;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* メニュー項目のスタイリング */
+.dropdown-menu a {
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+    background: none;
+    border-radius: 0;
+}
+
+.dropdown-menu a:hover, .dropdown-menu a:focus {
+    background-color: #f5f5f5;
+}
+
+/* 最後の項目の下線を削除 */
+.dropdown-menu a:last-child {
+    border-bottom: none;
+}
+
+/* フォーカス時のアウトライン表示 */
+.copy-link:focus, .dropdown-menu a:focus {
+    outline: 2px dashed #5b9dd9;
+    outline-offset: 2px;
+}

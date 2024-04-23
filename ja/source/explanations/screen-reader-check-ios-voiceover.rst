@@ -9,7 +9,7 @@ iOS用スクリーン・リーダーのVoiceOverの推奨設定の方法、基�
 なお、macOSにも同名のスクリーン・リーダーが標準搭載されていますが、iOSのVoiceOverとはまったくの別物です。
 本稿ではiOSのVoiceOverについてのみ記し、「VoiceOver」という記述はiOS VoiceOverを差します。
 
-本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/16.0/ios/16.0>`_ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
+本稿ではごく一部の機能や設定について紹介しています。より詳しくは、Appleが提供するiPhoneユーザガイドの「 `iPhoneのアクセシビリティ機能を使ってみる <https://support.apple.com/ja-jp/guide/iphone/iph3e2e4367/16.0/ios/16.0>`__ 」を参照してください。VoiceOverに加えて、その他のアクセシビリティー関連機能についても詳しく紹介されています。
 
 **********
 起動と終了
@@ -211,7 +211,7 @@ UIコンポーネントを独自に実装する場合は、これらを参考に
 UIコンポーネント
    ボタン
 参考
-   `ボタン | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/buttons>`_
+   `ボタン | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/buttons>`__
 
 VoiceOver利用時の挙動
 ---------------------
@@ -234,7 +234,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    ラベル
 参考
-   `ラベル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/labels>`_
+   `ラベル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/labels>`__
 
 VoiceOver利用時の挙動
 ---------------------
@@ -248,7 +248,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    ページコントロール
 参考
-   `ページコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/page-controls>`_
+   `ページコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/page-controls>`__
 
 使用されている箇所の例
 ----------------------
@@ -274,7 +274,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    ピッカー
 参考
-   `ピッカー | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/pickers/>`_
+   `ピッカー | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/pickers/>`__
 
 使用されている箇所の例
 ----------------------
@@ -299,7 +299,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    セグメントコントロール
 参考
-   `セグメントコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/segmented-controls>`_
+   `セグメントコントロール | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/segmented-controls>`__
 
 使用されている箇所の例
 ----------------------
@@ -321,7 +321,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    スライダ
 参考
-   `スライダ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`_
+   `スライダ | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/sliders>`__
 
 使用されている箇所の例
 ----------------------
@@ -353,7 +353,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    トグル
 参考
-   `トグル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/toggles>`_
+   `トグル | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/toggles>`__
 
 使用されている箇所の例
 ----------------------
@@ -375,7 +375,7 @@ VoiceOver利用時の挙動
 UIコンポーネント
    テキストフィールド
 参考
-   `テキストフィールド | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`_
+   `テキストフィールド | Apple Developer Documentation <https://developer.apple.com/jp/design/human-interface-guidelines/text-fields>`__
 
 使用されている箇所の例
 ----------------------

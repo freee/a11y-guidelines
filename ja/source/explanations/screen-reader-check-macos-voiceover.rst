@@ -32,7 +32,7 @@ macOS VoiceOverを用いたチェックの位置づけ
 macOS VoiceOverで問題なく動作してもNVDAでは動作に問題がある場合や、反対にmacOS VoiceOverでは動作に問題があってもNVDAでは問題なく動作する場合もあります。
 どちらの環境でも問題なく動作するものを実現できることが理想ですが、freeeでは最低限NVDAで問題なく動作することを目指しています。
 
-.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`_
+.. [#] `第3回支援技術利用状況調査報告書 <https://jbict.net/survey/at-survey-03>`__
 
 ********
 事前準備
@@ -72,7 +72,7 @@ macOS Venturaでの設定手順を以下に示します。
    .. image:: /img/macvo/macvo-settings-fnkey.png
       :alt: スクリーン・ショット：ファンクションキーの設定
 
-参考： `Mac でファンクションキーを使う方法 - Apple サポート (日本) <https://support.apple.com/ja-jp/102439>`_
+参考： `Mac でファンクションキーを使う方法 - Apple サポート (日本) <https://support.apple.com/ja-jp/102439>`__
 
 初回起動時の操作
 ================
@@ -225,7 +225,7 @@ VoiceOver起動中に :kbd:`VO + U` を押下すると、ローターと呼ば�
 ここで紹介した内容は、VoiceOverの機能のごく一部です。
 より詳しい使い方や、VoiceOverの機能については、以下の情報を参照してください。
 
-*  `Mac用VoiceOverユーザガイド <https://support.apple.com/ja-jp/guide/voiceover/welcome/mac>`_
+*  `Mac用VoiceOverユーザガイド <https://support.apple.com/ja-jp/guide/voiceover/welcome/mac>`__
 
 なお、このガイドには :kbd:`VO + H` の押下で表示されるヘルプ・メニューからもアクセスできます。
 

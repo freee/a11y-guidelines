@@ -27,6 +27,8 @@ Windows 10、Windows 11
 .. image:: /img/grayscale/win-settings-2.png
    :alt: スクリーン・ショット：カラーフィルターの設定画面でキーボードショートカットを有効にする
 
+参考： `Windows を見やすくする - Microsoft サポート <https://support.microsoft.com/ja-jp/windows/windows-%E3%82%92%E8%A6%8B%E3%82%84%E3%81%99%E3%81%8F%E3%81%99%E3%82%8B-c97c2b0d-cadb-93f0-5fd1-59ccfe19345d>`__
+
 *****
 macOS
 *****
@@ -46,28 +48,37 @@ macOS
    .. image:: /img/grayscale/mac-settings-2.png
       :alt: スクリーン・ショット：カラーフィルタの設定
 
-参考： `Macでアクセシビリティの「ディスプレイ」環境設定を変更する - Apple サポート <https://support.apple.com/ja-jp/guide/mac-help/unac089/mac>`_
+参考： `Macでアクセシビリティの「ディスプレイ」環境設定を変更する - Apple サポート <https://support.apple.com/ja-jp/guide/mac-help/unac089/mac>`__
 
 ***
 iOS
 ***
 
-#. 「設定」アプリ、 :menuselection:`アクセシビリティ --> カラー表示とテキストサイズ --> カラーフィルタ` の順にタップ
+注：以下の記述はiOS 17.4における操作手順です。
+
+#. 「設定」アプリ、 :menuselection:`アクセシビリティ --> 画面表示とテキストサイズ --> カラーフィルタ` の順にタップ
 #. 「カラーフィルタ」をオンにする
 #. 「グレイスケール」を選択する
+
+参考： `iPhoneに表示されるカラーを変更して画面上の項目を見やすくする - Apple サポート (日本) <https://support.apple.com/ja-jp/guide/iphone/iph3e2e1fb0/ios#:~:text=%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%99%E3%82%8B-,%E3%80%8C%E8%A8%AD%E5%AE%9A%E3%80%8D%20%EF%BC%9E%E3%80%8C%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B7%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3%E3%80%8D%EF%BC%9E%E3%80%8C%E7%94%BB%E9%9D%A2%E8%A1%A8%E7%A4%BA%E3%81%A8,%E8%89%B2%E7%9B%B8%E3%82%92%E8%AA%BF%E6%95%B4%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82>`__
 
 *******
 Android
 *******
 
-Android 12の場合
-================
+Android 13以降の場合
+====================
 
-注：以下の記述はPixel 6上のAndroid 12における操作手順です。機種によって異なっている場合があります。
+注：以下の記述はPixel 8上のAndroid 14における操作手順です。機種やOSのバージョンによって異なっている場合があります。
 
-#. 「設定」アプリ、 :menuselection:`ユーザー補助 --> テキストと表示 --> 色補正` の順にタップ
+#. 「設定」アプリ、 :menuselection:`ユーザー補助 --> 色と動き --> 色補正` の順にタップ
+
+   注：Androidのバージョンによっては、「色と動き」ではなく「テキストと表示」をタップ
+
 #. 「色補正を使用」をチェック
 #. 「補正モード」で「グレースケール」を選択
+
+参考： `テキストとディスプレイの設定を変更する - Android のユーザー補助機能 ヘルプ <https://support.google.com/accessibility/android/answer/11183305?hl=ja#zippy=%2C%E8%89%B2%E8%A3%9C%E6%AD%A3%E3%82%92%E4%BD%BF%E7%94%A8>`__
 
 Android 11以前の場合
 ====================
@@ -121,3 +132,7 @@ Android 11以前の場合
 .. include:: /inc/info2gl/exp-grayscale.rst
 
 .. include:: /inc/info2faq/exp-grayscale.rst
+
+.. translated:: true
+
+

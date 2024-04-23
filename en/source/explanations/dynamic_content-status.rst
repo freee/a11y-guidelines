@@ -21,14 +21,14 @@ ARIAライブ・リージョンの実装例と利用時の注意点
 ``aria-live`` 属性が指定されているか、 ``role`` 属性で ``status``, ``alert``, ``log`` などの特定の値が指定されている要素があると、これらがARIAライブ・リージョンとして扱われます。
 ARIAライブ・リージョンがページ中にあると、スクリーン・リーダーはその要素を監視して、内容に変化があると読み上げることが期待されています。
 
-参考： `ARIA ライブリージョン - アクセシビリティ | MDN <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Live_Regions>`_
+参考： `ARIA ライブリージョン - アクセシビリティ | MDN <https://developer.mozilla.org/ja/docs/Web/Accessibility/ARIA/ARIA_Live_Regions>`__
 
 基本的な実装例
 ==============
 
 以下のコードが、もっとも基本的な実装です。
 
-`aria-live-basic.html <../_static/samples/aria-live-basic.html>`_ ：
+`aria-live-basic.html <../_static/samples/aria-live-basic.html>`__ ：
 
 .. raw:: html
 
@@ -59,7 +59,7 @@ ARIAライブ・リージョンがページ中にあると、スクリーン・�
 
 しかし、以下のようにARIAライブ・リージョンの設置とその内容の更新に時間差を与えると、NVDAでも読み上げられることを確認しています。
 
-`aria-live-timer.html <../_static/samples/aria-live-timer.html>`_ ：
+`aria-live-timer.html <../_static/samples/aria-live-timer.html>`__ ：
 
 .. raw:: html
 

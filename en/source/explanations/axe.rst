@@ -1,102 +1,103 @@
 .. _exp-axe:
 
-##################################################
-axe DevToolsを使用したアクセシビリティー・チェック
-##################################################
+########################################
+Checking Accessibility With axe DevTools
+########################################
 
-axe DevToolsは非常によく使われているアクセシビリティー・チェック・ツールです。
-基本機能が `axe-core <https://github.com/dequelabs/axe-core>`_ として実装されているため様々な方法で使用することができますが、ここではブラウザー拡張機能として利用して、出来上がっているWebページのアクセシビリティーの対応状況をチェックする方法を紹介します。
+axe DevTools is a very commonly used accessibility checking tool.
+Its core functionality is implemented as `axe-core <https://github.com/dequelabs/axe-core>`__ which allows it to be used in various ways.
+Here, we will introduce how to use it as a browser extension to check the accessibility status of existing Web pages.
 
-なお、axe DevToolsを用いた具体的なチェックの実施方法については、 :ref:`check-example-axe` を参照してください。
-また、 :ref:`info-axe-rules` も合わせて参照してください。
+For specific instructions on how to conduct checks using axe DevTools, please refer to :ref:`check-example-axe`.
+Also refer to :ref:`info-axe-rules` for additional information.
 
 **************************************
-axe DevToolsのインストールと起動の仕方
+How to Install and Launch axe DevTools
 **************************************
 
-ChromeウェブストアからChrome拡張をインストールできます。
+You can install the Chrome extension from the Chrome Web Store.
 
-`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`_
+`axe DevTools - Web Accessibility Testing - Chrome ウェブストア <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__
 
-axe DevTools拡張機能はデベロッパーツール内で使用します。
+The axe DevTools extension is used within the developer tools.
 
-分析対象のページを開いた状態で、ツールバー右端のボタンから :menuselection:`その他のツール --> デベロッパーツール` を選択するか、ショートカットキー（Windowsでは :kbd:`Ctrl+Shift+I` 、macOSでは :kbd:`Command+Option+I` ）を使用してください。
+With the page you want to analyze open, select :menuselection:`More Tools --> Developer Tools` from the button at the right end of the toolbar, or use the shortcut keys (:kbd:`Ctrl+Shift+I` on Windows, :kbd:`Command+Option+I` on macOS).
 
 .. image:: /img/axe/axe-1.png
-   :alt: スクリーン・ショット：メニューからデベロッパーツールを開こうとしている
+   :alt: Screenshot: opening the developer tools from the menu
 
-デベロッパーツールのタブから「axe DevTools」を選択します。
+In the developer tools, select the "axe DevTools" tab.
 
 .. image:: /img/axe/axe-6.png
-   :alt: スクリーン・ショット：デベロッパーツールのタブバー、右端に「axe DevTools」がある
+   :alt: Screenshot: axe DevTools at the right end of the developer tools' tab bar
 
-デベロッパーツールの表示領域が狭い場合は 「>>」アイコンに隠されていることがあります。
+If the display area of the developer tools is narrow, the "axe DevTools" may be hidden under the ">>" icon.
 
 .. image:: /img/axe/axe-2.png
-   :alt: スクリーン・ショット：axe DevToolsが「>>」アイコンに隠されている、アイコンをクリックしたメニュー内に「axe DevTools」がある
+   :alt: Screenshot: axe DevTools is hidden behind the '>>' icon, within the menu that appears when the icon is clicked, there is axe DevTools
 
-****************
-初期設定（推奨）
-****************
+***************************
+Initial Setup (Recommended)
+***************************
 
-より多くの項目をチェックするために、以下の初期設定を行うと良いでしょう。
+To check more items, it is advisable to perform the following initial setup:
 
-1. :menuselection:`Options --> Settings` の順にクリック
+1. Click :menuselection:`Options --> Settings`
 
    .. image:: /img/axe/axe-settings.png
-      :alt: スクリーン・ショット：OptionsからSettingsを開こうとしている
+      :alt: Screenshot: opening the Settings from the Options screen
 
-2. "Best Practices" で "Enable" をチェック
+2. Check "Enable" under "Best Practices"
 
    .. image:: /img/axe/axe-settings-best-practices.png
-      :alt: スクリーン・ショット：Best Practicesの項目のEnableをチェックしている
+      :alt: Screenshot: checking Enable under Best Practices
 
-3. 「保存」をクリック
+3. 「Click "Save"
 
-****************************************
-axe DevToolsで今見ているページを分析する
-****************************************
+********************************************
+Analyzing the Current Page with axe DevTools
+********************************************
 
-分析対象のページを開いた状態でデベロッパーツール内のaxe DevToolsのタブを開き、「SCAN ALL OF MY PAGE」ボタンをクリックします。
+With the page you want to analyze open, open the axe DevTools tab within the developer tools and click the "SCAN ALL OF MY PAGE" button.
 
 .. image:: /img/axe/axe-8.png
-   :alt: スクリーン・ショット：axe DevToolsタブ
+   :alt: Screenshot: axe DevTools tab
 
-今見ているページの問題を瞬時に発見することができます。
+You can instantly identify issues on the current page.
 
 .. image:: /img/axe/axe-9.png
-   :alt: スクリーン・ショット：表示されているページの問題をaxe DevToolsで表示している
+   :alt: Screenshot: Displaying issues on the page with axe DevTools
 
-**************
-レポートの見方
-**************
+**********************
+How to Read the Report
+**********************
 
-axe DevToolsの画面には発見された問題の件数が表示されるエリアと、その問題のリストが表示されるエリアがあります。
+In the axe DevTools interface, there are two main areas: one displays the number of issues found, and the other shows the list of those issues.
 
-発見された問題の件数が表示されるエリアには、そのページにある問題の件数が表示されます。
-ここで、axe DevTools内のUser Impact（当ガイドライン内での「重篤度」などの定義とは別のものです）や、「Best Practices」などを使ってリストをフィルターすることができます。
+The area that displays the number of issues found will show the count of problems on that page.
+Here, you can filter the list using User Impact (which is different from definitions like 'severity' within this guide) and "Best Practices" within axe DevTools.
 
 .. image:: /img/axe/axe-3.png
-   :alt: スクリーン・ショット：発見された問題の件数が表示されるエリア
+   :alt: Screenshot: the area that displays the number of issues
 
-発見された問題のリストは、クリックで開くことでその問題の詳細ビューを見ることができます。
+You can view detailed information about each issue by clicking on it in the list of found problems.
 
-詳細ビューにはその問題が起きているHTML上の場所や、修正するための情報が表示されています。
+The detailed view shows the location in the HTML where the issue occurs and provides information for fixing it.
 
 .. image:: /img/axe/axe-4.png
-   :alt: スクリーン・ショット：問題の詳細部分
+   :alt: Screenshot: detail view of an issue
 
-同じ問題が複数箇所で見つかっている場合は、リスト上にその件数が表示され、詳細ビューのページャーで1つ1つ確認していくことができます。
+If the same issue is found in multiple places, the count is displayed on the list, and you can check each one using the pager in the detail view.
 
 .. image:: /img/axe/axe-pager.png
-   :alt: スクリーン・ショット：詳細ビューにあるページャー
+   :alt: Screenshot: Pager in the detailed view
 
-**********************************
-axe DevToolsを使用する上での注意点
-**********************************
+**************************************
+Considerations When Using axe DevTools
+**************************************
 
-*  モーダルやアコーディオンが開閉するような場所では、開いた状態や閉じた状態で何度かaxe DevToolsで分析してみる必要があります
-*  axe DevToolsだけではすべての問題を発見することはできませんが、機械的に発見できる問題を瞬時に発見することができます。また、調査の必要そうな場所を発見するために非常に有用です。
+*  In areas where modal dialogs or accordions open and close, it is necessary to analyze with axe DevTools several times in both the opened and closed states.
+*  While axe DevTools alone cannot detect all issues, it can instantly identify problems that can be programmatically detected. It is also extremely useful for pinpointing areas that may require further investigation.
 
 .. include:: /inc/info2faq/exp-axe.rst
 

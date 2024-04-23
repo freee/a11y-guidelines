@@ -2,13 +2,10 @@ id: p0001
 sortKey: 70000
 updated: '2023-12-05'
 tags:
-- nvda
-- macos-vo
-- ios-vo
-- android-tb
+- screen-reader
 title:
   ja: スクリーン・リーダーの読み上げ方がおかしい漢字や英単語がある
-  en: There are kanji or English words that are read in an unexpected way by the screen reader.
+  en: There Are Kanji Or English Words That Are Read in an Unexpected Way by Screen Readers
 problem:
   ja: |-
     読み上げられ方のおかしい漢字や英単語があるが、どのように対処するべきか。
