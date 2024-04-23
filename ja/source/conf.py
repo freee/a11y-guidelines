@@ -14,6 +14,7 @@ import os
 import sys
 import datetime
 import re
+import locale
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from sphinx.util.docutils import SphinxDirective
@@ -28,6 +29,7 @@ author = 'フリー株式会社'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
+locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
 date_obj = datetime.datetime.strptime(publishedDate, '%Y-%m-%d')
 if 'current' in tags:
   guidelines_version_suffix = '-CURRENT'
