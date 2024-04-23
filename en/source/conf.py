@@ -12,11 +12,11 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('.'))
 import datetime
 import re
 import locale
+sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
 from version import *
