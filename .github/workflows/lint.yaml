@@ -68,6 +68,10 @@ jobs:
         python-version: '3.9.x'
     - name: Install the Latest pip
       run: python -m pip install --upgrade pip
+    - name: install ja_JP.UTF-8 locale
+      run: |
+        sudo locale-gen ja_JP.UTF-8
+        sudo update-locale LANG=ja_JP.UTF-8
     - name: Install required modules
       run: python -m pip install -r requirements.txt --upgrade
     - name: Build HTML
