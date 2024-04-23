@@ -12,6 +12,7 @@
 #
 import os
 import sys
+sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('.'))
 import datetime
 import re
@@ -20,22 +21,21 @@ from docutils.parsers.rst import Directive
 from sphinx.util.docutils import SphinxDirective
 
 # -- Project information -----------------------------------------------------
+from version import *
 
 project = 'freeeアクセシビリティー・ガイドライン'
 author = 'フリー株式会社'
-guidelines_version = 'Ver. 202400.0'
-checksheet_version = '4.3.7'
-publishedDate = u'2024年4月23日'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
+date_obj = datetime.datetime.strptime(publishedDate, '%Y-%m-%d')
 if 'current' in tags:
   guidelines_version_suffix = '-CURRENT'
-  import datetime
-  guidelines_version_date = f'.{datetime.date.today().strftime("%Y%m%d")}'
-  today_str = datetime.date.today().strftime('%Y年%-m月%-d日')
-  publishedDate = today_str
+  date_obj = datetime.date.today()
+  guidelines_version_date = f'.{date_obj.strftime("%Y%m%d")}'
 
+date_str = date_obj.strftime('%Y年%-m月%-d日')
+publishedDate = date_str
 version = guidelines_version + guidelines_version_suffix + f'+{checksheet_version}'
 release = guidelines_version + guidelines_version_suffix + guidelines_version_date + f'+{checksheet_version}'
 guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date

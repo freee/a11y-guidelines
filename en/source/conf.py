@@ -12,27 +12,29 @@
 #
 import os
 import sys
+sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('.'))
 import datetime
 import re
+import locale
 
 # -- Project information -----------------------------------------------------
+from version import *
 
 project = 'freee Accessibility Guidelines'
 author = 'freee K.K.'
-guidelines_version = 'Ver. 202404.0'
-checksheet_version = '4.3.7'
-publishedDate = u'Apr 23 2024'
 guidelines_version_suffix = '-RELEASE'
 guidelines_version_date = ''
 
+locale.setlocale(locale.LC_TIME, 'en_US.UTF-8')
+date_obj = datetime.datetime.strptime(publishedDate, '%Y-%m-%d')
 if 'current' in tags:
   guidelines_version_suffix = '-CURRENT'
-  import datetime
-  guidelines_version_date = f'.{datetime.date.today().strftime("%Y%m%d")}'
-  today_str = datetime.date.today().strftime('%b %d %Y')
-  publishedDate = today_str
+  date_obj = datetime.date.today()
+  guidelines_version_date = f'.{date_obj.strftime("%Y%m%d")}'
 
+date_str = date_obj.strftime('%b %d %Y')
+publishedDate = date_str
 version = guidelines_version + guidelines_version_suffix + f'+{checksheet_version}'
 release = guidelines_version + guidelines_version_suffix + guidelines_version_date + f'+{checksheet_version}'
 guidelines_version_string = guidelines_version + guidelines_version_suffix + guidelines_version_date
