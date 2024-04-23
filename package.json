@@ -22,7 +22,7 @@
     "ajv-cli": "^5.0.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
-    "sudachi-synonyms-dictionary": "^13.0.0",
+    "sudachi-synonyms-dictionary": "^14.0.0",
     "textlint": "^14.0.4",
     "textlint-filter-rule-allowlist": "^4.0.0",
     "textlint-plugin-rst": "^0.1.1",
