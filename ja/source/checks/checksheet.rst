@@ -368,3 +368,6 @@ V1.0
 ====
 
 初版
+
+.. translated:: true
+
