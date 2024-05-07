@@ -1,0 +1,45 @@
+id: p0006
+sortKey: 70010
+updated: '2024-05-07'
+tags:
+- screen-reader
+title:
+  ja: スラッシュ（/）を含む数字はどのように読み上げられるべきか
+  en: How Should Numbers Containing a Slash (/) Be Read Aloud?
+problem:
+  ja: |-
+    例えば "11/12" という数字について、11月12日なのか、全12ページ中の11ページ目なのか、12分の11なのかが分かるようにスクリーン・リーダーが読み上げるようにしたい。
+  en: |-
+    For instance, with the number "11/12", it should be clear from the screen reader's pronunciation whether it denotes November 12th, page 11 of 12, or 11 out of 12.
+solution:
+  ja: |-
+    *  「11スラッシュ12」と読み上げられれば、対処は不要
+    *  想定している環境でそれ以外の読み上げられ方をする場合には、何らかの対処を検討する
+  en: |-
+    *  If pronounced "11 slash 12", no further action is required.
+    *  If it is pronounced differently in the intended environment, consider implementing a remedy.
+explanation:
+  ja: |-
+    表示通り、「11スラッシュ12」と読み上げられれば、それがその文脈において何を意味するかはユーザーが判断できるはずですので、特に対処の必要はありません。
+    もし表示通りに読み上げられても判断することが難しい可能性があると感じる場合、それは画面表示を見ているユーザーにとっても判断が難しい可能性がありますから、そもそもそのような表記が妥当なのかを検討する必要があるでしょう。
+
+    ただし、スクリーン・リーダーによっては、「11月12日」や「12分の11」などと読み上げるものもあります。
+    主に想定する環境においてこのような読み上げがされる場合、ユーザーが混乱する可能性があるため、何らかの対処を検討することが望ましいでしょう。
+
+    以下に対処方法の例をいくつか示します。
+
+    *  「11 / 12」のようにスペースを入れることで、「11スラッシュ12」と読み上げられるようにする
+    *  「11月12日」など、読み上げられるべき形で表記する。この際画面に表示される文字列と読み上げられる文字列はなるべく一致させる。
+  en: |-
+    If pronounced exactly as "11 slash 12", users should be able to discern its significance in the context, thus requiring no specific action.
+    However, if it remains challenging to interpret even when read correctly, it might also be difficult for those viewing the screen to understand, necessitating a reevaluation of the notation used.
+
+    Note that some screen readers may read it aloud as "November 12th" or "eleven twelfths".
+    If this occurs in your primary environments, it could confuse users, prompting the need for a corrective measure.
+
+    Below are some strategies to address this:
+
+    *  Add spaces around the slash in "11 / 12" to ensure it is read as "11 slash 12".
+    *  Display it in a format conducive to the intended reading, like "November 12th". Aim to align the displayed text with the spoken text as closely as possible.
+faqs:
+- p0001
