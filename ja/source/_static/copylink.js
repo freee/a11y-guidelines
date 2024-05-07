@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const firstH1 = document.querySelector('h1');
   if (firstH1) {
-    appendDropdownMenu(firstH1, firstH1.textContent, location.href);
+    appendDropdownMenu(firstH1, firstH1.textContent, location.origin + location.pathname);
   }
 
   document.querySelectorAll('section.permalink').forEach(section => {
