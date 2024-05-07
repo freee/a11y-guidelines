@@ -346,12 +346,14 @@ class Faq:
     def template_object(self, lang):
         rel = RelationshipManager()
         tags = rel.get_faq_to_tags(self)
+        if lang == 'ja':
+            date_format = "%Y年%-m月%-d日"
+        else:
+            date_format = "%B %-d, %Y"
         template_object = {
             'id': self.id,
             'updated': self.updated,
-            'updated_year': self.updated.year,
-            'updated_month': self.updated.month,
-            'updated_day': self.updated.day,
+            'updated_str': self.updated.strftime(date_format),
             'title': self.title[lang],
             'problem': self.problem[lang],
             'solution': self.solution[lang],

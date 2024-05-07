@@ -10,11 +10,11 @@
 {{ title|make_heading(1) }}
 
 {% if lang == 'ja' -%}
-最終更新：{{ updated_year }}年{{ updated_month }}月{{ updated_day }}日
+最終更新：{{ updated_str }}
 
 タグ：
 {%- elif lang == 'en' -%}
-Last Updated: {{ updated_year }}-{{ updated_month }}-{{ updated_day }}
+Last Updated: {{ updated_str }}
 
 Tags:
 {%- endif -%}
