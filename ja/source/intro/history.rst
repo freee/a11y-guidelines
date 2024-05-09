@@ -59,3 +59,6 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
 .. include:: ChangeLog/2020/202005.1.rst
 .. include:: ChangeLog/2020/202005.0.rst
 .. include:: ChangeLog/2020/202004.0.rst
+
+.. translated:: true
+
