@@ -23,3 +23,6 @@
 *  |Vibes Color Contrast|
 
 .. include:: /inc/info2gl/exp-contrast.rst
+
+.. translated:: true
+
