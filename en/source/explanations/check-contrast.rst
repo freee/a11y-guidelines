@@ -1,61 +1,107 @@
 .. _exp-check-contrast:
 
-############################
-コントラスト比のチェック方法
-############################
+##################################
+Method for Checking Contrast Ratio
+##################################
 
-ロービジョン者でもコンテンツを知覚できるよう、テキストやUIコンポーネントにはそれぞれコントラスト比の基準を満たす色が使われることが求められます。
+In both Web and mobile applications, it is crucial to use color combinations that meet the contrast ratio criteria for text and UI components to ensure that content is perceivable by people with low vision.
 
-実際のWebページから色のコントラスト比が不足している場所を発見するには `axe DevTools <https://www.deque.com/axe/>`__ のようなチェックツールを使用し、
-具体的な色同士のコントラスト比の計算には `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`__ のような計算ツールを使用します。
+To identify areas on a Web page where the color contrast ratio is insufficient, it is recommended to use checking tools such as `axe DevTools`_.
+If check tools as such are not available, such as when checking mobile application screens, using tools that calculate the contrast ratio between specific colors, such as `WebAIM: Contrast Checker`_, in combination with a color picker, would be beneficial.
 
-****************************************
-アクセシビリティー・チェックツールの使用
-****************************************
+*******************************
+Using Accessibility Check Tools
+*******************************
 
-`axe DevTools <https://www.deque.com/axe/>`__ を使用すると、Webページ全体から（コントラスト比以外にも）アクセシビリティー上の問題のある場所を発見することができます。
+In Google Chrome, you can check for accessibility issues, including color contrast ratio problems, using the Lighthouse tab in the developer tools.
 
-Google Chromeの場合、開発者ツールの Audits タブに Lighthouse が搭載されていますが、これで採点できるもののうち、 Accessbility については axe DevToolsが使用されています。
-また、 `axe DevToolsのGoogle Chrome 拡張 <https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd>`__ を使用すると、結果を日本語で読むこともできます。
+Additionally, with `axe DevTools`_, you can identify areas with accessibility issues, including contrast ratio problems, across the entire Web page.
+axe DevTools is available as a `Google Chrome extension`_ and a `Mozilla Firefox add-on`_.
 
-コントラスト比の自動判定ができない場合
-======================================
+***********************************************************
+When Automatic Contrast Ratio Detection Cannot Be Performed
+***********************************************************
 
-画像の中の文字など、これらのチェック・ツールではコントラスト比を正しく判定できない場合があります。
+These tools may not provide accurate contrast ratio assessments in cases such as for text within images.
 
-axe DevToolsのGoogle Chrome拡張の場合、コントラスト比の判定ができない場合も「要素には十分な色のコントラストがなければなりません」のような、コントラスト比が不充分な場合と同じメッセージが表示されます。
-しかし自動判定ができない場合は、詳細パネルに「This potential issue needs your review... コントラスト比を判定できません」といったメッセージが表示されます。
+For the axe DevTools Chrome extension, if the contrast ratio cannot be determined, the message "Elements must have sufficient color contrast" will be displayed, just as when the contrast ratio is insufficient.
+However, if automatic detection fails, the detailed panel will display a message such as "This potential issue needs your review... Cannot determine the contrast ratio."
 
-このような場合は、当該箇所のカラー・コードを調べて、以下に示すツールを使ってコントラスト比を確認します。
+Additionally, axe DevTools can only be used for checking web pages and cannot be used for checking screens of mobile applications.
 
+In such cases, it is necessary to examine the color codes of the specific areas and manually check the contrast ratio.
 
-********************************
-コントラスト比の計算ツールの使用
-********************************
+Checking Screens of Mobile Applications
+=======================================
 
-コントラスト比の計算式は非常に複雑であるため、 `WebAIM: Contrast Checker <https://webaim.org/resources/contrastchecker/>`__ のような計算ツールを使用することが一般的です。
-`contrast.app <https://usecontrast.com/>`__ のように、インストールして常駐させるタイプのチェッカーも存在します。
+The followings are a few examples of how you might conduct checks on screens of mobile applications.
 
-このようなコントラスト比計算ツールを使用する場合は以下の点に注意が必要です。
+*  Take screenshots and check the images on a PC.
+*  Share the screen using online meeting tools such as Google Meet and check the shared screen on a PC.
+   Exercise caution when using this method, as some online meeting tools may apply color correction to the shared screen.
 
-*  コントラスト比の計算ツールによって小数点以下の丸め方に差異があり、計算結果がバラつくことがある。
+Examining Color Codes
+=====================
 
-   -  計算結果は目安として、コントラスト比に余裕のある色を選ぶのが望ましい。
+Using a tool called a color picker, you can examine the color codes used in specific areas where contrast ratio checks are required.
 
-*  カラーピッカーを使用する場合、macOSではディスプレイのカラープロファイルの影響を受けることがあるため、これを防ぐ必要がある。
+Although WebAIM: Contrast Checker described below provides a color picker, there are also tools available for Windows and macOS.
+Here are some popular ones:
 
-   -  `macOSのカラープロファイル設定 <https://support.apple.com/ja-jp/guide/mac-help/mchlf3ddc60d/mac>`__ で、「このディスプレイのプロファイルのみを表示」のチェックを外してから ``SRGB IEC61966-2.1`` を選択。
-   -  SketchではPreferences➝General➝Color Profileで「SRGB IEC61966-2.1」を選択。
+Windows
+-------
 
-      上記はデフォルト設定なので、既存のドキュメントのカラープロファイルは異なったままになっている可能性があります。ファイルのカラープロファイルを変えたい場合は :menuselection:`File --> Document Settings` から変更します。
+Color picker is provided as one of the features of Microsoft PowerToys.
 
-   -  Adobe XDはOSの設定を引き継ぐので、カラープロファイルの設定を変更した場合は再起動。
+Microsoft PowerToys can be obtained from the Microsoft Store or GitHub:
 
-****
-参考
-****
+*  `Microsoft PowerToys (Microsoft Store)`_
+*  `Microsoft PowerToys (GitHub)`_
+
+Reference: `Microsoft PowerToys: Utilities to customize Windows`_
+
+macOS
+-----
+
+macOS comes with a built-in color picker called Digital Color Meter.
+
+Reference: `Digital Color Meter User Guide for Mac`_
+
+When using the color picker on macOS, it may be influenced by the display's color profile.
+To prevent this, deselect the "Show profiles for this display only" checkbox in macOS's color profile settings, then choose "SRGB IEC61966-2.1".
+
+Reference: `Change your Mac display’s color profile`_
+
+In Figma, you can check the color profile applied to each file by selecting "File color profile" from the menu located at the top of the screen next to the file name.
+If it's set to "sRGB" or "Same as preferred profile (sRGB)," there's no issue.
+
+Additionally, you can ensure that sRGB is selected for new file creation by changing it in Figma's preferences menu under ":menuselection:`Preferences --> Color profile...`" available from the menu icon in the top left corner of the Figma interface.
+
+Contrast Ratio Calculation Tools
+================================
+
+Because the formula for calculating contrast ratio is complex, it is common to use calculation tools such as `WebAIM: Contrast Checker`_.
+There are also checker tools that can be installed and run persistently, such as `contrast.app`_.
+
+Note that there may be discrepancies in the rounding of decimal places among contrast ratio calculation tools, resulting in varied calculation results.
+It's advisable to consider the results as approximate and opt for colors that provide a margin of contrast.
+
+**********
+References
+**********
 
 *  :ref:`exp-contrast`
 *  |Vibes Color Contrast|
 
 .. include:: /inc/info2gl/exp-check-contrast.rst
+
+.. _axe DevTools: https://www.deque.com/axe/
+.. _WebAIM\: Contrast Checker: https://webaim.org/resources/contrastchecker/
+.. _Google Chrome extension: https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd
+.. _Mozilla Firefox add-on: https://addons.mozilla.org/firefox/addon/axe-devtools/
+.. _contrast.app: https://usecontrast.com/
+.. _Change your Mac display’s color profile: https://support.apple.com/en-us/guide/mac-help/mchlf3ddc60d/mac
+.. _Digital Color Meter User Guide for Mac: https://support.apple.com/en-us/guide/digital-color-meter/welcome/mac
+.. _Microsoft PowerToys (Microsoft Store): https://apps.microsoft.com/detail/xp89dcgq3k6vld
+.. _Microsoft PowerToys (GitHub): https://github.com/microsoft/PowerToys
+.. _Microsoft PowerToys\: Utilities to customize Windows: https://learn.microsoft.com/en-us/windows/powertoys/

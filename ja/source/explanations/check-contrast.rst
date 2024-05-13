@@ -105,3 +105,6 @@ Figmaを使用する場合、画面上部、ファイル名の右横のメニュ
 .. _Microsoft PowerToys (Microsoft Store): https://apps.microsoft.com/detail/xp89dcgq3k6vld
 .. _Microsoft PowerToys (GitHub): https://github.com/microsoft/PowerToys
 .. _Microsoft PowerToys\: Windows をカスタマイズするためのユーティリティ: https://learn.microsoft.com/ja-jp/windows/powertoys/
+
+.. translated:: true
+
