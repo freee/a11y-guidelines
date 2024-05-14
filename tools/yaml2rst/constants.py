@@ -99,4 +99,10 @@ IMPLEMENTATION_TARGETS = {
 }
 
 # for axe rules
-DEQUE_URL = 'https://dequeuniversity.com/rules/axe/'
+AXE_CORE = {
+    'submodule_name': 'vendor/axe-core',
+    'deque_url': 'https://dequeuniversity.com/rules/axe/',
+    'msg_ja_file': 'locales/ja.json',
+    'pkg_file': 'package.json',
+    'rules_dir': 'lib/rules'
+}
