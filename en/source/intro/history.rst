@@ -7,10 +7,22 @@ Update History
 Here, we list updates related to the English translation since the introduction of Ver. 202403.0, when we began providing translations of all guidelines.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </intro/history.html>`__.
 
+`Ver. 202405.0 (May 14, 2024) <https://github.com/freee/a11y-guidelines/releases/202405.0>`__
+=============================================================================================
+
+*  Added FAQ: :ref:`faq-p0006`
+*  Updated :ref:`info-axe-rules` to be based on axe-core source as of April 29, 2024
+*  Added translations:
+
+   -  :ref:`exp-contrast`
+   -  :ref:`exp-check-contrast`
+
+*  Added update history of this translation: this page and :ref:`checks-checksheet`
+
 `Ver. 202404.0 (April 23, 2024) <https://github.com/freee/a11y-guidelines/releases/202404.0>`__
 ===============================================================================================
 
-*  Addition of translation:
+*  Added translations:
 
    -  :ref:`exp-color-only`
    -  :ref:`exp-text-wording`
@@ -19,7 +31,7 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    -  :ref:`exp-grayscale`
    -  :ref:`exp-image-text-alternative`
 
-*  Addition of FAQ:
+*  Added FAQs:
 
    -  :ref:`faq-p0004`
    -  :ref:`faq-p0005`
@@ -27,7 +39,7 @@ For the changes to the original Japanese version, please refer to the `Japanese 
 `Ver. 202403.1 (March 29, 2024) <https://github.com/freee/a11y-guidelines/releases/202403.1>`__
 ===============================================================================================
 
-*  Addition of translation:
+*  Added translations:
 
    -  :ref:`intro`
    -  :ref:`intro-intro`
@@ -38,7 +50,7 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    -  :ref:`exp-screen-reader-check-macos-vo`
    -  :ref:`exp-target-size`
 
-*  Addition of FAQ: :ref:`faq-d0003`
+*  Added FAQ: :ref:`faq-d0003`
 
 `Ver. 202403.0 (March 4, 2024) <https://github.com/freee/a11y-guidelines/releases/202403.0>`__
 ==============================================================================================
