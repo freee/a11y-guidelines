@@ -4,10 +4,10 @@ import re
 import json
 import time
 import yaml
-from git import Repo
+import git
 from jsonschema import validate, ValidationError, RefResolver
 from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
-from constants import CHECK_TOOLS, DEQUE_URL
+from constants import CHECK_TOOLS, AXE_CORE
 from path import get_src_path
 
 def setup_instances(settings):
@@ -43,37 +43,49 @@ def setup_instances(settings):
     for entity_type, srcdir, schema_filename, constructor in entity_config:
         process_entity_files(srcdir, src_path['schema'], schema_filename, resolver, constructor)
 
-    process_axe_rules(src_path['axe_rules'], src_path['axe_msg_ja'], src_path['axe_pkg'], DEQUE_URL)
+    process_axe_rules(basedir, AXE_CORE)
 
     rel = RelationshipManager()
     rel.resolve_faqs()
     return rel
 
-def process_axe_rules(axe_rules_dir, axe_msg_ja_file, axe_pkg_file, base_url):
-    try:
-        file_content = read_file_content(axe_msg_ja_file)
-    except Exception as e:
-        handle_file_error(e, axe_msg_ja_file)
+def process_axe_rules(basedir, AXE_CORE):
+    root_repo = git.Repo(basedir)
+    submodule = None
+    for sm in root_repo.submodules:
+        if sm.name == AXE_CORE['submodule_name']:
+            submodule = sm
+            break
+
+    if submodule is None:
+        raise ValueError(f'Submodule with name {AXE_CORE["submodule_name"]} not found.')
+
+    axe_base = os.path.join(basedir, submodule.path)
+    axe_commit_id = submodule.hexsha
+    axe_repo = git.Repo(axe_base)
+    axe_commit = axe_repo.commit(axe_commit_id)
+
+    # Get message file
+    blob = axe_commit.tree / AXE_CORE['msg_ja_file']
+    file_content = blob.data_stream.read().decode('utf-8')
     messages_ja = json.loads(file_content)
-    rule_files = ls_dir(axe_rules_dir, '.json')
-    for rule_file in rule_files:
-        try:
-            file_content = read_file_content(rule_file)
-        except Exception as e:
-            handle_file_error(e, rule_file)
+
+    # Get rule files
+    tree = axe_commit.tree / AXE_CORE['rules_dir']
+    rule_blobs = [item for item in tree.traverse() if item.type == 'blob' and item.path.endswith('.json')]
+    for blob in rule_blobs:
+        file_content = blob.data_stream.read().decode('utf-8')
         parsed_data = json.loads(file_content)
         AxeRule(parsed_data, messages_ja)
-    try:
-        file_content = read_file_content(axe_pkg_file)
-    except Exception as e:
-        handle_file_error(e, axe_pkg_file)
+
+    # Get the package file
+    blob = axe_commit.tree / AXE_CORE['pkg_file']
+    file_content = blob.data_stream.read().decode('utf-8')
     parsed_data = json.loads(file_content)
-    version = parsed_data['version']
-    AxeRule.version = version
-    AxeRule.major_version = re.sub(r'(\d+)\.(\d+)\.\d+', r'\1.\2', version)
-    AxeRule.deque_url = base_url
-    for item in Repo(os.path.dirname(axe_pkg_file)).iter_commits('develop', max_count=1):
-        AxeRule.timestamp = time.strftime("%F %T%z", time.localtime(item.authored_date))
+    AxeRule.version = parsed_data['version']
+    AxeRule.major_version = re.sub(r'(\d+)\.(\d+)\.\d+', r'\1.\2', parsed_data['version'])
+    AxeRule.deque_url = AXE_CORE['deque_url']
+    AxeRule.timestamp = time.strftime("%F %T%z", time.localtime(axe_commit.authored_date))
 
 def ls_dir(dirname, extension=None):
     files = []

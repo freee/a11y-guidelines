@@ -1,23 +1,23 @@
 .. _exp-contrast:
 
-##########################
-コントラスト比確保の重要性
-##########################
+############################
+Importance of Contrast Ratio
+############################
 
-テキストや画像の表示色と背景色のコントラスト比が極端に低い状態は、視覚的にWebを利用している大半のユーザーにとって、そのコンテンツの利用を困難なものにします。
-ロービジョンのユーザーの中には、低いコントラスト比の影響をより強く受けるユーザーがいます。
+When the contrast ratio between the foreground color and the background color of text and images is extremely low, it makes the content difficult to use for the majority of users who access the Web visually.
+Among users with low vision, some are particularly affected by low contrast ratios.
 
-当ガイドラインでは、視覚的に提示される情報について、一定のコントラスト比を確保することを求めています。
-当ガイドラインで示している基準は、WCAG 2.1のレベルAAの達成基準で示されているものですが、当ガイドラインではレベルAに相当するものとしており、必ず順守する必要があります。
+In our guidelines, we require a certain level of contrast ratio for visually presented information.
+The criteria we specify adhere to the success criteria of WCAG 2.1 at Level AA, although in our guidelines, we consider them as success criteria corresponding to Level A, and compliance is mandatory.
 
-対象となるのは、テキストと画像の両方で、画像にはアイコンや画像化されたテキストも含まれます。
-テキストの場合、文字のサイズや書体によって基準が異なります。
+This applies to both text and images, including icons and images of text.
+For text, the criteria vary depending on factors such as font size and typeface.
 
-画像の場合、隣接領域とのコントラスト比も確保する必要があります。
+For images, it is also necessary to ensure a sufficient contrast ratio with adjacent areas.
 
-****
-参考
-****
+**********
+References
+**********
 
 *  :ref:`exp-check-contrast`
 *  |Vibes Color Contrast|

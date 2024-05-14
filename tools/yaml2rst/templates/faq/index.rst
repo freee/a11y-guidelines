@@ -49,9 +49,9 @@ List of FAQ Articles
 
 {% for article in articles -%}
 {%- if lang == 'ja' -%}
-*  :ref:`faq-{{ article.id }}` （{{ article.updated_year }}年{{ article.updated_month }}月{{ article.updated_day }}日更新）
+*  :ref:`faq-{{ article.id }}` （{{ article.updated_str }}更新）
 {%- elif lang == 'en' -%}
-*  :ref:`faq-{{ article.id }}` (updated on {{ article.updated_year }}-{{ article.updated_month }}-{{ article.updated_day }})
+*  :ref:`faq-{{ article.id }}` (updated on {{ article.updated_str }})
 {%- endif %}
 {% endfor %}
 {% if lang == 'ja' -%}

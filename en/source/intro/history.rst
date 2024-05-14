@@ -1,58 +1,58 @@
 .. _intro-changes:
 
-########
-更新履歴
-########
+##############
+Update History
+##############
 
-Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`checksheet-history` のみに掲載しています。
+Here, we list updates related to the English translation since the introduction of Ver. 202403.0, when we began providing translations of all guidelines.
+For the changes to the original Japanese version, please refer to the `Japanese version of this page </intro/history.html>`__.
 
-.. include:: ChangeLog/2024/202401.0.rst
-.. include:: ChangeLog/2023/202312.1.rst
-.. include:: ChangeLog/2023/202312.0.rst
-.. include:: ChangeLog/2023/202311.1.rst
-.. include:: ChangeLog/2023/202311.0.rst
-.. include:: ChangeLog/2023/202310.0.rst
-.. include:: ChangeLog/2023/202309.1.rst
-.. include:: ChangeLog/2023/202309.0.rst
-.. include:: ChangeLog/2023/202308.0.rst
-.. include:: ChangeLog/2023/202307.0.rst
-.. include:: ChangeLog/2023/202306.1.rst
-.. include:: ChangeLog/2023/202306.0.rst
-.. include:: ChangeLog/2023/202305.0.rst
-.. include:: ChangeLog/2023/202304.1.rst
-.. include:: ChangeLog/2023/202304.0.rst
-.. include:: ChangeLog/2023/202303.2.rst
-.. include:: ChangeLog/2023/202303.1.rst
-.. include:: ChangeLog/2023/202303.0.rst
-.. include:: ChangeLog/2023/202302.0.rst
-.. include:: ChangeLog/2023/202301.0.rst
-.. include:: ChangeLog/2022/202210.0.rst
-.. include:: ChangeLog/2022/202209.1.rst
-.. include:: ChangeLog/2022/202209.0.rst
-.. include:: ChangeLog/2022/202205.0.rst
-.. include:: ChangeLog/2022/202203.0.rst
-.. include:: ChangeLog/2022/202202.0.rst
-.. include:: ChangeLog/2022/202201.1.rst
-.. include:: ChangeLog/2022/202201.0.rst
-.. include:: ChangeLog/2021/202112.0.rst
-.. include:: ChangeLog/2021/202111.0.rst
-.. include:: ChangeLog/2021/202110.2.rst
-.. include:: ChangeLog/2021/202110.1.rst
-.. include:: ChangeLog/2021/202110.0.rst
-.. include:: ChangeLog/2021/202107.0.rst
-.. include:: ChangeLog/2021/202106.0.rst
-.. include:: ChangeLog/2021/202105.0.rst
-.. include:: ChangeLog/2021/202104.0.rst
-.. include:: ChangeLog/2021/202103.0.rst
-.. include:: ChangeLog/2021/202102.0.rst
-.. include:: ChangeLog/2021/202101.1.rst
-.. include:: ChangeLog/2021/202101.0.rst
-.. include:: ChangeLog/2020/202011.0.rst
-.. include:: ChangeLog/2020/202010.0.rst
-.. include:: ChangeLog/2020/202009.0.rst
-.. include:: ChangeLog/2020/202008.0.rst
-.. include:: ChangeLog/2020/202007.0.rst
-.. include:: ChangeLog/2020/202006.0.rst
-.. include:: ChangeLog/2020/202005.1.rst
-.. include:: ChangeLog/2020/202005.0.rst
-.. include:: ChangeLog/2020/202004.0.rst
+`Ver. 202405.0 (May 14, 2024) <https://github.com/freee/a11y-guidelines/releases/202405.0>`__
+=============================================================================================
+
+*  Added FAQ: :ref:`faq-p0006`
+*  Updated :ref:`info-axe-rules` to be based on axe-core source as of April 29, 2024
+*  Added translations:
+
+   -  :ref:`exp-contrast`
+   -  :ref:`exp-check-contrast`
+
+*  Added update history of this translation: this page and :ref:`checks-checksheet`
+
+`Ver. 202404.0 (April 23, 2024) <https://github.com/freee/a11y-guidelines/releases/202404.0>`__
+===============================================================================================
+
+*  Added translations:
+
+   -  :ref:`exp-color-only`
+   -  :ref:`exp-text-wording`
+   -  :ref:`exp-axe`
+   -  :ref:`exp-markup-semantics`
+   -  :ref:`exp-grayscale`
+   -  :ref:`exp-image-text-alternative`
+
+*  Added FAQs:
+
+   -  :ref:`faq-p0004`
+   -  :ref:`faq-p0005`
+
+`Ver. 202403.1 (March 29, 2024) <https://github.com/freee/a11y-guidelines/releases/202403.1>`__
+===============================================================================================
+
+*  Added translations:
+
+   -  :ref:`intro`
+   -  :ref:`intro-intro`
+   -  :ref:`intro-usage`
+   -  :ref:`intro-contributing`
+   -  :ref:`info-axe-rules`
+   -  :ref:`exp-screen-reader-check-nvda`
+   -  :ref:`exp-screen-reader-check-macos-vo`
+   -  :ref:`exp-target-size`
+
+*  Added FAQ: :ref:`faq-d0003`
+
+`Ver. 202403.0 (March 4, 2024) <https://github.com/freee/a11y-guidelines/releases/202403.0>`__
+==============================================================================================
+
+*  The English translation of all guidelines was released.
