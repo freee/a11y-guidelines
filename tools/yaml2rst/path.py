@@ -111,9 +111,6 @@ def get_src_path(basedir):
         'wcag_sc': os.path.join(json_basedir, 'wcag-sc.json'),
         'gl_categories': os.path.join(json_basedir, 'guideline-categories.json'),
         'faq_tags': os.path.join(json_basedir, 'faq-tags.json'),
-        'info': os.path.join(json_basedir, 'info.json'),
-        'axe_rules': os.path.join(basedir, AXE_SRC_BASE, AXE_RULES_DIR),
-        'axe_msg_ja': os.path.join(basedir, AXE_SRC_BASE, AXE_LOCALE_DIR, AXE_LOCALE_JA_FILE),
-        'axe_pkg': os.path.join(basedir, AXE_SRC_BASE, AXE_PKG_FILE)
+        'info': os.path.join(json_basedir, 'info.json')
     }
     return src_path
