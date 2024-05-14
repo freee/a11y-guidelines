@@ -1,8 +1,8 @@
 .. _checks-checksheet:
 
-#######################################
-Google Spreadsheet for Peforming Checks
-#######################################
+########################################
+Google Spreadsheet for Performing Checks
+########################################
 
 A Google Spreadsheet that contains information for each check item is available.
 
