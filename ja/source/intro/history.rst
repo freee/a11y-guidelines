@@ -6,6 +6,13 @@
 
 Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`checksheet-history` のみに掲載しています。
 
+.. only:: current
+
+   最新リリース以降の変更点
+   ========================
+
+   *  :ref:`info-axe-rules` を2024年5月16日時点のaxe-coreのソースに基づいた内容に更新
+
 .. include:: ChangeLog/2024/202405.0.rst
 .. include:: ChangeLog/2024/202404.0.rst
 .. include:: ChangeLog/2024/202403.1.rst
