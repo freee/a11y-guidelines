@@ -8,16 +8,14 @@ check:
     スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
   en: |-
     The start of the main text can be found by using the heading jump function of the screen reader or the jump function between areas indicated by ARIA landmarks.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0681-nvda-1"
+    procedure:
       ja: |-
         以下のいずれかの方法で、本文またはその画面の中心的な機能の開始位置を容易に見つけられることを確認する。
 
@@ -31,8 +29,10 @@ procedures:
     YouTube:
       id: WP_2VExrCPU
       title: 本文の開始位置【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0681-macos-vo-1"
+    procedure:
       ja: |-
         以下のいずれかの方法で、本文またはその画面の中心的な機能の開始位置を容易に見つけられることを確認する。
 

@@ -9,16 +9,14 @@ check:
     テキストの表示色と背景色には、充分なコントラスト比が確保されている。
   en: |-
     Sufficient contrast ratio is maintained between the display color of the text and the background color.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェック、またはWebAIM Contrast Checkerによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either of the following checks passes: check by the Axe DevTools or check by the WebAIM Contrast Checker.
-  techniques:
-  - tool: axe
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    id: "0021-axe-1"
+    tool: axe
+    procedure:
       ja: |-
         「 :ref:`axe-rule-color-contrast` 」という問題が出ないことを確認する。
       en: |-
@@ -52,8 +50,10 @@ procedures:
 
         *  Insufficient contrast ratio of the actual colors being seen, when different colors appear to blend into a new color due to overlapping translucent elements.
         *  When it is difficult to identify the background and foreground colors in overlapping elements.
-  - tool: WebAIM Contrast Checker
-    technique:
+  - type: simple
+    tool: WebAIM Contrast Checker
+    id: "0021-webaim-1"
+    procedure:
       ja: |-
         WebAIM Contrast Checkerで、以下の基準を満たしていることを確認する：
 

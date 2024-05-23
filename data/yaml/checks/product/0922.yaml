@@ -9,23 +9,19 @@ check:
     日付、時刻、数値などは、ページやアプリケーションで利用されている自然言語において自然な形で読み上げられる。
   en: |-
     The screen reader announces dates, times, numeric values, etc. in a way that is natural in the natural language used in the page or in the application.
-procedures:
+conditions:
 - platform: web
+  type: simple
+  tool: nvda
+  id: "0922-nvda-1"
   procedure:
     ja: |-
-      以下のNVDAによるチェックを満たしていることを確認する。
+      ブラウズ・モードで上下矢印キーを用いて日付、時刻、数値などを読み上げさせて、以下のすべてを満たしていることを確認する。
+
+      *  当該箇所の読み上げに用いられる音声は、他の箇所を読み上げさせたときの音声と同じ種類の音声である
+      *  当該箇所の読み上げが、そのページやアプリケーションで用いられている言語において自然なものになっている（例：日本語が用いられている場合に、「1月1日」を「ジャニュアリー ファースト」などと読み上げない）
     en: |-
-      Confirm the following check by NVDA passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        ブラウズ・モードで上下矢印キーを用いて日付、時刻、数値などを読み上げさせて、以下のすべてを満たしていることを確認する。
+      Confirm that all of the following are met when reading date, time, number, etc. using up/down arrow keys in browse mode.
 
-        *  当該箇所の読み上げに用いられる音声は、他の箇所を読み上げさせたときの音声と同じ種類の音声である
-        *  当該箇所の読み上げが、そのページやアプリケーションで用いられている言語において自然なものになっている（例：日本語が用いられている場合に、「1月1日」を「ジャニュアリー ファースト」などと読み上げない）
-      en: |-
-        Confirm that all of the following are met when reading date, time, number, etc. using up/down arrow keys in browse mode.
-
-        *  The voice used to read the part is the same as the voice used to read other parts.
-        *  The speech output of the part is natural and in line with the language used on the page or in the application.  (eg. "Jan 1" would not be read as "1月1日" if the primary language of the page is English.)
+      *  The voice used to read the part is the same as the voice used to read other parts.
+      *  The speech output of the part is natural and in line with the language used on the page or in the application.  (eg. "Jan 1" would not be read as "1月1日" if the primary language of the page is English.)

@@ -9,16 +9,14 @@ check:
     情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
   en: |-
     Images that do not contain any information or functionality are ignored by the screen reader.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0471-nvda-1"
+    procedure:
       ja: |-
         ブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
@@ -26,21 +24,21 @@ procedures:
     YouTube:
       id: CPBzG2Zkl_Y
       title: 情報や機能性を持たない画像【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0471-mac-vo-1"
+    procedure:
       ja: |-
         :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
         Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 - platform: mobile
-  procedure:
-    ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
-    en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: ios-vo
+    id: "0471-ios-vo-1"
+    procedure:
       ja: |-
         1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
       en: |-
@@ -50,8 +48,10 @@ procedures:
         参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
+  - type: simple
+    tool: android-tb
+    id: "0471-android-tb-1"
+    procedure:
       ja: |-
         1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
       en: |-

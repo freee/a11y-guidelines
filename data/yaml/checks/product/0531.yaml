@@ -9,16 +9,14 @@ check:
     画像化されているテキストの内容を、スクリーン・リーダーで確認できる。
   en: |-
     The screen reader announces the same content as the images of text.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0531-nvda-1"
+    procedure:
       ja: |-
         ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       en: |-
@@ -26,21 +24,21 @@ procedures:
     YouTube:
       id: 7vGc7p0FraE
       title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0531-mac-vo-1"
+    procedure:
       ja: |-
         :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       en: |-
         Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 - platform: mobile
-  procedure:
-    ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
-    en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: ios-vo
+    id: "0531-ios-vo-1"
+    procedure:
       ja: |-
         *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
         *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
@@ -52,8 +50,10 @@ procedures:
         参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
+  - type: simple
+    tool: android-tb
+    id: "0531-android-tb-1"
+    procedure:
       ja: |-
         *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
         *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。

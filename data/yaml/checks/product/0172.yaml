@@ -17,35 +17,29 @@ check:
     *  Links and Buttons
     *  Form controls
     *  Everything else that accepts mouse, keyboard, or touch operation
-procedures:
+conditions:
 - platform: web
+  type: simple
+  tool: keyboard
+  id: "0172-keyboard-1"
   procedure:
     ja: |-
-      以下のキーボードによるチェックを満たしていることを確認する。
+      Tabキー、またはShift+Tabキーでフォーカスを移動して、以下を確認する：
+
+      *  すべてのリンク、ボタン、フォーム・コントロールおよび操作を受け付けるコンポーネントにフォーカスを移動できる
+      *  フォーカスの移動順序は、文脈、レイアウト、操作手順に即した自然な順序になっている
     en: |-
-      Confirm the following check by keyboard passes.
-  techniques:
-  - tool: keyboard
-    technique:
-      ja: |-
-        Tabキー、またはShift+Tabキーでフォーカスを移動して、以下を確認する：
+      Confirm the following by moving the focus using Tab key, or Shift+Tab key:
 
-        *  すべてのリンク、ボタン、フォーム・コントロールおよび操作を受け付けるコンポーネントにフォーカスを移動できる
-        *  フォーカスの移動順序は、文脈、レイアウト、操作手順に即した自然な順序になっている
-      en: |-
-        Confirm the following by moving the focus using Tab key, or Shift+Tab key:
-
-        *  The focus moves to all the links, buttons, form controls, and components that accepts operation.
-        *  The focus moves in a natural order that is consistent with the context, layout, and operating procedures.
+      *  The focus moves to all the links, buttons, form controls, and components that accepts operation.
+      *  The focus moves in a natural order that is consistent with the context, layout, and operating procedures.
 - platform: mobile
-  procedure:
-    ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
-    en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: ios-vo
+    id: "0172-ios-vo-1"
+    procedure:
       ja: |-
         1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
@@ -63,8 +57,10 @@ procedures:
         参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
       en: |-
         CF： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
+  - type: simple
+    tool: android-tb
+    id: "0172-android-tb-1"
+    procedure:
       ja: |-
         1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 

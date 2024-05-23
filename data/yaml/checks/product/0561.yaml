@@ -9,16 +9,14 @@ check:
     見出しは、設計資料で示されている見出しレベルの見出しとしてスクリーン・リーダーに認識されている。
   en: |-
     Headings are recognized by the screen reader as headings of the heading levels indicated in the design documents.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェックを満たしていて、かつNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that the following check by axe DevTools passes, and also either the checks by NVDA or the checks by macOS VoiceOver passes.
-  techniques:
-  - tool: axe
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0561-axe-1"
+    procedure:
       ja: |-
         以下のいずれの問題も出ないことを確認する。
 
@@ -31,42 +29,46 @@ procedures:
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
         *  :ref:`axe-rule-page-has-heading-one`
-  - tool: nvda
-    technique:
-      ja: |-
-        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0561-nvda-1"
+      procedure:
+        ja: |-
+          以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
-        1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
-        2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
-      en: |-
-        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
+          2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+        en: |-
+          Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
-        1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
-        2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
-    YouTube:
-      id: Gi2M1A0PB_0
-      title: 見出し【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
-      ja: |-
-        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
+          2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
+      YouTube:
+        id: Gi2M1A0PB_0
+        title: 見出し【NVDAでアクセシビリティー チェック】
+    - type: simple
+      tool: macos-vo
+      id: "0561-macos-vo-1"
+      procedure:
+        ja: |-
+          以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
-        1. :kbd:`VO + U` を押下してローターのメニューを表示
-        2. 「見出し」を選択
-      en: |-
-        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          1. :kbd:`VO + U` を押下してローターのメニューを表示
+          2. 「見出し」を選択
+        en: |-
+          Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
-        1. Press :kbd:`VO + U` to display the rotor menu
-        2. Select "Headings"
+          1. Press :kbd:`VO + U` to display the rotor menu
+          2. Select "Headings"
 - platform: mobile
-  procedure:
-    ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
-    en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: ios-vo
+    id: "0561-ios-vo-1"
+    procedure:
       ja: |-
         ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
       en: |-
@@ -76,8 +78,10 @@ procedures:
         参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
       en: |-
         CF: :ref:`exp-sr-iosvo-one-finger-vertical-flick`
-  - tool: android-tb
-    technique:
+  - type: simple
+    tool: android-tb
+    id: "0561-android-tb-1"
+    procedure:
       ja: |-
         読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
       en: |-
