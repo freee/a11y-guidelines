@@ -235,17 +235,17 @@ class Check:
         self.target = check['target']
         self.platform = check['platform']
         self.src_path = check['src_path']
-        self.procedures = []
+        self.conditions = []
         self.implementations = []
-        if 'procedures' in check:
-            for proc in check['procedures']:
-                self.procedures.append(Procedure(proc, self))
+        if 'conditions' in check:
+            for condition in check['conditions']:
+                self.conditions.append(Condition(condition, self))
         if 'implementations' in check:
             self.implementations = [Implementation(**implementation) for implementation in check['implementations']]
         Check.all_checks[self.id] = self
 
-    def procedure_platforms(self):
-        return sorted({procedure.platform for procedure in self.procedures})
+    def condition_platforms(self):
+        return sorted({condition.platform for condition in self.conditions})
 
     def template_object(self, lang, **kwargs):
         rel = RelationshipManager()
@@ -258,15 +258,11 @@ class Check:
             'platform': join_items(self.platform, lang),
             'guidelines': []
         }
-        if len(self.procedures) > 0:
+        if len(self.conditions) > 0:
             if not gl_platform:
-                template_object['procedures'] = [procedure.template_object(lang) for procedure in self.procedures]
+                template_object['conditions'] = [cond.template_object(lang) for cond in self.conditions]
             else:
-                template_object['procedures'] = []
-                for proc in self.procedures:
-                    proc_platform = proc.platform
-                    if proc_platform == 'general' or proc_platform in gl_platform:
-                        template_object['procedures'].append(proc.template_object(lang))
+                template_object['conditions'] = [cond.template_object(lang) for cond in self.conditions if cond.platform == 'general' or cond.platform in gl_platform]
         if len(self.implementations) > 0:
             template_object['implementations'] = [implementation.template_object(lang) for implementation in self.implementations]
         info = rel.get_check_to_info(self)
@@ -566,57 +562,102 @@ class InfoRef:
             if len(rel.get_info_to_faqs(inforef)):
                 yield inforef
 
-class Procedure:
-    def __init__(self, procedure, check):
-        self.platform = procedure['platform']
-        self.procedure = procedure['procedure']
-        self.techniques = []
-        if 'techniques' in procedure:
-            for tech in procedure['techniques']:
-                tech_tool = tech['tool']
-                if tech_tool in CheckTool.list_all_ids():
-                    basename = tech_tool
-                else:
-                    basename = 'misc'
-                    tech['tool_display_name'] = tech_tool
-                tech['tool'] = CheckTool.get_by_id(basename)
-                tech_obj = Technique(**tech)
-                example = {
-                    'tool': CheckTool.get_by_id(basename),
-                    'check': check,
-                    'technique': tech_obj
-                }
-                CheckTool.get_by_id(basename).add_example(Example(**example))
-                self.techniques.append(tech_obj)
+class Condition:
+    def __init__(self, condition, check):
+        self.type = condition['type']
+        if 'platform' in condition:
+            self.platform = condition['platform']
+        if self.type == 'simple':
+            self.procedure = Procedure(condition, check)
+            self.procedure.tool.add_example(Example(self.procedure, check))
         else:
-            self.techniques = None
+            self.conditions = []
+            for cond in condition['conditions']:
+                self.conditions.append(Condition(cond, check))
 
-    def get_platform(self):
-        return self.platform
+    def procedures(self):
+        if self.type == 'simple':
+            return [self.procedure]
+        procedures = []
+        for cond in self.conditions:
+            procedures.extend(cond.procedures())
+        return procedures
+
+    def summary(self, lang):
+        language_info = {
+            'ja': {
+                'simple_pass_singular': 'がOK',
+                'simple_pass_plural': 'がOK',
+                'and_connector': '、かつ',
+                'or_connector': '、または',
+                'and_separator': 'と',
+                'or_separator': 'または'
+            },
+            'en': {
+                'simple_pass_singular': ' passes',
+                'simple_pass_plural': ' pass',
+                'and_connector': ', and ',
+                'or_connector': ', or ',
+                'and_separator': ' and ',
+                'or_separator': ' or '
+            },
+        }
+
+        if self.type == 'simple':
+            return f'{self.procedure.id}{language_info[lang]["simple_pass_singular"]}'
+
+        simple_conditions = [cond.summary(lang) for cond in self.conditions if cond.type == 'simple']
+        complex_conditions = [cond.summary(lang) for cond in self.conditions if cond.type != 'simple']
+
+        if self.type == 'and':
+            summary_separator = language_info[lang]['and_separator']
+            summary_connector = language_info[lang]['and_connector'] 
+            simple_pass = language_info[lang]['simple_pass_plural']
+        else:
+            summary_separator = language_info[lang]['or_separator']
+            summary_connector = language_info[lang]['or_connector']
+            simple_pass = language_info[lang]['simple_pass_singular']
+
+        if len(simple_conditions) > 1:
+            simple_conditions = [cond.replace(language_info[lang]['simple_pass_singular'], '') for cond in simple_conditions]
+            simple_summary = summary_separator.join(simple_conditions) + simple_pass
+            return f'{simple_summary}{summary_connector}{summary_connector.join(complex_conditions)}' if complex_conditions else simple_summary
+        else:
+            return summary_connector.join(simple_conditions + complex_conditions)
 
     def template_object(self, lang):
-        template_object = {
-            'platform': PLATFORM_NAMES[self.platform][lang],
-            'procedure': self.procedure[lang]
-        }
-        if self.techniques:
-            template_object['techniques'] = [technique.template_object(lang) for technique in self.techniques]
+        template_object = {}
+        if self.platform is not None:
+            template_object['platform'] = PLATFORM_NAMES[self.platform][lang]
+            template_object['condition'] = self.summary(lang)
+            procedures = self.procedures() 
+            if len(procedures) > 0:
+                template_object['procedures'] = [proc.template_object(lang) for proc in procedures]
         return template_object
 
-class Technique:
-    def __init__(self, tool, technique, **kwargs):
+class Procedure:
+    def __init__(self, condition, check):
+        self.id = condition['id']
+        tool = condition['tool']
+        if tool in CheckTool.list_all_ids():
+            basename = tool
+            tool_display_name = None
+        else:
+            basename = 'misc'
+            tool_display_name = tool
+        tool = CheckTool.get_by_id(basename)
         self.tool = tool
-        if 'tool_display_name' in kwargs:
-            self.tool_display_name = kwargs['tool_display_name']
+        if tool_display_name:
+            self.tool_display_name = tool_display_name
         else:
             self.tool_display_name = None
-        self.technique = technique
-        if 'note' in kwargs:
-            self.note = kwargs['note']
+        self.procedure = condition['procedure']
+        if 'note' in condition:
+            self.note = condition['note']
         else:
             self.note = None
-        if 'YouTube' in kwargs:
-            self.youtube = YouTube(**kwargs['YouTube'])
+        if 'YouTube' in condition:
+            self.youtube = YouTube(condition['YouTube'])
         else:
             self.youtube = None
 
@@ -624,8 +665,9 @@ class Technique:
         if not self.tool_display_name:
             self.tool_display_name = self.tool.get_name(lang)
         template_object = {
+            'id': self.id,
             'tool_display_name': self.tool_display_name,
-            'technique': self.technique[lang]
+            'procedure': self.procedure[lang]
         }
         if self.note:
             template_object['note'] = self.note[lang]
@@ -634,9 +676,9 @@ class Technique:
         return template_object
 
 class YouTube:
-    def __init__(self, **kwargs):
-        self.id = kwargs['id']
-        self.title = kwargs['title']
+    def __init__(self, youtube):
+        self.id = youtube['id']
+        self.title = youtube['title']
 
     def template_object(self):
         return {
@@ -656,16 +698,15 @@ class Implementation:
         }
 
 class Example:
-    def __init__(self, tool, check, technique):
-        self.tool = tool
+    def __init__(self, procedure, check):
         self.check_id = check.id
         self.check_text = check.check
         self.check_src_path = check.src_path
-        self.technique = technique
+        self.procedure = procedure
 
     def template_object(self, lang):
-        template_object = self.technique.template_object(lang)
-        template_object['tool'] = self.tool.id
+        template_object = self.procedure.template_object(lang)
+        template_object['tool'] = self.procedure.tool.id
         template_object['check_id'] = self.check_id
         template_object['check_text'] = self.check_text[lang]
         return template_object

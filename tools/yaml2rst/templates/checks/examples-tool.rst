@@ -7,7 +7,7 @@
 
    {{ ex.check_text | indent(3) }}
 
-{{ ex.technique }}
+{{ ex.procedure }}
 {% if ex.note is defined %}
 {{ ex.note }}
 {% endif %}

@@ -67,7 +67,7 @@ Supplementary Information
 {% if check.implementations is defined -%}
 {% include 'checks/implementation.rst' %}
 {%- endif %}
-{% if check.procedures is defined %}
+{% if check.conditions is defined %}
 {% include 'checks/procedure.rst' %}
 {% endif %}
 {%- endfor %}
