@@ -5,7 +5,6 @@ import json
 import time
 import yaml
 import git
-from jsonschema import validate, ValidationError, RefResolver
 from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 from constants import CHECK_TOOLS, AXE_CORE
 from path import get_src_path
@@ -28,11 +27,6 @@ def setup_instances(settings):
         ('external_info', src_path['info'], InfoRef)
     ]
 
-    if not no_check:
-        resolver = setup_resolver(src_path)
-    else:
-        resolver = None
-
     # Setup CheckTool instances
     for tool_id, tool_names in CHECK_TOOLS.items():
         CheckTool(tool_id, tool_names)
@@ -41,7 +35,7 @@ def setup_instances(settings):
         process_static_entity_file(srcfile, constructor)
 
     for entity_type, srcdir, schema_filename, constructor in entity_config:
-        process_entity_files(srcdir, src_path['schema'], schema_filename, resolver, constructor)
+        process_entity_files(srcdir, src_path['schema'], schema_filename, constructor)
 
     process_axe_rules(basedir, AXE_CORE)
 
@@ -131,28 +125,7 @@ def read_yaml_file(file):
 
     return data
 
-def validate_data(data, schema_file, common_resolver=None):
-    try:
-        schema_content = read_file_content(schema_file)
-        schema = json.loads(schema_content)
-    except Exception as e:
-        raise e
-    try:
-        validate(data, schema, resolver=common_resolver)
-    except ValidationError as e:
-        raise ValueError("Validation failed.") from e
-
-def setup_resolver(src_path):
-    try:
-        file_content = read_file_content(src_path['common_schema_path'])
-        common_schema = json.loads(file_content)
-    except Exception as e:
-        handle_file_error(e, src_path['common_schema_path'])
-    schema_path = f'file://{src_path["schema"]}/'
-    resolver = RefResolver(schema_path, common_schema)
-    return resolver
-
-def process_entity_files(srcdir, schema_dir, schema_filename, resolver, constructor):
+def process_entity_files(srcdir, schema_dir, schema_filename, constructor):
     files = ls_dir(srcdir)
     for file in files:
         try:
@@ -160,11 +133,6 @@ def process_entity_files(srcdir, schema_dir, schema_filename, resolver, construc
         except Exception as e:
             handle_file_error(e, file)
         parsed_data = yaml.safe_load(file_content)
-        if resolver is not None:
-            try:
-                validate_data(parsed_data, os.path.join(schema_dir, schema_filename), resolver)
-            except Exception as e:
-                handle_file_error(e, file)
         parsed_data['src_path'] = os.path.abspath(file)
         try:
             constructor(parsed_data)
