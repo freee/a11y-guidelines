@@ -1,6 +1,6 @@
 rootdir = $(ROOTDIR)
 PYTHON?= python
-YAML2RST= $(PYTHON) $(rootdir)/tools/yaml2rst/yaml2rst.py -b $(rootdir) -l $(lang)
+YAML2RST= $(PYTHON) $(rootdir)/tools/yaml2x/yaml2rst/yaml2rst.py -b $(rootdir) -l $(lang)
 
 ifneq ($(BASE_URL),)
 html_baseurl = $(BASE_URL)
