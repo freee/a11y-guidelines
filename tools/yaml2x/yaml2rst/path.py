@@ -91,26 +91,3 @@ def get_static_dest_files(basedir, lang):
         'axe_rules': os.path.join(dest_dirnames['misc'], AXE_RULES_FILENAME)
     }
 
-def get_src_path(basedir):
-    data_basedir = os.path.join(basedir, DATA_DIR)
-    yaml_basedir = os.path.join(data_basedir, YAML_DIR)
-    json_basedir = os.path.join(data_basedir, JSON_DIR)
-
-    src_path = {
-        'guidelines': os.path.join(yaml_basedir, "gl"),
-        'checks': os.path.join(yaml_basedir, 'checks'),
-        'faq': os.path.join(yaml_basedir, 'faq'),
-        'schema': os.path.join(json_basedir, 'schemas'),
-        'schema_filenames': {
-            'guidelines': 'guideline.json',
-            'checks': 'check.json',
-            'faq': 'faq.json',
-            'common': 'common.json'
-        },
-        'common_schema_path': os.path.join(json_basedir, 'schemas', 'common.json'),
-        'wcag_sc': os.path.join(json_basedir, 'wcag-sc.json'),
-        'gl_categories': os.path.join(json_basedir, 'guideline-categories.json'),
-        'faq_tags': os.path.join(json_basedir, 'faq-tags.json'),
-        'info': os.path.join(json_basedir, 'info.json')
-    }
-    return src_path

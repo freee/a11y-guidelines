@@ -5,9 +5,9 @@ import json
 import time
 import yaml
 import git
-from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
-from constants import CHECK_TOOLS, AXE_CORE
-from path import get_src_path
+from .classes import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
+from .constants import CHECK_TOOLS, AXE_CORE
+from .source import get_src_path
 
 def setup_instances(settings):
     no_check = settings['no_check']
@@ -16,9 +16,9 @@ def setup_instances(settings):
     # Mapping of entity type, srcdir, schema filename, and constructor.
     # The order is important for the initialization of the instances.
     entity_config = [
-        ('check', src_path['checks'], src_path['schema_filenames']['checks'], Check),
-        ('guideline', src_path['guidelines'], src_path['schema_filenames']['guidelines'], Guideline),
-        ('faq', src_path['faq'], src_path['schema_filenames']['faq'], Faq)
+        ('check', src_path['checks'], Check),
+        ('guideline', src_path['guidelines'], Guideline),
+        ('faq', src_path['faq'], Faq)
     ]
     static_entity_config = [
         ('category', src_path['gl_categories'], Category),
@@ -34,8 +34,8 @@ def setup_instances(settings):
     for entity_type, srcfile, constructor in static_entity_config:
         process_static_entity_file(srcfile, constructor)
 
-    for entity_type, srcdir, schema_filename, constructor in entity_config:
-        process_entity_files(srcdir, src_path['schema'], schema_filename, constructor)
+    for entity_type, srcdir, constructor in entity_config:
+        process_entity_files(srcdir, constructor)
 
     process_axe_rules(basedir, AXE_CORE)
 
@@ -125,7 +125,7 @@ def read_yaml_file(file):
 
     return data
 
-def process_entity_files(srcdir, schema_dir, schema_filename, constructor):
+def process_entity_files(srcdir, constructor):
     files = ls_dir(srcdir)
     for file in files:
         try:

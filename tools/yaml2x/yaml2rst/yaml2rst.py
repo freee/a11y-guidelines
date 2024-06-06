@@ -1,14 +1,18 @@
+import sys
 import os
-import app_initializer
-from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
-import a11y_guidelines_initializer
+
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+import initializer as app_initializer
+from a11y_guidelines import setup_instances, Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 
 def main():
     settings = app_initializer.setup_parameters()
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
     templates = app_initializer.setup_templates()
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    a11y_guidelines_initializer.setup_instances(settings)
+    setup_instances(settings)
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
