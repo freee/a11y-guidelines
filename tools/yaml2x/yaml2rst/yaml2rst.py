@@ -12,7 +12,7 @@ def main():
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
     templates = app_initializer.setup_templates()
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    setup_instances(settings)
+    setup_instances(settings['basedir'])
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)

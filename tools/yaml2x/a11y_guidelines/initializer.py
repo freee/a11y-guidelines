@@ -9,9 +9,7 @@ from .classes import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, C
 from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
 
-def setup_instances(settings):
-    no_check = settings['no_check']
-    basedir = settings['basedir']
+def setup_instances(basedir):
     src_path = get_src_path(basedir)
     # Mapping of entity type, srcdir, schema filename, and constructor.
     # The order is important for the initialization of the instances.
