@@ -193,25 +193,25 @@ class Guideline:
             'guideline': self.id
         }
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         rel = RelationshipManager()
-        template_object = {
+        template_data = {
             'id': self.id,
             'title': self.title[lang],
             'platform': join_items(self.platform, lang),
             'guideline': self.guideline[lang],
             'intent': self.intent[lang],
             'category': self.category.names[lang],
-            'checks': [check.template_object(lang, platform=self.platform) for check in rel.get_guideline_to_checks(self)],
-            'scs': [sc.template_object() for sc in rel.get_guideline_to_scs(self)],
+            'checks': [check.template_data(lang, platform=self.platform) for check in rel.get_guideline_to_checks(self)],
+            'scs': [sc.template_data() for sc in rel.get_guideline_to_scs(self)],
         }
         faqs = rel.get_guideline_to_faqs(self)
         if len(faqs):
-            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
+            template_data['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
         info = rel.get_guideline_to_info(self)
         if len(info):
-            template_object['info'] = [inforef.refstring() for inforef in info]
-        return template_object
+            template_data['info'] = [inforef.refstring() for inforef in info]
+        return template_data
 
     @classmethod
     def get_by_id(cls, guideline_id):
@@ -247,10 +247,10 @@ class Check:
     def condition_platforms(self):
         return sorted({condition.platform for condition in self.conditions})
 
-    def template_object(self, lang, **kwargs):
+    def template_data(self, lang, **kwargs):
         rel = RelationshipManager()
         gl_platform = kwargs.get('platform')
-        template_object = {
+        template_data = {
             'id': self.id,
             'check': self.check[lang],
             'severity': SEVERITY_TAGS[self.severity][lang],
@@ -260,30 +260,30 @@ class Check:
         }
         if len(self.conditions) > 0:
             if not gl_platform:
-                template_object['conditions'] = [cond.template_object(lang) for cond in self.conditions]
+                template_data['conditions'] = [cond.template_data(lang) for cond in self.conditions]
             else:
-                template_object['conditions'] = [cond.template_object(lang) for cond in self.conditions if cond.platform == 'general' or cond.platform in gl_platform]
+                template_data['conditions'] = [cond.template_data(lang) for cond in self.conditions if cond.platform == 'general' or cond.platform in gl_platform]
         if len(self.implementations) > 0:
-            template_object['implementations'] = [implementation.template_object(lang) for implementation in self.implementations]
+            template_data['implementations'] = [implementation.template_data(lang) for implementation in self.implementations]
         info = rel.get_check_to_info(self)
         if len(info) > 0:
-            template_object['info_refs'] = [inforef.refstring() for inforef in info]
+            template_data['info_refs'] = [inforef.refstring() for inforef in info]
         faqs = rel.get_check_to_faqs(self)
         if len(faqs) > 0:
-            template_object['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
+            template_data['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
         for gl in rel.get_check_to_guidelines(self):
-            template_object['guidelines'].append(gl.get_category_and_id(lang))
-        return template_object
+            template_data['guidelines'].append(gl.get_category_and_id(lang))
+        return template_data
 
     @classmethod
     def get_by_id(cls, check_id):
         return cls.all_checks.get(check_id)
 
     @classmethod
-    def template_object_all(cls, lang):
+    def template_data_all(cls, lang):
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
         for check_id in sorted_checks:
-            yield cls.all_checks[check_id].template_object(lang)
+            yield cls.all_checks[check_id].template_data(lang)
 
     @classmethod
     def list_all_src_paths(cls):
@@ -339,14 +339,14 @@ class Faq:
             dependency.extend([check.src_path for check in checks])
         return uniq(dependency)
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         rel = RelationshipManager()
         tags = rel.get_faq_to_tags(self)
         if lang == 'ja':
             date_format = "%Y年%-m月%-d日"
         else:
             date_format = "%B %-d, %Y"
-        template_object = {
+        template_data = {
             'id': self.id,
             'updated': self.updated,
             'updated_str': self.updated.strftime(date_format),
@@ -359,18 +359,18 @@ class Faq:
         guidelines = rel.get_faq_to_guidelines(self)
         if len(guidelines) > 0:
             sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
-            template_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in sorted_guidelines]
+            template_data['guidelines'] = [guideline.get_category_and_id(lang) for guideline in sorted_guidelines]
         checks = rel.get_faq_to_checks(self)
         if len(checks) > 0:
             sorted_checks = sorted(checks, key=lambda item: item.id)
-            template_object['checks'] = [{'id': check.id, 'check': check.check[lang]} for check in sorted_checks]
+            template_data['checks'] = [{'id': check.id, 'check': check.check[lang]} for check in sorted_checks]
         info = rel.get_faq_to_info(self)
         if len(info):
-            template_object['info'] = [inforef.refstring() for inforef in info]
+            template_data['info'] = [inforef.refstring() for inforef in info]
         related_faqs = rel.get_related_faqs(self)
         if len(related_faqs) > 0:
-            template_object['related_faqs'] = [faq.id for faq in related_faqs]
-        return template_object
+            template_data['related_faqs'] = [faq.id for faq in related_faqs]
+        return template_data
 
     @classmethod
     def list_all(cls, **kwargs):
@@ -444,7 +444,7 @@ class FaqTag:
             return self.names[lang]
         return self.names['en']
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         rel = RelationshipManager()
         faqs = rel.get_tag_to_faqs(self)
         if len(faqs) == 0:
@@ -490,7 +490,7 @@ class WcagSc:
         }
         WcagSc.all_scs[self.id] = self
 
-    def template_object(self):
+    def template_data(self):
         return {
             'sc': self.scnum,
             'level': self.level,
@@ -625,15 +625,15 @@ class Condition:
         else:
             return summary_connector.join(simple_conditions + complex_conditions)
 
-    def template_object(self, lang):
-        template_object = {}
+    def template_data(self, lang):
+        template_data = {}
         if self.platform is not None:
-            template_object['platform'] = PLATFORM_NAMES[self.platform][lang]
-            template_object['condition'] = self.summary(lang)
+            template_data['platform'] = PLATFORM_NAMES[self.platform][lang]
+            template_data['condition'] = self.summary(lang)
             procedures = self.procedures() 
             if len(procedures) > 0:
-                template_object['procedures'] = [proc.template_object(lang) for proc in procedures]
-        return template_object
+                template_data['procedures'] = [proc.template_data(lang) for proc in procedures]
+        return template_data
 
 class Procedure:
     def __init__(self, condition, check):
@@ -661,26 +661,26 @@ class Procedure:
         else:
             self.youtube = None
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         if not self.tool_display_name:
             self.tool_display_name = self.tool.get_name(lang)
-        template_object = {
+        template_data = {
             'id': self.id,
             'tool_display_name': self.tool_display_name,
             'procedure': self.procedure[lang]
         }
         if self.note:
-            template_object['note'] = self.note[lang]
+            template_data['note'] = self.note[lang]
         if self.youtube:
-            template_object['YouTube'] = self.youtube.template_object()
-        return template_object
+            template_data['YouTube'] = self.youtube.template_data()
+        return template_data
 
 class YouTube:
     def __init__(self, youtube):
         self.id = youtube['id']
         self.title = youtube['title']
 
-    def template_object(self):
+    def template_data(self):
         return {
             'id': self.id,
             'title': self.title
@@ -691,10 +691,10 @@ class Implementation:
         self.title = title
         self.methods = [Method(**method) for method in methods]
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         return {
             'title': self.title[lang],
-            'methods': [method.template_object(lang) for method in self.methods]
+            'methods': [method.template_data(lang) for method in self.methods]
         }
 
 class Example:
@@ -704,19 +704,19 @@ class Example:
         self.check_src_path = check.src_path
         self.procedure = procedure
 
-    def template_object(self, lang):
-        template_object = self.procedure.template_object(lang)
-        template_object['tool'] = self.procedure.tool.id
-        template_object['check_id'] = self.check_id
-        template_object['check_text'] = self.check_text[lang]
-        return template_object
+    def template_data(self, lang):
+        template_data = self.procedure.template_data(lang)
+        template_data['tool'] = self.procedure.tool.id
+        template_data['check_id'] = self.check_id
+        template_data['check_text'] = self.check_text[lang]
+        return template_data
 
 class Method:
     def __init__(self, platform, method):
         self.platform = platform
         self.method = method
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         return {
             'platform': IMPLEMENTATION_TARGETS[self.platform][lang],
             'method': self.method[lang]
@@ -745,15 +745,15 @@ class CheckTool:
             dependency.append(example.check_src_path)
         return uniq(dependency)
 
-    def example_template_object(self, lang):
-        template_object = {
+    def example_template_data(self, lang):
+        template_data = {
             'tool': self.id
         }
         example_objects = []
         for example in self.examples:
-            example_objects.append(example.template_object(lang))
-        template_object['examples'] = sorted(example_objects, key=lambda item: item['check_id'])
-        return template_object
+            example_objects.append(example.template_data(lang))
+        template_data['examples'] = sorted(example_objects, key=lambda item: item['check_id'])
+        return template_data
 
     @classmethod
     def list_all(cls):
@@ -813,7 +813,7 @@ class AxeRule:
                 self.has_guideline = True
         AxeRule.all_rules[rule_id] = self
 
-    def template_object(self, lang):
+    def template_data(self, lang):
         rel = RelationshipManager()
         data = {
             'id': self.id,
@@ -824,7 +824,7 @@ class AxeRule:
             data['translated'] = True
         if self.has_wcag_sc:
             scs = sorted(rel.get_axe_to_wcagsc(self), key=lambda item: item.sort_key)
-            data['scs'] = [sc.template_object() for sc in scs]
+            data['scs'] = [sc.template_data() for sc in scs]
         if self.has_guideline:
             guidelines = sorted(rel.get_axe_to_guidelines(self), key=lambda item: item.sort_key)
             data['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
