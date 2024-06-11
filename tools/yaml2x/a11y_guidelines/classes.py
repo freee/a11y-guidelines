@@ -116,7 +116,8 @@ class RelationshipManager:
 
     def get_check_to_faqs(self, check):
         if 'faq' in self._data['check'][check.id]:
-            return self._data['check'][check.id]['faq']
+            faqs = self._data['check'][check.id]['faq']
+            return sorted(faqs, key=lambda item: item.sort_key)
         return []
 
     def get_faq_to_tags(self, faq):
@@ -192,6 +193,27 @@ class Guideline:
             'category': self.category.get_name(lang),
             'guideline': self.id
         }
+
+    def link_data(self, baseurl = ''):
+        separator_char = {
+            'ja': '：',
+            'en': ': '
+        }
+        basedir = {
+            'ja': '/categories/',
+            'en': '/en/categories/'
+        }
+        data = {
+            'text': {},
+            'url': {}
+        }
+        langs = self.title.keys()
+        for lang in langs:
+            category = self.category.get_name(lang)
+            basename = self.category.id
+            data['text'][lang] = f'{category}{separator_char[lang]}{self.title[lang]}'
+            data['url'][lang] = f'{baseurl}{basedir[lang]}{basename}.html#{self.id}'
+        return data
 
     def template_data(self, lang):
         rel = RelationshipManager()
@@ -270,10 +292,52 @@ class Check:
             template_data['info_refs'] = [inforef.refstring() for inforef in info]
         faqs = rel.get_check_to_faqs(self)
         if len(faqs) > 0:
-            template_data['faqs'] = [faq.id for faq in sorted(faqs, key=lambda item: item.sort_key)]
+            template_data['faqs'] = [faq.id for faq in faqs]
         for gl in rel.get_check_to_guidelines(self):
             template_data['guidelines'].append(gl.get_category_and_id(lang))
         return template_data
+
+    def object_data(self, baseurl = ''):
+        rel = RelationshipManager()
+        data = {
+            'id': self.id,
+            'check': self.check,
+            'severity': self.severity,
+            'target': self.target,
+            'platform': self.platform,
+            'glref': []
+        }
+        data['glref'] = [gl.link_data(baseurl) for gl in rel.get_check_to_guidelines(self)]
+        faqs = rel.get_check_to_faqs(self)
+        if len(faqs) > 0:
+            data['faqs'] = [faq.link_data(baseurl) for faq in faqs]
+        info = rel.get_check_to_info(self)
+        if len(info) > 0:
+            data['info'] = [inforef.link_data() for inforef in info]
+        if len(self.conditions) > 0:
+            data['conditions'] = [cond.object_data() for cond in self.conditions]
+        if len(self.implementations) > 0:
+            implementations = {}
+            for implementation in self.implementations:
+                title = implementation.title
+                for method in implementation.methods:
+                    platform = method.platform
+                    if platform not in implementations:
+                        implementations[platform] = []
+                    implementations[platform].append({
+                        'title': title,
+                        'method': method.method
+                    })
+            for platform, methods in implementations.items():
+                platform_key = f'implementation_{platform}'
+                if platform_key not in data:
+                    data[platform_key] = {}
+                for method in methods:
+                    for lang, lang_title in method['title'].items():
+                        if lang not in data[platform_key]:
+                            data[platform_key][lang] = ''
+                        data[platform_key][lang] += f'{lang_title}:\n{method["method"][lang]}\n\n'
+        return data
 
     @classmethod
     def get_by_id(cls, check_id):
@@ -284,6 +348,15 @@ class Check:
         sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
         for check_id in sorted_checks:
             yield cls.all_checks[check_id].template_data(lang)
+
+    @classmethod
+    def object_data_all(cls, baseurl = ''):
+        sorted_checks = sorted(cls.all_checks, key=lambda x: cls.all_checks[x].id)
+        checks = {}
+        for check_id in sorted_checks:
+            checks[check_id] = cls.all_checks[check_id].object_data(baseurl)
+        return checks
+
 
     @classmethod
     def list_all_src_paths(cls):
@@ -338,6 +411,22 @@ class Faq:
         if len(checks) > 0:
             dependency.extend([check.src_path for check in checks])
         return uniq(dependency)
+
+    def link_data(self, baseurl = ''):
+        basedir = {
+            'ja': '/faq/articles/',
+            'en': '/en/faq/articles/'
+        }
+        data = {
+            'text': {},
+            'url': {}
+        }
+        langs = self.title.keys()
+        for lang in langs:
+            basename = self.id
+            data['text'][lang] = self.title[lang]
+            data['url'][lang] = f'{baseurl}{basedir[lang]}{basename}.html'
+        return data
 
     def template_data(self, lang):
         rel = RelationshipManager()
@@ -538,6 +627,20 @@ class InfoRef:
             return f':ref:`{self.ref}`'
         return self.ref
 
+    def set_link(self, data):
+        if not self.internal:
+            return
+        self.url = data['url']
+        self.text = data['text']
+
+    def link_data(self):
+        if self.text:
+            return {
+                'text': self.text,
+                'url': self.url
+            }
+        return None
+
     @classmethod
     def get_by_id(cls, ref_id):
         return cls.all_inforefs.get(ref_id)
@@ -546,6 +649,12 @@ class InfoRef:
     def list_all_external(cls):
         for inforef in cls.all_inforefs.values():
             if not inforef.internal:
+                yield inforef
+
+    @classmethod
+    def list_all_internal(cls):
+        for inforef in cls.all_inforefs.values():
+            if inforef.internal:
                 yield inforef
 
     @classmethod
@@ -625,6 +734,23 @@ class Condition:
         else:
             return summary_connector.join(simple_conditions + complex_conditions)
 
+    def summary_formula(self):
+        def convert_to_formula_format(conditions, func):
+            return f'{func}({",".join(conditions)})'
+
+        if self.type == 'simple':
+            return self.procedure.id
+
+        simple_conditions = [cond.summary_formula() for cond in self.conditions if cond.type == 'simple']
+        complex_conditions = [cond.summary_formula() for cond in self.conditions if cond.type != 'simple']
+
+        if self.type == 'and':
+            func = 'AND'
+        else:
+            func = 'OR'
+
+        return convert_to_formula_format(simple_conditions + complex_conditions, func)
+
     def template_data(self, lang):
         template_data = {}
         if self.platform is not None:
@@ -634,6 +760,17 @@ class Condition:
             if len(procedures) > 0:
                 template_data['procedures'] = [proc.template_data(lang) for proc in procedures]
         return template_data
+
+    def object_data(self):
+        data = {}
+        if hasattr(self, 'platform'):
+            data['platform'] = self.platform
+        data['type'] = self.type
+        if self.type == 'simple':
+            data['procedure'] = self.procedure.object_data()
+        else:
+            data['conditions'] = [cond.object_data() for cond in self.conditions]
+        return data
 
 class Procedure:
     def __init__(self, condition, check):
@@ -674,6 +811,13 @@ class Procedure:
         if self.youtube:
             template_data['YouTube'] = self.youtube.template_data()
         return template_data
+
+    def object_data(self):
+        data = {
+            'id': self.id,
+            'procedure': self.procedure
+        }
+        return data
 
 class YouTube:
     def __init__(self, youtube):
