@@ -1,4 +1,5 @@
 id: '0711'
+sortKey: 603500
 severity: major
 target: product
 platform:
@@ -9,60 +10,59 @@ check:
     ページ/画面の状態が変化したときも含めて、スクリーン・リーダーで読み上げさせた時、内容的、および視覚的に自然な順序で読み上げられる。
   en: |-
     The content is read aloud in an order which is natural both visually and semantically, when read by the screen reader, including when the page/screen state changes.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0711-nvda-1"
+    procedure:
       ja: |-
         *  ブラウズ・モードでページ先頭から矢印キーの操作で読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
         *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
       en: |-
         *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using arrow keys in browse mode.
         *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0711-macos-vo-1"
+    procedure:
       ja: |-
         *  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作でページ先頭から読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
         *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
       en: |-
         *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
         *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-- platform: mobile
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0711-ios-vo-1"
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
+      *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
+      *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
     en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
-      ja: |-
-        *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
-        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
-      en: |-
-        *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
-        *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
-      ja: |-
-        *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
-        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
-      en: |-
-        *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
-        *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
+      *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0711-android-tb-1"
+  procedure:
+    ja: |-
+      *  1本指による右および左方向のフリックでフォーカスを移動した際、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
+      *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
+    en: |-
+      *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when moving the focus with one-finger left/right flicks.
+      *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

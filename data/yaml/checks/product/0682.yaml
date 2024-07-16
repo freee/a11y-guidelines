@@ -1,4 +1,5 @@
 id: '0682'
+sortKey: 500600
 severity: normal
 target: product
 platform:
@@ -8,16 +9,14 @@ check:
     ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
   en: |-
     All content on the page is placed in the appropriate area indicated by ARIA landmarks.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェックとLandmark Navigation via Keyboard or Pop-upによるチェックの両方を満たしていることを確認する。
-    en: |-
-      Confirm that both of the following checks pass: check by the Axe DevTools and check by the Landmark Navigation via Keyboard or Pop-up
-  techniques:
-  - tool: axe
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0682-axe-1"
+    procedure:
       ja: |-
         画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
@@ -44,8 +43,10 @@ procedures:
         -  :ref:`axe-rule-landmark-one-main`
         -  :ref:`axe-rule-landmark-unique`
         -  :ref:`axe-rule-region`
-  - tool: Landmark Navigation via Keyboard or Pop-up
-    technique:
+  - type: simple
+    tool: Landmark Navigation via Keyboard or Pop-up
+    id: "0681-misc-1"
+    procedure:
       ja: |-
         `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属していることを確認する。
       en: |-

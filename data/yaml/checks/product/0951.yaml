@@ -1,4 +1,5 @@
 id: '0951'
+sortKey: 500200
 severity: major
 target: product
 platform:
@@ -9,16 +10,14 @@ check:
     エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールは、適切にラベル付けされている。
   en: |-
     Form controls, such as edit boxes, check boxes, and radio buttons, are properly labeled.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェックを満たしていて、かつNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that the following check by axe DevTools passes, and also either the checks by NVDA or the checks by macOS VoiceOver passes.
-  techniques:
-  - tool: axe
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0951-axe-1"
+    procedure:
       ja: |-
         以下のいずれの問題も発生しないことを確認する。
 
@@ -33,15 +32,21 @@ procedures:
         *  :ref:`axe-rule-select-name`
         *  :ref:`axe-rule-form-field-multiple-labels`
         *  :ref:`axe-rule-label-title-only`
-  - tool: nvda
-    technique:
-      ja: |-
-        フォーカス・モードで :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
-      en: |-
-        Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys in focus mode.
-  - tool: macos-vo
-    technique:
-      ja: |-
-        VoiceOver有効時に :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
-      en: |-
-        Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys with VoiceOver enabled.
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0951-nvda-1"
+      procedure:
+        ja: |-
+          フォーカス・モードで :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
+        en: |-
+          Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys in focus mode.
+    - type: simple
+      tool: macos-vo
+      id: "0951-macos-vo-1"
+      procedure:
+        ja: |-
+          VoiceOver有効時に :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
+        en: |-
+          Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys with VoiceOver enabled.

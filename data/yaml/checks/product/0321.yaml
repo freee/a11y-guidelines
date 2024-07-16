@@ -1,4 +1,5 @@
 id: '0321'
+sortKey: 500900
 severity: major
 target: product
 platform:

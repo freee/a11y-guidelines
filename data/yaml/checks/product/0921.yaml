@@ -1,4 +1,5 @@
 id: '0921'
+sortKey: 502200
 severity: minor
 target: product
 platform:
@@ -8,20 +9,16 @@ check:
     複数の言語が含まれているテキストについて、多言語対応している読み上げ環境を用いて読み上げさせたとき、適切な言語の音声エンジンで読み上げられる。
   en: |-
     When text containing multiple languages is read out loud using a reading environment that supports multiple languages, the text is read out loud by the appropriate language's speech engine.
-procedures:
+conditions:
 - platform: web
+  type: simple
+  tool: nvda
+  id: "0921-nvda-1"
   procedure:
     ja: |-
-      以下のNVDAによるチェックを満たしていることを確認する。
+      ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
-      en: |-
-        Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in browse mode.
-    YouTube:
-      id: 5syA78BshdY
-      title: 複数の言語の音声【NVDAでアクセシビリティー チェック】
+      Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in browse mode.
+  YouTube:
+    id: 5syA78BshdY
+    title: 複数の言語の音声【NVDAでアクセシビリティー チェック】

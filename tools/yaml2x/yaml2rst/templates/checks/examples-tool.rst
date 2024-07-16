@@ -7,7 +7,13 @@
 
    {{ ex.check_text | indent(3) }}
 
-{{ ex.technique }}
+.. _check-{{ ex.id }}:
+
+{% filter make_heading(3, 'permalink') -%}
+ID {{ ex.id }}
+{%- endfilter %}
+
+{{ ex.procedure }}
 {% if ex.note is defined %}
 {{ ex.note }}
 {% endif %}

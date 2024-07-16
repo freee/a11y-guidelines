@@ -29,19 +29,19 @@
     },
     "title": {
       "description": "title of the FAQ",
-      "$ref": "common.json#/definitions/i18nString"
+      "$ref": "common.json#/$defs/i18nString"
     },
     "problem": {
       "description": "the problem or the question",
-      "$ref": "common.json#/definitions/i18nString"
+      "$ref": "common.json#/$defs/i18nString"
     },
     "solution": {
       "description": "the solution or the answer",
-      "$ref": "common.json#/definitions/i18nString"
+      "$ref": "common.json#/$defs/i18nString"
     },
     "explanation": {
       "description": "detailed explanation",
-      "$ref": "common.json#/definitions/i18nString"
+      "$ref": "common.json#/$defs/i18nString"
     },
     "guidelines": {
       "description": "related guidelines, if any",
