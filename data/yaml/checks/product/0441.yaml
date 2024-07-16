@@ -90,7 +90,7 @@ conditions:
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0441-ios-vo-"
+  id: "0441-ios-vo-1"
   procedure:
     ja: |-
       *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
