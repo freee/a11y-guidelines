@@ -37,15 +37,21 @@ def deRST(condition, info):
         text = ref.sub(lambda m: info[m.group(1)]['text'][lang], str)
         kbd = re.compile(r':kbd:`(.+)`')
         text = kbd.sub(lambda m: m.group(1), text)
-        # 先頭と末尾のホワイトスペースを削除
+
+        # Remove leading and trailing whitespaces
         text = text.strip()
 
-        # 全角文字と全角文字の間のホワイトスペースを削除
-        text = re.sub(r'([\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF])\s+([\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF])', r'\1\2', text)
+        # Define regexp for half and full width chars
+        fullwidth_chars = r'[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]'
+        halfwidth_chars = r'[\u0000-\u007F\uFF61-\uFFDC\uFFE8-\uFFEE]'
 
-        # 全角文字と半角文字の間の半角スペースを削除
-        text = re.sub(r'([\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF])\s+(\w)', r'\1\2', text)
-        text = re.sub(r'(\w)\s+([\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF])', r'\1\2', text)
+        # Remove whitespaces between fullwidth chars
+        text = re.sub(f'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+
+        # Remove whitespaces between halfwidth chars and full width chars
+        text = re.sub(f'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
+        text = re.sub(f'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+
         return text
 
     if condition['type'] == 'simple':
