@@ -252,6 +252,9 @@ class Check:
         self.object_type = 'check'
         if self.id in Check.all_checks:
             raise ValueError(f'Duplicate check ID: {self.id}')
+        self.sort_key = check['sortKey']
+        if self.sort_key in [check.sort_key for check in Check.all_checks.values()]:
+            raise ValueError(f'Duplicate check sortKey: {self.sort_key}')
         self.check = check['check']
         self.severity = check['severity']
         self.target = check['target']
@@ -301,13 +304,14 @@ class Check:
         rel = RelationshipManager()
         data = {
             'id': self.id,
+            'sortKey': self.sort_key,
             'check': self.check,
-            'severity': self.severity,
+            'severity': f'[{self.severity.upper()}]',
             'target': self.target,
             'platform': self.platform,
-            'glref': []
+            'guidelines': []
         }
-        data['glref'] = [gl.link_data(baseurl) for gl in rel.get_check_to_guidelines(self)]
+        data['guidelines'] = [gl.link_data(baseurl) for gl in rel.get_check_to_guidelines(self)]
         faqs = rel.get_check_to_faqs(self)
         if len(faqs) > 0:
             data['faqs'] = [faq.link_data(baseurl) for faq in faqs]
@@ -316,6 +320,16 @@ class Check:
             data['info'] = [inforef.link_data() for inforef in info]
         if len(self.conditions) > 0:
             data['conditions'] = [cond.object_data() for cond in self.conditions]
+            data['condition_statements'] = []
+            for condition in self.conditions:
+                statement = {
+                    'platform': condition.platform,
+                    'summary': {}
+                }
+                for lang in self.check:
+                    statement['summary'][lang] = condition.summary(lang)
+                data['condition_statements'].append(statement)
+
         if len(self.implementations) > 0:
             implementations = {}
             for implementation in self.implementations:
@@ -761,15 +775,16 @@ class Condition:
                 template_data['procedures'] = [proc.template_data(lang) for proc in procedures]
         return template_data
 
-    def object_data(self):
+    def object_data(self, platform = None):
         data = {}
         if hasattr(self, 'platform'):
             data['platform'] = self.platform
+            platform = self.platform
         data['type'] = self.type
         if self.type == 'simple':
-            data['procedure'] = self.procedure.object_data()
+            data['procedure'] = self.procedure.object_data(platform)
         else:
-            data['conditions'] = [cond.object_data() for cond in self.conditions]
+            data['conditions'] = [cond.object_data(platform) for cond in self.conditions]
         return data
 
 class Procedure:
@@ -812,9 +827,27 @@ class Procedure:
             template_data['YouTube'] = self.youtube.template_data()
         return template_data
 
-    def object_data(self):
+    def object_data(self, platform):
+        baseurl = {
+            'ja': 'https://a11y-guidelines.freee.co.jp/checks/examples/',
+            'en': 'https://a11y-guidelines.freee.co.jp/en/checks/examples/'
+        }
+        tool_link = {
+            'text': {},
+            'url': {}
+        }
+        langs = self.procedure.keys()
+        for lang in langs:
+            if self.tool_display_name is not None:
+                tool_link['text'][lang] = self.tool_display_name
+            else:
+                tool_link['text'][lang] = self.tool.get_name(lang)
+            tool_link['url'][lang] = f'{baseurl[lang]}{self.tool.id}.html#{self.id}'
         data = {
             'id': self.id,
+            'platform': platform,
+            'tool': self.tool.id,
+            'toolLink': tool_link,
             'procedure': self.procedure
         }
         return data
