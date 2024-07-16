@@ -1,4 +1,5 @@
 id: '0561'
+sortKey: 500400
 severity: normal
 target: product
 platform:
@@ -62,32 +63,31 @@ conditions:
 
           1. Press :kbd:`VO + U` to display the rotor menu
           2. Select "Headings"
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    tool: ios-vo
-    id: "0561-ios-vo-1"
-    procedure:
-      ja: |-
-        ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
-      en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-vertical-flick`
-  - type: simple
-    tool: android-tb
-    id: "0561-android-tb-1"
-    procedure:
-      ja: |-
-        読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
-      en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-vertical-flick`
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0561-ios-vo-1"
+  procedure:
+    ja: |-
+      ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+    en: |-
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-vertical-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0561-android-tb-1"
+  procedure:
+    ja: |-
+      読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+    en: |-
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-vertical-flick`

@@ -1,4 +1,5 @@
 id: '0411'
+sortKey: 500300
 severity: major
 target: product
 platform:
@@ -41,7 +42,7 @@ conditions:
         id: OQrwQ4rnudY
         title: アイコンの役割や示している状態【NVDAでアクセシビリティー チェック】
     - type: simple
-      id: "0411-mac-vo-1"
+      id: "0411-macVoiceOver-1"
       tool: macos-vo
       procedure:
         ja: |-
@@ -54,36 +55,35 @@ conditions:
 
           *  When the part with the icon is read aloud using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor
           *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    id: "0411-ios-vo-1"
-    tool: ios-vo
-    procedure:
-      ja: |-
-        *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
-        *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
-      en: |-
-        *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
-        *  Cofirm that text describing the role of the icon is announced when an icon is touched, instead of reaching it by flicking.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - type: simple
-    id: "0411-android-tb-1"
-    tool: android-tb
-    procedure:
-      ja: |-
-        *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
-        *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
-      en: |-
-        *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
-        *  Cofirm that text describing the role of the icon is announced when the icon is touched, instead of reaching it by flicking.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+- platform: ios
+  type: simple
+  id: "0411-ios-vo-1"
+  tool: ios-vo
+  procedure:
+    ja: |-
+      *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
+      *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
+    en: |-
+      *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
+      *  Cofirm that text describing the role of the icon is announced when an icon is touched, instead of reaching it by flicking.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  id: "0411-android-tb-1"
+  tool: android-tb
+  procedure:
+    ja: |-
+      *  1本指による右および左方向のフリックでアイコンに到達した際、そのアイコンの役割が分かるようなテキストが読み上げられることを確認する。
+      *  （フリックではなく）アイコンに触れたとき、そのアイコンの役割が分かるテキストが読み上げられることを確認する。
+    en: |-
+      *  Cofirm that text describing the role of the icon is announced when reaching an icon by one-finger left/right flicks.
+      *  Cofirm that text describing the role of the icon is announced when the icon is touched, instead of reaching it by flicking.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

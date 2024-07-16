@@ -1,4 +1,5 @@
 id: '0471'
+sortKey: 502400
 severity: normal
 target: product
 platform:
@@ -32,32 +33,31 @@ conditions:
         :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
         Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    tool: ios-vo
-    id: "0471-ios-vo-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
-      en: |-
-        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - type: simple
-    tool: android-tb
-    id: "0471-android-tb-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
-      en: |-
-        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0471-ios-vo-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+    en: |-
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0471-android-tb-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+    en: |-
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

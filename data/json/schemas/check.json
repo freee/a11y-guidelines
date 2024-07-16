@@ -10,6 +10,10 @@
       "type": "string",
       "pattern": "^[0-9]{4}"
     },
+    "sortKey": {
+      "description": "a sort key for the check",
+      "type": "integer"
+    },
     "check": {
       "description": "main text of the check",
       "$ref": "common.json#/$defs/i18nString"
@@ -51,7 +55,7 @@
         "properties": {
           "platform": {
             "type": "string",
-            "enum": ["web", "mobile", "general"]
+            "enum": ["web", "mobile", "ios", "android", "general"]
           },
           "type": {
             "type": "string",

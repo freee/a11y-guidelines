@@ -1,4 +1,5 @@
 id: '0413'
+sortKey: 502300
 severity: normal
 target: product
 platform:
@@ -32,32 +33,31 @@ conditions:
         :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
       en: |-
         Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    tool: ios-vo
-    id: "0413-ios-vo-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - type: simple
-    tool: android-tb
-    id: "0413-android-tb-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0413-ios-vo-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+    en: |-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0413-android-tb-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動して当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+    en: |-
+      Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

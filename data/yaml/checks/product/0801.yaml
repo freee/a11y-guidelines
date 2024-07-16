@@ -1,4 +1,5 @@
 id: '0801'
+sortKey: 603700
 severity: normal
 target: product
 platform:
@@ -44,32 +45,31 @@ conditions:
           :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
         en: |-
           Confirm that the reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    tool: ios-vo
-    id: "0801-ios-vo-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面一貫していることを確認する。
-      en: |-
-        Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - type: simple
-    tool: android-tb
-    id: "0801-android-tb-1"
-    procedure:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
-      en: |-
-        Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0801-ios-vo-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面一貫していることを確認する。
+    en: |-
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0801-android-tb-1"
+  procedure:
+    ja: |-
+      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
+    en: |-
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

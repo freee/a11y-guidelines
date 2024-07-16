@@ -1,4 +1,5 @@
 id: '1191'
+sortKey: 502800
 severity: major
 target: product
 platform:
@@ -27,22 +28,21 @@ conditions:
   YouTube:
     id: 5YO_NxGuks8
     title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
-- platform: mobile
-  type: and
-  conditions:
-  - type: simple
-    tool: ios-vo
-    id: "1191-ios-vo-1"
-    procedure:
-      ja: |-
-        iOS VoiceOverが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
-      en: |-
-        Perform the operation to display status messages according to the design documents while iOS VoiceOver is running, and confirm that the displayed status messages are automatically announced.
-  - type: simple
-    tool: android-tb
-    id: "1191-android-tb-1"
-    procedure:
-      ja: |-
-        Android TalkBackが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
-      en: |-
-        Perform the operation to display status messages according to the design documents while Android TalkBack is running, and confirm that the displayed status messages are automatically announced.
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "1191-ios-vo-1"
+  procedure:
+    ja: |-
+      iOS VoiceOverが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+    en: |-
+      Perform the operation to display status messages according to the design documents while iOS VoiceOver is running, and confirm that the displayed status messages are automatically announced.
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "1191-android-tb-1"
+  procedure:
+    ja: |-
+      Android TalkBackが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+    en: |-
+      Perform the operation to display status messages according to the design documents while Android TalkBack is running, and confirm that the displayed status messages are automatically announced.
