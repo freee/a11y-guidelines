@@ -52,7 +52,7 @@ def get_allchecks(lang):
 
 def get_example_pages(lang):
     for tool in CheckTool.list_all():
-        yield {**tool.example_template_data(lang), **{'filename': f'examples-{tool.id}'}}
+        yield {**{'examples': tool.example_template_data(lang)}, **{'filename': f'examples-{tool.id}'}}
 
 def get_faq_articles(lang):
     for faq in Faq.list_all():
