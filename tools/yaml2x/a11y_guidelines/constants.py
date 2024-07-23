@@ -25,8 +25,8 @@ CHECK_TOOLS = {
         'en': 'Keyboard'
     },
     'misc': {
-        'ja': 'その他のツール',
-        'en': 'Miscellaneous Tools'
+        'ja': 'その他の手段',
+        'en': 'Miscellaneous Methods'
     }
 }
 

@@ -14,12 +14,12 @@ conditions:
 - platform: web
   type: simple
   tool: nvda
-  id: "1191-nvda-1"
+  id: "1191-nvda-01"
   procedure:
     ja: |-
-      設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+      NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
     en: |-
-      Perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
+      With NVDA running, perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
   note:
     ja: |-
       参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
@@ -31,7 +31,7 @@ conditions:
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "1191-ios-vo-1"
+  id: "1191-iosvo-01"
   procedure:
     ja: |-
       iOS VoiceOverが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
@@ -40,7 +40,7 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "1191-android-tb-1"
+  id: "1191-androidtb-01"
   procedure:
     ja: |-
       Android TalkBackが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。

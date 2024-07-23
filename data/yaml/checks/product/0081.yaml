@@ -16,7 +16,7 @@ check:
 conditions:
 - platform: web
   type: simple
-  id: "0081-mouse-1"
+  id: "0081-mouse-01"
   tool: mouse
   procedure:
     ja: |-
@@ -27,7 +27,7 @@ conditions:
       3. マウス・ボタンを押下したままの状態でオブジェクト外にマウス・ポインターを移動
       4. マウス・ボタンを放す
     en: |-
-      Confirm that no functionality is executed upon performing the following:
+      Confirm that no functionality is executed upon performing the following with the mouse:
 
       1. Move the mouse pointer onto the object
       2. Press the mouse button

@@ -14,17 +14,17 @@ conditions:
 - platform: web
   type: simple
   tool: nvda
-  id: "0591-nvda-1"
+  id: "0591-nvda-01"
   procedure:
     ja: |-
-      以下のすべてを満たしていることを確認する：
+      以下のすべてを満たしていることをNVDAで確認する：
 
       *  ブラウズ・モードでその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
       *  その部分で提供されているすべての機能を、最低限フォーカス・モードにおいてキーボードで操作できる
       *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
       *  操作の結果表示が変わる場合、ブラウズ・モードで変更後の表示内容を読み上げさせて確認できる
     en: |-
-      Confirm that all of the following are met:
+      Confirm that all of the following are met using NVDA:
 
       *  Users can recognize that the component accepts some operation when reading the part in browse mode.
       *  All of the functions provided in the part can be operated at least by keyboard in focus mode.

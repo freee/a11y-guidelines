@@ -18,7 +18,7 @@ conditions:
   conditions:
   - type: simple
     tool: keyboard
-    id: "0801-keyboard-1"
+    id: "0801-keyboard-01"
     procedure:
       ja: |-
         TabキーおよびShift+Tabキーでフォーカスを移動した際、複数のページで移動順序が一貫していることを確認する。
@@ -28,32 +28,32 @@ conditions:
     conditions:
     - type: simple
       tool: nvda
-      id: "0801-nvda-1"
+      id: "0801-nvda-01"
       procedure:
         ja: |-
-          ブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+          NVDAのブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
         en: |-
-          Confirm that the reading order is consistent across multiple pages when reading the content using the up/down arrow keys in browse mode.
+          Confirm that the reading order is consistent across multiple pages when reading the content using the up/down arrow keys in NVDA's browse mode.
       YouTube:
         id: GYKStFpsfUw
         title: 同じ出現順序【NVDAでアクセシビリティー チェック】
     - type: simple
       tool: macos-vo
-      id: "0801-macos-vo-1"
+      id: "0801-macvo-01"
       procedure:
         ja: |-
-          :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
         en: |-
-          Confirm that the reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
+          Confirm that the reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0801-ios-vo-1"
+  id: "0801-iosvo-01"
   procedure:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面一貫していることを確認する。
+      iOS VoiceOver有効時に1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
     en: |-
-      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks with iOS VoiceOver enabled.
   note:
     ja: |-
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
@@ -62,12 +62,12 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0801-android-tb-1"
+  id: "0801-androidtb-01"
   procedure:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
+      Android TalkBack有効時に1本指による右および左方向のフリックでフォーカスを移動した際の読み上げ順序が、複数の画面で一貫していることを確認する。
     en: |-
-      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks.
+      Confirm that the reading order is consistent across multiple screens when moving the focus using one-finger left/right flicks with Android TalkBack enabled.
   note:
     ja: |-
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

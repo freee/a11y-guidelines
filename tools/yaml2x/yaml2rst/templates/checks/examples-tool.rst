@@ -7,28 +7,30 @@
 
    {{ ex.check_text | indent(3) }}
 
-.. _check-{{ ex.id }}:
+{% for proc in ex.procedures -%}
+.. _check-{{ proc.id }}:
 
 {% filter make_heading(3, 'permalink') -%}
-ID {{ ex.id }}
+ID {{ proc.id }}
 {%- endfilter %}
 
-{{ ex.procedure }}
-{% if ex.note is defined %}
-{{ ex.note }}
+{{ proc.procedure }}
+{% if proc.note is defined %}
+{{ proc.note }}
 {% endif %}
-{% if ex.YouTube is defined %}
+{% if proc.YouTube is defined %}
 {% if lang == 'ja' -%}
 参考動画：
 {%- elif lang == 'en' -%}
 Reference Videos:
-{%- endif %} `{{ ex.YouTube.title }} <https://www.youtube.com/watch?v={{ ex.YouTube.id }}>`__
+{%- endif %} `{{ proc.YouTube.title }} <https://www.youtube.com/watch?v={{ proc.YouTube.id }}>`__
 
 .. raw:: html
 
-   <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ ex.YouTube.id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ proc.YouTube.id }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 {% endif %}
+{% endfor %}
 {% endfor %}
 {% if lang == 'ja' -%}
 .. translated:: true

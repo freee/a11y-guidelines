@@ -14,10 +14,10 @@ conditions:
 - platform: web
   type: simple
   tool: nvda
-  id: "0562-nvda-1"
+  id: "0562-nvda-01"
   procedure:
     ja: |-
-      以下のすべてを満たしていることを確認する。
+      以下のすべてを満たしていることをNVDAで確認する。
 
       *  以下の手順で表を発見できる：
 
@@ -34,7 +34,7 @@ conditions:
             *  :kbd:`Ctrl+Alt+↓` ： 下のセル
             *  :kbd:`Ctrl+Alt+↑` ： 上のセル
     en: |-
-      Confirm that all of the following are met.
+      Confirm that all of the following are met using NVDA.
 
       *  The table can be found by the following steps:
 

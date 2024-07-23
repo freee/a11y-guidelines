@@ -923,14 +923,18 @@ class CheckTool:
         return uniq(dependency)
 
     def example_template_data(self, lang):
-        template_data = {
-            'tool': self.id
-        }
-        example_objects = []
+        examples = {}
         for example in self.examples:
-            example_objects.append(example.template_data(lang))
-        template_data['examples'] = sorted(example_objects, key=lambda item: item['check_id'])
-        return template_data
+            check_id = example.check_id
+            if check_id not in examples:
+                examples[check_id] = {
+                    'check_id': check_id,
+                    'check_text': example.check_text[lang],
+                    'tool': self.id,
+                    'procedures': []
+                }
+            examples[check_id]['procedures'].append(example.procedure.template_data(lang))
+        return sorted(examples.values(), key=lambda item: item['check_id'])
 
     @classmethod
     def list_all(cls):
