@@ -83,9 +83,15 @@ The repository's root directory contains the following directories:
    :file:`json`
       Contains schema definitions for files in the :file:`yaml` directory and files needed to process these files.
 :file:`tools`
-   :file:`yaml2rst`
-      Contains scripts and related files needed to generate the required reST files.
-      Originally, it was a script for processing YAML files and outputting reST files, thus the name, but now it also includes the functionality to process the source code of axe-core and output the necessary reST file.
+   :file:`yaml2x`
+      :file:`yaml2rst`
+         Contains scripts and related files needed to generate the required reST files.
+         Originally, it was a script for processing YAML files and outputting reST files, thus the name, but now it also includes the functionality to process the source code of axe-core and output the necessary reST file.
+      :file:`yaml2json`
+         Contains a script to process a group of YAML files and convert them into a JSON file.
+         Note that this script is not necessary for generating HTML files.
+      :file:`a11y_guidelines`
+         Contains modules commonly used by both ``yaml2rst`` and ``yaml2json``.
 :file:`vendor`
    Contains the source code of repositories referenced as submodules.
    Currently, this includes the source code of axe-core.
@@ -93,7 +99,7 @@ The repository's root directory contains the following directories:
 Executing ``yaml2rst``
 ======================
 
-Executing the ``tools/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reST files.
+Executing the ``tools/yaml2x/yaml2rst/yaml2rst.py`` script allows you to generate the necessary reST files.
 There are several command-line options, but the following two are necessary for manual execution:
 
 ``--lang`` or ``-l`` option
@@ -105,7 +111,7 @@ For example, executing the following in the repository's root directory outputs 
 
 .. code:: shell
 
-   python tools/yaml2rst/yaml2rst.py -l ja -b .
+   python tools/yaml2x/yaml2rst/yaml2rst.py -l ja -b .
 
 Note that executing ``make html`` in the root directory also includes the execution of this script, along with the necessary processes to output HTML for both the Japanese and English versions.
 
@@ -129,7 +135,6 @@ About the English Version
 =========================
 
 The normative version of this document is in Japanese.
-Currently, there are untranslated pages, and for these, the source of the Japanese version is included as it is.
 The English version is a translation of the content of the Japanese version, but where there are differences, the content of the Japanese version takes precedence.
 
 We try to update the English version simultaneously with the Japanese version, but there are cases where the update of the Japanese version precedes.
