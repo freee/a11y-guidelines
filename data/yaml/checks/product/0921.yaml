@@ -13,12 +13,12 @@ conditions:
 - platform: web
   type: simple
   tool: nvda
-  id: "0921-nvda-1"
+  id: "0921-nvda-01"
   procedure:
     ja: |-
-      ブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
+      NVDAのブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
     en: |-
-      Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in browse mode.
+      Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in NVDA's browse mode.
   YouTube:
     id: 5syA78BshdY
     title: 複数の言語の音声【NVDAでアクセシビリティー チェック】

@@ -16,32 +16,36 @@ conditions:
   conditions:
   - type: simple
     tool: nvda
-    id: "0531-nvda-1"
+    id: "0531-nvda-01"
     procedure:
       ja: |-
-        ブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       en: |-
-        Confirm that the same text as contained in the image is announced when using arrow keys in browse mode.
+        Confirm that the same text as contained in the image is announced when using arrow keys in NVDA's browse mode.
     YouTube:
       id: 7vGc7p0FraE
       title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
   - type: simple
     tool: macos-vo
-    id: "0531-mac-vo-1"
+    id: "0531-macvo-01"
     procedure:
       ja: |-
-        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       en: |-
-        Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
+        Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0531-ios-vo-1"
+  id: "0531-iosvo-01"
   procedure:
     ja: |-
+      iOS VoiceOverが有効な状態で、以下を確認する：
+
       *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
     en: |-
+      Confirm the following with iOS VoiceOver enabled:
+
       *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
       *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
   note:
@@ -52,12 +56,16 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0531-android-tb-1"
+  id: "0531-androidtb-01"
   procedure:
     ja: |-
+      Android TalkBackが有効な状態で、以下を確認する：
+
       *  1本指による右および左方向のフリックで画像に到達した際、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
       *  （フリックではなく）画像に触れたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
     en: |-
+      Confirm the following with Android TalkBack enabled:
+
       *  Cofirm that the same text as contained in the image is announced when reaching the image by one-finger left/right flicks.
       *  Cofirm that the same text as contained in the image is announced when the image is touched, instead of reaching it by flicking.
   note:

@@ -16,32 +16,32 @@ conditions:
   conditions:
   - type: simple
     tool: nvda
-    id: "0471-nvda-1"
+    id: "0471-nvda-01"
     procedure:
       ja: |-
-        ブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
-        Confirm that the presence of the image is not announced when passing over the image using arrow keys in browse mode.
+        Confirm that the presence of the image is not announced when passing over the image using arrow keys in NVDA's browse mode.
     YouTube:
       id: CPBzG2Zkl_Y
       title: 情報や機能性を持たない画像【NVDAでアクセシビリティー チェック】
   - type: simple
     tool: macos-vo
-    id: "0471-mac-vo-1"
+    id: "0471-macvo-01"
     procedure:
       ja: |-
-        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
-        Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
+        Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0471-ios-vo-1"
+  id: "0471-iosvo-01"
   procedure:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+      iOS VoiceOver有効時に1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
     en: |-
-      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks with iOS VoiceOver enabled.
   note:
     ja: |-
       参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
@@ -50,12 +50,12 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0471-android-tb-1"
+  id: "0471-androidtb-01"
   procedure:
     ja: |-
-      1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+      Android TalkBack有効時に1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
     en: |-
-      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks with Android TalkBack enabled.
   note:
     ja: |-
       参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

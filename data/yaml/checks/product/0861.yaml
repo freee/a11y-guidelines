@@ -16,20 +16,20 @@ conditions:
   conditions:
   - type: simple
     tool: nvda
-    id: "0861-nvda-1"
+    id: "0861-nvda-01"
     procedure:
       ja: |-
-        ブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content in browse mode using arrow keys.
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
     YouTube:
       id: wegzVOdnLJM
       title: 現在のページ【NVDAでアクセシビリティー チェック】
   - type: simple
     tool: macos-vo
-    id: "0861-macos-vo-1"
+    id: "0861-macvo-01"
     procedure:
       ja: |-
-        :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys.
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.

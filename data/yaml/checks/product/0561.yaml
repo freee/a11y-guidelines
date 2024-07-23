@@ -16,16 +16,16 @@ conditions:
   conditions:
   - type: simple
     tool: axe
-    id: "0561-axe-1"
+    id: "0561-axe-01"
     procedure:
       ja: |-
-        以下のいずれの問題も出ないことを確認する。
+        axe DevToolsで以下のいずれの問題も出ないことを確認する。
 
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
         *  :ref:`axe-rule-page-has-heading-one`
       en: |-
-        Confirm that none of the following issues is reported.
+        Confirm that none of the following issues is reported 混地裁.
 
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
@@ -34,15 +34,15 @@ conditions:
     conditions:
     - type: simple
       tool: nvda
-      id: "0561-nvda-1"
+      id: "0561-nvda-01"
       procedure:
         ja: |-
-          以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          NVDAで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
           1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
           2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
         en: |-
-          Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          With NVDA, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
           1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
           2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
@@ -51,27 +51,27 @@ conditions:
         title: 見出し【NVDAでアクセシビリティー チェック】
     - type: simple
       tool: macos-vo
-      id: "0561-macos-vo-1"
+      id: "0561-macvo-01"
       procedure:
         ja: |-
-          以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          macOS VoiceOverで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
           1. :kbd:`VO + U` を押下してローターのメニューを表示
           2. 「見出し」を選択
         en: |-
-          Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          With macOS VoiceOver, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
           1. Press :kbd:`VO + U` to display the rotor menu
           2. Select "Headings"
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0561-ios-vo-1"
+  id: "0561-iosvo-01"
   procedure:
     ja: |-
-      ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+      iOS VoiceOverのローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
     en: |-
-      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture.
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture of iOS VoiceOver.
   note:
     ja: |-
       参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
@@ -80,12 +80,12 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0561-android-tb-1"
+  id: "0561-androidtb-01"
   procedure:
     ja: |-
-      読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+      Android TalkBackの読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
     en: |-
-      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls.
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls of Android TalkBack.
   note:
     ja: |-
       参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`

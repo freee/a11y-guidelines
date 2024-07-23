@@ -16,24 +16,24 @@ conditions:
   conditions:  
   - type: simple
     tool: axe
-    id: "0441-axe-1"
+    id: "0441-axe-01"
     procedure:
       ja: |-
-        「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
+        axe DevToolsで「 :ref:`axe-rule-image-alt` 」という問題が出ないことを確認する。
 
         ただし、画像に何かしらの代替テキストが入っていれば問題として検知されないため、適切ではない代替テキストの検出をすることはできません。
       en: |-
-        Confirm that the issue :ref:`axe-rule-image-alt` is not reported.
+        Confirm that the issue :ref:`axe-rule-image-alt` is not reported by axe DevTools.
 
         Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
   - type: or
     conditions:
     - type: simple
       tool: nvda
-      id: "0441-nvda-1"
+      id: "0441-nvda-01"
       procedure:
         ja: |-
-          *  以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
+          *  NVDAで以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
 
              -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
              -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
@@ -43,9 +43,8 @@ conditions:
              -  当該画像の直前または直後に詳細な説明があり、ブラウズ・モードでの矢印キーの操作で読み上げさせることができる
              -  ブラウズ・モードで矢印キーを操作して当該画像を読み上げさせたとき、詳細な説明が読み上げられる
 
-          *  いずれの場合も、説明が画像の内容を適切に表していることを確認する。
         en: |-
-          *  Confirm that a brief description of the image is announced when performing the following:
+          *  Using NVDA, confirm that a brief description of the image is announced when performing the following:
 
              -  When reading the part with the image using arrow keys in browse mode
              -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.
@@ -55,16 +54,15 @@ conditions:
              -  Detailed description is placed immediately before or after the image, and it is announced when using arrow keys in browse mode.
              -  Detailed description is announced when reading the image using arrow keys in browse mode.
 
-          *  In either case, confirm that the description properly represents the content of the image.
       YouTube:
         id: Xrl96WVEF9s
         title: 画像の説明【NVDAでアクセシビリティー チェック】
     - type: simple
       tool: macos-vo
-      id: "0441-mac-vo-1"
+      id: "0441-macvo-01"
       procedure:
         ja: |-
-          *  以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
+          *  macOS VoiceOverで以下の操作をしたとき、画像に関する簡潔な読み上げがされることを確認する。
 
              -  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該箇所を読み上げさせたとき
              -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
@@ -74,9 +72,8 @@ conditions:
              -  当該画像の直前または直後に詳細な説明があり、 :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせることができる
              -  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該画像を読み上げさせたとき、詳細な説明が読み上げられる
 
-          *  いずれの場合も、説明が画像の内容を適切に表していることを確認する。
         en: |-
-          *  Confirm that a brief description of the image is announced when performing the following:
+          *  Using macOS VoiceOver, confirm that a brief description of the image is announced when performing the following:
 
              -  When reading the part with the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
              -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.
@@ -86,17 +83,28 @@ conditions:
              -  Detailed description is placed immediately before or after the image, and it is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
              -  Detailed description is announced when reading the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 
-          *  In either case, confirm that the description properly represents the content of the image.
+  - type: simple
+    tool: misc
+    id: "0441-content-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーによって読み上げられる簡潔な説明および詳細な説明が画像の内容を適切に表していることを確認する。
+      en: |-
+        Confirm that brief and detailed descriptions announced by the screen reader properly convey the content of the image.
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0441-ios-vo-1"
+  id: "0441-iosvo-01"
   procedure:
     ja: |-
+      iOS VoiceOverが有効な状態で、以下を確認する：
+
       *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
       *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認するる。
       *  読み上げられる説明が画像の内容を適切に表していることを確認する。
     en: |-
+      Confirm the following with iOS VoiceOver enabled:
+
       *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
       *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
       *  Confirm that the announced description properly represents the content of the image.
@@ -108,13 +116,17 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0441-android-tb-1"
+  id: "0441-androidtb-01"
   procedure:
     ja: |-
+      Android TalkBackが有効な状態で、以下を確認する：
+
       *  1本指による右および左方向のフリックで画像に到達した際、その画像の意味が分かるようなテキストが読み上げられることを確認する。
       *  （フリックではなく）画像に触れたとき、その画像の意味が分かるテキストが読み上げられることを確認する。
       *  読み上げられる説明が画像の内容を適切に表していることを確認する。
     en: |-
+      Confirm the following with Android TalkBack enabled:
+
       *  Cofirm that text describing the meaning of the image is announced when reaching an image by one-finger left/right flicks.
       *  Cofirm that text describing the meaning of the image is announced when an image is touched, instead of reaching it by flicking.
       *  Confirm that the announced description properly represents the content of the image.

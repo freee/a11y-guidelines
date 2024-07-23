@@ -22,7 +22,7 @@ conditions:
 - platform: web
   type: simple
   tool: keyboard
-  id: "0172-keyboard-1"
+  id: "0172-keyboard-01"
   procedure:
     ja: |-
       Tabキー、またはShift+Tabキーでフォーカスを移動して、以下を確認する：
@@ -37,16 +37,16 @@ conditions:
 - platform: ios
   type: simple
   tool: ios-vo
-  id: "0172-ios-vo-1"
+  id: "0172-iosvo-01"
   procedure:
     ja: |-
-      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+      iOS VoiceOver有効時に1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
       *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
       *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
       *  画面上に表示されているもので読み上げられないものがない
     en: |-
-      Confirm the following by moving the focus with one-finger left/right flicks:
+      Confirm the following by moving the focus with one-finger left/right flicks with iOS VoiceOver enabled:
 
       *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
       *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.
@@ -59,16 +59,16 @@ conditions:
 - platform: android
   type: simple
   tool: android-tb
-  id: "0172-android-tb-1"
+  id: "0172-androidtb-01"
   procedure:
     ja: |-
-      1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
+      Android TalkBack有効時に1本指による左フリックおよび右フリックの操作でフォーカスを移動して、以下の点を確認する。
 
       *  選択状態の移動が、画面表示や表示内容の意味合いから考えて不自然な順序になっていない
       *  画面上に表示されているテキスト、表示されている画像の代替テキスト以外のものが読み上げられることがない
       *  画面上に表示されているもので読み上げられないものがない
     en: |-
-      Confirm the following by moving the focus with one-finger left/right flicks:
+      Confirm the following by moving the focus with one-finger left/right flicks with Android TalkBack enabled:
 
       *  Selected state moves in a natural order that is consistent with displayed content and its meaning.
       *  Nothing besides text displayed on the screen and the alternative text of images being displayed is announced.

@@ -27,7 +27,7 @@ conditions:
 - platform: web
   type: simple
   tool: keyboard
-  id: "0201-keyboard-1"
+  id: "0201-keyboard-01"
   procedure:
     ja: |-
       Tabキーを使って、ページの先頭からフォーカスを順に移動し、以下を確認する：

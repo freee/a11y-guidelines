@@ -16,17 +16,17 @@ conditions:
   conditions:
   - type: simple
     tool: axe
-    id: "0951-axe-1"
+    id: "0951-axe-01"
     procedure:
       ja: |-
-        以下のいずれの問題も発生しないことを確認する。
+        axe DevToolsで以下のいずれの問題も発生しないことを確認する。
 
         *  :ref:`axe-rule-label`
         *  :ref:`axe-rule-select-name`
         *  :ref:`axe-rule-form-field-multiple-labels`
         *  :ref:`axe-rule-label-title-only`
       en: |-
-        Confirm that none of the following issues are reported.
+        Confirm that none of the following issues are reported by axe DevTools.
 
         *  :ref:`axe-rule-label`
         *  :ref:`axe-rule-select-name`
@@ -36,15 +36,15 @@ conditions:
     conditions:
     - type: simple
       tool: nvda
-      id: "0951-nvda-1"
+      id: "0951-nvda-01"
       procedure:
         ja: |-
-          フォーカス・モードで :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
+          NVDAのフォーカス・モードで :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。
         en: |-
-          Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys in focus mode.
+          Confirm that the appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys in NVDA's focus mode.
     - type: simple
       tool: macos-vo
-      id: "0951-macos-vo-1"
+      id: "0951-macvo-01"
       procedure:
         ja: |-
           VoiceOver有効時に :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられることを確認する。

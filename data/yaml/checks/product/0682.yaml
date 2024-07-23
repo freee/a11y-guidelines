@@ -15,10 +15,10 @@ conditions:
   conditions:
   - type: simple
     tool: axe
-    id: "0682-axe-1"
+    id: "0682-axe-01"
     procedure:
       ja: |-
-        画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
+        画面上に表示されているコンテンツに対して、axe DevToolsで以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
         -  :ref:`axe-rule-landmark-banner-is-top-level`
         -  :ref:`axe-rule-landmark-complementary-is-top-level`
@@ -31,7 +31,7 @@ conditions:
         -  :ref:`axe-rule-landmark-unique`
         -  :ref:`axe-rule-region`
       en: |-
-        Confirm that none of the following issues is reported against visible content.  (THere usually is no problem if these issues are reported against hidden content.)
+        Confirm that none of the following issues is reported by axe DevTools against visible content.  (THere usually is no problem if these issues are reported against hidden content.)
 
         -  :ref:`axe-rule-landmark-banner-is-top-level`
         -  :ref:`axe-rule-landmark-complementary-is-top-level`
