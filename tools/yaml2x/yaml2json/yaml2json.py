@@ -25,6 +25,7 @@ def main():
     data = {
         'publish': settings['publish'],
         'version': version_info['checksheet_version'],
+        'date': version_info['checksheet_date'],
         'checks': checks
     }
     with open(settings['output_file'], mode="w", encoding="utf-8", newline="\n") as f:
