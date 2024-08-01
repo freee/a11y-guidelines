@@ -13,6 +13,8 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    ================================
 
    *  Updated :ref:`info-axe-rules` to be based on axe-core source as of May 16, 2024
+   *  Updating :ref:`intro-contributing` to reflect the current state
+   *  Updated the Accessibility Check List to V5.0.0
 
 `Ver. 202405.0 (May 14, 2024) <https://github.com/freee/a11y-guidelines/releases/202405.0>`__
 =============================================================================================
