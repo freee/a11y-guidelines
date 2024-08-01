@@ -19,7 +19,7 @@ About the Version Number of the Accessibility Check List
 ********************************************************
 
 For convenience, version numbers are provided for the accessibility check list.
-As of the time of writing this document, the version is noted in cell A10 of the first sheet.
+As of the time of writing this document, the version is noted in cell A24 of the first sheet.
 
 Starting from V3.0.0, version numbers consist of three digits separated by periods (.): major version number, minor version number, and revision number.
 For example, if the version number is 3.0.1, the major version number is 3, the minor version number is 0, and the revision number is 1.
@@ -41,6 +41,15 @@ Accessibility Check List Update History
 
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
+
+V5.0.0 (August 2, 2024)
+=======================
+
+*  Reviewed the checklist items whose applicable stage is "Product"
+
+   -  For some items indicating check procedures, divided the description of check methods into multiple examples
+   -  Added a mechanism to the Accessibility Check List to determine the check results by reflecting the state of the check results for each check method when multiple examples of check methods are provided
+   -  Changed the posting order of checklist items in the Accessibility Check List to match how the checks are performed within freee K.K.
 
 V4.3.7 (February 15, 2024)
 ==========================
