@@ -320,7 +320,7 @@ class Check:
             data['info'] = [inforef.link_data() for inforef in info]
         if len(self.conditions) > 0:
             data['conditions'] = [cond.object_data() for cond in self.conditions]
-            data['condition_statements'] = []
+            data['conditionStatements'] = []
             for condition in self.conditions:
                 statement = {
                     'platform': condition.platform,
@@ -328,7 +328,7 @@ class Check:
                 }
                 for lang in self.check:
                     statement['summary'][lang] = condition.summary(lang)
-                data['condition_statements'].append(statement)
+                data['conditionStatements'].append(statement)
 
         if len(self.implementations) > 0:
             implementations = {}
