@@ -42,7 +42,7 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
-V5.0.0 (August 2, 2024)
+V5.0.0 (August 9, 2024)
 =======================
 
 *  Reviewed the checklist items whose applicable stage is "Product"
