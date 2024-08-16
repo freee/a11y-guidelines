@@ -13,7 +13,7 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
 
    *  :ref:`info-axe-rules` を2024年5月16日時点のaxe-coreのソースに基づいた内容に更新
    *  :ref:`intro-contributing` を現状に合わせて更新
-   *  アクセシビリティー・チェック・リストをV5.0.0に更新
+   *  アクセシビリティー・チェック・リストをV5.0.1に更新
 
 .. include:: ChangeLog/2024/202405.0.rst
 .. include:: ChangeLog/2024/202404.0.rst
