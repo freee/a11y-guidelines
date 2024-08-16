@@ -42,6 +42,12 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V5.0.1 (August 16, 2024)
+========================
+
+*  Added an example of how to perform the check using axe DevTools on :ref:`check-0681`.
+*  Typographical error correction
+
 V5.0.0 (August 9, 2024)
 =======================
 
