@@ -45,7 +45,7 @@ conditions:
         -  :ref:`axe-rule-region`
   - type: simple
     tool: Landmark Navigation via Keyboard or Pop-up
-    id: "0681-misc-1"
+    id: "0682-misc-01"
     procedure:
       ja: |-
         `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属していることを確認する。
