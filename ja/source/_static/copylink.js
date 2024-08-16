@@ -10,7 +10,16 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('section.permalink').forEach(section => {
     const firstHeader = section.querySelector('h1, h2, h3, h4, h5, h6');
     if (firstHeader) {
-      const url = location.origin + location.pathname + '#' + section.id;
+      let id;
+      const firstSpan = section.querySelector('span');
+      if (firstSpan && firstSpan.id && /id\d+/.test(firstSpan.id)) {
+        id = section.id;
+      } else if (firstSpan && firstSpan.id) {
+        id = firstSpan.id;
+      } else {
+        id = section.id;
+      }
+      const url = location.origin + location.pathname + '#' + id;
       appendDropdownMenu(firstHeader, firstHeader.textContent, url);
     }
   });
