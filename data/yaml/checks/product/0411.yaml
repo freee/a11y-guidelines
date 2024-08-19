@@ -22,6 +22,14 @@ conditions:
         axe DevToolsで「 :ref:`axe-rule-button-name` 」という問題が出ないことを確認する。
       en: |-
         Confirm that the issue :ref:`axe-rule-button-name` is not reported by axe DevTools.
+  - type: simple
+    tool: misc
+    id: "0411-content-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーによって読み上げられる内容がアイコンの役割や状態を適切に表していることを確認する。
+      en: |-
+        Confirm that what is announced by the screen reader properly convey the role and the state of the icon.
   - type: or
     conditions:
     - type: simple
