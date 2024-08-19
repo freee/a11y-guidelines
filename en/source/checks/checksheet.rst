@@ -42,6 +42,11 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V5.0.2 (August 19, 2024)
+========================
+
+*  :ref:`check-0411` のチェック方法の例に、読み上げられる内容の適切さの確認を明示
+
 V5.0.1 (August 16, 2024)
 ========================
 
