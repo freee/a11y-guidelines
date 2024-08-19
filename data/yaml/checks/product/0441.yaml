@@ -26,6 +26,14 @@ conditions:
         Confirm that the issue :ref:`axe-rule-image-alt` is not reported by axe DevTools.
 
         Note that this issue is not reported if any alternative text is specified for the image, and it is not possible to detect if the alternative text is inappropriate.
+  - type: simple
+    tool: misc
+    id: "0441-content-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーによって読み上げられる簡潔な説明および詳細な説明が画像の内容を適切に表していることを確認する。
+      en: |-
+        Confirm that brief and detailed descriptions announced by the screen reader properly convey the content of the image.
   - type: or
     conditions:
     - type: simple
@@ -83,14 +91,6 @@ conditions:
              -  Detailed description is placed immediately before or after the image, and it is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
              -  Detailed description is announced when reading the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
 
-  - type: simple
-    tool: misc
-    id: "0441-content-01"
-    procedure:
-      ja: |-
-        スクリーン・リーダーによって読み上げられる簡潔な説明および詳細な説明が画像の内容を適切に表していることを確認する。
-      en: |-
-        Confirm that brief and detailed descriptions announced by the screen reader properly convey the content of the image.
 - platform: ios
   type: simple
   tool: ios-vo
