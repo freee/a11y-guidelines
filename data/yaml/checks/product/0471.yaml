@@ -1,4 +1,5 @@
 id: '0471'
+sortKey: 502400
 severity: normal
 target: product
 platform:
@@ -9,55 +10,54 @@ check:
     情報や機能性を一切持たない画像は、スクリーン・リーダーで読み上げられない。
   en: |-
     Images that do not contain any information or functionality are ignored by the screen reader.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0471-nvda-01"
+    procedure:
       ja: |-
-        ブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
-        Confirm that the presence of the image is not announced when passing over the image using arrow keys in browse mode.
+        Confirm that the presence of the image is not announced when passing over the image using arrow keys in NVDA's browse mode.
     YouTube:
       id: CPBzG2Zkl_Y
       title: 情報や機能性を持たない画像【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0471-macvo-01"
+    procedure:
       ja: |-
-        :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像がある箇所を通過したとき、画像の存在が分かるような読み上げがされないことを確認する。
       en: |-
-        Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-- platform: mobile
+        Confirm that the presence of the image is not announced when passing over the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0471-iosvo-01"
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
+      iOS VoiceOver有効時に1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
     en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
-      en: |-
-        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
-  - tool: android-tb
-    technique:
-      ja: |-
-        1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
-      en: |-
-        Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks with iOS VoiceOver enabled.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-horizontal-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0471-androidtb-01"
+  procedure:
+    ja: |-
+      Android TalkBack有効時に1本指による右および左方向のフリックでフォーカスを移動した際、当該の画像が無視されて読み上げられないことを確認する。
+    en: |-
+      Confirm that the image is ignored and nothing is announced when moving the focus by one-finger left/right flicks with Android TalkBack enabled.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-horizontal-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-horizontal-flick`

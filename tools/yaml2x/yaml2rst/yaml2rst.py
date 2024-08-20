@@ -1,14 +1,18 @@
+import sys
 import os
-import app_initializer
-from a11y_guidelines import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
-import a11y_guidelines_initializer
+
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+import initializer as app_initializer
+from a11y_guidelines import setup_instances, Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 
 def main():
     settings = app_initializer.setup_parameters()
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = app_initializer.setup_constants(settings)
     templates = app_initializer.setup_templates()
     makefile_vars, makefile_vars_list = app_initializer.setup_variables()
-    a11y_guidelines_initializer.setup_instances(settings)
+    setup_instances(settings['basedir'])
 
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
@@ -39,20 +43,20 @@ def get_category_pages(lang):
     for category, guidelines in rel.get_guidelines_to_category().items():
         yield {
             'filename': category,
-            'guidelines': [gl.template_object(lang) for gl in guidelines]
+            'guidelines': [gl.template_data(lang) for gl in guidelines]
         }
 
 def get_allchecks(lang):
-    allchecks = Check.template_object_all(lang)
+    allchecks = Check.template_data_all(lang)
     return [{'allchecks': allchecks}]
 
 def get_example_pages(lang):
     for tool in CheckTool.list_all():
-        yield {**tool.example_template_object(lang), **{'filename': f'examples-{tool.id}'}}
+        yield {**{'examples': tool.example_template_data(lang)}, **{'filename': f'examples-{tool.id}'}}
 
 def get_faq_articles(lang):
     for faq in Faq.list_all():
-        yield {'filename': faq.id, **faq.template_object(lang)}
+        yield {'filename': faq.id, **faq.template_data(lang)}
 
 def get_faq_tagpages(lang):
     rel = RelationshipManager()
@@ -68,17 +72,17 @@ def get_faq_tagpages(lang):
 
 def get_faq_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
-    tags = [tag.template_object(lang) for tag in sorted_tags if tag.article_count() > 0]
-    articles = [article.template_object(lang) for article in Faq.list_all(sort_by='date')]
+    tags = [tag.template_data(lang) for tag in sorted_tags if tag.article_count() > 0]
+    articles = [article.template_data(lang) for article in Faq.list_all(sort_by='date')]
     return [{'articles': articles, 'tags': tags}]
 
 def get_faq_tag_index(lang):
     sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[lang])
-    tagpages = [tagpage.template_object(lang) for tagpage in sorted_tags if tagpage.article_count() > 0]
+    tagpages = [tagpage.template_data(lang) for tagpage in sorted_tags if tagpage.article_count() > 0]
     return [{'tags': tagpages}]
 
 def get_faq_article_index(lang):
-    articles = [article.template_object(lang) for article in Faq.list_all(sort_by='sortKey')]
+    articles = [article.template_data(lang) for article in Faq.list_all(sort_by='sortKey')]
     return [{'articles': articles}]
 
 def get_info_to_guidelines(lang):
@@ -102,7 +106,7 @@ def get_wcag21mapping(lang):
     rel = RelationshipManager()
     mappings = []
     for sc in WcagSc.get_all().values():
-        sc_object = sc.template_object()
+        sc_object = sc.template_data()
         guidelines = rel.get_sc_to_guidelines(sc)
         if len(guidelines) > 0:
             sc_object['guidelines'] = [guideline.get_category_and_id(lang) for guideline in guidelines]
@@ -110,7 +114,7 @@ def get_wcag21mapping(lang):
     return [{'mapping': mappings}]
 
 def get_priority_diff(lang):
-    diffs = [sc.template_object() for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
+    diffs = [sc.template_data() for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
     return [{'diffs': diffs}]
 
 def get_miscdefs(lang):
@@ -183,7 +187,7 @@ def get_axe_rules(lang):
         'major_version': AxeRule.major_version,
         'deque_url': AxeRule.deque_url,
         'timestamp': AxeRule.timestamp,
-        'rules': [rule.template_object(lang) for rule in AxeRule.list_all()]
+        'rules': [rule.template_data(lang) for rule in AxeRule.list_all()]
     }]
 
 def generate_file(dest_path, template, data):

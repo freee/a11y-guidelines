@@ -1,7 +1,8 @@
 import os
 import argparse
 import config
-from path import get_dest_dirnames, get_static_dest_files, get_src_path, TEMPLATE_DIR, TEMPLATE_FILENAMES
+from path import get_dest_dirnames, get_static_dest_files,  TEMPLATE_DIR, TEMPLATE_FILENAMES
+from a11y_guidelines import get_src_path
 from template_manager import TemplateManager
 
 def setup_parameters():
@@ -54,7 +55,6 @@ def setup_templates():
 def parse_args():
     languages = config.AVAILABLE_LANGUAGES
     parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
-    parser.add_argument('--no-check', action='store_true', help='Do not run various checks of YAML files')
     parser.add_argument('--lang', '-l', type=str, choices=languages, default='ja', help=f'the language of the output file ({" ".join(languages)})')
     parser.add_argument('--basedir', '-b', type=str, default='..', help='Base directory where the data directory is located.')
     parser.add_argument('files', nargs='*', help='Filenames')
@@ -77,7 +77,6 @@ def process_arguments(args):
     return {
         'build_all': not args.files,
         'targets': files,
-        'no_check': args.no_check,
         'lang': args.lang,
         'basedir': basedir
     }

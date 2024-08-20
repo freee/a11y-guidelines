@@ -1,4 +1,5 @@
 id: '0561'
+sortKey: 500400
 severity: normal
 target: product
 platform:
@@ -9,81 +10,84 @@ check:
     見出しは、設計資料で示されている見出しレベルの見出しとしてスクリーン・リーダーに認識されている。
   en: |-
     Headings are recognized by the screen reader as headings of the heading levels indicated in the design documents.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェックを満たしていて、かつNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that the following check by axe DevTools passes, and also either the checks by NVDA or the checks by macOS VoiceOver passes.
-  techniques:
-  - tool: axe
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0561-axe-01"
+    procedure:
       ja: |-
-        以下のいずれの問題も出ないことを確認する。
+        axe DevToolsで以下のいずれの問題も出ないことを確認する。
 
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
         *  :ref:`axe-rule-page-has-heading-one`
       en: |-
-        Confirm that none of the following issues is reported.
+        Confirm that none of the following issues is reported 混地裁.
 
         *  :ref:`axe-rule-empty-heading`
         *  :ref:`axe-rule-heading-order`
         *  :ref:`axe-rule-page-has-heading-one`
-  - tool: nvda
-    technique:
-      ja: |-
-        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0561-nvda-01"
+      procedure:
+        ja: |-
+          NVDAで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
-        1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
-        2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
-      en: |-
-        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
+          2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+        en: |-
+          With NVDA, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
-        1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
-        2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
-    YouTube:
-      id: Gi2M1A0PB_0
-      title: 見出し【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
-      ja: |-
-        以下の手順で見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
+          2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
+      YouTube:
+        id: Gi2M1A0PB_0
+        title: 見出し【NVDAでアクセシビリティー チェック】
+    - type: simple
+      tool: macos-vo
+      id: "0561-macvo-01"
+      procedure:
+        ja: |-
+          macOS VoiceOverで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
 
-        1. :kbd:`VO + U` を押下してローターのメニューを表示
-        2. 「見出し」を選択
-      en: |-
-        Display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          1. :kbd:`VO + U` を押下してローターのメニューを表示
+          2. 「見出し」を選択
+        en: |-
+          With macOS VoiceOver, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
 
-        1. Press :kbd:`VO + U` to display the rotor menu
-        2. Select "Headings"
-- platform: mobile
+          1. Press :kbd:`VO + U` to display the rotor menu
+          2. Select "Headings"
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "0561-iosvo-01"
   procedure:
     ja: |-
-      以下のiOS VoiceOverおよびAndroid TalkBackによるチェックを満たしていることを確認する。
+      iOS VoiceOverのローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
     en: |-
-      Confirm that the following checks by iOS VoiceOver and Android TalkBack pass.
-  techniques:
-  - tool: ios-vo
-    technique:
-      ja: |-
-        ローター・ジェスチャーで「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
-      en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
-      en: |-
-        CF: :ref:`exp-sr-iosvo-one-finger-vertical-flick`
-  - tool: android-tb
-    technique:
-      ja: |-
-        読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
-      en: |-
-        Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls.
-    note:
-      ja: |-
-        参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`
-      en: |-
-        CF: :ref:`exp-sr-androidtb-one-finger-vertical-flick`
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" by the rotor gesture of iOS VoiceOver.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-iosvo-one-finger-vertical-flick`
+    en: |-
+      CF: :ref:`exp-sr-iosvo-one-finger-vertical-flick`
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "0561-androidtb-01"
+  procedure:
+    ja: |-
+      Android TalkBackの読み上げコントロールの設定で「見出し」を選んだ上で、1本指の下および上方向のフリックですべての見出しに到達できることを確認する。
+    en: |-
+      Confirm that all the headings can be reached by one-finger up/down flicks after choosing "headings" for reading controls of Android TalkBack.
+  note:
+    ja: |-
+      参考： :ref:`exp-sr-androidtb-one-finger-vertical-flick`
+    en: |-
+      CF: :ref:`exp-sr-androidtb-one-finger-vertical-flick`

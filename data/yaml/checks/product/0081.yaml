@@ -1,4 +1,5 @@
 id: '0081'
+sortKey: 501600
 severity: normal
 target: product
 platform:
@@ -12,8 +13,11 @@ check:
     In objects that accept mouse clicks, such as links and buttons, it is possible to cancel the operation even after pressing the mouse button.
 
     Note： Objects for drag and drop are not subject to this check.
-procedures:
+conditions:
 - platform: web
+  type: simple
+  id: "0081-mouse-01"
+  tool: mouse
   procedure:
     ja: |-
       マウスで以下の操作をして、何も実行されないことを確認する：
@@ -23,7 +27,7 @@ procedures:
       3. マウス・ボタンを押下したままの状態でオブジェクト外にマウス・ポインターを移動
       4. マウス・ボタンを放す
     en: |-
-      Confirm that no functionality is executed upon performing the following:
+      Confirm that no functionality is executed upon performing the following with the mouse:
 
       1. Move the mouse pointer onto the object
       2. Press the mouse button

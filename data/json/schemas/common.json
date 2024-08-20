@@ -2,7 +2,7 @@
   "$id": "https://a11y-guidelines.freee.co.jp/schemas/common.json",
   "type": "object",
 
-  "definitions": {
+  "$defs": {
     "i18nString": {
       "type": "object",
       "properties": {

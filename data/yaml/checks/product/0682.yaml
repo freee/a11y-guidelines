@@ -1,4 +1,5 @@
 id: '0682'
+sortKey: 500600
 severity: normal
 target: product
 platform:
@@ -8,18 +9,16 @@ check:
     ページ上のすべてのコンテンツが、ARIAランドマークによって示される適切な領域に配置されている。
   en: |-
     All content on the page is placed in the appropriate area indicated by ARIA landmarks.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のaxe DevToolsによるチェックとLandmark Navigation via Keyboard or Pop-upによるチェックの両方を満たしていることを確認する。
-    en: |-
-      Confirm that both of the following checks pass: check by the Axe DevTools and check by the Landmark Navigation via Keyboard or Pop-up
-  techniques:
-  - tool: axe
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0682-axe-01"
+    procedure:
       ja: |-
-        画面上に表示されているコンテンツに対して、以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
+        画面上に表示されているコンテンツに対して、axe DevToolsで以下のいずれの問題も発生しないことを確認する。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
         -  :ref:`axe-rule-landmark-banner-is-top-level`
         -  :ref:`axe-rule-landmark-complementary-is-top-level`
@@ -32,7 +31,7 @@ procedures:
         -  :ref:`axe-rule-landmark-unique`
         -  :ref:`axe-rule-region`
       en: |-
-        Confirm that none of the following issues is reported against visible content.  (THere usually is no problem if these issues are reported against hidden content.)
+        Confirm that none of the following issues is reported by axe DevTools against visible content.  (THere usually is no problem if these issues are reported against hidden content.)
 
         -  :ref:`axe-rule-landmark-banner-is-top-level`
         -  :ref:`axe-rule-landmark-complementary-is-top-level`
@@ -44,8 +43,10 @@ procedures:
         -  :ref:`axe-rule-landmark-one-main`
         -  :ref:`axe-rule-landmark-unique`
         -  :ref:`axe-rule-region`
-  - tool: Landmark Navigation via Keyboard or Pop-up
-    technique:
+  - type: simple
+    tool: Landmark Navigation via Keyboard or Pop-up
+    id: "0682-misc-01"
+    procedure:
       ja: |-
         `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属していることを確認する。
       en: |-

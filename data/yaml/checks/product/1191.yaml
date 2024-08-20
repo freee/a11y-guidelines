@@ -1,4 +1,5 @@
 id: '1191'
+sortKey: 502800
 severity: major
 target: product
 platform:
@@ -9,31 +10,39 @@ check:
     操作の結果などを伝えるステータス・メッセージは、スクリーン・リーダーで自動的に読み上げられる。
   en: |-
     Status messages, such as the result of an operation, are automatically announced by the screen reader.
-procedures:
+conditions:
 - platform: web
+  type: simple
+  tool: nvda
+  id: "1191-nvda-01"
   procedure:
     ja: |-
-      以下のNVDAによるチェックを満たしていることを確認する。
+      NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
     en: |-
-      Confirm the following check by NVDA passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
-      en: |-
-        Perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
-    note:
-      ja: |-
-        参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
-      en: |-
-        Note: Refer to the implementation example shown in :ref:`exp-dynamic-content-status` for the expected behavior in the implementation using ``aria-live``.
-    YouTube:
-      id: 5YO_NxGuks8
-      title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
-- platform: mobile
+      With NVDA running, perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
+  note:
+    ja: |-
+      参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+    en: |-
+      Note: Refer to the implementation example shown in :ref:`exp-dynamic-content-status` for the expected behavior in the implementation using ``aria-live``.
+  YouTube:
+    id: 5YO_NxGuks8
+    title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
+- platform: ios
+  type: simple
+  tool: ios-vo
+  id: "1191-iosvo-01"
   procedure:
     ja: |-
-      iOS VoiceOver、Android TalkBackが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+      iOS VoiceOverが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
     en: |-
-      Perform the operation to display status messages according to the design documents while iOS VoiceOver and Android TalkBack are running, and confirm that the displayed status messages are automatically announced.
+      Perform the operation to display status messages according to the design documents while iOS VoiceOver is running, and confirm that the displayed status messages are automatically announced.
+- platform: android
+  type: simple
+  tool: android-tb
+  id: "1191-androidtb-01"
+  procedure:
+    ja: |-
+      Android TalkBackが起動している状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+    en: |-
+      Perform the operation to display status messages according to the design documents while Android TalkBack is running, and confirm that the displayed status messages are automatically announced.

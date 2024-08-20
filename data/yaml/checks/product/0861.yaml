@@ -1,4 +1,5 @@
 id: '0861'
+sortKey: 603800
 severity: normal
 target: product
 platform:
@@ -9,26 +10,26 @@ check:
     スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
   en: |-
     The screen reader announces the location of current page within the global navigation and breadcrumb list.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: or
+  conditions:
+  - type: simple
+    tool: nvda
+    id: "0861-nvda-01"
+    procedure:
       ja: |-
-        ブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content in browse mode using arrow keys.
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
     YouTube:
       id: wegzVOdnLJM
       title: 現在のページ【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
+  - type: simple
+    tool: macos-vo
+    id: "0861-macvo-01"
+    procedure:
       ja: |-
-        :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys.
+        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.

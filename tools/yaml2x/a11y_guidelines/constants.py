@@ -25,8 +25,8 @@ CHECK_TOOLS = {
         'en': 'Keyboard'
     },
     'misc': {
-        'ja': 'その他のツール',
-        'en': 'Miscellaneous Tools'
+        'ja': 'その他の手段',
+        'en': 'Miscellaneous Methods'
     }
 }
 
@@ -59,6 +59,14 @@ PLATFORM_NAMES = {
     'general': {
         'ja': 'Web、モバイル',
         'en': 'Web, Mobile'
+    },
+    'ios': {
+        'ja': 'iOS',
+        'en': 'iOS'
+    },
+    'android': {
+        'ja': 'Android',
+        'en': 'Android'
     }
 }
 

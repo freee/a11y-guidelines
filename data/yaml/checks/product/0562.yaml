@@ -1,4 +1,5 @@
 id: '0562'
+sortKey: 502500
 severity: major
 target: product
 platform:
@@ -9,77 +10,71 @@ check:
     スクリーン・リーダーが、表を適切に認識していて、表中のセルも適切に認識している。
   en: |-
     The screen reader properly recognizes tables and their cells.
-procedures:
+conditions:
 - platform: web
+  type: simple
+  tool: nvda
+  id: "0562-nvda-01"
   procedure:
     ja: |-
-      以下のNVDAによるチェックを満たしていることを確認する。
+      以下のすべてを満たしていることをNVDAで確認する。
+
+      *  以下の手順で表を発見できる：
+
+         1. ブラウズ・モードでページの先頭に移動（ :kbd:`Ctrl+Home` ）
+         2. 前後の表への移動（ :kbd:`T` または :kbd:`Shift+T` キー）で、表に移動
+
+      *  以下の手順で、表中のセル間を移動して、セルの内容が適切に読み上げられる：
+
+         1. ブラウズ・モードで表の先頭部分を探す
+         2. 以下のキー操作でセル間を移動：
+
+            *  :kbd:`Ctrl+Alt+←` ： 左のセル
+            *  :kbd:`Ctrl+Alt+→` ： 右のセル
+            *  :kbd:`Ctrl+Alt+↓` ： 下のセル
+            *  :kbd:`Ctrl+Alt+↑` ： 上のセル
     en: |-
-      Confirm the following check by NVDA passes.
-  techniques:
-  - tool: nvda
-    technique:
-      ja: |-
-        以下のすべてを満たしていることを確認する。
+      Confirm that all of the following are met using NVDA.
 
-        *  以下の手順で表を発見できる：
+      *  The table can be found by the following steps:
 
-           1. ブラウズ・モードでページの先頭に移動（ :kbd:`Ctrl+Home` ）
-           2. 前後の表への移動（ :kbd:`T` または :kbd:`Shift+T` キー）で、表に移動
+         1. Move to the beginning of the page in browse mode ():kbd:`Ctrl+Home`)
+         2. Move to the table using the go to next/previous table functions (:kbd:`T` or :kbd:`Shift+T`)
 
-        *  以下の手順で、表中のセル間を移動して、セルの内容が適切に読み上げられる：
+      *  Content of the table cells are announced properly when moving among the cells using the following steps:
 
-           1. ブラウズ・モードで表の先頭部分を探す
-           2. 以下のキー操作でセル間を移動：
+         1. Find the beginning of the table in browse mode
+         2. Move among the cells using following keys:
 
-              *  :kbd:`Ctrl+Alt+←` ： 左のセル
-              *  :kbd:`Ctrl+Alt+→` ： 右のセル
-              *  :kbd:`Ctrl+Alt+↓` ： 下のセル
-              *  :kbd:`Ctrl+Alt+↑` ： 上のセル
+            *  :kbd:`Ctrl+Alt+←`: to the left cell
+            *  :kbd:`Ctrl+Alt+→`: to the right cell
+            *  :kbd:`Ctrl+Alt+↓`: to the cell below
+            *  :kbd:`Ctrl+Alt+↑`: to the cell above
+  note:
+    ja: |-
+      セル移動時に読み上げられる内容：
 
-      en: |-
-        Confirm that all of the following are met.
+      上記のセル間移動の操作を行った場合、以下の内容が読み上げられます。
 
-        *  The table can be found by the following steps:
+      *  左右の移動：移動先のセルの列見出し、列の番号、セルの内容
+      *  上下の移動： 移動先のセルの行見出し、行の番号、セルの内容
 
-           1. Move to the beginning of the page in browse mode ():kbd:`Ctrl+Home`)
-           2. Move to the table using the go to next/previous table functions (:kbd:`T` or :kbd:`Shift+T`)
+      ブラウズ・モードで単に矢印キーを操作した場合は、以下のような内容が読み上げられます。
 
-        *  Content of the table cells are announced properly when moving among the cells using the following steps:
+      *  上下矢印： 前後のセルへ移動して読み上げ。ただしセル内で改行がある場合などは、セルの1部分だけが読み上げられることもある。
+      *  左右矢印： 1文字ずつ移動して読み上げ。空のセルでは、1つだけスペースがあるような挙動になる。
+    en: |-
+      What to be announced when moving among table cells：
 
-           1. Find the beginning of the table in browse mode
-           2. Move among the cells using following keys:
+      The following content is announced when moving among cells using the functions listed above.
 
-              *  :kbd:`Ctrl+Alt+←`: to the left cell
-              *  :kbd:`Ctrl+Alt+→`: to the right cell
-              *  :kbd:`Ctrl+Alt+↓`: to the cell below
-              *  :kbd:`Ctrl+Alt+↑`: to the cell above
+      *  move to left/right: the column header, column number, and the content of the destination cell
+      *  move up/down: the row header, row number, and the content of the destination cell
 
-    note:
-      ja: |-
-        セル移動時に読み上げられる内容：
+      The following is announced if arrow keys are simply used in browse mode:
 
-        上記のセル間移動の操作を行った場合、以下の内容が読み上げられます。
-
-        *  左右の移動：移動先のセルの列見出し、列の番号、セルの内容
-        *  上下の移動： 移動先のセルの行見出し、行の番号、セルの内容
-
-        ブラウズ・モードで単に矢印キーを操作した場合は、以下のような内容が読み上げられます。
-
-        *  上下矢印： 前後のセルへ移動して読み上げ。ただしセル内で改行がある場合などは、セルの1部分だけが読み上げられることもある。
-        *  左右矢印： 1文字ずつ移動して読み上げ。空のセルでは、1つだけスペースがあるような挙動になる。
-      en: |-
-        What to be announced when moving among table cells：
-
-        The following content is announced when moving among cells using the functions listed above.
-
-        *  move to left/right: the column header, column number, and the content of the destination cell
-        *  move up/down: the row header, row number, and the content of the destination cell
-
-        The following is announced if arrow keys are simply used in browse mode:
-
-        *  up/down arrows: move to the previous/next cell and announce the cell content; only a part of the cell might be read if there are line-breaks within the cell.
-        *  left/right arrows: move and announce character by character; the behavior on empty cells is as if there is only one space character
-    YouTube:
-      id: lnW6TRgkBg0
-      title: 表【NVDAでアクセシビリティー チェック】
+      *  up/down arrows: move to the previous/next cell and announce the cell content; only a part of the cell might be read if there are line-breaks within the cell.
+      *  left/right arrows: move and announce character by character; the behavior on empty cells is as if there is only one space character
+  YouTube:
+    id: lnW6TRgkBg0
+    title: 表【NVDAでアクセシビリティー チェック】

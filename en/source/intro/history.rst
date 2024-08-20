@@ -7,6 +7,18 @@ Update History
 Here, we list updates related to the English translation since the introduction of Ver. 202403.0, when we began providing translations of all guidelines.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </intro/history.html>`__.
 
+.. only:: current
+
+   Changes After the Latest release
+   ================================
+
+`Ver. 202408.0 (Aug 20, 2024) <https://github.com/freee/a11y-guidelines/releases/202408.0>`__
+=============================================================================================
+
+*  Updated :ref:`info-axe-rules` to be based on axe-core source as of May 16, 2024
+*  Updated :ref:`intro-contributing` to reflect the current state
+*  Updated the Accessibility Check List to V5.0.2
+
 `Ver. 202405.0 (May 14, 2024) <https://github.com/freee/a11y-guidelines/releases/202405.0>`__
 =============================================================================================
 

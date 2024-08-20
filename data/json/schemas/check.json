@@ -10,9 +10,13 @@
       "type": "string",
       "pattern": "^[0-9]{4}"
     },
+    "sortKey": {
+      "description": "a sort key for the check",
+      "type": "integer"
+    },
     "check": {
       "description": "main text of the check",
-      "$ref": "common.json#/definitions/i18nString"
+      "$ref": "common.json#/$defs/i18nString"
     },
     "severity": {
       "description": "severity of the issue if the check fails",
@@ -42,8 +46,8 @@
         ]
       }
     },
-    "procedures": {
-      "description": "suggested procedures for performing the check",
+    "conditions": {
+      "description": "conditions for performing the check",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -51,53 +55,87 @@
         "properties": {
           "platform": {
             "type": "string",
-            "enum": ["web", "mobile", "general"]
+            "enum": ["web", "mobile", "ios", "android", "general"]
+          },
+          "type": {
+            "type": "string",
+            "enum": ["simple", "and", "or"]
+          },
+          "id": {
+            "description": "a unique identifier for the technique, prefixed by the check ID (only for simple type)",
+            "type": "string",
+            "pattern": "^[0-9]{4}-.+"
+          },
+          "tool": {
+            "type": "string",
+            "description": "name of the tool (only for simple type)"
           },
           "procedure": {
-            "$ref": "common.json#/definitions/i18nString"
+            "$ref": "common.json#/$defs/i18nString",
+            "description": "procedure text (only for simple type)"
           },
-          "techniques": {
-            "description": "one or more specific techniques for performing the check",
+          "note": {
+            "description": "additional info about the technique, which will be omitted from the checklist (the spreadsheet, only for simple type)",
+            "$ref": "common.json#/$defs/i18nString"
+          },
+          "YouTube": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "YouTube video ID (only for simple type)",
+                "type": "string"
+              },
+              "title": {
+                "description": "title of the video (only for simple type)",
+                "type": "string"
+              }
+            },
+            "required": ["id", "title"],
+            "additionalProperties": false
+          },
+          "conditions": {
             "type": "array",
             "minItems": 1,
             "items": {
-              "type": "object",
-              "properties": {
-                "tool": {
-                  "description": "name of a tool to be used for performing the check",
-                  "type": "string"
-                },
-                "technique": {
-                  "description": "specific procedure for performing the check with the tool",
-                  "$ref": "common.json#/definitions/i18nString"
-                },
-                "note": {
-                  "description": "additional info about the technique, which will be omitted from the checklist (the spreadsheet)",
-                  "$ref": "common.json#/definitions/i18nString"
-                },
-                "YouTube": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "description": "YouTube video ID",
-                      "type": "string"
-                    },
-                    "title": {
-                      "description": "title of the video",
-                      "type": "string"
-                    }
-                  },
-                  "required": ["id", "title"],
-                  "additionalProperties": false
-                }
-              },
-              "additionalProperties": false,
-              "required": ["tool", "technique"]
-            }
+              "$ref": "#/$defs/conditionBase"
+            },
+            "description": "nested conditions (only for and/or types)"
           }
         },
-        "required": ["platform", "procedure"],
-        "additionalProperties": false
+        "required": ["platform", "type"],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": { "const": "simple" }
+              }
+            },
+            "then": {
+              "required": ["id", "tool", "procedure"],
+              "properties": {
+                "conditions": { "not": {} }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": { "enum": ["and", "or"] }
+              }
+            },
+            "then": {
+              "required": ["conditions"],
+              "properties": {
+                "id": { "not": {} },
+                "tool": { "not": {} },
+                "procedure": { "not": {} },
+                "note": { "not": {} },
+                "YouTube": { "not": {} }
+              }
+            }
+          }
+        ]
       }
     },
     "implementations": {
@@ -109,7 +147,7 @@
         "properties": {
           "title": {
             "description": "purpose of the implementation",
-            "$ref": "common.json#/definitions/i18nString"
+            "$ref": "common.json#/$defs/i18nString"
           },
           "methods": {
             "description": "one or more methods of the implementation, set of target platform and the specific implementation method",
@@ -124,7 +162,7 @@
                 },
                 "method": {
                   "description": "an example of how to implement",
-                  "$ref": "common.json#/definitions/i18nString"
+                  "$ref": "common.json#/$defs/i18nString"
                 }
               },
               "additionalProperties": false,
@@ -137,23 +175,107 @@
       }
     }
   },
+  "$defs": {
+    "conditionBase": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["simple", "and", "or"]
+        },
+        "id": {
+          "description": "a unique identifier for the technique, prefixed by the check ID (only for simple type)",
+          "type": "string",
+          "pattern": "^[0-9]{4}-.+"
+        },
+        "tool": {
+          "type": "string",
+          "description": "name of the tool (only for simple type)"
+        },
+        "procedure": {
+          "$ref": "common.json#/$defs/i18nString",
+          "description": "procedure text (only for simple type)"
+        },
+        "note": {
+          "description": "additional info about the technique, which will be omitted from the checklist (the spreadsheet, only for simple type)",
+          "$ref": "common.json#/$defs/i18nString"
+        },
+        "YouTube": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "YouTube video ID (only for simple type)",
+              "type": "string"
+            },
+            "title": {
+              "description": "title of the video (only for simple type)",
+              "type": "string"
+            }
+          },
+          "required": ["id", "title"],
+          "additionalProperties": false
+        },
+        "conditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/conditionBase"
+          },
+          "description": "nested conditions (only for and/or types)"
+        }
+      },
+      "required": ["type"],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": { "const": "simple" }
+            }
+          },
+          "then": {
+            "required": ["id", "tool", "procedure"],
+            "properties": {
+              "conditions": { "not": {} }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": { "enum": ["and", "or"] }
+            }
+          },
+          "then": {
+            "required": ["conditions"],
+            "properties": {
+              "id": { "not": {} },
+              "tool": { "not": {} },
+              "procedure": { "not": {} },
+              "note": { "not": {} },
+              "YouTube": { "not": {} }
+            }
+          }
+        }
+      ]
+    }
+  },
   "allOf": [
     {
       "if": {
         "properties": {
-          "target": {"const": "product"}
+          "target": { "const": "product" }
         }
       },
       "else": {
         "not": {
-          "required": ["procedures"]
+          "required": ["conditions"]
         }
       }
     },
     {
       "if": {
         "properties": {
-          "target": {"const": "code"}
+          "target": { "const": "code" }
         }
       },
       "else": {

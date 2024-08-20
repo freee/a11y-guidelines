@@ -1,4 +1,5 @@
 id: '0681'
+sortKey: 500500
 severity: normal
 target: product
 platform:
@@ -8,46 +9,66 @@ check:
     スクリーン・リーダーの見出しジャンプ機能やARIAランドマークで示される領域間ジャンプ機能で本文の開始位置を見つけることができる。
   en: |-
     The start of the main text can be found by using the heading jump function of the screen reader or the jump function between areas indicated by ARIA landmarks.
-procedures:
+conditions:
 - platform: web
-  procedure:
-    ja: |-
-      以下のNVDAによるチェックまたはmacOS VoiceOverによるチェックのいずれかを満たしていることを確認する。
-    en: |-
-      Confirm that either the check by NVDA or the check by macOS VoiceOver below passes.
-  techniques:
-  - tool: nvda
-    technique:
+  type: and
+  conditions:
+  - type: simple
+    tool: axe
+    id: "0681-axe-01"
+    procedure:
       ja: |-
-        以下のいずれかの方法で、本文またはその画面の中心的な機能の開始位置を容易に見つけられることを確認する。
+        axe DevToolsで以下のいずれの問題も出ないことを確認する。
 
-        *  ブラウズ・モードで、次/前の見出しへの移動（ :kbd:`H` / :kbd:`Shift + H` キー）を用いて、本文直前の見出しに移動できる
-        *  ブラウズ・モードで、次のランドマークへの移動（ :kbd:`D` キー）でmain要素の先頭部分に移動でき、その直後から本文が始まっている
+        *  :ref:`axe-rule-landmark-no-duplicate-main`
+        *  :ref:`axe-rule-landmark-one-main`
       en: |-
-        Confirm that the beginning of the main body, or the main function of the page can be easily found using any of the following method.
+        Confirm that none of the following issues are reported by axe DevTools.
 
-        *  Users can move to the position immediately before the main body using the jump to next/previous heading function ( :kbd:`H` / :kbd:`Shift + H` key) in browse mode.
-        *  Users can move to the beginning of the main landmark using the jump to next landmark function ( :kbd:`D`` key) in browse mode, and the main body begins immediately after that position.
-    YouTube:
-      id: WP_2VExrCPU
-      title: 本文の開始位置【NVDAでアクセシビリティー チェック】
-  - tool: macos-vo
-    technique:
-      ja: |-
-        以下のいずれかの方法で、本文またはその画面の中心的な機能の開始位置を容易に見つけられることを確認する。
+        *  :ref:`axe-rule-landmark-no-duplicate-main`
+        *  :ref:`axe-rule-landmark-one-main`
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0681-nvda-01"
+      procedure:
+        ja: |-
+          NVDAのブラウズ・モードで、次/前の見出しへの移動（ :kbd:`H` / :kbd:`Shift + H` キー）を用いて、本文直前の見出しに移動できることを確認する。
+        en: |-
+          Confirm that users can move to the position immediately before the main body using the jump to next/previous heading function ( :kbd:`H` / :kbd:`Shift + H` key) in NVDA's browse mode.
+      YouTube:
+        id: WP_2VExrCPU
+        title: 本文の開始位置【NVDAでアクセシビリティー チェック】
+    - type: simple
+      tool: nvda
+      id: "0681-nvda-02"
+      procedure:
+        ja: |-
+          NVDAのブラウズ・モードで、次のランドマークへの移動（ :kbd:`D` キー）でmain要素の先頭部分に移動でき、その直後から本文が始まっていることを確認巣る。
+        en: |-
+          Confirm that users can move to the beginning of the main landmark using the jump to next landmark function ( :kbd:`D`` key) in NVDA's browse mode, and the main body begins immediately after that position.
+    - type: simple
+      tool: macos-vo
+      id: "0681-macosvo-01"
+      procedure:
+        ja: |-
+          macOS VoiceOverの次/前の見出しへの移動（ :kbd:`VO + Command + H` / :kbd:`VO + Command + Shift + H` キー）を用いて、本文直前の見出しに移動できることを確認する。
+        en: |-
+          Confirm that users can move to the position immediately before the main body using the jump to next/previous heading function of macOS VoiceOver ( :kbd:`VO + Command + H` / :kbd:`VO + Command + Shift + H` key).
+    - type: simple
+      tool: macos-vo
+      id: "0681-macosvo-02"
+      procedure:
+        ja: |-
+          macOS VoiceOverで以下の以下の操作を行ってmain要素の先頭部分に移動でき、その直後から本文が始まっていることを確認する。
 
-        *  次/前の見出しへの移動（ :kbd:`VO + Command + H` / :kbd:`VO + Command + Shift + H` キー）を用いて、本文直前の見出しに移動できる
-        *  以下の手順でmain要素の先頭部分に移動でき、その直後から本文が始まっている
+          1. :kbd:`VO + U` キーを押下してローターのメニューを表示
+          2. 「ランドマーク」を選択
+          3. 「本文」を選んで :kbd:`Enter` キーを押下
+        en: |-
+          Confirm that users can move to the beginning of the main landmark by the following steps with macOS VoiceOver enabled, and the main body begins immediately after that position.
 
-           1. :kbd:`VO + U` キーを押下してローターのメニューを表示
-           2. 「ランドマーク」を選択
-           3. 「本文」を選んで :kbd:`Enter` キーを押下
-      en: |-
-        Confirm that the beginning of the main body, or the main function of the page can be easily found using any of the following method.
-
-        *  Users can move to the position immediately before the main body using the jump to next/previous heading function ( :kbd:`VO + Command + H` / :kbd:`VO + Command + Shift + H` key).
-        *  Users can move to the beginning of the main landmark by the following steps, and the main body begins immediately after that position.
-
-           1. Press :kbd:`VO + U` to display the rotor menu
-           2. Select "Landmarks"
-           3. Select "Main" and press :kbd:`Enter`
+          1. Press :kbd:`VO + U` to display the rotor menu
+          2. Select "Landmarks"
+          3. Select "Main" and press :kbd:`Enter`

@@ -1,4 +1,5 @@
 id: '0552'
+sortKey: 200900
 severity: major
 target: code
 platform:
