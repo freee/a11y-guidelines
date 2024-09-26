@@ -34,6 +34,7 @@
    color-only
    grayscale
    keyboard-notrap
+   mobile-a11y-basics
    input_device-various
    tab-order-check
    multimedia-perceivable
