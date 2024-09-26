@@ -12,12 +12,15 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
-   *  Added a new guideline  for mobile applications corresponding to WCAG 2.1 Success Criterion 2.5.1 and related explanations:
+`Ver. 202409.0 (Sep 26, 2024) <https://github.com/freee/a11y-guidelines/releases/202409.0>`__
+=============================================================================================
 
-      -  Input Device: :ref:`gl-input-device-mobile-standard-gestures`
-      -  :ref:`exp-mobile-a11y-basics`
+*  Added a new guideline  for mobile applications corresponding to WCAG 2.1 Success Criterion 2.5.1 and related explanations:
 
-   *  Updated the accessibility checklist to V5.1.0
+   -  Input Device: :ref:`gl-input-device-mobile-standard-gestures`
+   -  :ref:`exp-mobile-a11y-basics`
+
+*  Updated the accessibility checklist to V5.1.0
 
 `Ver. 202408.0 (Aug 20, 2024) <https://github.com/freee/a11y-guidelines/releases/202408.0>`__
 =============================================================================================

@@ -11,13 +11,7 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
    最新リリース以降の変更点
    ========================
 
-   *  WCAG 2.1の達成基準2.5.1に対応するモバイル・アプリケーションを対象としたガイドライン項目と関連する解説を追加：
-
-      -  入力ディバイス： :ref:`gl-input-device-mobile-standard-gestures`
-      -  :ref:`exp-mobile-a11y-basics`
-
-   *  アクセシビリティー・チェック・リストをV5.1.0に更新
-
+.. include:: ChangeLog/2024/202409.0.rst
 .. include:: ChangeLog/2024/202408.0.rst
 .. include:: ChangeLog/2024/202405.0.rst
 .. include:: ChangeLog/2024/202404.0.rst
