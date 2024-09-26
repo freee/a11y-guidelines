@@ -1,0 +1,24 @@
+id: gl-input-device-mobile-standard-gestures
+sortKey: 1303
+category: input_device
+title:
+  ja: モバイルOS標準のジェスチャーによる操作
+  en: Operation by Mobile OS Standard Gestures
+platform:
+- mobile
+guideline:
+  ja: |-
+    モバイル・アプリケーションにおいて、そのアプリケーション固有の独自ジェスチャーを用いなければ利用できないような機能がなく、すべての機能はOS標準のジェスチャーによって操作できる。
+  en: |-
+    In mobile applications, there are no functions that cannot be used without using application-specific unique gestures, and all functions can be operated by OS standard gestures.
+sc:
+- 2.5.1
+intent:
+  ja: |-
+    OSの標準ではないタッチ・ジェスチャーを使うことが難しい上肢不自由者や視覚障害者が、コンテンツを利用できるようにする。
+  en: |-
+    Ensure that users with upper limb disabilities or visual impairments who find it difficult to use touch gestures that are not standard in the OS can use content.
+checks:
+- '0154'
+info:
+- exp-mobile-a11y-basics

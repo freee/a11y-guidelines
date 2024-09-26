@@ -38,3 +38,5 @@ checks:
 - '0172'
 - '0581'
 - '0586'
+info:
+- exp-mobile-a11y-basics
