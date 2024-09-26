@@ -1,0 +1,11 @@
+id: '0154'
+sortKey: 100910
+severity: critical
+target: design
+platform:
+- mobile
+check:
+  ja: |-
+    アプリケーション固有の独自ジェスチャーを用いなければ利用できないような機能が設計資料に存在しない。
+  en: |-
+    There are no functions in the design documents that cannot be used without using application-specific unique gestures.
