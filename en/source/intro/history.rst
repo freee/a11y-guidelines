@@ -12,6 +12,8 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+   *  Added translation of :ref:`exp-dynamic-content-auto-updated`
+
 `Ver. 202409.0 (Sep 26, 2024) <https://github.com/freee/a11y-guidelines/releases/202409.0>`__
 =============================================================================================
 

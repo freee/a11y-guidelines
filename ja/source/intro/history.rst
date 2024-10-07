@@ -11,6 +11,8 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
    最新リリース以降の変更点
    ========================
 
+   *  :ref:`exp-dynamic-content-auto-updated` の文言の見直し
+
 .. include:: ChangeLog/2024/202409.0.rst
 .. include:: ChangeLog/2024/202408.0.rst
 .. include:: ChangeLog/2024/202405.0.rst
