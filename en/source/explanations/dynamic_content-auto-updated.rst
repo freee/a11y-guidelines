@@ -1,20 +1,26 @@
 .. _exp-dynamic-content-auto-updated:
 
-##################################
-自動的に変化するコンテンツの問題点
-##################################
+##########################################
+Issues with Content Changing Automatically
+##########################################
 
-自動更新される情報を含めて、動きがあったり点滅したり自動スクロールしたりするようなコンテンツが他のコンテンツと同時に同じページに存在すると、認知障害や注意障害があるユーザーの中には情報を読み取ることが困難になるユーザーがいます。
-そもそもこのような動的な変化が自動的に発生せず、短時間しか継続しなければ、この問題は発生しませんが、そうでない場合にはその動的変化をユーザーが制御できるようにすることを求めています。
+Some users with cognitive or attention disabilities may find it difficult to understand information when the following types of content are displayed on the same page along with other content:
 
-さらにより厳しい基準では、緊急の場合を除いて、プッシュ通知などによる割り込みをしないことを求めています。
-一般に割り込みが発生すると、認知障害や注意障害があるユーザーの集中を削ぐだけでなく、スクリーン・リーダーを利用している場合に情報の読み上げが中断され、混乱を生じる場合があります。
-そういった混乱を生じないために、WCAGでは健康、財産、安全を守るために必要な場合を、割り込みを発生させても良い場合として限定しています。
+*  Automatically updated
+*  Moving
+*  Flashing
+*  Auto-scrolling
 
-ページの中のある程度の面積において、輝度が特定の頻度で交互に変化する（閃光が発生する）と、一部のユーザーの光過敏性発作を誘発する可能性があります。
-WCAGでは、レベルAの達成基準でより限定的な条件を示していて、「1秒間に3回以内」という条件はレベルAAAの達成基準で挙げられています。
-しかし、レベルAの限定的な条件を正確に満たすことや、満たしていることを確認することが難しい場合もあり得ますし、ユーザーの安全に関わることですから、freeeではより厳しい条件を示しているレベルAAAの達成基準を採用しています。
+If these dynamic changes do not occur automatically or only last for a short period, such content is generally not problematic. However, in cases where they persist, WCAG requires that users be able to control these dynamic changes.
 
-参考： この達成基準はいわゆる `ポケモンショック <https://ja.wikipedia.org/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%82%AF>`__ を受けて追加されたものです。
+Furthermore, stricter WCAG success criterion prohibits interruptions, such as push notifications, except in emergencies. Interruptions can not only break the concentration of users with cognitive or attention disabilities, but can also disrupt screen reader users, causing confusion by interrupting the reading of information. To avoid such confusion, WCAG allows interruptions only when it is needed for protecting health, property, or safety.
+
+If brightness alternates at a specific frequency (causing a flashing effect) within a certain area of the page, it may trigger photosensitive seizures in some users.
+WCAG’s Level A success criterion allows flashing under certain conditions.
+On the other hand, the Level AAA success criterion sets a stricter condition, allowing no more than 3 flashes per second in any situation.
+However, it may be difficult to precisely meet or verify compliance with the limited conditions of Level A.
+Since this is a matter of user safety, freee has adopted the stricter Level AAA success criterion.
+
+Reference: This success criterion was added in response to the so-called `Pokémon Shock <https://en.wikipedia.org/wiki/Denn%C5%8D_Senshi_Porygon>`__ incident.
 
 .. include:: /inc/info2gl/exp-dynamic-content-auto-updated.rst
