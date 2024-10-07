@@ -26,3 +26,6 @@ WCAGでは、レベルAの達成基準で一定の条件下での閃光の発生
 参考： この達成基準はいわゆる `ポケモンショック <https://ja.wikipedia.org/wiki/%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%82%AF>`__ を受けて追加されたものです。
 
 .. include:: /inc/info2gl/exp-dynamic-content-auto-updated.rst
+
+.. translated:: true
+
