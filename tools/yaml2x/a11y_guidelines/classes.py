@@ -730,7 +730,7 @@ class Condition:
             return f'{self.procedure.id}{language_info[lang]["simple_pass_singular"]}'
 
         simple_conditions = [cond.summary(lang) for cond in self.conditions if cond.type == 'simple']
-        complex_conditions = [cond.summary(lang) for cond in self.conditions if cond.type != 'simple']
+        complex_conditions = [f'({cond.summary(lang)})' for cond in self.conditions if cond.type != 'simple']
 
         if self.type == 'and':
             summary_separator = language_info[lang]['and_separator']
