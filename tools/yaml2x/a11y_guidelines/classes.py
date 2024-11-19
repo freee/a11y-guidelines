@@ -743,7 +743,7 @@ class Condition:
 
         if len(simple_conditions) > 1:
             simple_conditions = [cond.replace(language_info[lang]['simple_pass_singular'], '') for cond in simple_conditions]
-            simple_summary = summary_separator.join(simple_conditions) + simple_pass
+            simple_summary = f'{summary_separator.join(simple_conditions)}{simple_pass}'
             return f'{simple_summary}{summary_connector}{summary_connector.join(complex_conditions)}' if complex_conditions else simple_summary
         else:
             return summary_connector.join(simple_conditions + complex_conditions)
