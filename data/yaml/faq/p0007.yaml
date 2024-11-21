@@ -1,0 +1,29 @@
+id: p0007
+sortKey: 70010
+updated: '2024-11-21'
+tags:
+- screen-reader
+title:
+  ja: 「2024-11-21 12:30」のような表記はスクリーン・リーダーでどう読み上げられるべきか
+  en: How Should Notations Like "2024-11-21 12:30" Be Read Aloud by Screen Readers?
+problem:
+  ja: |-
+    「2024-11-21」と表記されている日付をスクリーン・リーダーに読み上げさせたさい、「2024年11月22日」ではなく、「2024マイナス11マイナス21」と読み上げられが、このような読み上げでは理解が難しいかもしれないので、「2024年11月21日」と表記すべきか。
+    同様に時刻についても、「12:30」のような表記を「12時30分」と読み上げるようにすべきか。
+  en: |-
+    When a date is written as "2024-11-21" screen reader pronounces it as "2024 dash 11 dash 21" instead of "November 21, 2024". I'm concerned that this reading may be difficult to understand, so should it be written as "November 21, 2024"? Similarly, should the time be written as "12:30" as "12 30 PM"?
+solution:
+  ja: |-
+    広く一般に用いられている表記であれば、対処は不要
+  en: |-
+    If the notation is widely used, no further action is required.
+explanation:
+  ja: |-
+    「2024-11-21」や「12:30」のように、広く一般に用いられている日時の表記は、スクリーン・リーダーのユーザーにとってもなじみのあるもので、特に理解が難しいものではありません。
+    ですから、スクリーン・リーダーの読み上げを変更する目的で表記を変更したり、表記とは異なる非表示のテキストを指定したりする必要はありません。
+  en: |-
+    Notations such as "2024-11-21" and "12:30" are widely used and familiar also to screen reader users, so they are not particularly difficult to understand.
+    Therefore, there is no need to change the notation or specify hidden text that is different from the notation to change the screen reader's reading.
+faqs:
+- p0001
+- p0006
