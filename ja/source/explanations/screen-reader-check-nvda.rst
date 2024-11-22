@@ -326,11 +326,15 @@ JAWSでは、「仮想PCカーソル」がブラウズ・モード、「フォ�
 参考： NVDAチートシート
 -----------------------
 
-ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`__ には、他のキー操作も含めてまとめられています。
-GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`__ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`__ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`__ と `PNG版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.png>`__ が公開されています。以下にPNG版を転載します。
+ここまでで紹介したキー操作などはごく一部のものですが、NVDA日本語チームが公開している `NVDAチートシート <https://github.com/nvdajp/cheatsheet>`__ には、キーボード配列の設定が「デスクトップ」と「ラップトップ」の場合に分けて、他のキー操作も含めてまとめられています。
+GitHubのリポジトリーでは、 `Markdown版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.md>`__ 、 `pptx版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pptx>`__ 、 `PDF版 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat.pdf>`__ とPNG版（ `デスクトップ配列 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat-desktop.png>`__ 、 `ラップトップ配列 <https://github.com/nvdajp/cheatsheet/blob/master/nvdacheat-laptop.png>`__ ）が公開されています。
+以下にデスクトップ配列のNVDAチートシートのPNG版を転載します。
 
-.. image:: /img/nvda/nvdacheat.png
-   :alt: 画像化したNVDAチートシート
+なお、前述の通り、ラップトップ配列はテンキーがない場合に便利な設定ですが、通常のチェック作業において、テンキーに割り当てられた機能を使う必要はありません。
+これらの機能を使わないと内容を確認できないようなWebページは、アクセシビリティーに関する問題がある可能性があります。
+
+.. image:: /img/nvda/nvdacheat-desktop.png
+   :alt: 画像化したデスクトップ配列のNVDAチートシート
 
 NVDAの更新
 ==========

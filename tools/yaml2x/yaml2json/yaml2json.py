@@ -47,11 +47,11 @@ def deRST(condition, info):
         halfwidth_chars = r'[\u0000-\u007F\uFF61-\uFFDC\uFFE8-\uFFEE]'
 
         # Remove whitespaces between fullwidth chars
-        text = re.sub(f'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+        text = re.sub(rf'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
 
         # Remove whitespaces between halfwidth chars and full width chars
-        text = re.sub(f'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
-        text = re.sub(f'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+        text = re.sub(rf'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
+        text = re.sub(rf'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
 
         return text
 

@@ -1,6 +1,6 @@
 id: p0001
 sortKey: 70000
-updated: '2023-12-05'
+updated: '2024-11-21'
 tags:
 - screen-reader
 title:
@@ -15,6 +15,7 @@ problem:
     *  「寡婦」が「かふ」ではなく「やもめふ」と読み上げられる
     *  「配偶者」が「はいぐうしゃ」ではなく「はいたましゃ」と読み上げられる
     *  「折り畳む」が「おりたたむ」ではなく「おりりたたみむ」と読み上げられる
+    *  「作業を行った」が「さぎょうをおこなった」ではなく「さぎょうをいった」と読み上げられる
   en: |-
     There are kanji or English words that are read in an unexpected way. How should I deal with it?
 
@@ -23,6 +24,7 @@ problem:
     *  "寡婦" is read as "やもめふ" instead of "かふ"
     *  "配偶者" is read as "はいたましゃ" instead of "はいぐうしゃ"
     *  "折り畳む" is read as "おりりたたみむ" instead of "おりたたむ"
+    *  "作業を行った" is read as "さぎょうをいった" instead of "さぎょうをおこなった"
 solution:
   ja: |-
     *  特に対処の必要はない
