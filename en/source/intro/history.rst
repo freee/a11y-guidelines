@@ -12,11 +12,15 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
-   *  Added translation of :ref:`exp-dynamic-content-auto-updated`
-   *  Updated FAQ
 
-      -  Added example: :ref:`faq-p0001`
-      -  Added: :ref:`faq-p0007`
+`Ver. 202411.0 (Nov 22, 2024) <https://github.com/freee/a11y-guidelines/releases/202411.0>`__
+=============================================================================================
+
+*  Added translation of :ref:`exp-dynamic-content-auto-updated`
+*  Updated FAQ
+
+   -  Added example: :ref:`faq-p0001`
+   -  Added: :ref:`faq-p0007`
 
 `Ver. 202409.0 (Sep 26, 2024) <https://github.com/freee/a11y-guidelines/releases/202409.0>`__
 =============================================================================================

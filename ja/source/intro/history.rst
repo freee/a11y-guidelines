@@ -11,13 +11,8 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
    最新リリース以降の変更点
    ========================
 
-   *  :ref:`exp-dynamic-content-auto-updated` の文言の見直し
-   *  :ref:`exp-screen-reader-check-nvda` のNVDAチートシートを最新版に更新
-   *  FAQの更新
 
-      -  例を追加： :ref:`faq-p0001`
-      -  追加： :ref:`faq-p0007`
-
+.. include:: ChangeLog/2024/202411.0.rst
 .. include:: ChangeLog/2024/202409.0.rst
 .. include:: ChangeLog/2024/202408.0.rst
 .. include:: ChangeLog/2024/202405.0.rst
