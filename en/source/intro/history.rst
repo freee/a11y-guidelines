@@ -12,6 +12,7 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+   *  Added FAQ: :ref:`faq-d0004`
 
 `Ver. 202411.0 (Nov 22, 2024) <https://github.com/freee/a11y-guidelines/releases/202411.0>`__
 =============================================================================================

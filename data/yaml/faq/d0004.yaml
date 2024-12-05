@@ -1,0 +1,51 @@
+id: d0004
+updated: '2024-12-02'
+sortKey: 10050
+tags:
+- markup
+- screen-reader
+title:
+  ja: アイコン画像の代替テキストに「アイコン」や「ボタン」という言葉を含めるべきか
+  en: Should the Words "Icon" or "Button" Be Included in the Alternative Text of Icon Images?
+problem:
+  ja: |-
+    アイコン画像の説明として、代替テキストに「アイコン」や「ボタン」という言葉を含める必要はないのか。
+  en: |-
+    Isn't it necessary to include the words "icon" and/or "button" in the alternative text of icon images?
+solution:
+  ja: |-
+    代替テキストに「アイコン」や「ボタン」という言葉を含めるべきではない。
+  en: |-
+    The words "icon" and/or "button" should not be included in the alternative text.
+explanation:
+  ja: |-
+    適切なマークアップがされているアイコン画像を読み上げる際、スクリーン・リーダーはそれが画像であるという情報と共に代替テキストを読み上げますので、ユーザーはそれがアイコンであることを推測できます。
+    ですから、代替テキストに「アイコン」という言葉を含める必要はありません。
+    そもそも、それがアイコンであるかどうかを判断できなければ機能の利用や情報の取得に支障があるような状況は避けるべきです。
+
+    また、そのアイコンがボタンになっている場合は、それがボタンであるという情報も読み上げます。
+    そのため、代替テキストに「ボタン」という言葉を含める必要もありません。
+    もしボタンであることが分からないような読み上げになる場合は、マークアップに問題がある可能性が高いです。
+
+    参考：スクリーン・リーダーによる画像やボタンといった情報の追加は、読み上げ対象となっている要素のロール（役割）に基づいています。
+    すべての要素にはデフォルトのロールがあります。
+    また ``role`` 属性を用いることで、要素のロールをデフォルトから変更することができます。
+    適切な要素を用いて、必要に応じて ``role`` 属性を活用することで、スクリーン・リーダーが適切に情報を追加できるようになります。
+  en: |-
+    When a properly marked-up icon image is read aloud by a screen reader, it announces that it is an image along with its alternative text, allowing users to infer that it is an icon.
+    Therefore, there is no need to include the word "icon" in the alternative text.
+    In the first place, situations where users cannot determine whether something is an icon and are thereby hindered from using a feature or obtaining information should be avoided.
+
+    Additionally, if the icon serves as a button, the screen reader will announce that it is a button.
+    For this reason, there is no need to include the word "button" in the alternative text either.
+    If the announcement fails to convey that it is a button, there is likely an issue with the markup.
+info:
+- exp-image-text-alternative
+- exp-markup-component
+- exp-markup-semantics
+guidelines:
+- gl-image-description
+checks:
+- '0421'
+- '0431'
+- '0441'
