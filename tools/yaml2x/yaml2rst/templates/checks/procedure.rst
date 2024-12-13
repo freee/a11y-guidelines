@@ -8,9 +8,9 @@ Check Procedure: {{ cond.platform }}
 {%- endfilter %}
 
 {% if lang == 'ja' -%}
-以下の{{ cond.condition }}であることを確認する。
+以下の{{ cond.condition }}ことを確認する。
 {%- elif lang == 'en' -%}
-Confirm {{ cond.condition }} below.
+Verify that {{ cond.condition }} below.
 {%- endif %}
 
 {% if cond.procedures is defined -%}
