@@ -18,9 +18,9 @@ conditions:
     id: "0621-axe-01"
     procedure:
       ja: |-
-        axe DevToolsで「 :ref:`axe-rule-html-has-lang` 」という問題が出ないことを確認する。
+        axe DevToolsで「 :ref:`axe-rule-html-has-lang` 」という問題が出ない。
       en: |-
-        Confirm that the issue :ref:`axe-rule-html-has-lang` is not reported by axe DevTools.
+        The issue :ref:`axe-rule-html-has-lang` is not reported by axe DevTools.
     note:
       ja: |-
         この問題が出た場合は、そのページの ``<html>`` 要素の記述を ``<html lang="ja">`` （主に利用されている言語が日本語の場合）のように修正する必要があります。
@@ -31,9 +31,9 @@ conditions:
     id: "0621-nvda-01"
     procedure:
       ja: |-
-        NVDAのブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられることを確認する。
+        NVDAのブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、表示されているテキストが問題なく読み上げられる。
       en: |-
-        Confirm that displayed text is announced without any issue when reading with up and down arrow keys in NVDA's browse mode.
+        Displayed text is announced without any issue when reading with up and down arrow keys in NVDA's browse mode.
     note:
       ja: |-
         このチェックを正しく実施するためには、多言語処理のための設定を行う必要があります。（ :ref:`exp-screen-reader-check` の「その他の初期設定」、「音声」および「音声合成エンジンの管理」の項を参照）

@@ -17,9 +17,9 @@ conditions:
   id: "1191-nvda-01"
   procedure:
     ja: |-
-      NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
+      NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行ったとき、表示されたステータス・メッセージが自動的に読み上げられる。
     en: |-
-      With NVDA running, perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
+      With NVDA running, performing the operation to display status messages according to the design documents causes the displayed status messages to be automatically announced.
   note:
     ja: |-
       参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照

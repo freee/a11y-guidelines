@@ -21,9 +21,9 @@ conditions:
     id: "0801-keyboard-01"
     procedure:
       ja: |-
-        TabキーおよびShift+Tabキーでフォーカスを移動した際、複数のページで移動順序が一貫していることを確認する。
+        TabキーおよびShift+Tabキーでフォーカスを移動した際、複数のページで移動順序が一貫している。
       en: |-
-        Confirm that the focus moves in a consistent order across multiple pages when moving the focus using the Tab key and Shift+Tab key.
+        Focus moves in a consistent order across multiple pages when moving the focus using the Tab key and Shift+Tab key.
   - type: or
     conditions:
     - type: simple
@@ -31,9 +31,9 @@ conditions:
       id: "0801-nvda-01"
       procedure:
         ja: |-
-          NVDAのブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+          NVDAのブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫している。
         en: |-
-          Confirm that the reading order is consistent across multiple pages when reading the content using the up/down arrow keys in NVDA's browse mode.
+          The reading order is consistent across multiple pages when reading the content using the up/down arrow keys in NVDA's browse mode.
       YouTube:
         id: GYKStFpsfUw
         title: 同じ出現順序【NVDAでアクセシビリティー チェック】
@@ -42,9 +42,9 @@ conditions:
       id: "0801-macvo-01"
       procedure:
         ja: |-
-          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫していることを確認する。
+          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫している。
         en: |-
-          Confirm that the reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+          The reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo

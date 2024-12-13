@@ -19,9 +19,9 @@ conditions:
     id: "0531-nvda-01"
     procedure:
       ja: |-
-        NVDAのブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられる。
       en: |-
-        Confirm that the same text as contained in the image is announced when using arrow keys in NVDA's browse mode.
+        The same text as contained in the image is announced when using arrow keys in NVDA's browse mode.
     YouTube:
       id: 7vGc7p0FraE
       title: 画像化されたテキスト【NVDAでアクセシビリティー チェック】
@@ -30,9 +30,9 @@ conditions:
     id: "0531-macvo-01"
     procedure:
       ja: |-
-        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられることを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該の画像を読み上げさせたとき、画像に含まれるテキストと同じ内容が読み上げられる。
       en: |-
-        Confirm that the same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+        The same text as contained in the image is announced when using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo

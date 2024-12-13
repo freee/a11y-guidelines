@@ -19,29 +19,29 @@ conditions:
     id: "0711-nvda-01"
     procedure:
       ja: |-
-        NVDAが起動している状態で、以下を確認する：
+        NVDAが起動している状態の操作で、以下を満たしている：
 
-        *  ブラウズ・モードでページ先頭から矢印キーの操作で読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
-        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
+        *  ブラウズ・モードでページ先頭から矢印キーの操作で読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられる。
+        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられる。
       en: |-
-        With NVDA running, confirm the following:
+        With NVDA running, the following is satisfied:
 
-        *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using arrow keys in browse mode.
-        *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
+        *  The content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using the arrow keys in browse mode.
+        *  The content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
   - type: simple
     tool: macos-vo
     id: "0711-macvo-01"
     procedure:
       ja: |-
-        macOS VoiceOverが有効な状態で、以下を確認する：
+        macOS VoiceOverが起動している状態の操作で、以下を満たしている：
 
-        *  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作でページ先頭から読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられることを確認する。
-        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられることを確認する。
+        *  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作でページ先頭から読み上げさせたとき、自然な、意味の理解を阻害しない順序で読み上げられる。
+        *  別の画面への遷移を伴わずに表示内容を変更するような仕組みがある場合は、すべての状態において適切な順序で読み上げられる。
       en: |-
-        Confirm the following with macOS VoiceOver enabled:
+        With macOS VoiceOver running, the following is satisfied:
 
-        *  Confirm that the content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-        *  Confirm that the content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
+        *  The content is read aloud in an order which is natural, and does not hinder the understanding of the meaning when reading from the top of the page using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
+        *  The content is read aloud in the appropriate order in all states when there are mechanisms that change the display content without transitioning to another page.
 - platform: ios
   type: simple
   tool: ios-vo

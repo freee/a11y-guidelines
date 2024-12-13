@@ -19,9 +19,9 @@ conditions:
     id: "0861-nvda-01"
     procedure:
       ja: |-
-        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
+        The part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
     YouTube:
       id: wegzVOdnLJM
       title: 現在のページ【NVDAでアクセシビリティー チェック】
@@ -30,6 +30,6 @@ conditions:
     id: "0861-macvo-01"
     procedure:
       ja: |-
-        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声があることを確認する。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
       en: |-
-        Confirm that the part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.
+        The part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.

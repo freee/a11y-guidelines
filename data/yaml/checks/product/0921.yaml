@@ -11,14 +11,24 @@ check:
     When text containing multiple languages is read out loud using a reading environment that supports multiple languages, the text is read out loud by the appropriate language's speech engine.
 conditions:
 - platform: web
-  type: simple
-  tool: nvda
-  id: "0921-nvda-01"
-  procedure:
-    ja: |-
-      NVDAのブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わることを確認する。
-    en: |-
-      Confirm that the voices for reading content change according to the natural language used in the content when reading with arrow keys in NVDA's browse mode.
-  YouTube:
-    id: 5syA78BshdY
-    title: 複数の言語の音声【NVDAでアクセシビリティー チェック】
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0921-content-none"
+    procedure:
+      ja: |-
+        チェック対象の画面には、単一の言語のテキストしか存在しない。
+      en: |-
+        There is only text in a single language on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0921-nvda-01"
+    procedure:
+      ja: |-
+        NVDAのブラウズ・モードで上下矢印キーを用いて読み上げさせたとき、使用されている言語に応じて読み上げに用いられる音声が切り替わる。
+      en: |-
+        The voices for reading content change according to the natural language used in the content when reading with arrow keys in NVDA's browse mode.
+    YouTube:
+      id: 5syA78BshdY
+      title: 複数の言語の音声【NVDAでアクセシビリティー チェック】
