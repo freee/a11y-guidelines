@@ -16,12 +16,12 @@ conditions:
   id: "0957-keyboard-01"
   procedure:
     ja: |-
-      キーボード操作を行って、以下のすべてを満たしていることを確認する:
+      キーボード操作時、以下のすべてを満たしている:
 
       *  Tab/Shift+Tabキーでフォーカスを移動した際、到達できないチェックボックスがない。
       *  スペースキーを押下することで、フォーカスされているチェックボックスのオン/オフ譜を切り替えられる。
     en: |-
-      Perform keyboard operations and confirm that all of the following are met:
+      All of the following are met when performing keyboard operations:
 
       *  There are no check boxes that cannot be reached when moving the focus using the Tab/Shift+Tab keys.
       *  The on/off state of the focused check box can be toggled by pressing the space key.

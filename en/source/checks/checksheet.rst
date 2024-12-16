@@ -42,6 +42,13 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V6.0.0 (December 16, 2024)
+==========================
+
+*  Conducted a review of how to record  check results on the check sheet and revised the wording for items applicable to "Product"
+*  Addition to the check procedures of :ref:`check-0471`
+*  Addition to the implementation examples of :ref:`check-0461`
+
 V5.1.0 (September 26, 2024)
 ===========================
 

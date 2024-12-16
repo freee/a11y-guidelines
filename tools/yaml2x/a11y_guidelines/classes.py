@@ -709,16 +709,16 @@ class Condition:
     def summary(self, lang):
         language_info = {
             'ja': {
-                'simple_pass_singular': 'がOK',
-                'simple_pass_plural': 'がOK',
+                'simple_pass_singular': 'を満たしている',
+                'simple_pass_plural': 'を満たしている',
                 'and_connector': '、かつ',
                 'or_connector': '、または',
                 'and_separator': 'と',
                 'or_separator': 'または'
             },
             'en': {
-                'simple_pass_singular': ' passes',
-                'simple_pass_plural': ' pass',
+                'simple_pass_singular': ' is true',
+                'simple_pass_plural': ' are true',
                 'and_connector': ', and ',
                 'or_connector': ', or ',
                 'and_separator': ' and ',

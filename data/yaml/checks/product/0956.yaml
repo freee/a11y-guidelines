@@ -16,13 +16,13 @@ conditions:
   id: "0956-keyboard-01"
   procedure:
     ja: |-
-      キーボード操作を行って、以下のすべてを満たしていることを確認する:
+      キーボード操作時、以下のすべてを満たしている:
 
       *  同じ質問に対する選択肢など、適切な単位でラジオボタンがグループ化されていて、Tab/Shift+Tabキーでフォーカスを移動した際、グループごとに1つのラジオボタンにしかフォーカスが移動しない。
       *  グループ内のラジオボタンにフォーカスがある状態で、矢印キーでラジオボタンのグループ内の選択状態を変更でき、選択状態になったラジオボタンにフォーカスが移動する。
       *  矢印キーでラジオボタンの選択状態を変更した際、そのグループに属さないラジオボタンへのフォーカスの移動や状態の変更が発生しない。
     en: |-
-      Perform keyboard operations and confirm that all of the following are met:
+      All of the following are met when performing keyboard operations:
 
       *  Radio buttons are grouped in appropriate units, such as choices for the same question, and when moving the focus using the Tab/Shift+Tab keys, the focus moves to only one radio button in each group.
       *  When the focus is on a radio button in a group, the selection state of the radio buttons in the group can be changed using the arrow keys, and the focus moves to the selected radio button.

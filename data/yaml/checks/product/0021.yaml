@@ -19,9 +19,9 @@ conditions:
     tool: axe
     procedure:
       ja: |-
-        axe DevToolsで「 :ref:`axe-rule-color-contrast` 」という問題が出ないことを確認する。
+        axe DevToolsで「 :ref:`axe-rule-color-contrast` 」という問題が出ない。
       en: |-
-        Confirm that the issue :ref:`axe-rule-color-contrast` is not reported by axe DevTools.
+        The issue :ref:`axe-rule-color-contrast` is not reported by axe DevTools.
     note:
       ja: |-
         ただし、ガイドラインを満たしていない状態であっても、以下の場合は問題として表示されませんので注意が必要です。
@@ -56,13 +56,13 @@ conditions:
     id: "0021-webaim-01"
     procedure:
       ja: |-
-        WebAIM Contrast Checkerで、以下の基準を満たしていることを確認する：
+        WebAIM Contrast Checkerで、以下の基準を満たしていることを確認した：
 
         *  文字サイズが29px（22pt）以上の場合：3:1以上
         *  文字サイズが24px（18pt）以上で太字の場合：3:1以上
         *  その他の場合：4.5:1以上
       en: |-
-        Verify the content meets the following color contrast requirement using the WebAIM Color Contrast Checker:
+        Verified that the content meets the following color contrast requirement using the WebAIM Color Contrast Checker:
 
         *  Font Size: 29px（22pt）or larger; 3:1 or higher
         *  Font Size: 24px（18pt）or larger and bold; 3:1 or higher

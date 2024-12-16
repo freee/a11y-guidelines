@@ -22,47 +22,59 @@ conditions:
         axe DevToolsで「 :ref:`axe-rule-button-name` 」という問題が出ないことを確認する。
       en: |-
         Confirm that the issue :ref:`axe-rule-button-name` is not reported by axe DevTools.
-  - type: simple
-    tool: misc
-    id: "0411-content-01"
-    procedure:
-      ja: |-
-        スクリーン・リーダーによって読み上げられる内容がアイコンの役割や状態を適切に表していることを確認する。
-      en: |-
-        Confirm that what is announced by the screen reader properly convey the role and the state of the icon.
   - type: or
     conditions:
     - type: simple
-      id: "0411-nvda-01"
-      tool: nvda
+      tool: misc
+      id: "0411-content-none"
       procedure:
         ja: |-
-          NVDAで以下の操作をしたとき、アイコンの示す状態や機能が分かる読み上げがされることを確認する。
-
-          -  ブラウズ・モードで矢印キーを操作してアイコンがある箇所を読み上げさせたとき
-          -  そのアイコンがボタンやリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+          チェック対象の画面にアイコンが存在しない。
         en: |-
-          Confirm that the functionality of the icon, or the state the icon is indicating is announced when the following operations are performed using NVDA:
+          There are no icons on the screen to be checked.
+    - type: and
+      conditions:
+      - type: simple
+        tool: misc
+        id: "0411-content-01"
+        procedure:
+          ja: |-
+            スクリーン・リーダーによって読み上げられる内容がアイコンの役割や状態を適切に表している。
+          en: |-
+            What is announced by the screen reader properly convey the role and the state of the icon.
+      - type: or
+        conditions:
+        - type: simple
+          id: "0411-nvda-01"
+          tool: nvda
+          procedure:
+            ja: |-
+              NVDAで以下の操作をしたとき、アイコンの示す状態や機能が分かる読み上げがされる。
 
-          *  When the part with the icon is read aloud using arrow keys in browse mode
-          *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
-      YouTube:
-        id: OQrwQ4rnudY
-        title: アイコンの役割や示している状態【NVDAでアクセシビリティー チェック】
-    - type: simple
-      id: "0411-macvo-01"
-      tool: macos-vo
-      procedure:
-        ja: |-
-          macOS VoiceOverで以下の操作をしたとき、アイコンの示す状態や機能が分かる読み上げがされることを確認する。
+              -  ブラウズ・モードで矢印キーを操作してアイコンがある箇所を読み上げさせたとき
+              -  そのアイコンがボタンやリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+            en: |-
+              The functionality of the icon, or the state the icon is indicating is announced when the following operations are performed using NVDA:
 
-          -  :kbd:`VO` キーと左右矢印キーでVoiceOverカーソルを操作し、アイコンがある箇所を読み上げさせたとき
-          -  そのアイコンがボタンやリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
-        en: |-
-          Confirm that the functionality of the icon, or the state the icon is indicating is announced when the following operations are performed using macOS VoiceOver:
+              *  When the part with the icon is read aloud using arrow keys in browse mode
+              *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
+          YouTube:
+            id: OQrwQ4rnudY
+            title: アイコンの役割や示している状態【NVDAでアクセシビリティー チェック】
+        - type: simple
+          id: "0411-macvo-01"
+          tool: macos-vo
+          procedure:
+            ja: |-
+              macOS VoiceOverで以下の操作をしたとき、アイコンの示す状態や機能が分かる読み上げがされる。
 
-          *  When the part with the icon is read aloud using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor
-          *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
+              -  :kbd:`VO` キーと左右矢印キーでVoiceOverカーソルを操作し、アイコンがある箇所を読み上げさせたとき
+              -  そのアイコンがボタンやリンクなど、フォーカスを受け取るものの場合、Tab/Shift+Tabキーの操作でフォーカスされたとき
+            en: |-
+              The functionality of the icon, or the state the icon is indicating is announced when the following operations are performed using macOS VoiceOver:
+
+              *  When the part with the icon is read aloud using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor
+              *  When the icon is something that can receive focus, like a button or a link, and is focused on by pressing the Tab/Shift+Tab keys
 - platform: ios
   type: simple
   id: "0411-iosvo-01"
