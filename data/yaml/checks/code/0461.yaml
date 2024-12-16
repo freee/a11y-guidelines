@@ -19,10 +19,12 @@ implementations:
     method:
       ja: |-
         *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
-        *  ``role="presentation"`` を指定。
+        *  ``role="presentation"`` を指定、または
+        *  CSSで背景画像として指定
       en: |-
         *  Specify an empty ``alt`` attribute ( ``alt=""`` ). Or
-        *  Specify ``role="presentation"``.
+        *  Specify ``role="presentation"``. Or
+        *  Specify as a background image in CSS.
   - platform: ios
     method:
       ja: |-
