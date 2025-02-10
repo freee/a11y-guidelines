@@ -6,3 +6,6 @@ pyyaml
 jsonschema < 4.18.0
 GitPython
 sphinx-lint
+google-auth-oauthlib
+google-api-python-client
+pytz
