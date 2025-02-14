@@ -12,6 +12,7 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
    ========================
 
    *  FAQ追加： :ref:`faq-d0004`
+   *  FAQ追加： :ref:`faq-p0008`
 
 .. include:: ChangeLog/2024/202411.0.rst
 .. include:: ChangeLog/2024/202409.0.rst
