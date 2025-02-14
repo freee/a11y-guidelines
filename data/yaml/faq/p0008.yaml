@@ -1,0 +1,44 @@
+id: p0008
+sortKey: 70005
+updated: '2025-02-14'
+tags:
+- screen-reader
+title:
+  ja: スクリーン・リーダーによる長いテキストの読み上げが途中で止まる
+  en: Screen reader stops reading long text in the middle
+problem:
+  ja: |-
+    NVDAのブラウズ・モードでテキストを読み上げさせたとき、1行のテキストや画像の代替テキストなど、一気に読み上げられることが期待されるものでも、途中で読み上げが止まってしまう場合がある。
+    この挙動は実装によって抑制するべきものか。
+  en: |-
+    When reading text in NVDA's browse mode, the screen reader may stop reading in the middle of text that is expected to be read all at once, such as a single line of text or alternative text of an image.
+    Should this behavior be suppressed by implementation?
+solution:
+  ja: |-
+    NVDAの設定による挙動なので対処は不要。
+  en: |-
+    No action is required as this is a behavior determined by NVDA settings.
+explanation:
+  ja: |-
+    NVDAのブラウズ・モードでは、下矢印キーや上矢印キーを使って1行ずつ読み上げさせる場合に、一定の文字数を超える長さのテキストを複数行のテキストのように扱って読み上げるようになっています。
+    そのため、1行のテキストや画像の代替テキストなど、一気に読み上げられることが期待されるものでも、この文字数を超える長いものの場合は途中で読み上げが止まり、下矢印キーを押下しないと続きが読み上げられません。
+    これは、極端に長いテキストを一気に読み上げられても理解が難しい場合があるためです。
+    仮に実装によってこの挙動を抑制することができたとしても、この挙動の意図を考えると、そういった対処はすべきではありません。
+    ただし、画像の代替テキストについては、テキストに構造を持たせられないため、長いテキストは理解が難しくなる恐れがありますので、そもそも簡潔なものにすることが望ましいでしょう。
+
+    この設定のデフォルト値は100文字で、NVDAの設定画面の「ブラウズモード」の「1行の最大文字数」で変更できます。
+
+    なお、長いテキストの分割が発生する場合、分割位置の判定に半角の英数字や空白文字が使われるようで、英単語が含まれる日本語のテキストでは設定の文字数よりもかなり短い長さで分割されることがあります。
+  en: |-
+    In NVDA's browse mode, when reading text one line at a time using the down arrow key or up arrow key, text longer than a certain number of characters is treated as multi-line text and read out accordingly.
+    Therefore, even text that is expected to be read all at once, such as a single line of text or alternative text of an image, will stop reading in the middle if it exceeds this character limit, and the rest will not be read until the down arrow key is pressed.
+    This is because it may be difficult to understand extremely long text if it is read all at once.
+    Even if it were possible to suppress this behavior by implementation, it should not be done considering the intention of this behavior.
+
+    However, for alternative text of images, it is desirable to keep it concise as it is difficult to understand long text due to the lack of structure in the text.
+
+    The default value of this setting is 100 characters, and it can be changed in the "Maximum number of characters on one line" setting in the "Browse mode" section of the NVDA settings.
+
+    Note that when dividing long text, half-width alphanumeric characters and whitespace seem to be used to determine the division point, so Japanese text containing English words may be divided at a much shorter length than the setting's character count.
+info:
+- exp-screen-reader-check-nvda
