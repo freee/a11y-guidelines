@@ -6,12 +6,36 @@ platform:
 - web
 check:
   ja: |-
-    マウスオーバーで表示されるすべてのコンテンツは、以下のすべてを満たしている:
-
-    *  マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーで消える、など）
-    *  マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツを非表示にする。
+    マウスオーバーで表示されるすべてのコンテンツは、拡大表示利用時にもユーザーの意図に反して消えない。
   en: |-
-    All content displayed on hover meets all of the following
-
-    *  Content displayed on hover can be hidden without moving the mouse pointer. (ESC key to make it disappear, etc.)
-    *  Hide content displayed on hover only when it is no longer in hover state, when the user performs an action to hide it, or when the content is no longer valid.
+    All content displayed on mouseover does not disappear against the user's intention even when using the magnification function.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0111-content-none
+    procedure:
+      ja: |-
+        チェック対象の画面に、マウスオーバーで表示されるコンテンツが存在しない。
+      en: |-
+        There are no content displayed on mouseover on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      tool: mouse
+      id: 0111-mouse-01
+      procedure:
+        ja: |-
+          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできることを確認する。（ESCキーの押下や表示されたコンテンツ上でのマウス・クリックなど）
+        en: |-
+          Verify that the content displayed on mouseover can be hidden without moving the mouse pointer. (Press the ESC key or click the mouse on the displayed content)
+    - type: simple
+      tool: mouse
+      id: 0111-mouse-02
+      procedure:
+        ja: |-
+          マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツが非表示になることを確認する。
+        en: |- 
+          Verify that the content displayed on mouseover is hidden only when when the mouseover state is removed, the user performs an operation to hide it, or the content becomes invalid.

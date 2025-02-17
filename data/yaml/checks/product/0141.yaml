@@ -6,12 +6,44 @@ platform:
 - web
 check:
   ja: |-
-    ショートカット・キーを提供していて、それが画面のどこにフォーカスがあっても作動する仕様である場合、以下のいずれかを満たしている：
-
-    *  ユーザーがショートカット・キーを無効にできる
-    *  ユーザーがショートカット・キーの割当を変更できる
+    ショートカット・キーが支援技術の動作を妨げないようになっている。
   en: |-
-    If there are shortcut keys that work regardless of which part of the screen the focus is on, one of the following is true
-
-    *  Users can disable the shortcut keys
-    *  Users can change shortcut assignments
+    Shortcut keys do not interfere with the operation of assistive technologies.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0141-content-none"
+    procedure:
+      ja: |-
+        チェック対象の画面では、ショートカット・キーが提供されていないことを確認する。
+      en: |-
+        Confirm that there are no shortcut keys provided on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: "0141-content-01"
+    procedure:
+      ja: |-
+        ショートカット・キーは、画面の特定の部分にフォーカスがある時だけ利用できるようになっていることを確認する。
+      en: |-
+        Confirm that shortcut keys can only be used when a specific part of the screen has focus.
+  - type: or
+    conditions:
+    - type: simple
+      tool: misc
+      id: "0141-content-02"
+      procedure:
+        ja: |-
+          ユーザーがショートカット・キーを無効にできることを確認する。
+        en: |-
+          Confirm that users can disable shortcut keys.
+    - type: simple
+      tool: misc
+      id: "0141-content-03"
+      procedure:
+        ja: |-
+          ユーザーがショートカット・キーの割当を変更できることを確認する。
+        en: |-
+          Confirm that users can change shortcut assignments.
