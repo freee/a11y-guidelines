@@ -9,4 +9,24 @@ check:
   ja: |-
     テキストのラベルが併せて表示されていないアイコンで、形状とサイズが同じで色だけが違うものがない。（例：異なる状態を表す複数のアイコンが、色の違いだけで状態の違いを表していない。）
   en: |-
-    There are no icons that do not have text labels, that are the same shape and size, and differ only in color. (e.g., multiple icons representing different states must be distiguishable not only by difference in color.)
+    There are no icons without accompanying text labels displayed, that are the same shape and size, and differ only in color. (e.g., multiple icons representing different states must be distiguishable not only by difference in color.)
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0412-content-none"
+    procedure:
+      ja: |-
+        チェック対象の画面に、テキストのラベルが併せて表示されていないアイコンが存在しないことを確認する。
+      en: |-
+        Confirm that there are no icons without accompanying text labels displayed on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: "0412-content-01"
+    procedure:
+      ja: |-
+        テキストのラベルが合わせて表示されていないアイコンで異なる状態や機能を表しているものは、色以外の視覚的な違いもあることを確認する。
+      en: |-
+        Confirm that icons without accompanying text labels that represent different states or functions have visual differences other than color.

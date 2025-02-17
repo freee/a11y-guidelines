@@ -7,11 +7,25 @@ platform:
 check:
   ja: |-
     ボタンやリンクになっている画像は、クリックやタッチに反応するサイズが、充分な大きさになっている。
-
-    *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
-    *  モバイル向けWebでは44 x 44 CSS px以上
   en: |-
     Images used as buttons or links have large enough area that responds to clicks and touches
-
-    *  for desktop Web: at least 24 x 24 CSS px, preferably larger than 44 x 44 CSS px
-    *  for mobile Web: larger than 44 x 44 CSS px
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0351-content-none"
+    procedure:
+      ja: |-
+        チェック対象の画面に、ボタンやリンクになっている画像が存在しないことを確認する。
+      en: |-
+        Confirm that there are no images used as buttons or links on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: "0351-content-01"
+    procedure:
+      ja: |-
+        ボタンやリンクになっている画像のクリックやタッチに反応するサイズが、デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上に、モバイル向けWebでは44 x 44 CSS px以上になっていることを確認する。
+      en: |-
+        Confirm that the size of the area that responds to clicks and touches of images used as buttons or links is at least 24 x 24 CSS px for desktop Web, preferably larger than 44 x 44 CSS px, and larger than 44 x 44 CSS px for mobile Web.

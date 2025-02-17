@@ -23,7 +23,7 @@ conditions:
         There are no form controls on the screen to be checked.
   - type: simple
     tool: misc
-    id: "0352-content-default"
+    id: "0352-content-01"
     procedure:
       ja: |-
         フォーム・コントロールの見た目は、ブラウザーのデフォルト表示から変更されていない。
@@ -31,7 +31,7 @@ conditions:
         The appearance of form controls has not been changed from the browser default.
   - type: simple
     tool: misc
-    id: "0352-content-size"
+    id: "0352-content-02"
     procedure:
       ja: |-
         フォーム・コントロールのクリックやタッチに反応するサイズは、以下の条件を満たしている：
