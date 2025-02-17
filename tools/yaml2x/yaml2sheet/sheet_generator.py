@@ -701,205 +701,232 @@ class ChecklistSheetGenerator:
         sheet_id: int,
         sheet: SheetStructure
     ) -> None:
-
-        data_length = len(sheet.data)
-        column_count = len(sheet.data[0]) if sheet.data else 26
+        """Add requests to update sheet content and formatting
         
+        Args:
+            requests: List to append requests to
+            sheet_id: ID of sheet to update
+            sheet: Sheet structure containing data and format info
+        """
         try:
-            # スプレッドシートの情報を取得
-            spreadsheet = self.service.spreadsheets().get(
-                spreadsheetId=self.spreadsheet_id,
-                ranges=[sheet.name],
-                includeGridData=False
-            ).execute()
-            
-            grid_properties = None
-            for s in spreadsheet['sheets']:
-                if s['properties']['title'] == sheet.name:
-                    grid_properties = s['properties']['gridProperties']
-                    break
-                
-            if grid_properties:
-                current_row_count = grid_properties.get('rowCount', 1000)
-                current_column_count = grid_properties.get('columnCount', 26)
-                
-                # 1. サイズ調整が必要な場合は先に実行
-                size_adjustment_requests = adjust_sheet_size(
-                    sheet_id,
-                    data_length,
-                    column_count,
-                    current_row_count,
-                    current_column_count
-                )
-                
-                # サイズ調整が必要な場合は先に実行
-                if size_adjustment_requests:
-                    logger.debug("Executing size adjustment requests")
-                    self.service.spreadsheets().batchUpdate(
-                        spreadsheetId=self.spreadsheet_id,
-                        body={'requests': size_adjustment_requests}
-                    ).execute()
-                
-                # 2. 既存のコンテンツをクリア
-                requests.append({
-                    'updateCells': {
-                        'range': {
-                            'sheetId': sheet_id,
-                            'startRowIndex': 0,
-                            'endRowIndex': data_length,
-                            'startColumnIndex': 0,
-                            'endColumnIndex': column_count
-                        },
-                        'fields': '*'
-                    }
-                })
-
-            # 3. 新しいデータを書き込む処理...
-            for i in range(0, len(sheet.data), 1000):
-                chunk = sheet.data[i:i + 1000]
-                requests.append({
-                    'updateCells': {
-                        'rows': [
-                            {
-                                'values': [cell.to_sheets_value() for cell in row]
-                            }
-                            for row in chunk
-                        ],
-                        'fields': 'userEnteredValue,userEnteredFormat,textFormatRuns,dataValidation',
-                        'range': {
-                            'sheetId': sheet_id,
-                            'startRowIndex': i,
-                            'startColumnIndex': 0
-                        }
-                    }
-                })
-
-            # 4. 列幅の設定
-            for i, width in enumerate(self._get_column_widths()):
-                requests.append({
-                    'updateDimensionProperties': {
-                        'range': {
-                            'sheetId': sheet_id,
-                            'dimension': 'COLUMNS',
-                            'startIndex': i,
-                            'endIndex': i + 1
-                        },
-                        'properties': {
-                            'pixelSize': width
-                        },
-                        'fields': 'pixelSize'
-                    }
-                })
-
-            # Cell formatting and protection
-            formatter = SheetFormatter(self.current_lang, self.current_target)
             data_length = len(sheet.data)
-            requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
+            column_count = len(sheet.data[0]) if sheet.data else 26
 
-            # Add protection settings
-            protection_requests = formatter.add_protection_settings(sheet_id, sheet)
-            requests.extend(protection_requests)
+            # Get current sheet properties and adjust size if needed
+            self._adjust_sheet_size(sheet_id, sheet.name, data_length, column_count)
             
-            # Add parent check protection
-            for i, row in enumerate(sheet.data[1:], start=1):  # ヘッダー行をスキップ
-                if self._is_parent_check_with_subchecks(row):
-                    parent_protection = formatter.protect_parent_check_cells(sheet_id, i)
-                    requests.append(parent_protection)
+            # Clear existing content
+            self._add_clear_content_request(requests, sheet_id, data_length, column_count)
+            
+            # Add new data in chunks
+            self._add_data_update_requests(requests, sheet_id, sheet.data)
+            
+            # Set column widths
+            self._add_column_width_requests(requests, sheet_id)
+            
+            # Add formatting and protection
+            self._add_formatting_requests(requests, sheet_id, sheet, data_length)
+            
+            # Configure column visibility
+            self._add_column_visibility_requests(requests, sheet_id, sheet.data, column_count)
 
-            # まず全列の非表示設定を解除
+        except Exception as e:
+            logger.error(f"Error processing sheet content: {e}")
+            raise
+
+    def _adjust_sheet_size(self, sheet_id: int, sheet_name: str, data_length: int, column_count: int) -> None:
+        """Adjust sheet size if needed"""
+        spreadsheet = self.service.spreadsheets().get(
+            spreadsheetId=self.spreadsheet_id,
+            ranges=[sheet_name],
+            includeGridData=False
+        ).execute()
+        
+        grid_properties = None
+        for s in spreadsheet['sheets']:
+            if s['properties']['title'] == sheet_name:
+                grid_properties = s['properties']['gridProperties']
+                break
+                
+        if grid_properties:
+            current_rows = grid_properties.get('rowCount', 1000)
+            current_cols = grid_properties.get('columnCount', 26)
+            
+            size_requests = adjust_sheet_size(
+                sheet_id, data_length, column_count, 
+                current_rows, current_cols
+            )
+            
+            if size_requests:
+                logger.debug("Executing size adjustment requests")
+                self.service.spreadsheets().batchUpdate(
+                    spreadsheetId=self.spreadsheet_id,
+                    body={'requests': size_requests}
+                ).execute()
+
+    def _add_clear_content_request(
+        self,
+        requests: List[Dict],
+        sheet_id: int,
+        data_length: int,
+        column_count: int
+    ) -> None:
+        """Add request to clear existing content"""
+        requests.append({
+            'updateCells': {
+                'range': {
+                    'sheetId': sheet_id,
+                    'startRowIndex': 0,
+                    'endRowIndex': data_length,
+                    'startColumnIndex': 0,
+                    'endColumnIndex': column_count
+                },
+                'fields': '*'
+            }
+        })
+
+    def _add_data_update_requests(
+        self,
+        requests: List[Dict],
+        sheet_id: int,
+        data: List[List[CellData]]
+    ) -> None:
+        """Add requests to update sheet data in chunks"""
+        for i in range(0, len(data), 1000):
+            chunk = data[i:i + 1000]
+            requests.append({
+                'updateCells': {
+                    'rows': [
+                        {'values': [cell.to_sheets_value() for cell in row]}
+                        for row in chunk
+                    ],
+                    'fields': 'userEnteredValue,userEnteredFormat,textFormatRuns,dataValidation',
+                    'range': {
+                        'sheetId': sheet_id,
+                        'startRowIndex': i,
+                        'startColumnIndex': 0
+                    }
+                }
+            })
+
+    def _add_column_width_requests(self, requests: List[Dict], sheet_id: int) -> None:
+        """Add requests to set column widths"""
+        for i, width in enumerate(self._get_column_widths()):
             requests.append({
                 'updateDimensionProperties': {
                     'range': {
                         'sheetId': sheet_id,
                         'dimension': 'COLUMNS',
-                        'startIndex': 0,
-                        'endIndex': column_count
+                        'startIndex': i,
+                        'endIndex': i + 1
                     },
-                    'properties': {
-                        'hiddenByUser': False
-                    },
-                    'fields': 'hiddenByUser'
+                    'properties': {'pixelSize': width},
+                    'fields': 'pixelSize'
                 }
             })
 
-            # GeneratedDataの有無を確認
-            has_generated_data = bool(COLUMNS[self.current_target]['generatedData'])
-            
-            # シートにサブチェックが存在するか確認
-            has_subchecks = False
-            for row in sheet.data[1:]:  # ヘッダー行をスキップ
-                if row[1].value:  # B列（subcheckId）に値がある
-                    has_subchecks = True
-                    break
+    def _add_formatting_requests(
+        self,
+        requests: List[Dict],
+        sheet_id: int,
+        sheet: SheetStructure,
+        data_length: int
+    ) -> None:
+        """Add formatting and protection requests"""
+        formatter = SheetFormatter(self.current_lang, self.current_target)
+        
+        # Basic formatting
+        requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
+        
+        # Protection settings
+        requests.extend(formatter.add_protection_settings(sheet_id, sheet))
+        
+        # Parent check protection
+        for i, row in enumerate(sheet.data[1:], start=1):
+            if self._is_parent_check_with_subchecks(row):
+                requests.append(formatter.protect_parent_check_cells(sheet_id, i))
 
-            # 列の表示/非表示設定
-            if has_generated_data:
-                if not has_subchecks:
-                    # サブチェックがない場合はB～D列を非表示
-                    requests.append({
-                        'updateDimensionProperties': {
-                            'range': {
-                                'sheetId': sheet_id,
-                                'dimension': 'COLUMNS',
-                                'startIndex': 1,  # B列
-                                'endIndex': 4     # E列の手前まで
-                            },
-                            'properties': {
-                                'hiddenByUser': True
-                            },
-                            'fields': 'hiddenByUser'
-                        }
-                    })
-                else:
-                    # サブチェックがある場合はC列のみ非表示
-                    requests.append({
-                        'updateDimensionProperties': {
-                            'range': {
-                                'sheetId': sheet_id,
-                                'dimension': 'COLUMNS',
-                                'startIndex': 2,  # C列
-                                'endIndex': 3     # D列の手前まで
-                            },
-                            'properties': {
-                                'hiddenByUser': True
-                            },
-                            'fields': 'hiddenByUser'
-                        }
-                    })
-                    
-                    # A列とB列をマージ
-                    requests.append({
-                        'mergeCells': {
-                            'range': {
-                                'sheetId': sheet_id,
-                                'startRowIndex': 0,
-                                'endRowIndex': 1,
-                                'startColumnIndex': 0,
-                                'endColumnIndex': 2
-                            },
-                            'mergeType': 'MERGE_ALL'
-                        }
-                    })
-            else:
-                # GeneratedDataがない場合はB列を非表示
+    def _add_column_visibility_requests(
+        self,
+        requests: List[Dict],
+        sheet_id: int,
+        data: List[List[CellData]],
+        column_count: int
+    ) -> None:
+        """Add requests to configure column visibility"""
+        # Reset all column visibility
+        requests.append({
+            'updateDimensionProperties': {
+                'range': {
+                    'sheetId': sheet_id,
+                    'dimension': 'COLUMNS',
+                    'startIndex': 0,
+                    'endIndex': column_count
+                },
+                'properties': {'hiddenByUser': False},
+                'fields': 'hiddenByUser'
+            }
+        })
+        
+        has_generated_data = bool(COLUMNS[self.current_target]['generatedData'])
+        has_subchecks = any(row[1].value for row in data[1:])  # Check B column after header
+        
+        if has_generated_data:
+            if not has_subchecks:
+                # Hide columns B-D if no subchecks
                 requests.append({
                     'updateDimensionProperties': {
                         'range': {
                             'sheetId': sheet_id,
                             'dimension': 'COLUMNS',
-                            'startIndex': 1,  # B列
-                            'endIndex': 2     # C列の手前まで
+                            'startIndex': 1,
+                            'endIndex': 4
                         },
-                        'properties': {
-                            'hiddenByUser': True
-                        },
+                        'properties': {'hiddenByUser': True},
                         'fields': 'hiddenByUser'
                     }
                 })
-
-        except Exception as e:
-            logger.error(f"Error processing sheet content: {e}")
-            raise
+            else:
+                # Hide column C and merge A-B for subchecks
+                requests.append({
+                    'updateDimensionProperties': {
+                        'range': {
+                            'sheetId': sheet_id,
+                            'dimension': 'COLUMNS',
+                            'startIndex': 2,
+                            'endIndex': 3
+                        },
+                        'properties': {'hiddenByUser': True},
+                        'fields': 'hiddenByUser'
+                    }
+                })
+                
+                requests.append({
+                    'mergeCells': {
+                        'range': {
+                            'sheetId': sheet_id,
+                            'startRowIndex': 0,
+                            'endRowIndex': 1,
+                            'startColumnIndex': 0,
+                            'endColumnIndex': 2
+                        },
+                        'mergeType': 'MERGE_ALL'
+                    }
+                })
+        else:
+            # Hide column B if no generated data
+            requests.append({
+                'updateDimensionProperties': {
+                    'range': {
+                        'sheetId': sheet_id,
+                        'dimension': 'COLUMNS',
+                        'startIndex': 1,
+                        'endIndex': 2
+                    },
+                    'properties': {'hiddenByUser': True},
+                    'fields': 'hiddenByUser'
+                }
+            })
 
     def _is_parent_check_with_subchecks(self, row: List[CellData]) -> bool:
         """Check if the row represents a parent check that has subchecks
