@@ -11,8 +11,12 @@ from .faq_generator import (
 from .reference_generator import (
     WcagMappingGenerator,
     PriorityDiffGenerator,
-    MiscDefinitionsGenerator
+    MiscDefinitionsGenerator,
+    InfoToGuidelinesGenerator,
+    InfoToFaqsGenerator,
+    AxeRulesGenerator
 )
+from .makefile_generator import MakefileGenerator
 
 __all__ = [
     'CategoryGenerator',
@@ -25,5 +29,9 @@ __all__ = [
     'FaqArticleIndexGenerator',
     'WcagMappingGenerator',
     'PriorityDiffGenerator',
-    'MiscDefinitionsGenerator'
+    'MiscDefinitionsGenerator',
+    'InfoToGuidelinesGenerator',
+    'InfoToFaqsGenerator',
+    'AxeRulesGenerator',
+    'MakefileGenerator'
 ]
