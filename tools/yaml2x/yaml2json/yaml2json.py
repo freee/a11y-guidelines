@@ -12,7 +12,7 @@ from typing import Dict, Any
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from a11y_guidelines import setup_instances, InfoRef, Check
-from . import config, utils, rst_processor
+import config, utils, rst_processor
 
 def get_yaml_data(basedir: Path, base_url: str) -> Dict[str, Any]:
     """

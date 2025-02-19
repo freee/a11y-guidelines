@@ -9,10 +9,26 @@ import re
 from typing import Dict, Any
 
 # Regular expression patterns
-RST_REF_PATTERN = re.compile(r':ref:`([-a-z0-9]+)`')
-RST_KBD_PATTERN = re.compile(r':kbd:`(.+)`')
-FULLWIDTH_CHARS = r'[----]'
-HALFWIDTH_CHARS = r'[---]'
+RST_REF_PATTERN = re.compile(r':ref:`([-a-z0-9]+)`')  # Match reference IDs
+RST_KBD_PATTERN = re.compile(r':kbd:`(.+)`')  # Match keyboard shortcuts
+
+def normalize_text(text: str) -> str:
+    """Normalize whitespace and spacing between characters."""
+    # Remove leading and trailing whitespaces
+    text = text.strip()
+
+    # Define regexp for half and full width chars
+    fullwidth_chars = r'[----]'
+    halfwidth_chars = r'[---]'
+
+    # Remove whitespaces between fullwidth chars
+    text = re.sub(rf'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+
+    # Remove whitespaces between halfwidth chars and full width chars
+    text = re.sub(rf'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
+    text = re.sub(rf'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+
+    return text
 
 def process_rst_text(text: str, info: Dict[str, Any], lang: str) -> str:
     """
@@ -26,20 +42,22 @@ def process_rst_text(text: str, info: Dict[str, Any], lang: str) -> str:
     Returns:
         Processed text with RST markup replaced
     """
+    def ref_replace(match):
+        """Replace reference with its text."""
+        ref_id = match.group(1)
+        if ref_id not in info:
+            return match.group(0)  # Keep original if reference not found
+        return info[ref_id]['text'][lang]
+
     # Replace references
-    text = RST_REF_PATTERN.sub(lambda m: info[m.group(1)]['text'][lang], text)
+    text = RST_REF_PATTERN.sub(ref_replace, text)
     
     # Replace keyboard shortcuts
     text = RST_KBD_PATTERN.sub(lambda m: m.group(1), text)
-    
-    # Clean up whitespace
-    text = text.strip()
-    
-    # Remove unnecessary spaces between width chars
-    text = re.sub(rf'({FULLWIDTH_CHARS})\s+({FULLWIDTH_CHARS})', r'\1\2', text)
-    text = re.sub(rf'({FULLWIDTH_CHARS})\s+({HALFWIDTH_CHARS})', r'\1\2', text)
-    text = re.sub(rf'({HALFWIDTH_CHARS})\s+({FULLWIDTH_CHARS})', r'\1\2', text)
-    
+
+    # Only normalize spacing for Japanese text
+    if lang == 'ja':
+        text = normalize_text(text)
     return text
 
 def process_rst_condition(condition: Dict[str, Any], info: Dict[str, Any]) -> Dict[str, Any]:
