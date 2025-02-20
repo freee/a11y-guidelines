@@ -18,8 +18,8 @@ def normalize_text(text: str) -> str:
     text = text.strip()
 
     # Define regexp for half and full width chars
-    fullwidth_chars = r'[----]'
-    halfwidth_chars = r'[---]'
+    fullwidth_chars = r'[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]'
+    halfwidth_chars = r'[\u0000-\u007F\uFF61-\uFFDC\uFFE8-\uFFEE]'
 
     # Remove whitespaces between fullwidth chars
     text = re.sub(rf'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
