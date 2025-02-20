@@ -444,3 +444,6 @@ In Browse Mode, you can navigate through the content using key commands such as 
       -  Next, previous table
 
 In addition to these key commands, pressing :kbd:`NVDA + F7` displays a list of elements within the page, and it is possible to navigate using this list.
+
+.. include:: /inc/info2faq/exp-screen-reader-check-nvda.rst
+

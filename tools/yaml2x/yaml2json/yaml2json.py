@@ -1,68 +1,83 @@
+"""
+Main module for YAML to JSON conversion.
+
+This module orchestrates the conversion process, handling configuration,
+data processing, and output generation for accessibility guidelines.
+"""
+
 import sys
-import os
 import json
-import re
 from pathlib import Path
+from typing import Dict, Any
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-import initializer as app_initializer
-from a11y_guidelines import setup_instances, Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
+from a11y_guidelines import setup_instances, InfoRef, Check
+import config, utils, rst_processor
 
-def main():
-    settings = app_initializer.setup_parameters()
-    version_info = app_initializer.version_info(settings['basedir'])
-    setup_instances(settings['basedir'])
+def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
+    """
+    Process YAML files and return structured data as a Python dictionary.
 
-    info_links = app_initializer.get_info_links(settings['basedir'], settings['base_url'])
+    Args:
+        basedir (Path): Base directory containing YAML files
+        base_url (str): Base URL for links
+
+    Returns:
+        Dict[str, Any]: Processed data including version info, checks, and conditions
+
+    Raises:
+        Exception: If there's an error during the conversion process
+    """
+    # Initialize configuration
+    settings: Dict[str, Any] = {
+        "basedir": basedir,
+        "base_url": base_url,
+        "publish": publish
+    }
+    
+    version_info: Dict[str, str] = utils.get_version_info(basedir)
+    setup_instances(basedir)
+
+    # Process information links and references
+    info_links: Dict[str, Any] = utils.get_info_links(basedir, base_url)
     for info in InfoRef.list_all_internal():
         if info.ref in info_links:
             info.set_link(info_links[info.ref])
-    checks = Check.object_data_all(settings['base_url'])
+    
+    # Process checks and their conditions
+    checks: Dict[str, Any] = Check.object_data_all(base_url)
     for key in checks:
         if 'conditions' in checks[key]:
-            checks[key]['conditions'] = [deRST(condition, info_links) for condition in checks[key]['conditions']]
+            checks[key]['conditions'] = [
+                rst_processor.process_rst_condition(condition, info_links) 
+                for condition in checks[key]['conditions']
+            ]
 
-    data = {
-        'publish': settings['publish'],
+    # Return output data
+    return {
+        'publish': publish,
         'version': version_info['checksheet_version'],
         'date': version_info['checksheet_date'],
         'checks': checks
     }
-    with open(settings['output_file'], mode="w", encoding="utf-8", newline="\n") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
 
-def deRST(condition, info):
-
-    def reRST_str(str, info, lang):
-        ref = re.compile(r':ref:`([-a-z0-9]+)`')
-        text = ref.sub(lambda m: info[m.group(1)]['text'][lang], str)
-        kbd = re.compile(r':kbd:`(.+)`')
-        text = kbd.sub(lambda m: m.group(1), text)
-
-        # Remove leading and trailing whitespaces
-        text = text.strip()
-
-        # Define regexp for half and full width chars
-        fullwidth_chars = r'[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]'
-        halfwidth_chars = r'[\u0000-\u007F\uFF61-\uFFDC\uFFE8-\uFFEE]'
-
-        # Remove whitespaces between fullwidth chars
-        text = re.sub(rf'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
-
-        # Remove whitespaces between halfwidth chars and full width chars
-        text = re.sub(rf'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
-        text = re.sub(rf'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
-
-        return text
-
-    if condition['type'] == 'simple':
-        if 'procedure' in condition:
-            for lang in condition['procedure']['procedure']:
-                condition['procedure']['procedure'][lang] = reRST_str(condition['procedure']['procedure'][lang], info, lang)
-        return condition
-    for i in range(len(condition['conditions'])):
-        condition['conditions'][i] = deRST(condition['conditions'][i], info)
-    return condition
+def main() -> None:
+    """
+    Main CLI function that processes YAML files and generates JSON output.
+    """
+    try:
+        # Get configuration
+        settings: Dict[str, Any] = config.setup_configuration()
+        
+        # Process YAML data
+        output_data = get_yaml_data(settings['basedir'], settings['base_url'], settings['publish'])
+        
+        # Write to JSON file
+        with open(settings['output_file'], mode="w", encoding="utf-8", newline="\n") as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
+            
+    except Exception as e:
+        sys.exit(f"Error during conversion process: {str(e)}")
 
 if __name__ == "__main__":
     main()
