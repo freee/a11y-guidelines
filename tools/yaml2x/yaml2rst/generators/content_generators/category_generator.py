@@ -1,29 +1,36 @@
 """Generator for category pages."""
-from typing import Dict, Any, Iterator
+from typing import Dict, Any, Iterator, List
 
 from a11y_guidelines import RelationshipManager, Category
-from ..base_generator import BaseGenerator
+from ..common_generators import ListBasedGenerator
 
-class CategoryGenerator(BaseGenerator):
+class CategoryGenerator(ListBasedGenerator[str]):
     """Generates category pages with associated guidelines."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate category page data.
-        
-        Yields:
-            Dictionary containing category and its guidelines data
-        """
-        rel = RelationshipManager()
-        for category, guidelines in rel.get_guidelines_to_category().items():
-            yield {
-                'filename': category,
-                'guidelines': [gl.template_data(self.lang) for gl in guidelines]
-            }
+    def __init__(self, lang: str):
+        super().__init__(lang)
+        self.relationship_manager = RelationshipManager()
+        self.categories_by_id = {cat.id: cat for cat in Category.list_all()}
+
+    def get_items(self) -> List[str]:
+        """Get all category IDs to process."""
+        return list(self.categories_by_id.keys())
+
+    def process_item(self, category_id: str) -> Dict[str, Any]:
+        """Process a single category."""
+        category_map = self.relationship_manager.get_guidelines_to_category()
+        category = self.categories_by_id[category_id]
+        guidelines = category_map[category_id]
+        return {
+            'filename': category_id,
+            'guidelines': [gl.template_data(self.lang) for gl in guidelines]
+        }
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate category page data."""
+        required_fields = ['filename', 'guidelines']
+        return all(field in data for field in required_fields)
 
     def get_dependencies(self) -> list[str]:
-        """Get category file dependencies.
-        
-        Returns:
-            List of category source file paths
-        """
+        """Get category file dependencies."""
         return [cat.get_dependency() for cat in Category.list_all()]

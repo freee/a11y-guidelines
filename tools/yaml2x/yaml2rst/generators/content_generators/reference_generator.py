@@ -1,111 +1,80 @@
-"""Generators for reference content like WCAG mappings and misc definitions."""
-from typing import Dict, Any, Iterator
+"""Generators for miscellaneous definitions and reference content."""
+from typing import Dict, Any, List
 
-from a11y_guidelines import WcagSc, InfoRef, RelationshipManager, AxeRule
-from ..base_generator import BaseGenerator
+from a11y_guidelines import InfoRef, AxeRule, RelationshipManager
+from ..common_generators import SingleFileGenerator, ListBasedGenerator
 
-class WcagMappingGenerator(BaseGenerator):
-    """Generates WCAG 2.1 mapping pages."""
-
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate WCAG mapping data.
-        
-        Yields:
-            Dictionary containing WCAG success criteria mappings
-        """
-        rel = RelationshipManager()
-        mappings = []
-        for sc in WcagSc.get_all().values():
-            sc_object = sc.template_data()
-            guidelines = rel.get_sc_to_guidelines(sc)
-            if len(guidelines) > 0:
-                sc_object['guidelines'] = [guideline.get_category_and_id(self.lang) for guideline in guidelines]
-            mappings.append(sc_object)
-        yield {'mapping': mappings}
-
-    def get_dependencies(self) -> list[str]:
-        return [sc.src_path for sc in WcagSc.get_all().values()]
-
-class PriorityDiffGenerator(BaseGenerator):
-    """Generates priority difference pages."""
-
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate priority difference data.
-        
-        Yields:
-            Dictionary containing differences between WCAG levels and local priorities
-        """
-        diffs = [sc.template_data() for sc in WcagSc.get_all().values() if sc.level != sc.local_priority]
-        yield {'diffs': diffs}
-
-    def get_dependencies(self) -> list[str]:
-        return [sc.src_path for sc in WcagSc.get_all().values()]
-
-class MiscDefinitionsGenerator(BaseGenerator):
-    """Generates miscellaneous definitions pages."""
-
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate miscellaneous definitions data.
-        
-        Yields:
-            Dictionary containing external reference links and definitions
-        """
-        data = []
-        for info in InfoRef.list_all_external():
-            data.append({
-                'label': info.refstring(),
-                'text': info.text[self.lang],
-                'url': info.url[self.lang]
-            })
-        yield {'links': data}
-
-    def get_dependencies(self) -> list[str]:
-        return [info.src_path for info in InfoRef.list_all_external()]
-
-class InfoToGuidelinesGenerator(BaseGenerator):
+class InfoToGuidelinesGenerator(ListBasedGenerator[InfoRef]):
     """Generates guideline reference pages from info."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        rel = RelationshipManager()
-        for info in InfoRef.list_has_guidelines():
-            if not info.internal:
-                continue
-            sorted_guidelines = sorted(
-                rel.get_info_to_guidelines(info),
-                key=lambda item: item.sort_key
-            )
-            guidelines = [guideline.get_category_and_id(self.lang) 
-                         for guideline in sorted_guidelines]
-            yield {
-                'filename': info.ref,
-                'guidelines': guidelines
-            }
+    def __init__(self, lang: str):
+        super().__init__(lang)
+        self.relationship_manager = RelationshipManager()
+
+    def get_items(self) -> List[InfoRef]:
+        """Get all internal infos that have guidelines."""
+        return [info for info in InfoRef.list_has_guidelines() if info.internal]
+
+    def process_item(self, info: InfoRef) -> Dict[str, Any]:
+        """Process a single info reference."""
+        sorted_guidelines = sorted(
+            self.relationship_manager.get_info_to_guidelines(info),
+            key=lambda item: item.sort_key
+        )
+        guidelines = [guideline.get_category_and_id(self.lang) 
+                     for guideline in sorted_guidelines]
+        return {
+            'filename': info.ref,
+            'guidelines': guidelines
+        }
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate guideline reference data."""
+        required_fields = ['filename', 'guidelines']
+        if not all(field in data for field in required_fields):
+            return False
+        return isinstance(data['guidelines'], list)
 
     def get_dependencies(self) -> list[str]:
+        """Get file dependencies."""
         return [info.src_path for info in InfoRef.list_has_guidelines()]
 
-class InfoToFaqsGenerator(BaseGenerator):
+class InfoToFaqsGenerator(ListBasedGenerator[InfoRef]):
     """Generates FAQ reference pages from info."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        rel = RelationshipManager()
-        for info in InfoRef.list_has_faqs():
-            if not info.internal:
-                continue
-            faqs = [faq.id for faq in rel.get_info_to_faqs(info)]
-            yield {
-                'filename': info.ref,
-                'faqs': faqs
-            }
+    def __init__(self, lang: str):
+        super().__init__(lang)
+        self.relationship_manager = RelationshipManager()
+
+    def get_items(self) -> List[InfoRef]:
+        """Get all internal infos that have FAQs."""
+        return [info for info in InfoRef.list_has_faqs() if info.internal]
+
+    def process_item(self, info: InfoRef) -> Dict[str, Any]:
+        """Process a single info reference."""
+        faqs = [faq.id for faq in self.relationship_manager.get_info_to_faqs(info)]
+        return {
+            'filename': info.ref,
+            'faqs': faqs
+        }
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate FAQ reference data."""
+        required_fields = ['filename', 'faqs']
+        if not all(field in data for field in required_fields):
+            return False
+        return isinstance(data['faqs'], list)
 
     def get_dependencies(self) -> list[str]:
+        """Get file dependencies."""
         return [info.src_path for info in InfoRef.list_has_faqs()]
 
-class AxeRulesGenerator(BaseGenerator):
+class AxeRulesGenerator(SingleFileGenerator):
     """Generates axe rules documentation."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        yield {
+    def get_template_data(self) -> Dict[str, Any]:
+        """Generate axe rules data."""
+        return {
             'version': AxeRule.version,
             'major_version': AxeRule.major_version,
             'deque_url': AxeRule.deque_url,
@@ -113,5 +82,47 @@ class AxeRulesGenerator(BaseGenerator):
             'rules': [rule.template_data(self.lang) for rule in AxeRule.list_all()]
         }
 
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate axe rules data."""
+        required_fields = ['version', 'major_version', 'deque_url', 'timestamp', 'rules']
+        if not all(field in data for field in required_fields):
+            return False
+        return isinstance(data['rules'], list)
+
     def get_dependencies(self) -> list[str]:
+        """Get file dependencies."""
         return [rule.src_path for rule in AxeRule.list_all()]
+
+class MiscDefinitionsGenerator(SingleFileGenerator):
+    """Generates miscellaneous definitions pages."""
+
+    def get_template_data(self) -> Dict[str, Any]:
+        """Generate miscellaneous definitions data."""
+        data = []
+        for info in InfoRef.list_all_external():
+            data.append({
+                'label': info.refstring(),
+                'text': info.text[self.lang],
+                'url': info.url[self.lang]
+            })
+        return {'links': data}
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate miscellaneous definitions data."""
+        if not isinstance(data, dict) or 'links' not in data:
+            return False
+            
+        links = data['links']
+        if not isinstance(links, list):
+            return False
+            
+        for link in links:
+            required_fields = ['label', 'text', 'url']
+            if not all(field in link for field in required_fields):
+                return False
+                
+        return True
+
+    def get_dependencies(self) -> list[str]:
+        """Get file dependencies."""
+        return [info.src_path for info in InfoRef.list_all_external()]

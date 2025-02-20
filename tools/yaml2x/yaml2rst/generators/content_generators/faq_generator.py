@@ -1,91 +1,108 @@
 """Generators for FAQ-related content."""
-from typing import Dict, Any, Iterator, List
+from typing import Dict, Any, List, Iterator
 
 from a11y_guidelines import Faq, FaqTag, RelationshipManager
+from ..common_generators import SingleFileGenerator, ListBasedGenerator
 from ..base_generator import BaseGenerator
 
-class FaqArticleGenerator(BaseGenerator):
+class FaqGeneratorBase(BaseGenerator):
+    """Base class for FAQ-related generators."""
+    
+    def __init__(self, lang: str):
+        super().__init__(lang)
+        self.relationship_manager = RelationshipManager()
+
+    def get_dependencies(self) -> list[str]:
+        """Get FAQ file dependencies."""
+        return [faq.src_path for faq in Faq.list_all()]
+
+    def get_sorted_tags(self) -> List[FaqTag]:
+        """Get sorted list of tags with articles."""
+        return sorted(
+            [tag for tag in FaqTag.list_all() if tag.article_count() > 0],
+            key=lambda x: x.names[self.lang]
+        )
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate FAQ data."""
+        return True  # 具体的なバリデーションは子クラスで実装
+
+class FaqArticleGenerator(ListBasedGenerator[Faq], FaqGeneratorBase):
     """Generates individual FAQ article pages."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate FAQ article data.
-        
-        Yields:
-            Dictionary containing FAQ article data
-        """
-        for faq in Faq.list_all():
-            yield {'filename': faq.id, **faq.template_data(self.lang)}
+    def get_items(self) -> List[Faq]:
+        """Get all FAQ articles."""
+        return Faq.list_all()
 
-    def get_dependencies(self) -> list[str]:
-        return [faq.src_path for faq in Faq.list_all()]
+    def process_item(self, faq: Faq) -> Dict[str, Any]:
+        """Process a single FAQ article."""
+        return {
+            'filename': faq.id,
+            **faq.template_data(self.lang)
+        }
 
-class FaqTagPageGenerator(BaseGenerator):
-    """Generates FAQ tag pages."""
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate FAQ article data."""
+        required_fields = ['filename', 'title']
+        return all(field in data for field in required_fields)
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate FAQ tag page data.
-        
-        Yields:
-            Dictionary containing tag page data with associated articles
-        """
-        rel = RelationshipManager()
-        for tag in FaqTag.list_all():
-            if tag.article_count() == 0:
-                continue
-            yield {
-                'filename': tag.id,
-                'tag': tag.id,
-                'label': tag.names[self.lang],
-                'articles': [faq.id for faq in rel.get_tag_to_faqs(tag)]
-            }
-
-    def get_dependencies(self) -> list[str]:
-        return [faq.src_path for faq in Faq.list_all()]
-
-class FaqIndexGenerator(BaseGenerator):
+class FaqIndexGenerator(SingleFileGenerator, FaqGeneratorBase):
     """Generates the main FAQ index page."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate FAQ index data.
-        
-        Yields:
-            Dictionary containing all tags and articles for the index
-        """
-        sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[self.lang])
-        tags = [tag.template_data(self.lang) for tag in sorted_tags if tag.article_count() > 0]
-        articles = [article.template_data(self.lang) for article in Faq.list_all(sort_by='date')]
-        yield {'articles': articles, 'tags': tags}
+    def get_template_data(self) -> Dict[str, Any]:
+        """Generate the index page data."""
+        sorted_tags = self.get_sorted_tags()
+        tags = [tag.template_data(self.lang) for tag in sorted_tags]
+        articles = [article.template_data(self.lang) 
+                   for article in Faq.list_all(sort_by='date')]
+        return {
+            'tags': tags,
+            'articles': articles
+        }
 
-    def get_dependencies(self) -> list[str]:
-        return [faq.src_path for faq in Faq.list_all()]
+class FaqTagPageGenerator(ListBasedGenerator[FaqTag], FaqGeneratorBase):
+    """Generates FAQ tag pages."""
 
-class FaqTagIndexGenerator(BaseGenerator):
+    def get_items(self) -> List[FaqTag]:
+        """Get all FAQ tags with articles."""
+        return [tag for tag in FaqTag.list_all() if tag.article_count() > 0]
+
+    def process_item(self, tag: FaqTag) -> Dict[str, Any]:
+        """Process a single FAQ tag."""
+        return {
+            'filename': tag.id,
+            'tag': tag.id,
+            'label': tag.names[self.lang],
+            'articles': [faq.id for faq in self.relationship_manager.get_tag_to_faqs(tag)]
+        }
+
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate tag page data."""
+        required_fields = ['filename', 'tag', 'label', 'articles']
+        return all(field in data for field in required_fields)
+
+class FaqTagIndexGenerator(SingleFileGenerator, FaqGeneratorBase):
     """Generates the FAQ tag index page."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate FAQ tag index data.
-        
-        Yields:
-            Dictionary containing all tags for the index
-        """
-        sorted_tags = sorted(FaqTag.list_all(), key=lambda x: x.names[self.lang])
-        tagpages = [tagpage.template_data(self.lang) for tagpage in sorted_tags if tagpage.article_count() > 0]
-        yield {'tags': tagpages}
+    def get_template_data(self) -> Dict[str, Any]:
+        """Generate the tag index page data."""
+        sorted_tags = self.get_sorted_tags()
+        tagpages = [tag.template_data(self.lang) for tag in sorted_tags]
+        return {'tags': tagpages}
 
-    def get_dependencies(self) -> list[str]:
-        return [faq.src_path for faq in Faq.list_all()]
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate tag index data."""
+        return 'tags' in data and isinstance(data['tags'], list)
 
-class FaqArticleIndexGenerator(BaseGenerator):
+class FaqArticleIndexGenerator(SingleFileGenerator, FaqGeneratorBase):
     """Generates the FAQ article index page."""
 
-    def generate(self) -> Iterator[Dict[str, Any]]:
-        """Generate FAQ article index data.
-        
-        Yields:
-            Dictionary containing all articles for the index
-        """
-        articles = [article.template_data(self.lang) for article in Faq.list_all(sort_by='sortKey')]
-        yield {'articles': articles}
+    def get_template_data(self) -> Dict[str, Any]:
+        """Generate the article index page data."""
+        articles = [article.template_data(self.lang) 
+                   for article in Faq.list_all(sort_by='sortKey')]
+        return {'articles': articles}
 
-    def get_dependencies(self) -> list[str]:
-        return [faq.src_path for faq in Faq.list_all()]
+    def validate_data(self, data: Dict[str, Any]) -> bool:
+        """Validate article index data."""
+        return 'articles' in data and isinstance(data['articles'], list)

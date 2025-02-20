@@ -8,30 +8,38 @@ from .faq_generator import (
     FaqTagIndexGenerator,
     FaqArticleIndexGenerator
 )
-from .reference_generator import (
+from .wcag_generator import (
     WcagMappingGenerator,
-    PriorityDiffGenerator,
+    PriorityDiffGenerator
+)
+from .reference_generator import (
     MiscDefinitionsGenerator,
     InfoToGuidelinesGenerator,
     InfoToFaqsGenerator,
     AxeRulesGenerator
 )
-from .makefile_generator import MakefileGenerator
+from .makefile_generator import (
+    MakefileGenerator,
+    MakefileConfig
+)
 
 __all__ = [
     'CategoryGenerator',
     'AllChecksGenerator',
     'CheckExampleGenerator',
+    'FaqGeneratorBase',
     'FaqArticleGenerator',
     'FaqTagPageGenerator',
     'FaqIndexGenerator',
     'FaqTagIndexGenerator',
     'FaqArticleIndexGenerator',
+    'WcagGeneratorBase',
     'WcagMappingGenerator',
     'PriorityDiffGenerator',
     'MiscDefinitionsGenerator',
     'InfoToGuidelinesGenerator',
     'InfoToFaqsGenerator',
     'AxeRulesGenerator',
-    'MakefileGenerator'
+    'MakefileGenerator',
+    'MakefileConfig'
 ]
