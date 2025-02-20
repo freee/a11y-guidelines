@@ -14,7 +14,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from a11y_guidelines import setup_instances, InfoRef, Check
 import config, utils, rst_processor
 
-def get_yaml_data(basedir: Path, base_url: str) -> Dict[str, Any]:
+def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
     """
     Process YAML files and return structured data as a Python dictionary.
 
@@ -29,7 +29,12 @@ def get_yaml_data(basedir: Path, base_url: str) -> Dict[str, Any]:
         Exception: If there's an error during the conversion process
     """
     # Initialize configuration
-    settings: Dict[str, Any] = {"basedir": basedir, "base_url": base_url}
+    settings: Dict[str, Any] = {
+        "basedir": basedir,
+        "base_url": base_url,
+        "publish": publish
+    }
+    
     version_info: Dict[str, str] = utils.get_version_info(basedir)
     setup_instances(basedir)
 
@@ -50,7 +55,7 @@ def get_yaml_data(basedir: Path, base_url: str) -> Dict[str, Any]:
 
     # Return output data
     return {
-        'publish': settings.get('publish', True),
+        'publish': publish,
         'version': version_info['checksheet_version'],
         'date': version_info['checksheet_date'],
         'checks': checks
@@ -65,7 +70,7 @@ def main() -> None:
         settings: Dict[str, Any] = config.setup_configuration()
         
         # Process YAML data
-        output_data = get_yaml_data(settings['basedir'], settings['base_url'])
+        output_data = get_yaml_data(settings['basedir'], settings['base_url'], settings['publish'])
         
         # Write to JSON file
         with open(settings['output_file'], mode="w", encoding="utf-8", newline="\n") as f:
