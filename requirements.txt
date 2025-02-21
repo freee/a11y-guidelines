@@ -9,4 +9,5 @@ sphinx-lint
 google-auth-oauthlib
 google-api-python-client
 pytz
-tools/yaml2x/get_yaml_data
+tools/yaml2x/libs/freee_a11y_gl
+tools/yaml2x/libs/get_yaml_data
