@@ -1,7 +1,7 @@
 """Generators for check-related content."""
 from typing import Dict, Any, Iterator, List
 
-from a11y_guidelines import Check, CheckTool
+from freee_a11y_gl import Check, CheckTool
 from ..common_generators import SingleFileGenerator, ListBasedGenerator
 from ..base_generator import BaseGenerator
 

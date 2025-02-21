@@ -1,7 +1,7 @@
 """Generators for FAQ-related content."""
 from typing import Dict, Any, List, Iterator
 
-from a11y_guidelines import Faq, FaqTag, RelationshipManager
+from freee_a11y_gl import Faq, FaqTag, RelationshipManager
 from ..common_generators import SingleFileGenerator, ListBasedGenerator
 from ..base_generator import BaseGenerator
 

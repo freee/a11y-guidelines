@@ -1,7 +1,7 @@
 """Generators for WCAG content."""
 from typing import Dict, Any, List
 
-from a11y_guidelines import WcagSc, InfoRef, RelationshipManager, AxeRule
+from freee_a11y_gl import WcagSc, InfoRef, RelationshipManager, AxeRule
 from ..base_generator import BaseGenerator
 from ..common_generators import SingleFileGenerator
 

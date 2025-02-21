@@ -1,7 +1,7 @@
 """Generators for miscellaneous definitions and reference content."""
 from typing import Dict, Any, List
 
-from a11y_guidelines import InfoRef, AxeRule, RelationshipManager
+from freee_a11y_gl import InfoRef, AxeRule, RelationshipManager
 from ..common_generators import SingleFileGenerator, ListBasedGenerator
 
 class InfoToGuidelinesGenerator(ListBasedGenerator[InfoRef]):

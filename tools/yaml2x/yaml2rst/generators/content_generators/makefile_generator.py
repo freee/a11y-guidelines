@@ -3,7 +3,7 @@ from typing import Dict, Any, List
 import os
 from dataclasses import dataclass
 
-from a11y_guidelines import (
+from freee_a11y_gl import (
     Category, CheckTool, Faq, FaqTag, InfoRef, 
     Guideline, Check, RelationshipManager
 )
