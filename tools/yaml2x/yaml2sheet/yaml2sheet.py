@@ -1,5 +1,5 @@
 import sys
-import json
+import os
 import logging
 import argparse
 from pathlib import Path
@@ -39,6 +39,19 @@ def parse_args() -> argparse.Namespace:
         help='Use production spreadsheet (default: use development spreadsheet)'
     )
     
+    parser.add_argument(
+        '-b', '--basedir',
+        type=str,
+        default=str(Path.cwd()),
+        help='The root directory of the Guidelines project (default: current working directory)'
+    )
+    
+    parser.add_argument(
+        '-u', '--base-url',
+        type=str,
+        help='Base URL for the Guidelines (default: https://a11y-guidelines.freee.co.jp)'
+    )
+    
     return parser.parse_args()
 
 def setup_logging(level: int = logging.INFO) -> None:
@@ -64,7 +77,7 @@ def main() -> None:
     
     try:
         # Load configuration
-        logger.debug(f"Loading configuration from {args.config}")
+        logger.debug(f"Loading configuration from {args.config if args.config else 'default locations'}")
         config = load_configuration(args.config)
         
         # Update log level from config if needed
@@ -78,10 +91,10 @@ def main() -> None:
         env_type = "production" if args.production else "development"
         logger.info(f"Using {env_type} environment")
         
-        # Get authentication
+        # Get authentication using Path objects from config
         auth_manager = GoogleAuthManager(
-            credentials_path=config.credentials_path,
-            token_path=config.token_path
+            credentials_path=config.credentials_path.as_posix(),
+            token_path=config.token_path.as_posix()
         )
         credentials = auth_manager.get_credentials()
         
@@ -96,9 +109,15 @@ def main() -> None:
         return
 
     try:
-        # Load source data
-        logger.debug(f"Loading source data from YAML files")
-        source_data = get_yaml_data("/home/max/work/a11y-guidelines/", 'https://a11y-guidelines.freee.co.jp')
+        # Get base directory using unified handler
+        source_path = config.get_basedir(args.basedir)
+        logger.debug(f"Using base directory: {source_path}")
+            
+        # Get base URL from config, with command-line override
+        base_url = config.get_base_url(args.base_url)
+        logger.debug(f"Using base URL: {base_url}")
+        
+        source_data = get_yaml_data(str(source_path), base_url)
     except Exception as e:
         logger.error(f"Failed to load source data: {e}")
         return
