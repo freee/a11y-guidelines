@@ -2,7 +2,7 @@
 from typing import Dict, Any, Iterator, TypeVar, Generic, List
 from abc import abstractmethod
 
-from a11y_guidelines import Faq, FaqTag, WcagSc, RelationshipManager
+from freee_a11y_gl import Faq, FaqTag, WcagSc, RelationshipManager
 from .base_generator import BaseGenerator
 
 T = TypeVar('T')

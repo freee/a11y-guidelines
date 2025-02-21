@@ -4,8 +4,6 @@ import sys
 import os
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-
 import initializer
 from generators.file_generator import FileGenerator, GeneratorConfig
 from generators.content_generators import (
@@ -19,7 +17,7 @@ from generators.content_generators import (
     MakefileGenerator,
     MakefileConfig
 )
-from a11y_guidelines import setup_instances
+from freee_a11y_gl import setup_instances
 
 def main():
     """Main entry point for the YAML to RST converter."""

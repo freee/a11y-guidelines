@@ -2,7 +2,7 @@ import os
 import argparse
 import config
 from path import get_dest_dirnames, get_static_dest_files,  TEMPLATE_DIR, TEMPLATE_FILENAMES
-from a11y_guidelines import get_src_path
+from freee_a11y_gl import get_src_path
 from template_manager import TemplateManager
 
 def setup_parameters():

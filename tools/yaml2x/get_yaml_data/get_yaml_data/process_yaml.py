@@ -10,12 +10,10 @@ import sys
 import json
 from pathlib import Path
 from typing import Dict, Any, Optional
-sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
-from a11y_guidelines import setup_instances, InfoRef, Check
+from freee_a11y_gl import setup_instances, InfoRef, Check
 from .config import setup_configuration
-from . import utils
-from . import rst_processor
+from . import utils, rst_processor
 
 def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
     """
