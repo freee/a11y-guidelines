@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "freee_a11y_gl"
+version = "0.1.0"
+description = "A module to process a11y guidelines data"
+authors = [
+    {name = "Masafumi NAKANE", email = "max@freee.co.jp"}
+]
+requires-python = ">=3.8"
+
+[tool.setuptools]
+packages = { find = {} }
