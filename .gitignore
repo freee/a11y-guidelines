@@ -7,3 +7,7 @@ build/
 incfiles.mk
 __pycache__/
 *:Zone.Identifier
+*.egg-info/
+tools/yaml2x/libs/freee_a11y_gl/freee_a11y_gl.egg-info/PKG-INFO
+tools/yaml2x/libs/freee_a11y_gl/freee_a11y_gl.egg-info/SOURCES.txt
+tools/yaml2x/libs/freee_a11y_gl/freee_a11y_gl.egg-info/top_level.txt
