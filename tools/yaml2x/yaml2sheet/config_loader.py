@@ -16,7 +16,6 @@ class ApplicationConfig:
     token_path: str
     development_spreadsheet_id: str
     production_spreadsheet_id: str
-    source_file: str
     log_level: str = "INFO"
     
     def get_log_level(self) -> int:
@@ -72,8 +71,7 @@ class ApplicationConfig:
         # Set defaults
         defaults = {
             'credentials_path': 'credentials.json',
-            'token_path': 'token.json',
-            'source_file': 'checks-v5.json'
+            'token_path': 'token.json'
         }
         
         # Merge with provided data
@@ -85,7 +83,6 @@ class ApplicationConfig:
             'GOOGLE_TOKEN_PATH': 'token_path',
             'DEV_CHECKSHEET_ID': 'development_spreadsheet_id',
             'PROD_CHECKSHEET_ID': 'production_spreadsheet_id',
-            'SOURCE_FILE': 'source_file',
             'LOG_LEVEL': 'log_level'
         }
         
@@ -95,7 +92,7 @@ class ApplicationConfig:
                 logger.debug(f"Using environment variable for {config_key}")
         
         # Validate minimal required settings
-        required_fields = {'credentials_path', 'token_path', 'source_file'}
+        required_fields = {'credentials_path', 'token_path'}
         missing_fields = required_fields - set(merged_data.keys())
         if missing_fields:
             raise ValueError(f"Missing required configuration fields: {', '.join(missing_fields)}")
