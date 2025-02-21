@@ -1,3 +1,4 @@
+import sys
 import json
 import logging
 import argparse
@@ -5,6 +6,9 @@ from pathlib import Path
 from auth import GoogleAuthManager
 from sheet_generator import ChecklistSheetGenerator
 from config_loader import load_configuration
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+from get_yaml_data import get_yaml_data
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
@@ -94,9 +98,8 @@ def main() -> None:
 
     try:
         # Load source data
-        logger.debug(f"Loading source data from {config.source_file}")
-        with open(config.source_file, 'r', encoding='utf-8') as f:
-            source_data = json.load(f)
+        logger.debug(f"Loading source data from YAML files")
+        source_data = get_yaml_data("/home/max/work/a11y-guidelines/", 'https://a11y-guidelines.freee.co.jp')
     except Exception as e:
         logger.error(f"Failed to load source data: {e}")
         return
