@@ -1,18 +1,21 @@
+# get_yaml_data.py
 """
-Main module for YAML to JSON conversion.
+Main module for YAML processing and conversion to JSON.
 
-This module orchestrates the conversion process, handling configuration,
-data processing, and output generation for accessibility guidelines.
+This module provides the core functionality for converting YAML files to JSON format,
+focusing on accessibility guidelines processing.
 """
 
 import sys
 import json
 from pathlib import Path
-from typing import Dict, Any
-sys.path.append(str(Path(__file__).resolve().parent.parent))
+from typing import Dict, Any, Optional
+sys.path.append(str(Path(__file__).resolve().parent.parent.parent))
 
 from a11y_guidelines import setup_instances, InfoRef, Check
-import config, utils, rst_processor
+from .config import setup_configuration
+from . import utils
+from . import rst_processor
 
 def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
     """
@@ -21,6 +24,7 @@ def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[s
     Args:
         basedir (Path): Base directory containing YAML files
         base_url (str): Base URL for links
+        publish (bool): Flag to indicate if this is a publication build
 
     Returns:
         Dict[str, Any]: Processed data including version info, checks, and conditions
@@ -61,23 +65,31 @@ def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[s
         'checks': checks
     }
 
-def main() -> None:
+def convert_yaml_to_json(
+    basedir: Path,
+    base_url: str,
+    output_file: Path,
+    publish: bool = False
+) -> None:
     """
-    Main CLI function that processes YAML files and generates JSON output.
+    Convert YAML files to JSON and write to specified output file.
+
+    Args:
+        basedir (Path): Base directory containing YAML files
+        base_url (str): Base URL for links
+        output_file (Path): Path to output JSON file
+        publish (bool): Flag to indicate if this is a publication build
+
+    Raises:
+        Exception: If there's an error during the conversion process
     """
     try:
-        # Get configuration
-        settings: Dict[str, Any] = config.setup_configuration()
-        
         # Process YAML data
-        output_data = get_yaml_data(settings['basedir'], settings['base_url'], settings['publish'])
+        output_data = get_yaml_data(basedir, base_url, publish)
         
         # Write to JSON file
-        with open(settings['output_file'], mode="w", encoding="utf-8", newline="\n") as f:
+        with open(output_file, mode="w", encoding="utf-8", newline="\n") as f:
             json.dump(output_data, f, indent=2, ensure_ascii=False)
             
     except Exception as e:
-        sys.exit(f"Error during conversion process: {str(e)}")
-
-if __name__ == "__main__":
-    main()
+        raise Exception(f"Error during conversion process: {str(e)}")

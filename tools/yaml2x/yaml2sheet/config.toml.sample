@@ -1,0 +1,7 @@
+# config.toml
+[General]
+credentials_path = "credentials.json"
+token_path = "token.json"
+development_spreadsheet_id = "your-dev-spreadsheet-id-here"
+production_spreadsheet_id = "your-prod-spreadsheet-id-here"
+log_level = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
