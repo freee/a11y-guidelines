@@ -188,7 +188,58 @@ def get_config_loader(config_path: str) -> ConfigLoader:
         
     return loaders[ext]
 
-def load_configuration(config_path: str = 'config.yaml') -> ApplicationConfig:
+def find_config_file(config_path: Optional[str] = None) -> str:
+    """設定ファイルを探索する
+    
+    Args:
+        config_path: コマンドラインで指定された設定ファイルパス
+        
+    Returns:
+        str: 見つかった設定ファイルの絶対パス
+        
+    Raises:
+        FileNotFoundError: 設定ファイルが見つからない場合
+    """
+    # -c オプションで指定された場合
+    if config_path:
+        if os.path.isabs(config_path):
+            if not os.path.exists(config_path):
+                raise FileNotFoundError(f"Specified configuration file not found: {config_path}")
+            return config_path
+        else:
+            # 相対パスの場合はカレントディレクトリからの相対で探す
+            abs_path = os.path.join(os.getcwd(), config_path)
+            if not os.path.exists(abs_path):
+                raise FileNotFoundError(f"Specified configuration file not found: {config_path}")
+            return abs_path
+    
+    # デフォルトの探索順
+    search_paths = []
+    
+    # カレントディレクトリを探索
+    search_paths.extend([
+        os.path.join(os.getcwd(), f"config.{ext}")
+        for ext in ["yaml", "toml", "ini"]
+    ])
+    
+    # スクリプトのあるディレクトリを探索
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    search_paths.extend([
+        os.path.join(script_dir, f"config.{ext}")
+        for ext in ["yaml", "toml", "ini"]
+    ])
+    
+    # 最初に見つかったファイルを返す
+    for path in search_paths:
+        if os.path.exists(path):
+            return path
+    
+    raise FileNotFoundError(
+        "No configuration file found. Searched in:\n" +
+        "\n".join(f"- {p}" for p in search_paths)
+    )
+
+def load_configuration(config_path: Optional[str] = None) -> ApplicationConfig:
     """Load application configuration from file
     
     Args:
@@ -201,14 +252,12 @@ def load_configuration(config_path: str = 'config.yaml') -> ApplicationConfig:
         FileNotFoundError: If config file is not found
         ValueError: If format is not supported or required settings are missing
     """
-    if not os.path.exists(config_path):
-        logger.warning(f"Configuration file not found: {config_path}")
-        return ApplicationConfig.from_dict({})
-        
     try:
-        loader = get_config_loader(config_path)
-        config_data = loader.load(config_path)
-        logger.info(f"Loaded configuration from {config_path}")
+        actual_config_path = find_config_file(config_path)
+        logger.info(f"Using configuration file: {actual_config_path}")
+        
+        loader = get_config_loader(actual_config_path)
+        config_data = loader.load(actual_config_path)
         return ApplicationConfig.from_dict(config_data)
     except Exception as e:
         logger.error(f"Error loading configuration: {e}")

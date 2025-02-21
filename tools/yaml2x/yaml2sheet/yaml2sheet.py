@@ -24,7 +24,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '-c', '--config',
         type=str,
-        default='config.yaml',
         help='Path to configuration file (supported formats: yaml, toml, ini)'
     )
     
