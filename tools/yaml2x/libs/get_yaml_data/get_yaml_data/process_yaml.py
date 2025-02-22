@@ -11,9 +11,12 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-from freee_a11y_gl import setup_instances, InfoRef, Check
+from freee_a11y_gl import (
+    setup_instances, InfoRef, Check,
+    info_utils, get_version_info
+)
 from .config import setup_configuration
-from . import utils, rst_processor
+from . import rst_processor
 
 def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
     """
@@ -37,11 +40,11 @@ def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[s
         "publish": publish
     }
     
-    version_info: Dict[str, str] = utils.get_version_info(basedir)
+    version_info: Dict[str, str] = get_version_info(basedir)
     setup_instances(basedir)
 
     # Process information links and references
-    info_links: Dict[str, Any] = utils.get_info_links(basedir, base_url)
+    info_links: Dict[str, Any] = info_utils.get_info_links(basedir, base_url)
     for info in InfoRef.list_all_internal():
         if info.ref in info_links:
             info.set_link(info_links[info.ref])
