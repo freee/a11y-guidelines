@@ -2,6 +2,7 @@
 from typing import Dict, List, Any, Optional, ClassVar
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
+from ..config import Config, LanguageCode
 
 class Check(BaseModel):
     """Check model for accessibility validation criteria."""
@@ -57,15 +58,14 @@ class Check(BaseModel):
         Returns:
             Dictionary with check data formatted for templates
         """
-        from ..constants import SEVERITY_TAGS, CHECK_TARGETS
         rel = RelationshipManager()
         gl_platform = kwargs.get('platform')
 
         data = {
             'id': self.id,
             'check': self.check_text[lang],
-            'severity': SEVERITY_TAGS[self.severity][lang],
-            'target': CHECK_TARGETS[self.target][lang],
+            'severity': Config.get_severity_tag(self.severity, lang),
+            'target': Config.get_check_target_name(self.target, lang),
             'platform': self.join_items(self.platform, lang),
             'guidelines': []
         }
@@ -104,9 +104,9 @@ class Check(BaseModel):
     @staticmethod
     def join_items(items: List[str], lang: str) -> str:
         """Join platform items with localized separator."""
-        from ..constants import PLATFORM_NAMES
-        separator = '、' if lang == 'ja' else ', '
-        return separator.join([PLATFORM_NAMES[item][lang] for item in items])
+        return Config.get_list_separator(lang).join(
+            [Config.get_platform_name(item, lang) for item in items]
+        )
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:
@@ -119,7 +119,6 @@ class Check(BaseModel):
         sorted_checks = sorted(cls._instances, key=lambda x: cls._instances[x].id)
         for check_id in sorted_checks:
             yield cls._instances[check_id].template_data(lang)
-
 
 class Example:
     """Example use of a check procedure."""
@@ -230,7 +229,6 @@ class CheckTool:
         """
         return cls._instances.get(tool_id)
 
-
 @dataclass
 class YouTube:
     """YouTube video reference."""
@@ -256,9 +254,8 @@ class Method:
         Args:
             lang: Language code
         """
-        from ..constants import IMPLEMENTATION_TARGETS
         return {
-            'platform': IMPLEMENTATION_TARGETS[self.platform][lang],
+            'platform': Config.get_implementation_target_name(self.platform, lang),
             'method': self.method[lang]
         }
 
@@ -324,10 +321,7 @@ class Procedure:
 
     def object_data(self, platform: str) -> Dict[str, Any]:
         """Get object data for procedure."""
-        baseurl = {
-            'ja': 'https://a11y-guidelines.freee.co.jp/checks/examples/',
-            'en': 'https://a11y-guidelines.freee.co.jp/en/checks/examples/'
-        }
+        baseurl = Config.EXAMPLES_BASE_URLS
         tool_link = {
             'text': {},
             'url': {}
@@ -372,44 +366,21 @@ class Condition:
 
     def summary(self, lang: str) -> str:
         """Get localized summary of condition."""
-        language_info = {
-            'ja': {
-                'simple_pass_singular': 'を満たしている',
-                'simple_pass_plural': 'を満たしている',
-                'and_connector': '、かつ',
-                'or_connector': '、または',
-                'and_separator': 'と',
-                'or_separator': 'または'
-            },
-            'en': {
-                'simple_pass_singular': ' is true',
-                'simple_pass_plural': ' are true',
-                'and_connector': ', and ',
-                'or_connector': ', or ',
-                'and_separator': ' and ',
-                'or_separator': ' or '
-            },
-        }
-
         if self.type == 'simple':
-            return f'{self.procedure.id}{language_info[lang]["simple_pass_singular"]}'
+            pass_text = '_を満たしている' if lang == 'ja' else ' is true'
+            return f'{self.procedure.id}{pass_text}'
 
-        info = language_info[lang]
         simple_conditions = [c.summary(lang) for c in self.conditions if c.type == 'simple']
         complex_conditions = [f'({c.summary(lang)})' for c in self.conditions if c.type != 'simple']
 
-        if self.type == 'and':
-            summary_separator = info['and_separator']
-            summary_connector = info['and_connector']
-            simple_pass = info['simple_pass_plural']
-        else:
-            summary_separator = info['or_separator']
-            summary_connector = info['or_connector']
-            simple_pass = info['simple_pass_singular']
+        conjunction_type = 'and' if self.type == 'and' else 'or'
+        summary_separator = Config.get_separator(lang, conjunction_type)
+        summary_connector = Config.get_conjunction(lang, conjunction_type)
+        pass_text = '_を満たしている' if lang == 'ja' else ' is true'
 
         if len(simple_conditions) > 1:
-            simple_conditions = [c.replace(info['simple_pass_singular'], '') for c in simple_conditions]
-            simple_summary = f'{summary_separator.join(simple_conditions)}{simple_pass}'
+            simple_conditions = [c.replace(pass_text, '') for c in simple_conditions]
+            simple_summary = f'{summary_separator.join(simple_conditions)}{pass_text}'
             return f'{simple_summary}{summary_connector}{summary_connector.join(complex_conditions)}' if complex_conditions else simple_summary
         else:
             return summary_connector.join(simple_conditions + complex_conditions)
@@ -418,10 +389,9 @@ class Condition:
         """Get template data for condition."""
         if not self.platform:
             return {}
-            
-        from ..constants import PLATFORM_NAMES
+
         data = {
-            'platform': PLATFORM_NAMES[self.platform][lang],
+            'platform': Config.get_platform_name(self.platform, lang),
             'condition': self.summary(lang)
         }
         procedures = self.procedures()
