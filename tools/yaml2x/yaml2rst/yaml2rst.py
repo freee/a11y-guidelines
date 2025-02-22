@@ -23,12 +23,16 @@ def main():
     """Main entry point for the YAML to RST converter."""
     # Initialize settings and templates
     settings = initializer.setup_parameters()
+    print("Settings:", settings)
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = initializer.setup_constants(settings)
+    print("DEST_DIRS:", DEST_DIRS)
+    print("STATIC_FILES:", STATIC_FILES)
     templates = initializer.setup_templates()
     makefile_vars, makefile_vars_list = initializer.setup_variables()
     setup_instances(settings['basedir'])
 
     # Create output directories
+    print("Creating output directories...")
     for directory in DEST_DIRS.values():
         os.makedirs(directory, exist_ok=True)
 

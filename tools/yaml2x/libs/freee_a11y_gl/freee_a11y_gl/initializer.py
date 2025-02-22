@@ -52,13 +52,14 @@ def process_axe_rules(basedir, AXE_CORE):
     if submodule is None:
         raise ValueError(f'Submodule with name {AXE_CORE["submodule_name"]} not found.')
 
-    axe_base = os.path.join(basedir, submodule.path)
+    axe_base = os.path.join(basedir, AXE_CORE['base_dir'])
     axe_commit_id = submodule.hexsha
     axe_repo = git.Repo(axe_base)
     axe_commit = axe_repo.commit(axe_commit_id)
 
     # Get message file
-    blob = axe_commit.tree / AXE_CORE['msg_ja_file']
+    msg_ja_path = os.path.join(AXE_CORE['locale_dir'], AXE_CORE['locale_ja_file'])
+    blob = axe_commit.tree / msg_ja_path
     file_content = blob.data_stream.read().decode('utf-8')
     messages_ja = json.loads(file_content)
 

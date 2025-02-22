@@ -109,8 +109,11 @@ IMPLEMENTATION_TARGETS = {
 # for axe rules
 AXE_CORE = {
     'submodule_name': 'vendor/axe-core',
+    'base_dir': 'vendor/axe-core',  # 追加: yaml2rstでも使用
     'deque_url': 'https://dequeuniversity.com/rules/axe/',
     'msg_ja_file': 'locales/ja.json',
     'pkg_file': 'package.json',
-    'rules_dir': 'lib/rules'
+    'rules_dir': 'lib/rules',
+    'locale_dir': 'locales',  # 追加: yaml2rstでも使用
+    'locale_ja_file': 'ja.json'  # 追加: yaml2rstでも使用
 }

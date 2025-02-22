@@ -1,18 +1,10 @@
 import os
 from config import AVAILABLE_LANGUAGES
+from freee_a11y_gl.source import DATA_DIR, YAML_DIR, JSON_DIR
+from freee_a11y_gl.constants import AXE_CORE
 
-# Directories
-DATA_DIR = 'data'
-YAML_DIR = 'yaml'
-JSON_DIR = 'json'
+# Output directory
 DEST_DIR_BASE = 'source'
-
-# axe-core directories
-AXE_SRC_BASE = 'vendor/axe-core'
-AXE_RULES_DIR = 'lib/rules'
-AXE_LOCALE_DIR = 'locales'
-AXE_LOCALE_JA_FILE = 'ja.json'
-AXE_PKG_FILE = 'package.json'
 
 # File paths
 FAQ_INDEX_FILENAME = 'index.rst'
@@ -90,4 +82,3 @@ def get_static_dest_files(basedir, lang):
         'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME),
         'axe_rules': os.path.join(dest_dirnames['misc'], AXE_RULES_FILENAME)
     }
-
