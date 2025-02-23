@@ -321,14 +321,14 @@ class Procedure:
 
     def object_data(self, platform: str) -> Dict[str, Any]:
         """Get object data for procedure."""
-        baseurl = Config.EXAMPLES_BASE_URLS
         tool_link = {
             'text': {},
             'url': {}
         }
         for lang in self.procedure.keys():
+            baseurl = Config.get_examples_url(lang)
             tool_link['text'][lang] = self.tool_display_name or self.tool.get_name(lang)
-            tool_link['url'][lang] = f'{baseurl[lang]}{self.tool.id}.html#{self.id}'
+            tool_link['url'][lang] = f'{baseurl}{self.tool.id}.html#{self.id}'
         return {
             'id': self.id,
             'platform': platform,
