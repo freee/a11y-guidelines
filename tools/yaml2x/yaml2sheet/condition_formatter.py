@@ -13,6 +13,7 @@ class ConditionFormatter:
         """
         self.check_results = check_results
         self.final_results = final_results
+        # @@todo@@ replace 'E' below with a calculated value
         self.RESULT_COLUMN = "E"  # Column for result entries
     
     def get_condition_formula(self, cond: Condition, id_to_row: Dict[str, int], lang: str) -> str:
