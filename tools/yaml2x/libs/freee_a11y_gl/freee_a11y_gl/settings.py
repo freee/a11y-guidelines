@@ -70,6 +70,10 @@ class Settings:
                 "docs": {
                     "ja": "/categories/",
                     "en": "/en/categories/"
+                },
+                "faq": {
+                    "ja": "/faq/articles/",
+                    "en": "/en/faq/articles/"
                 }
             },
             "separators": {
@@ -96,6 +100,16 @@ class Settings:
                 "or_conjunction": {
                     "ja": "、または",
                     "en": ", or "
+                },
+                "pass_text": {
+                    "ja": "_を満たしている",
+                    "en": " is true"
+                }
+            },
+            "formats": {
+                "date": {
+                    "ja": "%Y年%-m月%-d日",
+                    "en": "%B %-d, %Y"
                 }
             }
         }

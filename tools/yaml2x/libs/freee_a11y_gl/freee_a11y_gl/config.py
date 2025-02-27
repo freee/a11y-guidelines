@@ -54,6 +54,18 @@ class Config:
         return settings.get(f"separators.list.{effective_lang}", ", ")
 
     @classmethod
+    def get_pass_text(cls, lang: Optional[LanguageCode] = None) -> str:
+        """Get localized pass text for conditions.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            Localized pass text
+        """
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"separators.pass_text.{effective_lang}", " is true")
+
     def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
@@ -115,6 +127,19 @@ class Config:
             return ", "
 
     @classmethod
+    def get_faq_path(cls, lang: Optional[LanguageCode] = None) -> str:
+        """Get FAQ path for specified language.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            Path string for FAQ articles
+        """
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"urls.faq.{effective_lang}", "/faq/articles/")
+
+    @classmethod
     def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get examples base URL for specified language."""
         """Get examples base URL for specified language.
@@ -127,6 +152,21 @@ class Config:
         """
         base_url = cls.get_base_url(lang)
         return f"{base_url}/checks/examples/"
+
+    @staticmethod
+    @classmethod
+    def get_date_format(cls, lang: Optional[LanguageCode] = None) -> str:
+        """Get localized date format string.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            Date format string in strftime format
+        """
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        default_format = "%Y年%-m月%-d日" if effective_lang == "ja" else "%B %-d, %Y"
+        return settings.get(f"formats.date.{effective_lang}", default_format)
 
     @staticmethod
     def tag2sc(tag: str) -> str:

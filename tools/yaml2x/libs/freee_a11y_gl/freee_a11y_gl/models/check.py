@@ -367,8 +367,7 @@ class Condition:
     def summary(self, lang: str) -> str:
         """Get localized summary of condition."""
         if self.type == 'simple':
-            pass_text = '_を満たしている' if lang == 'ja' else ' is true'
-            return f'{self.procedure.id}{pass_text}'
+            return f'{self.procedure.id}{Config.get_pass_text(lang)}'
 
         simple_conditions = [c.summary(lang) for c in self.conditions if c.type == 'simple']
         complex_conditions = [f'({c.summary(lang)})' for c in self.conditions if c.type != 'simple']
@@ -376,7 +375,7 @@ class Condition:
         conjunction_type = 'and' if self.type == 'and' else 'or'
         summary_separator = Config.get_separator(lang, conjunction_type)
         summary_connector = Config.get_conjunction(lang, conjunction_type)
-        pass_text = '_を満たしている' if lang == 'ja' else ' is true'
+        pass_text = Config.get_pass_text(lang)
 
         if len(simple_conditions) > 1:
             simple_conditions = [c.replace(pass_text, '') for c in simple_conditions]
