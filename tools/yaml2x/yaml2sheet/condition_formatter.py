@@ -1,10 +1,10 @@
 from typing import Dict, List
-from config import M17nField, Condition
+from config import M17nField, Condition, COLUMNS
 
 class ConditionFormatter:
     """Handles creation and formatting of conditional formulas for sheet cells"""
     
-    def __init__(self, check_results: Dict[str, M17nField], final_results: Dict[str, M17nField]):
+    def __init__(self, check_results: Dict[str, M17nField], final_results: Dict[str, M17nField], target_id: str):
         """Initialize with result string definitions
         
         Args:
@@ -14,7 +14,11 @@ class ConditionFormatter:
         self.check_results = check_results
         self.final_results = final_results
         # @@todo@@ replace 'E' below with a calculated value
-        self.RESULT_COLUMN = "E"  # Column for result entries
+        # Calculate result column based on array lengths
+        id_cols_length = len(COLUMNS['idCols'])
+        generated_data_length = len(COLUMNS[target_id]['generatedData']) if target_id in COLUMNS else 0
+        result_column_index = id_cols_length + generated_data_length
+        self.RESULT_COLUMN = chr(ord('A') + result_column_index)  # Convert to letter (0=A, 1=B, etc)
     
     def get_condition_formula(self, cond: Condition, id_to_row: Dict[str, int], lang: str) -> str:
         """Generate formula for condition evaluation
