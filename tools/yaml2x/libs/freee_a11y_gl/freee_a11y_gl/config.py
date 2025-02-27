@@ -1,6 +1,6 @@
 """Configuration interface for freee_a11y_gl module."""
 import re
-from typing import Dict, Literal
+from typing import Dict, Literal, Optional
 from .settings import settings
 
 LanguageCode = Literal["ja", "en"]
@@ -9,73 +9,122 @@ class Config:
     """Configuration interface."""
 
     @classmethod
-    def register_settings(cls, new_settings: Dict[str, any]) -> None:
+    def register_settings(cls, new_settings: Optional[Dict[str, any]] = None) -> None:
         """Register new settings."""
         settings.update(new_settings)
 
     @classmethod
-    def get_base_url(cls, lang: LanguageCode) -> str:
+    def get_basedir(cls) -> str:
+        """Get base directory path.
+        
+        Returns:
+            Base directory path from settings, or '.' if not set
+        """
+        return settings.get("basedir", ".")
+
+    @classmethod
+    def get_base_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get base URL for specified language."""
-        return settings.get(f"urls.base.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"urls.base.{effective_lang}", "")
 
     @classmethod
-    def get_doc_path(cls, lang: LanguageCode) -> str:
+    def get_doc_path(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get documentation path for specified language."""
-        return settings.get(f"urls.docs.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"urls.docs.{effective_lang}", "/")
 
     @classmethod
-    def get_separator(cls, lang: LanguageCode, separator_type: str) -> str:
+    def get_separator(cls, lang: Optional[LanguageCode] = None, separator_type: Optional[str] = None) -> str:
         """Get separator of specified type for language."""
-        return settings.get(f"separators.{separator_type}.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        effective_type = separator_type if separator_type is not None else "text"
+        return settings.get(f"separators.{effective_type}.{effective_lang}", "")
 
     @classmethod
-    def get_text_separator(cls, lang: LanguageCode) -> str:
+    def get_text_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get text separator for specified language."""
-        return settings.get(f"separators.text.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"separators.text.{effective_lang}", "")
 
     @classmethod
-    def get_list_separator(cls, lang: LanguageCode) -> str:
+    def get_list_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get list item separator for specified language."""
-        return settings.get(f"separators.list.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"separators.list.{effective_lang}", ", ")
 
     @classmethod
-    def get_conjunction(cls, lang: LanguageCode, conjunction_type: str) -> str:
+    def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
-        return settings.get(f"separators.{conjunction_type}_conjunction.{lang}")
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        effective_type = conjunction_type if conjunction_type is not None else "and"
+        return settings.get(f"separators.{effective_type}_conjunction.{effective_lang}", " and ")
 
     @classmethod
-    def get_check_tool_name(cls, tool_id: str, lang: LanguageCode) -> str:
+    def get_check_tool_name(cls, tool_id: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check tool name."""
-        return settings.config.check_tools.names[tool_id][lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.check_tools.names[tool_id][effective_lang]
+        except (KeyError, AttributeError):
+            return tool_id
 
     @classmethod
-    def get_check_target_name(cls, target: str, lang: LanguageCode) -> str:
+    def get_check_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check target name."""
-        return settings.config.check_targets.names[target][lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.check_targets.names[target][effective_lang]
+        except (KeyError, AttributeError):
+            return target
 
     @classmethod
-    def get_severity_tag(cls, severity: str, lang: LanguageCode) -> str:
+    def get_severity_tag(cls, severity: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized severity tag."""
-        return settings.config.severity_tags.tags[severity][lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.severity_tags.tags[severity][effective_lang]
+        except (KeyError, AttributeError):
+            return severity
 
     @classmethod
-    def get_implementation_target_name(cls, target: str, lang: LanguageCode) -> str:
+    def get_implementation_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized implementation target name."""
-        return settings.config.implementation_targets.targets[target][lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.implementation_targets.targets[target][effective_lang]
+        except (KeyError, AttributeError):
+            return target
 
     @classmethod
-    def get_platform_name(cls, platform: str, lang: LanguageCode) -> str:
+    def get_platform_name(cls, platform: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized platform name."""
-        return settings.config.platform.names[platform][lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.platform.names[platform][effective_lang]
+        except (KeyError, AttributeError):
+            return platform
 
     @classmethod
-    def get_platform_separator(cls, lang: LanguageCode) -> str:
+    def get_platform_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get platform list separator for specified language."""
-        return settings.config.platform.separator[lang]
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        try:
+            return settings.config.platform.separator[effective_lang]
+        except (KeyError, AttributeError):
+            return ", "
 
     @classmethod
-    def get_examples_url(cls, lang: LanguageCode) -> str:
+    def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get examples base URL for specified language."""
+        """Get examples base URL for specified language.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            URL string for examples in the specified language
+        """
         base_url = cls.get_base_url(lang)
         return f"{base_url}/checks/examples/"
 

@@ -5,12 +5,27 @@ import json
 import time
 import yaml
 import git
+from typing import Optional
 from .classes import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
 from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
 
-def setup_instances(basedir):
-    src_path = get_src_path(basedir)
+def setup_instances(basedir: Optional[str] = None):
+    """
+    Set up instances for all components.
+    
+    Args:
+        basedir: Base directory containing data files.
+                If None, value from settings will be used. If not in settings, defaults to '.'
+    
+    Returns:
+        RelationshipManager instance with resolved relationships
+    """
+    from .config import Config
+
+    # Get value from settings if not provided
+    effective_basedir = basedir if basedir is not None else Config.get_basedir()
+    src_path = get_src_path(effective_basedir)
     # Mapping of entity type, srcdir, schema filename, and constructor.
     # The order is important for the initialization of the instances.
     entity_config = [
@@ -41,8 +56,22 @@ def setup_instances(basedir):
     rel.resolve_faqs()
     return rel
 
-def process_axe_rules(basedir, AXE_CORE):
-    root_repo = git.Repo(basedir)
+def process_axe_rules(basedir: Optional[str], AXE_CORE):
+    """
+    Process axe-core rules from the Git submodule.
+    
+    Args:
+        basedir: Base directory containing the Git repository.
+                If None, value from settings will be used. If not in settings, defaults to '.'
+        AXE_CORE: Dictionary containing axe-core configuration
+    
+    Raises:
+        ValueError: If the axe-core submodule is not found
+    """
+    from .config import Config
+
+    effective_basedir = basedir if basedir is not None else Config.get_basedir()
+    root_repo = git.Repo(effective_basedir)
     submodule = None
     for sm in root_repo.submodules:
         if sm.name == AXE_CORE['submodule_name']:

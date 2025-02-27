@@ -4,7 +4,7 @@ Utility functions for info and link processing.
 
 import pickle
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 # Constants
 LANGUAGES: List[str] = ['ja', 'en']
@@ -14,13 +14,15 @@ class InfoUtilsError(Exception):
     """Custom exception for info utilities related errors."""
     pass
 
-def get_info_links(basedir: str, baseurl: str = '') -> Dict[str, Any]:
+def get_info_links(basedir: Optional[str] = None, baseurl: Optional[str] = None) -> Dict[str, Any]:
     """
     Extract labels and links from the environment pickle file.
     
     Args:
-        basedir: Project root directory containing language-specific data
-        baseurl: Base URL for related information links
+        basedir: Project root directory containing language-specific data.
+                If None, value from settings will be used. If not in settings, defaults to '.'
+        baseurl: Base URL for related information links.
+                If None, value from settings will be used. If not in settings, defaults to ''
         
     Returns:
         Dictionary containing extracted labels and their associated information
@@ -28,6 +30,12 @@ def get_info_links(basedir: str, baseurl: str = '') -> Dict[str, Any]:
     Raises:
         InfoUtilsError: If pickle file cannot be loaded or processed
     """
+    from .config import Config
+
+    # Get values from settings if not provided
+    effective_basedir = basedir if basedir is not None else Config.get_basedir()
+    effective_baseurl = baseurl if baseurl is not None else Config.get_base_url(None)
+
     info: Dict[str, Dict[str, Dict[str, str]]] = {}
     path_prefix = {
         'ja': '',
@@ -35,7 +43,7 @@ def get_info_links(basedir: str, baseurl: str = '') -> Dict[str, Any]:
     }
     
     for lang in LANGUAGES:
-        pickle_path = Path(basedir) / lang / PICKLE_PATH
+        pickle_path = Path(effective_basedir) / lang / PICKLE_PATH
         try:
             with open(pickle_path, 'rb') as f:
                 doctree = pickle.load(f)
@@ -53,6 +61,6 @@ def get_info_links(basedir: str, baseurl: str = '') -> Dict[str, Any]:
                     'url': {}
                 }
             info[label]['text'][lang] = labels[label][2]
-            info[label]['url'][lang] = f'{baseurl}/{path_prefix[lang]}{labels[label][0]}.html#{labels[label][1]}'
+            info[label]['url'][lang] = f'{effective_baseurl}/{path_prefix[lang]}{labels[label][0]}.html#{labels[label][1]}'
 
     return info
