@@ -51,7 +51,6 @@ def setup_instances(basedir: Optional[str] = None):
         process_entity_files(srcdir, constructor)
 
     process_axe_rules(basedir, AXE_CORE)
-
     rel = RelationshipManager()
     rel.resolve_faqs()
     return rel
@@ -81,7 +80,7 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
     if submodule is None:
         raise ValueError(f'Submodule with name {AXE_CORE["submodule_name"]} not found.')
 
-    axe_base = os.path.join(basedir, AXE_CORE['base_dir'])
+    axe_base = os.path.join(effective_basedir, AXE_CORE['base_dir'])
     axe_commit_id = submodule.hexsha
     axe_repo = git.Repo(axe_base)
     axe_commit = axe_repo.commit(axe_commit_id)

@@ -2,6 +2,7 @@ import datetime
 import re
 from urllib.parse import quote as url_encode
 from .constants import PLATFORM_NAMES, SEVERITY_TAGS, CHECK_TARGETS, IMPLEMENTATION_TARGETS
+from .config import Config
 
 class RelationshipManager:
     _instance = None
@@ -194,25 +195,20 @@ class Guideline:
             'guideline': self.id
         }
 
-    def link_data(self, baseurl = ''):
-        separator_char = {
-            'ja': '：',
-            'en': ': '
-        }
-        basedir = {
-            'ja': '/categories/',
-            'en': '/en/categories/'
-        }
+    def link_data(self):
+        langs = self.title.keys()
         data = {
             'text': {},
             'url': {}
         }
-        langs = self.title.keys()
         for lang in langs:
+            separator_char = Config.get_separator(lang, "text")
+            basedir = Config.get_guidelines_path()
+            baseurl = Config.get_base_url(lang)
             category = self.category.get_name(lang)
             basename = self.category.id
-            data['text'][lang] = f'{category}{separator_char[lang]}{self.title[lang]}'
-            data['url'][lang] = f'{baseurl}{basedir[lang]}{basename}.html#{self.id}'
+            data['text'][lang] = f'{category}{separator_char}{self.title[lang]}'
+            data['url'][lang] = f'{baseurl}{basedir}{basename}.html#{self.id}'
         return data
 
     def template_data(self, lang):
@@ -311,10 +307,10 @@ class Check:
             'platform': self.platform,
             'guidelines': []
         }
-        data['guidelines'] = [gl.link_data(baseurl) for gl in rel.get_check_to_guidelines(self)]
+        data['guidelines'] = [gl.link_data() for gl in rel.get_check_to_guidelines(self)]
         faqs = rel.get_check_to_faqs(self)
         if len(faqs) > 0:
-            data['faqs'] = [faq.link_data(baseurl) for faq in faqs]
+            data['faqs'] = [faq.link_data() for faq in faqs]
         info = rel.get_check_to_info(self)
         if len(info) > 0:
             data['info'] = [inforef.link_data() for inforef in info]
@@ -426,20 +422,18 @@ class Faq:
             dependency.extend([check.src_path for check in checks])
         return uniq(dependency)
 
-    def link_data(self, baseurl = ''):
-        basedir = {
-            'ja': '/faq/articles/',
-            'en': '/en/faq/articles/'
-        }
+    def link_data(self):
+        langs = self.title.keys()
+        basedir = Config.get_faq_path()
         data = {
             'text': {},
             'url': {}
         }
-        langs = self.title.keys()
         for lang in langs:
+            baseurl = Config.get_base_url(lang)
             basename = self.id
             data['text'][lang] = self.title[lang]
-            data['url'][lang] = f'{baseurl}{basedir[lang]}{basename}.html'
+            data['url'][lang] = f'{baseurl}{basedir}{basename}.html'
         return data
 
     def template_data(self, lang):
@@ -500,12 +494,6 @@ class Category:
         self.names = names
         self.guidelines = []
         Category.all_categories[category_id] = self
-
-    # def add_guideline(self, guideline):
-    #     if guideline in self.guidelines:
-    #         return
-    #     self.guidelines.append(guideline)
-    #     guideline.set_category(self)
 
     def get_name(self, lang):
         if lang in self.names:

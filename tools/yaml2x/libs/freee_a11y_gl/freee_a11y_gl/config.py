@@ -29,10 +29,9 @@ class Config:
         return settings.get(f"urls.base.{effective_lang}", "")
 
     @classmethod
-    def get_doc_path(cls, lang: Optional[LanguageCode] = None) -> str:
-        """Get documentation path for specified language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"urls.docs.{effective_lang}", "/")
+    def get_guidelines_path(cls) -> str:
+        """Get guidelines (categories) path."""
+        return settings.get("paths.guidelines", "/")
 
     @classmethod
     def get_separator(cls, lang: Optional[LanguageCode] = None, separator_type: Optional[str] = None) -> str:

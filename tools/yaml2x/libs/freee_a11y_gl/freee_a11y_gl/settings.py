@@ -62,19 +62,13 @@ class Settings:
                 "default": "ja",
                 "required": ["ja", "en"]
             },
-            "urls": {
-                "base": {
-                    "ja": "https://a11y-guidelines.freee.co.jp",
-                    "en": "https://a11y-guidelines.freee.co.jp/en"
-                },
-                "docs": {
-                    "ja": "/categories/",
-                    "en": "/en/categories/"
-                },
-                "faq": {
-                    "ja": "/faq/articles/",
-                    "en": "/en/faq/articles/"
-                }
+            "base_url": {
+                "ja": "https://a11y-guidelines.freee.co.jp",
+                "en": "https://a11y-guidelines.freee.co.jp/en"
+            },
+            "paths": {
+                "guidelines": "/categories/",
+                "faq": "/faq/articles/"
             },
             "separators": {
                 "text": {
