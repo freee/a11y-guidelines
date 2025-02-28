@@ -38,8 +38,13 @@ def get_version_info(basedir: Optional[str] = None) -> Dict[str, str]:
         if not version_file.is_file():
             raise VersionError(f"Version file not found: {version_file}")
             
-        with open(version_file, encoding='utf-8') as f:
-            exec(f.read(), version_data)
+        with open(version_file, encoding='utf-8') as file:
+            for line in file:
+                if not line or line.startswith('#'):
+                    continue
+                if "=" in line:
+                    key, value = line.strip().split(' = ')
+                    version_data[key] = value.strip('\'"')
             
         return version_data
     except Exception as e:
