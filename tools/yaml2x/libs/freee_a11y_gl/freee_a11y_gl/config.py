@@ -126,17 +126,12 @@ class Config:
             return ", "
 
     @classmethod
-    def get_faq_path(cls, lang: Optional[LanguageCode] = None) -> str:
-        """Get FAQ path for specified language.
-        
-        Args:
-            lang: Language code. If None, default language from settings will be used.
-            
+    def get_faq_path(cls) -> str:
+        """Get FAQ path
         Returns:
             Path string for FAQ articles
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"urls.faq.{effective_lang}", "/faq/articles/")
+        return settings.get("paths.faq", "/faq/articles/")
 
     @classmethod
     def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
