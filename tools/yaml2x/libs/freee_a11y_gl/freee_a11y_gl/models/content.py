@@ -2,6 +2,7 @@
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
+from ..config import Config, LanguageCode
 
 @dataclass
 class GuidelineData:
@@ -10,7 +11,6 @@ class GuidelineData:
     platform: List[str]
     guideline: Dict[str, str]
     intent: Dict[str, str]
-
 
 class Category(BaseModel):
     """Category model representing groupings of guidelines."""
@@ -146,14 +146,6 @@ class Guideline(BaseModel):
         Returns:
             Dictionary with localized text and URLs
         """
-        separator_char = {
-            'ja': '：',
-            'en': ': '
-        }
-        basedir = {
-            'ja': '/categories/',
-            'en': '/en/categories/'
-        }
         data = {
             'text': {},
             'url': {}
@@ -162,8 +154,10 @@ class Guideline(BaseModel):
         category = rel.get_related_objects(self, 'category')[0]
 
         for lang in self.data.title.keys():
-            data['text'][lang] = f'{category.get_name(lang)}{separator_char[lang]}{self.data.title[lang]}'
-            data['url'][lang] = f'{baseurl}{basedir[lang]}{category.id}.html#{self.id}'
+            separator_char = Config.get_text_separator(lang)
+            basedir = Config.get_doc_path(lang)
+            data['text'][lang] = f'{category.get_name(lang)}{separator_char}{self.data.title[lang]}'
+            data['url'][lang] = f'{baseurl}{basedir}{category.id}.html#{self.id}'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
@@ -220,9 +214,9 @@ class Guideline(BaseModel):
         Returns:
             Joined string with localized separator
         """
-        from ..constants import PLATFORM_NAMES  # Import here to avoid circular imports
-        separator = '、' if lang == 'ja' else ', '
-        return separator.join([PLATFORM_NAMES[item][lang] for item in items])
+        return Config.get_list_separator(lang).join(
+            [Config.get_platform_name(item, lang) for item in items]
+        )
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:

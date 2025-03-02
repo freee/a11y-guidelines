@@ -11,11 +11,14 @@ import json
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-from freee_a11y_gl import setup_instances, InfoRef, Check
+from freee_a11y_gl import (
+    setup_instances, InfoRef, Check,
+    info_utils, get_version_info
+)
 from .config import setup_configuration
-from . import utils, rst_processor
+from . import rst_processor
 
-def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[str, Any]:
+def get_yaml_data(basedir: Optional[str] = None, base_url: Optional[str] = None, publish: bool = False) -> Dict[str, Any]:
     """
     Process YAML files and return structured data as a Python dictionary.
 
@@ -30,18 +33,12 @@ def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[s
     Raises:
         Exception: If there's an error during the conversion process
     """
-    # Initialize configuration
-    settings: Dict[str, Any] = {
-        "basedir": basedir,
-        "base_url": base_url,
-        "publish": publish
-    }
-    
-    version_info: Dict[str, str] = utils.get_version_info(basedir)
+    # Get version info and setup instances with basedir
+    version_info: Dict[str, str] = get_version_info(basedir)
     setup_instances(basedir)
 
     # Process information links and references
-    info_links: Dict[str, Any] = utils.get_info_links(basedir, base_url)
+    info_links: Dict[str, Any] = info_utils.get_info_links(basedir, base_url)
     for info in InfoRef.list_all_internal():
         if info.ref in info_links:
             info.set_link(info_links[info.ref])
@@ -64,9 +61,9 @@ def get_yaml_data(basedir: Path, base_url: str, publish: bool = False) -> Dict[s
     }
 
 def convert_yaml_to_json(
-    basedir: Path,
-    base_url: str,
-    output_file: Path,
+    basedir: Optional[str] = None,
+    base_url: Optional[str] = None,
+    output_file: Optional[str] = None,
     publish: bool = False
 ) -> None:
     """
@@ -85,9 +82,10 @@ def convert_yaml_to_json(
         # Process YAML data
         output_data = get_yaml_data(basedir, base_url, publish)
         
-        # Write to JSON file
-        with open(output_file, mode="w", encoding="utf-8", newline="\n") as f:
-            json.dump(output_data, f, indent=2, ensure_ascii=False)
+        # Write to JSON file if output_file is provided
+        if output_file is not None:
+            with open(output_file, mode="w", encoding="utf-8", newline="\n") as f:
+                json.dump(output_data, f, indent=2, ensure_ascii=False)
             
     except Exception as e:
         raise Exception(f"Error during conversion process: {str(e)}")

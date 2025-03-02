@@ -1,0 +1,47 @@
+# Production configuration
+# Usage: Copy this file to config.yaml in your production environment
+
+# URLs for production environment
+urls:
+  base:
+    ja: "https://a11y-guidelines.freee.co.jp"
+    en: "https://a11y-guidelines.freee.co.jp/en"
+  docs:
+    ja: "/categories/"
+    en: "/en/categories/"
+
+# Other settings inherit from defaults
+languages:
+  available:
+    - ja
+    - en
+  default: ja
+  required:
+    - ja
+    - en
+
+# Standard separators (same as defaults)
+separators:
+  text:
+    ja: "："
+    en: ": "
+  list:
+    ja: "、"
+    en: ", "
+  and:
+    ja: "と"
+    en: " and "
+  or:
+    ja: "または"
+    en: " or "
+  and_conjunction:
+    ja: "、かつ"
+    en: ", and "
+  or_conjunction:
+    ja: "、または"
+    en: ", or "
+
+# Note: In production, you might want to:
+# 1. Use environment variables for sensitive settings
+# 2. Restrict file permissions (e.g., chmod 600 config.yaml)
+# 3. Use a secure location for the config file
