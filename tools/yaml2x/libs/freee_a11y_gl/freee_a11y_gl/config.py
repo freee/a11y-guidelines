@@ -26,7 +26,7 @@ class Config:
     def get_base_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get base URL for specified language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"urls.base.{effective_lang}", "")
+        return settings.get(f"base_url.{effective_lang}", "")
 
     @classmethod
     def get_guidelines_path(cls) -> str:

@@ -8,13 +8,13 @@ from pydantic import BaseModel, Field
 
 class UrlConfig(BaseModel):
     """URL configuration for each language."""
-    ja: str
-    en: str
+    ja: str = ""
+    en: str = ""
 
 class SeparatorConfig(BaseModel):
     """Separator configuration for each language."""
-    ja: str
-    en: str
+    ja: str = ""
+    en: str = ""
 
 class LanguageConfig(BaseModel):
     """Language configuration."""
@@ -24,9 +24,12 @@ class LanguageConfig(BaseModel):
 
 class GlobalConfig(BaseModel):
     """Global configuration model."""
-    languages: LanguageConfig
-    urls: Dict[str, UrlConfig]
-    separators: Dict[str, SeparatorConfig]
+    languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
+    base_url: UrlConfig = Field(default_factory=lambda: UrlConfig(
+        ja="https://a11y-guidelines.freee.co.jp",
+        en="https://a11y-guidelines.freee.co.jp/en"
+    ))
+    separators: Dict[str, SeparatorConfig] = Field(default_factory=dict)
 
 class Settings:
     """設定値を階層的に管理するクラス。
@@ -215,9 +218,23 @@ class Settings:
             current = current.setdefault(key, {})
         current[keys[-1]] = value
 
-    def update(self, settings: Dict[str, Any]) -> None:
-        """設定値の一括更新"""
-        self._settings.update(settings)
+    def update(self, settings: Optional[Dict[str, Any]] = None) -> None:
+        """設定値の一括更新
+        
+        Args:
+            settings: 更新する設定値。Noneの場合は更新しない
+        """
+        if settings:
+            # 深い階層でもデフォルト値を保持したまま更新
+            def deep_update(base: dict, update: dict) -> dict:
+                for key, value in update.items():
+                    if isinstance(value, dict):
+                        base[key] = deep_update(base.get(key, {}), value)
+                    else:
+                        base[key] = value
+                return base
+            
+            deep_update(self._settings, settings)
         self.validate()
 
     def validate(self) -> None:
