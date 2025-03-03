@@ -9,11 +9,6 @@ import argparse
 from pathlib import Path
 from typing import Dict, Any
 
-# Default values
-DEFAULT_OUTPUT_FILE: str = 'data.json'
-DEFAULT_BASE_URL: str = ''
-DEFAULT_BASE_DIR: str = '.'
-
 class ConfigError(Exception):
     """Custom exception for configuration-related errors."""
     pass
@@ -31,19 +26,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '--basedir', '-b',
         type=str,
-        default=DEFAULT_BASE_DIR,
+        default=None,
         help='Base directory where the data directory is located.'
     )
     parser.add_argument(
         '--output-file', '-o',
         type=str,
-        default=DEFAULT_OUTPUT_FILE,
+        default=None,
         help='Output file path.'
     )
     parser.add_argument(
         '--base-url', '-u',
         type=str,
-        default=DEFAULT_BASE_URL,
+        default=None,
         help='Base URL for the links to related information.'
     )
     parser.add_argument(
@@ -67,24 +62,30 @@ def process_arguments(args: argparse.Namespace) -> Dict[str, Any]:
         ConfigError: If required paths are invalid
     """
     try:
-        basedir = Path(args.basedir).resolve()
-        if not basedir.is_dir():
-            raise ConfigError(f"Base directory does not exist: {basedir}")
-
-        if Path(args.output_file).is_absolute():
-            output_file = Path(args.output_file)
-        else:
-            output_file = basedir / args.output_file
-            
-        # Ensure output directory exists
-        output_file.parent.mkdir(parents=True, exist_ok=True)
-        
-        return {
-            'basedir': str(basedir),
-            'output_file': str(output_file),
+        result = {
+            'basedir': None,
+            'output_file': None,
             'base_url': args.base_url,
             'publish': args.publish
         }
+        
+        if args.basedir is not None:
+            basedir = Path(args.basedir).resolve()
+            if not basedir.is_dir():
+                raise ConfigError(f"Base directory does not exist: {basedir}")
+            result['basedir'] = str(basedir)
+
+        if args.output_file is not None:
+            if args.basedir is not None and not Path(args.output_file).is_absolute():
+                output_file = basedir / args.output_file
+            else:
+                output_file = Path(args.output_file)
+            
+            # Ensure output directory exists
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+            result['output_file'] = str(output_file)
+
+        return result
     except Exception as e:
         raise ConfigError(f"Error processing arguments: {str(e)}")
 

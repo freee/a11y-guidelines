@@ -1,0 +1,42 @@
+# Development configuration
+# Usage: Copy this file to config.yaml in your project directory
+
+# URLs for development environment
+urls:
+  base:
+    ja: "http://localhost:8000"
+    en: "http://localhost:8000/en"
+  docs:
+    ja: "/categories/"
+    en: "/en/categories/"
+
+# Other settings inherit from defaults
+languages:
+  available:
+    - ja
+    - en
+  default: ja
+  required:
+    - ja
+    - en
+
+# Standard separators (same as defaults)
+separators:
+  text:
+    ja: "："
+    en: ": "
+  list:
+    ja: "、"
+    en: ", "
+  and:
+    ja: "と"
+    en: " and "
+  or:
+    ja: "または"
+    en: " or "
+  and_conjunction:
+    ja: "、かつ"
+    en: ", and "
+  or_conjunction:
+    ja: "、または"
+    en: ", or "

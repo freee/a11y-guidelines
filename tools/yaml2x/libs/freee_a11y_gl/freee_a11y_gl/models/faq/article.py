@@ -91,17 +91,15 @@ class Faq(BaseModel):
         Returns:
             Dictionary with localized text and URLs
         """
-        basedir = {
-            'ja': '/faq/articles/',
-            'en': '/en/faq/articles/'
-        }
+        from ...config import Config
+        
         data = {
             'text': {},
             'url': {}
         }
         for lang in self.title.keys():
             data['text'][lang] = self.title[lang]
-            data['url'][lang] = f'{baseurl}{basedir[lang]}{self.id}.html'
+            data['url'][lang] = f'{baseurl}{Config.get_faq_path(lang)}{self.id}.html'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
@@ -116,9 +114,10 @@ class Faq(BaseModel):
         rel = RelationshipManager()
         tags = rel.get_related_objects(self, 'faq_tag')
         
+        from ...config import Config
+        
         # Format date based on language
-        date_format = "%Y年%-m月%-d日" if lang == 'ja' else "%B %-d, %Y"
-        formatted_date = self.updated.strftime(date_format)
+        formatted_date = self.updated.strftime(Config.get_date_format(lang))
 
         data = {
             'id': self.id,
