@@ -14,6 +14,17 @@ class Config:
         settings.update(new_settings)
 
     @classmethod
+    def set_base_url(cls, base_url: str, lang: Optional[LanguageCode] = None) -> None:
+        """Update base URL for specified language
+        
+        Args:
+            base_url: New base URL to set
+            lang: Language code. If None, default language from settings will be used.
+        """
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        settings.update({f"base_url.{effective_lang}": base_url})
+
+    @classmethod
     def get_basedir(cls) -> str:
         """Get base directory path.
         

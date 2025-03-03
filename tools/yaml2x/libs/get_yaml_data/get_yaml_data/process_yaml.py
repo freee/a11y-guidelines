@@ -37,6 +37,11 @@ def get_yaml_data(basedir: Optional[str] = None, base_url: Optional[str] = None,
     version_info: Dict[str, str] = get_version_info(basedir)
     setup_instances(basedir)
 
+    # Set base_url in Config if provided
+    if base_url is not None:
+        from freee_a11y_gl import Config
+        Config.set_base_url(base_url)
+
     # Process information links and references
     info_links: Dict[str, Any] = info_utils.get_info_links(basedir, base_url)
     for info in InfoRef.list_all_internal():
