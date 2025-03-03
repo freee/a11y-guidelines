@@ -13,7 +13,6 @@ class ConditionFormatter:
         """
         self.check_results = check_results
         self.final_results = final_results
-        # @@todo@@ replace 'E' below with a calculated value
         # Calculate result column based on array lengths
         id_cols_length = len(COLUMNS['idCols'])
         generated_data_length = len(COLUMNS[target_id]['generatedData']) if target_id in COLUMNS else 0
