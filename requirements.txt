@@ -12,4 +12,3 @@ google-api-python-client
 pytz
 pydantic
 tools/yaml2x/libs/freee_a11y_gl
-tools/yaml2x/libs/get_yaml_data
