@@ -25,10 +25,7 @@ class LanguageConfig(BaseModel):
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
-    base_url: UrlConfig = Field(default_factory=lambda: UrlConfig(
-        ja="https://a11y-guidelines.freee.co.jp",
-        en="https://a11y-guidelines.freee.co.jp/en"
-    ))
+    base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
     separators: Dict[str, SeparatorConfig] = Field(default_factory=dict)
 
 class Settings:
@@ -65,10 +62,7 @@ class Settings:
                 "default": "ja",
                 "required": ["ja", "en"]
             },
-            "base_url": {
-                "ja": "https://a11y-guidelines.freee.co.jp",
-                "en": "https://a11y-guidelines.freee.co.jp/en"
-            },
+            "base_url": "https://a11y-guidelines.freee.co.jp",
             "paths": {
                 "guidelines": "/categories/",
                 "faq": "/faq/articles/"
@@ -228,7 +222,7 @@ class Settings:
             # 深い階層でもデフォルト値を保持したまま更新
             def deep_update(base: dict, update: dict) -> dict:
                 for key, value in update.items():
-                    if isinstance(value, dict):
+                    if isinstance(value, dict) and isinstance(base.get(key, {}), dict):
                         base[key] = deep_update(base.get(key, {}), value)
                     else:
                         base[key] = value

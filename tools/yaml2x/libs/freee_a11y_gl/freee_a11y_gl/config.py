@@ -14,15 +14,13 @@ class Config:
         settings.update(new_settings)
 
     @classmethod
-    def set_base_url(cls, base_url: str, lang: Optional[LanguageCode] = None) -> None:
-        """Update base URL for specified language
+    def set_base_url(cls, base_url: str) -> None:
+        """Set the base URL for the site.
         
         Args:
-            base_url: New base URL to set
-            lang: Language code. If None, default language from settings will be used.
+            base_url: Base URL (e.g., https://a11y-guidelines.freee.co.jp)
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        settings.update({f"base_url.{effective_lang}": base_url})
+        settings.update({"base_url": base_url.rstrip("/")})
 
     @classmethod
     def get_basedir(cls) -> str:
@@ -34,15 +32,36 @@ class Config:
         return settings.get("basedir", ".")
 
     @classmethod
+    def _get_language_path(cls, lang: LanguageCode) -> str:
+        """Get the language-specific path segment.
+        
+        Args:
+            lang: Language code
+            
+        Returns:
+            Language path segment ("" for ja, "/en" for en)
+        """
+        return "" if lang == "ja" else f"/{lang}"
+
+    @classmethod
     def get_base_url(cls, lang: Optional[LanguageCode] = None) -> str:
-        """Get base URL for specified language."""
+        """Get base URL with language path for specified language.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            Base URL with language path
+        """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"base_url.{effective_lang}", "")
+        base = settings.get("base_url", "")
+        lang_path = cls._get_language_path(effective_lang)
+        return f"{base}{lang_path}"
 
     @classmethod
     def get_guidelines_path(cls) -> str:
         """Get guidelines (categories) path."""
-        return settings.get("paths.guidelines", "/")
+        return settings.get("paths.guidelines", "/categories/")
 
     @classmethod
     def get_separator(cls, lang: Optional[LanguageCode] = None, separator_type: Optional[str] = None) -> str:
@@ -76,6 +95,7 @@ class Config:
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         return settings.get(f"separators.pass_text.{effective_lang}", " is true")
 
+    @classmethod
     def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
@@ -146,7 +166,6 @@ class Config:
 
     @classmethod
     def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
-        """Get examples base URL for specified language."""
         """Get examples base URL for specified language.
         
         Args:
@@ -158,7 +177,6 @@ class Config:
         base_url = cls.get_base_url(lang)
         return f"{base_url}/checks/examples/"
 
-    @staticmethod
     @classmethod
     def get_date_format(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized date format string.
