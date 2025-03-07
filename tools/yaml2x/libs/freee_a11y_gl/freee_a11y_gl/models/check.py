@@ -375,11 +375,12 @@ class Condition:
         conjunction_type = 'and' if self.type == 'and' else 'or'
         summary_separator = Config.get_separator(lang, conjunction_type)
         summary_connector = Config.get_conjunction(lang, conjunction_type)
-        pass_text = Config.get_pass_text(lang)
+        pass_singular_text = Config.get_pass_singular_text(lang)
+        pass_plural_text = Config.get_pass_plural_text(lang)
 
         if len(simple_conditions) > 1:
-            simple_conditions = [c.replace(pass_text, '') for c in simple_conditions]
-            simple_summary = f'{summary_separator.join(simple_conditions)}{pass_text}'
+            simple_conditions = [c.replace(pass_singular_text, '') for c in simple_conditions]
+            simple_summary = f'{summary_separator.join(simple_conditions)}{pass_plural_text}'
             return f'{simple_summary}{summary_connector}{summary_connector.join(complex_conditions)}' if complex_conditions else simple_summary
         else:
             return summary_connector.join(simple_conditions + complex_conditions)

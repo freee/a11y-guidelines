@@ -2,31 +2,82 @@
 import os
 import platform
 from pathlib import Path
-from typing import Any, Dict, Optional, Set, List
+from typing import Any, Dict, Optional, List, Literal
 import yaml
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
-class UrlConfig(BaseModel):
-    """URL configuration for each language."""
-    ja: str = ""
-    en: str = ""
-
-class SeparatorConfig(BaseModel):
-    """Separator configuration for each language."""
-    ja: str = ""
-    en: str = ""
+class LocaleConfig(BaseModel):
+    """Locale-specific configuration."""
+    text_separator: str = Field(default=": ", description="Text separator for the category and the title for guideline links")
+    list_separator: str = Field(default=", ", description="List item separator")
+    and_separator: str = Field(default=" and ", description="AND conjunction")
+    or_separator: str = Field(default=" or ", description="OR conjunction")
+    and_conjunction: str = Field(default=", and ", description="AND conjunction for grouped items")
+    or_conjunction: str = Field(default=", or ", description="OR conjunction for grouped items")
+    pass_singular_text: str = Field(default=" is true", description="Pass condition text for single condition")
+    pass_plural_text: str = Field(default=" are true", description="Pass condition text for multiple conditions")
+    date_format: str = Field(default="%B %-d, %Y", description="Date format in strftime format")
 
 class LanguageConfig(BaseModel):
     """Language configuration."""
     available: list[str] = Field(default_factory=lambda: ["ja", "en"])
     default: str = "ja"
-    required: Set[str] = Field(default_factory=lambda: {"ja", "en"})
+
+class PathConfig(BaseModel):
+    """Path configuration."""
+    guidelines: str = Field(default="/categories/", description="Guidelines path (must start and end with /)")
+    faq: str = Field(default="/faq/articles/", description="FAQ path (must start and end with /)")
+
+    @validator("guidelines", "faq")
+    def validate_path(cls, v: str) -> str:
+        """Validate path string.
+        
+        Args:
+            v: Path string to validate
+            
+        Returns:
+            Validated path string
+            
+        Raises:
+            ValueError: If path is invalid
+        """
+        if not v:
+            raise ValueError("Path cannot be empty")
+        if not v.startswith("/"):
+            raise ValueError("Path must start with /")
+        if not v.endswith("/"):
+            raise ValueError("Path must end with /")
+        return v
 
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
-    separators: Dict[str, SeparatorConfig] = Field(default_factory=dict)
+    paths: PathConfig = Field(default_factory=lambda: PathConfig())
+    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
+        "ja": LocaleConfig(
+            text_separator="：",
+            list_separator="、",
+            and_separator="と",
+            or_separator="または",
+            and_conjunction="、かつ",
+            or_conjunction="、または",
+            pass_singular_text="を満たしている",
+            pass_plural_text="を満たしている",
+            date_format="%Y年%-m月%-d日"
+        ),
+        "en": LocaleConfig(
+            text_separator=": ",
+            list_separator=", ",
+            and_separator=" and ",
+            or_separator=" or ",
+            and_conjunction=", and ",
+            or_conjunction=", or ",
+            pass_singular_text=" is true",
+            pass_plural_text=" are true",
+            date_format="%B %-d, %Y"
+        )
+    })
 
 class Settings:
     """設定値を階層的に管理するクラス。
@@ -59,48 +110,35 @@ class Settings:
         self._settings = {
             "languages": {
                 "available": ["ja", "en"],
-                "default": "ja",
-                "required": ["ja", "en"]
+                "default": "ja"
             },
             "base_url": "https://a11y-guidelines.freee.co.jp",
             "paths": {
                 "guidelines": "/categories/",
                 "faq": "/faq/articles/"
             },
-            "separators": {
-                "text": {
-                    "ja": "：",
-                    "en": ": "
+            "locale": {
+                "ja": {
+                    "text_separator": "：",
+                    "list_separator": "、",
+                    "and_separator": "と",
+                    "or_separator": "または",
+                    "and_conjunction": "、かつ",
+                    "or_conjunction": "、または",
+                    "pass_singular_text": "を満たしている",
+                    "pass_plural_text": "を満たしている",
+                    "date_format": "%Y年%-m月%-d日"
                 },
-                "list": {
-                    "ja": "、",
-                    "en": ", "
-                },
-                "and": {
-                    "ja": "と",
-                    "en": " and "
-                },
-                "or": {
-                    "ja": "または",
-                    "en": " or "
-                },
-                "and_conjunction": {
-                    "ja": "、かつ",
-                    "en": ", and "
-                },
-                "or_conjunction": {
-                    "ja": "、または",
-                    "en": ", or "
-                },
-                "pass_text": {
-                    "ja": "_を満たしている",
-                    "en": " is true"
-                }
-            },
-            "formats": {
-                "date": {
-                    "ja": "%Y年%-m月%-d日",
-                    "en": "%B %-d, %Y"
+                "en": {
+                    "text_separator": ": ",
+                    "list_separator": ", ",
+                    "and_separator": " and ",
+                    "or_separator": " or ",
+                    "and_conjunction": ", and ",
+                    "or_conjunction": ", or ",
+                    "pass_singular_text": " is true",
+                    "pass_plural_text": " are true",
+                    "date_format": "%B %-d, %Y"
                 }
             }
         }

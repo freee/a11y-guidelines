@@ -68,39 +68,52 @@ class Config:
         """Get separator of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         effective_type = separator_type if separator_type is not None else "text"
-        return settings.get(f"separators.{effective_type}.{effective_lang}", "")
+        return settings.get(f"locale.{effective_lang}.{effective_type}_separator", "")
 
     @classmethod
     def get_text_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get text separator for specified language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"separators.text.{effective_lang}", "")
+        return settings.get(f"locale.{effective_lang}.text_separator", "")
 
     @classmethod
     def get_list_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get list item separator for specified language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"separators.list.{effective_lang}", ", ")
+        return settings.get(f"locale.{effective_lang}.list_separator", ", ")
 
     @classmethod
-    def get_pass_text(cls, lang: Optional[LanguageCode] = None) -> str:
+    def get_pass_singular_text(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized pass text for conditions.
         
         Args:
             lang: Language code. If None, default language from settings will be used.
             
         Returns:
-            Localized pass text
+            Localized pass text for single condition
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"separators.pass_text.{effective_lang}", " is true")
+        return settings.get(f"locale.{effective_lang}.pass_singular_text", " is true")
+
+    @classmethod
+    def get_pass_plural_text(cls, lang: Optional[LanguageCode] = None) -> str:
+        """Get localized pass text for conditions.
+        
+        Args:
+            lang: Language code. If None, default language from settings will be used.
+            
+        Returns:
+            Localized pass text for multiple conditions
+        """
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.get(f"locale.{effective_lang}.pass_plural_text", " are true")
 
     @classmethod
     def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         effective_type = conjunction_type if conjunction_type is not None else "and"
-        return settings.get(f"separators.{effective_type}_conjunction.{effective_lang}", " and ")
+        return settings.get(f"locale.{effective_lang}.{effective_type}_conjunction", "and")
 
     @classmethod
     def get_check_tool_name(cls, tool_id: str, lang: Optional[LanguageCode] = None) -> str:
@@ -189,7 +202,7 @@ class Config:
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         default_format = "%Y年%-m月%-d日" if effective_lang == "ja" else "%B %-d, %Y"
-        return settings.get(f"formats.date.{effective_lang}", default_format)
+        return settings.get(f"locale.{effective_lang}.date_format", default_format)
 
     @staticmethod
     def tag2sc(tag: str) -> str:
