@@ -87,8 +87,6 @@ def main():
             extra_args={'config': makefile_config}
         )
         file_generator.generate(makefile_generator, settings['build_all'], settings['targets'])    
-        #     if settings['build_all'] or STATIC_FILES['makefile'] in settings['targets']:
-        # templates['makefile'].write_rst(makefile_data, STATIC_FILES['makefile'])
 
 if __name__ == "__main__":
     main()
