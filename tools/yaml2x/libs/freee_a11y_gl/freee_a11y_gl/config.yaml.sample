@@ -1,112 +1,52 @@
-# freee_a11y_gl configuration sample
-#
-# Usage:
-# 1. Copy this file to one of the following locations:
-#    - ./config.yaml (current directory)
-#    - ~/.config/freee_a11y_gl/config.yaml (Unix-like systems)
-#    - %APPDATA%\freee_a11y_gl\config.yaml (Windows)
-# 2. Or specify location with FREEE_A11Y_GL_CONFIG environment variable
-#
-# Note: All settings are optional. Default values will be used if not specified.
+# freee_a11y_gl Configuration Sample
+
+# Base URL for the site
+base_url: "https://a11y-guidelines.freee.co.jp"
 
 # Language settings
 languages:
-  # Available languages
-  available:
-    - ja
-    - en
-  # Default language
-  default: ja
-  # Languages that must be defined in all translations
-  required:
-    - ja
-    - en
+  available: ["ja", "en"]
+  default: "ja"
 
-# URL configurations
-urls:
-  # Base URLs for each language
-  base:
-    ja: "https://a11y-guidelines.freee.co.jp"
-    en: "https://a11y-guidelines.freee.co.jp/en"
-  # Documentation paths
-  docs:
-    ja: "/categories/"
-    en: "/en/categories/"
+# Path settings (must start and end with /)
+paths:
+  guidelines: "/categories/"     # Path to guidelines categories
+  faq: "/faq/articles/"         # Path to FAQ articles
 
-# Separator configurations
-separators:
-  # Text separators (used in titles, etc.)
-  text:
-    ja: "："
-    en: ": "
-  # List item separators
-  list:
-    ja: "、"
-    en: ", "
-  # Basic conjunctions
-  and:
-    ja: "と"
-    en: " and "
-  or:
-    ja: "または"
-    en: " or "
-  # Complex conjunctions (used in condition descriptions)
-  and_conjunction:
-    ja: "、かつ"
-    en: ", and "
-  or_conjunction:
-    ja: "、または"
-    en: ", or "
+# Language-specific configurations
+# To add a new language:
+# 1. Add the language code to languages.available array above
+# 2. Copy an existing language block below and modify values as needed
+locale:
+  # Japanese configuration
+  ja:
+    text_separator: "："        # Text separator for labels
+    list_separator: "、"        # Separator for list items
+    and_separator: "と"
+    or_separator: "または"
+    and_conjunction: "、かつ"     # For combining conditions with AND
+    or_conjunction: "、または"    # For combining conditions with OR
+    pass_singular_text: "_を満たしている"  # Text for pass conditions
+    pass_plural_text: "_を満たしている"  # Text for pass conditions
+    date_format: "%Y年%-m月%-d日"  # strftime format
 
-# Example of overriding specific values:
-#urls:
-#  base:
-#    ja: "https://staging.example.com"
-#    en: "https://staging.example.com/en"
+  # English configuration
+  en:
+    text_separator: ": "        # Text separator for labels
+    list_separator: ", "        # Separator for list items
+    and_separator: " and "
+    or_separator: " or "
+    and_conjunction: ", and "      # For combining conditions with AND
+    or_conjunction: ", or "        # For combining conditions with OR
+    pass_singular_text: " is true"       # Text for pass conditions
+    pass_plural_text: " are true"       # Text for pass conditions
+    date_format: "%B %-d, %Y"  # strftime format
 
-# Example of adding a new language (must implement all required configurations):
-#languages:
-#  available:
-#    - ja
-#    - en
-#    - zh
-#  default: ja
-#  required:
-#    - ja
-#    - en
-#
-#urls:
-#  base:
-#    ja: "https://a11y-guidelines.freee.co.jp"
-#    en: "https://a11y-guidelines.freee.co.jp/en"
-#    zh: "https://a11y-guidelines.freee.co.jp/zh"
-#  docs:
-#    ja: "/categories/"
-#    en: "/en/categories/"
-#    zh: "/zh/categories/"
-#
-#separators:
-#  text:
-#    ja: "："
-#    en: ": "
-#    zh: "："
-#  list:
-#    ja: "、"
-#    en: ", "
-#    zh: "、"
-#  and:
-#    ja: "と"
-#    en: " and "
-#    zh: "和"
-#  or:
-#    ja: "または"
-#    en: " or "
-#    zh: "或"
-#  and_conjunction:
-#    ja: "、かつ"
-#    en: ", and "
-#    zh: "、且"
-#  or_conjunction:
-#    ja: "、または"
-#    en: ", or "
-#    zh: "、或"
+# Note: This configuration can be loaded from:
+# 1. Explicitly specified path via FREEE_A11Y_GL_CONFIG environment variable
+# 2. Current directory (config.yaml or config.yml)
+# 3. Platform-specific standard configuration directories:
+#    - Windows: %APPDATA%\freee_a11y_gl\config.yaml
+#    - macOS: /Library/Application Support/freee_a11y_gl/config.yaml
+#    - Linux: /etc/freee_a11y_gl/config.yaml
+#    - Unix-like: ~/.config/freee_a11y_gl/config.yaml

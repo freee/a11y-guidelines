@@ -695,42 +695,23 @@ class Condition:
         return procedures
 
     def summary(self, lang):
-        language_info = {
-            'ja': {
-                'simple_pass_singular': 'を満たしている',
-                'simple_pass_plural': 'を満たしている',
-                'and_connector': '、かつ',
-                'or_connector': '、または',
-                'and_separator': 'と',
-                'or_separator': 'または'
-            },
-            'en': {
-                'simple_pass_singular': ' is true',
-                'simple_pass_plural': ' are true',
-                'and_connector': ', and ',
-                'or_connector': ', or ',
-                'and_separator': ' and ',
-                'or_separator': ' or '
-            },
-        }
-
         if self.type == 'simple':
-            return f'{self.procedure.id}{language_info[lang]["simple_pass_singular"]}'
+            return f'{self.procedure.id}{Config.get_pass_singular_text(lang)}'
 
         simple_conditions = [cond.summary(lang) for cond in self.conditions if cond.type == 'simple']
         complex_conditions = [f'({cond.summary(lang)})' for cond in self.conditions if cond.type != 'simple']
 
         if self.type == 'and':
-            summary_separator = language_info[lang]['and_separator']
-            summary_connector = language_info[lang]['and_connector'] 
-            simple_pass = language_info[lang]['simple_pass_plural']
+            summary_separator = Config.get_separator(lang, "and")
+            summary_connector = Config.get_conjunction(lang, "and")
+            simple_pass = Config.get_pass_plural_text(lang)
         else:
-            summary_separator = language_info[lang]['or_separator']
-            summary_connector = language_info[lang]['or_connector']
-            simple_pass = language_info[lang]['simple_pass_singular']
+            summary_separator = Config.get_separator(lang, "or")
+            summary_connector = Config.get_conjunction(lang, "or")
+            simple_pass = Config.get_pass_singular_text(lang)
 
         if len(simple_conditions) > 1:
-            simple_conditions = [cond.replace(language_info[lang]['simple_pass_singular'], '') for cond in simple_conditions]
+            simple_conditions = [cond.replace(Config.get_pass_singular_text(lang), '') for cond in simple_conditions]
             simple_summary = f'{summary_separator.join(simple_conditions)}{simple_pass}'
             return f'{simple_summary}{summary_connector}{summary_connector.join(complex_conditions)}' if complex_conditions else simple_summary
         else:

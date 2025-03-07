@@ -245,7 +245,7 @@ class ChecklistSheetGenerator:
             check['subchecks'][target_id].get('count', 0) > 1
         )
         
-        formatter = ConditionFormatter(CHECK_RESULTS, FINAL_CHECK_RESULTS)
+        formatter = ConditionFormatter(CHECK_RESULTS, FINAL_CHECK_RESULTS, target_id)
         
         if check.get('conditions'):
             for condition in check['conditions']:
@@ -254,7 +254,9 @@ class ChecklistSheetGenerator:
                     
                     if not is_subcheck:
                         # Parent check
-                        ref_col = f'D{id_to_row[check["id"]]}'
+                        # Calculate column for calculatedResult (second generatedData column)
+                        calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
+                        ref_col = f'{calc_col}{id_to_row[check["id"]]}'
                         row_data.extend([
                             CellData(
                                 value=f'=IF({ref_col}="","{CHECK_RESULTS["unchecked"][lang]}",{ref_col})',
@@ -274,7 +276,7 @@ class ChecklistSheetGenerator:
                         row_data.extend([
                             CellData(value="", type=CellType.PLAIN, protection=True),
                             CellData(
-                                value=f'=D{parent_row}',
+                                value=f'={calc_col}{parent_row}',
                                 type=CellType.FORMULA,
                                 protection=True
                             )
@@ -283,8 +285,11 @@ class ChecklistSheetGenerator:
                     
         # Simple check case
         if not is_subcheck:
-            result_cell = f'E{id_to_row[check["id"]]}'
-            calc_cell = f'D{id_to_row[check["id"]]}'
+            # Calculate column positions
+            calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
+            result_col = chr(ord('A') + len(COLUMNS['idCols']) + len(COLUMNS[target_id]['generatedData']))
+            result_cell = f'{result_col}{id_to_row[check["id"]]}'
+            calc_cell = f'{calc_col}{id_to_row[check["id"]]}'
             row_data.extend([
                 CellData(
                     value=f'=IF(${calc_cell}="","{CHECK_RESULTS["unchecked"][lang]}",${calc_cell})',
@@ -302,12 +307,14 @@ class ChecklistSheetGenerator:
                 )
             ])
         else:
+            # Calculate column for calculatedResult
+            calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
             parent_id = check['id'].split('-')[0]
             parent_row = id_to_row[parent_id]
             row_data.extend([
                 CellData(value="", type=CellType.PLAIN, protection=True),
                 CellData(
-                    value=f'=D{parent_row}',
+                    value=f'={calc_col}{parent_row}',
                     type=CellType.FORMULA,
                     protection=True
                 )

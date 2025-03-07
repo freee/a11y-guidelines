@@ -6,6 +6,7 @@ from pathlib import Path
 
 import initializer
 from generators.file_generator import FileGenerator, GeneratorConfig
+from freee_a11y_gl import Config as GL
 from generators.content_generators import (
     CategoryGenerator,
     AllChecksGenerator, CheckExampleGenerator,
@@ -26,7 +27,12 @@ def main():
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = initializer.setup_constants(settings)
     templates = initializer.setup_templates()
     makefile_vars, makefile_vars_list = initializer.setup_variables()
+    # Initialize core settings
     setup_instances(settings['basedir'])
+    
+    # Set base URL
+    base_url = "https://a11y-guidelines.freee.co.jp"
+    GL.set_base_url(base_url)
 
     # Create output directories
     for directory in DEST_DIRS.values():
@@ -81,8 +87,6 @@ def main():
             extra_args={'config': makefile_config}
         )
         file_generator.generate(makefile_generator, settings['build_all'], settings['targets'])    
-        #     if settings['build_all'] or STATIC_FILES['makefile'] in settings['targets']:
-        # templates['makefile'].write_rst(makefile_data, STATIC_FILES['makefile'])
 
 if __name__ == "__main__":
     main()
