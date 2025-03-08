@@ -8,10 +8,12 @@ languages:
   available: ["ja", "en"]
   default: "ja"
 
-# Path settings (must start and end with /)
+# Path settings
 paths:
-  guidelines: "/categories/"     # Path to guidelines categories
-  faq: "/faq/articles/"         # Path to FAQ articles
+  # Guidelines path (must start and end with /)
+  guidelines: "/categories/"
+  # FAQ path (must start and end with /)
+  faq: "/faq/articles/"
 
 # Language-specific configurations
 # To add a new language:
@@ -20,27 +22,27 @@ paths:
 locale:
   # Japanese configuration
   ja:
-    text_separator: "："        # Text separator for labels
-    list_separator: "、"        # Separator for list items
-    and_separator: "と"
-    or_separator: "または"
-    and_conjunction: "、かつ"     # For combining conditions with AND
-    or_conjunction: "、または"    # For combining conditions with OR
-    pass_singular_text: "_を満たしている"  # Text for pass conditions
-    pass_plural_text: "_を満たしている"  # Text for pass conditions
-    date_format: "%Y年%-m月%-d日"  # strftime format
+    text_separator: "："        # Text separator for the category and the title for guideline links
+    list_separator: "、"        # List item separator
+    and_separator: "と"         # AND conjunction
+    or_separator: "または"      # OR conjunction
+    and_conjunction: "、かつ"    # AND conjunction for grouped items
+    or_conjunction: "、または"   # OR conjunction for grouped items
+    pass_singular_text: "を満たしている"  # Pass condition text for single condition
+    pass_plural_text: "を満たしている"    # Pass condition text for multiple conditions
+    date_format: "%Y年%-m月%-d日"        # Date format in strftime format
 
   # English configuration
   en:
-    text_separator: ": "        # Text separator for labels
-    list_separator: ", "        # Separator for list items
-    and_separator: " and "
-    or_separator: " or "
-    and_conjunction: ", and "      # For combining conditions with AND
-    or_conjunction: ", or "        # For combining conditions with OR
-    pass_singular_text: " is true"       # Text for pass conditions
-    pass_plural_text: " are true"       # Text for pass conditions
-    date_format: "%B %-d, %Y"  # strftime format
+    text_separator: ": "        # Text separator for the category and the title for guideline links
+    list_separator: ", "        # List item separator
+    and_separator: " and "      # AND conjunction
+    or_separator: " or "        # OR conjunction
+    and_conjunction: ", and "   # AND conjunction for grouped items
+    or_conjunction: ", or "     # OR conjunction for grouped items
+    pass_singular_text: " is true"   # Pass condition text for single condition
+    pass_plural_text: " are true"    # Pass condition text for multiple conditions
+    date_format: "%B %-d, %Y"        # Date format in strftime format
 
 # Note: This configuration can be loaded from:
 # 1. Explicitly specified path via FREEE_A11Y_GL_CONFIG environment variable
