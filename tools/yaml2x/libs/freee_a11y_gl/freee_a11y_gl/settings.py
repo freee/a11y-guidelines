@@ -107,41 +107,8 @@ class Settings:
 
     def load_defaults(self) -> None:
         """デフォルト設定の読み込み"""
-        self._settings = {
-            "languages": {
-                "available": ["ja", "en"],
-                "default": "ja"
-            },
-            "base_url": "https://a11y-guidelines.freee.co.jp",
-            "paths": {
-                "guidelines": "/categories/",
-                "faq": "/faq/articles/"
-            },
-            "locale": {
-                "ja": {
-                    "text_separator": "：",
-                    "list_separator": "、",
-                    "and_separator": "と",
-                    "or_separator": "または",
-                    "and_conjunction": "、かつ",
-                    "or_conjunction": "、または",
-                    "pass_singular_text": "を満たしている",
-                    "pass_plural_text": "を満たしている",
-                    "date_format": "%Y年%-m月%-d日"
-                },
-                "en": {
-                    "text_separator": ": ",
-                    "list_separator": ", ",
-                    "and_separator": " and ",
-                    "or_separator": " or ",
-                    "and_conjunction": ", and ",
-                    "or_conjunction": ", or ",
-                    "pass_singular_text": " is true",
-                    "pass_plural_text": " are true",
-                    "date_format": "%B %-d, %Y"
-                }
-            }
-        }
+        # Pydanticモデルのデフォルト値を使用
+        self._settings = GlobalConfig().dict()
 
     def _get_config_search_paths(self) -> List[Path]:
         """Get list of paths to search for config files.
