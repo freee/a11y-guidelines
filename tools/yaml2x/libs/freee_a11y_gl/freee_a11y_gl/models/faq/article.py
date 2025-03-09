@@ -1,7 +1,8 @@
 """FAQ article model."""
 import datetime
 from typing import Dict, List, Any, Optional, ClassVar
-from ..base import BaseModel, RelationshipManager
+from ..base import BaseModel
+from ...relationship_manager import RelationshipManager
 from ...utils import uniq
 
 class Faq(BaseModel):

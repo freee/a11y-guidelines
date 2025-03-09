@@ -1,7 +1,8 @@
 """Check-related models for a11y-guidelines."""
 from typing import Dict, List, Any, Optional, ClassVar
 from dataclasses import dataclass
-from .base import BaseModel, RelationshipManager
+from .base import BaseModel
+from ..relationship_manager import RelationshipManager
 from ..config import Config, LanguageCode
 from ..utils import uniq
 

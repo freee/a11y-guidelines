@@ -2,7 +2,8 @@
 from typing import Dict, List, Optional, Any, ClassVar
 from urllib.parse import quote as url_encode
 from dataclasses import dataclass
-from .base import BaseModel, RelationshipManager
+from .base import BaseModel
+from ..relationship_manager import RelationshipManager
 import re
 from ..config import Config, LanguageCode
 from ..utils import tag2sc

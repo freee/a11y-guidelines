@@ -1,7 +1,8 @@
 """Generator for category pages."""
 from typing import Dict, Any, Iterator, List
 
-from freee_a11y_gl import RelationshipManager, Category
+from freee_a11y_gl import Category
+from freee_a11y_gl.relationship_manager import RelationshipManager
 from ..common_generators import ListBasedGenerator
 
 class CategoryGenerator(ListBasedGenerator[str]):

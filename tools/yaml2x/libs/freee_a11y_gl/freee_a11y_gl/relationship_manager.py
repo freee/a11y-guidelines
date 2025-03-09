@@ -1,16 +1,11 @@
-import datetime
-import re
-from urllib.parse import quote as url_encode
-from .constants import PLATFORM_NAMES
-from .config import Config
-from .models.check import Check, CheckTool
-from .models.content import Category, Guideline
-from .models.reference import WcagSc, InfoRef
-from .models.faq.article import Faq
-from .models.faq.tag import FaqTag
-from .models.axe import AxeRule
+"""Relationship management for accessibility guidelines entities."""
+from typing import Any, Dict, List
+
+from .models.base import BaseModel
 
 class RelationshipManager:
+    """Manages relationships between different model objects."""
+    
     _instance = None
     _initialized = False
 
@@ -20,143 +15,99 @@ class RelationshipManager:
         return cls._instance
 
     def __init__(self):
+        """Initialize the relationship manager.
+        
+        Uses singleton pattern to ensure only one instance exists.
+        """
         if self._initialized:
             return
         self._data = {}
         self._unresolved_faqs = {}
         self._initialized = True
 
-    def associate_objects(self, obj1, obj2):
+    def associate_objects(self, obj1: BaseModel, obj2: BaseModel) -> None:
+        """Associate two objects bidirectionally.
+        
+        Args:
+            obj1: First object to associate
+            obj2: Second object to associate
+        """
         obj1_type = obj1.object_type
         obj2_type = obj2.object_type
         obj1_id = obj1.id
         obj2_id = obj2.id
-        if obj1_type not in self._data:
-            self._data[obj1_type] = {}
-        if obj1_id not in self._data[obj1_type]:
-            self._data[obj1_type][obj1_id] = {}
-        if obj2_type not in self._data[obj1_type][obj1_id]:
-            self._data[obj1_type][obj1_id][obj2_type] = []
-        if obj2 not in self._data[obj1_type][obj1_id][obj2_type]:
-            self._data[obj1_type][obj1_id][obj2_type].append(obj2)
 
-        if obj2_type not in self._data:
-            self._data[obj2_type] = {}
-        if obj2_id not in self._data[obj2_type]:
-            self._data[obj2_type][obj2_id] = {}
-        if obj1_type not in self._data[obj2_type][obj2_id]:
-            self._data[obj2_type][obj2_id][obj1_type] = []
-        if obj1 not in self._data[obj2_type][obj2_id][obj1_type]:
-            self._data[obj2_type][obj2_id][obj1_type].append(obj1)
+        # Create nested dictionaries if they don't exist
+        for obj_type, obj_id in [(obj1_type, obj1_id), (obj2_type, obj2_id)]:
+            if obj_type not in self._data:
+                self._data[obj_type] = {}
+            if obj_id not in self._data[obj_type]:
+                self._data[obj_type][obj_id] = {}
 
-    def add_unresolved_faqs(self, faq1, faq2):
-        if faq1 not in self._unresolved_faqs:
-            self._unresolved_faqs[faq1] = []
-        if faq2 not in self._unresolved_faqs[faq1]:
-            self._unresolved_faqs[faq1].append(faq2)
-        if faq2 not in self._unresolved_faqs:
-            self._unresolved_faqs[faq2] = []
-        if faq1 not in self._unresolved_faqs[faq2]:
-            self._unresolved_faqs[faq2].append(faq1)
+        # Add bidirectional relationship
+        for (src_type, src_id, src_obj, dest_type, dest_obj) in [
+            (obj1_type, obj1_id, obj1, obj2_type, obj2),
+            (obj2_type, obj2_id, obj2, obj1_type, obj1)
+        ]:
+            if dest_type not in self._data[src_type][src_id]:
+                self._data[src_type][src_id][dest_type] = []
+            if dest_obj not in self._data[src_type][src_id][dest_type]:
+                self._data[src_type][src_id][dest_type].append(dest_obj)
 
-    def resolve_faqs(self):
+    def add_unresolved_faqs(self, faq1_id: str, faq2_id: str) -> None:
+        """Add unresolved FAQ relationship to be resolved later.
+        
+        Args:
+            faq1_id: ID of first FAQ
+            faq2_id: ID of second FAQ
+        """
+        for id1, id2 in [(faq1_id, faq2_id), (faq2_id, faq1_id)]:
+            if id1 not in self._unresolved_faqs:
+                self._unresolved_faqs[id1] = []
+            if id2 not in self._unresolved_faqs[id1]:
+                self._unresolved_faqs[id1].append(id2)
+
+    def resolve_faqs(self) -> None:
+        """Resolve all unresolved FAQ relationships."""
+        from .models.faq.article import Faq  # Import here to avoid circular imports
+        
         for faq_id in self._unresolved_faqs:
             for faq2_id in self._unresolved_faqs[faq_id]:
                 faq1 = Faq.get_by_id(faq_id)
                 faq2 = Faq.get_by_id(faq2_id)
-                self.associate_objects(faq1, faq2)
+                if faq1 and faq2:
+                    self.associate_objects(faq1, faq2)
 
-    def get_guidelines_to_category(self):
-        mapping = {}
-        for category in self._data['category']:
-            guidelines = self._data['category'][category]['guideline']
-            sorted_guidelines = sorted(guidelines, key=lambda item: item.sort_key)
-            mapping[category] = sorted_guidelines
-        return mapping
-
-    def get_category_to_guidelines(self, category):
-        return sorted(self._data['category'][category.id]['guideline'], key=lambda item: item.sort_key)
-
-    def get_check_to_guidelines(self, check):
-        return sorted(self._data['check'][check.id]['guideline'], key=lambda item: item.sort_key)
-
-    def get_guideline_to_checks(self, guideline):
-        return sorted(self._data['guideline'][guideline.id]['check'], key=lambda item: item.id)
-
-    def get_guideline_to_scs(self, guideline):
-        return sorted(self._data['guideline'][guideline.id]['wcag_sc'], key=lambda item: item.sort_key)
-
-    def get_sc_to_guidelines(self, sc):
-        if sc.id not in self._data['wcag_sc'] or 'guideline' not in self._data['wcag_sc'][sc.id]:
+    def get_related_objects(self, obj: BaseModel, related_type: str) -> List[Any]:
+        """Get all related objects of a specific type for an object.
+        
+        Args:
+            obj: Source object
+            related_type: Type of related objects to retrieve
+            
+        Returns:
+            List of related objects
+        """
+        try:
+            return self._data[obj.object_type][obj.id][related_type]
+        except KeyError:
             return []
-        return sorted(self._data['wcag_sc'][sc.id]['guideline'], key=lambda item: item.sort_key)
 
-    def get_guideline_to_info(self, guideline):
-        if 'info_ref' in self._data['guideline'][guideline.id]:
-            return self._data['guideline'][guideline.id]['info_ref']
-        return []
-
-    def get_info_to_guidelines(self, info):
-        if 'guideline' in self._data['info_ref'][info.id]:
-            return self._data['info_ref'][info.id]['guideline']
-        return []
-
-    def get_check_to_info(self, check):
-        if 'info_ref' in self._data['check'][check.id]:
-            return self._data['check'][check.id]['info_ref']
-        return []
-
-    def get_guideline_to_faqs(self, guideline):
-        if 'faq' in self._data['guideline'][guideline.id]:
-            return self._data['guideline'][guideline.id]['faq']
-        return []
-
-    def get_faq_to_guidelines(self, faq):
-        if faq.id not in self._data['faq'] or 'guideline' not in self._data['faq'][faq.id]:
-            return []
-        return self._data['faq'][faq.id]['guideline']
-
-    def get_faq_to_checks(self, faq):
-        if faq.id not in self._data['faq'] or 'check' not in self._data['faq'][faq.id]:
-            return []
-        return self._data['faq'][faq.id]['check']
-
-    def get_check_to_faqs(self, check):
-        if 'faq' in self._data['check'][check.id]:
-            faqs = self._data['check'][check.id]['faq']
-            return sorted(faqs, key=lambda item: item.sort_key)
-        return []
-
-    def get_faq_to_tags(self, faq):
-        return sorted(self._data['faq'][faq.id]['faq_tag'], key=lambda item: item.id)
-
-    def get_tag_to_faqs(self, tag):
-        if tag.id not in self._data['faq_tag'] or 'faq' not in self._data['faq_tag'][tag.id]:
-            return []
-        return self._data['faq_tag'][tag.id]['faq']
-
-    def get_faq_to_info(self, faq):
-        if 'info_ref' in self._data['faq'][faq.id]:
-            return self._data['faq'][faq.id]['info_ref']
-        return []
-
-    def get_info_to_faqs(self, info):
-        if 'faq' in self._data['info_ref'][info.id]:
-            return self._data['info_ref'][info.id]['faq']
-        return []
-
-    def get_related_faqs(self, faq):
-        if faq.id not in self._unresolved_faqs:
-            return []
-        return sorted(self._data['faq'][faq.id]['faq'], key=lambda item: item.sort_key)
-
-    def get_axe_to_wcagsc(self, axe_rule):
-        if 'wcag_sc' in self._data['axe_rule'][axe_rule.id]:
-            return self._data['axe_rule'][axe_rule.id]['wcag_sc']
-        return []
-
-    def get_axe_to_guidelines(self, axe_rule):
-        if 'guideline' in self._data['axe_rule'][axe_rule.id]:
-            return self._data['axe_rule'][axe_rule.id]['guideline']
-        return []
-
+    def get_sorted_related_objects(
+        self,
+        obj: BaseModel,
+        related_type: str,
+        key: str = 'sort_key'
+    ) -> List[Any]:
+        """Get sorted related objects of a specific type.
+        
+        Args:
+            obj: Source object
+            related_type: Type of related objects to get
+            key: Key to sort by (defaults to 'sort_key')
+            
+        Returns:
+            Sorted list of related objects
+        """
+        objects = self.get_related_objects(obj, related_type)
+        return sorted(objects, key=lambda x: getattr(x, key))

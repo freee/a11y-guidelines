@@ -2,7 +2,8 @@
 import re
 from typing import Dict, List, Optional, Any, ClassVar
 from dataclasses import dataclass
-from .base import BaseModel, RelationshipManager
+from .base import BaseModel
+from ..relationship_manager import RelationshipManager
 from ..utils import tag2sc
 
 @dataclass

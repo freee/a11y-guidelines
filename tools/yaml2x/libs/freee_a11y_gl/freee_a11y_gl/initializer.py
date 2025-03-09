@@ -6,7 +6,7 @@ import time
 import yaml
 import git
 from typing import Optional
-from .classes import RelationshipManager
+from .relationship_manager import RelationshipManager
 from .models.content import Category, Guideline
 from .models.reference import WcagSc, InfoRef
 from .models.faq.article import Faq

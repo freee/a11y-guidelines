@@ -1,4 +1,10 @@
-from .classes import *
+from .models.content import Category, Guideline
+from .models.check import Check, CheckTool
+from .models.reference import WcagSc, InfoRef
+from .models.faq.article import Faq
+from .models.faq.tag import FaqTag
+from .models.axe import AxeRule
+from .relationship_manager import RelationshipManager
 from .constants import *
 from .source import get_src_path
 from .initializer import setup_instances
@@ -7,9 +13,11 @@ from .version_utils import get_version_info
 from .yaml_processor import process_yaml_data
 
 __all__ = [
-    # Existing exports from classes
+    # Models
     'Category', 'Check', 'Guideline', 'Faq', 'FaqTag',
     'WcagSc', 'InfoRef', 'AxeRule', 'CheckTool',
+    # Managers
+    'RelationshipManager',
     # Constants
     'PLATFORM_NAMES', 'SEVERITY_TAGS', 'CHECK_TARGETS',
     'IMPLEMENTATION_TARGETS',

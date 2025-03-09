@@ -1,7 +1,8 @@
 """Generators for WCAG content."""
 from typing import Dict, Any, List
 
-from freee_a11y_gl import WcagSc, InfoRef, RelationshipManager, AxeRule
+from freee_a11y_gl import WcagSc, InfoRef, AxeRule
+from freee_a11y_gl.relationship_manager import RelationshipManager
 from ..base_generator import BaseGenerator
 from ..common_generators import SingleFileGenerator
 
@@ -56,4 +57,3 @@ class PriorityDiffGenerator(SingleFileGenerator, WcagGeneratorBase):
     def validate_data(self, data: Dict[str, Any]) -> bool:
         """Validate priority difference data."""
         return 'diffs' in data and isinstance(data['diffs'], list)
-    
