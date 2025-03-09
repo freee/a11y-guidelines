@@ -3,7 +3,9 @@ from typing import Dict, List, Optional, Any, ClassVar
 from urllib.parse import quote as url_encode
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
+import re
 from ..config import Config, LanguageCode
+from ..utils import tag2sc
 
 @dataclass
 class LocalizedReference:
@@ -140,14 +142,3 @@ class InfoRef(BaseModel):
         """Get references that have associated FAQs."""
         rel = RelationshipManager()
         return [ref for ref in cls._instances.values() if rel.get_related_objects(ref, 'faq')]
-
-def tag2sc(tag: str) -> str:
-    """Convert axe-core tag to WCAG SC identifier.
-    
-    Args:
-        tag: axe-core tag (e.g., 'wcag111')
-        
-    Returns:
-        WCAG SC identifier (e.g., '1.1.1')
-    """
-    return Config.tag2sc(tag)

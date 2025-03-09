@@ -203,15 +203,3 @@ class Config:
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         default_format = "%Y年%-m月%-d日" if effective_lang == "ja" else "%B %-d, %Y"
         return settings.get(f"locale.{effective_lang}.date_format", default_format)
-
-    @staticmethod
-    def tag2sc(tag: str) -> str:
-        """Convert axe-core tag to WCAG SC identifier.
-        
-        Args:
-            tag: axe-core tag (e.g., 'wcag111')
-            
-        Returns:
-            WCAG SC identifier (e.g., '1.1.1')
-        """
-        return re.sub(r'wcag(\d)(\d)(\d+)', r'\1.\2.\3', tag)

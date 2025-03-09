@@ -3,6 +3,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
 from ..config import Config, LanguageCode
+from ..utils import uniq
 
 @dataclass
 class GuidelineData:
@@ -54,7 +55,7 @@ class Category(BaseModel):
             dependency.extend([check.src_path for check in rel.get_related_objects(guideline, 'check')])
             # Add FAQ dependencies
             dependency.extend([faq.src_path for faq in rel.get_related_objects(guideline, 'faq')])
-        return list(dict.fromkeys(dependency))  # Remove duplicates while preserving order
+        return uniq(dependency)  # Remove duplicates while preserving order
 
     @classmethod
     def list_all(cls) -> List['Category']:

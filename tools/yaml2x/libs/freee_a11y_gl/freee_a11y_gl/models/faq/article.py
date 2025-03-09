@@ -2,6 +2,7 @@
 import datetime
 from typing import Dict, List, Any, Optional, ClassVar
 from ..base import BaseModel, RelationshipManager
+from ...utils import uniq
 
 class Faq(BaseModel):
     """FAQ article model."""
@@ -80,7 +81,7 @@ class Faq(BaseModel):
         if checks:
             dependency.extend(check.src_path for check in checks)
 
-        return list(dict.fromkeys(dependency))
+        return uniq(dependency)
 
     def link_data(self, baseurl: str = '') -> Dict[str, Dict[str, str]]:
         """Get link data for FAQ.

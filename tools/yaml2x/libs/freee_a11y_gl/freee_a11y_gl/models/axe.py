@@ -3,6 +3,7 @@ import re
 from typing import Dict, List, Optional, Any, ClassVar
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
+from ..utils import tag2sc
 
 @dataclass
 class AxeMessage:
@@ -137,14 +138,3 @@ class AxeRule(BaseModel):
                 without_sc.append(rule)
 
         return with_guidelines + with_sc + without_sc
-
-def tag2sc(tag: str) -> str:
-    """Convert axe-core tag to WCAG SC identifier.
-    
-    Args:
-        tag: axe-core tag (e.g., 'wcag111')
-        
-    Returns:
-        WCAG SC identifier (e.g., '1.1.1')
-    """
-    return re.sub(r'wcag(\d)(\d)(\d+)', r'\1.\2.\3', tag)

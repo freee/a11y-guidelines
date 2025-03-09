@@ -3,6 +3,7 @@ from typing import Dict, List, Any, Optional, ClassVar
 from dataclasses import dataclass
 from .base import BaseModel, RelationshipManager
 from ..config import Config, LanguageCode
+from ..utils import uniq
 
 class Check(BaseModel):
     """Check model for accessibility validation criteria."""
@@ -183,7 +184,7 @@ class CheckTool:
 
     def get_dependency(self) -> List[str]:
         """Get list of file dependencies for this tool."""
-        return list(dict.fromkeys(ex.check_src_path for ex in self.examples))
+        return uniq([ex.check_src_path for ex in self.examples])
 
     def example_template_data(self, lang: str) -> List[Dict[str, Any]]:
         """Get template data for all examples.
