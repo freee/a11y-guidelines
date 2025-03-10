@@ -1,6 +1,7 @@
 """FAQ tag model for categorizing FAQ articles."""
 from typing import Dict, List, Optional, Any, ClassVar
-from ..base import BaseModel, RelationshipManager
+from ..base import BaseModel
+from ...relationship_manager import RelationshipManager
 
 class FaqTag(BaseModel):
     """Tag for categorizing FAQ articles."""
