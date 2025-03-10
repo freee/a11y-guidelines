@@ -21,7 +21,7 @@ class WcagGeneratorBase(BaseGenerator):
         """Get guidelines for a success criterion."""
         return [
             guideline.get_category_and_id(self.lang)
-            for guideline in self.relationship_manager.get_sc_to_guidelines(sc)
+            for guideline in self.relationship_manager.get_sorted_related_objects(sc, 'guideline')
         ]
 
 class WcagMappingGenerator(SingleFileGenerator, WcagGeneratorBase):

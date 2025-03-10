@@ -74,7 +74,7 @@ class FaqTagPageGenerator(ListBasedGenerator[FaqTag], FaqGeneratorBase):
             'filename': tag.id,
             'tag': tag.id,
             'label': tag.names[self.lang],
-            'articles': [faq.id for faq in self.relationship_manager.get_tag_to_faqs(tag)]
+            'articles': [faq.id for faq in self.relationship_manager.get_sorted_related_objects(tag, 'faq', key='sort_key')]
         }
 
     def validate_data(self, data: Dict[str, Any]) -> bool:

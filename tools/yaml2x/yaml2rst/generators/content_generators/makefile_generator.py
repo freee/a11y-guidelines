@@ -127,7 +127,7 @@ class MakefileGenerator(SingleFileGenerator):
             if target not in tagpage_targets:
                 dependency = []
                 tagpage_targets.append(target)
-                for faq in self.relationship_manager.get_tag_to_faqs(tag):
+                for faq in self.relationship_manager.get_sorted_related_objects(tag, 'faq'):
                     dependency.extend(faq.get_dependency())
                 build_depends.append({
                     'target': target,
@@ -154,7 +154,7 @@ class MakefileGenerator(SingleFileGenerator):
                     'target': target,
                     'depends': ' '.join([
                         guideline.src_path 
-                        for guideline in self.relationship_manager.get_info_to_guidelines(info)
+                        for guideline in self.relationship_manager.get_sorted_related_objects(info, 'guideline')
                     ])
                 })
 
@@ -170,7 +170,7 @@ class MakefileGenerator(SingleFileGenerator):
                     'target': target,
                     'depends': ' '.join([
                         faq.src_path 
-                        for faq in self.relationship_manager.get_info_to_faqs(info)
+                        for faq in self.relationship_manager.get_sorted_related_objects(info, 'faq')
                     ])
                 })
 

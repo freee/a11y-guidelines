@@ -18,12 +18,10 @@ class InfoToGuidelinesGenerator(ListBasedGenerator[InfoRef]):
 
     def process_item(self, info: InfoRef) -> Dict[str, Any]:
         """Process a single info reference."""
-        sorted_guidelines = sorted(
-            self.relationship_manager.get_info_to_guidelines(info),
-            key=lambda item: item.sort_key
-        )
-        guidelines = [guideline.get_category_and_id(self.lang) 
-                     for guideline in sorted_guidelines]
+        guidelines = [
+            guideline.get_category_and_id(self.lang) 
+            for guideline in self.relationship_manager.get_sorted_related_objects(info, 'guideline')
+        ]
         return {
             'filename': info.ref,
             'guidelines': guidelines
@@ -53,7 +51,10 @@ class InfoToFaqsGenerator(ListBasedGenerator[InfoRef]):
 
     def process_item(self, info: InfoRef) -> Dict[str, Any]:
         """Process a single info reference."""
-        faqs = [faq.id for faq in self.relationship_manager.get_info_to_faqs(info)]
+        faqs = [
+            faq.id
+            for faq in self.relationship_manager.get_sorted_related_objects(info, 'faq', key='sort_key')
+        ]
         return {
             'filename': info.ref,
             'faqs': faqs
