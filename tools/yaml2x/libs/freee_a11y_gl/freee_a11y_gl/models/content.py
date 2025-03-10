@@ -3,7 +3,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel
 from ..relationship_manager import RelationshipManager
-from ..config import Config, LanguageCode
+from ..settings import settings
 from ..utils import uniq
 
 @dataclass
@@ -156,8 +156,8 @@ class Guideline(BaseModel):
         category = rel.get_related_objects(self, 'category')[0]
 
         for lang in self.data.title.keys():
-            separator_char = Config.get_text_separator(lang)
-            basedir = Config.get_doc_path(lang)
+            separator_char = settings.get(f'locale.{lang}.text_separator', ': ')
+            basedir = settings.get('paths.guidelines', '/categories/')
             data['text'][lang] = f'{category.get_name(lang)}{separator_char}{self.data.title[lang]}'
             data['url'][lang] = f'{baseurl}{basedir}{category.id}.html#{self.id}'
         return data
@@ -184,7 +184,7 @@ class Guideline(BaseModel):
         # Add checks data
         data['checks'] = [
             check.template_data(lang, platform=self.data.platform)
-            for check in rel.get_sorted_related_objects(self, 'check')
+            for check in rel.get_sorted_related_objects(self, 'check', key='id')
         ]
 
         # Add success criteria data
@@ -216,9 +216,12 @@ class Guideline(BaseModel):
         Returns:
             Joined string with localized separator
         """
-        return Config.get_list_separator(lang).join(
-            [Config.get_platform_name(item, lang) for item in items]
-        )
+        separator = settings.get(f'locale.{lang}.list_separator', ', ')
+        platform_names = [
+            settings.get(f'platform.names.{lang}.{item}', item)
+            for item in items
+        ]
+        return separator.join(platform_names)
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:

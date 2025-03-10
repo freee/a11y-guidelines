@@ -3,7 +3,10 @@ from typing import Dict, List, Any, Optional, ClassVar
 from dataclasses import dataclass
 from .base import BaseModel
 from ..relationship_manager import RelationshipManager
-from ..config import Config, LanguageCode
+from typing import Literal
+from ..settings import settings
+
+LanguageCode = Literal["ja", "en"]
 from ..utils import uniq
 
 class Check(BaseModel):
@@ -66,8 +69,8 @@ class Check(BaseModel):
         data = {
             'id': self.id,
             'check': self.check_text[lang],
-            'severity': Config.get_severity_tag(self.severity, lang),
-            'target': Config.get_check_target_name(self.target, lang),
+            'severity': settings.get(f'severity_tags.{lang}.{self.severity}', self.severity),
+            'target': settings.get(f'check_targets.{lang}.{self.target}', self.target),
             'platform': self.join_items(self.platform, lang),
             'guidelines': []
         }
@@ -105,10 +108,13 @@ class Check(BaseModel):
 
     @staticmethod
     def join_items(items: List[str], lang: str) -> str:
-        """Join platform items with localized separator."""
-        return Config.get_list_separator(lang).join(
-            [Config.get_platform_name(item, lang) for item in items]
-        )
+        """Join platform items with localized separator and platform names."""
+        separator = settings.get(f'locale.{lang}.list_separator', ', ')
+        platform_names = [
+            settings.get(f'platform.names.{lang}.{item}', item)
+            for item in items
+        ]
+        return separator.join(platform_names)
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:
@@ -118,7 +124,7 @@ class Check(BaseModel):
     @classmethod
     def template_data_all(cls, lang: str) -> List[Dict[str, Any]]:
         """Get template data for all checks."""
-        sorted_checks = sorted(cls._instances, key=lambda x: cls._instances[x].id)
+        sorted_checks = sorted(cls._instances.keys())  # イキストでソート（cls._instancesのキーは既にcheck idなので）
         for check_id in sorted_checks:
             yield cls._instances[check_id].template_data(lang)
 
@@ -257,7 +263,7 @@ class Method:
             lang: Language code
         """
         return {
-            'platform': Config.get_implementation_target_name(self.platform, lang),
+            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
             'method': self.method[lang]
         }
 
@@ -328,7 +334,7 @@ class Procedure:
             'url': {}
         }
         for lang in self.procedure.keys():
-            baseurl = Config.get_examples_url(lang)
+            baseurl = f"{settings.get('base_url')}/{lang}/checks/examples/"
             tool_link['text'][lang] = self.tool_display_name or self.tool.get_name(lang)
             tool_link['url'][lang] = f'{baseurl}{self.tool.id}.html#{self.id}'
         return {
@@ -369,16 +375,16 @@ class Condition:
     def summary(self, lang: str) -> str:
         """Get localized summary of condition."""
         if self.type == 'simple':
-            return f'{self.procedure.id}{Config.get_pass_text(lang)}'
+            return f'{self.procedure.id}{settings.get(f"locale.{lang}.pass_singular_text", " is true")}'
 
         simple_conditions = [c.summary(lang) for c in self.conditions if c.type == 'simple']
         complex_conditions = [f'({c.summary(lang)})' for c in self.conditions if c.type != 'simple']
 
         conjunction_type = 'and' if self.type == 'and' else 'or'
-        summary_separator = Config.get_separator(lang, conjunction_type)
-        summary_connector = Config.get_conjunction(lang, conjunction_type)
-        pass_singular_text = Config.get_pass_singular_text(lang)
-        pass_plural_text = Config.get_pass_plural_text(lang)
+        summary_separator = settings.get(f'locale.{lang}.{conjunction_type}_separator', ' and ' if conjunction_type == 'and' else ' or ')
+        summary_connector = settings.get(f'locale.{lang}.{conjunction_type}_conjunction', ', and ' if conjunction_type == 'and' else ', or ')
+        pass_singular_text = settings.get(f'locale.{lang}.pass_singular_text', ' is true')
+        pass_plural_text = settings.get(f'locale.{lang}.pass_plural_text', ' are true')
 
         if len(simple_conditions) > 1:
             simple_conditions = [c.replace(pass_singular_text, '') for c in simple_conditions]
@@ -393,7 +399,7 @@ class Condition:
             return {}
 
         data = {
-            'platform': Config.get_platform_name(self.platform, lang),
+            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
             'condition': self.summary(lang)
         }
         procedures = self.procedures()

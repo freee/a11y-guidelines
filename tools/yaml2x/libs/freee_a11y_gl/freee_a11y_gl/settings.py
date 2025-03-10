@@ -49,11 +49,66 @@ class PathConfig(BaseModel):
             raise ValueError("Path must end with /")
         return v
 
+class LangSpecificConfig(BaseModel):
+    """Language-specific configuration base."""
+    ja: Dict[str, str]
+    en: Dict[str, str]
+
+class SeverityTagsConfig(LangSpecificConfig):
+    """Severity tags configuration."""
+    ja: Dict[str, str] = Field(default_factory=lambda: {
+        "minor": "[MINOR]",
+        "normal": "[NORMAL]",
+        "major": "[MAJOR]",
+        "critical": "[CRITICAL]"
+    })
+    en: Dict[str, str] = Field(default_factory=lambda: {
+        "minor": "[MINOR]",
+        "normal": "[NORMAL]",
+        "major": "[MAJOR]",
+        "critical": "[CRITICAL]"
+    })
+
+class CheckTargetsConfig(LangSpecificConfig):
+    """Check targets configuration."""
+    ja: Dict[str, str] = Field(default_factory=lambda: {
+        "design": "デザイン",
+        "code": "コード",
+        "product": "プロダクト",
+    })
+    en: Dict[str, str] = Field(default_factory=lambda: {
+        "design": "Design",
+        "code": "Code",
+        "product": "Product",
+    })
+
+class PlatformConfig(BaseModel):
+    """Platform configuration."""
+    names: Dict[str, Dict[str, str]] = Field(default_factory=lambda: {
+        "ja": {
+            "web": "Web",
+            "mobile": "モバイル",
+            "general": "全般",
+            "ios": "iOS",
+            "android": "Android",
+        },
+        "en": {
+            "web": "Web",
+            "mobile": "Mobile",
+            "general": "General",
+            "ios": "iOS",
+            "android": "Android",
+        }
+    })
+
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
     paths: PathConfig = Field(default_factory=lambda: PathConfig())
+    severity_tags: SeverityTagsConfig = Field(default_factory=lambda: SeverityTagsConfig())
+    platform: PlatformConfig = Field(default_factory=lambda: PlatformConfig())
+    check_targets: CheckTargetsConfig = Field(default_factory=lambda: CheckTargetsConfig())
     locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
         "ja": LocaleConfig(
             text_separator="：",
