@@ -106,6 +106,10 @@ class InfoRef(BaseModel):
         """Get reference string format."""
         if self.internal:
             return f':ref:`{self.ref}`'
+        # Check if it's a |name| style reference
+        if re.match(r'\|.+\|', self.ref):
+            return self.ref
+        # For HTTP URLs, return as is
         return self.ref
 
     def link_data(self) -> Optional[Dict[str, Dict[str, str]]]:
