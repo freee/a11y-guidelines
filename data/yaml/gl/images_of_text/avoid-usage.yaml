@@ -24,6 +24,6 @@ intent:
     -  Do not compromise the ease of handling text information.
 checks:
 - '0481'
-- '0501'
+- '0531'
 info:
 - exp-iot-usage
