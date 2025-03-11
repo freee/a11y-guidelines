@@ -384,7 +384,7 @@ class Condition:
         summary_separator = settings.get(f'locale.{lang}.{conjunction_type}_separator', ' and ' if conjunction_type == 'and' else ' or ')
         summary_connector = settings.get(f'locale.{lang}.{conjunction_type}_conjunction', ', and ' if conjunction_type == 'and' else ', or ')
         pass_singular_text = settings.get(f'locale.{lang}.pass_singular_text', ' is true')
-        pass_plural_text = settings.get(f'locale.{lang}.pass_plural_text', ' are true')
+        pass_plural_text = settings.get(f'locale.{lang}.pass_plural_text', ' are true') if conjunction_type == 'and' else pass_singular_text
 
         if len(simple_conditions) > 1:
             simple_conditions = [c.replace(pass_singular_text, '') for c in simple_conditions]
