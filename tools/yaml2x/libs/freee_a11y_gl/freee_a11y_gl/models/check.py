@@ -163,7 +163,7 @@ class Check(BaseModel):
             for condition in self.conditions:
                 # 条件を再帰的に処理（checkのplatformを引き継ぐ）
                 check_platform = self.platform[0] if condition.platform is None and self.platform else None
-                cond_data = condition.object_data(check_platform)
+                cond_data = condition.object_data(check_platform, is_top=True)
                 conditions_data.append(cond_data)
                 
                 # conditionStatementsの生成
@@ -507,11 +507,12 @@ class Condition:
             data['procedures'] = [proc.template_data(lang) for proc in procedures]
         return data
 
-    def object_data(self, parent_platform: Optional[str] = None) -> Dict[str, Any]:
+    def object_data(self, parent_platform: Optional[str] = None, is_top: bool = True) -> Dict[str, Any]:
         """Get object data for condition.
         
         Args:
             parent_platform: Optional platform from parent condition
+            is_top: Whether this is a top-level condition
             
         Returns:
             Dictionary containing condition data
@@ -520,12 +521,15 @@ class Condition:
         
         # プラットフォームの解決（自身のplatformがNoneの場合は親から継承）
         platform = parent_platform if self.platform is None else self.platform
-        if platform:
+
+        # platformの出力制御:
+        # - トップレベルまたはsimpleタイプの場合のみ出力
+        if platform and (is_top or self.type == 'simple'):
             data['platform'] = platform
 
         if self.type == 'simple':
             data['procedure'] = self.procedure.object_data(platform)
         else:
-            # 子conditionsに親のplatformを渡す
-            data['conditions'] = [cond.object_data(platform) for cond in self.conditions]
+            # 子conditionsに親のplatformを渡す（is_top=Falseで）
+            data['conditions'] = [cond.object_data(platform, is_top=False) for cond in self.conditions]
         return data
