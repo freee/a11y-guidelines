@@ -157,8 +157,9 @@ class Guideline(BaseModel):
         for lang in self.data.title.keys():
             separator_char = settings.get(f'locale.{lang}.text_separator', ': ')
             basedir = settings.get('paths.guidelines', '/categories/')
+            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
             data['text'][lang] = f'{category.get_name(lang)}{separator_char}{self.data.title[lang]}'
-            data['url'][lang] = f'{baseurl}{basedir}{category.id}.html#{self.id}'
+            data['url'][lang] = f'{baseurl}{lang_path}{basedir}{category.id}.html#{self.id}'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:

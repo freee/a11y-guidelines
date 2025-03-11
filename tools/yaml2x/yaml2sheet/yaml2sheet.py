@@ -8,9 +8,8 @@ from sheet_generator import ChecklistSheetGenerator
 from config_loader import load_configuration
 #sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from freee_a11y_gl import Config as GL
-from freee_a11y_gl import process_yaml_data
-#from get_yaml_data import get_yaml_data
+from freee_a11y_gl import settings as GL
+from freee_a11y_gl.yaml_processor import process_yaml_data
 
 def parse_args() -> argparse.Namespace:
     """Parse command line arguments
@@ -112,7 +111,7 @@ def main() -> None:
             
         # Set base URL
         base_url = "https://a11y-guidelines.freee.co.jp"
-        GL.set_base_url(base_url)
+        GL.update({'base_url': base_url})
         logger.debug(f"Using base URL: {base_url}")
         
         source_data = process_yaml_data(str(source_path))

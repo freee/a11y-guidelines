@@ -13,6 +13,7 @@ from .source import get_src_path
 from .initializer import setup_instances
 from .info_utils import get_info_links
 from .version_utils import get_version_info
+from .settings import settings
 
 # Data processing
 from .yaml_processor import process_yaml_data
@@ -30,5 +31,7 @@ __all__ = [
     'get_src_path', 'setup_instances', 'get_info_links',
     'get_version_info',
     # YAML processing functionality
-    'process_yaml_data'
+    'process_yaml_data',
+    # Settings
+    'settings'
 ]

@@ -87,7 +87,7 @@ class InfoRef(BaseModel):
         
         Args:
             ref: Reference string
-            data: Optional reference data for external refs
+            data: Optional reference data from pickle
         """
         if hasattr(self, 'initialized'):
             return
@@ -96,10 +96,8 @@ class InfoRef(BaseModel):
         self.ref = ref
         self.internal = not bool(re.match(r'(https?://|\|.+\|)', ref))
 
-        if not self.internal and data:
-            self.url = data['url']
-            self.text = data['text']
-
+        # データは内部/外部に関係なく保存
+        self.ref_data = data if data else None
         self.initialized = True
 
     def refstring(self) -> str:
@@ -113,28 +111,53 @@ class InfoRef(BaseModel):
         return self.ref
 
     def link_data(self) -> Optional[Dict[str, Dict[str, str]]]:
-        """Get link data for external references."""
-        if not self.internal and hasattr(self, 'text'):
+        """Get link data for references.
+        
+        Returns:
+            Dictionary with localized text and URLs for all reference types
+        """
+        # pickleから取得したデータが存在する場合はそれを使用
+        if self.ref_data:
             return {
-                'text': self.text,
-                'url': self.url
+                'text': self.ref_data['text'],
+                'url': self.ref_data['url']
             }
-        return None
 
-    def set_link(self, data: Dict[str, Any]) -> None:
-        """Set link data for external references.
+        # デフォルトケース: pickleデータがない場合は参照タイプに応じて生成
+        result = {
+            'text': {},
+            'url': {}
+        }
+
+        # textにはrefstringを使用
+        refstr = self.refstring()
+        result['text'] = {lang: refstr for lang in ['ja', 'en']}
+
+        # URLは空文字をデフォルトとし、HTTP(S)の場合のみURLを設定
+        if re.match(r'https?://', self.ref):
+            result['url'] = {lang: self.ref for lang in ['ja', 'en']}
+        else:
+            result['url'] = {lang: '' for lang in ['ja', 'en']}
+
+        return result
+
+    def set_link(self, data: Dict[str, Dict[str, str]]) -> None:
+        """Set link data for references.
         
         Args:
-            data: Dictionary containing url and text
+            data: Dictionary containing localized url and text
         """
-        if not self.internal:
-            self.url = data['url']
-            self.text = data['text']
+        self.ref_data = data
 
     @classmethod
     def list_all_internal(cls) -> List['InfoRef']:
-        """Get all external references."""
+        """Get all internal references."""
         return [ref for ref in cls._instances.values() if ref.internal]
+
+    @classmethod
+    def list_all_external(cls) -> List['InfoRef']:
+        """Get all external references."""
+        return [ref for ref in cls._instances.values() if not ref.internal]
 
     @classmethod
     def list_has_guidelines(cls) -> List['InfoRef']:

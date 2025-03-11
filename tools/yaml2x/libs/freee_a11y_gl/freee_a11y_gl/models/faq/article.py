@@ -101,7 +101,8 @@ class Faq(BaseModel):
         for lang in self.title.keys():
             data['text'][lang] = self.title[lang]
             faq_path = settings.get('paths.faq', '/faq/articles/')
-            data['url'][lang] = f'{baseurl}{faq_path}{self.id}.html'
+            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
+            data['url'][lang] = f'{baseurl}{lang_path}{faq_path}{self.id}.html'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:

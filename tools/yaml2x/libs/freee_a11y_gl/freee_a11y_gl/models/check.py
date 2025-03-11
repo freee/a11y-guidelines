@@ -121,6 +121,105 @@ class Check(BaseModel):
         """Get all check source paths."""
         return [check.src_path for check in cls._instances.values()]
 
+    def object_data(self, baseurl: str = '') -> Dict[str, Any]:
+        """Get object data for check.
+        
+        Args:
+            baseurl: Optional base URL prefix
+        
+        Returns:
+            Dictionary with check data formatted for object representation
+        """
+        rel = RelationshipManager()
+        data = {
+            'id': self.id,
+            'sortKey': self.sort_key,
+            'check': self.check_text,
+            'severity': f'[{self.severity.upper()}]',
+            'target': self.target,
+            'platform': self.platform,
+            'guidelines': []
+        }
+
+        # Add guidelines
+        data['guidelines'] = [gl.link_data() for gl in rel.get_sorted_related_objects(self, 'guideline')]
+        
+        # Add FAQs if present
+        faqs = rel.get_sorted_related_objects(self, 'faq')
+        if faqs:
+            data['faqs'] = [faq.link_data() for faq in faqs]
+        
+        # Add info references if present
+        info = rel.get_related_objects(self, 'info_ref')
+        if info:
+            data['info'] = [inforef.link_data() for inforef in info]
+
+        # Add conditions if present
+        if self.conditions:
+            # 親のplatform情報を受け渡しながらconditionsを処理
+            conditions_data = []
+            condition_statements = []
+            
+            for condition in self.conditions:
+                # 条件を再帰的に処理（checkのplatformを引き継ぐ）
+                check_platform = self.platform[0] if condition.platform is None and self.platform else None
+                cond_data = condition.object_data(check_platform)
+                conditions_data.append(cond_data)
+                
+                # conditionStatementsの生成
+                statement = {
+                    'platform': cond_data.get('platform'),  # platformはobject_dataから取得
+                    'summary': {}
+                }
+                for lang in self.check_text.keys():
+                    statement['summary'][lang] = condition.summary(lang)
+                condition_statements.append(statement)
+
+            data['conditions'] = conditions_data
+            data['conditionStatements'] = condition_statements
+
+        # Add implementations if present
+        if self.implementations:
+            implementations = {}
+            for implementation in self.implementations:
+                title = implementation.title
+                for method in implementation.methods:
+                    platform = method.platform
+                    if platform not in implementations:
+                        implementations[platform] = []
+                    implementations[platform].append({
+                        'title': title,
+                        'method': method.method
+                    })
+            
+            for platform, methods in implementations.items():
+                platform_key = f'implementation_{platform}'
+                if platform_key not in data:
+                    data[platform_key] = {}
+                for method in methods:
+                    for lang, lang_title in method['title'].items():
+                        if lang not in data[platform_key]:
+                            data[platform_key][lang] = ''
+                        data[platform_key][lang] += f'{lang_title}:\n{method["method"][lang]}\n\n'
+
+        return data
+
+    @classmethod
+    def object_data_all(cls, baseurl: str = '') -> Dict[str, Any]:
+        """Get object data for all checks.
+        
+        Args:
+            baseurl: Optional base URL prefix
+            
+        Returns:
+            Dictionary mapping check IDs to their object data
+        """
+        sorted_checks = sorted(cls._instances.keys(), key=lambda x: cls._instances[x].id)
+        return {
+            check_id: cls._instances[check_id].object_data(baseurl)
+            for check_id in sorted_checks
+        }
+
     @classmethod
     def template_data_all(cls, lang: str) -> List[Dict[str, Any]]:
         """Get template data for all checks."""
@@ -334,7 +433,8 @@ class Procedure:
             'url': {}
         }
         for lang in self.procedure.keys():
-            baseurl = f"{settings.get('base_url')}/{lang}/checks/examples/"
+            lang_path = '' if lang == 'ja' else f'/{lang}'
+            baseurl = f"{settings.get('base_url')}{lang_path}/checks/examples/"
             tool_link['text'][lang] = self.tool_display_name or self.tool.get_name(lang)
             tool_link['url'][lang] = f'{baseurl}{self.tool.id}.html#{self.id}'
         return {
@@ -407,15 +507,25 @@ class Condition:
             data['procedures'] = [proc.template_data(lang) for proc in procedures]
         return data
 
-    def object_data(self, platform: Optional[str] = None) -> Dict[str, Any]:
-        """Get object data for condition."""
+    def object_data(self, parent_platform: Optional[str] = None) -> Dict[str, Any]:
+        """Get object data for condition.
+        
+        Args:
+            parent_platform: Optional platform from parent condition
+            
+        Returns:
+            Dictionary containing condition data
+        """
         data = {'type': self.type}
-        if hasattr(self, 'platform'):
-            data['platform'] = self.platform
-            platform = self.platform
+        
+        # プラットフォームの解決（自身のplatformがNoneの場合は親から継承）
+        platform = parent_platform if self.platform is None else self.platform
+        if platform:
+            data['platform'] = platform
 
         if self.type == 'simple':
             data['procedure'] = self.procedure.object_data(platform)
         else:
+            # 子conditionsに親のplatformを渡す
             data['conditions'] = [cond.object_data(platform) for cond in self.conditions]
         return data
