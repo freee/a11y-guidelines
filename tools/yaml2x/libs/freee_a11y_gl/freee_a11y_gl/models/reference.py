@@ -132,9 +132,9 @@ class InfoRef(BaseModel):
             self.text = data['text']
 
     @classmethod
-    def list_all_external(cls) -> List['InfoRef']:
+    def list_all_internal(cls) -> List['InfoRef']:
         """Get all external references."""
-        return [ref for ref in cls._instances.values() if not ref.internal]
+        return [ref for ref in cls._instances.values() if ref.internal]
 
     @classmethod
     def list_has_guidelines(cls) -> List['InfoRef']:
