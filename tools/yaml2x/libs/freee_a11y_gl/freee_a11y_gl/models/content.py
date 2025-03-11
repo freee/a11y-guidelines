@@ -117,9 +117,8 @@ class Guideline(BaseModel):
                 from .reference import InfoRef  # Import here to avoid circular imports
                 info_ref = InfoRef(info)
                 rel.associate_objects(self, info_ref)
-                if info_ref.internal:
-                    for check in rel.get_related_objects(self, 'check'):
-                        rel.associate_objects(check, info_ref)
+                for check in rel.get_related_objects(self, 'check'):
+                    rel.associate_objects(check, info_ref)
 
         Guideline._instances[self.id] = self
 
