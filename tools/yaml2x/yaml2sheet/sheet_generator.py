@@ -454,10 +454,17 @@ class ChecklistSheetGenerator:
             link_text = link['text'][lang]
             text_parts.append(link_text)
             
+            url = link['url'][lang]
+            # Check if URL is relative and needs base_url
+            if url.startswith('/'):
+                from freee_a11y_gl import settings as GL
+                base_url = GL.get('base_url', '')
+                url = base_url.rstrip('/') + url
+            
             format_runs.append({
                 'startIndex': current_index,
                 'format': {
-                    'link': {'uri': link['url'][lang]},
+                    'link': {'uri': url},
                     'foregroundColor': {'red': 0.06, 'green': 0.47, 'blue': 0.82},
                     'underline': True
                 }
