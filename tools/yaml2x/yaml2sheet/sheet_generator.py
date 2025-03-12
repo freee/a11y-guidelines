@@ -558,12 +558,11 @@ class ChecklistSheetGenerator:
             self.initialize_spreadsheet()
             self._load_existing_sheets()
 
-        # Store version info request
-        self.version_update_request = create_version_info_request(
-            source_data.get('version', ''),
-            source_data.get('date', ''),
-            self.get_first_sheet_id()
-        )
+        # Store version info for later use
+        self._version_info = {
+            'version': source_data.get('version', ''),
+            'date': source_data.get('date', '')
+        }
 
         # Process source data
         processed_data = self.data_processor.process_source_data(source_data['checks'])
@@ -619,6 +618,16 @@ class ChecklistSheetGenerator:
             update_requests = [req for req in update_requests if 'addSheet' not in req]
             
             if update_requests:
+                # バージョン情報の更新リクエストを再生成して追加
+                if hasattr(self, '_version_info'):
+                    first_sheet_id = self.get_first_sheet_id()
+                    version_update_request = create_version_info_request(
+                        self._version_info['version'],
+                        self._version_info['date'],
+                        first_sheet_id
+                    )
+                    update_requests.append(version_update_request)
+                
                 logger.info(f"Updating {len(update_requests)} sheet contents")
                 self.service.spreadsheets().batchUpdate(
                     spreadsheetId=self.spreadsheet_id,
