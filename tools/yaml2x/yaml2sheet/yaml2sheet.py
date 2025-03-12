@@ -92,16 +92,26 @@ def main() -> None:
             credentials_path=config.credentials_path.as_posix(),
             token_path=config.token_path.as_posix()
         )
-        credentials = auth_manager.get_credentials()
         
-    except FileNotFoundError as e:
-        logger.error(f"Authentication error: {e}")
-        return
-    except ValueError as e:
-        logger.error(f"Configuration error: {e}")
-        return
+        try:
+            credentials = auth_manager.get_credentials()
+        except FileNotFoundError as e:
+            # credential fileが見つからない場合はエラーとして扱う
+            if str(e).startswith("Credentials file not found"):
+                logger.error(f"Authentication error: {e}")
+                return
+            # token fileが見つからない場合は無視して処理を継続
+            logger.debug(f"Token file not found (this is normal for first run): {e}")
+            credentials = None
+        except ValueError as e:
+            logger.error(f"Configuration error: {e}")
+            return
+        except Exception as e:
+            logger.error(f"Unexpected error during initialization: {e}", exc_info=True)
+            return
+
     except Exception as e:
-        logger.error(f"Unexpected error during initialization: {e}", exc_info=True)
+        logger.error(f"Configuration error: {e}")
         return
 
     try:
@@ -124,6 +134,10 @@ def main() -> None:
         spreadsheet_id = config.get_spreadsheet_id(args.production)
         logger.debug(f"Using spreadsheet ID: {spreadsheet_id}")
         
+        if credentials is None:
+            logger.error("No valid credentials available. Please run the script again to authenticate.")
+            return
+            
         # Generate checklist
         generator = ChecklistSheetGenerator(credentials, spreadsheet_id)
         generator.generate_checklist(source_data, initialize=args.init)

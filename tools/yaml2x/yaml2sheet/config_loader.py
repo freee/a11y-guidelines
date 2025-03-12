@@ -112,10 +112,10 @@ class ApplicationConfig(BaseModel):
         # Relative paths will be handled in get_basedir
         return Path(path)
 
-    @field_validator('credentials_path', 'token_path')
+    @field_validator('credentials_path')
     @classmethod
-    def validate_path(cls, path: Path) -> Path:
-        """Validate that paths exist and are readable
+    def validate_credentials_path(cls, path: Path) -> Path:
+        """Validate that credentials file exists and is readable
         
         Args:
             path: Path to validate
@@ -127,6 +127,22 @@ class ApplicationConfig(BaseModel):
             ValueError: If path is invalid or file is not readable
         """
         return validate_readable_file(path)
+
+    @field_validator('token_path')
+    @classmethod
+    def validate_token_path(cls, path: Path) -> Path:
+        """Token file path validator - only validates path format
+        
+        Args:
+            path: Path to validate
+            
+        Returns:
+            Path: Path object
+        """
+        try:
+            return Path(path)
+        except Exception as e:
+            raise ValueError(f"Invalid token path: {e}")
     
     def get_log_level(self) -> int:
         """Convert string log level to logging constant
