@@ -104,8 +104,8 @@ class MiscDefinitionsGenerator(SingleFileGenerator):
         for info in InfoRef.list_all_external():
             data.append({
                 'label': info.refstring(),
-                'text': info.text[self.lang],
-                'url': info.url[self.lang]
+                'text': info.link_data()['text'][self.lang],
+                'url': info.link_data()['url'][self.lang]
             })
         return {'links': data}
 
