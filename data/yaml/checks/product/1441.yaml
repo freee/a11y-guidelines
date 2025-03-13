@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    3秒以上の長さの自動再生される音声コンテンツがない。
+    スクリーン・リーダーの音声出力を阻害するような、音声を含む自動再生されるコンテンツがない。
   en: |-
-    There is no audio content that automatically plays for more than 3 seconds in length.
+    There is no conten containing audio that starts automatically and interferes with the screen reader's speech output.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1441-content-none
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、音声を含む自動再生されるコンテンツがないことを確認する。
+      en: |-
+        Verify that there is no content containing audio that starts automatically on the screen to be checked.
+  - type: simple
+    id: 1441-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        音声を含む自動再生されるコンテンツは、3秒以内に音声の再生が終了することを確認する。
+      en: |-
+        Verify that the audio playback of content containing audio that starts automatically ends within 3 seconds.

@@ -10,3 +10,33 @@ check:
     音声・映像コンテンツは、そのコンテンツがなくても不足なく情報が伝わるような内容で、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
   en: |-
     EThe audio and video content is provided in such a way that it is not essential to perceive the information, and the content is explicitly labeled as a substitute or supplement to the textual information.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1501-content-none
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、音声コンテンツ、動画、アニメーションがないことを確認する。
+      en: |-
+        Verify that there is no audio content, video, or animation on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 1501-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          音声コンテンツ、動画、アニメーションは、そのコンテンツがなくても不足なく情報が伝わるような内容であることを確認する。
+        en: |-
+          Verify that the audio content, video, or animation is provided in such a way that it is not essential to perceive the information.
+    - type: simple
+      id: 1501-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          音声コンテンツ、動画、アニメーションは、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されていることを確認する。
+        en: |-
+          Verify that the audio content, video, or animation is explicitly labeled as a substitute or supplement to the textual information.
