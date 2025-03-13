@@ -7,10 +7,34 @@ platform:
 - mobile
 check:
   ja: |-
-    *  自動更新されるコンテンツがない。または
-    *  ユーザーが自動更新の間隔やタイミングの変更をできる。または
-    *  ユーザーが自動更新を停止できる。
+    ユーザーの集中を阻害するような、自動更新されるコンテンツがない。
   en: |-
-    *  No content is automatically updated. or
-    *  The user can change the interval and timing of automatic updates. or
-    *  The user can stop automatic updates.
+    There is no automatically updated content that hinders user concentration.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 1251-content-none
+    procedure:
+      ja: |-
+        チェック対象の画面に自動更新されるコンテンツがないことを確認する。
+      en: |-
+        Check that there is no content that is automatically updated on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: 1251-content-01
+    procedure:
+      ja: |-
+        自動更新されるコンテンツの更新頻度について、ユーザーが変更できることを確認する。
+      en: |-
+        Verify that the user can change the update frequency of automatically updated content.
+  - type: simple
+    tool: misc
+    id: 1251-content-02
+    procedure:
+      ja: |-
+        ユーザーが自動更新を停止できることを確認する。
+      en: |-
+        Verify that the user can stop automatic updates.

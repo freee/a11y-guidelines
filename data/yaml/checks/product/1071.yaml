@@ -7,14 +7,44 @@ platform:
 - mobile
 check:
   ja: |-
-    ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のような挙動がないことを確認する：
-
-    *  表示内容が大幅に変わる
-    *  自動的に別のページ/画面に遷移する
-    *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+    フォームの操作時に、ユーザーが予期できない挙動が発生しない。
   en: |-
-    Manipulating form controls, such as edit boxes, checkboxes, radio buttons, buttons, etc., within the page/screen doesn not cause behavior such as:
+    Unexpected behavior does not occur when manipulating forms.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 1071-content-none
+    procedure:
+      ja: |-
+        チェック対象の画面にフォーム・コントロールが存在しないことを確認する。
+      en: |-
+        Confirm that there are no form controls on the screen to be checked.
+  - type: or
+    conditions:
+    - type: simple
+      tool: keyboard
+      id: "1071-keyboard-01"
+      procedure:
+        ja: |-
+          ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のようなあまり一般的ではない挙動がないことを確認する：
 
-    *  The display content changes significantly.
-    *  Automatic transition to another page/screen
-    *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
+          *  表示内容が大幅に変わる
+          *  自動的に別のページ/画面に遷移する
+          *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+        en: |-
+          Operate form controls such as edit boxes, check boxes, and radio buttons on the page/screen to confirm that the following uncommon behaviors do not occur:
+
+          *  The display content changes significantly.
+          *  Automatic transition to another page/screen
+          *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
+    - type: simple
+      tool: misc
+      id: 1071-content-01
+      procedure:
+        ja: |-
+          フォーム操作時に発生する、あまり一般的ではない挙動について、分かりやすくユーザーに説明されていることを確認する。
+        en: |-
+          Confirm that the user is clearly informed about behaviors that are not very common that occur when manipulating forms.

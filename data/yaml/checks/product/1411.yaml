@@ -7,8 +7,34 @@ platform:
 - mobile
 check:
   ja: |-
-    *  ページ内に埋め込まれる音声/動画プレイヤーについて、適切なラベル付けがされていてそこにプレイヤーがあることが容易に認知できるようになっている。または
-    *  前後のテキストから、そこにプレイヤーがあることが推測できる。
+    ページ内に音声や動画プレイヤーが埋め込まれている場合、その事実が容易に認知できる。
   en: |-
-    *  For audio/video players that are embedded in the page, they are properly labeled so that it is easily recognizable that the player is there. OR
-    *  It can be inferred from the text before and after that the player is there.
+    If there is an audio or video player embedded in the page, it is easy to recognize that fact.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 1411-content-none
+    procedure:
+      ja: |-
+        チェック対象の画面に音声や動画プレイヤーは埋め込まれていない。
+      en: |-
+        There are no audio or video players embedded in the screen to be checked.
+  - type: simple
+    tool: misc
+    id: 1411-content-01
+    procedure:
+      ja: |-
+        ページに埋め込まれている音声や動画のプレイヤーには、そこにプレイヤーがあることが分かるようなラベルが適切に付けられていることを確認する。
+      en: |-
+         Verify that the audio or video player embedded in the page is properly labeled so that it is clear that there is a player there.
+  - type: simple
+    tool: misc
+    id: 1411-content-02
+    procedure:
+      ja: |-
+        ページに埋め込まれている音声や動画のプレイヤーが、前後のテキストから、そこにプレイヤーがあることが推測できるようになっていることを確認する。
+      en: |-
+        Verify that the audio or video player embedded in the page can be inferred from the text before and after that there is a player there.
