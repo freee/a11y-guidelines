@@ -43,44 +43,7 @@ class SheetFormatter:
                 'fields': 'userEnteredFormat(backgroundColor,textFormat,verticalAlignment,wrapStrategy)'
             }
         })
-        
-        # Data cell formatting
-        requests.append({
-            'repeatCell': {
-                'range': {
-                    'sheetId': sheet_id,
-                    'startRowIndex': 1,
-                    'endRowIndex': data_length + 1
-                },
-                'cell': {
-                    'userEnteredFormat': {
-                        'verticalAlignment': 'TOP',
-                        'wrapStrategy': 'WRAP'
-                    }
-                },
-                'fields': 'userEnteredFormat(verticalAlignment,wrapStrategy)'
-            }
-        })
-        
-        # ID column formatting
-        requests.append({
-            'repeatCell': {
-                'range': {
-                    'sheetId': sheet_id,
-                    'startRowIndex': 1,
-                    'endRowIndex': data_length + 1,
-                    'startColumnIndex': 0,
-                    'endColumnIndex': 1
-                },
-                'cell': {
-                    'userEnteredFormat': {
-                        'numberFormat': {'type': 'TEXT', 'pattern': '0000'}
-                    }
-                },
-                'fields': 'userEnteredFormat.numberFormat'
-            }
-        })
-        
+
         # Freeze top row
         requests.append({
             'updateSheetProperties': {
