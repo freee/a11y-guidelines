@@ -1,7 +1,8 @@
 """Generators for miscellaneous definitions and reference content."""
 from typing import Dict, Any, List
 
-from freee_a11y_gl import InfoRef, AxeRule, RelationshipManager
+from freee_a11y_gl import InfoRef, AxeRule
+from freee_a11y_gl.relationship_manager import RelationshipManager
 from ..common_generators import SingleFileGenerator, ListBasedGenerator
 
 class InfoToGuidelinesGenerator(ListBasedGenerator[InfoRef]):
@@ -17,12 +18,10 @@ class InfoToGuidelinesGenerator(ListBasedGenerator[InfoRef]):
 
     def process_item(self, info: InfoRef) -> Dict[str, Any]:
         """Process a single info reference."""
-        sorted_guidelines = sorted(
-            self.relationship_manager.get_info_to_guidelines(info),
-            key=lambda item: item.sort_key
-        )
-        guidelines = [guideline.get_category_and_id(self.lang) 
-                     for guideline in sorted_guidelines]
+        guidelines = [
+            guideline.get_category_and_id(self.lang) 
+            for guideline in self.relationship_manager.get_sorted_related_objects(info, 'guideline')
+        ]
         return {
             'filename': info.ref,
             'guidelines': guidelines
@@ -52,7 +51,10 @@ class InfoToFaqsGenerator(ListBasedGenerator[InfoRef]):
 
     def process_item(self, info: InfoRef) -> Dict[str, Any]:
         """Process a single info reference."""
-        faqs = [faq.id for faq in self.relationship_manager.get_info_to_faqs(info)]
+        faqs = [
+            faq.id
+            for faq in self.relationship_manager.get_sorted_related_objects(info, 'faq', key='sort_key')
+        ]
         return {
             'filename': info.ref,
             'faqs': faqs
@@ -102,8 +104,8 @@ class MiscDefinitionsGenerator(SingleFileGenerator):
         for info in InfoRef.list_all_external():
             data.append({
                 'label': info.refstring(),
-                'text': info.text[self.lang],
-                'url': info.url[self.lang]
+                'text': info.link_data()['text'][self.lang],
+                'url': info.link_data()['url'][self.lang]
             })
         return {'links': data}
 

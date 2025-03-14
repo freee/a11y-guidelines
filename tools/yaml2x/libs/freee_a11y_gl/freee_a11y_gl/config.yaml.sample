@@ -8,45 +8,67 @@ languages:
   available: ["ja", "en"]
   default: "ja"
 
-# Path settings (must start and end with /)
+# Path settings
 paths:
-  guidelines: "/categories/"     # Path to guidelines categories
-  faq: "/faq/articles/"         # Path to FAQ articles
+  # Guidelines path (must start and end with /)
+  guidelines: "/categories/"
+  # FAQ path (must start and end with /)
+  faq: "/faq/articles/"
 
 # Language-specific configurations
-# To add a new language:
-# 1. Add the language code to languages.available array above
-# 2. Copy an existing language block below and modify values as needed
 locale:
   # Japanese configuration
   ja:
-    text_separator: "："        # Text separator for labels
-    list_separator: "、"        # Separator for list items
-    and_separator: "と"
-    or_separator: "または"
-    and_conjunction: "、かつ"     # For combining conditions with AND
-    or_conjunction: "、または"    # For combining conditions with OR
-    pass_singular_text: "_を満たしている"  # Text for pass conditions
-    pass_plural_text: "_を満たしている"  # Text for pass conditions
-    date_format: "%Y年%-m月%-d日"  # strftime format
+    text_separator: "："        # Text separator for the category and the title for guideline links
+    list_separator: "、"        # List item separator
+    and_separator: "と"         # AND conjunction
+    or_separator: "または"      # OR conjunction
+    and_conjunction: "、かつ"    # AND conjunction for grouped items
+    or_conjunction: "、または"   # OR conjunction for grouped items
+    pass_singular_text: "を満たしている"  # Pass condition text for single condition
+    pass_plural_text: "を満たしている"    # Pass condition text for multiple conditions
+    date_format: "%Y年%-m月%-d日"        # Date format in strftime format
 
   # English configuration
   en:
-    text_separator: ": "        # Text separator for labels
-    list_separator: ", "        # Separator for list items
-    and_separator: " and "
-    or_separator: " or "
-    and_conjunction: ", and "      # For combining conditions with AND
-    or_conjunction: ", or "        # For combining conditions with OR
-    pass_singular_text: " is true"       # Text for pass conditions
-    pass_plural_text: " are true"       # Text for pass conditions
-    date_format: "%B %-d, %Y"  # strftime format
+    text_separator: ": "        # Text separator for the category and the title for guideline links
+    list_separator: ", "        # List item separator
+    and_separator: " and "      # AND conjunction
+    or_separator: " or "        # OR conjunction
+    and_conjunction: ", and "   # AND conjunction for grouped items
+    or_conjunction: ", or "     # OR conjunction for grouped items
+    pass_singular_text: " is true"   # Pass condition text for single condition
+    pass_plural_text: " are true"    # Pass condition text for multiple conditions
+    date_format: "%B %-d, %Y"        # Date format in strftime format
 
-# Note: This configuration can be loaded from:
-# 1. Explicitly specified path via FREEE_A11Y_GL_CONFIG environment variable
-# 2. Current directory (config.yaml or config.yml)
-# 3. Platform-specific standard configuration directories:
-#    - Windows: %APPDATA%\freee_a11y_gl\config.yaml
-#    - macOS: /Library/Application Support/freee_a11y_gl/config.yaml
-#    - Linux: /etc/freee_a11y_gl/config.yaml
-#    - Unix-like: ~/.config/freee_a11y_gl/config.yaml
+# Validation settings
+# Check severity levels and their display names
+severity_tags:
+  ja:
+    must: "必須"
+    should: "推奨"
+  en:
+    must: "Must"
+    should: "Should"
+
+# Check target types and their display names
+check_targets:
+  ja:
+    code: "コード"        # For code-level checks
+    content: "コンテンツ"  # For content-level checks
+  en:
+    code: "Code"         # For code-level checks
+    content: "Content"   # For content-level checks
+
+# Platform settings
+platform:
+  # Platform display names used for both platform indication and implementation targets
+  names:
+    ja:
+      web: "Webアプリケーション"       # Web application specific
+      mobile: "モバイルアプリケーション" # Mobile application specific
+      general: "全般"                 # Platform independent
+    en:
+      web: "Web Application"         # Web application specific
+      mobile: "Mobile Application"   # Mobile application specific
+      general: "General"            # Platform independent

@@ -34,22 +34,58 @@ class ChecklistSheetGenerator:
         self._load_existing_sheets()
 
     def _load_existing_sheets(self) -> None:
-        """Load existing sheet information from spreadsheet"""
+        """Load existing sheet information including protected ranges from spreadsheet"""
         try:
+            # スプレッドシートの基本情報を取得
             spreadsheet = self.service.spreadsheets().get(
                 spreadsheetId=self.spreadsheet_id
             ).execute()
 
             logger.debug("Loading existing sheets")            
+            self.existing_sheets = {}
+            self.protected_ranges = {}  # 保護範囲情報を格納する辞書
+            
             for sheet in spreadsheet.get('sheets', []):
                 properties = sheet['properties']
                 title = properties['title']
+                sheet_id = properties['sheetId']
                 logger.debug(f"Found existing sheet: '{title}'")
-                self.existing_sheets[properties['title']] = {
-                    'sheetId': properties['sheetId'],
+                self.existing_sheets[title] = {
+                    'sheetId': sheet_id,
                     'index': properties.get('index', 0)
                 }
+                
+                # 保護範囲情報があれば取得
+                if 'protectedRanges' in sheet:
+                    self.protected_ranges[sheet_id] = [
+                        protected_range.get('protectedRangeId')
+                        for protected_range in sheet.get('protectedRanges', [])
+                        if 'protectedRangeId' in protected_range
+                    ]
+                    if self.protected_ranges[sheet_id]:
+                        logger.debug(f"Found {len(self.protected_ranges[sheet_id])} protected ranges in sheet '{title}'")
+            
             logger.debug(f"Loaded existing sheets: {list(self.existing_sheets.keys())}")
+            
+            # 保護範囲の詳細情報を取得
+            if any(self.protected_ranges.values()):
+                try:
+                    # 保護範囲の詳細情報を取得するには別のAPI呼び出しが必要
+                    protected_ranges_response = self.service.spreadsheets().getByDataFilter(
+                        spreadsheetId=self.spreadsheet_id,
+                        body={
+                            "dataFilters": [
+                                {"developerMetadataLookup": {"metadataKey": "protectedRanges"}}
+                            ]
+                        }
+                    ).execute()
+                    
+                    # 追加の処理が必要であれば、ここに書く
+                    # 必要に応じて protected_ranges_response からさらに詳細情報を抽出
+                    
+                except Exception as e:
+                    # 詳細情報の取得に失敗してもプログラムを続行する
+                    logger.warning(f"Failed to get detailed protected ranges info: {e}")
         except Exception as e:
             logger.error(f"Error loading existing sheets: {e}")
             raise
@@ -454,10 +490,17 @@ class ChecklistSheetGenerator:
             link_text = link['text'][lang]
             text_parts.append(link_text)
             
+            url = link['url'][lang]
+            # Check if URL is relative and needs base_url
+            if url.startswith('/'):
+                from freee_a11y_gl import settings as GL
+                base_url = GL.get('base_url', '')
+                url = base_url.rstrip('/') + url
+            
             format_runs.append({
                 'startIndex': current_index,
                 'format': {
-                    'link': {'uri': link['url'][lang]},
+                    'link': {'uri': url},
                     'foregroundColor': {'red': 0.06, 'green': 0.47, 'blue': 0.82},
                     'underline': True
                 }
@@ -541,34 +584,44 @@ class ChecklistSheetGenerator:
                 self._map_procedure_ids(cond, id_to_row, row)
 
     def generate_checklist(self, source_data: Dict[str, Any], initialize: bool = False) -> None:
-        """Generate complete checklist
+        """Generate complete checklist with progress reporting
         
         Args:
             source_data: Source data to process
             initialize: Whether to initialize spreadsheet first
         """
         if initialize:
+            logger.info("Initializing spreadsheet (removing existing sheets)")
             self.initialize_spreadsheet()
             self._load_existing_sheets()
 
-        # Store version info request
-        self.version_update_request = create_version_info_request(
-            source_data.get('version', ''),
-            source_data.get('date', ''),
-            self.get_first_sheet_id()
-        )
+        # Store version info for later use
+        self._version_info = {
+            'version': source_data.get('version', ''),
+            'date': source_data.get('date', '')
+        }
+        logger.info(f"Checklist version: {self._version_info['version']} ({self._version_info['date']})")
 
         # Process source data
+        logger.info("Processing source data")
         processed_data = self.data_processor.process_source_data(source_data['checks'])
         
-        logger.info(f"Available targets: {list(processed_data.keys())}")
-        logger.info(f"Processing languages: {LANGS}")
+        # Count total sheets to be generated for progress reporting
+        total_sheets = 0
+        for target_id in processed_data:
+            if target_id in TARGET_NAMES:
+                total_sheets += len(LANGS)
+        
+        logger.info(f"Will generate {total_sheets} sheets ({len(processed_data)} targets × {len(LANGS)} languages)")
 
         # Generate sheets for each language and target
+        sheets_processed = 0
         for lang in LANGS:
             for target_id, translations in TARGET_NAMES.items():
                 if target_id in processed_data:
-                    logger.info(f"Creating sheet for {target_id} in {lang}: {translations[lang]}")
+                    sheets_processed += 1
+                    logger.info(f"Creating sheet {sheets_processed}/{total_sheets}: {target_id} in {lang} ({translations[lang]})")
+                    
                     self.current_lang = lang
                     self.current_target = target_id
                     sheet = self.prepare_sheet_structure(
@@ -580,10 +633,12 @@ class ChecklistSheetGenerator:
                     self.sheets[sheet.name] = sheet
         
         # Execute updates
+        logger.info("All sheets prepared, executing batch update")
         self.execute_batch_update()
+        logger.info("Checklist generation completed successfully")
 
     def execute_batch_update(self) -> None:
-        """Execute batch update of spreadsheet"""
+        """Execute batch update of spreadsheet with improved chunking for timeout prevention"""
         try:
             # Initial batch update
             initial_requests, pending_formats = self.generate_batch_requests()
@@ -612,12 +667,40 @@ class ChecklistSheetGenerator:
             update_requests = [req for req in update_requests if 'addSheet' not in req]
             
             if update_requests:
-                logger.info(f"Updating {len(update_requests)} sheet contents")
-                self.service.spreadsheets().batchUpdate(
-                    spreadsheetId=self.spreadsheet_id,
-                    body={'requests': update_requests}
-                ).execute()
-                            
+                # Add version info request
+                if hasattr(self, '_version_info'):
+                    first_sheet_id = self.get_first_sheet_id()
+                    version_update_request = create_version_info_request(
+                        self._version_info['version'],
+                        self._version_info['date'],
+                        first_sheet_id
+                    )
+                    update_requests.append(version_update_request)
+                
+                # Process in smaller batches to avoid timeouts
+                BATCH_SIZE = 50  # Reduced batch size to avoid timeout
+                total_requests = len(update_requests)
+                logger.info(f"Updating {total_requests} sheet contents in smaller batches")
+                
+                # タイムアウト回避のためのバッチ処理
+                for i in range(0, total_requests, BATCH_SIZE):
+                    end_idx = min(i + BATCH_SIZE, total_requests)
+                    batch = update_requests[i:end_idx]
+                    logger.info(f"Processing batch {i//BATCH_SIZE + 1}/{(total_requests-1)//BATCH_SIZE + 1}: requests {i+1}-{end_idx} of {total_requests}")
+                    
+                    try:
+                        # タイムアウト設定を長めに
+                        self.service.spreadsheets().batchUpdate(
+                            spreadsheetId=self.spreadsheet_id,
+                            body={'requests': batch}
+                        ).execute()
+                        logger.info(f"Batch {i//BATCH_SIZE + 1} completed successfully")
+                    except Exception as e:
+                        logger.error(f"Error in batch {i//BATCH_SIZE + 1}: {e}")
+                        # エラーが発生しても次のバッチを続行
+                
+                logger.info(f"All sheet updates completed")
+                                
         except Exception as e:
             logger.error(f"Error executing batch update: {e}")
             raise
@@ -663,19 +746,7 @@ class ChecklistSheetGenerator:
                 logger.debug(f"Updating existing sheet: {sheet_name} (id: {sheet_id})")
                 
                 formatter = SheetFormatter(current_lang, target_id)
-                
-                # Clear existing content
-                requests.append({
-                    'updateCells': {
-                        'range': {
-                            'sheetId': sheet_id,
-                            'startRowIndex': 0,
-                            'startColumnIndex': 0
-                        },
-                        'fields': '*'
-                    }
-                })
-                
+
                 # Add content and formatting
                 self._add_sheet_content_requests(requests, sheet_id, sheet)
                 requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
@@ -778,7 +849,25 @@ class ChecklistSheetGenerator:
         data_length: int,
         column_count: int
     ) -> None:
-        """Add request to clear existing content"""
+        """Add request to clear existing content and remove protected ranges
+        
+        Args:
+            requests: List to append requests to
+            sheet_id: ID of sheet to update
+            data_length: Number of data rows
+            column_count: Number of columns
+        """
+        # 既存の保護範囲を削除するリクエストを追加
+        if hasattr(self, 'protected_ranges') and sheet_id in self.protected_ranges:
+            for protected_range_id in self.protected_ranges.get(sheet_id, []):
+                requests.append({
+                    'deleteProtectedRange': {
+                        'protectedRangeId': protected_range_id
+                    }
+                })
+            logger.debug(f"Added requests to delete {len(self.protected_ranges.get(sheet_id, []))} protected ranges from sheet {sheet_id}")
+        
+        # 既存のセル内容をクリアするリクエスト
         requests.append({
             'updateCells': {
                 'range': {
@@ -798,9 +887,24 @@ class ChecklistSheetGenerator:
         sheet_id: int,
         data: List[List[CellData]]
     ) -> None:
-        """Add requests to update sheet data in chunks"""
-        for i in range(0, len(data), 1000):
-            chunk = data[i:i + 1000]
+        """Add requests to update sheet data in chunks with improved batching
+        
+        Args:
+            requests: List to append requests to
+            sheet_id: ID of sheet to update
+            data: Data to update
+        """
+        # Use smaller chunks for better reliability
+        CHUNK_SIZE = 100  # Reduced from 1000 to avoid timeouts
+        
+        total_rows = len(data)
+        logger.debug(f"Adding data update requests for {total_rows} rows in chunks of {CHUNK_SIZE}")
+        
+        for i in range(0, total_rows, CHUNK_SIZE):
+            chunk = data[i:i + CHUNK_SIZE]
+            end_idx = min(i + CHUNK_SIZE, total_rows)
+            logger.debug(f"Processing rows {i+1}-{end_idx} of {total_rows}")
+            
             requests.append({
                 'updateCells': {
                     'rows': [

@@ -1,7 +1,8 @@
 """Generator for category pages."""
 from typing import Dict, Any, Iterator, List
 
-from freee_a11y_gl import RelationshipManager, Category
+from freee_a11y_gl import Category
+from freee_a11y_gl.relationship_manager import RelationshipManager
 from ..common_generators import ListBasedGenerator
 
 class CategoryGenerator(ListBasedGenerator[str]):
@@ -18,9 +19,8 @@ class CategoryGenerator(ListBasedGenerator[str]):
 
     def process_item(self, category_id: str) -> Dict[str, Any]:
         """Process a single category."""
-        category_map = self.relationship_manager.get_guidelines_to_category()
         category = self.categories_by_id[category_id]
-        guidelines = category_map[category_id]
+        guidelines = self.relationship_manager.get_sorted_related_objects(category, 'guideline')
         return {
             'filename': category_id,
             'guidelines': [gl.template_data(self.lang) for gl in guidelines]

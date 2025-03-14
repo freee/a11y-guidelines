@@ -49,11 +49,66 @@ class PathConfig(BaseModel):
             raise ValueError("Path must end with /")
         return v
 
+class LangSpecificConfig(BaseModel):
+    """Language-specific configuration base."""
+    ja: Dict[str, str]
+    en: Dict[str, str]
+
+class SeverityTagsConfig(LangSpecificConfig):
+    """Severity tags configuration."""
+    ja: Dict[str, str] = Field(default_factory=lambda: {
+        "minor": "[MINOR]",
+        "normal": "[NORMAL]",
+        "major": "[MAJOR]",
+        "critical": "[CRITICAL]"
+    })
+    en: Dict[str, str] = Field(default_factory=lambda: {
+        "minor": "[MINOR]",
+        "normal": "[NORMAL]",
+        "major": "[MAJOR]",
+        "critical": "[CRITICAL]"
+    })
+
+class CheckTargetsConfig(LangSpecificConfig):
+    """Check targets configuration."""
+    ja: Dict[str, str] = Field(default_factory=lambda: {
+        "design": "デザイン",
+        "code": "コード",
+        "product": "プロダクト",
+    })
+    en: Dict[str, str] = Field(default_factory=lambda: {
+        "design": "Design",
+        "code": "Code",
+        "product": "Product",
+    })
+
+class PlatformConfig(BaseModel):
+    """Platform configuration."""
+    names: Dict[str, Dict[str, str]] = Field(default_factory=lambda: {
+        "ja": {
+            "web": "Web",
+            "mobile": "モバイル",
+            "general": "全般",
+            "ios": "iOS",
+            "android": "Android",
+        },
+        "en": {
+            "web": "Web",
+            "mobile": "Mobile",
+            "general": "General",
+            "ios": "iOS",
+            "android": "Android",
+        }
+    })
+
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
     paths: PathConfig = Field(default_factory=lambda: PathConfig())
+    severity_tags: SeverityTagsConfig = Field(default_factory=lambda: SeverityTagsConfig())
+    platform: PlatformConfig = Field(default_factory=lambda: PlatformConfig())
+    check_targets: CheckTargetsConfig = Field(default_factory=lambda: CheckTargetsConfig())
     locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
         "ja": LocaleConfig(
             text_separator="：",
@@ -107,41 +162,8 @@ class Settings:
 
     def load_defaults(self) -> None:
         """デフォルト設定の読み込み"""
-        self._settings = {
-            "languages": {
-                "available": ["ja", "en"],
-                "default": "ja"
-            },
-            "base_url": "https://a11y-guidelines.freee.co.jp",
-            "paths": {
-                "guidelines": "/categories/",
-                "faq": "/faq/articles/"
-            },
-            "locale": {
-                "ja": {
-                    "text_separator": "：",
-                    "list_separator": "、",
-                    "and_separator": "と",
-                    "or_separator": "または",
-                    "and_conjunction": "、かつ",
-                    "or_conjunction": "、または",
-                    "pass_singular_text": "を満たしている",
-                    "pass_plural_text": "を満たしている",
-                    "date_format": "%Y年%-m月%-d日"
-                },
-                "en": {
-                    "text_separator": ": ",
-                    "list_separator": ", ",
-                    "and_separator": " and ",
-                    "or_separator": " or ",
-                    "and_conjunction": ", and ",
-                    "or_conjunction": ", or ",
-                    "pass_singular_text": " is true",
-                    "pass_plural_text": " are true",
-                    "date_format": "%B %-d, %Y"
-                }
-            }
-        }
+        # Pydanticモデルのデフォルト値を使用
+        self._settings = GlobalConfig().dict()
 
     def _get_config_search_paths(self) -> List[Path]:
         """Get list of paths to search for config files.

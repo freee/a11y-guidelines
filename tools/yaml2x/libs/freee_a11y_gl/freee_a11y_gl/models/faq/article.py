@@ -1,7 +1,10 @@
 """FAQ article model."""
 import datetime
 from typing import Dict, List, Any, Optional, ClassVar
-from ..base import BaseModel, RelationshipManager
+from ..base import BaseModel
+from ...relationship_manager import RelationshipManager
+from ...settings import settings
+from ...utils import uniq
 
 class Faq(BaseModel):
     """FAQ article model."""
@@ -80,7 +83,7 @@ class Faq(BaseModel):
         if checks:
             dependency.extend(check.src_path for check in checks)
 
-        return list(dict.fromkeys(dependency))
+        return uniq(dependency)
 
     def link_data(self, baseurl: str = '') -> Dict[str, Dict[str, str]]:
         """Get link data for FAQ.
@@ -91,15 +94,15 @@ class Faq(BaseModel):
         Returns:
             Dictionary with localized text and URLs
         """
-        from ...config import Config
-        
         data = {
             'text': {},
             'url': {}
         }
         for lang in self.title.keys():
             data['text'][lang] = self.title[lang]
-            data['url'][lang] = f'{baseurl}{Config.get_faq_path(lang)}{self.id}.html'
+            faq_path = settings.get('paths.faq', '/faq/articles/')
+            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
+            data['url'][lang] = f'{baseurl}{lang_path}{faq_path}{self.id}.html'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
@@ -114,10 +117,9 @@ class Faq(BaseModel):
         rel = RelationshipManager()
         tags = rel.get_related_objects(self, 'faq_tag')
         
-        from ...config import Config
-        
         # Format date based on language
-        formatted_date = self.updated.strftime(Config.get_date_format(lang))
+        date_format = settings.get(f'locale.{lang}.date_format', '%Y年%-m月%-d日' if lang == 'ja' else '%B %-d, %Y')
+        formatted_date = self.updated.strftime(date_format)
 
         data = {
             'id': self.id,
@@ -125,8 +127,8 @@ class Faq(BaseModel):
             'problem': self.problem[lang],
             'solution': self.solution[lang],
             'explanation': self.explanation[lang],
-            'updated': formatted_date,
-            'tags': [tag.get_name(lang) for tag in tags]
+            'updated_str': formatted_date,
+            'tags': [tag.id for tag in tags]
         }
 
         # Add guidelines if present
@@ -138,23 +140,38 @@ class Faq(BaseModel):
             ]
 
         # Add checks if present
-        checks = rel.get_sorted_related_objects(self, 'check')
+        checks = rel.get_sorted_related_objects(self, 'check', key='id')
         if checks:
             data['checks'] = [check.template_data(lang) for check in checks]
+
+        # Add related FAQs if present
+        related_faqs = rel.get_sorted_related_objects(self, 'faq', key='sort_key')
+        if related_faqs:
+            data['related_faqs'] = [faq.id for faq in related_faqs]
 
         # Add info references if present
         info = rel.get_related_objects(self, 'info_ref')
         if info:
-            data['info_refs'] = [inforef.refstring() for inforef in info]
-
-        # Add related FAQs if present
-        related_faqs = rel.get_sorted_related_objects(self, 'faq')
-        if related_faqs:
-            data['faqs'] = [faq.id for faq in related_faqs]
+            data['info'] = [inforef.refstring() for inforef in info]
 
         return data
 
     @classmethod
-    def list_all(cls) -> List['Faq']:
-        """Get all FAQ instances sorted by sort key."""
-        return sorted(cls._instances.values(), key=lambda x: x.sort_key)
+    def list_all(cls, sort_by: str = 'sortKey') -> List['Faq']:
+        """Get all FAQ instances sorted by specified key.
+        
+        Args:
+            sort_by: Sorting key ('sortKey' or 'date')
+            
+        Returns:
+            List of FAQ instances sorted by the specified key
+        """
+        if sort_by == 'date':
+            return sorted(cls._instances.values(), key=lambda x: x.updated, reverse=True)
+        else:  # default to sortKey
+            return sorted(cls._instances.values(), key=lambda x: x.sort_key)
+
+    @classmethod
+    def list_all_src_paths(cls) -> List[str]:
+        """Get all FAQ source paths."""
+        return [faq.src_path for faq in cls._instances.values()]

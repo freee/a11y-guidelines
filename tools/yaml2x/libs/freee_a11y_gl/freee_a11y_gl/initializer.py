@@ -6,7 +6,13 @@ import time
 import yaml
 import git
 from typing import Optional
-from .classes import Category, WcagSc, InfoRef, Guideline, Check, Faq, FaqTag, CheckTool, AxeRule, RelationshipManager
+from .relationship_manager import RelationshipManager
+from .models.content import Category, Guideline
+from .models.reference import WcagSc, InfoRef
+from .models.faq.article import Faq
+from .models.faq.tag import FaqTag
+from .models.axe import AxeRule
+from .models.check import Check, CheckTool
 from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
 

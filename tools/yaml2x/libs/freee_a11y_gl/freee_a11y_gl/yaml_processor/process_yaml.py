@@ -7,14 +7,11 @@ focusing on accessibility guidelines processing.
 
 from typing import Dict, Any, Optional
 
-from freee_a11y_gl import (
-    InfoRef,
-    Check,
-    info_utils,
-    get_version_info,
-    Config,
-    setup_instances
-)
+from ..models.reference import InfoRef
+from ..models.check import Check
+from .. import info_utils
+from ..version_utils import get_version_info
+from ..initializer import setup_instances
 from . import rst_processor
 
 def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
