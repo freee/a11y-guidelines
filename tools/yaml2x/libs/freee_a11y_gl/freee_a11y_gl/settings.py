@@ -109,30 +109,7 @@ class GlobalConfig(BaseModel):
     severity_tags: SeverityTagsConfig = Field(default_factory=lambda: SeverityTagsConfig())
     platform: PlatformConfig = Field(default_factory=lambda: PlatformConfig())
     check_targets: CheckTargetsConfig = Field(default_factory=lambda: CheckTargetsConfig())
-    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
-        "ja": LocaleConfig(
-            text_separator="：",
-            list_separator="、",
-            and_separator="と",
-            or_separator="または",
-            and_conjunction="、かつ",
-            or_conjunction="、または",
-            pass_singular_text="を満たしている",
-            pass_plural_text="を満たしている",
-            date_format="%Y年%-m月%-d日"
-        ),
-        "en": LocaleConfig(
-            text_separator=": ",
-            list_separator=", ",
-            and_separator=" and ",
-            or_separator=" or ",
-            and_conjunction=", and ",
-            or_conjunction=", or ",
-            pass_singular_text=" is true",
-            pass_plural_text=" are true",
-            date_format="%B %-d, %Y"
-        )
-    })
+    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {})
 
 class Settings:
     """設定値を階層的に管理するクラス。
