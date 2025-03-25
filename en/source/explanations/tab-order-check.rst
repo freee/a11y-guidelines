@@ -118,3 +118,5 @@ Tab/Shift+Tabキーでフォーカスを移動した際に、ユーザーが予�
 :ref:`exp-form-dynamic-content` も併せて参照。
 
 .. include:: /inc/info2gl/exp-tab-order-check.rst
+
+.. include:: /inc/info2faq/exp-tab-order-check.rst
