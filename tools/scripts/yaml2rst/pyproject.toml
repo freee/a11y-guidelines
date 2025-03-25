@@ -12,13 +12,17 @@ authors = [
 ]
 dependencies = [
     "jinja2",
-    "freee_a11y_gl @ file:../yaml2x/libs/freee_a11y_gl",
+    "freee_a11y_gl>=0.1.0",
 ]
 requires-python = ">=3.8"
 
 [tool.setuptools]
-packages = ["yaml2rst"]
 package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["yaml2rst*"]
 
 [project.scripts]
 yaml2rst = "yaml2rst.yaml2rst:main"

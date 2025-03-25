@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import logging
 
-from template_manager import TemplateManager
+from ..template_manager import TemplateManager
 from .base_generator import BaseGenerator, GeneratorError
 
 @dataclass(frozen=True)
