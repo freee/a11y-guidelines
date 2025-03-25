@@ -17,4 +17,4 @@ dependencies = [
 ]
 
 [tool.setuptools]
-packages = { find = {} }
+package-dir = { "" = "src" }
