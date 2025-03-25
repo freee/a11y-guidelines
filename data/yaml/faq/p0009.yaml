@@ -42,7 +42,7 @@ explanation:
     Note that by one of the following settings, the behavior of the :kbd:`Tab` key and :kbd:`Shift+Tab` key in Safari on macOS will be the same as in other browsers.
 
     *  In Safari's :menuselection:`Preferences --> Advanced`, check "Press Tab to highlight each item on a webpage."
-    *  In macOS :menuselection:`System Preferences --> Accessibility --> Keyboard`, enable "Full Keyboard Access." 
+    *  In macOS :menuselection:`System Preferences --> Accessibility --> Keyboard`, enable "Full Keyboard Access."
 info:
 - exp-tab-order-check
 checks:
