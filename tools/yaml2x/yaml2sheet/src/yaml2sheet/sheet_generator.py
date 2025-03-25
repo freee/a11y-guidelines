@@ -4,13 +4,13 @@ import json
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
-from config import TARGET_NAMES, LANGS, COLUMN_INFO, CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
-from sheet_structure import SheetStructure, CheckInfo
-from cell_data import CellData, CellType
-from condition_formatter import ConditionFormatter
-from sheet_formatter import SheetFormatter
-from data_processor import DataProcessor
-from utils import create_version_info_request, adjust_sheet_size
+from .config import TARGET_NAMES, LANGS, COLUMN_INFO, CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
+from .sheet_structure import SheetStructure, CheckInfo
+from .cell_data import CellData, CellType
+from .condition_formatter import ConditionFormatter
+from .sheet_formatter import SheetFormatter
+from .data_processor import DataProcessor
+from .utils import create_version_info_request, adjust_sheet_size
 
 logger = logging.getLogger(__name__)
 
@@ -423,7 +423,7 @@ class ChecklistSheetGenerator:
             lang: Language code
             row_data: Row data to append to
         """
-        from utils import l10n_string
+        from .utils import l10n_string
         
         plain_headers = [
             *COLUMNS['common']['plainData1'],

@@ -4,9 +4,9 @@ import logging
 import argparse
 from typing import Optional
 from pathlib import Path
-from auth import GoogleAuthManager
-from sheet_generator import ChecklistSheetGenerator
-from config_loader import load_configuration, ApplicationConfig
+from .auth import GoogleAuthManager
+from .sheet_generator import ChecklistSheetGenerator
+from .config_loader import load_configuration, ApplicationConfig
 from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
 

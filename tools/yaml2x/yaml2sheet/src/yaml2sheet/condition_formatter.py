@@ -1,5 +1,5 @@
 from typing import Dict, List
-from config import M17nField, Condition, COLUMNS
+from .config import M17nField, Condition, COLUMNS
 
 class ConditionFormatter:
     """Handles creation and formatting of conditional formulas for sheet cells"""
