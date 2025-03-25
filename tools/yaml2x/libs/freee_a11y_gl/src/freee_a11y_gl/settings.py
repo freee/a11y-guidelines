@@ -8,15 +8,15 @@ from pydantic import BaseModel, Field, validator
 
 class LocaleConfig(BaseModel):
     """Locale-specific configuration."""
-    text_separator: str = Field(default=": ", description="Text separator for the category and the title for guideline links")
-    list_separator: str = Field(default=", ", description="List item separator")
-    and_separator: str = Field(default=" and ", description="AND conjunction")
-    or_separator: str = Field(default=" or ", description="OR conjunction")
-    and_conjunction: str = Field(default=", and ", description="AND conjunction for grouped items")
-    or_conjunction: str = Field(default=", or ", description="OR conjunction for grouped items")
-    pass_singular_text: str = Field(default=" is true", description="Pass condition text for single condition")
-    pass_plural_text: str = Field(default=" are true", description="Pass condition text for multiple conditions")
-    date_format: str = Field(default="%B %-d, %Y", description="Date format in strftime format")
+    text_separator: str = Field(description="Text separator for the category and the title for guideline links")
+    list_separator: str = Field(description="List item separator")
+    and_separator: str = Field(description="AND conjunction")
+    or_separator: str = Field(description="OR conjunction")
+    and_conjunction: str = Field(description="AND conjunction for grouped items")
+    or_conjunction: str = Field(description="OR conjunction for grouped items")
+    pass_singular_text: str = Field(description="Pass condition text for single condition")
+    pass_plural_text: str = Field(description="Pass condition text for multiple conditions")
+    date_format: str = Field(description="Date format in strftime format")
 
 class LanguageConfig(BaseModel):
     """Language configuration."""
@@ -109,7 +109,30 @@ class GlobalConfig(BaseModel):
     severity_tags: SeverityTagsConfig = Field(default_factory=lambda: SeverityTagsConfig())
     platform: PlatformConfig = Field(default_factory=lambda: PlatformConfig())
     check_targets: CheckTargetsConfig = Field(default_factory=lambda: CheckTargetsConfig())
-    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {})
+    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
+        "ja": LocaleConfig(
+            text_separator="：",
+            list_separator="、",
+            and_separator="と",
+            or_separator="または",
+            and_conjunction="、かつ",
+            or_conjunction="、または",
+            pass_singular_text="を満たしている",
+            pass_plural_text="を満たしている",
+            date_format="%Y年%-m月%-d日"
+        ),
+        "en": LocaleConfig(
+            text_separator=": ",
+            list_separator=", ",
+            and_separator=" and ",
+            or_separator=" or ",
+            and_conjunction=", and ",
+            or_conjunction=", or ",
+            pass_singular_text=" is true",
+            pass_plural_text=" are true",
+            date_format="%B %-d, %Y"
+        )
+    })
 
 class Settings:
     """設定値を階層的に管理するクラス。
