@@ -19,6 +19,10 @@
         "ja": "iOS VoiceOver",
         "en": "iOS VoiceOver"
     },
+    "keyboard-operation": {
+        "ja": "キーボード操作",
+        "en": "Keyboard Operation"
+    },
     "macos-vo": {
         "ja": "macOS VoiceOver",
         "en": "macOS VoiceOver"
