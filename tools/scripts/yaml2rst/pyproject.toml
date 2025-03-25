@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yaml2rst"
+version = "0.1.0"
+description = "Process YAML files into reStructuredText to e included in the guidelines document."
+readme = "README.md"
+authors = [
+    { name = "Masafumi NAKANE", email = "max@freee.co.jp" }
+]
+dependencies = [
+    "jinja2",
+    "freee_a11y_gl @ file:../yaml2x/libs/freee_a11y_gl",
+]
+requires-python = ">=3.8"
+
+[tool.setuptools]
+packages = ["yaml2rst"]
+package-dir = {"" = "src"}
+
+[project.scripts]
+yaml2rst = "yaml2rst.yaml2rst:main"

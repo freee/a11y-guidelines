@@ -1,9 +1,9 @@
 import os
 import argparse
-import config
-from path import get_dest_dirnames, get_static_dest_files, TEMPLATE_DIR, TEMPLATE_FILENAMES
+from . import config
+from .path import get_dest_dirnames, get_static_dest_files, TEMPLATE_DIR, TEMPLATE_FILENAMES
 from freee_a11y_gl.source import get_src_path
-from template_manager import TemplateManager
+from .template_manager import TemplateManager
 
 def setup_parameters():
     args = parse_args()

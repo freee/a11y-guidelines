@@ -4,9 +4,9 @@ import sys
 import os
 from pathlib import Path
 
-import initializer
-from generators.file_generator import FileGenerator, GeneratorConfig
-from generators.content_generators import (
+from . import initializer
+from .generators.file_generator import FileGenerator, GeneratorConfig
+from .generators.content_generators import (
     CategoryGenerator,
     AllChecksGenerator, CheckExampleGenerator,
     FaqArticleGenerator, FaqTagPageGenerator, FaqIndexGenerator,
