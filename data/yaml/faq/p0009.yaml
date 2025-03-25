@@ -5,7 +5,7 @@ tags:
 - keyboard-operation
 title:
   ja: Safariでのみ、Tabキーによるフォーカス移動の挙動がおかしい
-  en: Tab key focus movement behaves strangely only in Safari
+  en: Focus Movement by Tab Key Is Strange Only in Safari
 problem:
   ja: |-
     SafariでWebページを表示して、 :kbd:`Tab` キーや :kbd:`Shift+Tab` キーでフォーカスを移動すると、本来フォーカスされるべきなのにスキップされる要素がある。
