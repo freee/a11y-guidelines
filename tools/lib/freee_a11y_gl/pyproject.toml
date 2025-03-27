@@ -10,6 +10,11 @@ authors = [
     {name = "Masafumi NAKANE", email = "max@freee.co.jp"}
 ]
 requires-python = ">=3.8"
+dependencies = [
+    "pyyaml>=6.0",
+    "gitpython>=3.1.43",
+    "pydantic>=2.7.0"
+]
 
 [tool.setuptools]
-packages = { find = {} }
+package-dir = { "" = "src" }

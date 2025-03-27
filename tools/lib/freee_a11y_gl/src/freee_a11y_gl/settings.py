@@ -8,15 +8,15 @@ from pydantic import BaseModel, Field, validator
 
 class LocaleConfig(BaseModel):
     """Locale-specific configuration."""
-    text_separator: str = Field(default=": ", description="Text separator for the category and the title for guideline links")
-    list_separator: str = Field(default=", ", description="List item separator")
-    and_separator: str = Field(default=" and ", description="AND conjunction")
-    or_separator: str = Field(default=" or ", description="OR conjunction")
-    and_conjunction: str = Field(default=", and ", description="AND conjunction for grouped items")
-    or_conjunction: str = Field(default=", or ", description="OR conjunction for grouped items")
-    pass_singular_text: str = Field(default=" is true", description="Pass condition text for single condition")
-    pass_plural_text: str = Field(default=" are true", description="Pass condition text for multiple conditions")
-    date_format: str = Field(default="%B %-d, %Y", description="Date format in strftime format")
+    text_separator: str = Field(description="Text separator for the category and the title for guideline links")
+    list_separator: str = Field(description="List item separator")
+    and_separator: str = Field(description="AND conjunction")
+    or_separator: str = Field(description="OR conjunction")
+    and_conjunction: str = Field(description="AND conjunction for grouped items")
+    or_conjunction: str = Field(description="OR conjunction for grouped items")
+    pass_singular_text: str = Field(description="Pass condition text for single condition")
+    pass_plural_text: str = Field(description="Pass condition text for multiple conditions")
+    date_format: str = Field(description="Date format in strftime format")
 
 class LanguageConfig(BaseModel):
     """Language configuration."""

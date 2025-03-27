@@ -1,6 +1,6 @@
 from typing import List, Dict, Optional
 from dataclasses import dataclass, field
-from cell_data import CellData
+from .cell_data import CellData
 
 @dataclass
 class ColumnProperties:

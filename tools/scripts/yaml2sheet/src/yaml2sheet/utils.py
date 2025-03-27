@@ -1,5 +1,5 @@
 from typing import Dict, List, Any, Union
-from config import M17nField
+from .config import M17nField
 
 def format_statement_summary(statement: M17nField) -> M17nField:
     """Format a check statement summary into a complete sentence

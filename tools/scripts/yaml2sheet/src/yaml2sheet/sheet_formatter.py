@@ -1,7 +1,7 @@
 from typing import Dict, List, Optional
 import logging
-from sheet_structure import SheetStructure
-from config import CHECK_RESULTS, FINAL_CHECK_RESULTS
+from .sheet_structure import SheetStructure
+from .config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
 
 logger = logging.getLogger(__name__)
 
@@ -128,7 +128,6 @@ class SheetFormatter:
         Returns:
             int: Index of result column
         """
-        from config import COLUMNS
         return len(COLUMNS['idCols']) + len(COLUMNS[self.current_target]['generatedData'])
 
     def add_protection_settings(self, sheet_id: int, sheet: SheetStructure) -> List[Dict]:
@@ -141,8 +140,6 @@ class SheetFormatter:
         Returns:
             List[Dict]: List of protection requests
         """
-        from config import COLUMNS
-        
         requests = []
         data_length = len(sheet.data)
         

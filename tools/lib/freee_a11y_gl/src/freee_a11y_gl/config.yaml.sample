@@ -41,34 +41,42 @@ locale:
     pass_plural_text: " are true"    # Pass condition text for multiple conditions
     date_format: "%B %-d, %Y"        # Date format in strftime format
 
-# Validation settings
-# Check severity levels and their display names
+# Severity tags configuration
 severity_tags:
   ja:
-    must: "必須"
-    should: "推奨"
+    minor: "[MINOR]"
+    normal: "[NORMAL]"
+    major: "[MAJOR]"
+    critical: "[CRITICAL]"
   en:
-    must: "Must"
-    should: "Should"
+    minor: "[MINOR]"
+    normal: "[NORMAL]"
+    major: "[MAJOR]"
+    critical: "[CRITICAL]"
 
-# Check target types and their display names
+# Check targets configuration
 check_targets:
   ja:
-    code: "コード"        # For code-level checks
-    content: "コンテンツ"  # For content-level checks
+    design: "デザイン"
+    code: "コード"
+    product: "プロダクト"
   en:
-    code: "Code"         # For code-level checks
-    content: "Content"   # For content-level checks
+    design: "Design"
+    code: "Code"
+    product: "Product"
 
 # Platform settings
 platform:
-  # Platform display names used for both platform indication and implementation targets
   names:
     ja:
-      web: "Webアプリケーション"       # Web application specific
-      mobile: "モバイルアプリケーション" # Mobile application specific
-      general: "全般"                 # Platform independent
+      web: "Web"
+      mobile: "モバイル"
+      general: "全般"
+      ios: "iOS"
+      android: "Android"
     en:
-      web: "Web Application"         # Web application specific
-      mobile: "Mobile Application"   # Mobile application specific
-      general: "General"            # Platform independent
+      web: "Web"
+      mobile: "Mobile"
+      general: "General"
+      ios: "iOS"
+      android: "Android"

@@ -1,7 +1,7 @@
 from typing import Dict, List, Any
 import logging
-from config import TARGET_NAMES, M17nField
-from sheet_structure import CheckInfo
+from .config import TARGET_NAMES, M17nField, COLUMNS
+from .sheet_structure import CheckInfo
 
 logger = logging.getLogger(__name__)
 
@@ -70,7 +70,6 @@ class DataProcessor:
         Returns:
             bool: True if any sheets require generated data
         """
-        from config import COLUMNS
         return any(
             bool(COLUMNS[name]['generatedData'])
             for name in sheet_names
