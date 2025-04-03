@@ -18,9 +18,9 @@ conditions:
     id: 0956-content-none
     procedure:
       ja: |-
-        チェック対象の画面にラジオボタンが存在しないことを確認巣る。
+        チェック対象の画面にラジオボタンが存在しない。
       en: |-
-        Confirm that there are no radio buttons on the screen to be checked.
+        There are no radio buttons on the screen to be checked.
   - type: simple
     tool: keyboard
     id: "0956-keyboard-01"

@@ -19,9 +19,9 @@ conditions:
     id: 1071-content-none
     procedure:
       ja: |-
-        チェック対象の画面にフォーム・コントロールが存在しないことを確認する。
+        チェック対象の画面にフォーム・コントロールが存在しない。
       en: |-
-        Confirm that there are no form controls on the screen to be checked.
+        There are no form controls on the screen to be checked.
   - type: or
     conditions:
     - type: simple
@@ -29,13 +29,13 @@ conditions:
       id: "1071-keyboard-01"
       procedure:
         ja: |-
-          ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のようなあまり一般的ではない挙動がないことを確認する：
+          ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作した際、以下のようなあまり一般的ではない挙動が発生しない：
 
           *  表示内容が大幅に変わる
           *  自動的に別のページ/画面に遷移する
           *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
         en: |-
-          Operate form controls such as edit boxes, check boxes, and radio buttons on the page/screen to confirm that the following uncommon behaviors do not occur:
+          Unexpected behaviors that are not very common do not occur when manipulating form controls such as edit boxes, check boxes, and radio buttons on the page/screen:
 
           *  The display content changes significantly.
           *  Automatic transition to another page/screen
@@ -45,6 +45,6 @@ conditions:
       id: 1071-content-01
       procedure:
         ja: |-
-          フォーム操作時に発生する、あまり一般的ではない挙動について、分かりやすくユーザーに説明されていることを確認する。
+          フォーム操作時に発生する、あまり一般的ではない挙動について、分かりやすくユーザーに説明されている。
         en: |-
-          Confirm that the user is clearly informed about behaviors that are not very common that occur when manipulating forms.
+          The user is clearly informed about behaviors that are not very common that occur when manipulating forms.

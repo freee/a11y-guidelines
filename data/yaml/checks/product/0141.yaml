@@ -18,17 +18,17 @@ conditions:
     id: "0141-content-none"
     procedure:
       ja: |-
-        チェック対象の画面では、ショートカット・キーが提供されていないことを確認する。
+        チェック対象の画面では、ショートカット・キーが提供されていない。
       en: |-
-        Confirm that there are no shortcut keys provided on the screen to be checked.
+        There are no shortcut keys provided on the screen to be checked.
   - type: simple
     tool: misc
     id: "0141-content-01"
     procedure:
       ja: |-
-        ショートカット・キーは、画面の特定の部分にフォーカスがある時だけ利用できるようになっていることを確認する。
+        ショートカット・キーは、画面の特定の部分にフォーカスがある時だけ利用できるようになっている。
       en: |-
-        Confirm that shortcut keys can only be used when a specific part of the screen has focus.
+        Shortcut keys can only be used when a specific part of the screen has focus.
   - type: or
     conditions:
     - type: simple
@@ -36,14 +36,14 @@ conditions:
       id: "0141-content-02"
       procedure:
         ja: |-
-          ユーザーがショートカット・キーを無効にできることを確認する。
+          ユーザーがショートカット・キーを無効にできる。
         en: |-
-          Confirm that users can disable shortcut keys.
+          Users can disable shortcut keys.
     - type: simple
       tool: misc
       id: "0141-content-03"
       procedure:
         ja: |-
-          ユーザーがショートカット・キーの割当を変更できることを確認する。
+          ユーザーがショートカット・キーの割当を変更できる。
         en: |-
-          Confirm that users can change shortcut assignments.
+          Users can change shortcut assignments.

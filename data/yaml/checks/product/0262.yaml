@@ -19,14 +19,14 @@ conditions:
     id: "0262-content-none"
     procedure:
       ja: |-
-        チェック対象の画面には、同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンが存在しないことを確認する。
+        チェック対象の画面には、同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンが存在しない。
       en: |-
-        Confirm that there are no multiple links that transition to the same screen or multiple buttons that execute the same function on the screen to be checked.
+        There are no multiple links that transition to the same screen or multiple buttons that execute the same function on the screen to be checked.
   - type: simple
     tool: misc
     id: "0262-content-01"
     procedure:
       ja: |-
-        同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンには、一貫したテキストやアイコンが使われていることを確認する。
+        同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンには、一貫したテキストやアイコンが使われている。
       en: |-
-        Confirm that consistent text and icons are used for multiple links that transition to the same screen or multiple buttons that execute the same function on the same screen.
+        Consistent text and icons are used for multiple links that transition to the same screen or multiple buttons that execute the same function on the same screen.
