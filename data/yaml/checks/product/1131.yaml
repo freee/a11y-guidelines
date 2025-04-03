@@ -27,6 +27,6 @@ conditions:
     id: "1131-content-01"
     procedure:
       ja: |-
-        エラーが発生するフォーム入力を行い、エラーの修正方法が分かるテキスト情報が表示されることを確認する。
+        エラーが発生するフォーム入力を行うと、エラーの修正方法が分かるテキスト情報が表示される。
       en: |- 
-        Perform form input that causes an error, and confirm that text information that indicates how to correct the error is displayed.
+        When performing form input that causes an error, text information is displayed that indicates how to correct the error.

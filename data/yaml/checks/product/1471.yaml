@@ -19,22 +19,22 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        チェック対象の画面に、自動再生される動画やアニメーションがないことを確認する。
+        チェック対象の画面に、自動再生される動画やアニメーションがない。
       en: |-
-        Verify that there are no videos or animations that start automatically on the screen to be checked.
+        There are no videos or animations that start automatically on the screen to be checked.
   - type: simple
     id: 1471-content-01
     tool: misc
     procedure:
       ja: |-
-        自動再生される動画やアニメーションは、5秒以内に再生が終了することを確認する。
+        自動再生される動画やアニメーションは、5秒以内に再生が終了する。
       en: |-
-        Verify that videos or animations that start automatically finish playing within 5 seconds.
+        Videos or animations that start automatically finish playing within 5 seconds.
   - type: simple
     id: 1471-content-02
     tool: misc
     procedure:
       ja: |-
-        自動再生される動画やアニメーションは、ユーザーが停止、一時停止、または非表示にできることを確認する。
+        ユーザーが、自動再生される動画やアニメーションを停止、一時停止、または非表示にできる。
       en: |-
-        Verify that videos or animations that start automatically can be stopped, paused, or hidden by the user.
+        The user can stop, pause, or hide videos or animations that start automatically.

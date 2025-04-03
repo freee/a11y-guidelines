@@ -27,14 +27,14 @@ conditions:
     id: 1411-content-01
     procedure:
       ja: |-
-        ページに埋め込まれている音声や動画のプレイヤーには、そこにプレイヤーがあることが分かるようなラベルが適切に付けられていることを確認する。
+        ページに埋め込まれている音声や動画のプレイヤーには、そこにプレイヤーがあることが分かるようなラベルが適切に付けられている。
       en: |-
-         Verify that the audio or video player embedded in the page is properly labeled so that it is clear that there is a player there.
+         The audio or video player embedded in the page is properly labeled so that it is clear that there is a player there.
   - type: simple
     tool: misc
     id: 1411-content-02
     procedure:
       ja: |-
-        ページに埋め込まれている音声や動画のプレイヤーが、前後のテキストから、そこにプレイヤーがあることが推測できるようになっていることを確認する。
+        ページに埋め込まれている音声や動画のプレイヤーは、前後のテキストから、そこにプレイヤーがあることが推測できるようになっている。
       en: |-
-        Verify that the audio or video player embedded in the page can be inferred from the text before and after that there is a player there.
+        The audio or video player embedded in the page can be inferred from the text before and after that there is a player there.

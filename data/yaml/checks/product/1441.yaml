@@ -19,14 +19,14 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        チェック対象の画面に、音声を含む自動再生されるコンテンツがないことを確認する。
+        チェック対象の画面に、音声を含む自動再生されるコンテンツがない。
       en: |-
-        Verify that there is no content containing audio that starts automatically on the screen to be checked.
+        There is no content containing audio that starts automatically on the screen to be checked.
   - type: simple
     id: 1441-content-01
     tool: misc
     procedure:
       ja: |-
-        音声を含む自動再生されるコンテンツは、3秒以内に音声の再生が終了することを確認する。
+        音声を含む自動再生されるコンテンツは、3秒以内に音声の再生が終了する。
       en: |-
-        Verify that the audio playback of content containing audio that starts automatically ends within 3 seconds.
+        The audio playback of content containing audio that starts automatically ends within 3 seconds.

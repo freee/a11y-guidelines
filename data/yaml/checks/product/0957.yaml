@@ -18,9 +18,9 @@ conditions:
     id: 0957-content-none
     procedure:
       ja: |-
-        チェック対象の画面にチェックボックスが存在しないことを確認巣る。
+        チェック対象の画面にチェックボックスが存在しない。
       en: |-
-        Confirm that there are no check boxes on the screen to be checked.
+        There are no check boxes on the screen to be checked.
   - type: simple
     tool: keyboard
     id: "0957-keyboard-01"

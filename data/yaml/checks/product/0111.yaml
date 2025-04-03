@@ -28,14 +28,14 @@ conditions:
       id: 0111-mouse-01
       procedure:
         ja: |-
-          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできることを確認する。（ESCキーの押下や表示されたコンテンツ上でのマウス・クリックなど）
+          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーの押下や表示されたコンテンツ上でのマウス・クリックなど）
         en: |-
-          Verify that the content displayed on mouseover can be hidden without moving the mouse pointer. (Press the ESC key or click the mouse on the displayed content)
+          The content displayed on mouseover can be hidden without moving the mouse pointer. (Press the ESC key or click the mouse on the displayed content)
     - type: simple
       tool: mouse
       id: 0111-mouse-02
       procedure:
         ja: |-
-          マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツが非表示になることを確認する。
+          マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツが非表示になる。
         en: |- 
-          Verify that the content displayed on mouseover is hidden only when when the mouseover state is removed, the user performs an operation to hide it, or the content becomes invalid.
+          The content displayed on mouseover is hidden only when when the mouseover state is removed, the user performs an operation to hide it, or the content becomes invalid.

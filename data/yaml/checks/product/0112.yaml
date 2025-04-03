@@ -26,6 +26,6 @@ conditions:
     id: 0112-mouse-01
     procedure:
       ja: |-
-        マウスオーバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えないことを確認する。
+        マウスオーバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
       en: |-
-        Verify that content displayed on mouseover does not disappear when the mouse pointer is moved over it.
+        The content displayed on mouseover does not disappear when the mouse pointer is moved over it.

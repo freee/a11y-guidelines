@@ -19,9 +19,9 @@ conditions:
     id: "0261-content-none"
     procedure:
       ja: |-
-        チェック対象の画面に、リンクが存在しないことを確認する。
+        チェック対象の画面に、リンクが存在しない。
       en: |-
-        Confirm that there are no links on the screen to be checked.
+        There are no links on the screen to be checked.
   - type: or
     conditions:
     - type: simple
@@ -29,14 +29,14 @@ conditions:
       id: "0261-content-01"
       procedure:
         ja: |-
-          「○○はこちら」の「こちら」の部分だけがリンクになっているようなリンクがないことを確認する。（この場合は「○○はこちら」全体をリンクにする。）
+          「○○はこちら」の「こちら」の部分だけがリンクになっているようなリンクがない。（この場合は「○○はこちら」全体をリンクにする。）
         en: |- 
-          Confirm that there are no links that are like "click here for *****" where only the "here" part is a link. (In this case, make the entire "click here for *****" a link.)
+          There are no links that are like "click here for *****" where only the "here" part is a link. (In this case, make the entire "click here for *****" a link.)
     - type: simple
       tool: misc
       id: "0261-content-02"
       procedure:
         ja: |-
-          リンク・テキストの意図が、マークアップで明確になっていることを確認する。（例：直前の見出しなどから容易に推測できる場合）
+          リンク・テキストの意図が、マークアップで明確になっている。（例：直前の見出しなどから容易に推測できる場合）
         en: |-
-          Confirm that the intent of the link text is clearly defined in the markup. (For example, it can be easily inferred from the heading immediately before the link.)
+          The intent of the link text is clearly defined in the markup. (For example, it can be easily inferred from the heading immediately before the link.)

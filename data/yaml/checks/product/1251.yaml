@@ -19,22 +19,22 @@ conditions:
     id: 1251-content-none
     procedure:
       ja: |-
-        チェック対象の画面に自動更新されるコンテンツがないことを確認する。
+        チェック対象の画面に自動更新されるコンテンツがない。
       en: |-
-        Check that there is no content that is automatically updated on the screen to be checked.
+        There is no content that is automatically updated on the screen to be checked.
   - type: simple
     tool: misc
     id: 1251-content-01
     procedure:
       ja: |-
-        自動更新されるコンテンツの更新頻度について、ユーザーが変更できることを確認する。
+        ユーザーが、自動更新されるコンテンツの更新頻度を変更できる。
       en: |-
-        Verify that the user can change the update frequency of automatically updated content.
+        The user can change the update frequency of the automatically updated content.
   - type: simple
     tool: misc
     id: 1251-content-02
     procedure:
       ja: |-
-        ユーザーが自動更新を停止できることを確認する。
+        ユーザーが自動更新を停止できる。
       en: |-
-        Verify that the user can stop automatic updates.
+        The user can stop automatic updates.
