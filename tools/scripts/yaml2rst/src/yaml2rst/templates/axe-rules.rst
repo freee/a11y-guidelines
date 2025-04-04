@@ -33,7 +33,7 @@ Updated
 {% if lang == 'ja' -%}
 {{ rule.description.ja }}
 
-参考： `Deque Universityの解説（英語） <{{ deque_url }}{{ major_version }}/{{ rule.id }}>`__
+参考： `Deque Universityの解説 <{{ deque_url }}{{ major_version }}/{{ rule.id }}>`__
 {%- elif lang == 'en' -%}
 {{ rule.description.en }}
 
