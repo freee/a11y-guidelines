@@ -7,8 +7,34 @@ platform:
 - mobile
 check:
   ja: |-
-    *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
-    *  動画には音声解説が含まれている。
+    すべての動画は、映像を見られない視覚障害者にも理解できるようになっている。
   en: |-
-    *  For video content, visually presented information can be easily inferred from the content of the originally recorded audio track. Or
-    *  Video includes audio description.
+    All videos are designed to be understandable to visually impaired individuals who cannot see the images.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1562-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、動画コンテンツが存在しない。
+      en: |-
+        There is no video content on the target screen.
+  - type: simple
+    id: 1562-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。
+      en: |-
+        For video content, visually presented information can be easily inferred from the content of the originally recorded audio track.
+  - type: simple
+    id: 1562-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        動画には音声解説が含まれている。
+      en: |-
+        Video includes audio description.

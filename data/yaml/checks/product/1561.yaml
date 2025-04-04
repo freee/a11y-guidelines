@@ -7,10 +7,50 @@ platform:
 - mobile
 check:
   ja: |-
-    *  動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。または
-    *  動画には音声解説が含まれている。または
-    *  映像に関するテキストによる説明が提供されている。
+    動画について、映像を見られない視覚障害者も、サービスの利用や必要な情報の取得を支障なくできる。
   en: |-
-    *  For video content, visually presented information can be easily inferred from the content of the originally recorded audio track. Or
-    *  Video includes audio description. OR
-    *  A textual description of the video is provided.
+    For video content, visually impaired individuals who cannot see the images can use the service and obtain necessary information without any hindrance.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1561-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、動画コンテンツが存在しない。
+      en: |-
+        There is no video content on the target screen.
+  - type: simple
+    id: 1561-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        動画は、そのコンテンツがなくても不足なくその画面で提供されている情報が伝わるような内容である。
+      en: |-
+        The video content is such that the information on the screen can be conveyed without any deficiency even without the content.
+  - type: simple
+    id: 1561-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        動画は、元々収録されている音声トラックの内容から容易に映像を推測できる。
+      en: |-
+        For video content, visually presented information can be easily inferred from the content of the originally recorded audio track.
+  - type: simple
+    id: 1561-content-03
+    tool: misc
+    procedure:
+      ja: |-
+        動画には音声解説が含まれている。
+      en: |-
+        Video includes audio description.
+  - type: simple
+    id: 1561-content-04
+    tool: misc
+    procedure:
+      ja: |-
+        映像に関するテキストによる説明が提供されている。
+      en: |-
+        A textual description of the video is provided.
