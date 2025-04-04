@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0591-content-none"
+    id: "0591-content-00"
     procedure:
       ja: |-
         チェック対象の画面には、静的なテキストしか存在しない。

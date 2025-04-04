@@ -15,7 +15,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: 0111-content-none
+    id: 0111-content-00
     procedure:
       ja: |-
         チェック対象の画面に、マウスオーバーで表示されるコンテンツが存在しない。

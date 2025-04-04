@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0561-content-none"
+    id: "0561-content-00"
     procedure:
       ja: |-
         チェック対象は、見出しを含まないモーダル・ダイアログである。

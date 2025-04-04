@@ -15,7 +15,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: 0956-content-none
+    id: 0956-content-00
     procedure:
       ja: |-
         チェック対象の画面にラジオボタンが存在しない。

@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0471-content-none"
+    id: "0471-content-00"
     procedure:
       ja: |-
         チェック対象の画面には、情報や機能性を持たない画像が存在しない。

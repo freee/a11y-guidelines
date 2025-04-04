@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0261-content-none"
+    id: "0261-content-00"
     procedure:
       ja: |-
         チェック対象の画面に、リンクが存在しない。
