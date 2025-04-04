@@ -44,6 +44,23 @@ class SheetFormatter:
             }
         })
 
+        # Set wrapStrategy to all data cells.
+        requests.append({
+            'repeatCell': {
+                'range': {
+                    'sheetId': sheet_id,
+                    'startRowIndex': 1,
+                    'endRowIndex': data_length + 1
+                },
+                'cell': {
+                    'userEnteredFormat': {
+                        'wrapStrategy': 'WRAP'
+                    }
+                },
+                'fields': 'userEnteredFormat.wrapStrategy'
+            }
+        })
+
         # Freeze top row
         requests.append({
             'updateSheetProperties': {
