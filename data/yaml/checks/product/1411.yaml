@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: 1411-content-none
+    id: 1411-content-00
     procedure:
       ja: |-
         チェック対象の画面に音声や動画プレイヤーは埋め込まれていない。

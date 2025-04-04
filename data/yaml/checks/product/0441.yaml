@@ -30,7 +30,7 @@ conditions:
     conditions:
     - type: simple
       tool: misc
-      id: "0441-content-none"
+      id: "0441-content-00"
       procedure:
         ja: |-
           チェック対象の画面に、装飾目的のものを除いて画像が存在しない。

@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "1101-content-none"
+    id: "1101-content-00"
     procedure:
       ja: |-
         チェック対象の画面には、入力フォームがない。

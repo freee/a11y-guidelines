@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0262-content-none"
+    id: "0262-content-00"
     procedure:
       ja: |-
         チェック対象の画面には、同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンが存在しない。

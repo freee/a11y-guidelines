@@ -16,7 +16,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "1191-content-none"
+    id: "1191-content-00"
     procedure:
       ja: |-
         チェック対象の画面では、ステータス・メッセージは表示されない。

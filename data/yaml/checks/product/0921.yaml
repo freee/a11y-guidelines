@@ -15,7 +15,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: "0921-content-none"
+    id: "0921-content-00"
     procedure:
       ja: |-
         チェック対象の画面には、単一の言語のテキストしか存在しない。

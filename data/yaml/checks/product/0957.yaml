@@ -15,7 +15,7 @@ conditions:
   conditions:
   - type: simple
     tool: misc
-    id: 0957-content-none
+    id: 0957-content-00
     procedure:
       ja: |-
         チェック対象の画面にチェックボックスが存在しない。
