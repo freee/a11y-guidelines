@@ -33,19 +33,11 @@ conditions:
       id: "0441-content-00"
       procedure:
         ja: |-
-          チェック対象の画面に、装飾目的のものを除いて画像が存在しない。
+          チェック対象の画面に存在する画像は、装飾目的のもののみである。
         en: |-
-          There are no images on the screen to be checked, except for those used for decoration purpose.
+          The images on the target screen are only for decorative purposes.
     - type: and
       conditions:  
-      - type: simple
-        tool: misc
-        id: "0441-content-01"
-        procedure:
-          ja: |-
-            スクリーン・リーダーによって読み上げられる簡潔な説明および詳細な説明が画像の内容を適切に表している。
-          en: |-
-            Brief and detailed descriptions announced by the screen reader properly convey the content of the image.
       - type: or
         conditions:
         - type: simple
@@ -53,7 +45,7 @@ conditions:
           id: "0441-nvda-01"
           procedure:
             ja: |-
-              *  NVDAで以下の操作をしたとき、画像に関する簡潔な読み上げがされる。
+              *  NVDAで以下の操作をしたとき、画像の内容を適切に表す簡潔な読み上げがされる。
 
                  -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
                  -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
@@ -64,7 +56,7 @@ conditions:
                 -  ブラウズ・モードで矢印キーを操作して当該画像を読み上げさせたとき、詳細な説明が読み上げられる
 
             en: |-
-              *  Using NVDA, a brief description of the image is announced when performing the following:
+              *  Using NVDA, an appropriate brief description of the image is announced when performing the following:
 
                  -  When reading the part with the image using arrow keys in browse mode
                  -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.
@@ -82,7 +74,7 @@ conditions:
           id: "0441-macvo-01"
           procedure:
             ja: |-
-              *  macOS VoiceOverで以下の操作をしたとき、画像に関する簡潔な読み上げがされる。
+              *  macOS VoiceOverで以下の操作をしたとき、画像の内容を適切に表す簡潔な読み上げがされる。
 
                  -  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該箇所を読み上げさせたとき
                  -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
@@ -93,7 +85,7 @@ conditions:
                  -  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該画像を読み上げさせたとき、詳細な説明が読み上げられる
 
             en: |-
-              *  Using macOS VoiceOver, confirm that a brief description of the image is announced when performing the following:
+              *  Using macOS VoiceOver, an appropriate brief description of the image is announced when performing the following:
 
                 -  When reading the part with the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
                 -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.

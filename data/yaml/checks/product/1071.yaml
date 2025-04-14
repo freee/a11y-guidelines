@@ -45,6 +45,6 @@ conditions:
       id: 1071-content-01
       procedure:
         ja: |-
-          フォーム操作時に発生する、あまり一般的ではない挙動について、分かりやすくユーザーに説明されている。
+          フォーム操作時に1071-keyboard-01で示すような挙動が発生する場合、そのような挙動が発生することを明示的にユーザーに伝えている。
         en: |-
-          The user is clearly informed about behaviors that are not very common that occur when manipulating forms.
+          If the behavior indicated in 1071-keyboard-01 occurs during form operations, it is explicitly communicated to the user that such behavior will occur.
