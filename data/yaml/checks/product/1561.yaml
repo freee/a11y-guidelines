@@ -27,9 +27,9 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        動画は、そのコンテンツがなくても不足なくその画面で提供されている情報が伝わるような内容である。
+        動画は、テキスト情報と同一の内容を伝えるためのもので、その動画がなくても情報の理解やサービスの利用に支障がない。
       en: |-
-        The video content is such that the information on the screen can be conveyed without any deficiency even without the content.
+        The video content conveys the same information as the text information, and the absence of that video content does not hinder understanding of the information or use of the service.
   - type: simple
     id: 1561-content-02
     tool: misc

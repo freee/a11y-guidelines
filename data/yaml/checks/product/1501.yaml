@@ -29,14 +29,14 @@ conditions:
       tool: misc
       procedure:
         ja: |-
-          音声コンテンツ、動画、アニメーションは、そのコンテンツがなくても不足なくその画面で提供されている情報が伝わるような内容である。
+          音声コンテンツ、動画、アニメーションは、テキスト情報と同一の内容を伝えるためのもので、そのコンテンツがなくても情報の理解やサービスの利用に支障がない。
         en: |-
-          The audio content, video, or animation is such that the information on the screen can be conveyed without any deficiency even without the content.
+          The audio content, video, or animation conveys the same information as the text information, and the absence of that content does not hinder understanding of the information or use of the service.
     - type: simple
       id: 1501-content-02
       tool: misc
       procedure:
         ja: |-
-          音声コンテンツ、動画、アニメーションは、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
+          音声コンテンツ、動画、アニメーションは、そのコンテンツがテキスト情報と同一の内容であることが明示されている。
         en: |-
-          The audio content, video, or animation is explicitly labeled as an alternative or supplement to the textual information.
+          The audio content, video, and animation are explicitly stated to be the same content as the text information.

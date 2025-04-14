@@ -27,9 +27,9 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        音声コンテンツは、テキスト情報の代替もしくは補助的な位置づけである。
+        音声コンテンツは、テキスト情報と同一の内容を伝えるためのもので、その音声コンテンツがなくても情報の理解やサービスの利用に支障がない。
       en: |-
-        The audio content is an alternative or supplement to the textual information.
+        The audio content conveys the same information as the text information, and the absence of that audio content does not hinder understanding of the information or use of the service.
   - type: simple
     id: 1591-content-02
     tool: misc
