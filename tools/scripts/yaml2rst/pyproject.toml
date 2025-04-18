@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2rst"
-version = "0.1.1"
+version = "0.1.2"
 description = "Process YAML files into reStructuredText to e included in the guidelines document."
 readme = "README.md"
 authors = [
