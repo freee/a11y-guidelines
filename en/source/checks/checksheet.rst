@@ -42,6 +42,11 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V6.1.0 (April 18, 2025)
+=======================
+
+*  Added a step to explicitly confirm that there is no content within the check target that is applicable to the checklist item whose applicable stage is "Product" and the target platform is "Web".
+
 V6.0.0 (December 16, 2024)
 ==========================
 
