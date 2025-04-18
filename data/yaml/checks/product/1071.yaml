@@ -7,14 +7,44 @@ platform:
 - mobile
 check:
   ja: |-
-    ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作して、以下のような挙動がないことを確認する：
-
-    *  表示内容が大幅に変わる
-    *  自動的に別のページ/画面に遷移する
-    *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+    フォームの操作時に、ユーザーが予期できない挙動が発生しない。
   en: |-
-    Manipulating form controls, such as edit boxes, checkboxes, radio buttons, buttons, etc., within the page/screen doesn not cause behavior such as:
+    Unexpected behavior does not occur when manipulating forms.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 1071-content-00
+    procedure:
+      ja: |-
+        チェック対象の画面にフォーム・コントロールが存在しない。
+      en: |-
+        There are no form controls on the screen to be checked.
+  - type: or
+    conditions:
+    - type: simple
+      tool: keyboard
+      id: "1071-keyboard-01"
+      procedure:
+        ja: |-
+          ページ/画面内の、エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールを操作した際、以下のようなあまり一般的ではない挙動が発生しない：
 
-    *  The display content changes significantly.
-    *  Automatic transition to another page/screen
-    *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
+          *  表示内容が大幅に変わる
+          *  自動的に別のページ/画面に遷移する
+          *  ユーザーが既に入力したフィールドの内容が自動的に変更される（特に操作したフィールドよりも前にあるフィールドが変更されるのは望ましくない）
+        en: |-
+          Unexpected behaviors that are not very common do not occur when manipulating form controls such as edit boxes, check boxes, and radio buttons on the page/screen:
+
+          *  The display content changes significantly.
+          *  Automatic transition to another page/screen
+          *  The content of a field already entered by the user is automatically changed (especially undesirable if the field being changed is located before the field that was manipulated).
+    - type: simple
+      tool: misc
+      id: 1071-content-01
+      procedure:
+        ja: |-
+          フォーム操作時に1071-keyboard-01で示すような挙動が発生する場合、そのような挙動が発生することを明示的にユーザーに伝えている。
+        en: |-
+          If the behavior indicated in 1071-keyboard-01 occurs during form operations, it is explicitly communicated to the user that such behavior will occur.

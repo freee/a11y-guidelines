@@ -6,6 +6,26 @@ platform:
 - web
 check:
   ja: |-
-    マウスオーバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
+    マウスオーバーで表示されるコンテンツは、拡大表示が可能。
   en: |-
-    Content displayed on hover does not disappear when the mouse pointer is moved over it.
+    Content displayed on mouseover can be enlarged.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0112-content-00
+    procedure:
+      ja: |-
+        チェック対象の画面に、マウスオーバーで表示されるコンテンツが存在しない。
+      en: |-
+        There are no content displayed on mouseover on the screen to be checked.
+  - type: simple
+    tool: mouse
+    id: 0112-mouse-01
+    procedure:
+      ja: |-
+        マウスオーバーで表示されるコンテンツは、マウス・ポインターをそのコンテンツ上に移動しても、コンテンツが消えない。
+      en: |-
+        The content displayed on mouseover does not disappear when the mouse pointer is moved over it.
