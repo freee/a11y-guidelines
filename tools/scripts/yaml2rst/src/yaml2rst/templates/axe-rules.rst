@@ -33,11 +33,11 @@ Updated
 {% if lang == 'ja' -%}
 {{ rule.description.ja }}
 
-参考： `Deque Universityの解説 <{{ deque_url }}{{ major_version }}/{{ rule.id }}>`__
+参考： `Deque Universityの解説 <{{ deque_url }}{{ major_version }}/{{ rule.id }}?lang=ja>`__
 {%- elif lang == 'en' -%}
 {{ rule.description.en }}
 
-CF: `Explanation on Deque University <{{ deque_url }}{{ major_version }}/{{ rule.id }}>`__
+CF: `Explanation on Deque University <{{ deque_url }}{{ major_version }}/{{ rule.id }}?lang=en>`__
 {%- endif %}
 {% if rule.scs is defined %}
 {% filter make_heading(3) -%}
