@@ -8,10 +8,11 @@ logger = logging.getLogger(__name__)
 class SheetFormatter:
     """Handles sheet formatting operations including conditional formatting and protection"""
     
-    def __init__(self, current_lang: str, current_target: str):
+    def __init__(self, current_lang: str, current_target: str, editor_email: str = ""):
         self.current_lang = current_lang
         self.current_target = current_target
-        
+        self.editor_email = editor_email
+
     def apply_basic_formatting(self, sheet_id: int, data_length: int) -> List[Dict]:
         """Apply basic sheet formatting
         
@@ -165,7 +166,7 @@ class SheetFormatter:
             generated_data_start = len(COLUMNS['idCols'])
             generated_data_count = len(COLUMNS[self.current_target]['generatedData'])
             
-            requests.append({
+            protection_request = {
                 'addProtectedRange': {
                     'protectedRange': {
                         'range': {
@@ -182,8 +183,10 @@ class SheetFormatter:
                         }
                     }
                 }
-            })
-            
+            }
+            if self.editor_email:
+                protection_request['addProtectedRange']['protectedRange']['editors']['users'] = [self.editor_email]
+            requests.append(protection_request)
         return requests
 
     def protect_parent_check_cells(self, sheet_id: int, row_index: int) -> Dict:
@@ -198,7 +201,7 @@ class SheetFormatter:
         """
         result_column = self.get_result_column_index()
         
-        return {
+        protection_request = {
             'addProtectedRange': {
                 'protectedRange': {
                     'range': {
@@ -216,3 +219,6 @@ class SheetFormatter:
                 }
             }
         }
+        if self.editor_email:
+            protection_request['addProtectedRange']['protectedRange']['editors']['users'] = [self.editor_email]
+        return protection_request

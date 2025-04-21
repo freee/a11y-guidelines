@@ -40,6 +40,7 @@ class ApplicationConfig(BaseModel):
     token_path: Path = Field(default=Path("token.json"), description="Path to Google token file")
     development_spreadsheet_id: str = Field("", description="Development environment spreadsheet ID")
     production_spreadsheet_id: str = Field("", description="Production environment spreadsheet ID")
+    sheet_editor_email: str = Field("", description="Email (Google account) of the user allowed to edit protected ranges")
     log_level: LogLevel = Field(default="INFO", description="Logging level")
     basedir: Optional[Path] = Field(None, description="Base directory for YAML files")
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp", description="Base URL for documentation")
@@ -199,6 +200,7 @@ class ApplicationConfig(BaseModel):
             'GOOGLE_TOKEN_PATH': 'token_path',
             'DEV_CHECKSHEET_ID': 'development_spreadsheet_id',
             'PROD_CHECKSHEET_ID': 'production_spreadsheet_id',
+            'SHEET_EDITOR_EMAIL': 'sheet_editor_email',
             'LOG_LEVEL': 'log_level',
             'BASE_URL': 'base_url'
         }

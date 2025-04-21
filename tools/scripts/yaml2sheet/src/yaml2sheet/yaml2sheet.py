@@ -158,12 +158,12 @@ def main() -> int:
         # Get base directory using unified handler
         source_path = config.get_basedir(args.basedir)
         logger.info(f"Using base directory: {source_path}")
-            
+
         # Set base URL from command line or config
         base_url = args.url or config.get_base_url()
         GL.update({'base_url': base_url})
         logger.info(f"Using base URL: {base_url}")
-        
+
         # Process source YAML data
         logger.info(f"Processing YAML data from {source_path}")
         source_data = process_yaml_data(str(source_path))
@@ -177,14 +177,17 @@ def main() -> int:
         # Get appropriate spreadsheet ID
         spreadsheet_id = config.get_spreadsheet_id(args.production)
         logger.info(f"Using spreadsheet ID: {spreadsheet_id}")
-        
+
+        editor_email = config.sheet_editor_email
+        logger.info(f"Using editor email: {editor_email}")
+
         if credentials is None:
             logger.error("No valid credentials available. Please run the script again to authenticate.")
             return 1
-            
+
         # Generate checklist
         logger.info(f"Starting checklist generation in {env_type} environment")
-        generator = ChecklistSheetGenerator(credentials, spreadsheet_id)
+        generator = ChecklistSheetGenerator(credentials, spreadsheet_id, editor_email)
         generator.generate_checklist(source_data, initialize=args.init)
         logger.info(f"Checklist generation completed successfully")
         return 0

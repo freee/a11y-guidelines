@@ -17,15 +17,17 @@ logger = logging.getLogger(__name__)
 class ChecklistSheetGenerator:
     """Generates Google Sheets checklists from source data"""
     
-    def __init__(self, credentials: Credentials, spreadsheet_id: str):
+    def __init__(self, credentials: Credentials, spreadsheet_id: str, editor_email: str = ""):
         """Initialize the generator
         
         Args:
             credentials: Google API credentials
             spreadsheet_id: Target spreadsheet ID
+            editor_email: Email address of editor for protected ranges
         """
         self.service = build('sheets', 'v4', credentials=credentials)
         self.spreadsheet_id = spreadsheet_id
+        self.editor_email = editor_email
         self.sheets: Dict[str, SheetStructure] = {}
         self.existing_sheets: Dict[str, Dict[str, Any]] = {}
         self.current_lang: str = 'ja'
@@ -168,7 +170,7 @@ class ChecklistSheetGenerator:
         
         # Add conditional formatting
         data_length = len(sheet.data)
-        formatter = SheetFormatter(self.current_lang, self.current_target)
+        formatter = SheetFormatter(self.current_lang, self.current_target, self.editor_email)
         sheet.conditional_formats.extend(formatter.add_conditional_formatting(sheet.sheet_id, data_length))
         
         return sheet
@@ -745,7 +747,7 @@ class ChecklistSheetGenerator:
                 sheet_id = self.existing_sheets[sheet_name]['sheetId']
                 logger.debug(f"Updating existing sheet: {sheet_name} (id: {sheet_id})")
                 
-                formatter = SheetFormatter(current_lang, target_id)
+                formatter = SheetFormatter(current_lang, target_id, self.editor_email)
 
                 # Add content and formatting
                 self._add_sheet_content_requests(requests, sheet_id, sheet)
@@ -944,7 +946,7 @@ class ChecklistSheetGenerator:
         data_length: int
     ) -> None:
         """Add formatting and protection requests"""
-        formatter = SheetFormatter(self.current_lang, self.current_target)
+        formatter = SheetFormatter(self.current_lang, self.current_target, self.editor_email)
         
         # Basic formatting
         requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
