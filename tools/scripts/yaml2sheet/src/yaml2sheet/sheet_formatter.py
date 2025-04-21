@@ -8,10 +8,11 @@ logger = logging.getLogger(__name__)
 class SheetFormatter:
     """Handles sheet formatting operations including conditional formatting and protection"""
     
-    def __init__(self, current_lang: str, current_target: str):
+    def __init__(self, current_lang: str, current_target: str, editor_email: str = ""):
         self.current_lang = current_lang
         self.current_target = current_target
-        
+        self.editor_email = editor_email
+
     def apply_basic_formatting(self, sheet_id: int, data_length: int) -> List[Dict]:
         """Apply basic sheet formatting
         
@@ -89,7 +90,7 @@ class SheetFormatter:
         result_column = self.get_result_column_index()
         requests = []
         
-        # Pass condition formatting
+        # Pass condition formatting for user-entered check results
         requests.append({
             'addConditionalFormatRule': {
                 'rule': {
@@ -113,7 +114,7 @@ class SheetFormatter:
             }
         })
         
-        # Fail condition formatting
+        # Fail condition formatting  for user-entered check results
         requests.append({
             'addConditionalFormatRule': {
                 'rule': {
@@ -136,7 +137,58 @@ class SheetFormatter:
                 }
             }
         })
-        
+
+        # Add conditoinal formatting if there are generated data columns
+        if COLUMNS[self.current_target]['generatedData']:
+            generated_column_start = len(COLUMNS['idCols']) + 1
+            generated_column_end = len(COLUMNS['idCols']) + len(COLUMNS[self.current_target]['generatedData'])
+            # Pass condition formatting for generated check results
+            requests.append({
+                'addConditionalFormatRule': {
+                    'rule': {
+                        'ranges': [{
+                            'sheetId': sheet_id,
+                            'startRowIndex': 1,
+                            'endRowIndex': data_length + 1,
+                            'startColumnIndex': generated_column_start,
+                            'endColumnIndex': generated_column_end
+                        }],
+                        'booleanRule': {
+                            'condition': {
+                                'type': 'TEXT_EQ',
+                                'values': [{'userEnteredValue': FINAL_CHECK_RESULTS['pass'][self.current_lang]}]
+                            },
+                            'format': {
+                                'backgroundColor': {'red': 0.85, 'green': 0.92, 'blue': 0.83}
+                            }
+                        }
+                    }
+                }
+            })
+            
+            # Fail condition formatting for generated check results
+            requests.append({
+                'addConditionalFormatRule': {
+                    'rule': {
+                        'ranges': [{
+                            'sheetId': sheet_id,
+                            'startRowIndex': 1,
+                            'endRowIndex': data_length + 1,
+                            'startColumnIndex': generated_column_start,
+                            'endColumnIndex': generated_column_end
+                        }],
+                        'booleanRule': {
+                            'condition': {
+                                'type': 'TEXT_EQ',
+                                'values': [{'userEnteredValue': FINAL_CHECK_RESULTS['fail'][self.current_lang]}]
+                            },
+                            'format': {
+                                'backgroundColor': {'red': 0.96, 'green': 0.80, 'blue': 0.80}
+                            }
+                        }
+                    }
+                }
+            })
         return requests
         
     def get_result_column_index(self) -> int:
@@ -165,7 +217,7 @@ class SheetFormatter:
             generated_data_start = len(COLUMNS['idCols'])
             generated_data_count = len(COLUMNS[self.current_target]['generatedData'])
             
-            requests.append({
+            protection_request = {
                 'addProtectedRange': {
                     'protectedRange': {
                         'range': {
@@ -182,8 +234,10 @@ class SheetFormatter:
                         }
                     }
                 }
-            })
-            
+            }
+            if self.editor_email:
+                protection_request['addProtectedRange']['protectedRange']['editors']['users'] = [self.editor_email]
+            requests.append(protection_request)
         return requests
 
     def protect_parent_check_cells(self, sheet_id: int, row_index: int) -> Dict:
@@ -198,7 +252,7 @@ class SheetFormatter:
         """
         result_column = self.get_result_column_index()
         
-        return {
+        protection_request = {
             'addProtectedRange': {
                 'protectedRange': {
                     'range': {
@@ -216,3 +270,6 @@ class SheetFormatter:
                 }
             }
         }
+        if self.editor_email:
+            protection_request['addProtectedRange']['protectedRange']['editors']['users'] = [self.editor_email]
+        return protection_request
