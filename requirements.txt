@@ -2,7 +2,8 @@ wheel
 sphinx >= 3.0
 sphinx_rtd_theme
 sphinxcontrib-trimblank
-pyyaml
 jsonschema < 4.18.0
-GitPython
 sphinx-lint
+pytz
+tools/lib/freee_a11y_gl
+tools/scripts/yaml2rst

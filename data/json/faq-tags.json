@@ -1,36 +1,43 @@
 {
-    "markup": {
-        "ja": "マークアップ",
-        "en": "Markup"
+    "android-tb": {
+        "ja": "Android TalkBack",
+        "en": "Android TalkBack"
+    },
+     "axe": {
+        "ja": "axe DevTools",
+        "en": "axe DevTools"
     },
     "form": {
         "ja": "フォーム",
         "en": "Form"
     },
-    "grayscale":
-    {
+    "grayscale": {
         "ja": "グレースケール表示",
         "en": "Grayscale View"
-    },
-    "axe": {
-        "ja": "axe DevTools",
-        "en": "axe DevTools"
-    },
-    "nvda": {
-        "ja": "NVDA",
-        "en": "NVDA"
-    },
-    "macos-vo": {
-        "ja": "macOS VoiceOver",
-        "en": "macOS VoiceOver"
     },
     "ios-vo": {
         "ja": "iOS VoiceOver",
         "en": "iOS VoiceOver"
     },
-    "android-tb": {
-        "ja": "Android TalkBack",
-        "en": "Android TalkBack"
+    "keyboard-operation": {
+        "ja": "キーボード操作",
+        "en": "Keyboard Operation"
+    },
+    "macos-vo": {
+        "ja": "macOS VoiceOver",
+        "en": "macOS VoiceOver"
+    },
+    "markup": {
+        "ja": "マークアップ",
+        "en": "Markup"
+    },
+    "misc": {
+        "ja": "その他",
+        "en": "Miscellaneous"
+    },
+    "nvda": {
+        "ja": "NVDA",
+        "en": "NVDA"
     },
     "screen-reader": {
         "ja": "スクリーン・リーダー",
@@ -39,9 +46,5 @@
     "target-size": {
         "ja": "ターゲット・サイズ",
         "en": "Target Size"
-    },
-    "misc": {
-        "ja": "その他",
-        "en": "Miscellaneous"
     }
 }

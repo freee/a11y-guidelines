@@ -10,3 +10,31 @@ check:
     映像がない音声のみのコンテンツについて、音声を書き起こしたテキストが提供されている。
   en: |-
     For audio-only content with no video, a transcribed audio text is provided.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1591-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、音声コンテンツが存在しない。
+      en: |-
+        There is no audio content on the target screen.
+  - type: simple
+    id: 1591-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        音声コンテンツは、テキスト情報と同一の内容を伝えるためのもので、その音声コンテンツがなくても情報の理解やサービスの利用に支障がない。
+      en: |-
+        The audio content conveys the same information as the text information, and the absence of that audio content does not hinder understanding of the information or use of the service.
+  - type: simple
+    id: 1591-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        その音声コンテンツを書き起こしたテキストが提供されている。
+      en: |-
+        A text transcribed from the audio content is provided.

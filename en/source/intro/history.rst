@@ -12,6 +12,18 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+`Ver. 202504.0 (Apr 22, 2025) <https://github.com/freee/a11y-guidelines/releases/202504.0>`__
+=============================================================================================
+
+*  Added FAQ: :ref:`faq-d0004`
+*  Added FAQ: :ref:`faq-p0008`
+*  Added FAQ: :ref:`faq-p0009`
+*  Updated :ref:`info-axe-rules`
+
+   -  Updated to be based on axe-core source as of April 4, 2025
+   -  Changed the links to Deque University articles to link to the Japanese and English pages respectively
+
+*  Updated the accessibility checklist to V6.1.0
 
 `Ver. 202411.0 (Nov 22, 2024) <https://github.com/freee/a11y-guidelines/releases/202411.0>`__
 =============================================================================================

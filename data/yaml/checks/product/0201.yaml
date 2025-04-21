@@ -30,12 +30,12 @@ conditions:
   id: "0201-keyboard-01"
   procedure:
     ja: |-
-      Tabキーを使って、ページの先頭からフォーカスを順に移動し、以下を確認する：
+      Tabキーを使って、ページの先頭からフォーカスを順に移動したときの挙動は、以下を満たしている：
 
       *  TabキーまたはShift+Tabキーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
       *  TabキーやShift+Tabキーの押下でフォーカスが抜け出せない場合に、矢印キーやEscキーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
     en: |-
-      Use the Tab key to sequentially move the focus from the top of the page and confirm the following:
+      Behavior when moving the focus sequentially from the top of the page using the Tab key fulfills the following:
 
       *  Pressing the Tab key or Shift+Tab key does not cause a situation where the focus cannot escape from a specific location, or
       *  If the focus cannot escape by pressing the Tab key or Shift+Tab key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the Esc key.

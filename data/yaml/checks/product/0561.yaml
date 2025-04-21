@@ -12,57 +12,67 @@ check:
     Headings are recognized by the screen reader as headings of the heading levels indicated in the design documents.
 conditions:
 - platform: web
-  type: and
+  type: or
   conditions:
   - type: simple
-    tool: axe
-    id: "0561-axe-01"
+    tool: misc
+    id: "0561-content-00"
     procedure:
       ja: |-
-        axe DevToolsで以下のいずれの問題も出ないことを確認する。
-
-        *  :ref:`axe-rule-empty-heading`
-        *  :ref:`axe-rule-heading-order`
-        *  :ref:`axe-rule-page-has-heading-one`
+        チェック対象は、見出しを含まないモーダル・ダイアログである。
       en: |-
-        Confirm that none of the following issues is reported 混地裁.
-
-        *  :ref:`axe-rule-empty-heading`
-        *  :ref:`axe-rule-heading-order`
-        *  :ref:`axe-rule-page-has-heading-one`
-  - type: or
+        The target of the check is a modal dialog that does not contain any headings.
+  - type: and
     conditions:
     - type: simple
-      tool: nvda
-      id: "0561-nvda-01"
+      tool: axe
+      id: "0561-axe-01"
       procedure:
         ja: |-
-          NVDAで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          axe DevToolsで以下のいずれの問題も出ない。
 
-          1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
-          2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+          *  :ref:`axe-rule-empty-heading`
+          *  :ref:`axe-rule-heading-order`
+          *  :ref:`axe-rule-page-has-heading-one`
         en: |-
-          With NVDA, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+          None of the following issues is reported by axe DevTools.
 
-          1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
-          2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
-      YouTube:
-        id: Gi2M1A0PB_0
-        title: 見出し【NVDAでアクセシビリティー チェック】
-    - type: simple
-      tool: macos-vo
-      id: "0561-macvo-01"
-      procedure:
-        ja: |-
-          macOS VoiceOverで以下の操作をして見出しリストを表示して、ページ中の見出しが過不足なく表示されていることを確認する。
+          *  :ref:`axe-rule-empty-heading`
+          *  :ref:`axe-rule-heading-order`
+          *  :ref:`axe-rule-page-has-heading-one`
+    - type: or
+      conditions:
+      - type: simple
+        tool: nvda
+        id: "0561-nvda-01"
+        procedure:
+          ja: |-
+            NVDAで以下の操作をして見出しリストを表示したとき、ページ中の見出しが過不足なく表示される。
 
-          1. :kbd:`VO + U` を押下してローターのメニューを表示
-          2. 「見出し」を選択
-        en: |-
-          With macOS VoiceOver, display the heading list by steps below, and confirm that all headings on the page are displayed appropriately.
+            1. ブラウズ・モードで要素リストを表示（ :kbd:`NVDA+F7` ）
+            2. 「種別」を「見出し」に設定（ :kbd:`Alt+H` ）
+          en: |-
+            All headings on the page are displayed appropriately when displaying the heading list by steps below with NVDA.
 
-          1. Press :kbd:`VO + U` to display the rotor menu
-          2. Select "Headings"
+            1. Display the elements list in browse mode (:kbd:`NVDA+F7`)
+            2. Set the "Type" to "Headings" ():kbd:`Alt+H`)
+        YouTube:
+          id: Gi2M1A0PB_0
+          title: 見出し【NVDAでアクセシビリティー チェック】
+      - type: simple
+        tool: macos-vo
+        id: "0561-macvo-01"
+        procedure:
+          ja: |-
+            macOS VoiceOverで以下の操作をして見出しリストを表示したとき、ページ中の見出しが過不足なく表示される。
+
+            1. :kbd:`VO + U` を押下してローターのメニューを表示
+            2. 「見出し」を選択
+          en: |-
+            All headings on the page are displayed appropriately when displaying the heading list by steps below with macOS VoiceOver.
+
+            1. Press :kbd:`VO + U` to display the rotor menu
+            2. Select "Headings"
 - platform: ios
   type: simple
   tool: ios-vo

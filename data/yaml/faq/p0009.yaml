@@ -1,0 +1,59 @@
+id: p0009
+sortKey: 69000
+updated: '2025-03-25'
+tags:
+- keyboard-operation
+title:
+  ja: Safariでのみ、Tabキーによるフォーカス移動の挙動がおかしい
+  en: Focus Movement by Tab Key Is Strange Only in Safari
+problem:
+  ja: |-
+    SafariでWebページを表示して、 :kbd:`Tab` キーや :kbd:`Shift+Tab` キーでフォーカスを移動すると、本来フォーカスされるべきなのにスキップされる要素がある。
+    Google Chromeや他のブラウザーでは適切にフォーカス移動できているが、コンテンツ側で何らかの対応が必要か。
+  en: |-
+    When displaying a Web page in Safari, there are elements that should be focused but are skipped when moving focus with the :kbd:`Tab` key or :kbd:`Shift+Tab` key.
+    Google Chrome and other browsers can move focus correctly, but is there any action required on the content side?
+solution:
+  ja: |-
+    デフォルト設定でSafariを使用している場合の挙動なので対処は不要。
+    :kbd:`option+Tab` と :kbd:`Shift+option+Tab` キーを使用すると他のブラウザーと同様の挙動になる。
+  en: |-
+    Since this is the behavior when using Safari with the default settings, no action is required.
+    Using the :kbd:`option+Tab` and :kbd:`Shift+option+Tab` keys will behave the same as other browsers.
+explanation:
+  ja: |-
+    デフォルト設定でSafariを使用している場合、リンクやボタンなど、本来 :kbd:`Tab` キーや :kbd:`Shift+Tab` キーでフォーカスを移動できるはずの要素の一部に、フォーカスが移動できません。
+    代わりに、 :kbd:`option+Tab` キーや :kbd:`Shift+option+Tab` キーを使用すると、他のブラウザーと同様にフォーカスを移動できます。
+
+    フォーカス順序のチェックをする場合、通常は他のブラウザーで確認して問題なければ問題はありません。
+    もしSafariでチェックを実施する必要がある場合は、 :kbd:`option+Tab` キーと :kbd:`Shift+option+Tab` キーを使用して確認します。
+
+    なお、macOS上のSafariを使用している場合は、以下のいずれかの設定をすることで、 :kbd:`Tab` キーと :kbd:`Shift+Tab` キーの挙動が他のブラウザーと同様になります。
+
+    *  Safariの :menuselection:`設定 --> 詳細` で、「Tabキーを押したときにWebページ上の各項目を強調表示」にチェックを入れる
+    *  macOSの :menuselection:`環境設定 --> アクセシビリティ --> キーボード` で「フルキーボードアクセス」を有効にする
+  en: |-
+    When using Safari with the default settings, some elements, such as links and buttons, that should be able to move focus to with the :kbd:`Tab` key or :kbd:`Shift+Tab` key, don't receive focus.
+    Instead, using the :kbd:`option+Tab` key and :kbd:`Shift+option+Tab` key will allow you to move focus as in other browsers.
+
+    When checking the focus order, if there are no issues when checking with other browsers, usually there is no problem.
+    If you need to check with Safari, use the :kbd:`option+Tab` key and :kbd:`Shift+option+Tab` key to check.
+
+    Note that by one of the following settings, the behavior of the :kbd:`Tab` key and :kbd:`Shift+Tab` key in Safari on macOS will be the same as in other browsers.
+
+    *  In Safari's :menuselection:`Preferences --> Advanced`, check "Press Tab to highlight each item on a webpage."
+    *  In macOS :menuselection:`System Preferences --> Accessibility --> Keyboard`, enable "Full Keyboard Access."
+info:
+- exp-tab-order-check
+checks:
+- '0171'
+- '0172'
+guidelines:
+- gl-dynamic-content-focus
+- gl-form-dynamic-content-focus
+- gl-form-keyboard-operable
+- gl-form-tab-order
+- gl-input-device-focus
+- gl-input-device-focus-indicator
+- gl-input-device-keyboard-operable
+- gl-link-tab-order

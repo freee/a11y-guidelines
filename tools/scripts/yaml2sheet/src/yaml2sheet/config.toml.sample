@@ -1,0 +1,9 @@
+# config.toml
+[General]
+credentials_path = "credentials.json"
+token_path = "token.json"
+development_spreadsheet_id = "your-dev-spreadsheet-id-here"
+production_spreadsheet_id = "your-prod-spreadsheet-id-here"
+log_level = "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+basedir = /"/path/to/a11y-guidelines"  # The root directory of the Guidelines project
+base_url = "https://a11y-guidelines.freee.co.jp"  # Base URL for the Guidelines

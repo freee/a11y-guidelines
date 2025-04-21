@@ -7,32 +7,42 @@ platform:
 - mobile
 check:
   ja: |-
-    アイコンがテキストのラベルと併せて表示されている場合、同じ内容が重複してスクリーン・リーダーに読み上げられない。
+    アイコンがテキストのラベルと併せて表示されている箇所をスクリーン・リーダーで読み上げさせた際、同じ内容が重複して読み上げられない。
   en: |-
-    When icons are displayed along with text labels, the same content is not announced by the screen reader more than once.
+    When an icon is displayed together with a text label, the same content is not announced twice by the screen reader.
 conditions:
 - platform: web
   type: or
   conditions:
   - type: simple
-    tool: nvda
-    id: "0413-nvda-01"
+    tool: misc
+    id: "0413-content-00"
     procedure:
       ja: |-
-        NVDAのブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
+        チェック対象の画面にアイコンが存在しない。
       en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in NVDA's browse mode.
-    YouTube:
-      id: _Q1WaOtcX7c
-      title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
-  - type: simple
-    tool: macos-vo
-    id: "0413-macvo-01"
-    procedure:
-      ja: |-
-        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていないことを確認する。
-      en: |-
-        Confirm that the same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+        There are no icons on the screen to be checked.
+  - type: or
+    conditions:
+    - type: simple
+      tool: nvda
+      id: "0413-nvda-01"
+      procedure:
+        ja: |-
+          NVDAのブラウズ・モードでの矢印キーの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていない。
+        en: |-
+          The same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using arrow keys in NVDA's browse mode.
+      YouTube:
+        id: _Q1WaOtcX7c
+        title: アイコンの説明が重複しない【NVDAでアクセシビリティー チェック】
+    - type: simple
+      tool: macos-vo
+      id: "0413-macvo-01"
+      procedure:
+        ja: |-
+          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で、当該のアイコンとテキスト・ラベルがある箇所を通過したとき、アイコンとそのアイコンに併記されているテキストの両方が読み上げられるなど、結果として同じ内容が2度読まれるような状態になっていない。
+        en: |-
+          The same content is not announced twice as the result of both the icon and the accompanying text being announced, when passing over a location with an icon accompanied by a text label using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo

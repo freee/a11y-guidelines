@@ -454,4 +454,6 @@ NVDAには、表の読み上げを効率的に行うためのキー操作が用�
 
 これらのキー操作に加えて、 :kbd:`NVDA + F7` の押下でページ内の要素ごとのリストを表示することができ、このリストを用いて移動することも可能です。
 
+.. include:: /inc/info2faq/exp-screen-reader-check-nvda.rst
+
 .. translated:: true

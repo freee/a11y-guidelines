@@ -10,3 +10,23 @@ check:
     フォーム入力に関するエラー発生時には、エラーの内容が具体的に分かるテキスト情報が表示される。
   en: |-
     When an error related to form entry occurs, text information that specifically identifies the nature of the error is displayed.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "1101-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、入力フォームがない。
+      en: |- 
+        There are no input forms on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: "1101-content-01"
+    procedure:
+      ja: |-
+        エラーが発生するフォーム入力を行うと、エラー内容が具体的に分かるテキスト情報が表示される。
+      en: |- 
+        When performing form input that causes an error, text information that specifically identifies the nature of the error is displayed.

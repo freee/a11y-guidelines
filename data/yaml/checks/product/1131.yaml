@@ -10,3 +10,23 @@ check:
     フォーム入力に関するエラー・メッセージには、エラーの修正方法が示されている。
   en: |-
     Error messages related to form entry indicate how to correct the error.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "1131-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、入力フォームがない。
+      en: |- 
+        There are no input forms on the screen to be checked.
+  - type: simple
+    tool: misc
+    id: "1131-content-01"
+    procedure:
+      ja: |-
+        エラーが発生するフォーム入力を行うと、エラーの修正方法が分かるテキスト情報が表示される。
+      en: |- 
+        When performing form input that causes an error, text information is displayed that indicates how to correct the error.

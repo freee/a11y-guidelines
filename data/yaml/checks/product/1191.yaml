@@ -12,22 +12,32 @@ check:
     Status messages, such as the result of an operation, are automatically announced by the screen reader.
 conditions:
 - platform: web
-  type: simple
-  tool: nvda
-  id: "1191-nvda-01"
-  procedure:
-    ja: |-
-      NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行い、表示されたステータス・メッセージが自動的に読み上げられることを確認する。
-    en: |-
-      With NVDA running, perform the operation to display status messages according to the design documents, and confirm that the displayed status messages are automatically announced.
-  note:
-    ja: |-
-      参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
-    en: |-
-      Note: Refer to the implementation example shown in :ref:`exp-dynamic-content-status` for the expected behavior in the implementation using ``aria-live``.
-  YouTube:
-    id: 5YO_NxGuks8
-    title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "1191-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面では、ステータス・メッセージは表示されない。
+      en: |-
+        No status messages are displayed on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "1191-nvda-01"
+    procedure:
+      ja: |-
+        NVDAを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行ったとき、表示されたステータス・メッセージが自動的に読み上げられる。
+      en: |-
+        With NVDA running, performing the operation to display status messages according to the design documents causes the displayed status messages to be automatically announced.
+    note:
+      ja: |-
+        参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+      en: |-
+        Note: Refer to the implementation example shown in :ref:`exp-dynamic-content-status` for the expected behavior in the implementation using ``aria-live``.
+    YouTube:
+      id: 5YO_NxGuks8
+      title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
 - platform: ios
   type: simple
   tool: ios-vo

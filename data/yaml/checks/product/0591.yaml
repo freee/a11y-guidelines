@@ -12,24 +12,34 @@ check:
     Non-static text (e.g., open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
 conditions:
 - platform: web
-  type: simple
-  tool: nvda
-  id: "0591-nvda-01"
-  procedure:
-    ja: |-
-      以下のすべてを満たしていることをNVDAで確認する：
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0591-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、静的なテキストしか存在しない。
+      en: |-
+        There are only static texts on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0591-nvda-01"
+    procedure:
+      ja: |-
+        以下のすべてを満たしていることをNVDAで確認：
 
-      *  ブラウズ・モードでその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
-      *  その部分で提供されているすべての機能を、最低限フォーカス・モードにおいてキーボードで操作できる
-      *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
-      *  操作の結果表示が変わる場合、ブラウズ・モードで変更後の表示内容を読み上げさせて確認できる
-    en: |-
-      Confirm that all of the following are met using NVDA:
+        *  ブラウズ・モードでその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
+        *  その部分で提供されているすべての機能を、最低限フォーカス・モードにおいてキーボードで操作できる
+        *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
+        *  操作の結果表示が変わる場合、ブラウズ・モードで変更後の表示内容を読み上げさせて確認できる
+      en: |-
+        Confirm that all of the following are met using NVDA:
 
-      *  Users can recognize that the component accepts some operation when reading the part in browse mode.
-      *  All of the functions provided in the part can be operated at least by keyboard in focus mode.
-      *  If the displayed content changes upon operation, users can recognize it through the announcement.
-      *  If the displayed content changes upon operation, users can read the updated content in browse mode.
-  YouTube:
-    id: Wl6cydtXNw4
-    title: 開閉するボタン【NVDAでアクセシビリティー チェック】
+        *  Users can recognize that the component accepts some operation when reading the part in browse mode.
+        *  All of the functions provided in the part can be operated at least by keyboard in focus mode.
+        *  If the displayed content changes upon operation, users can recognize it through the announcement.
+        *  If the displayed content changes upon operation, users can read the updated content in browse mode.
+    YouTube:
+      id: Wl6cydtXNw4
+      title: 開閉するボタン【NVDAでアクセシビリティー チェック】
