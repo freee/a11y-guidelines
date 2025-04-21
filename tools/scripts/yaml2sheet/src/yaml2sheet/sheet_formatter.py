@@ -90,7 +90,7 @@ class SheetFormatter:
         result_column = self.get_result_column_index()
         requests = []
         
-        # Pass condition formatting
+        # Pass condition formatting for user-entered check results
         requests.append({
             'addConditionalFormatRule': {
                 'rule': {
@@ -114,7 +114,7 @@ class SheetFormatter:
             }
         })
         
-        # Fail condition formatting
+        # Fail condition formatting  for user-entered check results
         requests.append({
             'addConditionalFormatRule': {
                 'rule': {
@@ -137,7 +137,58 @@ class SheetFormatter:
                 }
             }
         })
-        
+
+        # Add conditoinal formatting if there are generated data columns
+        if COLUMNS[self.current_target]['generatedData']:
+            generated_column_start = len(COLUMNS['idCols']) + 1
+            generated_column_end = len(COLUMNS['idCols']) + len(COLUMNS[self.current_target]['generatedData'])
+            # Pass condition formatting for generated check results
+            requests.append({
+                'addConditionalFormatRule': {
+                    'rule': {
+                        'ranges': [{
+                            'sheetId': sheet_id,
+                            'startRowIndex': 1,
+                            'endRowIndex': data_length + 1,
+                            'startColumnIndex': generated_column_start,
+                            'endColumnIndex': generated_column_end
+                        }],
+                        'booleanRule': {
+                            'condition': {
+                                'type': 'TEXT_EQ',
+                                'values': [{'userEnteredValue': FINAL_CHECK_RESULTS['pass'][self.current_lang]}]
+                            },
+                            'format': {
+                                'backgroundColor': {'red': 0.85, 'green': 0.92, 'blue': 0.83}
+                            }
+                        }
+                    }
+                }
+            })
+            
+            # Fail condition formatting for generated check results
+            requests.append({
+                'addConditionalFormatRule': {
+                    'rule': {
+                        'ranges': [{
+                            'sheetId': sheet_id,
+                            'startRowIndex': 1,
+                            'endRowIndex': data_length + 1,
+                            'startColumnIndex': generated_column_start,
+                            'endColumnIndex': generated_column_end
+                        }],
+                        'booleanRule': {
+                            'condition': {
+                                'type': 'TEXT_EQ',
+                                'values': [{'userEnteredValue': FINAL_CHECK_RESULTS['fail'][self.current_lang]}]
+                            },
+                            'format': {
+                                'backgroundColor': {'red': 0.96, 'green': 0.80, 'blue': 0.80}
+                            }
+                        }
+                    }
+                }
+            })
         return requests
         
     def get_result_column_index(self) -> int:
