@@ -150,7 +150,7 @@ class ChecklistSheetGenerator:
         sheet = SheetStructure(name=target_name, sheet_id=None)
         
         # Prepare headers
-        headers = self.get_headers(target_id, lang)
+        headers = self.get_header_names(target_id, lang)
         header_row = []
         for header in headers:
             header_row.append(CellData(
@@ -175,15 +175,14 @@ class ChecklistSheetGenerator:
         
         return sheet
 
-    def get_headers(self, target_id: str, lang: str) -> List[str]:
-        """Get column headers for sheet
+    def get_header_ids(self, target_id: str) -> List[str]:
+        """Get column IDs for sheet
         
         Args:
             target_id: Target identifier
-            lang: Language code
             
         Returns:
-            List[str]: Localized header names
+            List[str]: Column IDs
         """
         # Column groups in order
         id_headers = COLUMNS['idCols']
@@ -208,7 +207,21 @@ class ChecklistSheetGenerator:
             *plain_headers,
             *link_headers
         ]
+
+        return all_headers
+
+    def get_header_names(self, target_id: str, lang: str) -> List[str]:
+        """Get localized column header names for sheet
         
+        Args:
+            target_id: Target identifier
+            lang: Language code
+            
+        Returns:
+            List[str]: Localized header names
+        """
+        all_headers = self.get_header_ids(target_id)
+
         # Get localized names
         return [
             COLUMN_INFO['name'].get(header, {}).get(lang, header)
@@ -1071,7 +1084,7 @@ class ChecklistSheetGenerator:
         Returns:
             List[int]: List of column widths
         """
-        headers = self.get_headers(self.current_target, self.current_lang)
+        headers = self.get_header_ids(self.current_target)
         return [
             COLUMN_INFO['width'].get(header, 100)
             for header in headers
