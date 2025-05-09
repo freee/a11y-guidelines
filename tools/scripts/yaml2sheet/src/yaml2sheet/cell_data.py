@@ -38,7 +38,7 @@ class CellData:
         self.type = type
         
         # 値が None の場合は書式設定も適用しない（完全に空のセルにする）
-        if self.value is None and not protection and not validation:
+        if self.value is None:
             self.formatting = None
         else:
             self.formatting = formatting
@@ -57,7 +57,7 @@ class CellData:
         
         is_empty = self.value is None or (isinstance(self.value, str) and not self.value.strip())
         
-        if is_empty and not self.protection and not self.validation:
+        if is_empty:
             result["userEnteredValue"] = None
         else:
             if self.type == CellType.PLAIN:
