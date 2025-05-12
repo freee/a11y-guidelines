@@ -10,7 +10,7 @@ from typing import Dict, Any
 
 # Regular expression patterns
 RST_REF_PATTERN = re.compile(r':ref:`([-a-z0-9]+)`')  # Match reference IDs
-RST_KBD_PATTERN = re.compile(r':kbd:`(.+)`')  # Match keyboard shortcuts
+RST_KBD_PATTERN = re.compile(r':kbd:`([^`]+)`')  # Match keyboard shortcuts
 
 def normalize_text(text: str) -> str:
     """Normalize whitespace and spacing between characters."""
