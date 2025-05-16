@@ -1,22 +1,42 @@
-name: Publish HTML
+name: Deploy to GitHub Pages
 
 on:
   push:
     tags: [ "*" ]
     branches: [develop]
 
-jobs:
-  release:
-    if: github.repository == 'freee/a11y-guidelines' && startsWith(github.ref, 'refs/tags/')
+# GitHubへのページデプロイに必要な権限設定
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+# 同時に実行されるデプロイを1つに制限（オプション）
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
     runs-on: ubuntu-latest
+    env:
+      # カスタムドメインの設定 - 実運用時に設定
+      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
     steps:
     - name: Extract Branch/Tag Names
       run: |
         echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
         echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
         echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
+        
+    - name: Set BASE_URL
+      run: |
+        if [ -n "$CUSTOM_DOMAIN" ]; then
+          echo "BASE_URL=https://${CUSTOM_DOMAIN}/" >> $GITHUB_ENV
+        else
+          echo "BASE_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_ENV
+        fi
+        
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
@@ -26,159 +46,226 @@ jobs:
       with:
         python-version: '3.9.x'
 
-    - uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-northeast-1
-
     - name: install ja_JP.UTF-8 locale
       run: |
+        sudo apt-get update
+        sudo apt-get install -y locales
         sudo locale-gen ja_JP.UTF-8
         sudo update-locale LANG=ja_JP.UTF-8
 
     - name: Install the Latest pip
       run: python -m pip install --upgrade pip
 
-    - name: Install required modules
-      run: python -m pip install -r requirements.txt --upgrade
+    # GitHub Pagesのセットアップ
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
 
-    - name: Prepare file upload directory with the archive directory
+    - name: Prepare deployment directory structure
       run: |
-        mkdir -p ${GITHUB_WORKSPACE}/upload/archive
-        mkdir -p ${GITHUB_WORKSPACE}/upload/en
+        mkdir -p ${GITHUB_WORKSPACE}/deploy/archive
+        mkdir -p ${GITHUB_WORKSPACE}/deploy/current/en
 
-    - name: Download the existing archive files from S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
+    - name: Get latest tag
+      id: latest_tag
+      run: |
+        LATEST_TAG=$(git describe --tags --abbrev=0)
+        echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
+        
+    # Display configuration info
+    - name: Display configuration info
+      run: |
+        echo "Using BASE_URL: ${BASE_URL}"
+        echo "Custom Domain: ${CUSTOM_DOMAIN:-Not set, using GitHub Pages URL}"
+        echo "Latest tag: ${LATEST_TAG}"
 
-    - name: Build HTML of all releases, with gtag.js, and OGP tags
+    # Build HTML from the latest tag for the root directory (always use latest tag)
+    - name: Build HTML for latest tag (root directory)
       env:
         GTM_ID: ${{ secrets.GTM_ID }}
         TZ: Asia/Tokyo
       run: |
-        make BASE_URL=https://a11y-guidelines.freee.co.jp/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload
-        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/en
-        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload
-        make BASE_URL=https://a11y-guidelines.freee.co.jp/current/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-        mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
-        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current
-        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
-        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/current
+        git checkout ${LATEST_TAG}
+        git submodule update --init --recursive
+        python -m pip install -r requirements.txt --upgrade
+        if [ ! -f ./build.mk ]; then
+          build_procedure=0
+        else
+          build_procedure=$(make build-procedure-version)
+        fi
+        if [ ${build_procedure} -eq 0 ]; then
+          make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
+          cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/
+          fi
+        elif [ ${build_procedure} -eq 1 ]; then
+          make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID}" clean html
+          mkdir -p ${GITHUB_WORKSPACE}/deploy/en
+          cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/
+          if [ -d ./en/build/html ]; then
+            cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/en
+          fi
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/
+          fi
+        else
+          echo "Unknown build procedure version: ${build_procedure}"
+          exit 1
+        fi
         make clean
-        current_commit=$(git rev-parse HEAD)
-        rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
-        for _tag in `git tag` ; do \
-          echo "Processing ${_tag}..." ; \
-          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
-            git checkout ${_tag} ; \
-            git submodule update --init --recursive ; \
-            if [ ! -f ./build.mk ]; then
-              build_procedure=0 ; \
-            else \
-              build_procedure=`make build-procedure-version` ; \
-            fi ; \
-            if [ ${build_procedure} -eq 0 ]; then
-              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=https://a11y-guidelines.freee.co.jp/archive/${_tag}/" html ; \
-              if [ -d ./data/json/schemas ]; then \
-                cp -r ./data/json/schemas ./build/html ; \
-              fi ; \
-              cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-            elif [ ${build_procedure} -eq 1 ]; then \
-              make BASE_URL=https://a11y-guidelines.freee.co.jp/archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
-              mkdir -p ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en ; \
-              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-              cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en
-              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-            else \
-              echo "Unknown build procedure version: ${build_procedure}" ; \
-              exit 1 ; \
-            fi ; \
-            make clean ; \
-            git checkout ${current_commit} ; \
-            git submodule update --init --recursive ; \
-          fi ; \
-        done
 
-    - name: Publish to S3
+    # Build current from develop branch
+    - name: Build HTML for develop branch (current directory)
       env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/ s3://${AWS_BUCKET}/ --quiet
-
-    - name: Prepare the HTML Archive
-      env:
+        GTM_ID: ${{ secrets.GTM_ID }}
         TZ: Asia/Tokyo
       run: |
-        make BASE_URL=/ clean html
-        mv ./ja/build/html ./freee-a11y-guidelines-${TAG}
-        cp -r ./data/json/schemas ./freee-a11y-guidelines-${TAG}
-        cp -r ./en/build/html ./freee-a11y-guidelines-${TAG}/en
+        git checkout develop
+        git submodule update --init --recursive
+        python -m pip install -r requirements.txt --upgrade
+        if [ ! -f ./build.mk ]; then
+          build_procedure=0
+        else
+          build_procedure=$(make build-procedure-version)
+        fi
+        if [ ${build_procedure} -eq 0 ]; then
+          make sphinx_options="-A gtm_id=${GTM_ID} -t current -D html_baseurl=${BASE_URL}current/" clean html
+          mkdir -p ${GITHUB_WORKSPACE}/deploy/current
+          cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/current/
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/current/
+          fi
+        elif [ ${build_procedure} -eq 1 ]; then
+          make BASE_URL=${BASE_URL}current/ sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
+          mkdir -p ${GITHUB_WORKSPACE}/deploy/current/en
+          cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/current/
+          if [ -d ./en/build/html ]; then
+            cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/current/en
+          fi
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/current/
+          fi
+        else
+          echo "Unknown build procedure version: ${build_procedure}"
+          exit 1
+        fi
+        make clean
+
+    # Build archive for all tags
+    - name: Build HTML for all tags (archive directory)
+      env:
+        GTM_ID: ${{ secrets.GTM_ID }}
+        TZ: Asia/Tokyo
+      run: |
+        current_commit=$(git rev-parse HEAD)
+        for _tag in `git tag`; do
+          echo "Processing ${_tag} for archive..."
+          if [ ! -d ${GITHUB_WORKSPACE}/deploy/archive/${_tag} ]; then
+            git checkout ${_tag}
+            git submodule update --init --recursive
+            python -m pip install -r requirements.txt --upgrade
+            if [ ! -f ./build.mk ]; then
+              build_procedure=0
+            else
+              build_procedure=$(make build-procedure-version)
+            fi
+            if [ ${build_procedure} -eq 0 ]; then
+              make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}archive/${_tag}/" clean html
+              mkdir -p ${GITHUB_WORKSPACE}/deploy/archive/${_tag}
+              cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
+              if [ -d ./data/json/schemas ]; then
+                cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
+              fi
+            elif [ ${build_procedure} -eq 1 ]; then
+              make BASE_URL=${BASE_URL}archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+              mkdir -p ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/en
+              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
+              if [ -d ./en/build/html ]; then
+                cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/en
+              fi
+              if [ -d ./data/json/schemas ]; then
+                cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
+              fi
+            else
+              echo "Unknown build procedure version: ${build_procedure}"
+              exit 1
+            fi
+            make clean
+          fi
+        done
+        git checkout ${current_commit}
+        git submodule update --init --recursive
+
+    # Prepare HTML archive for release when a tag is pushed
+    - name: Prepare HTML archive for release
+      if: startsWith(github.ref, 'refs/tags/')
+      env:
+        GTM_ID: ${{ secrets.GTM_ID }}
+        TZ: Asia/Tokyo
+      run: |
+        git checkout ${TAG}
+        git submodule update --init --recursive
+        python -m pip install -r requirements.txt --upgrade
+        if [ ! -f ./build.mk ]; then
+          build_procedure=0
+        else
+          build_procedure=$(make build-procedure-version)
+        fi
+        if [ ${build_procedure} -eq 0 ]; then
+          make BASE_URL=/ sphinx_options="-A gtm_id=${GTM_ID}" html
+          mkdir -p freee-a11y-guidelines-${TAG}
+          cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
+          fi
+        elif [ ${build_procedure} -eq 1 ]; then
+          make BASE_URL=/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+          mkdir -p freee-a11y-guidelines-${TAG}/en
+          cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
+          if [ -d ./en/build/html ]; then
+            cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
+          fi
+          if [ -d ./data/json/schemas ]; then
+            cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
+          fi
+        else
+          echo "Unknown build procedure version: ${build_procedure}"
+          exit 1
+        fi
         zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
-    - name: Create Release
+    # Create GitHub release when a tag is pushed
+    - name: Create GitHub Release
+      if: startsWith(github.ref, 'refs/tags/')
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        gh release create ${TAG} \
-          --title "Ver. ${TAG}" \
-          --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
-          --draft
+        if [ -f ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst ]; then
+          gh release create ${TAG} \
+            --title "Ver. ${TAG}" \
+            --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
+            --draft
+        else
+          gh release create ${TAG} \
+            --title "Ver. ${TAG}" \
+            --notes "Release version ${TAG}" \
+            --draft
+        fi
         gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
 
-  current:
-    if: github.repository == 'freee/a11y-guidelines' && github.ref == 'refs/heads/develop'
+    # Upload artifact for GitHub Pages deployment
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: deploy
 
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
-    - name: Extract Branch/Tag Names
-      run: |
-        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-
-    - uses: actions/checkout@v4
-      with:
-        submodules: true
-
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.9.x'
-
-    - uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-northeast-1
-
-    - name: install ja_JP.UTF-8 locale
-      run: |
-        sudo locale-gen ja_JP.UTF-8
-        sudo update-locale LANG=ja_JP.UTF-8
-  
-    - name: Install the Latest pip
-      run: python -m pip install --upgrade pip
-
-    - name: Install required modules
-      run: python -m pip install -r requirements.txt --upgrade
-
-    - name: Prepare file upload directory with the archive directory
-      run: mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
-
-    - name: Build HTML with gtag.js, and OGP tags
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        BASE_URL: https://a11y-guidelines.freee.co.jp/current/
-        TZ: Asia/Tokyo
-      run: |
-        make sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
-        cp -r ./data/json/schemas ./ja/build/html
-        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current/
-        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
-
-    - name: Publish to S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/current/ s3://${AWS_BUCKET}/current/ --quiet
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
