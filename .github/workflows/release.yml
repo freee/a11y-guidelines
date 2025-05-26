@@ -100,7 +100,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_target: ${{ needs.get_build_targets.outputs.matrix }}
+        build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
 
     env:
       CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
