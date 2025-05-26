@@ -242,8 +242,8 @@ jobs:
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
-          mkdir -p ${{ GITHUB_WORKSPACE }}/_site_final
-          for DIR in ${{ GITHUB_WORKSPACE }}/_site_temp/*; do
+          mkdir -p ${GITHUB_WORKSPACE}/_site_final
+          for DIR in ${GITHUB_WORKSPACE}/_site_temp/*; do
             if [ -d "$DIR" ]; then
               if [ "$(basename "$DIR")" == "root" ]; then
                 cp -r "$DIR"/* ${{ GITHUB_WORKSPACE }}/_site_final/
