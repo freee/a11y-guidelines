@@ -30,13 +30,16 @@ jobs:
 
       - name: Generate build matrix
         id: generate_matrix
+        env:
+          IS_TAG_PUSH: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+          GITHUB_REFNAME: ${{ github.ref_name }}
         run: |
           ALL_TAGS_SORTED=$(git tag -l '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*' | sort -rV)
           MATRIX_ITEMS="[]"
 
           CURRENT_PUSHED_TAG=""
-          if [[ "${{ github.event_name }}" == "push" && startsWith(github.ref, 'refs/tags/') ]]; then
-            CURRENT_PUSHED_TAG="${{ github.ref_name }}"
+          if [[ "${IS_TAG_PUSH}" == "true" ]]; then
+            CURRENT_PUSHED_TAG="$(echo ${GITHUB_REFNAME} | sed s/refs\/tags\///)"
           fi
 
           LATEST_RELEASE_TAG=$(echo "$ALL_TAGS_SORTED" | head -n1)
@@ -55,7 +58,7 @@ jobs:
             echo "$PY_VER,$SPHINX_VER,$THEME_VER"
           }
 
-          MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "develop" \
+          MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "develop" \
             --arg python "3.13" \
             --arg sphinx "~=8.0" \
             --arg theme "~=3.0" \
@@ -66,7 +69,7 @@ jobs:
             LATEST_VNUM=$(echo "$LATEST_RELEASE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
             IFS=',' read -r LATEST_PY LATEST_SPHINX LATEST_THEME <<< $(get_versions "$LATEST_VNUM")
 
-            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "$LATEST_RELEASE_TAG" \
+            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
               --arg python "$LATEST_PY" \
               --arg sphinx "$LATEST_SPHINX" \
               --arg theme "$LATEST_THEME" \
@@ -79,7 +82,7 @@ jobs:
               ARCHIVE_VNUM=$(echo "$ARCHIVE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
               IFS=',' read -r ARCHIVE_PY ARCHIVE_SPHINX ARCHIVE_THEME <<< $(get_versions "$ARCHIVE_VNUM")
 
-              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "$ARCHIVE_TAG" \
+              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$ARCHIVE_TAG" \
                 --arg python "$ARCHIVE_PY" \
                 --arg sphinx "$ARCHIVE_SPHINX" \
                 --arg theme "$ARCHIVE_THEME" \
@@ -89,7 +92,7 @@ jobs:
           done
 
           echo "matrix=$MATRIX_ITEMS" >> "$GITHUB_OUTPUT"
-          echo "Generated matrix: $(cat "$GITHUB_OUTPUT" | grep 'matrix=' | sed 's/matrix=//')"
+          echo "Generated matrix."
 
   build_docs:
     runs-on: ubuntu-latest
