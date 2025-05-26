@@ -219,7 +219,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ env.DEPLOY_PATH || 'root' }}
-          path: ${{ GITHUB_WORKSPACE }}/deploy_temp/${{ env.DEPLOY_PATH }}
+          path: ${{ github.workspace }}/deploy_temp/${{ env.DEPLOY_PATH }}
 
   deploy_pages:
     environment:
@@ -234,7 +234,7 @@ jobs:
       - name: Download all build artifacts
         uses: actions/download-artifact@v4
         with:
-          path: ${{ GITHUB_WORKSPACE }}/_site_temp
+          path: ${{ github.workspace }}/_site_temp
 
       - name: Prepare final deployment directory
         run: |
@@ -252,7 +252,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ GITHUB_WORKSPACE }}/_site_final
+          path: ${{ github.workspace }}/_site_final
 
       - name: Deploy to GitHub Pages
         id: deployment
