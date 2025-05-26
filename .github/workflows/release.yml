@@ -190,21 +190,20 @@ jobs:
             BUILD_PROCEDURE=$(make build-procedure-version)
           fi
 
-          BASE_URL_ARG="-D html_baseurl=${BASE_URL}"
           EXTRA_SPHINX_OPTIONS=""
           if ${{ env.IS_LATEST_DEVELOP == 'true' }}; then
             EXTRA_SPHINX_OPTIONS="-t current"
           fi
 
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-A gtm_id=${GTM_ID} ${BASE_URL_ARG} ${EXTRA_SPHINX_OPTIONS}" clean html
+            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
             mkdir -p ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}
             cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make ${BASE_URL_ARG} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
+            make BASE_URL=${BASE_URL}  sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
             mkdir -p ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/en
             cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
             if [ -d ./en/build/html ]; then
