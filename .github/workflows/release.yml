@@ -1,271 +1,346 @@
-name: Deploy to GitHub Pages
+name: Release and Deploy Documentation
 
 on:
   push:
-    tags: [ "*" ]
-    branches: [develop]
+    branches:
+      - develop
 
-# GitHubへのページデプロイに必要な権限設定
+    tags:
+      - '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*'
+
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# 同時に実行されるデプロイを1つに制限（オプション）
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  build:
+  get_build_targets:
     runs-on: ubuntu-latest
-    env:
-      # カスタムドメインの設定 - 実運用時に設定
-      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
+    outputs:
+      matrix: ${{ steps.generate_matrix.outputs.matrix }}
     steps:
-    - name: Extract Branch/Tag Names
-      run: |
-        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-        
-    - name: Set BASE_URL
-      run: |
-        if [ -n "$CUSTOM_DOMAIN" ]; then
-          echo "BASE_URL=https://${CUSTOM_DOMAIN}/" >> $GITHUB_ENV
-        else
-          echo "BASE_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_ENV
-        fi
-        
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        submodules: true
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.9.x'
+      - name: Generate build matrix
+        id: generate_matrix
+        run: |
+          ALL_TAGS_SORTED=$(git tag -l '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*' | sort -rV)
+          MATRIX_ITEMS="[]"
 
-    - name: install ja_JP.UTF-8 locale
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y locales
-        sudo locale-gen ja_JP.UTF-8
-        sudo update-locale LANG=ja_JP.UTF-8
-
-    - name: Install the Latest pip
-      run: python -m pip install --upgrade pip
-
-    # GitHub Pagesのセットアップ
-    - name: Setup Pages
-      uses: actions/configure-pages@v4
-
-    - name: Prepare deployment directory structure
-      run: |
-        mkdir -p ${GITHUB_WORKSPACE}/deploy/archive
-        mkdir -p ${GITHUB_WORKSPACE}/deploy/current/en
-
-    - name: Get latest tag
-      id: latest_tag
-      run: |
-        LATEST_TAG=$(git describe --tags --abbrev=0)
-        echo "LATEST_TAG=${LATEST_TAG}" >> $GITHUB_ENV
-        
-    # Display configuration info
-    - name: Display configuration info
-      run: |
-        echo "Using BASE_URL: ${BASE_URL}"
-        echo "Custom Domain: ${CUSTOM_DOMAIN:-Not set, using GitHub Pages URL}"
-        echo "Latest tag: ${LATEST_TAG}"
-
-    # Build HTML from the latest tag for the root directory (always use latest tag)
-    - name: Build HTML for latest tag (root directory)
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        TZ: Asia/Tokyo
-      run: |
-        git checkout ${LATEST_TAG}
-        git submodule update --init --recursive
-        python -m pip install -r requirements.txt --upgrade
-        if [ ! -f ./build.mk ]; then
-          build_procedure=0
-        else
-          build_procedure=$(make build-procedure-version)
-        fi
-        if [ ${build_procedure} -eq 0 ]; then
-          make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}" clean html
-          cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/
+          CURRENT_PUSHED_TAG=""
+          if [[ "${{ github.event_name }}" == "push" && startsWith(github.ref, 'refs/tags/') ]]; then
+            CURRENT_PUSHED_TAG="${{ github.ref_name }}"
           fi
-        elif [ ${build_procedure} -eq 1 ]; then
-          make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID}" clean html
-          mkdir -p ${GITHUB_WORKSPACE}/deploy/en
-          cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/
-          if [ -d ./en/build/html ]; then
-            cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/en
-          fi
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/
-          fi
-        else
-          echo "Unknown build procedure version: ${build_procedure}"
-          exit 1
-        fi
-        make clean
 
-    # Build current from develop branch
-    - name: Build HTML for develop branch (current directory)
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        TZ: Asia/Tokyo
-      run: |
-        git checkout develop
-        git submodule update --init --recursive
-        python -m pip install -r requirements.txt --upgrade
-        if [ ! -f ./build.mk ]; then
-          build_procedure=0
-        else
-          build_procedure=$(make build-procedure-version)
-        fi
-        if [ ${build_procedure} -eq 0 ]; then
-          make sphinx_options="-A gtm_id=${GTM_ID} -t current -D html_baseurl=${BASE_URL}current/" clean html
-          mkdir -p ${GITHUB_WORKSPACE}/deploy/current
-          cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/current/
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/current/
-          fi
-        elif [ ${build_procedure} -eq 1 ]; then
-          make BASE_URL=${BASE_URL}current/ sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
-          mkdir -p ${GITHUB_WORKSPACE}/deploy/current/en
-          cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/current/
-          if [ -d ./en/build/html ]; then
-            cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/current/en
-          fi
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/current/
-          fi
-        else
-          echo "Unknown build procedure version: ${build_procedure}"
-          exit 1
-        fi
-        make clean
+          LATEST_RELEASE_TAG=$(echo "$ALL_TAGS_SORTED" | head -n1)
 
-    # Build archive for all tags
-    - name: Build HTML for all tags (archive directory)
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        TZ: Asia/Tokyo
-      run: |
-        current_commit=$(git rev-parse HEAD)
-        for _tag in `git tag`; do
-          echo "Processing ${_tag} for archive..."
-          if [ ! -d ${GITHUB_WORKSPACE}/deploy/archive/${_tag} ]; then
-            git checkout ${_tag}
-            git submodule update --init --recursive
-            python -m pip install -r requirements.txt --upgrade
-            if [ ! -f ./build.mk ]; then
-              build_procedure=0
+          get_versions() {
+            local VNUM=$1
+            local PY_VER=""
+            local SPHINX_VER=""
+            local THEME_VER=""
+
+            if (( VNUM <= 202230300 )); then
+              PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
             else
-              build_procedure=$(make build-procedure-version)
+              PY_VER="3.13"; SPHINX_VER="~=8.0"; THEME_VER="~=3.0"
             fi
-            if [ ${build_procedure} -eq 0 ]; then
-              make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL}archive/${_tag}/" clean html
-              mkdir -p ${GITHUB_WORKSPACE}/deploy/archive/${_tag}
-              cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
-              if [ -d ./data/json/schemas ]; then
-                cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
-              fi
-            elif [ ${build_procedure} -eq 1 ]; then
-              make BASE_URL=${BASE_URL}archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-              mkdir -p ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/en
-              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
-              if [ -d ./en/build/html ]; then
-                cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/en
-              fi
-              if [ -d ./data/json/schemas ]; then
-                cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy/archive/${_tag}/
-              fi
-            else
-              echo "Unknown build procedure version: ${build_procedure}"
-              exit 1
+            echo "$PY_VER,$SPHINX_VER,$THEME_VER"
+          }
+
+          MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "develop" \
+            --arg python "3.13" \
+            --arg sphinx "~=8.0" \
+            --arg theme "~=3.0" \
+            --arg vnum "99999999" \
+            '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: "current", is_latest_develop: true, vnum: ($vnum | tonumber)}]')
+
+          if [ -n "$LATEST_RELEASE_TAG" ]; then
+            LATEST_VNUM=$(echo "$LATEST_RELEASE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
+            IFS=',' read -r LATEST_PY LATEST_SPHINX LATEST_THEME <<< $(get_versions "$LATEST_VNUM")
+
+            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "$LATEST_RELEASE_TAG" \
+              --arg python "$LATEST_PY" \
+              --arg sphinx "$LATEST_SPHINX" \
+              --arg theme "$LATEST_THEME" \
+              --arg vnum "$LATEST_VNUM" \
+              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: "", is_latest_release: true, vnum: ($vnum | tonumber)}]')
+          fi
+
+          for ARCHIVE_TAG in ${ALL_TAGS_SORTED}; do
+            if [[ "$ARCHIVE_TAG" != "$LATEST_RELEASE_TAG" ]]; then
+              ARCHIVE_VNUM=$(echo "$ARCHIVE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
+              IFS=',' read -r ARCHIVE_PY ARCHIVE_SPHINX ARCHIVE_THEME <<< $(get_versions "$ARCHIVE_VNUM")
+
+              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq --arg tag "$ARCHIVE_TAG" \
+                --arg python "$ARCHIVE_PY" \
+                --arg sphinx "$ARCHIVE_SPHINX" \
+                --arg theme "$ARCHIVE_THEME" \
+                --arg vnum "$ARCHIVE_VNUM" \
+                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: ("archive/" + $tag), vnum: ($vnum | tonumber)}]')
             fi
-            make clean
-          fi
-        done
-        git checkout ${current_commit}
-        git submodule update --init --recursive
+          done
 
-    # Prepare HTML archive for release when a tag is pushed
-    - name: Prepare HTML archive for release
-      if: startsWith(github.ref, 'refs/tags/')
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        TZ: Asia/Tokyo
-      run: |
-        git checkout ${TAG}
-        git submodule update --init --recursive
-        python -m pip install -r requirements.txt --upgrade
-        if [ ! -f ./build.mk ]; then
-          build_procedure=0
-        else
-          build_procedure=$(make build-procedure-version)
-        fi
-        if [ ${build_procedure} -eq 0 ]; then
-          make BASE_URL=/ sphinx_options="-A gtm_id=${GTM_ID}" html
-          mkdir -p freee-a11y-guidelines-${TAG}
-          cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-          fi
-        elif [ ${build_procedure} -eq 1 ]; then
-          make BASE_URL=/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-          mkdir -p freee-a11y-guidelines-${TAG}/en
-          cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
-          if [ -d ./en/build/html ]; then
-            cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
-          fi
-          if [ -d ./data/json/schemas ]; then
-            cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-          fi
-        else
-          echo "Unknown build procedure version: ${build_procedure}"
-          exit 1
-        fi
-        zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
+          echo "matrix=$MATRIX_ITEMS" >> "$GITHUB_OUTPUT"
+          echo "Generated matrix: $(cat "$GITHUB_OUTPUT" | grep 'matrix=' | sed 's/matrix=//')"
 
-    # Create GitHub release when a tag is pushed
-    - name: Create GitHub Release
-      if: startsWith(github.ref, 'refs/tags/')
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        if [ -f ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst ]; then
-          gh release create ${TAG} \
-            --title "Ver. ${TAG}" \
-            --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
-            --draft
-        else
-          gh release create ${TAG} \
-            --title "Ver. ${TAG}" \
-            --notes "Release version ${TAG}" \
-            --draft
-        fi
-        gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
+  build_docs:
+    runs-on: ubuntu-latest
+    needs: get_build_targets
+    strategy:
+      fail-fast: false
+      matrix:
+        build_target: ${{ needs.get_build_targets.outputs.matrix }}
 
-    # Upload artifact for GitHub Pages deployment
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: deploy
+    env:
+      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
+      GTM_ID: ${{ secrets.GTM_ID }}
+      TZ: Asia/Tokyo
 
-  deploy:
+    steps:
+      - name: Extract Build Target Info
+        run: |
+          echo "CURRENT_TAG=${{ matrix.build_target.tag }}" >> $GITHUB_ENV
+          echo "PYTHON_VER=${{ matrix.build_target.python }}" >> $GITHUB_ENV
+          echo "SPHINX_VER=${{ matrix.build_target.sphinx }}" >> $GITHUB_ENV
+          echo "THEME_VER=${{ matrix.build_target.theme }}" >> $GITHUB_ENV
+          echo "DEPLOY_PATH=${{ matrix.build_target.deploy_path }}" >> $GITHUB_ENV
+          echo "IS_LATEST_RELEASE=${{ matrix.build_target.is_latest_release || 'false' }}" >> $GITHUB_ENV
+          echo "IS_LATEST_DEVELOP=${{ matrix.build_target.is_latest_develop || 'false' }}" >> $GITHUB_ENV
+          echo "CURRENT_TAG_VNUM=${{ matrix.build_target.vnum }}" >> $GITHUB_ENV
+
+      - name: Set BASE_URL for build_target
+        run: |
+          BASE_URL_PREFIX=""
+          if [ -n "$CUSTOM_DOMAIN" ]; then
+            BASE_URL_PREFIX="https://${CUSTOM_DOMAIN}/"
+          else
+            BASE_URL_PREFIX="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          fi
+
+          FINAL_BASE_URL=""
+          if [ -n "$DEPLOY_PATH" ]; then
+            FINAL_BASE_URL="${BASE_URL_PREFIX}${DEPLOY_PATH}/"
+          else
+            FINAL_BASE_URL="${BASE_URL_PREFIX}"
+          fi
+          echo "BASE_URL=${FINAL_BASE_URL}" >> $GITHUB_ENV
+          echo "Using BASE_URL: ${FINAL_BASE_URL}"
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.CURRENT_TAG == 'develop' && 'develop' || env.CURRENT_TAG }}
+          fetch-depth: 0
+          submodules: true
+      - name: Clean working directory
+        run: |
+          git clean -dfx
+          echo "Cleaned working directory"
+
+      - name: Set up Python ${{ env.PYTHON_VER }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VER }}
+
+      - name: Install ja_JP.UTF-8 locale
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen ja_JP.UTF-8
+          sudo update-locale LANG=ja_JP.UTF-8
+
+      - name: Conditionally remove docutils-ast-writer
+        if: ${{ env.CURRENT_TAG_VNUM <= 202230300 }}
+        run: |
+          REQUIREMENTS_FILE="requirements.txt"
+          if [ -f "$REQUIREMENTS_FILE" ]; then
+            echo "Checking $REQUIREMENTS_FILE for docutils-ast-writer..."
+            sed -i '/^docutils-ast-writer/d' "$REQUIREMENTS_FILE"
+            echo "'docutils-ast-writer' removed from $REQUIREMENTS_FILE for tag ${{ env.CURRENT_TAG }}"
+          else
+            echo "$REQUIREMENTS_FILE not found, skipping modification."
+          fi
+        working-directory: ${{ github.workspace }}
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+          pip install "sphinx${{ env.SPHINX_VER }}" "sphinx_rtd_theme${{ env.THEME_VER }}"
+        working-directory: ${{ github.workspace }}
+
+      - name: Build documentation for ${{ env.CURRENT_TAG }}
+        run: |
+          if [ ! -f ./build.mk ]; then
+            BUILD_PROCEDURE=0
+          else
+            BUILD_PROCEDURE=$(make build-procedure-version)
+          fi
+
+          BASE_URL_ARG="-D html_baseurl=${BASE_URL}"
+          EXTRA_SPHINX_OPTIONS=""
+          if ${{ env.IS_LATEST_DEVELOP == 'true' }}; then
+            EXTRA_SPHINX_OPTIONS="-t current"
+          fi
+
+          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
+            make sphinx_options="-A gtm_id=${GTM_ID} ${BASE_URL_ARG} ${EXTRA_SPHINX_OPTIONS}" clean html
+            mkdir -p ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}
+            cp -r ./build/html/* ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
+            fi
+          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
+            make ${BASE_URL_ARG} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
+            mkdir -p ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/en
+            cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
+            if [ -d ./en/build/html ]; then
+              cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/en
+            fi
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/deploy_temp/${DEPLOY_PATH}/
+            fi
+          else
+            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
+            exit 1
+          fi
+          make clean
+        working-directory: ${{ github.workspace }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.DEPLOY_PATH || 'root' }}
+          path: ${{ GITHUB_WORKSPACE }}/deploy_temp/${{ env.DEPLOY_PATH }}
+
+  deploy_pages:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: build_docs
     steps:
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ GITHUB_WORKSPACE }}/_site_temp
+
+      - name: Prepare final deployment directory
+        run: |
+          mkdir -p ${{ GITHUB_WORKSPACE }}/_site_final
+          for DIR in ${{ GITHUB_WORKSPACE }}/_site_temp/*; do
+            if [ -d "$DIR" ]; then
+              if [ "$(basename "$DIR")" == "root" ]; then
+                cp -r "$DIR"/* ${{ GITHUB_WORKSPACE }}/_site_final/
+              else
+                cp -r "$DIR"/* ${{ GITHUB_WORKSPACE }}/_site_final/"$(basename "$DIR")"/
+              fi
+            fi
+          done
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ GITHUB_WORKSPACE }}/_site_final
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  create_release:
+    runs-on: ubuntu-latest
+    needs: get_build_targets
+    if: |
+      startsWith(github.ref, 'refs/tags/') &&
+      needs.get_build_targets.outputs.matrix
+
+    steps:
+      - name: Extract Tag Name
+        run: |
+          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Checkout repository for release build
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          submodules: true
+
+      - name: Clean working directory for release build
+        run: |
+          git clean -dfx
+          echo "Cleaned working directory for release build"
+
+      - name: Set up Python (for release build)
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install Python dependencies for release build
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+
+      - name: Prepare HTML archive for release
+        env:
+          TZ: Asia/Tokyo
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [ ! -f ./build.mk ]; then
+            BUILD_PROCEDURE=0
+          else
+            BUILD_PROCEDURE=$(make build-procedure-version)
+          fi
+
+          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
+            make sphinx_options="-D html_baseurl=/ " html
+            mkdir -p freee-a11y-guidelines-${TAG}
+            cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
+            fi
+          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
+            make BASE_URL=/ sphinx_options="" clean html
+            mkdir -p freee-a11y-guidelines-${TAG}/en
+            cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
+            if [ -d ./en/build/html ]; then
+              cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
+            fi
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
+            fi
+          else
+            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
+            exit 1
+          fi
+          zip -r freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
+
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          RELEASE_NOTES_FILE="./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
+          if [ -f "$RELEASE_NOTES_FILE" ]; then
+            gh release create ${TAG} \
+              --title "Ver. ${TAG}" \
+              --notes-file "$RELEASE_NOTES_FILE" \
+              --draft
+          else
+            gh release create ${TAG} \
+              --title "Ver. ${TAG}" \
+              --notes "Release version ${TAG}" \
+              --draft
+          fi
+          gh release upload ${TAG} freee-a11y-guidelines-${TAG}-html.zip
