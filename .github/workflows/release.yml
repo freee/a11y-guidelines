@@ -178,6 +178,8 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Build documentation for ${{ env.CURRENT_TAG }}
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
           if [ ! -f ./build.mk ]; then
             BUILD_PROCEDURE=0
@@ -237,6 +239,8 @@ jobs:
           path: ${{ github.workspace }}/_site_temp
 
       - name: Prepare final deployment directory
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
           mkdir -p ${{ GITHUB_WORKSPACE }}/_site_final
           for DIR in ${{ GITHUB_WORKSPACE }}/_site_temp/*; do
