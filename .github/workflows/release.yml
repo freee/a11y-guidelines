@@ -344,18 +344,6 @@ jobs:
           git clean -dfx
           echo "Cleaned working directory"
 
-      - name: Verify Makefile content byte by byte
-        run: |
-          echo "--- Makefile content (hex dump) ---"
-          # Makefile の全バイトを16進数とASCII文字でダンプ
-          # タブは 09、スペースは 20 と表示されます
-          od -xc Makefile > makefile_dump.txt
-          cat makefile_dump.txt
-          echo "--- build.mk content (hex dump) ---"
-          od -xc build.mk > buildmk_dump.txt
-          cat buildmk_dump.txt
-        working-directory: ${{ github.workspace }}
-
       - name: Set up Python ${{ env.PYTHON_VER }}
         if: steps.check_reuse.outputs.can_reuse != 'true'
         uses: actions/setup-python@v5
@@ -400,7 +388,7 @@ jobs:
           if [ ! -f ./build.mk ]; then
             BUILD_PROCEDURE=0
           else
-            BUILD_PROCEDURE=$(make build-procedure-version)
+            BUILD_PROCEDURE=$(make -d build-procedure-version)
           fi
 
           EXTRA_SPHINX_OPTIONS=""
