@@ -332,6 +332,12 @@ jobs:
           fetch-depth: 0
           submodules: true
 
+      - name: Update submodules
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        run: |
+          git submodule update --init --recursive
+        working-directory: ${{ github.workspace }}
+
       - name: Clean working directory
         if: steps.check_reuse.outputs.can_reuse != 'true'
         run: |
