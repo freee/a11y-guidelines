@@ -385,7 +385,7 @@ jobs:
           fi
 
           EXTRA_SPHINX_OPTIONS=""
-          if ${{ env.IS_LATEST_DEVELOP == 'true' }}; then
+          if [ "${{ env.IS_LATEST_DEVELOP }}" == "true" ]; then
             EXTRA_SPHINX_OPTIONS="-t current"
           fi
 
@@ -400,7 +400,7 @@ jobs:
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=${BASE_URL}  sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" html
+            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" html
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             if [ -d ./en/build/html ]; then
               mkdir -p "${BUILD_OUTPUT_DIR}/en"
