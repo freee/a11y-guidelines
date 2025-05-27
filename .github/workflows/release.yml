@@ -384,6 +384,7 @@ jobs:
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
+          set -x
           if [ ! -f ./build.mk ]; then
             BUILD_PROCEDURE=0
           else
