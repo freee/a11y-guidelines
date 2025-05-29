@@ -324,6 +324,11 @@ jobs:
           echo "Build settings validated and compatible"
 
       # 以下のステップは、アーティファクトを再利用しない場合のみ実行
+      - name: Configure Git for LF line endings
+        run: |
+          git config --global core.autocrlf input
+          git config --global core.eol lf
+
       - name: Checkout repository
         if: steps.check_reuse.outputs.can_reuse != 'true'
         uses: actions/checkout@v4
