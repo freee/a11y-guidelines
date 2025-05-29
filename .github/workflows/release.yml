@@ -77,7 +77,7 @@ jobs:
             local SPHINX_VER=""
             local THEME_VER=""
 
-            if (( VNUM <= 202230300 )); then
+            if (( VNUM <= 20230300 )); then
               PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
             else
               PY_VER="3.13"; SPHINX_VER="~=8.0"; THEME_VER="~=3.0"
