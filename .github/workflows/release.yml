@@ -394,24 +394,24 @@ jobs:
           echo "Git status: $(git status --porcelain | wc -l) modified files"
           
           check_makefile() {
-            local file ="$1"
+            local target_file="$1"
             echo "=== makefile Analysis ==="
-            echo "$file found - analyzing..."
+            echo "$target_file found - analyzing..."
             
             # File information
             echo "File info:"
-            ls -la $file
-            file $file
+            ls -la $target_file
+            file $target_file
             
             # Check encoding and line endings
             echo "Line ending check:"
             if command -v dos2unix >/dev/null 2>&1; then
-              dos2unix -ih $file 2>/dev/null || echo "dos2unix not available or no conversion needed"
+              dos2unix -ih $target_file 2>/dev/null || echo "dos2unix not available or no conversion needed"
             fi
             
             # Show first few lines with visible control characters
             echo "First 5 lines with control characters:"
-            head -5 $file | cat -A
+            head -5 $target_file | cat -A
 
             # Additional diagnostics
             echo "=== Additional Diagnostics ==="
@@ -438,7 +438,6 @@ jobs:
                 echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
               fi
             fi
-              
           }
 
           check_makefile "Makefile"
