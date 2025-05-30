@@ -325,6 +325,7 @@ jobs:
 
       # 以下のステップは、アーティファクトを再利用しない場合のみ実行
       - name: Configure Git for LF line endings
+        if: steps.check_reuse.outputs.can_reuse != 'true'
         run: |
           git config --global core.autocrlf input
           git config --global core.eol lf
@@ -383,65 +384,142 @@ jobs:
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
-          # Debug information for makefile issues
-          echo "=== Debug Information ==="
+          echo "=== Environment Information ==="
           echo "Current tag: ${CURRENT_TAG}"
           echo "Working directory: $(pwd)"
+          echo "User: $(whoami)"
+          echo "Shell: $0"
+          echo "Make version: $(make --version | head -1)"
+          echo "OS: $(uname -a)"
+          echo "Git status: $(git status --porcelain | wc -l) modified files"
           
           if [ ! -f ./build.mk ]; then
             BUILD_PROCEDURE=0
             echo "build.mk not found - using BUILD_PROCEDURE=0"
           else
-            echo "build.mk found - checking format..."
+            echo "=== Makefile Analysis ==="
+            echo "build.mk found - analyzing..."
             
-            # Check for tab characters and file format
-            echo "First 10 lines of build.mk (with special chars visible):"
-            sed -n '1,10l' build.mk
-            
-            echo "File type information:"
+            # File information
+            echo "File info:"
+            ls -la build.mk
             file build.mk
             
-            # Try to get build procedure version with error handling
-            echo "Attempting to get build-procedure-version..."
-            if BUILD_PROCEDURE=$(make build-procedure-version 2>&1); then
-              echo "BUILD_PROCEDURE=$BUILD_PROCEDURE"
+            # Check encoding and line endings
+            echo "Line ending check:"
+            if command -v dos2unix >/dev/null 2>&1; then
+              dos2unix -ih build.mk 2>/dev/null || echo "dos2unix not available or no conversion needed"
+            fi
+            
+            # Show first few lines with visible control characters
+            echo "First 5 lines with control characters:"
+            head -5 build.mk | cat -A
+            
+            # Check if build-procedure-version target exists
+            echo "=== Target Analysis ==="
+            if grep -q "build-procedure-version" build.mk; then
+              echo "build-procedure-version target found"
+              echo "Target definition:"
+              grep -A3 -B1 "build-procedure-version" build.mk
+              
+              # Check the rule format (tabs vs spaces)
+              echo "Rule format check:"
+              grep -A5 "build-procedure-version:" build.mk | sed -n '2,6p' | od -c
             else
-              echo "ERROR: Failed to get build-procedure-version:"
-              echo "$BUILD_PROCEDURE"
+              echo "ERROR: build-procedure-version target not found"
+              echo "Available targets:"
+              grep "^[a-zA-Z][^:]*:" build.mk | head -10
+            fi
+            
+            # Try make with different options
+            echo "=== Make Execution Test ==="
+            echo "Testing make with various options..."
+            
+            # Test 1: Simple target list
+            echo "Available make targets:"
+            make -qp 2>/dev/null | grep "^[a-zA-Z][^:]*:" | head -10 || echo "Failed to list targets"
+            
+            # Test 2: Dry run
+            echo "Dry run test:"
+            if make -n build-procedure-version 2>&1; then
+              echo "Dry run successful"
+            else
+              echo "Dry run failed"
+            fi
+            
+            # Test 3: Actual execution with error capture
+            echo "Attempting to execute build-procedure-version..."
+            if BUILD_PROCEDURE_OUTPUT=$(make build-procedure-version 2>&1); then
+              BUILD_PROCEDURE="$BUILD_PROCEDURE_OUTPUT"
+              echo "SUCCESS: BUILD_PROCEDURE=$BUILD_PROCEDURE"
+            else
+              echo "FAILED: make build-procedure-version error output:"
+              echo "$BUILD_PROCEDURE_OUTPUT"
               
-              # Show the build-procedure-version target
-              echo "=== build-procedure-version target definition ==="
-              grep -A10 -B5 "build-procedure-version" build.mk || echo "Target not found in build.mk"
+              # Additional diagnostics
+              echo "=== Additional Diagnostics ==="
               
-              # Show makefile syntax around the problematic area
-              echo "=== Checking for tab/space issues ==="
-              grep -n "^[[:space:]]*[^[:space:]].*:" build.mk | head -10
+              # Check for common makefile issues
+              echo "Checking for common issues:"
               
-              # Fallback to procedure 1
-              BUILD_PROCEDURE=1
-              echo "Using fallback BUILD_PROCEDURE=1"
+              # Check for mixed tabs/spaces
+              if grep -P '^\t' build.mk >/dev/null && grep -P '^        ' build.mk >/dev/null; then
+                echo "WARNING: Mixed tabs and spaces detected"
+              fi
+              
+              # Check for Windows line endings
+              if grep -l $'\r' build.mk >/dev/null 2>&1; then
+                echo "WARNING: Windows line endings (CR) detected"
+                # Try to fix it
+                echo "Attempting to fix line endings..."
+                sed -i 's/\r$//' build.mk
+                echo "Line endings fixed, retrying..."
+                if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
+                  BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
+                  echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
+                else
+                  echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
+                fi
+              fi
+              
+              # If still failed, use fallback
+              if [ -z "$BUILD_PROCEDURE" ] || ! [[ "$BUILD_PROCEDURE" =~ ^[0-9]+$ ]]; then
+                echo "Using fallback BUILD_PROCEDURE=1"
+                BUILD_PROCEDURE=1
+              fi
             fi
           fi
 
-          BASE_URL_ARG="-D html_baseurl=${BASE_URL}"
+          # Validate BUILD_PROCEDURE
+          case "$BUILD_PROCEDURE" in
+            0|1) echo "Valid BUILD_PROCEDURE: $BUILD_PROCEDURE" ;;
+            *) echo "Invalid BUILD_PROCEDURE: $BUILD_PROCEDURE, using fallback 1"; BUILD_PROCEDURE=1 ;;
+          esac
+
+          # Set up build options
           EXTRA_SPHINX_OPTIONS=""
           if [ "${{ env.IS_LATEST_DEVELOP }}" == "true" ]; then
             EXTRA_SPHINX_OPTIONS="-t current"
           fi
 
-          # Create the build output directory with proper structure
+          # Create the build output directory
           BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
           mkdir -p "${BUILD_OUTPUT_DIR}"
+          
+          echo "=== Build Execution ==="
+          echo "Build procedure: $BUILD_PROCEDURE"
+          echo "Base URL: $BASE_URL"
+          echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
 
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            echo "Using BUILD_PROCEDURE=0"
-            make sphinx_options="-A gtm_id=${GTM_ID} ${BASE_URL_ARG} ${EXTRA_SPHINX_OPTIONS}" clean html
+            echo "Executing BUILD_PROCEDURE=0 (single language)"
+            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            echo "Using BUILD_PROCEDURE=1"
+            echo "Executing BUILD_PROCEDURE=1 (multi-language)"
             make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             if [ -d ./en/build/html ]; then
@@ -452,15 +530,14 @@ jobs:
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           else
-            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
+            echo "ERROR: Unexpected BUILD_PROCEDURE value: ${BUILD_PROCEDURE}"
             exit 1
           fi
-          make clean
 
-          # Create metadata files for deployment and build settings
+          # Create metadata files
           echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
           echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
-          echo "Build completed for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
+          echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
         working-directory: ${{ github.workspace }}
 
       - name: Upload build artifact
