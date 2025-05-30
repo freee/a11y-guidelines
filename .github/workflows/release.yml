@@ -393,42 +393,75 @@ jobs:
           echo "OS: $(uname -a)"
           echo "Git status: $(git status --porcelain | wc -l) modified files"
           
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
-            echo "build.mk not found - using BUILD_PROCEDURE=0"
-          else
-            echo "=== Makefile Analysis ==="
-            echo "build.mk found - analyzing..."
+          check_makefile() {
+            local file ="$1"
+            echo "=== makefile Analysis ==="
+            echo "$file found - analyzing..."
             
             # File information
             echo "File info:"
-            ls -la build.mk
-            file build.mk
+            ls -la $file
+            file $file
             
             # Check encoding and line endings
             echo "Line ending check:"
             if command -v dos2unix >/dev/null 2>&1; then
-              dos2unix -ih build.mk 2>/dev/null || echo "dos2unix not available or no conversion needed"
+              dos2unix -ih $file 2>/dev/null || echo "dos2unix not available or no conversion needed"
             fi
             
             # Show first few lines with visible control characters
             echo "First 5 lines with control characters:"
-            head -5 build.mk | cat -A
+            head -5 $file | cat -A
+
+            # Additional diagnostics
+            echo "=== Additional Diagnostics ==="
             
+            # Check for common makefile issues
+            echo "Checking for common issues:"
+            
+            # Check for mixed tabs/spaces
+            if grep -P '^\t' build.mk >/dev/null && grep -P '^        ' build.mk >/dev/null; then
+              echo "WARNING: Mixed tabs and spaces detected"
+            fi
+            
+            # Check for Windows line endings
+            if grep -l $'\r' build.mk >/dev/null 2>&1; then
+              echo "WARNING: Windows line endings (CR) detected"
+              # Try to fix it
+              echo "Attempting to fix line endings..."
+              sed -i 's/\r$//' build.mk
+              echo "Line endings fixed, retrying..."
+              if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
+                BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
+                echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
+              else
+                echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
+              fi
+            fi
+              
+          }
+
+          check_makefile "Makefile"
+          if [ ! -f ./build.mk ]; then
+            BUILD_PROCEDURE=0
+            echo "build.mk not found - using BUILD_PROCEDURE=0"
+          else
+            check_makefile "build.mk"
+
             # Check if build-procedure-version target exists
             echo "=== Target Analysis ==="
-            if grep -q "build-procedure-version" build.mk; then
+            if grep -q "build-procedure-version" Makefile; then
               echo "build-procedure-version target found"
               echo "Target definition:"
-              grep -A3 -B1 "build-procedure-version" build.mk
+              grep -A3 -B1 "build-procedure-version" Makefile
               
               # Check the rule format (tabs vs spaces)
               echo "Rule format check:"
-              grep -A5 "build-procedure-version:" build.mk | sed -n '2,6p' | od -c
+              grep -A5 "build-procedure-version:" Makefile | sed -n '2,6p' | od -c
             else
               echo "ERROR: build-procedure-version target not found"
               echo "Available targets:"
-              grep "^[a-zA-Z][^:]*:" build.mk | head -10
+              grep "^[a-zA-Z][^:]*:" Makefile | head -10
             fi
             
             # Try make with different options
@@ -455,32 +488,6 @@ jobs:
             else
               echo "FAILED: make build-procedure-version error output:"
               echo "$BUILD_PROCEDURE_OUTPUT"
-              
-              # Additional diagnostics
-              echo "=== Additional Diagnostics ==="
-              
-              # Check for common makefile issues
-              echo "Checking for common issues:"
-              
-              # Check for mixed tabs/spaces
-              if grep -P '^\t' build.mk >/dev/null && grep -P '^        ' build.mk >/dev/null; then
-                echo "WARNING: Mixed tabs and spaces detected"
-              fi
-              
-              # Check for Windows line endings
-              if grep -l $'\r' build.mk >/dev/null 2>&1; then
-                echo "WARNING: Windows line endings (CR) detected"
-                # Try to fix it
-                echo "Attempting to fix line endings..."
-                sed -i 's/\r$//' build.mk
-                echo "Line endings fixed, retrying..."
-                if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
-                  BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
-                  echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-                else
-                  echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
-                fi
-              fi
               
               # If still failed, use fallback
               if [ -z "$BUILD_PROCEDURE" ] || ! [[ "$BUILD_PROCEDURE" =~ ^[0-9]+$ ]]; then
