@@ -420,16 +420,16 @@ jobs:
             echo "Checking for common issues:"
             
             # Check for mixed tabs/spaces
-            if grep -P '^\t' build.mk >/dev/null && grep -P '^        ' build.mk >/dev/null; then
+            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' build.mk >/dev/null; then
               echo "WARNING: Mixed tabs and spaces detected"
             fi
             
             # Check for Windows line endings
-            if grep -l $'\r' build.mk >/dev/null 2>&1; then
+            if grep -l $'\r' $target_file >/dev/null 2>&1; then
               echo "WARNING: Windows line endings (CR) detected"
               # Try to fix it
               echo "Attempting to fix line endings..."
-              sed -i 's/\r$//' build.mk
+              sed -i 's/\r$//' $target_file
               echo "Line endings fixed, retrying..."
               if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
                 BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
