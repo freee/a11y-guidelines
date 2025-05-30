@@ -1,707 +1,184 @@
-name: Release and Deploy Documentation
+name: Publish HTML
 
 on:
   push:
-    branches:
-      - develop
-    tags:
-      - '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*'
-  workflow_dispatch:
-    inputs:
-      force_rebuild:
-        description: 'Force rebuild all artifacts (ignore cache)'
-        required: false
-        default: false
-        type: boolean
-      target_ref:
-        description: 'Target branch or tag to build (leave empty for current branch)'
-        required: false
-        default: ''
-        type: string
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    tags: [ "*" ]
+    branches: [develop]
 
 jobs:
-  get_build_targets:
+  release:
+    if: github.repository == 'freee/a11y-guidelines' && startsWith(github.ref, 'refs/tags/')
+
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.generate_matrix.outputs.matrix }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.target_ref || github.ref }}
-          fetch-depth: 0
+    - name: Extract Branch/Tag Names
+      run: |
+        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Generate build matrix
-        id: generate_matrix
-        env:
-          IS_TAG_PUSH: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
-          GITHUB_REFNAME: ${{ github.ref_name }}
-          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
-          TARGET_REF: ${{ inputs.target_ref || '' }}
-        run: |
-          ALL_TAGS_SORTED=$(git tag -l '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*' | sort -rV)
-          MATRIX_ITEMS="[]"
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        submodules: true
 
-          CURRENT_PUSHED_TAG=""
-          if [[ "${IS_TAG_PUSH}" == "true" ]]; then
-            CURRENT_PUSHED_TAG="$(echo ${GITHUB_REFNAME} | sed s/refs\/tags\///)"
-          fi
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9.x'
 
-          # Handle manual workflow dispatch with target_ref
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "$TARGET_REF" ]; then
-            echo "Manual dispatch with target ref: $TARGET_REF"
-            if git tag -l | grep -q "^${TARGET_REF}$"; then
-              echo "Target ref is a tag: $TARGET_REF"
-              CURRENT_PUSHED_TAG="$TARGET_REF"
-            elif [ "$TARGET_REF" == "develop" ]; then
-              echo "Target ref is develop branch"
-            else
-              echo "Warning: Target ref '$TARGET_REF' is not a recognized tag or develop branch"
-            fi
-          fi
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
 
-          LATEST_RELEASE_TAG=$(echo "$ALL_TAGS_SORTED" | head -n1)
+    - name: install ja_JP.UTF-8 locale
+      run: |
+        sudo locale-gen ja_JP.UTF-8
+        sudo update-locale LANG=ja_JP.UTF-8
 
-          get_versions() {
-            local VNUM=$1
-            local PY_VER=""
-            local SPHINX_VER=""
-            local THEME_VER=""
+    - name: Install the Latest pip
+      run: python -m pip install --upgrade pip
 
-            if (( VNUM <= 20230300 )); then
-              PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
-            else
-              PY_VER="3.13"; SPHINX_VER="~=8.0"; THEME_VER="~=3.0"
-            fi
-            echo "$PY_VER,$SPHINX_VER,$THEME_VER"
-          }
+    - name: Install required modules
+      run: python -m pip install -r requirements.txt --upgrade
 
-          # Generate safe artifact names by replacing problematic characters
-          generate_artifact_name() {
-            local tag=$1
-            local deploy_path=$2
-            if [ "$tag" == "develop" ]; then
-              echo "build-current"
-            elif [ -z "$deploy_path" ]; then
-              echo "build-root"
-            else
-              # Replace / with - for artifact names
-              echo "build-$(echo "$deploy_path" | sed 's/\//-/g')"
-            fi
-          }
+    - name: Prepare file upload directory with the archive directory
+      run: |
+        mkdir -p ${GITHUB_WORKSPACE}/upload/archive
+        mkdir -p ${GITHUB_WORKSPACE}/upload/en
 
-          # Add develop build
-          DEVELOP_ARTIFACT_NAME=$(generate_artifact_name "develop" "current")
-          MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "develop" \
-            --arg python "3.13" \
-            --arg sphinx "~=8.0" \
-            --arg theme "~=3.0" \
-            --arg vnum "99999999" \
-            --arg deploy_path "current" \
-            --arg artifact_name "$DEVELOP_ARTIFACT_NAME" \
-            '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, is_latest_develop: true, vnum: ($vnum | tonumber)}]')
+    - name: Download the existing archive files from S3
+      env:
+        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
 
-          # Add latest release build
-          if [ -n "$LATEST_RELEASE_TAG" ]; then
-            LATEST_VNUM=$(echo "$LATEST_RELEASE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
-            IFS=',' read -r LATEST_PY LATEST_SPHINX LATEST_THEME <<< $(get_versions "$LATEST_VNUM")
-            LATEST_ARTIFACT_NAME=$(generate_artifact_name "$LATEST_RELEASE_TAG" "")
+    - name: Build HTML of all releases, with gtag.js, and OGP tags
+      env:
+        GTM_ID: ${{ secrets.GTM_ID }}
+        TZ: Asia/Tokyo
+      run: |
+        make BASE_URL=https://a11y-guidelines.freee.co.jp/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/en
+        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload
+        make BASE_URL=https://a11y-guidelines.freee.co.jp/current/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
+        mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
+        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/current
+        make clean
+        current_commit=$(git rev-parse HEAD)
+        rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
+        for _tag in `git tag` ; do \
+          echo "Processing ${_tag}..." ; \
+          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
+            git checkout ${_tag} ; \
+            git submodule update --init --recursive ; \
+            if [ ! -f ./build.mk ]; then
+              build_procedure=0 ; \
+            else \
+              build_procedure=`make build-procedure-version` ; \
+            fi ; \
+            if [ ${build_procedure} -eq 0 ]; then
+              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=https://a11y-guidelines.freee.co.jp/archive/${_tag}/" html ; \
+              if [ -d ./data/json/schemas ]; then \
+                cp -r ./data/json/schemas ./build/html ; \
+              fi ; \
+              cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            elif [ ${build_procedure} -eq 1 ]; then \
+              make BASE_URL=https://a11y-guidelines.freee.co.jp/archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
+              mkdir -p ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en ; \
+              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+              cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en
+              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
+            else \
+              echo "Unknown build procedure version: ${build_procedure}" ; \
+              exit 1 ; \
+            fi ; \
+            make clean ; \
+            git checkout ${current_commit} ; \
+            git submodule update --init --recursive ; \
+          fi ; \
+        done
 
-            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
-              --arg python "$LATEST_PY" \
-              --arg sphinx "$LATEST_SPHINX" \
-              --arg theme "$LATEST_THEME" \
-              --arg vnum "$LATEST_VNUM" \
-              --arg deploy_path "" \
-              --arg artifact_name "$LATEST_ARTIFACT_NAME" \
-              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
-          fi
+    - name: Publish to S3
+      env:
+        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/ s3://${AWS_BUCKET}/ --quiet
 
-          # Add archive builds
-          for ARCHIVE_TAG in ${ALL_TAGS_SORTED}; do
-            if [[ "$ARCHIVE_TAG" != "$LATEST_RELEASE_TAG" ]]; then
-              ARCHIVE_VNUM=$(echo "$ARCHIVE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
-              IFS=',' read -r ARCHIVE_PY ARCHIVE_SPHINX ARCHIVE_THEME <<< $(get_versions "$ARCHIVE_VNUM")
-              ARCHIVE_DEPLOY_PATH="archive/${ARCHIVE_TAG}"
-              ARCHIVE_ARTIFACT_NAME=$(generate_artifact_name "$ARCHIVE_TAG" "$ARCHIVE_DEPLOY_PATH")
+    - name: Prepare the HTML Archive
+      env:
+        TZ: Asia/Tokyo
+      run: |
+        make BASE_URL=/ clean html
+        mv ./ja/build/html ./freee-a11y-guidelines-${TAG}
+        cp -r ./data/json/schemas ./freee-a11y-guidelines-${TAG}
+        cp -r ./en/build/html ./freee-a11y-guidelines-${TAG}/en
+        zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
-              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$ARCHIVE_TAG" \
-                --arg python "$ARCHIVE_PY" \
-                --arg sphinx "$ARCHIVE_SPHINX" \
-                --arg theme "$ARCHIVE_THEME" \
-                --arg vnum "$ARCHIVE_VNUM" \
-                --arg deploy_path "$ARCHIVE_DEPLOY_PATH" \
-                --arg artifact_name "$ARCHIVE_ARTIFACT_NAME" \
-                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, vnum: ($vnum | tonumber)}]')
-            fi
-          done
+    - name: Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release create ${TAG} \
+          --title "Ver. ${TAG}" \
+          --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
+          --draft
+        gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
 
-          echo "matrix=$MATRIX_ITEMS" >> "$GITHUB_OUTPUT"
-          echo "Generated matrix with $(echo "$MATRIX_ITEMS" | jq length) items"
-          echo "Force rebuild: $FORCE_REBUILD"
+  current:
+    if: github.repository == 'freee/a11y-guidelines' && github.ref == 'refs/heads/develop'
 
-  check_existing_artifacts:
     runs-on: ubuntu-latest
-    needs: get_build_targets
-    outputs:
-      reusable_artifacts: ${{ steps.check_artifacts.outputs.reusable_artifacts }}
-    steps:
-      - name: Check for existing artifacts
-        id: check_artifacts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MATRIX: ${{ needs.get_build_targets.outputs.matrix }}
-          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
-        run: |
-          echo "Checking for reusable artifacts..."
-          echo "Force rebuild mode: $FORCE_REBUILD"
-          
-          REUSABLE_ARTIFACTS="[]"
-          
-          # 強制再ビルドが指定されている場合は、アーティファクト検索をスキップ
-          if [ "$FORCE_REBUILD" == "true" ]; then
-            echo "Force rebuild enabled - skipping artifact search"
-          else
-            echo "Normal mode - searching for reusable artifacts"
-            
-            # 最新の成功したワークフロー実行を取得
-            RECENT_RUNS=$(gh run list \
-              --repo ${{ github.repository }} \
-              --workflow release.yml \
-              --status success \
-              --limit 5 \
-              --json databaseId,headSha,createdAt)
-            
-            # 各ビルドターゲットについて、既存のアーティファクトをチェック
-            echo "$MATRIX" | jq -c '.[]' | while read -r target; do
-              TAG=$(echo "$target" | jq -r '.tag')
-              ARTIFACT_NAME=$(echo "$target" | jq -r '.artifact_name')
-              
-              # タグ（develop以外）の場合、過去のアーティファクトを探す
-              if [ "$TAG" != "develop" ]; then
-                echo "Checking for existing artifact: $ARTIFACT_NAME for tag: $TAG"
-                
-                # 過去5回の実行からアーティファクトを検索
-                echo "$RECENT_RUNS" | jq -c '.[]' | while read -r run; do
-                  RUN_ID=$(echo "$run" | jq -r '.databaseId')
-                  
-                  # アーティファクトの存在をチェック
-                  if gh run view $RUN_ID --json artifacts --jq ".artifacts[] | select(.name == \"$ARTIFACT_NAME\") | .name" | grep -q "$ARTIFACT_NAME"; then
-                    echo "Found reusable artifact: $ARTIFACT_NAME in run: $RUN_ID"
-                    
-                    # 再利用可能なアーティファクトリストに追加
-                    REUSABLE_ARTIFACTS=$(echo "$REUSABLE_ARTIFACTS" | jq -c --arg name "$ARTIFACT_NAME" --arg runId "$RUN_ID" '. + [{name: $name, runId: $runId}]')
-                    break
-                  fi
-                done
-              fi
-            done
-          fi
-          
-          echo "reusable_artifacts=$REUSABLE_ARTIFACTS" >> $GITHUB_OUTPUT
-          echo "Found $(echo "$REUSABLE_ARTIFACTS" | jq length) reusable artifacts"
-
-  build_docs:
-    runs-on: ubuntu-latest
-    needs: [get_build_targets, check_existing_artifacts]
-    strategy:
-      fail-fast: false
-      matrix:
-        build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
-
-    env:
-      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
-      GTM_ID: ${{ secrets.GTM_ID }}
-      TZ: Asia/Tokyo
 
     steps:
-      - name: Extract Build Target Info
-        run: |
-          echo "CURRENT_TAG=${{ matrix.build_target.tag }}" >> $GITHUB_ENV
-          echo "PYTHON_VER=${{ matrix.build_target.python }}" >> $GITHUB_ENV
-          echo "SPHINX_VER=${{ matrix.build_target.sphinx }}" >> $GITHUB_ENV
-          echo "THEME_VER=${{ matrix.build_target.theme }}" >> $GITHUB_ENV
-          echo "DEPLOY_PATH=${{ matrix.build_target.deploy_path }}" >> $GITHUB_ENV
-          echo "ARTIFACT_NAME=${{ matrix.build_target.artifact_name }}" >> $GITHUB_ENV
-          echo "IS_LATEST_RELEASE=${{ matrix.build_target.is_latest_release || 'false' }}" >> $GITHUB_ENV
-          echo "IS_LATEST_DEVELOP=${{ matrix.build_target.is_latest_develop || 'false' }}" >> $GITHUB_ENV
-          echo "CURRENT_TAG_VNUM=${{ matrix.build_target.vnum }}" >> $GITHUB_ENV
+    - name: Extract Branch/Tag Names
+      run: |
+        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Set BASE_URL for build_target
-        run: |
-          BASE_URL_PREFIX=""
-          if [ -n "$CUSTOM_DOMAIN" ]; then
-            BASE_URL_PREFIX="https://${CUSTOM_DOMAIN}/"
-          else
-            BASE_URL_PREFIX="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-          fi
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
 
-          FINAL_BASE_URL=""
-          if [ -n "$DEPLOY_PATH" ]; then
-            FINAL_BASE_URL="${BASE_URL_PREFIX}${DEPLOY_PATH}/"
-          else
-            FINAL_BASE_URL="${BASE_URL_PREFIX}"
-          fi
-          echo "BASE_URL=${FINAL_BASE_URL}" >> $GITHUB_ENV
-          echo "Using BASE_URL: ${FINAL_BASE_URL}"
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9.x'
 
-      - name: Check if artifact can be reused
-        id: check_reuse
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REUSABLE_ARTIFACTS: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
-          CURRENT_CUSTOM_DOMAIN: ${{ env.CUSTOM_DOMAIN }}
-          IS_LATEST_RELEASE: ${{ env.IS_LATEST_RELEASE }}
-          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
-        run: |
-          CAN_REUSE="false"
-          REUSE_RUN_ID=""
-          
-          # 強制再ビルドが指定されている場合は無条件で再ビルド
-          if [ "$FORCE_REBUILD" == "true" ]; then
-            echo "Force rebuild enabled - will rebuild all artifacts"
-          # developブランチまたは最新リリースは常に再ビルド
-          elif [ "${{ env.CURRENT_TAG }}" == "develop" ]; then
-            echo "Develop branch - always rebuild"
-          elif [ "$IS_LATEST_RELEASE" == "true" ]; then
-            echo "Latest release - always rebuild"
-          else
-            # 再利用可能なアーティファクトをチェック
-            REUSE_INFO=$(echo "$REUSABLE_ARTIFACTS" | jq -r --arg name "${{ env.ARTIFACT_NAME }}" '.[] | select(.name == $name) | .runId')
-            
-            if [ -n "$REUSE_INFO" ]; then
-              # アーティファクトの詳細をダウンロードして設定値をチェック
-              echo "Found potential artifact ${{ env.ARTIFACT_NAME }} from run $REUSE_INFO"
-              echo "Checking build settings compatibility..."
-              
-              # 一時的にアーティファクトをダウンロードして設定値を確認
-              TEMP_DIR=$(mktemp -d)
-              if gh run download $REUSE_INFO --name ${{ env.ARTIFACT_NAME }} --dir "$TEMP_DIR" 2>/dev/null; then
-                STORED_CUSTOM_DOMAIN=""
-                
-                if [ -f "$TEMP_DIR/.build_custom_domain" ]; then
-                  STORED_CUSTOM_DOMAIN=$(cat "$TEMP_DIR/.build_custom_domain")
-                fi
-                
-                echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
-                echo "Current CUSTOM_DOMAIN: '$CURRENT_CUSTOM_DOMAIN'"
-                
-                if [ "$STORED_CUSTOM_DOMAIN" == "$CURRENT_CUSTOM_DOMAIN" ]; then
-                  CAN_REUSE="true"
-                  REUSE_RUN_ID="$REUSE_INFO"
-                  echo "CUSTOM_DOMAIN matches - can reuse artifact"
-                  
-                  # 再利用する場合、アーティファクトを正しい場所に移動
-                  mkdir -p ${{ github.workspace }}/build_output
-                  cp -r "$TEMP_DIR"/* ${{ github.workspace }}/build_output/
-                else
-                  echo "CUSTOM_DOMAIN differs - will rebuild"
-                fi
-                
-                rm -rf "$TEMP_DIR"
-              else
-                echo "Failed to download artifact for inspection"
-              fi
-            fi
-          fi
-          
-          echo "can_reuse=$CAN_REUSE" >> $GITHUB_OUTPUT
-          echo "reuse_run_id=$REUSE_RUN_ID" >> $GITHUB_OUTPUT
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-northeast-1
 
-      - name: Download existing artifact
-        if: steps.check_reuse.outputs.can_reuse == 'true'
-        run: |
-          echo "Reusing existing artifact ${{ env.ARTIFACT_NAME }} from run ${{ steps.check_reuse.outputs.reuse_run_id }}"
-          echo "Build settings validated and compatible"
+    - name: install ja_JP.UTF-8 locale
+      run: |
+        sudo locale-gen ja_JP.UTF-8
+        sudo update-locale LANG=ja_JP.UTF-8
+  
+    - name: Install the Latest pip
+      run: python -m pip install --upgrade pip
 
-      # 以下のステップは、アーティファクトを再利用しない場合のみ実行
-      - name: Configure Git for LF line endings
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          git config --global core.autocrlf input
-          git config --global core.eol lf
+    - name: Install required modules
+      run: python -m pip install -r requirements.txt --upgrade
 
-      - name: Checkout repository
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.target_ref || (env.CURRENT_TAG == 'develop' && 'develop' || env.CURRENT_TAG) }}
-          fetch-depth: 0
-          submodules: true
+    - name: Prepare file upload directory with the archive directory
+      run: mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
 
-      - name: Clean working directory
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          git clean -dfx
-          echo "Cleaned working directory"
+    - name: Build HTML with gtag.js, and OGP tags
+      env:
+        GTM_ID: ${{ secrets.GTM_ID }}
+        BASE_URL: https://a11y-guidelines.freee.co.jp/current/
+        TZ: Asia/Tokyo
+      run: |
+        make sphinx_options="-A gtm_id=${GTM_ID} -t current" clean html
+        cp -r ./data/json/schemas ./ja/build/html
+        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current/
+        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
 
-      - name: Set up Python ${{ env.PYTHON_VER }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VER }}
-
-      - name: Install ja_JP.UTF-8 locale
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y locales
-          sudo locale-gen ja_JP.UTF-8
-          sudo update-locale LANG=ja_JP.UTF-8
-
-      - name: Conditionally remove docutils-ast-writer
-        if: steps.check_reuse.outputs.can_reuse != 'true' && env.CURRENT_TAG_VNUM <= 202230300
-        run: |
-          REQUIREMENTS_FILE="requirements.txt"
-          if [ -f "$REQUIREMENTS_FILE" ]; then
-            echo "Checking $REQUIREMENTS_FILE for docutils-ast-writer..."
-            sed -i '/^docutils-ast-writer/d' "$REQUIREMENTS_FILE"
-            echo "'docutils-ast-writer' removed from $REQUIREMENTS_FILE for tag ${{ env.CURRENT_TAG }}"
-          else
-            echo "$REQUIREMENTS_FILE not found, skipping modification."
-          fi
-        working-directory: ${{ github.workspace }}
-
-      - name: Install Python dependencies
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --upgrade
-          pip install "sphinx${{ env.SPHINX_VER }}" "sphinx_rtd_theme${{ env.THEME_VER }}"
-        working-directory: ${{ github.workspace }}
-
-      - name: Build documentation for ${{ env.CURRENT_TAG }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        env:
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-        run: |
-          echo "=== Environment Information ==="
-          echo "Current tag: ${CURRENT_TAG}"
-          echo "Working directory: $(pwd)"
-          echo "User: $(whoami)"
-          echo "Shell: $0"
-          echo "Make version: $(make --version | head -1)"
-          echo "OS: $(uname -a)"
-          echo "Git status: $(git status --porcelain | wc -l) modified files"
-          
-          check_makefile() {
-            local target_file="$1"
-            echo "=== makefile Analysis ==="
-            echo "$target_file found - analyzing..."
-            
-            # File information
-            echo "File info:"
-            ls -la $target_file
-            file $target_file
-            
-            # Check encoding and line endings
-            echo "Line ending check:"
-            if command -v dos2unix >/dev/null 2>&1; then
-              dos2unix -ih $target_file 2>/dev/null || echo "dos2unix not available or no conversion needed"
-            fi
-            
-            # Show first few lines with visible control characters
-            echo "First 5 lines with control characters:"
-            head -5 $target_file | cat -A
-
-            # Additional diagnostics
-            echo "=== Additional Diagnostics ==="
-            
-            # Check for common makefile issues
-            echo "Checking for common issues:"
-            
-            # Check for mixed tabs/spaces
-            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' build.mk >/dev/null; then
-              echo "WARNING: Mixed tabs and spaces detected"
-            fi
-            
-            # Check for Windows line endings
-            if grep -l $'\r' $target_file >/dev/null 2>&1; then
-              echo "WARNING: Windows line endings (CR) detected"
-              # Try to fix it
-              echo "Attempting to fix line endings..."
-              sed -i 's/\r$//' $target_file
-              echo "Line endings fixed, retrying..."
-              if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
-                BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
-                echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-              else
-                echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
-              fi
-            fi
-          }
-
-          check_makefile "Makefile"
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
-            echo "build.mk not found - using BUILD_PROCEDURE=0"
-          else
-            check_makefile "build.mk"
-
-            # Check if build-procedure-version target exists
-            echo "=== Target Analysis ==="
-            if grep -q "build-procedure-version" Makefile; then
-              echo "build-procedure-version target found"
-              echo "Target definition:"
-              grep -A3 -B1 "build-procedure-version" Makefile
-              
-              # Check the rule format (tabs vs spaces)
-              echo "Rule format check:"
-              grep -A5 "build-procedure-version:" Makefile | sed -n '2,6p' | od -c
-            else
-              echo "ERROR: build-procedure-version target not found"
-              echo "Available targets:"
-              grep "^[a-zA-Z][^:]*:" Makefile | head -10
-            fi
-            
-            # Try make with different options
-            echo "=== Make Execution Test ==="
-            echo "Testing make with various options..."
-            
-            # Test 1: Simple target list
-            echo "Available make targets:"
-            make -qp 2>/dev/null | grep "^[a-zA-Z][^:]*:" | head -10 || echo "Failed to list targets"
-            
-            # Test 2: Dry run
-            echo "Dry run test:"
-            if make -n build-procedure-version 2>&1; then
-              echo "Dry run successful"
-            else
-              echo "Dry run failed"
-            fi
-            
-            # Test 3: Actual execution with error capture
-            echo "Attempting to execute build-procedure-version..."
-            if BUILD_PROCEDURE_OUTPUT=$(make build-procedure-version 2>&1); then
-              BUILD_PROCEDURE="$BUILD_PROCEDURE_OUTPUT"
-              echo "SUCCESS: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-            else
-              echo "FAILED: make build-procedure-version error output:"
-              echo "$BUILD_PROCEDURE_OUTPUT"
-              
-              # If still failed, use fallback
-              if [ -z "$BUILD_PROCEDURE" ] || ! [[ "$BUILD_PROCEDURE" =~ ^[0-9]+$ ]]; then
-                echo "Using fallback BUILD_PROCEDURE=1"
-                BUILD_PROCEDURE=1
-              fi
-            fi
-          fi
-
-          # Validate BUILD_PROCEDURE
-          case "$BUILD_PROCEDURE" in
-            0|1) echo "Valid BUILD_PROCEDURE: $BUILD_PROCEDURE" ;;
-            *) echo "Invalid BUILD_PROCEDURE: $BUILD_PROCEDURE, using fallback 1"; BUILD_PROCEDURE=1 ;;
-          esac
-
-          # Set up build options
-          EXTRA_SPHINX_OPTIONS=""
-          if [ "${{ env.IS_LATEST_DEVELOP }}" == "true" ]; then
-            EXTRA_SPHINX_OPTIONS="-t current"
-          fi
-
-          # Create the build output directory
-          BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
-          mkdir -p "${BUILD_OUTPUT_DIR}"
-          
-          echo "=== Build Execution ==="
-          echo "Build procedure: $BUILD_PROCEDURE"
-          echo "Base URL: $BASE_URL"
-          echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
-
-          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            echo "Executing BUILD_PROCEDURE=0 (single language)"
-            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
-            cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-            fi
-          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            echo "Executing BUILD_PROCEDURE=1 (multi-language)"
-            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
-            cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
-            if [ -d ./en/build/html ]; then
-              mkdir -p "${BUILD_OUTPUT_DIR}/en"
-              cp -r ./en/build/html/* "${BUILD_OUTPUT_DIR}/en/"
-            fi
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-            fi
-          else
-            echo "ERROR: Unexpected BUILD_PROCEDURE value: ${BUILD_PROCEDURE}"
-            exit 1
-          fi
-
-          # Create metadata files
-          echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
-          echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
-          echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
-        working-directory: ${{ github.workspace }}
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ github.workspace }}/build_output
-          retention-days: 1
-
-  deploy_pages:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: [build_docs, get_build_targets]
-    steps:
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Download all build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ github.workspace }}/artifacts
-
-      - name: Prepare final deployment directory
-        env:
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-        run: |
-          mkdir -p "${GITHUB_WORKSPACE}/_site"
-          
-          echo "Processing artifacts..."
-          for artifact_dir in "${GITHUB_WORKSPACE}"/artifacts/*; do
-            if [ -d "$artifact_dir" ]; then
-              artifact_name=$(basename "$artifact_dir")
-              echo "Processing artifact: $artifact_name"
-              
-              # Read deploy path from metadata
-              if [ -f "${artifact_dir}/.deploy_path" ]; then
-                deploy_path=$(cat "${artifact_dir}/.deploy_path")
-                echo "Deploy path: $deploy_path"
-                
-                if [ -z "$deploy_path" ]; then
-                  # Root deployment
-                  echo "Deploying to root"
-                  cp -r "${artifact_dir}"/* "${GITHUB_WORKSPACE}/_site/"
-                else
-                  # Subdirectory deployment
-                  echo "Deploying to subdirectory: $deploy_path"
-                  mkdir -p "${GITHUB_WORKSPACE}/_site/${deploy_path}"
-                  cp -r "${artifact_dir}"/* "${GITHUB_WORKSPACE}/_site/${deploy_path}/"
-                fi
-                
-                # Remove metadata files from final deployment
-                rm -f "${GITHUB_WORKSPACE}/_site/${deploy_path}/.deploy_path" 2>/dev/null || true
-                rm -f "${GITHUB_WORKSPACE}/_site/${deploy_path}/.build_custom_domain" 2>/dev/null || true
-                rm -f "${GITHUB_WORKSPACE}/_site/.deploy_path" 2>/dev/null || true
-                rm -f "${GITHUB_WORKSPACE}/_site/.build_custom_domain" 2>/dev/null || true
-              else
-                echo "Warning: No .deploy_path found for $artifact_name"
-              fi
-            fi
-          done
-          
-          echo "Final site structure:"
-          find "${GITHUB_WORKSPACE}/_site" -type d | head -20
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ${{ github.workspace }}/_site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  create_release:
-    runs-on: ubuntu-latest
-    needs: get_build_targets
-    if: |
-      startsWith(github.ref, 'refs/tags/') &&
-      needs.get_build_targets.outputs.matrix
-
-    steps:
-      - name: Extract Tag Name
-        run: |
-          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
-
-      - name: Checkout repository for release build
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-          submodules: true
-
-      - name: Clean working directory for release build
-        run: |
-          git clean -dfx
-          echo "Cleaned working directory for release build"
-
-      - name: Set up Python (for release build)
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Install Python dependencies for release build
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --upgrade
-
-      - name: Prepare HTML archive for release
-        env:
-          TZ: Asia/Tokyo
-          TAG: ${{ github.ref_name }}
-        run: |
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
-          else
-            BUILD_PROCEDURE=$(make build-procedure-version)
-          fi
-
-          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-D html_baseurl=/ " html
-            mkdir -p freee-a11y-guidelines-${TAG}
-            cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=/ sphinx_options="" clean html
-            mkdir -p freee-a11y-guidelines-${TAG}/en
-            cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./en/build/html ]; then
-              cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
-            fi
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          else
-            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
-            exit 1
-          fi
-          zip -r freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
-
-      - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ github.ref_name }}
-        run: |
-          RELEASE_NOTES_FILE="./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
-          if [ -f "$RELEASE_NOTES_FILE" ]; then
-            gh release create ${TAG} \
-              --title "Ver. ${TAG}" \
-              --notes-file "$RELEASE_NOTES_FILE" \
-              --draft
-          else
-            gh release create ${TAG} \
-              --title "Ver. ${TAG}" \
-              --notes "Release version ${TAG}" \
-              --draft
-          fi
-          gh release upload ${TAG} freee-a11y-guidelines-${TAG}-html.zip
+    - name: Publish to S3
+      env:
+        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/current/ s3://${AWS_BUCKET}/current/ --quiet
