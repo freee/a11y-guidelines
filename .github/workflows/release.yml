@@ -420,7 +420,7 @@ jobs:
             echo "Checking for common issues:"
             
             # Check for mixed tabs/spaces
-            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' build.mk >/dev/null; then
+            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' $target_file >/dev/null; then
               echo "WARNING: Mixed tabs and spaces detected"
             fi
             
