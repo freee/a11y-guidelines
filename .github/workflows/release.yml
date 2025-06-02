@@ -324,12 +324,6 @@ jobs:
           echo "Build settings validated and compatible"
 
       # 以下のステップは、アーティファクトを再利用しない場合のみ実行
-      - name: Configure Git for LF line endings
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          git config --global core.autocrlf input
-          git config --global core.eol lf
-
       - name: Checkout repository
         if: steps.check_reuse.outputs.can_reuse != 'true'
         uses: actions/checkout@v4
@@ -388,116 +382,13 @@ jobs:
           echo "Current tag: ${CURRENT_TAG}"
           echo "Working directory: $(pwd)"
           
-          check_makefile() {
-            local target_file="$1"
-            echo "=== makefile Analysis ==="
-            echo "$target_file found - analyzing..."
-            
-            # File information
-            echo "File info:"
-            ls -la $target_file
-            file $target_file
-            
-            # Check encoding and line endings
-            echo "Line ending check:"
-            if command -v dos2unix >/dev/null 2>&1; then
-              dos2unix -ih $target_file 2>/dev/null || echo "dos2unix not available or no conversion needed"
-            fi
-            
-            # Show first few lines with visible control characters
-            echo "First 5 lines with control characters:"
-            head -5 $target_file | cat -A
-
-            # Additional diagnostics
-            echo "=== Additional Diagnostics ==="
-            
-            # Check for common makefile issues
-            echo "Checking for common issues:"
-            
-            # Check for mixed tabs/spaces
-            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' $target_file >/dev/null; then
-              echo "WARNING: Mixed tabs and spaces detected"
-            fi
-            
-            # Check for Windows line endings
-            if grep -l $'\r' $target_file >/dev/null 2>&1; then
-              echo "WARNING: Windows line endings (CR) detected"
-              # Try to fix it
-              echo "Attempting to fix line endings..."
-              sed -i 's/\r$//' $target_file
-              echo "Line endings fixed, retrying..."
-              if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
-                BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
-                echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-              else
-                echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
-              fi
-            fi
-          }
-
-          # check_makefile "Makefile"
           if [ ! -f ./build.mk ]; then
             BUILD_PROCEDURE=0
             echo "build.mk not found - using BUILD_PROCEDURE=0"
           else
             BUILD_PROCEDURE=$(make build-procedure-version)
             echo "Using BUILD_PROCEDURE=$BUILD_PROCEDURE"
-            # check_makefile "build.mk"
-
-            # Check if build-procedure-version target exists
-            # echo "=== Target Analysis ==="
-            # if grep -q "build-procedure-version" Makefile; then
-            #   echo "build-procedure-version target found"
-            #   echo "Target definition:"
-            #   grep -A3 -B1 "build-procedure-version" Makefile
-              
-            #   # Check the rule format (tabs vs spaces)
-            #   echo "Rule format check:"
-            #   grep -A5 "build-procedure-version:" Makefile | sed -n '2,6p' | od -c
-            # else
-            #   echo "ERROR: build-procedure-version target not found"
-            #   echo "Available targets:"
-            #   grep "^[a-zA-Z][^:]*:" Makefile | head -10
-            # fi
-            
-            # Try make with different options
-            # echo "=== Make Execution Test ==="
-            # echo "Testing make with various options..."
-            
-            # Test 1: Simple target list
-            # echo "Available make targets:"
-            # make -qp 2>/dev/null | grep "^[a-zA-Z][^:]*:" | head -10 || echo "Failed to list targets"
-            
-            # Test 2: Dry run
-            # echo "Dry run test:"
-            # if make -n build-procedure-version 2>&1; then
-            #   echo "Dry run successful"
-            # else
-            #   echo "Dry run failed"
-            # fi
-            
-            # Test 3: Actual execution with error capture
-            # echo "Attempting to execute build-procedure-version..."
-            # if BUILD_PROCEDURE_OUTPUT=$(make build-procedure-version 2>&1); then
-            #   BUILD_PROCEDURE="$BUILD_PROCEDURE_OUTPUT"
-            #   echo "SUCCESS: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-            # else
-            #   echo "FAILED: make build-procedure-version error output:"
-            #   echo "$BUILD_PROCEDURE_OUTPUT"
-              
-            #   # If still failed, use fallback
-            #   if [ -z "$BUILD_PROCEDURE" ] || ! [[ "$BUILD_PROCEDURE" =~ ^[0-9]+$ ]]; then
-            #     echo "Using fallback BUILD_PROCEDURE=1"
-            #     BUILD_PROCEDURE=1
-            #   fi
-            # fi
           fi
-
-          # Validate BUILD_PROCEDURE
-          # case "$BUILD_PROCEDURE" in
-          #   0|1) echo "Valid BUILD_PROCEDURE: $BUILD_PROCEDURE" ;;
-          #   *) echo "Invalid BUILD_PROCEDURE: $BUILD_PROCEDURE, using fallback 1"; BUILD_PROCEDURE=1 ;;
-          # esac
 
           # Set up build options
           EXTRA_SPHINX_OPTIONS=""
@@ -515,27 +406,20 @@ jobs:
           echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
 
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            echo "Executing BUILD_PROCEDURE=0"
             make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
-            echo "Copying ./build/html/* ${BUILD_OUTPUT_DIR}/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-              echo "Copying ./data/json/schemas to ${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            echo "Executing BUILD_PROCEDURE=1"
             make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
-            echo "Copying ./ja/build/html/* ${BUILD_OUTPUT_DIR}/"
             if [ -d ./en/build/html ]; then
               mkdir -p "${BUILD_OUTPUT_DIR}/en"
               cp -r ./en/build/html/* "${BUILD_OUTPUT_DIR}/en/"
-              echo "Copying ./en/build/html/* ${BUILD_OUTPUT_DIR}/en/"
             fi
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-              echo "Copying ./data/json/schemas to ${BUILD_OUTPUT_DIR}/"
             fi
           else
             echo "ERROR: Unexpected BUILD_PROCEDURE value: ${BUILD_PROCEDURE}"
@@ -546,8 +430,6 @@ jobs:
           echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
           echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
           echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
-          cat "${BUILD_OUTPUT_DIR}/.deploy_path"
-          ls -la "${BUILD_OUTPUT_DIR}"
         working-directory: ${{ github.workspace }}
 
       - name: Upload build artifact
@@ -611,9 +493,6 @@ jobs:
               fi
             fi
           done
-          
-          echo "Final site structure:"
-          find "${GITHUB_WORKSPACE}/_site" -type d | head -20
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
