@@ -518,7 +518,7 @@ jobs:
             echo "Executing BUILD_PROCEDURE=0"
             make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
-            echo "Copying ./build/html/* "${BUILD_OUTPUT_DIR}/"""
+            echo "Copying ./build/html/* "${BUILD_OUTPUT_DIR}/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
               echo "Copying ./data/json/schemas to ${BUILD_OUTPUT_DIR}/"
