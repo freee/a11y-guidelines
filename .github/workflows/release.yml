@@ -1,9 +1,32 @@
-name: Publish HTML
+name: Release and Deploy Documentation
 
 on:
   push:
-    tags: [ "*" ]
-    branches: [develop]
+    branches:
+      - develop
+    tags:
+      - '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*'
+  workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: 'Force rebuild all artifacts (ignore cache)'
+        required: false
+        default: false
+        type: boolean
+      target_ref:
+        description: 'Target branch or tag to build (leave empty for current branch)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   get_build_targets:
@@ -111,128 +134,94 @@ jobs:
               ARCHIVE_DEPLOY_PATH="archive/${ARCHIVE_TAG}"
               ARCHIVE_ARTIFACT_NAME=$(generate_artifact_name "$ARCHIVE_TAG" "$ARCHIVE_DEPLOY_PATH")
 
+              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$ARCHIVE_TAG" \
+                --arg python "$ARCHIVE_PY" \
+                --arg sphinx "$ARCHIVE_SPHINX" \
+                --arg theme "$ARCHIVE_THEME" \
+                --arg vnum "$ARCHIVE_VNUM" \
+                --arg deploy_path "$ARCHIVE_DEPLOY_PATH" \
+                --arg artifact_name "$ARCHIVE_ARTIFACT_NAME" \
+                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, vnum: ($vnum | tonumber)}]')
+            fi
+          done
+
+          echo "matrix=$MATRIX_ITEMS" >> "$GITHUB_OUTPUT"
+          echo "Generated matrix with $(echo "$MATRIX_ITEMS" | jq length) items"
+          echo "Force rebuild: $FORCE_REBUILD"
+
+  check_existing_artifacts:
     runs-on: ubuntu-latest
+    needs: get_build_targets
+    outputs:
+      reusable_artifacts: ${{ steps.check_artifacts.outputs.reusable_artifacts }}
     steps:
-    - name: Extract Branch/Tag Names
-      run: |
-        echo "NAME=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-        echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - name: Check for existing artifacts
+        id: check_artifacts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MATRIX: ${{ needs.get_build_targets.outputs.matrix }}
+          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
+        run: |
+          echo "Checking for reusable artifacts..."
+          echo "Force rebuild mode: $FORCE_REBUILD"
+          
+          REUSABLE_ARTIFACTS="[]"
+          
+          # 強制再ビルドが指定されている場合は、アーティファクト検索をスキップ
+          if [ "$FORCE_REBUILD" == "true" ]; then
+            echo "Force rebuild enabled - skipping artifact search"
+          else
+            echo "Normal mode - searching for reusable artifacts"
+            
+            # 最新の成功したワークフロー実行を取得
+            RECENT_RUNS=$(gh run list \
+              --repo ${{ github.repository }} \
+              --workflow release.yml \
+              --status success \
+              --limit 5 \
+              --json databaseId,headSha,createdAt)
+            
+            # 各ビルドターゲットについて、既存のアーティファクトをチェック
+            echo "$MATRIX" | jq -c '.[]' | while read -r target; do
+              TAG=$(echo "$target" | jq -r '.tag')
+              ARTIFACT_NAME=$(echo "$target" | jq -r '.artifact_name')
+              
+              # タグ（develop以外）の場合、過去のアーティファクトを探す
+              if [ "$TAG" != "develop" ]; then
+                echo "Checking for existing artifact: $ARTIFACT_NAME for tag: $TAG"
+                
+                # 過去5回の実行からアーティファクトを検索
+                echo "$RECENT_RUNS" | jq -c '.[]' | while read -r run; do
+                  RUN_ID=$(echo "$run" | jq -r '.databaseId')
+                  
+                  # アーティファクトの存在をチェック
+                  if gh run view $RUN_ID --json artifacts --jq ".artifacts[] | select(.name == \"$ARTIFACT_NAME\") | .name" | grep -q "$ARTIFACT_NAME"; then
+                    echo "Found reusable artifact: $ARTIFACT_NAME in run: $RUN_ID"
+                    
+                    # 再利用可能なアーティファクトリストに追加
+                    REUSABLE_ARTIFACTS=$(echo "$REUSABLE_ARTIFACTS" | jq -c --arg name "$ARTIFACT_NAME" --arg runId "$RUN_ID" '. + [{name: $name, runId: $runId}]')
+                    break
+                  fi
+                done
+              fi
+            done
+          fi
+          
+          echo "reusable_artifacts=$REUSABLE_ARTIFACTS" >> $GITHUB_OUTPUT
+          echo "Found $(echo "$REUSABLE_ARTIFACTS" | jq length) reusable artifacts"
 
-    - uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-        submodules: true
-
-    - uses: actions/setup-python@v4
-      with:
-        python-version: '3.9.x'
-
-    - uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-northeast-1
-
-    - name: install ja_JP.UTF-8 locale
-      run: |
-        sudo locale-gen ja_JP.UTF-8
-        sudo update-locale LANG=ja_JP.UTF-8
-
-    - name: Install the Latest pip
-      run: python -m pip install --upgrade pip
-
-    - name: Install required modules
-      run: python -m pip install -r requirements.txt --upgrade
-
-    - name: Prepare file upload directory with the archive directory
-      run: |
-        mkdir -p ${GITHUB_WORKSPACE}/upload/archive
-        mkdir -p ${GITHUB_WORKSPACE}/upload/en
-
-    - name: Download the existing archive files from S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete s3://${AWS_BUCKET}/archive/ ${GITHUB_WORKSPACE}/upload/archive/ --quiet
-
-    - name: Build HTML of all releases, with gtag.js, and OGP tags
-      env:
-        GTM_ID: ${{ secrets.GTM_ID }}
-        TZ: Asia/Tokyo
-      run: |
-        make BASE_URL=https://a11y-guidelines.freee.co.jp/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload
-        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/en
-        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload
-        make BASE_URL=https://a11y-guidelines.freee.co.jp/current/ sphinx_options="-A gtm_id=${GTM_ID}" clean html
-        mkdir -p ${GITHUB_WORKSPACE}/upload/current/en
-        cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/current
-        cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/current/en
-        cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/current
-        make clean
-        current_commit=$(git rev-parse HEAD)
-        rm -rf ${GITHUB_WORKSPACE}/upload/archive/${TAG}
-        for _tag in `git tag` ; do \
-          echo "Processing ${_tag}..." ; \
-          if [ ! -d ${GITHUB_WORKSPACE}/upload/archive/${_tag} ] ; then \
-            git checkout ${_tag} ; \
-            git submodule update --init --recursive ; \
-            if [ ! -f ./build.mk ]; then
-              build_procedure=0 ; \
-            else \
-              build_procedure=`make build-procedure-version` ; \
-            fi ; \
-            if [ ${build_procedure} -eq 0 ]; then
-              make SPHINXOPTS="-A gtm_id=${GTM_ID} -D html_baseurl=https://a11y-guidelines.freee.co.jp/archive/${_tag}/" html ; \
-              if [ -d ./data/json/schemas ]; then \
-                cp -r ./data/json/schemas ./build/html ; \
-              fi ; \
-              cp -r ./build/html ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-            elif [ ${build_procedure} -eq 1 ]; then \
-              make BASE_URL=https://a11y-guidelines.freee.co.jp/archive/${_tag}/ sphinx_options="-A gtm_id=${GTM_ID}" clean html ; \
-              mkdir -p ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en ; \
-              cp -r ./ja/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-              cp -r ./en/build/html/* ${GITHUB_WORKSPACE}/upload/archive/${_tag}/en
-              cp -r ./data/json/schemas ${GITHUB_WORKSPACE}/upload/archive/${_tag} ; \
-            else \
-              echo "Unknown build procedure version: ${build_procedure}" ; \
-              exit 1 ; \
-            fi ; \
-            make clean ; \
-            git checkout ${current_commit} ; \
-            git submodule update --init --recursive ; \
-          fi ; \
-        done
-
-    - name: Publish to S3
-      env:
-        AWS_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-      run: aws s3 sync --delete ${GITHUB_WORKSPACE}/upload/ s3://${AWS_BUCKET}/ --quiet
-
-    - name: Prepare the HTML Archive
-      env:
-        TZ: Asia/Tokyo
-      run: |
-        make BASE_URL=/ clean html
-        mv ./ja/build/html ./freee-a11y-guidelines-${TAG}
-        cp -r ./data/json/schemas ./freee-a11y-guidelines-${TAG}
-        cp -r ./en/build/html ./freee-a11y-guidelines-${TAG}/en
-        zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
-
-    - name: Create Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh release create ${TAG} \
-          --title "Ver. ${TAG}" \
-          --notes-file ./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst \
-          --draft
-        gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
-
-  current:
-    if: github.repository == 'freee/a11y-guidelines' && github.ref == 'refs/heads/develop'
-
+  build_docs:
     runs-on: ubuntu-latest
+    needs: [get_build_targets, check_existing_artifacts]
+    strategy:
+      fail-fast: false
+      matrix:
+        build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
+
+    env:
+      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
+      GTM_ID: ${{ secrets.GTM_ID }}
+      TZ: Asia/Tokyo
 
     steps:
       - name: Extract Build Target Info
