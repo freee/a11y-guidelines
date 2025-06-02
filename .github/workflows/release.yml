@@ -80,7 +80,7 @@ jobs:
             if (( VNUM <= 20230300 )); then
               PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
             else
-              PY_VER="3.13"; SPHINX_VER="~=8.0"; THEME_VER="~=3.0"
+              PY_VER="3.13"; SPHINX_VER="~=7.0"; THEME_VER="~=3.0"
             fi
             echo "$PY_VER,$SPHINX_VER,$THEME_VER"
           }
@@ -103,7 +103,7 @@ jobs:
           DEVELOP_ARTIFACT_NAME=$(generate_artifact_name "develop" "current")
           MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "develop" \
             --arg python "3.13" \
-            --arg sphinx "~=8.0" \
+            --arg sphinx "~=7.0" \
             --arg theme "~=3.0" \
             --arg vnum "99999999" \
             --arg deploy_path "current" \
@@ -355,7 +355,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y locales
-          sudo locale-gen ja_JP.UTF-8
+          sudo locale-gen ja_JP.UTF-8 en_US.UTF-8
           sudo update-locale LANG=ja_JP.UTF-8
 
       - name: Conditionally remove docutils-ast-writer
