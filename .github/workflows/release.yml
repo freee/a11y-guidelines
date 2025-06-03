@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   get-custom-domain:
-    uses: ./.github/workflows/reusable/custom-domain.yml
+    uses: ./.github/workflows/reusable-custom-domain.yml
 
   get_build_targets:
     needs: get-custom-domain
@@ -240,7 +240,7 @@ jobs:
       fail-fast: false
       matrix:
         build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
-    uses: ./.github/workflows/reusable/build-doc.yml
+    uses: ./.github/workflows/reusable-build-doc.yml
     with:
       tag: ${{ matrix.build_target.tag }}
       python: ${{ matrix.build_target.python }}
