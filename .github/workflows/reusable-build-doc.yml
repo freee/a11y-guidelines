@@ -137,7 +137,7 @@ jobs:
         if: steps.check_reuse.outputs.can_reuse != 'true'
         uses: actions/checkout@v4
         with:
-          ref: ${CURRENT_TAG}
+          ref: ${{ env.CURRENT_TAG }}
           fetch-depth: 0
           submodules: true
 
