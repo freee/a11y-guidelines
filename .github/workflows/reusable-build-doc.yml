@@ -180,7 +180,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
           if [ $SPHINX_VER != "requirements.txt" ]; then
-            pip install "sphinx$SPHINX_VER}"
+            pip install "sphinx${SPHINX_VER}"
           fi
           if [ THEME_VER != "requirements.txt" ]; then
             pip install "sphinx_rtd_theme${THEME_VER}"
