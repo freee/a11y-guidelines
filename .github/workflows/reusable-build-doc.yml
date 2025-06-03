@@ -151,7 +151,7 @@ jobs:
         if: steps.check_reuse.outputs.can_reuse != 'true'
         uses: actions/setup-python@v5
         with:
-          python-version: ${PYTHON_VER}
+          python-version: ${{ env.PYTHON_VER }}
 
       - name: Install ja_JP.UTF-8 locale
         if: steps.check_reuse.outputs.can_reuse != 'true'
