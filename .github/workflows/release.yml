@@ -29,10 +29,16 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  get-custom-domain:
+    uses: ./.github/workflows/reusable-custom-domain.yml
+
   get_build_targets:
+    needs: get-custom-domain
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.generate_matrix.outputs.matrix }}
+    env:
+      CUSTOM_DOMAIN: ${{ needs.get-custom-domain.outputs.custom_domain }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -79,8 +85,10 @@ jobs:
 
             if (( VNUM <= 20230300 )); then
               PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
-            else
+            elif (( VNUM <= 20250400 )); then
               PY_VER="3.13"; SPHINX_VER="~=7.0"; THEME_VER="~=3.0"
+            else
+              PY_VER="3.13"; SPHINX_VER="requirements.txt"; THEME_VER="requirements.txt"
             fi
             echo "$PY_VER,$SPHINX_VER,$THEME_VER"
           }
@@ -99,22 +107,35 @@ jobs:
             fi
           }
 
+          get_base_url() {
+            local deploy_path=$1
+            if [ -n "$CUSTOM_DOMAIN" ]; then
+              base_url_prefix="https://${CUSTOM_DOMAIN}/"
+            else
+              base_url_prefix="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+            fi
+            echo "${base_url_prefix}${deploy_path}/"
+          }
+
           # Add develop build
           DEVELOP_ARTIFACT_NAME=$(generate_artifact_name "develop" "current")
+          DEVELOP_BASE_URL=$(get_base_url "current")
           MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "develop" \
             --arg python "3.13" \
             --arg sphinx "~=7.0" \
             --arg theme "~=3.0" \
             --arg vnum "99999999" \
             --arg deploy_path "current" \
+            --arg base_url "$DEVELOP_BASE_URL" \
             --arg artifact_name "$DEVELOP_ARTIFACT_NAME" \
-            '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, is_latest_develop: true, vnum: ($vnum | tonumber)}]')
+            '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_develop: true, vnum: ($vnum | tonumber)}]')
 
           # Add latest release build
           if [ -n "$LATEST_RELEASE_TAG" ]; then
             LATEST_VNUM=$(echo "$LATEST_RELEASE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
             IFS=',' read -r LATEST_PY LATEST_SPHINX LATEST_THEME <<< $(get_versions "$LATEST_VNUM")
             LATEST_ARTIFACT_NAME=$(generate_artifact_name "$LATEST_RELEASE_TAG" "")
+            LATEST_BASE_URL=$(get_base_url "")
 
             MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
               --arg python "$LATEST_PY" \
@@ -122,8 +143,9 @@ jobs:
               --arg theme "$LATEST_THEME" \
               --arg vnum "$LATEST_VNUM" \
               --arg deploy_path "" \
+              --arg base_url "$LATEST_BASE_URL" \
               --arg artifact_name "$LATEST_ARTIFACT_NAME" \
-              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
+              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
           fi
 
           # Add archive builds
@@ -132,6 +154,7 @@ jobs:
               ARCHIVE_VNUM=$(echo "$ARCHIVE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
               IFS=',' read -r ARCHIVE_PY ARCHIVE_SPHINX ARCHIVE_THEME <<< $(get_versions "$ARCHIVE_VNUM")
               ARCHIVE_DEPLOY_PATH="archive/${ARCHIVE_TAG}"
+              ARCHIVE_BASE_URL=$(get_base_url "$ARCHIVE_DEPLOY_PATH")
               ARCHIVE_ARTIFACT_NAME=$(generate_artifact_name "$ARCHIVE_TAG" "$ARCHIVE_DEPLOY_PATH")
 
               MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$ARCHIVE_TAG" \
@@ -140,8 +163,9 @@ jobs:
                 --arg theme "$ARCHIVE_THEME" \
                 --arg vnum "$ARCHIVE_VNUM" \
                 --arg deploy_path "$ARCHIVE_DEPLOY_PATH" \
+                --arg base_url "$ARCHIVE_BASE_URL" \
                 --arg artifact_name "$ARCHIVE_ARTIFACT_NAME" \
-                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, artifact_name: $artifact_name, vnum: ($vnum | tonumber)}]')
+                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, vnum: ($vnum | tonumber)}]')
             fi
           done
 
@@ -211,352 +235,25 @@ jobs:
           echo "Found $(echo "$REUSABLE_ARTIFACTS" | jq length) reusable artifacts"
 
   build_docs:
-    runs-on: ubuntu-latest
     needs: [get_build_targets, check_existing_artifacts]
     strategy:
       fail-fast: false
       matrix:
         build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
-
-    env:
-      CUSTOM_DOMAIN: ${{ secrets.CUSTOM_DOMAIN }}
-      GTM_ID: ${{ secrets.GTM_ID }}
-      TZ: Asia/Tokyo
-
-    steps:
-      - name: Extract Build Target Info
-        run: |
-          echo "CURRENT_TAG=${{ matrix.build_target.tag }}" >> $GITHUB_ENV
-          echo "PYTHON_VER=${{ matrix.build_target.python }}" >> $GITHUB_ENV
-          echo "SPHINX_VER=${{ matrix.build_target.sphinx }}" >> $GITHUB_ENV
-          echo "THEME_VER=${{ matrix.build_target.theme }}" >> $GITHUB_ENV
-          echo "DEPLOY_PATH=${{ matrix.build_target.deploy_path }}" >> $GITHUB_ENV
-          echo "ARTIFACT_NAME=${{ matrix.build_target.artifact_name }}" >> $GITHUB_ENV
-          echo "IS_LATEST_RELEASE=${{ matrix.build_target.is_latest_release || 'false' }}" >> $GITHUB_ENV
-          echo "IS_LATEST_DEVELOP=${{ matrix.build_target.is_latest_develop || 'false' }}" >> $GITHUB_ENV
-          echo "CURRENT_TAG_VNUM=${{ matrix.build_target.vnum }}" >> $GITHUB_ENV
-
-      - name: Set BASE_URL for build_target
-        run: |
-          BASE_URL_PREFIX=""
-          if [ -n "$CUSTOM_DOMAIN" ]; then
-            BASE_URL_PREFIX="https://${CUSTOM_DOMAIN}/"
-          else
-            BASE_URL_PREFIX="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-          fi
-
-          FINAL_BASE_URL=""
-          if [ -n "$DEPLOY_PATH" ]; then
-            FINAL_BASE_URL="${BASE_URL_PREFIX}${DEPLOY_PATH}/"
-          else
-            FINAL_BASE_URL="${BASE_URL_PREFIX}"
-          fi
-          echo "BASE_URL=${FINAL_BASE_URL}" >> $GITHUB_ENV
-          echo "Using BASE_URL: ${FINAL_BASE_URL}"
-
-      - name: Check if artifact can be reused
-        id: check_reuse
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REUSABLE_ARTIFACTS: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
-          CURRENT_CUSTOM_DOMAIN: ${{ env.CUSTOM_DOMAIN }}
-          IS_LATEST_RELEASE: ${{ env.IS_LATEST_RELEASE }}
-          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
-        run: |
-          CAN_REUSE="false"
-          REUSE_RUN_ID=""
-          
-          # 強制再ビルドが指定されている場合は無条件で再ビルド
-          if [ "$FORCE_REBUILD" == "true" ]; then
-            echo "Force rebuild enabled - will rebuild all artifacts"
-          # developブランチまたは最新リリースは常に再ビルド
-          elif [ "${{ env.CURRENT_TAG }}" == "develop" ]; then
-            echo "Develop branch - always rebuild"
-          elif [ "$IS_LATEST_RELEASE" == "true" ]; then
-            echo "Latest release - always rebuild"
-          else
-            # 再利用可能なアーティファクトをチェック
-            REUSE_INFO=$(echo "$REUSABLE_ARTIFACTS" | jq -r --arg name "${{ env.ARTIFACT_NAME }}" '.[] | select(.name == $name) | .runId')
-            
-            if [ -n "$REUSE_INFO" ]; then
-              # アーティファクトの詳細をダウンロードして設定値をチェック
-              echo "Found potential artifact ${{ env.ARTIFACT_NAME }} from run $REUSE_INFO"
-              echo "Checking build settings compatibility..."
-              
-              # 一時的にアーティファクトをダウンロードして設定値を確認
-              TEMP_DIR=$(mktemp -d)
-              if gh run download $REUSE_INFO --name ${{ env.ARTIFACT_NAME }} --dir "$TEMP_DIR" 2>/dev/null; then
-                STORED_CUSTOM_DOMAIN=""
-                
-                if [ -f "$TEMP_DIR/.build_custom_domain" ]; then
-                  STORED_CUSTOM_DOMAIN=$(cat "$TEMP_DIR/.build_custom_domain")
-                fi
-                
-                echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
-                echo "Current CUSTOM_DOMAIN: '$CURRENT_CUSTOM_DOMAIN'"
-                
-                if [ "$STORED_CUSTOM_DOMAIN" == "$CURRENT_CUSTOM_DOMAIN" ]; then
-                  CAN_REUSE="true"
-                  REUSE_RUN_ID="$REUSE_INFO"
-                  echo "CUSTOM_DOMAIN matches - can reuse artifact"
-                  
-                  # 再利用する場合、アーティファクトを正しい場所に移動
-                  mkdir -p ${{ github.workspace }}/build_output
-                  cp -r "$TEMP_DIR"/* ${{ github.workspace }}/build_output/
-                else
-                  echo "CUSTOM_DOMAIN differs - will rebuild"
-                fi
-                
-                rm -rf "$TEMP_DIR"
-              else
-                echo "Failed to download artifact for inspection"
-              fi
-            fi
-          fi
-          
-          echo "can_reuse=$CAN_REUSE" >> $GITHUB_OUTPUT
-          echo "reuse_run_id=$REUSE_RUN_ID" >> $GITHUB_OUTPUT
-
-      - name: Download existing artifact
-        if: steps.check_reuse.outputs.can_reuse == 'true'
-        run: |
-          echo "Reusing existing artifact ${{ env.ARTIFACT_NAME }} from run ${{ steps.check_reuse.outputs.reuse_run_id }}"
-          echo "Build settings validated and compatible"
-
-      # 以下のステップは、アーティファクトを再利用しない場合のみ実行
-      - name: Configure Git for LF line endings
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          git config --global core.autocrlf input
-          git config --global core.eol lf
-
-      - name: Checkout repository
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.target_ref || (env.CURRENT_TAG == 'develop' && 'develop' || env.CURRENT_TAG) }}
-          fetch-depth: 0
-          submodules: true
-
-      - name: Clean working directory
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          git clean -dfx
-          echo "Cleaned working directory"
-
-      - name: Set up Python ${{ env.PYTHON_VER }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VER }}
-
-      - name: Install ja_JP.UTF-8 locale
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y locales
-          sudo locale-gen ja_JP.UTF-8 en_US.UTF-8
-          sudo update-locale LANG=ja_JP.UTF-8
-
-      - name: Conditionally remove docutils-ast-writer
-        if: steps.check_reuse.outputs.can_reuse != 'true' && env.CURRENT_TAG_VNUM <= 202230300
-        run: |
-          REQUIREMENTS_FILE="requirements.txt"
-          if [ -f "$REQUIREMENTS_FILE" ]; then
-            echo "Checking $REQUIREMENTS_FILE for docutils-ast-writer..."
-            sed -i '/^docutils-ast-writer/d' "$REQUIREMENTS_FILE"
-            echo "'docutils-ast-writer' removed from $REQUIREMENTS_FILE for tag ${{ env.CURRENT_TAG }}"
-          else
-            echo "$REQUIREMENTS_FILE not found, skipping modification."
-          fi
-        working-directory: ${{ github.workspace }}
-
-      - name: Install Python dependencies
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --upgrade
-          pip install "sphinx${{ env.SPHINX_VER }}" "sphinx_rtd_theme${{ env.THEME_VER }}"
-        working-directory: ${{ github.workspace }}
-
-      - name: Build documentation for ${{ env.CURRENT_TAG }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
-        env:
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-        run: |
-          echo "=== Environment Information ==="
-          echo "Current tag: ${CURRENT_TAG}"
-          echo "Working directory: $(pwd)"
-          
-          check_makefile() {
-            local target_file="$1"
-            echo "=== makefile Analysis ==="
-            echo "$target_file found - analyzing..."
-            
-            # File information
-            echo "File info:"
-            ls -la $target_file
-            file $target_file
-            
-            # Check encoding and line endings
-            echo "Line ending check:"
-            if command -v dos2unix >/dev/null 2>&1; then
-              dos2unix -ih $target_file 2>/dev/null || echo "dos2unix not available or no conversion needed"
-            fi
-            
-            # Show first few lines with visible control characters
-            echo "First 5 lines with control characters:"
-            head -5 $target_file | cat -A
-
-            # Additional diagnostics
-            echo "=== Additional Diagnostics ==="
-            
-            # Check for common makefile issues
-            echo "Checking for common issues:"
-            
-            # Check for mixed tabs/spaces
-            if grep -P '^\t' $target_file >/dev/null && grep -P '^        ' $target_file >/dev/null; then
-              echo "WARNING: Mixed tabs and spaces detected"
-            fi
-            
-            # Check for Windows line endings
-            if grep -l $'\r' $target_file >/dev/null 2>&1; then
-              echo "WARNING: Windows line endings (CR) detected"
-              # Try to fix it
-              echo "Attempting to fix line endings..."
-              sed -i 's/\r$//' $target_file
-              echo "Line endings fixed, retrying..."
-              if BUILD_PROCEDURE_RETRY=$(make build-procedure-version 2>&1); then
-                BUILD_PROCEDURE="$BUILD_PROCEDURE_RETRY"
-                echo "SUCCESS after line ending fix: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-              else
-                echo "Still failed after line ending fix: $BUILD_PROCEDURE_RETRY"
-              fi
-            fi
-          }
-
-          # check_makefile "Makefile"
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
-            echo "build.mk not found - using BUILD_PROCEDURE=0"
-          else
-            BUILD_PROCEDURE=$(make build-procedure-version)
-            echo "Using BUILD_PROCEDURE=$BUILD_PROCEDURE"
-            # check_makefile "build.mk"
-
-            # Check if build-procedure-version target exists
-            # echo "=== Target Analysis ==="
-            # if grep -q "build-procedure-version" Makefile; then
-            #   echo "build-procedure-version target found"
-            #   echo "Target definition:"
-            #   grep -A3 -B1 "build-procedure-version" Makefile
-              
-            #   # Check the rule format (tabs vs spaces)
-            #   echo "Rule format check:"
-            #   grep -A5 "build-procedure-version:" Makefile | sed -n '2,6p' | od -c
-            # else
-            #   echo "ERROR: build-procedure-version target not found"
-            #   echo "Available targets:"
-            #   grep "^[a-zA-Z][^:]*:" Makefile | head -10
-            # fi
-            
-            # Try make with different options
-            # echo "=== Make Execution Test ==="
-            # echo "Testing make with various options..."
-            
-            # Test 1: Simple target list
-            # echo "Available make targets:"
-            # make -qp 2>/dev/null | grep "^[a-zA-Z][^:]*:" | head -10 || echo "Failed to list targets"
-            
-            # Test 2: Dry run
-            # echo "Dry run test:"
-            # if make -n build-procedure-version 2>&1; then
-            #   echo "Dry run successful"
-            # else
-            #   echo "Dry run failed"
-            # fi
-            
-            # Test 3: Actual execution with error capture
-            # echo "Attempting to execute build-procedure-version..."
-            # if BUILD_PROCEDURE_OUTPUT=$(make build-procedure-version 2>&1); then
-            #   BUILD_PROCEDURE="$BUILD_PROCEDURE_OUTPUT"
-            #   echo "SUCCESS: BUILD_PROCEDURE=$BUILD_PROCEDURE"
-            # else
-            #   echo "FAILED: make build-procedure-version error output:"
-            #   echo "$BUILD_PROCEDURE_OUTPUT"
-              
-            #   # If still failed, use fallback
-            #   if [ -z "$BUILD_PROCEDURE" ] || ! [[ "$BUILD_PROCEDURE" =~ ^[0-9]+$ ]]; then
-            #     echo "Using fallback BUILD_PROCEDURE=1"
-            #     BUILD_PROCEDURE=1
-            #   fi
-            # fi
-          fi
-
-          # Validate BUILD_PROCEDURE
-          # case "$BUILD_PROCEDURE" in
-          #   0|1) echo "Valid BUILD_PROCEDURE: $BUILD_PROCEDURE" ;;
-          #   *) echo "Invalid BUILD_PROCEDURE: $BUILD_PROCEDURE, using fallback 1"; BUILD_PROCEDURE=1 ;;
-          # esac
-
-          # Set up build options
-          EXTRA_SPHINX_OPTIONS=""
-          if [ "${{ env.IS_LATEST_DEVELOP }}" == "true" ]; then
-            EXTRA_SPHINX_OPTIONS="-t current"
-          fi
-
-          # Create the build output directory
-          BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
-          mkdir -p "${BUILD_OUTPUT_DIR}"
-          
-          echo "=== Build Execution ==="
-          echo "Build procedure: $BUILD_PROCEDURE"
-          echo "Base URL: $BASE_URL"
-          echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
-
-          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            echo "Executing BUILD_PROCEDURE=0"
-            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
-            cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
-            echo "Copying ./build/html/* ${BUILD_OUTPUT_DIR}/"
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-              echo "Copying ./data/json/schemas to ${BUILD_OUTPUT_DIR}/"
-            fi
-          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            echo "Executing BUILD_PROCEDURE=1"
-            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
-            cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
-            echo "Copying ./ja/build/html/* ${BUILD_OUTPUT_DIR}/"
-            if [ -d ./en/build/html ]; then
-              mkdir -p "${BUILD_OUTPUT_DIR}/en"
-              cp -r ./en/build/html/* "${BUILD_OUTPUT_DIR}/en/"
-              echo "Copying ./en/build/html/* ${BUILD_OUTPUT_DIR}/en/"
-            fi
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
-              echo "Copying ./data/json/schemas to ${BUILD_OUTPUT_DIR}/"
-            fi
-          else
-            echo "ERROR: Unexpected BUILD_PROCEDURE value: ${BUILD_PROCEDURE}"
-            exit 1
-          fi
-
-          # Create metadata files
-          echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
-          echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
-          echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
-          cat "${BUILD_OUTPUT_DIR}/.deploy_path"
-          ls -la "${BUILD_OUTPUT_DIR}"
-        working-directory: ${{ github.workspace }}
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.ARTIFACT_NAME }}
-          path: ${{ github.workspace }}/build_output
-          retention-days: 1
-          include-hidden-files: true
+    uses: ./.github/workflows/reusable-build-doc.yml
+    with:
+      tag: ${{ matrix.build_target.tag }}
+      python: ${{ matrix.build_target.python }}
+      sphinx: ${{ matrix.build_target.sphinx }}
+      theme: ${{ matrix.build_target.theme }}
+      deploy_path: ${{ matrix.build_target.deploy_path }}
+      base_url: ${{ matrix.build_target.base_url }}
+      artifact_name: ${{ matrix.build_target.artifact_name }}
+      is_latest_release: ${{ matrix.build_target.is_latest_release || 'false' }}
+      is_latest_develop: ${{ matrix.build_target.is_latest_develop || 'false' }}
+      vnum: ${{ matrix.build_target.vnum }}
+      force_rebuild: ${{ inputs.force_rebuild || 'false' }}
+      reusable_artifacts: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
 
   deploy_pages:
     environment:
@@ -611,9 +308,6 @@ jobs:
               fi
             fi
           done
-          
-          echo "Final site structure:"
-          find "${GITHUB_WORKSPACE}/_site" -type d | head -20
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

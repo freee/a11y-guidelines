@@ -1,0 +1,44 @@
+name: Get Custom Domain Configuration
+
+on:
+  workflow_call:
+    outputs:
+      custom_domain:
+        description: 'Custom domain configured for GitHub Pages'
+        value: ${{ jobs.get-domain.outputs.custom_domain }}
+      pages_configured:
+        description: 'Whether GitHub Pages is configured'
+        value: ${{ jobs.get-domain.outputs.pages_configured }}
+
+jobs:
+  get-domain:
+    runs-on: ubuntu-latest
+    outputs:
+      custom_domain: ${{ steps.get_pages_config.outputs.custom_domain }}
+      pages_configured: ${{ steps.get_pages_config.outputs.pages_configured }}
+    
+    steps:
+      - name: Get GitHub Pages configuration
+        id: get_pages_config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Fetching GitHub Pages configuration for ${{ github.repository }}..."
+          
+          if PAGES_INFO=$(gh api repos/${{ github.repository }}/pages 2>/dev/null); then
+            echo "✅ Pages configuration found"
+            
+            CUSTOM_DOMAIN=$(echo "$PAGES_INFO" | jq -r '.cname // ""')
+            PAGES_STATUS=$(echo "$PAGES_INFO" | jq -r '.status // "unknown"')
+            
+            echo "Pages status: $PAGES_STATUS"
+            echo "Custom domain: '$CUSTOM_DOMAIN'"
+            
+            echo "custom_domain=$CUSTOM_DOMAIN" >> $GITHUB_OUTPUT
+            echo "pages_configured=true" >> $GITHUB_OUTPUT
+            
+          else
+            echo "⚠️  GitHub Pages is not configured for this repository"
+            echo "custom_domain=" >> $GITHUB_OUTPUT
+            echo "pages_configured=false" >> $GITHUB_OUTPUT
+          fi

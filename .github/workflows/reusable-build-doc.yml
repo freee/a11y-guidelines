@@ -1,0 +1,255 @@
+name: Build for Single Tag
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+      python:
+        required: true
+        type: string
+      sphinx:
+        required: true
+        type: string
+      theme:
+        required: true
+        type: string
+      deploy_path:
+        required: false
+        type: string
+        default: ''
+      base_url:
+        required: true
+        type: string
+      artifact_name:
+        required: true
+        type: string
+      is_latest_release:
+        required: false
+        type: boolean
+        default: false
+      is_latest_develop:
+        required: false
+        type: boolean
+        default: false
+      vnum:
+        required: true
+        type: number
+      force_rebuild:
+        required: false
+        type: boolean
+        default: false
+      custom_domain:
+        required: false
+        type: string
+        default: ''
+      reusable_artifacts:
+        required: false
+        type: string
+        default: '[]'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Tokyo
+      CUSTOM_DOMAIN: ${{ inputs.custom_domain }}
+      GTM_ID: ${{ secrets.GTM_ID }}
+      CURRENT_TAG: ${{ inputs.tag }}
+      PYTHON_VER: ${{ inputs.python }}
+      SPHINX_VER: ${{ inputs.sphinx }}
+      THEME_VER: ${{ inputs.theme }}
+      DEPLOY_PATH: ${{ inputs.deploy_path }}
+      BASE_URL: ${{ inputs.base_url }}
+      ARTIFACT_NAME: ${{ inputs.artifact_name }}
+      IS_LATEST_RELEASE: ${{ inputs.is_latest_release }}
+      IS_LATEST_DEVELOP: ${{ inputs.is_latest_develop }}
+      CURRENT_TAG_VNUM: ${{ inputs.vnum }}
+      FORCE_REBUILD: ${{ inputs.force_rebuild }}
+
+    steps:
+      - name: Check if artifact can be reused
+        id: check_reuse
+        run: |
+          CAN_REUSE="false"
+          REUSE_RUN_ID=""
+          
+          # 強制再ビルドが指定されている場合は無条件で再ビルド
+          if [ "$FORCE_REBUILD" == "true" ]; then
+            echo "Force rebuild enabled - will rebuild all artifacts"
+          # developブランチまたは最新リリースは常に再ビルド
+          elif [ "${CURRENT_TAG}" == "develop" ]; then
+            echo "Develop branch - always rebuild"
+          elif [ "$IS_LATEST_RELEASE" == "true" ]; then
+            echo "Latest release - always rebuild"
+          else
+            # 再利用可能なアーティファクトをチェック
+            REUSE_INFO=$(echo "$REUSABLE_ARTIFACTS" | jq -r --arg name "${ARTIFACT_NAME}" '.[] | select(.name == $name) | .runId')
+
+            if [ -n "$REUSE_INFO" ]; then
+              # アーティファクトの詳細をダウンロードして設定値をチェック
+              echo "Found potential artifact ${ARTIFACT_NAME} from run $REUSE_INFO"
+              echo "Checking build settings compatibility..."
+              
+              # 一時的にアーティファクトをダウンロードして設定値を確認
+              TEMP_DIR=$(mktemp -d)
+              if gh run download $REUSE_INFO --name ${ARTIFACT_NAME} --dir "$TEMP_DIR" 2>/dev/null; then
+                STORED_CUSTOM_DOMAIN=""
+                
+                if [ -f "$TEMP_DIR/.build_custom_domain" ]; then
+                  STORED_CUSTOM_DOMAIN=$(cat "$TEMP_DIR/.build_custom_domain")
+                fi
+                
+                echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
+                echo "Current CUSTOM_DOMAIN: '$CURRENT_CUSTOM_DOMAIN'"
+                
+                if [ "$STORED_CUSTOM_DOMAIN" == "$CURRENT_CUSTOM_DOMAIN" ]; then
+                  CAN_REUSE="true"
+                  REUSE_RUN_ID="$REUSE_INFO"
+                  echo "CUSTOM_DOMAIN matches - can reuse artifact"
+                  
+                  # 再利用する場合、アーティファクトを正しい場所に移動
+                  mkdir -p ${{ github.workspace }}/build_output
+                  cp -r "$TEMP_DIR"/* ${{ github.workspace }}/build_output/
+                else
+                  echo "CUSTOM_DOMAIN differs - will rebuild"
+                fi
+                
+                rm -rf "$TEMP_DIR"
+              else
+                echo "Failed to download artifact for inspection"
+              fi
+            fi
+          fi
+
+          echo "can_reuse=$CAN_REUSE" >> $GITHUB_OUTPUT
+          echo "reuse_run_id=$REUSE_RUN_ID" >> $GITHUB_OUTPUT
+
+      - name: Download existing artifact
+        if: steps.check_reuse.outputs.can_reuse == 'true'
+        run: |
+          echo "Reusing existing artifact ${ARTIFACT_NAME} from run ${{ steps.check_reuse.outputs.reuse_run_id }}"
+          echo "Build settings validated and compatible"
+
+      # 以下のステップは、アーティファクトを再利用しない場合のみ実行
+      - name: Checkout repository
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${CURRENT_TAG}
+          fetch-depth: 0
+          submodules: true
+
+      - name: Clean working directory
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        run: |
+          git clean -dfx
+          echo "Cleaned working directory"
+
+      - name: Set up Python ${{ env.PYTHON_VER }}
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${PYTHON_VER}
+
+      - name: Install ja_JP.UTF-8 locale
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y locales
+          sudo locale-gen ja_JP.UTF-8 en_US.UTF-8
+          sudo update-locale LANG=ja_JP.UTF-8
+
+      - name: Conditionally remove docutils-ast-writer
+        if: steps.check_reuse.outputs.can_reuse != 'true' && env.CURRENT_TAG_VNUM <= 202230300
+        run: |
+          REQUIREMENTS_FILE="requirements.txt"
+          if [ -f "$REQUIREMENTS_FILE" ]; then
+            echo "Removing docutils-ast-writer from $REQUIREMENTS_FILE ..."
+            sed -i '/^docutils-ast-writer/d' "$REQUIREMENTS_FILE"
+            echo "'docutils-ast-writer' removed from $REQUIREMENTS_FILE for tag ${{ env.CURRENT_TAG }}"
+          else
+            echo "$REQUIREMENTS_FILE not found, skipping modification."
+          fi
+        working-directory: ${{ github.workspace }}
+
+      - name: Install Python dependencies
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt --upgrade
+          if [ $SPHINX_VER != "requirements.txt" ]; then
+            pip install "sphinx$SPHINX_VER}"
+          fi
+          if [ THEME_VER != "requirements.txt" ]; then
+            pip install "sphinx_rtd_theme${THEME_VER}"
+          fi
+        working-directory: ${{ github.workspace }}
+
+      - name: Build documentation for ${CURRENT_TAG}
+        if: steps.check_reuse.outputs.can_reuse != 'true'
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+        run: |
+          echo "=== Environment Information ==="
+          echo "Current tag: ${CURRENT_TAG}"
+          echo "Working directory: $(pwd)"
+          
+          if [ ! -f ./build.mk ]; then
+            BUILD_PROCEDURE=0
+            echo "build.mk not found - using BUILD_PROCEDURE=0"
+          else
+            BUILD_PROCEDURE=$(make build-procedure-version)
+            echo "Using BUILD_PROCEDURE=$BUILD_PROCEDURE"
+          fi
+
+          # Set up build options
+          EXTRA_SPHINX_OPTIONS=""
+          if [ "${IS_LATEST_DEVELOP}" == "true" ]; then
+            EXTRA_SPHINX_OPTIONS="-t current"
+          fi
+
+          # Create the build output directory
+          BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
+          mkdir -p "${BUILD_OUTPUT_DIR}"
+          
+          echo "=== Build Execution ==="
+          echo "Build procedure: $BUILD_PROCEDURE"
+          echo "Base URL: $BASE_URL"
+          echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
+
+          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
+            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
+            cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
+            fi
+          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
+            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
+            cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
+            if [ -d ./en/build/html ]; then
+              mkdir -p "${BUILD_OUTPUT_DIR}/en"
+              cp -r ./en/build/html/* "${BUILD_OUTPUT_DIR}/en/"
+            fi
+            if [ -d ./data/json/schemas ]; then
+              cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
+            fi
+          else
+            echo "ERROR: Unexpected BUILD_PROCEDURE value: ${BUILD_PROCEDURE}"
+            exit 1
+          fi
+
+          # Create metadata files
+          echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
+          echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
+          echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
+        working-directory: ${{ github.workspace }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ github.workspace }}/build_output
+          retention-days: 1
+          include-hidden-files: true
