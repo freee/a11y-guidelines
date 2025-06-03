@@ -1,6 +1,6 @@
 wheel
-sphinx >= 3.0
-sphinx_rtd_theme
+sphinx ~= 7.0
+sphinx_rtd_theme ~= 3.0
 sphinxcontrib-trimblank
 jsonschema < 4.18.0
 sphinx-lint
