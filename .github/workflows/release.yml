@@ -254,9 +254,6 @@ jobs:
       vnum: ${{ matrix.build_target.vnum }}
       force_rebuild: ${{ inputs.force_rebuild || 'false' }}
       reusable_artifacts: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
-    secrets:
-      gtm_id: ${{ secrets.GTM_ID }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy_pages:
     environment:

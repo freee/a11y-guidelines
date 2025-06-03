@@ -44,19 +44,10 @@ on:
         required: false
         type: string
         default: ''
-      gtm_id:
-        required: false
-        type: string
-        default: ''
       reusable_artifacts:
         required: false
         type: string
         default: '[]'
-    secrets:
-      GITHUB_TOKEN:
-        required: true
-      gtm_id:
-        required: false
 
 jobs:
   build:
@@ -64,7 +55,7 @@ jobs:
     env:
       TZ: Asia/Tokyo
       CUSTOM_DOMAIN: ${{ inputs.custom_domain }}
-      GTM_ID: ${{ inputs.gtm_id }}
+      GTM_ID: ${{ secrets.GTM_ID }}
       CURRENT_TAG: ${{ inputs.tag }}
       PYTHON_VER: ${{ inputs.python }}
       SPHINX_VER: ${{ inputs.sphinx }}
