@@ -252,7 +252,7 @@ jobs:
       is_latest_release: ${{ matrix.build_target.is_latest_release || false }}
       is_latest_develop: ${{ matrix.build_target.is_latest_develop || false }}
       vnum: ${{ matrix.build_target.vnum }}
-      force_rebuild: ${{ inputs.force_rebuild }}
+      force_rebuild: ${{ inputs.force_rebuild || false }}
       reusable_artifacts: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
 
   deploy_pages:
