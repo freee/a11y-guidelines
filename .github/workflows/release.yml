@@ -219,7 +219,7 @@ jobs:
                   RUN_ID=$(echo "$run" | jq -r '.databaseId')
                   
                   # アーティファクトの存在をチェック
-                  if gh run view $RUN_ID --json artifacts --jq ".artifacts[] | select(.name == \"$ARTIFACT_NAME\") | .name" | grep -q "$ARTIFACT_NAME"; then
+                  if gh api repos/${{ github.repository }}/actions/runs/$RUN_ID/artifacts --jq ".artifacts[] | select(.name == \"$ARTIFACT_NAME\") | .name" | grep -q "$ARTIFACT_NAME"; then
                     echo "Found reusable artifact: $ARTIFACT_NAME in run: $RUN_ID"
                     
                     # 再利用可能なアーティファクトリストに追加
