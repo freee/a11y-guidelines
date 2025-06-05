@@ -206,7 +206,7 @@ jobs:
               --json databaseId,headSha,createdAt)
             
             # 各ビルドターゲットについて、既存のアーティファクトをチェック
-            echo "$MATRIX" | jq -c '.[]' | while read -r target; do
+            while IFS= read -r target; do
               TAG=$(echo "$target" | jq -r '.tag')
               ARTIFACT_NAME=$(echo "$target" | jq -r '.artifact_name')
               
@@ -215,7 +215,7 @@ jobs:
                 echo "Checking for existing artifact: $ARTIFACT_NAME for tag: $TAG"
                 
                 # 過去5回の実行からアーティファクトを検索
-                echo "$RECENT_RUNS" | jq -c '.[]' | while read -r run; do
+                while IFS= read -r run; do
                   RUN_ID=$(echo "$run" | jq -r '.databaseId')
                   
                   # アーティファクトの存在をチェック
@@ -226,9 +226,9 @@ jobs:
                     REUSABLE_ARTIFACTS=$(echo "$REUSABLE_ARTIFACTS" | jq -c --arg name "$ARTIFACT_NAME" --arg runId "$RUN_ID" '. + [{name: $name, runId: $runId}]')
                     break
                   fi
-                done
+                done < <(echo "$RECENT_RUNS" | jq -c '.[]')
               fi
-            done
+            done < <(echo "$MATRIX" | jq -c '.[]') # MODIFIED LINE: Process substitution for outer loop 
           fi
           
           echo "reusable_artifacts=$REUSABLE_ARTIFACTS" >> $GITHUB_OUTPUT
