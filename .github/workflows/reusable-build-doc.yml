@@ -187,7 +187,7 @@ jobs:
           fi
         working-directory: ${{ github.workspace }}
 
-      - name: Build documentation for ${CURRENT_TAG}
+      - name: Build documentation for ${{ env.CURRENT_TAG }}
         if: steps.check_reuse.outputs.can_reuse != 'true'
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
