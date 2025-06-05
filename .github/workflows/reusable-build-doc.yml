@@ -102,9 +102,9 @@ jobs:
                 fi
                 
                 echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
-                echo "Current CUSTOM_DOMAIN: '$CURRENT_CUSTOM_DOMAIN'"
+                echo "Current CUSTOM_DOMAIN: '$CUSTOM_DOMAIN'"
                 
-                if [ "$STORED_CUSTOM_DOMAIN" == "$CURRENT_CUSTOM_DOMAIN" ]; then
+                if [ "$STORED_CUSTOM_DOMAIN" == "$CUSTOM_DOMAIN" ]; then
                   CAN_REUSE="true"
                   REUSE_RUN_ID="$REUSE_INFO"
                   echo "CUSTOM_DOMAIN matches - can reuse artifact"
