@@ -32,11 +32,11 @@ jobs:
   get-custom-domain:
     uses: ./.github/workflows/reusable-custom-domain.yml
 
-  get_build_targets:
+  get-build-targets:
     needs: get-custom-domain
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.generate_matrix.outputs.matrix }}
+      matrix: ${{ steps.generate-matrix.outputs.matrix }}
     env:
       CUSTOM_DOMAIN: ${{ needs.get-custom-domain.outputs.custom_domain }}
     steps:
@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 0
 
       - name: Generate build matrix
-        id: generate_matrix
+        id: generate-matrix
         env:
           IS_TAG_PUSH: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
           GITHUB_REFNAME: ${{ github.ref_name }}
@@ -173,17 +173,17 @@ jobs:
           echo "Generated matrix with $(echo "$MATRIX_ITEMS" | jq length) items"
           echo "Force rebuild: $FORCE_REBUILD"
 
-  check_existing_artifacts:
+  check-existing-artifacts:
     runs-on: ubuntu-latest
-    needs: get_build_targets
+    needs: get-build-targets
     outputs:
-      reusable_artifacts: ${{ steps.check_artifacts.outputs.reusable_artifacts }}
+      reusable_artifacts: ${{ steps.check-artifacts.outputs.reusable_artifacts }}
     steps:
       - name: Check for existing artifacts
-        id: check_artifacts
+        id: check-artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MATRIX: ${{ needs.get_build_targets.outputs.matrix }}
+          MATRIX: ${{ needs.get-build-targets.outputs.matrix }}
           FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
         run: |
           echo "Checking for reusable artifacts..."
@@ -234,12 +234,12 @@ jobs:
           echo "reusable_artifacts=$REUSABLE_ARTIFACTS" >> $GITHUB_OUTPUT
           echo "Found $(echo "$REUSABLE_ARTIFACTS" | jq length) reusable artifacts"
 
-  build_docs:
-    needs: [get_build_targets, check_existing_artifacts]
+  build-docs:
+    needs: [get-build-targets, check-existing-artifacts]
     strategy:
       fail-fast: false
       matrix:
-        build_target: ${{ fromJson(needs.get_build_targets.outputs.matrix) }}
+        build_target: ${{ fromJson(needs.get-build-targets.outputs.matrix) }}
     uses: ./.github/workflows/reusable-build-doc.yml
     with:
       tag: ${{ matrix.build_target.tag }}
@@ -253,14 +253,14 @@ jobs:
       is_latest_develop: ${{ matrix.build_target.is_latest_develop || false }}
       vnum: ${{ matrix.build_target.vnum }}
       force_rebuild: ${{ inputs.force_rebuild || false }}
-      reusable_artifacts: ${{ needs.check_existing_artifacts.outputs.reusable_artifacts }}
+      reusable_artifacts: ${{ needs.check-existing-artifacts.outputs.reusable_artifacts }}
 
-  deploy_pages:
+  deploy-pages:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build_docs, get_build_targets]
+    needs: [build-docs, get-build-targets]
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -318,12 +318,12 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  create_release:
+  create-release:
     runs-on: ubuntu-latest
-    needs: get_build_targets
+    needs: get-build-targets
     if: |
       startsWith(github.ref, 'refs/tags/') &&
-      needs.get_build_targets.outputs.matrix
+      needs.get-build-targets.outputs.matrix
 
     steps:
       - name: Extract Tag Name

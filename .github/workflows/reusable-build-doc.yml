@@ -70,7 +70,7 @@ jobs:
 
     steps:
       - name: Check if artifact can be reused
-        id: check_reuse
+        id: check-reuse
         run: |
           CAN_REUSE="false"
           REUSE_RUN_ID=""
@@ -102,9 +102,9 @@ jobs:
                 fi
                 
                 echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
-                echo "Current CUSTOM_DOMAIN: '$CURRENT_CUSTOM_DOMAIN'"
+                echo "Current CUSTOM_DOMAIN: '$CUSTOM_DOMAIN'"
                 
-                if [ "$STORED_CUSTOM_DOMAIN" == "$CURRENT_CUSTOM_DOMAIN" ]; then
+                if [ "$STORED_CUSTOM_DOMAIN" == "$CUSTOM_DOMAIN" ]; then
                   CAN_REUSE="true"
                   REUSE_RUN_ID="$REUSE_INFO"
                   echo "CUSTOM_DOMAIN matches - can reuse artifact"
@@ -127,14 +127,14 @@ jobs:
           echo "reuse_run_id=$REUSE_RUN_ID" >> $GITHUB_OUTPUT
 
       - name: Download existing artifact
-        if: steps.check_reuse.outputs.can_reuse == 'true'
+        if: steps.check-reuse.outputs.can_reuse == 'true'
         run: |
-          echo "Reusing existing artifact ${ARTIFACT_NAME} from run ${{ steps.check_reuse.outputs.reuse_run_id }}"
+          echo "Reusing existing artifact ${ARTIFACT_NAME} from run ${{ steps.check-reuse.outputs.reuse_run_id }}"
           echo "Build settings validated and compatible"
 
       # 以下のステップは、アーティファクトを再利用しない場合のみ実行
       - name: Checkout repository
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         uses: actions/checkout@v4
         with:
           ref: ${{ env.CURRENT_TAG }}
@@ -142,19 +142,19 @@ jobs:
           submodules: true
 
       - name: Clean working directory
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         run: |
           git clean -dfx
           echo "Cleaned working directory"
 
       - name: Set up Python ${{ env.PYTHON_VER }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VER }}
 
       - name: Install ja_JP.UTF-8 locale
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y locales
@@ -162,7 +162,7 @@ jobs:
           sudo update-locale LANG=ja_JP.UTF-8
 
       - name: Conditionally remove docutils-ast-writer
-        if: steps.check_reuse.outputs.can_reuse != 'true' && env.CURRENT_TAG_VNUM <= 202230300
+        if: steps.check-reuse.outputs.can_reuse != 'true' && env.CURRENT_TAG_VNUM <= 202230300
         run: |
           REQUIREMENTS_FILE="requirements.txt"
           if [ -f "$REQUIREMENTS_FILE" ]; then
@@ -175,7 +175,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Install Python dependencies
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt --upgrade
@@ -188,7 +188,7 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Build documentation for ${{ env.CURRENT_TAG }}
-        if: steps.check_reuse.outputs.can_reuse != 'true'
+        if: steps.check-reuse.outputs.can_reuse != 'true'
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
