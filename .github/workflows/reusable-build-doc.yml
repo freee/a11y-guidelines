@@ -80,8 +80,10 @@ jobs:
             echo "Latest release - always rebuild"
           else
             # 再利用可能なアーティファクトをチェック
+            echo "Debug: Searching for ARTIFACT_NAME -> |${ARTIFACT_NAME}|"
+            echo "Debug: Searching within REUSABLE_ARTIFACTS -> ${REUSABLE_ARTIFACTS}"
             REUSE_INFO=$(echo "$REUSABLE_ARTIFACTS" | jq -r --arg name "${ARTIFACT_NAME}" '.[] | select(.name == $name) | .runId')
-
+            echo "Debug: Found REUSE_INFO -> |${REUSE_INFO}|"
             if [ -n "$REUSE_INFO" ]; then
               # アーティファクトの詳細をダウンロードして設定値をチェック
               echo "Found potential artifact ${ARTIFACT_NAME} from run $REUSE_INFO"
