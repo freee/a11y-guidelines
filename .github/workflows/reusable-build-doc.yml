@@ -206,7 +206,7 @@ jobs:
 
           # Create the build output directory
           BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
-          mkdir -p "${BUILD_OUTPUT_DIR}"
+          mkdir -p "${BUILD_OUTPUT_DIR}/all"
           
           echo "=== Build Execution ==="
           echo "Build procedure: $BUILD_PROCEDURE"
@@ -214,17 +214,20 @@ jobs:
           echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
 
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html
+            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html singlehtml
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
+            cp -r ./build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html
+            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
+            cp -r ./ja/build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./en/build/html ]; then
-              mkdir -p "${BUILD_OUTPUT_DIR}/en"
+              mkdir -p "${BUILD_OUTPUT_DIR}/en/all"
               cp -r ./en/build/html/* "${BUILD_OUTPUT_DIR}/en/"
+              cp -r ./en/build/singlehtml/* "${BUILD_OUTPUT_DIR}/en/all/"
             fi
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
