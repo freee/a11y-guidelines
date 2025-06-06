@@ -67,6 +67,8 @@ jobs:
     steps:
       - name: Check if artifact can be reused
         id: check-reuse
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           CAN_REUSE="false"
           REUSE_RUN_ID=""
@@ -123,12 +125,6 @@ jobs:
 
           echo "can_reuse=$CAN_REUSE" >> $GITHUB_OUTPUT
           echo "reuse_run_id=$REUSE_RUN_ID" >> $GITHUB_OUTPUT
-
-      - name: Download existing artifact
-        if: steps.check-reuse.outputs.can_reuse == 'true'
-        run: |
-          echo "Reusing existing artifact ${ARTIFACT_NAME} from run ${{ steps.check-reuse.outputs.reuse_run_id }}"
-          echo "Build settings validated and compatible"
 
       # 以下のステップは、アーティファクトを再利用しない場合のみ実行
       - name: Checkout repository
