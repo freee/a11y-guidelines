@@ -300,9 +300,9 @@ jobs:
                 
                 # Remove metadata files from final deployment
                 rm -f "${GITHUB_WORKSPACE}/_site/${deploy_path}/.deploy_path" 2>/dev/null || true
-                rm -f "${GITHUB_WORKSPACE}/_site/${deploy_path}/.build_custom_domain" 2>/dev/null || true
+                rm -f "${GITHUB_WORKSPACE}/_site/${deploy_path}/.build_base_url" 2>/dev/null || true
                 rm -f "${GITHUB_WORKSPACE}/_site/.deploy_path" 2>/dev/null || true
-                rm -f "${GITHUB_WORKSPACE}/_site/.build_custom_domain" 2>/dev/null || true
+                rm -f "${GITHUB_WORKSPACE}/_site/.build_base_url" 2>/dev/null || true
               else
                 echo "Warning: No .deploy_path found for $artifact_name"
               fi
