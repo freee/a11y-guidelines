@@ -62,6 +62,7 @@ jobs:
       IS_LATEST_DEVELOP: ${{ inputs.is_latest_develop }}
       CURRENT_TAG_VNUM: ${{ inputs.vnum }}
       FORCE_REBUILD: ${{ inputs.force_rebuild }}
+      REUSABLE_ARTIFACTS: ${{ inputs.reusable_artifacts }}
 
     steps:
       - name: Check if artifact can be reused
