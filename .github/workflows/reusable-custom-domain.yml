@@ -14,12 +14,12 @@ jobs:
   get-domain:
     runs-on: ubuntu-latest
     outputs:
-      custom_domain: ${{ steps.get_pages_config.outputs.custom_domain }}
-      pages_configured: ${{ steps.get_pages_config.outputs.pages_configured }}
+      custom_domain: ${{ steps.get-pages-config.outputs.custom_domain }}
+      pages_configured: ${{ steps.get-pages-config.outputs.pages_configured }}
     
     steps:
       - name: Get GitHub Pages configuration
-        id: get_pages_config
+        id: get-pages-config
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
