@@ -40,10 +40,6 @@ on:
         required: false
         type: boolean
         default: false
-      custom_domain:
-        required: false
-        type: string
-        default: ''
       reusable_artifacts:
         required: false
         type: string
@@ -54,7 +50,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TZ: Asia/Tokyo
-      CUSTOM_DOMAIN: ${{ inputs.custom_domain }}
       GTM_ID: ${{ secrets.GTM_ID }}
       CURRENT_TAG: ${{ inputs.tag }}
       PYTHON_VER: ${{ inputs.python }}
@@ -95,25 +90,25 @@ jobs:
               # 一時的にアーティファクトをダウンロードして設定値を確認
               TEMP_DIR=$(mktemp -d)
               if gh run download $REUSE_INFO --name ${ARTIFACT_NAME} --dir "$TEMP_DIR" 2>/dev/null; then
-                STORED_CUSTOM_DOMAIN=""
+                STORED_BASE_URL=""
                 
-                if [ -f "$TEMP_DIR/.build_custom_domain" ]; then
-                  STORED_CUSTOM_DOMAIN=$(cat "$TEMP_DIR/.build_custom_domain")
+                if [ -f "$TEMP_DIR/.build_base_url" ]; then
+                  STORED_BASE_URL=$(cat "$TEMP_DIR/.build_base_url")
                 fi
                 
-                echo "Stored CUSTOM_DOMAIN: '$STORED_CUSTOM_DOMAIN'"
-                echo "Current CUSTOM_DOMAIN: '$CUSTOM_DOMAIN'"
+                echo "Stored BASE_URL: '$STORED_BASE_URL'"
+                echo "Current BASE_URL: '$BASE_URL'"
                 
-                if [ "$STORED_CUSTOM_DOMAIN" == "$CUSTOM_DOMAIN" ]; then
+                if [ "$STORED_BASE_URL" == "$BASE_URL" ]; then
                   CAN_REUSE="true"
                   REUSE_RUN_ID="$REUSE_INFO"
-                  echo "CUSTOM_DOMAIN matches - can reuse artifact"
+                  echo "BASE_URL matches - can reuse artifact"
                   
                   # 再利用する場合、アーティファクトを正しい場所に移動
                   mkdir -p ${{ github.workspace }}/build_output
                   cp -r "$TEMP_DIR"/* ${{ github.workspace }}/build_output/
                 else
-                  echo "CUSTOM_DOMAIN differs - will rebuild"
+                  echo "BASE_URL differs - will rebuild"
                 fi
                 
                 rm -rf "$TEMP_DIR"
@@ -242,7 +237,7 @@ jobs:
 
           # Create metadata files
           echo "${DEPLOY_PATH}" > "${BUILD_OUTPUT_DIR}/.deploy_path"
-          echo "${CUSTOM_DOMAIN}" > "${BUILD_OUTPUT_DIR}/.build_custom_domain"
+          echo "${BASE_URL}" > "${BUILD_OUTPUT_DIR}/.build_base_url"
           echo "Build completed successfully for ${CURRENT_TAG}, deploy path: ${DEPLOY_PATH}"
         working-directory: ${{ github.workspace }}
 
