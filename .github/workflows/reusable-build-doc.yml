@@ -116,6 +116,8 @@ jobs:
               else
                 echo "Failed to download artifact for inspection"
               fi
+            else
+              echo "No reusable artifact found for ${ARTIFACT_NAME}"
             fi
           fi
 
