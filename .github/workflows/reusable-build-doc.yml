@@ -90,7 +90,7 @@ jobs:
               
               # 一時的にアーティファクトをダウンロードして設定値を確認
               TEMP_DIR=$(mktemp -d)
-              if gh run download $REUSE_INFO --name ${ARTIFACT_NAME} --dir "$TEMP_DIR" 2>/dev/null; then
+              if gh run download $REUSE_INFO --name $ARTIFACT_NAME --dir "$TEMP_DIR"; then
                 STORED_BASE_URL=""
                 
                 if [ -f "$TEMP_DIR/.build_base_url" ]; then
