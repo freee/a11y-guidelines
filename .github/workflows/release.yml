@@ -120,6 +120,7 @@ jobs:
       artifact_name: ${{ matrix.build_target.artifact_name }}
       is_latest_release: ${{ matrix.build_target.is_latest_release || false }}
       is_latest_develop: ${{ matrix.build_target.is_latest_develop || false }}
+      is_release_asset: ${{ matrix.build_target.release_asset || false }}
       vnum: ${{ matrix.build_target.vnum }}
       force_rebuild: ${{ inputs.force_rebuild || false }}
       reusable_artifacts: ${{ needs.check-existing-artifacts.outputs.reusable_artifacts }}
@@ -129,7 +130,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build-docs, get-build-targets]
+    needs: build-docs
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -138,6 +139,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ${{ github.workspace }}/artifacts
+          pattern: build-*
 
       - name: Prepare final deployment directory
         env:
@@ -189,78 +191,43 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: get-build-targets
-    if: |
-      startsWith(github.ref, 'refs/tags/') &&
-      needs.get-build-targets.outputs.matrix
+    needs: build-docs
+    if: startsWith(github.ref, 'refs/tags/')
+    env:
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+      TAG: ${{ github.ref_name }}
 
     steps:
-      - name: Extract Tag Name
-        run: |
-          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
-
-      - name: Checkout repository for release build
-        uses: actions/checkout@v4
+      - name: Download asset build artifact
+        uses: actions/download-artifact@v4
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-          submodules: true
+          path: ${{ github.workspace }}/artifacts
+          pattern: release-*
 
-      - name: Clean working directory for release build
+      - name: Prepare release asset
         run: |
-          git clean -dfx
-          echo "Cleaned working directory for release build"
+          ASSET_DIR="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}-html"
+          mkdir -p "${ASSET_DIR}"
+          
+          echo "Processing artifacts..."
+          ARTIFACT_DIR="${GITHUB_WORKSPACE}/artifacts/release-${TAG}"
+          if [ -d "$ARTIFACT_DIR" ]; then
+            cp -r "${ARTIFACT_DIR}/*"" "${ASSET_DIR}/"
 
-      - name: Set up Python (for release build)
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Install Python dependencies for release build
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --upgrade
-
-      - name: Prepare HTML archive for release
-        env:
-          TZ: Asia/Tokyo
-          TAG: ${{ github.ref_name }}
-        run: |
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
+            # Remove metadata files from the asset
+            rm -f "${ASSET_DIR}/.deploy_path" 2>/dev/null || true
+            rm -f "${ASSET_DIR}/.build_base_url" 2>/dev/null || true
+            zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
           else
-            BUILD_PROCEDURE=$(make build-procedure-version)
-          fi
-
-          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-D html_baseurl=/ " html
-            mkdir -p freee-a11y-guidelines-${TAG}
-            cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=/ sphinx_options="" clean html
-            mkdir -p freee-a11y-guidelines-${TAG}/en
-            cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./en/build/html ]; then
-              cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
-            fi
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          else
-            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
+            echo "ERROR: No artifact found for ${TAG}"
             exit 1
           fi
-          zip -r freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ github.ref_name }}
         run: |
-          RELEASE_NOTES_FILE="./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
+          RELEASE_NOTES_FILE="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}-html/ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
           if [ -f "$RELEASE_NOTES_FILE" ]; then
             gh release create ${TAG} \
               --title "Ver. ${TAG}" \
@@ -272,4 +239,4 @@ jobs:
               --notes "Release version ${TAG}" \
               --draft
           fi
-          gh release upload ${TAG} freee-a11y-guidelines-${TAG}-html.zip
+          gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip

@@ -33,6 +33,10 @@ on:
         required: false
         type: boolean
         default: false
+      is_release_asset:
+        required: false
+        type: boolean
+        default: false
       vnum:
         required: true
         type: number
@@ -60,6 +64,7 @@ jobs:
       ARTIFACT_NAME: ${{ inputs.artifact_name }}
       IS_LATEST_RELEASE: ${{ inputs.is_latest_release }}
       IS_LATEST_DEVELOP: ${{ inputs.is_latest_develop }}
+      IS_RELEASE_ASSET: ${{ inputs.is_release_asset }}
       CURRENT_TAG_VNUM: ${{ inputs.vnum }}
       FORCE_REBUILD: ${{ inputs.force_rebuild }}
       REUSABLE_ARTIFACTS: ${{ inputs.reusable_artifacts }}
@@ -81,6 +86,8 @@ jobs:
             echo "Develop branch - always rebuild"
           elif [ "$IS_LATEST_RELEASE" == "true" ]; then
             echo "Latest release - always rebuild"
+          elif [ $IS_RELEASE_ASSET == "true" ]; then
+            echo "Release asset - always rebuild"
           else
             # 再利用可能なアーティファクトをチェック
             REUSE_INFO=$(echo "$REUSABLE_ARTIFACTS" | jq -r --arg name "${ARTIFACT_NAME}" '.[] | select(.name == $name) | .runId')
@@ -204,6 +211,12 @@ jobs:
             EXTRA_SPHINX_OPTIONS="-t current"
           fi
 
+          GTM_OPTIONS=""
+          if [ $IS_RELEASE_ASSET == "true; then
+            BASE_URL=""
+            NO_SPHINX_OPTIONS="true"
+          fi
+
           # Create the build output directory
           BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
           mkdir -p "${BUILD_OUTPUT_DIR}/all"
@@ -213,15 +226,22 @@ jobs:
           echo "Base URL: $BASE_URL"
           echo "Extra Sphinx options: $EXTRA_SPHINX_OPTIONS"
 
+          SPHINX_OPTIONS=""
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}" clean html singlehtml
+            if [ ! "$NO_SPHINX_OPTIONS" ]; then
+              SPHINX_OPTIONS="sphinx_options=\"-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}\""
+            fi
+            make $SPHINX_OPTIONS clean html singlehtml
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=${BASE_URL} sphinx_options="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}" clean html singlehtml
+            if [ ! "$NO_SPHINX_OPTIONS" ]; then
+              SPHINX_OPTIONS="sphinx_options=\"-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}\""
+            fi
+            make BASE_URL=${BASE_URL} $SPHINX_OPTIONS clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./ja/build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./en/build/html ]; then
