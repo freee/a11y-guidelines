@@ -225,6 +225,7 @@ jobs:
             if [ "$IS_RELEASE_ASSET" != "true" ]; then
               SPHINX_OPTIONS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}"
             fi
+            echo "SPHINX_OPTIONS: $SPHINX_OPTIONS"
             make sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
@@ -237,6 +238,7 @@ jobs:
             else
               BASE_URL=""
             fi
+            echo "SPHINX_OPTIONS: $SPHINX_OPTIONS"
             make BASE_URL=${BASE_URL} sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./ja/build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
