@@ -133,7 +133,7 @@ jobs:
               --arg base_url "$LATEST_BASE_URL" \
               --arg artifact_name "$LATEST_ARTIFACT_NAME" \
               '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
-            RELEASE_ASSET_ARTIFACT_NAME="release-${LATEST_TAG}"
+            RELEASE_ASSET_ARTIFACT_NAME="release-${LATEST_RELEASE_TAG}"
             MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
               --arg python "$LATEST_PY" \
               --arg sphinx "$LATEST_SPHINX" \
