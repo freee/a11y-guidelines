@@ -212,7 +212,7 @@ jobs:
           fi
 
           GTM_OPTIONS=""
-          if [ $IS_RELEASE_ASSET == "true; then
+          if [ $IS_RELEASE_ASSET == "true" ]; then
             BASE_URL=""
             NO_SPHINX_OPTIONS="true"
           fi
