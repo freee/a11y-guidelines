@@ -133,18 +133,16 @@ jobs:
               --arg base_url "$LATEST_BASE_URL" \
               --arg artifact_name "$LATEST_ARTIFACT_NAME" \
               '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
-            if [ "$IS_TAG_PUSH" = "true" ]; then
-              RELEASE_ASSET_ARTIFACT_NAME="release-${LATEST_TAG}"
-              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
-                --arg python "$LATEST_PY" \
-                --arg sphinx "$LATEST_SPHINX" \
-                --arg theme "$LATEST_THEME" \
-                --arg vnum "$LATEST_VNUM" \
-                --arg deploy_path "" \
-                --arg base_url "" \
-                --arg artifact_name "$RELEASE_ASSET_ARTIFACT_NAME" \
-                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: "", base_url: "", artifact_name: $artifact_name, is_latest_release: true, release_asset: true, vnum: ($vnum | tonumber)}]')
-            fi
+            RELEASE_ASSET_ARTIFACT_NAME="release-${LATEST_TAG}"
+            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
+              --arg python "$LATEST_PY" \
+              --arg sphinx "$LATEST_SPHINX" \
+              --arg theme "$LATEST_THEME" \
+              --arg vnum "$LATEST_VNUM" \
+              --arg deploy_path "" \
+              --arg base_url "" \
+              --arg artifact_name "$RELEASE_ASSET_ARTIFACT_NAME" \
+              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_release: true, release_asset: true, vnum: ($vnum | tonumber)}]')
           fi
 
           # Add archive builds
