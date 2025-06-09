@@ -229,9 +229,9 @@ jobs:
           SPHINX_OPTIONS=""
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
             if [ ! "$NO_SPHINX_OPTIONS" ]; then
-              SPHINX_OPTIONS="sphinx_options=\"-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}\""
+              SPHINX_OPTIONS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}"
             fi
-            make $SPHINX_OPTIONS clean html singlehtml
+            make sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./data/json/schemas ]; then
@@ -239,9 +239,9 @@ jobs:
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
             if [ ! "$NO_SPHINX_OPTIONS" ]; then
-              SPHINX_OPTIONS="sphinx_options=\"-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}\""
+              SPHINX_OPTIONS="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}"
             fi
-            make BASE_URL=${BASE_URL} $SPHINX_OPTIONS clean html singlehtml
+            make BASE_URL=${BASE_URL} sphinx_options=$SPHINX_OPTIONS clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./ja/build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./en/build/html ]; then
