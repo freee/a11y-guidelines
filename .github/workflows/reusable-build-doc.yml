@@ -241,7 +241,7 @@ jobs:
             if [ ! "$NO_SPHINX_OPTIONS" ]; then
               SPHINX_OPTIONS="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}"
             fi
-            make BASE_URL=${BASE_URL} sphinx_options=$SPHINX_OPTIONS clean html singlehtml
+            make BASE_URL=${BASE_URL} sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
             cp -r ./ja/build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./en/build/html ]; then
