@@ -124,6 +124,7 @@ jobs:
       vnum: ${{ matrix.build_target.vnum }}
       force_rebuild: ${{ inputs.force_rebuild || false }}
       reusable_artifacts: ${{ needs.check-existing-artifacts.outputs.reusable_artifacts }}
+    secrets: inherit
 
   deploy-pages:
     environment:
