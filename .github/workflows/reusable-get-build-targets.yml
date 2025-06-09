@@ -144,6 +144,7 @@ jobs:
                 --arg base_url "" \
                 --arg artifact_name "$RELEASE_ASSET_ARTIFACT_NAME" \
                 '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: "", base_url: "", artifact_name: $artifact_name, is_latest_release: true, release_asset: true, vnum: ($vnum | tonumber)}]')
+            fi
           fi
 
           # Add archive builds
