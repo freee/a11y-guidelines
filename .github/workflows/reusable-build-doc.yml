@@ -211,12 +211,6 @@ jobs:
             EXTRA_SPHINX_OPTIONS="-t current"
           fi
 
-          GTM_OPTIONS=""
-          if [ $IS_RELEASE_ASSET == "true" ]; then
-            BASE_URL=""
-            NO_SPHINX_OPTIONS="true"
-          fi
-
           # Create the build output directory
           BUILD_OUTPUT_DIR="${GITHUB_WORKSPACE}/build_output"
           mkdir -p "${BUILD_OUTPUT_DIR}/all"
@@ -228,7 +222,7 @@ jobs:
 
           SPHINX_OPTIONS=""
           if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            if [ ! "$NO_SPHINX_OPTIONS" ]; then
+            if [ "$IS_RELEASE_ASSET" != "true" ]; then
               SPHINX_OPTIONS="-A gtm_id=${GTM_ID} -D html_baseurl=${BASE_URL} ${EXTRA_SPHINX_OPTIONS}"
             fi
             make sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
@@ -238,8 +232,10 @@ jobs:
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
           elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            if [ ! "$NO_SPHINX_OPTIONS" ]; then
+            if [ "$IS_RELEASE_ASSET" != "true" ]; then
               SPHINX_OPTIONS="-A gtm_id=${GTM_ID} ${EXTRA_SPHINX_OPTIONS}"
+            else
+              BASE_URL=""
             fi
             make BASE_URL=${BASE_URL} sphinx_options="$SPHINX_OPTIONS" clean html singlehtml
             cp -r ./ja/build/html/* "${BUILD_OUTPUT_DIR}/"
