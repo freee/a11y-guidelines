@@ -36,150 +36,11 @@ jobs:
     steps:
       - run: echo "Running in the correct repository. Proceeding."
 
-  get-custom-domain:
-    needs: check-repo
-    uses: ./.github/workflows/reusable-custom-domain.yml
-
   get-build-targets:
-    needs: [check-repo, get-custom-domain]
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.generate-matrix.outputs.matrix }}
-    env:
-      CUSTOM_DOMAIN: ${{ needs.get-custom-domain.outputs.custom_domain }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.target_ref || github.ref }}
-          fetch-depth: 0
-
-      - name: Generate build matrix
-        id: generate-matrix
-        env:
-          IS_TAG_PUSH: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
-          GITHUB_REFNAME: ${{ github.ref_name }}
-          FORCE_REBUILD: ${{ inputs.force_rebuild || 'false' }}
-          TARGET_REF: ${{ inputs.target_ref || '' }}
-        run: |
-          ALL_TAGS_SORTED=$(git tag -l '[0-9][0-9][0-9][0-9][0-9][0-9].[0-9]*' | sort -rV)
-          MATRIX_ITEMS="[]"
-
-          CURRENT_PUSHED_TAG=""
-          if [[ "${IS_TAG_PUSH}" == "true" ]]; then
-            CURRENT_PUSHED_TAG="$(echo ${GITHUB_REFNAME} | sed s/refs\/tags\///)"
-          fi
-
-          # Handle manual workflow dispatch with target_ref
-          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "$TARGET_REF" ]; then
-            echo "Manual dispatch with target ref: $TARGET_REF"
-            if git tag -l | grep -q "^${TARGET_REF}$"; then
-              echo "Target ref is a tag: $TARGET_REF"
-              CURRENT_PUSHED_TAG="$TARGET_REF"
-            elif [ "$TARGET_REF" == "develop" ]; then
-              echo "Target ref is develop branch"
-            else
-              echo "Warning: Target ref '$TARGET_REF' is not a recognized tag or develop branch"
-            fi
-          fi
-
-          LATEST_RELEASE_TAG=$(echo "$ALL_TAGS_SORTED" | head -n1)
-
-          get_versions() {
-            local VNUM=$1
-            local PY_VER=""
-            local SPHINX_VER=""
-            local THEME_VER=""
-
-            if (( VNUM <= 20230300 )); then
-              PY_VER="3.12"; SPHINX_VER="~=5.0"; THEME_VER="~=2.0"
-            elif (( VNUM <= 20250400 )); then
-              PY_VER="3.13"; SPHINX_VER="~=7.0"; THEME_VER="~=3.0"
-            else
-              PY_VER="3.13"; SPHINX_VER="requirements.txt"; THEME_VER="requirements.txt"
-            fi
-            echo "$PY_VER,$SPHINX_VER,$THEME_VER"
-          }
-
-          # Generate safe artifact names by replacing problematic characters
-          generate_artifact_name() {
-            local tag=$1
-            local deploy_path=$2
-            if [ "$tag" == "develop" ]; then
-              echo "build-current"
-            elif [ -z "$deploy_path" ]; then
-              echo "build-root"
-            else
-              # Replace / with - for artifact names
-              echo "build-$(echo "$deploy_path" | sed 's/\//-/g')"
-            fi
-          }
-
-          get_base_url() {
-            local deploy_path=$1
-            if [ -n "$CUSTOM_DOMAIN" ]; then
-              base_url_prefix="https://${CUSTOM_DOMAIN}/"
-            else
-              base_url_prefix="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-            fi
-            echo "${base_url_prefix}${deploy_path}/"
-          }
-
-          # Add develop build
-          DEVELOP_ARTIFACT_NAME=$(generate_artifact_name "develop" "current")
-          DEVELOP_BASE_URL=$(get_base_url "current")
-          MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "develop" \
-            --arg python "3.13" \
-            --arg sphinx "~=7.0" \
-            --arg theme "~=3.0" \
-            --arg vnum "99999999" \
-            --arg deploy_path "current" \
-            --arg base_url "$DEVELOP_BASE_URL" \
-            --arg artifact_name "$DEVELOP_ARTIFACT_NAME" \
-            '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_develop: true, vnum: ($vnum | tonumber)}]')
-
-          # Add latest release build
-          if [ -n "$LATEST_RELEASE_TAG" ]; then
-            LATEST_VNUM=$(echo "$LATEST_RELEASE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
-            IFS=',' read -r LATEST_PY LATEST_SPHINX LATEST_THEME <<< $(get_versions "$LATEST_VNUM")
-            LATEST_ARTIFACT_NAME=$(generate_artifact_name "$LATEST_RELEASE_TAG" "")
-            LATEST_BASE_URL=$(get_base_url "")
-
-            MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$LATEST_RELEASE_TAG" \
-              --arg python "$LATEST_PY" \
-              --arg sphinx "$LATEST_SPHINX" \
-              --arg theme "$LATEST_THEME" \
-              --arg vnum "$LATEST_VNUM" \
-              --arg deploy_path "" \
-              --arg base_url "$LATEST_BASE_URL" \
-              --arg artifact_name "$LATEST_ARTIFACT_NAME" \
-              '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, is_latest_release: true, vnum: ($vnum | tonumber)}]')
-          fi
-
-          # Add archive builds
-          for ARCHIVE_TAG in ${ALL_TAGS_SORTED}; do
-            if [[ "$ARCHIVE_TAG" != "$LATEST_RELEASE_TAG" ]]; then
-              ARCHIVE_VNUM=$(echo "$ARCHIVE_TAG" | awk -F'.' '{printf "%s%02d", $1, $2}')
-              IFS=',' read -r ARCHIVE_PY ARCHIVE_SPHINX ARCHIVE_THEME <<< $(get_versions "$ARCHIVE_VNUM")
-              ARCHIVE_DEPLOY_PATH="archive/${ARCHIVE_TAG}"
-              ARCHIVE_BASE_URL=$(get_base_url "$ARCHIVE_DEPLOY_PATH")
-              ARCHIVE_ARTIFACT_NAME=$(generate_artifact_name "$ARCHIVE_TAG" "$ARCHIVE_DEPLOY_PATH")
-
-              MATRIX_ITEMS=$(echo "$MATRIX_ITEMS" | jq -c --arg tag "$ARCHIVE_TAG" \
-                --arg python "$ARCHIVE_PY" \
-                --arg sphinx "$ARCHIVE_SPHINX" \
-                --arg theme "$ARCHIVE_THEME" \
-                --arg vnum "$ARCHIVE_VNUM" \
-                --arg deploy_path "$ARCHIVE_DEPLOY_PATH" \
-                --arg base_url "$ARCHIVE_BASE_URL" \
-                --arg artifact_name "$ARCHIVE_ARTIFACT_NAME" \
-                '. + [{tag: $tag, python: $python, sphinx: $sphinx, theme: $theme, deploy_path: $deploy_path, base_url: $base_url, artifact_name: $artifact_name, vnum: ($vnum | tonumber)}]')
-            fi
-          done
-
-          echo "matrix=$MATRIX_ITEMS" >> "$GITHUB_OUTPUT"
-          echo "Generated matrix with $(echo "$MATRIX_ITEMS" | jq length) items"
-          echo "Force rebuild: $FORCE_REBUILD"
+    uses: ./.github/workflows/reusable-get-build-targets.yml
+    with:
+      target_ref: ${{ inputs.target_ref || '' }}
+      force_rebuild: ${{ inputs.force_rebuild || false }}
 
   check-existing-artifacts:
     runs-on: ubuntu-latest
@@ -259,6 +120,7 @@ jobs:
       artifact_name: ${{ matrix.build_target.artifact_name }}
       is_latest_release: ${{ matrix.build_target.is_latest_release || false }}
       is_latest_develop: ${{ matrix.build_target.is_latest_develop || false }}
+      is_release_asset: ${{ matrix.build_target.release_asset || false }}
       vnum: ${{ matrix.build_target.vnum }}
       force_rebuild: ${{ inputs.force_rebuild || false }}
       reusable_artifacts: ${{ needs.check-existing-artifacts.outputs.reusable_artifacts }}
@@ -268,7 +130,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [build-docs, get-build-targets]
+    needs: build-docs
     steps:
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -277,6 +139,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ${{ github.workspace }}/artifacts
+          pattern: build-*
 
       - name: Prepare final deployment directory
         env:
@@ -328,78 +191,43 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: get-build-targets
-    if: |
-      startsWith(github.ref, 'refs/tags/') &&
-      needs.get-build-targets.outputs.matrix
+    needs: build-docs
+    if: startsWith(github.ref, 'refs/tags/')
+    env:
+      GITHUB_WORKSPACE: ${{ github.workspace }}
+      TAG: ${{ github.ref_name }}
 
     steps:
-      - name: Extract Tag Name
-        run: |
-          echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
-
-      - name: Checkout repository for release build
-        uses: actions/checkout@v4
+      - name: Download asset build artifact
+        uses: actions/download-artifact@v4
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
-          submodules: true
+          path: ${{ github.workspace }}/artifacts
+          pattern: release-*
 
-      - name: Clean working directory for release build
+      - name: Prepare release asset
         run: |
-          git clean -dfx
-          echo "Cleaned working directory for release build"
+          ASSET_DIR="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}-html"
+          mkdir -p "${ASSET_DIR}"
+          
+          echo "Processing artifacts..."
+          ARTIFACT_DIR="${GITHUB_WORKSPACE}/artifacts/release-${TAG}"
+          if [ -d "$ARTIFACT_DIR" ]; then
+            cp -r "${ARTIFACT_DIR}/*"" "${ASSET_DIR}/"
 
-      - name: Set up Python (for release build)
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Install Python dependencies for release build
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt --upgrade
-
-      - name: Prepare HTML archive for release
-        env:
-          TZ: Asia/Tokyo
-          TAG: ${{ github.ref_name }}
-        run: |
-          if [ ! -f ./build.mk ]; then
-            BUILD_PROCEDURE=0
+            # Remove metadata files from the asset
+            rm -f "${ASSET_DIR}/.deploy_path" 2>/dev/null || true
+            rm -f "${ASSET_DIR}/.build_base_url" 2>/dev/null || true
+            zip -r ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
           else
-            BUILD_PROCEDURE=$(make build-procedure-version)
-          fi
-
-          if [ "${BUILD_PROCEDURE}" -eq 0 ]; then
-            make sphinx_options="-D html_baseurl=/ " html
-            mkdir -p freee-a11y-guidelines-${TAG}
-            cp -r ./build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          elif [ "${BUILD_PROCEDURE}" -eq 1 ]; then
-            make BASE_URL=/ sphinx_options="" clean html
-            mkdir -p freee-a11y-guidelines-${TAG}/en
-            cp -r ./ja/build/html/* freee-a11y-guidelines-${TAG}/
-            if [ -d ./en/build/html ]; then
-              cp -r ./en/build/html/* freee-a11y-guidelines-${TAG}/en
-            fi
-            if [ -d ./data/json/schemas ]; then
-              cp -r ./data/json/schemas freee-a11y-guidelines-${TAG}/
-            fi
-          else
-            echo "Unknown build procedure version: ${BUILD_PROCEDURE}"
+            echo "ERROR: No artifact found for ${TAG}"
             exit 1
           fi
-          zip -r freee-a11y-guidelines-${TAG}-html.zip ./freee-a11y-guidelines-${TAG}
 
       - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ github.ref_name }}
         run: |
-          RELEASE_NOTES_FILE="./ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
+          RELEASE_NOTES_FILE="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}-html/ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
           if [ -f "$RELEASE_NOTES_FILE" ]; then
             gh release create ${TAG} \
               --title "Ver. ${TAG}" \
@@ -411,4 +239,4 @@ jobs:
               --notes "Release version ${TAG}" \
               --draft
           fi
-          gh release upload ${TAG} freee-a11y-guidelines-${TAG}-html.zip
+          gh release upload ${TAG} ${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}-html.zip
