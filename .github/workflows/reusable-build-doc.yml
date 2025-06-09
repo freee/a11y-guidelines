@@ -232,7 +232,6 @@ jobs:
             fi
             make sphinx_options="$SPHINX_OPTIONS" clean html
             cp -r ./build/html/* "${BUILD_OUTPUT_DIR}/"
-            cp -r ./build/singlehtml/* "${BUILD_OUTPUT_DIR}/all/"
             if [ -d ./data/json/schemas ]; then
               cp -r ./data/json/schemas "${BUILD_OUTPUT_DIR}/"
             fi
