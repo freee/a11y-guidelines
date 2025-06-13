@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, Optional, Literal, Union
 import logging
 from pathlib import Path
-from pydantic import BaseModel, Field, model_validator, field_validator, ValidationError
+from pydantic import BaseModel, Field, model_validator, field_validator, ValidationError, ValidationInfo
 import yaml
 import toml
 import configparser
@@ -44,6 +44,25 @@ class ApplicationConfig(BaseModel):
     log_level: LogLevel = Field(default="INFO", description="Logging level")
     basedir: Optional[Path] = Field(None, description="Base directory for YAML files")
     base_url: str = Field(default="https://a11y-guidelines.freee.co.jp", description="Base URL for documentation")
+
+    @model_validator(mode='after')
+    def resolve_credential_paths(self, info: ValidationInfo) -> 'ApplicationConfig':
+        """Resolve credential and token paths relative to the config file."""
+        # load_configurationからcontext経由で設定ファイルのパスを取得
+        config_file_path = info.context.get('config_file_path') if info.context else None
+
+        if config_file_path:
+            config_dir = config_file_path.parent
+            
+            # 1. credentials_path が相対パスの場合、設定ファイルのディレクトリからの相対パスとして解決
+            if not self.credentials_path.is_absolute():
+                self.credentials_path = config_dir / self.credentials_path
+            
+            # 2. token_path が相対パスの場合、同様に解決
+            if not self.token_path.is_absolute():
+                self.token_path = config_dir / self.token_path
+        
+        return self
 
     def get_base_url(self, cmd_base_url: Optional[str] = None) -> str:
         """Get base URL for documentation, resolving from command line or config
@@ -325,93 +344,81 @@ def get_config_loader(config_path: Path) -> ConfigLoader:
     return loaders[ext]
 
 def find_config_file(config_path: Optional[Union[str, Path]] = None) -> Path:
-    """Find configuration file from specified path or default locations
-    
-    Args:
-        config_path: Command-line specified configuration file path
-        
-    Returns:
-        Path: Absolute path to found configuration file
-        
-    Raises:
-        FileNotFoundError: If configuration file not found
-    """
-    try:
-        # Convert to Path if string provided
-        config_path_obj = Path(config_path) if config_path else None
-    except Exception as e:
-        raise ValueError(f"Invalid config path: {e}")
+    """Find configuration file from specified path or default locations.
 
-    # If path specified with -c option
-    if config_path_obj:
-        if config_path_obj.is_absolute():
-            # Use absolute path as is
-            if not config_path_obj.exists():
-                raise FileNotFoundError(f"Specified configuration file not found: {config_path_obj}")
-            return validate_readable_file(config_path_obj)
+    Search logic:
+    1. If -c option is used:
+        a. If absolute path, use it directly.
+        b. If relative path, search only in the current working directory.
+    2. If -c option is NOT used, search in order:
+        a. In `${HOME}/.config/freee_a11y_gl/` for `yaml2sheet.{yaml,yml,ini,toml}`
+        b. In the current working directory for `.yaml2sheet.{yaml,yml,ini,toml}`
+
+    Args:
+        config_path: Command-line specified configuration file path.
+
+    Returns:
+        Path: Absolute path to the found configuration file.
+
+    Raises:
+        FileNotFoundError: If configuration file is not found.
+    """
+    # When -c option is specified, use the provided path directly
+    if config_path:
+        path_obj = Path(config_path)
+        
+        # a. When the path is absolute
+        if path_obj.is_absolute():
+            if not path_obj.exists():
+                raise FileNotFoundError(f"Specified configuration file not found: {path_obj}")
+            return validate_readable_file(path_obj)
+        
+        # b. When the path is relative (only serach in current directory)
         else:
-            # For relative path, search in:
-            # 1. Current working directory
-            # 2. Script directory
-            search_dirs = [
-                Path.cwd(),  # Current working directory first
-                Path(__file__).parent.absolute()  # Script directory second
-            ]
-            
-            tried_paths = []
-            for dir_path in search_dirs:
-                try_path = dir_path / config_path_obj
-                tried_paths.append(try_path)
-                if try_path.exists():
-                    return validate_readable_file(try_path)
-            
-            raise FileNotFoundError(
-                "Specified configuration file not found. Searched in:\n" +
-                "\n".join(f"- {p}" for p in tried_paths)
-            )
-    
-    # File types in order of precedence
-    config_types = ["yaml", "yml", "toml", "ini"]
-    search_dirs = [
-        Path.cwd(),  # Current working directory first
-        Path(__file__).parent.absolute()  # Script directory second
+            search_path = Path.cwd() / path_obj
+            if search_path.exists():
+                return validate_readable_file(search_path)
+            else:
+                raise FileNotFoundError(
+                    "Specified configuration file not found in the current directory.\n"
+                    f"- Searched for: {search_path}"
+                )
+
+    # Default  search logic when -c option is not used
+    search_locations = [
+        {
+            "dir": Path.home() / ".config" / "freee_a11y_gl",
+            "basename": "yaml2sheet"
+        },
+        {
+            "dir": Path.cwd(),
+            "basename": ".yaml2sheet"
+        }
     ]
     
-    # First check for config.* in current directory
-    for ext in config_types:
-        config_path = Path.cwd() / f"config.{ext}"
-        if config_path.exists():
-            logger.debug(f"Found config file in current directory: {config_path}")
-            return validate_readable_file(config_path)
-            
-    # Then check script directory
-    script_dir = Path(__file__).parent.absolute()
-    for ext in config_types:
-        config_path = script_dir / f"config.{ext}"
-        if config_path.exists():
-            logger.debug(f"Found config file in script directory: {config_path}")
-            return validate_readable_file(config_path)
+    config_types = ["yaml", "yml", "ini", "toml"]
     
-    # Build search paths list for error message, maintaining search order
-    search_paths = [
-        Path.cwd() / f"config.{ext}"
-        for ext in config_types
-    ] + [
-        Path(__file__).parent.absolute() / f"config.{ext}"
-        for ext in config_types
-    ]
-    
+    tried_paths = []
+    for loc in search_locations:
+        if not loc["dir"].is_dir():
+            continue
+        for ext in config_types:
+            path_to_check = loc["dir"] / f"{loc['basename']}.{ext}"
+            tried_paths.append(path_to_check)
+            if path_to_check.exists():
+                logger.debug(f"Found config file: {path_to_check}")
+                return validate_readable_file(path_to_check)
+
+    # If no config file found, raise FileNotFoundError
     raise FileNotFoundError(
         "No configuration file found. Searched in order of precedence:\n" +
-        "\n".join(f"- {p}" for p in search_paths) +
-        "\n\nTo create a config file, save as 'config.yaml' with the following content:\n" +
+        "\n".join(f"- {p}" for p in tried_paths) +
+        "\n\nTo create a config file, save as "
+        f"'{Path.home() / '.config' / 'freee_a11y_gl' / 'yaml2sheet.yaml'}' "
+        "with the following content:\n" +
         "---\n" +
-        "credentials_path: credentials.json\n" +
-        "token_path: token.json\n" +
         "development_spreadsheet_id: YOUR_DEV_SPREADSHEET_ID\n" +
-        "production_spreadsheet_id: YOUR_PROD_SPREADSHEET_ID\n" +
-        "log_level: INFO\n" +
-        "base_url: https://a11y-guidelines.freee.co.jp\n"
+        "production_spreadsheet_id: YOUR_PROD_SPREADSHEET_ID\n"
     )
 
 def load_configuration(config_path: Optional[Union[str, Path]] = None) -> ApplicationConfig:
@@ -437,7 +444,12 @@ def load_configuration(config_path: Optional[Union[str, Path]] = None) -> Applic
         
         # Validate and return config
         try:
-            validated_config = ApplicationConfig.model_validate(config_data)
+            validation_context = {"config_file_path": actual_config_path}
+            validated_config = ApplicationConfig.model_validate(
+                config_data,
+                context=validation_context
+            )
+            
             return validated_config
         except ValidationError as e:
             logger.error(f"Configuration validation error: {e}")
@@ -451,13 +463,13 @@ def create_default_config(output_path: Optional[Union[str, Path]] = None) -> Pat
     """Create a default configuration file
     
     Args:
-        output_path: Path to save configuration file (defaults to ./config.yaml)
+        output_path: Path to save configuration file (defaults to ./yaml2sheet.yaml)
         
     Returns:
         Path: Path to created configuration file
     """
     if output_path is None:
-        output_path = Path.cwd() / "config.yaml"
+        output_path = Path.cwd() / "yaml2sheet.yaml"
     else:
         output_path = Path(output_path)
         
