@@ -7,10 +7,44 @@ platform:
 - mobile
 check:
   ja: |-
-    *  アイコンには、その役割や示している状態を表すテキスト・ラベルが併せて表示されている。または
-    *  テキスト・ラベルを表示できない場合、色の違いだけでアイコンの意味の違いを表さず、形状（モチーフ）やサイズでも違いが示されている。かつ
-    *  役割や意味がわかる ``alt`` 属性の値が設計資料で明示されている。
+    アイコンは、その役割や示している状態が伝わるようになっている。
   en: |-
-    *  Icons are accompanied by text labels that represent their role or the state they indicate. Or,
-    *  If text labels cannot be displayed, the difference in the meaning of icons is not represented solely by color differences but also by differences in shape (motif) or size. And,
-    *  The value of the ``alt`` attribute, which makes the role or meaning understandable, is explicitly specified in the design documentation.
+    Icons are designed to convey their role and the state they indicate.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0391-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、アイコンが存在しない。
+      en: |-
+        There are no icons on the screen to be checked.
+  - type: simple
+    id: 0391-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        アイコンには、その役割や示している状態を表すテキスト・ラベルが併せて表示されている。
+      en: |-
+        Icons are accompanied by text labels that represent their role or the state they indicate.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0391-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          アイコンは、色の違いだけで異なる役割や示している状態を表さず、形状（モチーフ）やサイズでも違いが示されている。
+        en: |-
+          Different roles or states indicated by icons are not represented solely by color differences, but also by differences in shape (motif) or size.
+    - type: simple
+      id: 0391-content-03
+      tool: misc
+      procedure:
+        ja: |-
+          役割や意味がわかるような代替テキスト（ ``alt`` 属性のまたは ``aria-label`` 属性の値）が設計資料で明示されている。
+        en: |-
+          Alternative text (value of ``alt`` attribute or ``aria-label`` attribute) that indicates the role or meaning is clearly defined in the design documentation.

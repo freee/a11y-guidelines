@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    情報や機能性を一切持たない画像は、説明のテキストを付加してはならないことが設計資料で明示されている。
+    情報や機能性を一切持たない画像は、スクリーン・リーダーに無視されるようになっている。
   en: |-
-    It is explicitly stated in the design documentation that images which do not carry any information or functionality must not have descriptive text added to them.
+    Images that do not contain any information or functionality are designed so that they are ignored by screen readers.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0451-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、情報や機能性を持たない画像が存在しない。
+      en: |-
+        There are no images that do not contain any information or functionality on the screen to be checked.
+  - type: simple
+    id: 0451-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        情報や機能性を持たない画像について、代替テキスト（ ``alt`` 属性または ``aria-label`` 属性の値）を空にすべきこと、または ``role="presentation"`` を指定すべきことが設計資料で明示されている。
+      en: |-
+        The design documentation clearly states that images that do not contain any information or functionality should have an empty alternative text (value of ``alt`` attribute or ``aria-label`` attribute) or specify ``role="presentation"``.

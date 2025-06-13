@@ -10,3 +10,23 @@ check:
     音声を含むコンテンツには、同期したキャプションが提供されている。
   en: |-
     Content that includes audio is provided with synchronized captions.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1511-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に音声を含むコンテンツがない。
+      en: |-
+        There is no content that includes audio on the screen to be checked.
+  - type: simple
+    id: 1511-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        音声を含むコンテンツには、同期したキャプションが提供されている。
+      en: |-
+        Content that includes audio is provided with synchronized captions.

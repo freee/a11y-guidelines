@@ -6,6 +6,26 @@ platform:
 - web
 check:
   ja: |-
-    クリックやマウスオーバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できるように設計されている。
+    すべての操作がキーボードのみでできるように設計されている。
   en: |-
-    Elements that accept mouse actions such as clicks or mouseovers are designed to be operable with the keyboard alone.
+    All operations are designed to be possible with only the keyboard.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0211-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、静的なテキストのみが存在し、クリックやマウスオーバーなどのマウス操作を受け付けるもの（リンク、ボタン、フォーム・コントロールその他）は存在しない。
+      en: |-
+        The screen to be checked contains only static text, and does not contain any elements that accept mouse actions such as clicks or mouseovers (links, buttons, form controls, etc.).
+  - type: simple
+    id: 0211-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        クリックやマウスオーバーなどのマウス操作を受け付けるものは、キーボードのみでも操作できる設計になっている。
+      en: |-
+        Anything that accepts mouse operation, such as clicks and hover, is designed to be operable with only the keyboard.

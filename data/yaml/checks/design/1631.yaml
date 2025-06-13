@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    音声コンテンツについて、充分に聴き取りやすい。
+    音声を含むコンテンツにおいて、背景音は適切な音量になっている。
   en: |-
-    The audio content is sufficiently easy to listen to.
+    In content with audio, the background sound is at an appropriate volume.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1631-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、音声コンテンツが存在しない。
+      en: |-
+        There is no audio content on the target screen.
+  - type: simple
+    id: 1631-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        音声コンテンツは、充分に聴き取りやすい。
+      en: |-
+        The audio content is sufficiently audible.

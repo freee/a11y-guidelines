@@ -10,3 +10,23 @@ check:
     設計資料には、フォーム入力でエラーが発生したときに表示される、エラー内容が分かる具体的な文言が明示されている。
   en: |-
     The design documentation explicitly specifies the specific phrases that are displayed when an error occurs in form input, clarifying the nature of the error.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1081-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、入力フォームが存在しない。
+      en: |-
+        There are no input forms on the screen to be checked.
+  - type: simple
+    id: 1081-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        フォーム入力時に発生することが想定されるすべてのエラーについて、それぞれ具体的なエラーの内容が分かるメッセージが表示されるような設計になっている。
+      en: |-
+        The design is such that a message indicating the specific content of each error is displayed for all errors that are expected to occur during form input.

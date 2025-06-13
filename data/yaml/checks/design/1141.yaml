@@ -10,3 +10,23 @@ check:
     法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正が可能な設計になっている。
   en: |-
     For functions that involve legal actions, financial transactions, or the modification and deletion of data, the design allows for cancellation, pre-submission confirmation and modification, or error checking and correction at the time of submission.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1141-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、法的行為、経済的取引、データの変更や削除を生じる機能が存在しない。
+      en: |-
+        There are no functions that involve legal actions, financial transactions, or the modification and deletion of data on the screen to be checked.
+  - type: simple
+    id: 1141-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        法的行為、経済的取引、データの変更や削除を生じる機能について、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正が可能な設計になっている。
+      en: |-
+        The design allows for cancellation, pre-submission confirmation and modification, or error checking and correction at the time of submission for functions that involve legal actions, financial transactions, or the modification and deletion of data.

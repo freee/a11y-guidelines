@@ -6,6 +6,26 @@ platform:
 - web
 check:
   ja: |-
-    デフォルトのフォーカス・インジケーターを用いない場合、代替となるフォーカス・インジケーターが設計資料で明示されている。
+    フォーカスされている場所が視認できるようになっている。
   en: |-
-    When not using the default focus indicator, an alternative focus indicator is explicitly specified in the design documentation.
+    The location of the focus is visible.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0151-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        フォーカス・インジケーターについて、ブラウザーのデフォルトのものから変更していない。
+      en: |-
+        The focus indicator has not been changed from the default of the browser.
+  - type: simple
+    id: 0151-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        フォーカス・インジケーターが設計資料で明示されている。
+      en: |-
+        The focus indicator is clearly stated in the design document.

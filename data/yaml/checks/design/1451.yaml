@@ -7,8 +7,34 @@ platform:
 - mobile
 check:
   ja: |-
-    *  自動的に開始し5秒以上続く動画、アニメーションがない。または
-    *  動画やアニメーションを停止、一時停止、または非表示にすることができる。
+    ユーザーの注意を阻害するような自動再生される動画やアニメーションがない。
   en: |-
-    *  There are no videos or animations that start automatically and last for more than 5 seconds. Or
-    *  Videos or animations can be stopped, paused, or hidden.
+    There is no automatically played video or animation that hinders the user's attention.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1451-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に自動再生される動画やアニメーションがない。
+      en: |-
+        There is no automatically played video or animation on the screen to be checked.
+  - type: simple
+    id: 1451-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        ユーザーが、自動再生される動画やアニメーションの再生頻度を変更できるようになっている。
+      en: |-
+        The user can change the playback frequency of the automatically played video or animation.
+  - type: simple
+    id: 1451-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        ユーザーが自動再生を停止できるようになっている。
+      en: |-
+        The user can stop automatic playback.

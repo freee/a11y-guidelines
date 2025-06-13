@@ -8,4 +8,24 @@ check:
   ja: |-
     マウスオーバー時に表示される情報や実行できる機能は、キーボードだけで操作している場合やタッチUIで操作している場合にも表示・実行できるような設計になっている。
   en: |-
-    Design such that information displayed or functions executable on mouseover can also be displayed or executed when operating solely with a keyboard, or with a touch UI.
+    Information displayed or functions that can be executed on mouseover are designed so that they are displayed or can be executed also when operating with a keyboard or touch UI.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0361-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、マウスオーバー時にのみ表示される情報や実行できる機能が存在しない。
+      en: |-
+        There are no information displayed or functions executable only on mouseover on the screen to be checked.
+  - type: simple
+    id: 0361-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        マウスオーバー時に表示される情報や実行できる機能について、キーボードのみで操作する方法やタッチUIで操作する方法が設計資料に明示されている。
+      en: |-
+        The method of operating with only the keyboard or touch UI for information displayed or functions executable on mouseover is clearly defined in the design documentation.
