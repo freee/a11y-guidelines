@@ -99,16 +99,22 @@ class Guideline(BaseModel):
 
         # Set up relationships
         rel = RelationshipManager()
+        if not Category.get_by_id(gl['category']):
+            raise ValueError(f'Category ID {gl["category"]} referenced in guideline {self.id} does not exist.')
         rel.associate_objects(self, Category.get_by_id(gl['category']))
         
         # Associate checks
         for check_id in gl.get('checks', []):
             from .check import Check  # Import here to avoid circular imports
+            if not Check.get_by_id(check_id):
+                raise ValueError(f'Check ID {check_id} referenced in guideline {self.id} does not exist.')
             rel.associate_objects(self, Check.get_by_id(check_id))
 
         # Associate WCAG success criteria
         for sc in gl.get('sc', []):
             from .reference import WcagSc  # Import here to avoid circular imports
+            if not WcagSc.get_by_id(sc):
+                raise ValueError(f'Success criterion ID {sc} referenced in guideline {self.id} does not exist.')
             rel.associate_objects(self, WcagSc.get_by_id(sc))
 
         # Associate info references

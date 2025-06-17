@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "freee_a11y_gl"
-version = "0.1.1"
+version = "0.1.2"
 description = "A module to process a11y guidelines data"
 authors = [
     {name = "Masafumi NAKANE", email = "max@freee.co.jp"}
