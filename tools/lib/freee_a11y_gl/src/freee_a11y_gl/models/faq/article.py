@@ -45,18 +45,24 @@ class Faq(BaseModel):
         # Associate tags
         from .tag import FaqTag
         for tag_id in faq['tags']:
+            if not FaqTag.get_by_id(tag_id):
+                raise ValueError(f'Tag ID {tag_id} referenced in FAQ {self.id} does not exist.')
             rel.associate_objects(self, FaqTag.get_by_id(tag_id))
 
         # Associate guidelines if present
         if 'guidelines' in faq:
             from ..content import Guideline
             for gl_id in faq['guidelines']:
+                if not Guideline.get_by_id(gl_id):
+                    raise ValueError(f'Guideline ID {gl_id} referenced in FAQ {self.id} does not exist.')
                 rel.associate_objects(self, Guideline.get_by_id(gl_id))
 
         # Associate checks if present
         if 'checks' in faq:
             from ..check import Check
             for check_id in faq['checks']:
+                if not Check.get_by_id(check_id):
+                    raise ValueError(f'Check ID {check_id} referenced in FAQ {self.id} does not exist.')
                 rel.associate_objects(self, Check.get_by_id(check_id))
 
         # Associate info references if present
