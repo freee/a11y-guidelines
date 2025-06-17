@@ -12,6 +12,8 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+   *  Updated the accessibility checklist to V7.0.0
+
 `Ver. 202504.0 (Apr 22, 2025) <https://github.com/freee/a11y-guidelines/releases/202504.0>`__
 =============================================================================================
 
