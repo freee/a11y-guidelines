@@ -47,6 +47,6 @@ conditions:
         tool: misc
         procedure:
           ja: |-
-            代替テキストによる簡潔な説明では不十分な場合、詳細な説明のテキストと、その実装方法（例： ``aria-describedby``属性や``figcaption``要素の利用、画像の直前または直後への掲載など）が設計資料に明示されている。
+            代替テキストによる簡潔な説明では不十分な場合、詳細な説明のテキストと、その実装方法（例： ``aria-describedby`` 属性や ``figcaption`` 要素の利用、画像の直前または直後への掲載など）が設計資料に明示されている。
           en: |-
             If a concise description using alternative text is insufficient, the design documentation clearly specifies the text for a detailed description and how to implement it (e.g., using the ``aria-describedby`` attribute or ``figcaption`` element, or placing it immediately before or after the image).
