@@ -37,6 +37,6 @@ conditions:
       tool: misc
       procedure:
         ja: |-
-          グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置を示す要素に、適切な``aria-current``属性の値が指定されている。
+          グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置を示す要素に、適切な ``aria-current`` 属性の値が指定されている。
         en: |-
           The appropriate value of the ``aria-current`` attribute is specified for the element that indicates the position of the page/screen within the site or application in the global navigation or breadcrumb list.
