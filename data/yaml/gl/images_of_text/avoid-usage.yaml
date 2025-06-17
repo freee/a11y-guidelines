@@ -23,7 +23,6 @@ intent:
     -  Present information in a form that can be accessed by screen reader users.
     -  Do not compromise the ease of handling text information.
 checks:
-- '0481'
 - '0531'
 info:
 - exp-iot-usage
