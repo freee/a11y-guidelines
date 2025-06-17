@@ -7,6 +7,6 @@ platform:
 - mobile
 check:
   ja: |-
-    3秒以上の長さの自動再生される音声コンテンツがない。
+    3秒以上の長さの音声を含む、自動再生されるコンテンツがない。
   en: |-
-    There is no audio content that plays automatically for more than 3 seconds.
+    There is no automatically playing content that includes audio longer than 3 seconds.
