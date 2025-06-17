@@ -37,6 +37,7 @@ jobs:
       - run: echo "Running in the correct repository. Proceeding."
 
   get-build-targets:
+    needs: check-repo
     uses: ./.github/workflows/reusable-get-build-targets.yml
     with:
       target_ref: ${{ inputs.target_ref || '' }}
