@@ -8,13 +8,35 @@ platform:
 check:
   ja: |-
     アイコンや画像に関して、3:1以上のコントラスト比が確保されている。
-
-    *  アイコンと背景色
-    *  画像内の重要な情報とその背景色
-    *  画像および画像化されたテキストとその隣接領域
   en: |-
     For icons and images, a contrast ratio of at least 3:1 is ensured.
-
-    *  Between the icon and its background color
-    *  Between important information within the image and its background color
-    *  Between the image and images of text and their adjacent areas
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0001-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、アイコンや画像が存在しない。
+      en: |-
+        There are no icons or images on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0001-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          画像内の重要な情報やアイコンと、その背景色とのコントラスト比が3:1以上である。
+        en: |-
+          The contrast ratio between important information or icons within the image and its background color is 3:1 or more.
+    - type: simple
+      id: 0001-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          画像や画像化されたテキストと、その隣接領域とのコントラスト比が3:1以上である。
+        en: |-
+          The contrast ratio between the image or image text and its adjacent area is 3:1 or more.

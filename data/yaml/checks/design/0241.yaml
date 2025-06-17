@@ -7,6 +7,34 @@ platform:
 - mobile
 check:
   ja: |-
-    リンク・テキストは「こちら」などになっておらず、リンク・テキストの文言から遷移先をある程度推測できるようになっている。
+    リンクは、リンク先が容易に推測できるようなテキストで提供されている。
   en: |-
-    Link text is not merely 'click here' or similar phrases, and is designed so that the destination can be somewhat inferred from the wording of the link text.
+    Links are provided with text that makes it easy to guess the destination.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0241-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、リンクが存在しない。
+      en: |-
+        There are no links on the screen to be checked.
+  - type: simple
+    id: 0241-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        「○○はこちら」の「こちら」の部分だけがリンクになっているようなリンクがない。（この場合は「○○はこちら」全体をリンクにする。）
+      en: |-
+        There are no links that are like "click here for *****" where only the "here" part is a link. (In this case, make the entire "click here for *****" a link.)
+  - type: simple
+    id: 0241-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        リンク・テキストの意図が、マークアップで明確になっている。（例：直前の見出しなどから容易に推測できる場合）
+      en: |-
+        The intent of the link text is clearly defined in the markup. (For example, it can be easily inferred from the heading immediately before the link.)

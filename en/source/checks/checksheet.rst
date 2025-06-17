@@ -42,6 +42,12 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V7.0.0 (June 17, 2025)
+======================
+
+*  Revised the check sheet for items whose applicable stage is "Design" and platform is "Web" to match the recording method to the check sheet for items whose applicable stage is "Product" and platform is "Web", and reviewed the check items.
+*  Reviewed some of the check items regarding images of text, integrating check ID: 0481 into :ref:`check-0511`.
+
 V6.1.0 (April 18, 2025)
 =======================
 

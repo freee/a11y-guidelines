@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    動画の音声情報には同期した手話通訳が提供されている。
+    音声を含むコンテンツには同期した手話通訳が提供されている。
   en: |-
-    Synchronized sign language interpretation is provided for the audio information in videos.
+    Content that includes audio is provided with synchronized sign language interpretation.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1601-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、音声を含むコンテンツが存在しない。
+      en: |-
+        There is no content with audio on the target screen.
+  - type: simple
+    id: 1601-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        音声を含むコンテンツには、同期した手話通訳を提供している。
+      en: |-
+        Content with audio includes synchronized sign language interpretation.

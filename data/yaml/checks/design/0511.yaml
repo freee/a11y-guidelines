@@ -7,6 +7,36 @@ platform:
 - mobile
 check:
   ja: |-
-    画像化されたテキストと同じ内容のテキストが、その画像代替テキストとして設計資料で明示されている。
+    画像化されたテキストを用いていない。
   en: |-
-    The text that has the same content as images of text is explicitly stated as the alternative text for those images in the design documentation.
+    Images of text are not used.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0511-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、テキスト情報を含む画像はまったく存在しない。
+      en: |-
+        There are no images containing text information at all on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0511-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象の画面には、自社および他者のロゴ、バナー、図や写真の中の文字列を除いて、テキスト情報を含む画像が存在しない。
+        en: |-
+          There are no images containing text information on the screen to be checked, except for logos, banners, and text in diagrams and photographs of our company and others.
+    - type: simple
+      id: 0511-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          テキスト情報を含む画像について、その内容が適切に伝わる代替テキストが設計資料で明示されている。
+        en: |-
+          The design documentation clearly states the alternative text which conveys the content of the image containing text information appropriately.

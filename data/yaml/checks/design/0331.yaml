@@ -6,12 +6,36 @@ platform:
 - web
 check:
   ja: |-
-    画像をリンクやボタンにする場合、クリックやタッチに反応する領域が充分な大きさになっていて、その領域が設計資料で明示されている。
-
-    *  デスクトップWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
-    *  モバイルWebでは44 x 44 CSS px以上
+    ボタンやリンクになっている画像は、クリックやタッチに反応する領域が充分に大きく、その領域が設計資料で明示されている。
   en: |-
-    When an image is used as a link or button, the area that responds to clicks or touches is sufficiently large, and this area is explicitly specified in the design documentation.
-
-    *  For desktop Web, at least 24 x 24 CSS pixels, preferably more than 44 x 44 CSS pixels
-    *  For mobile Web, more than 44 x 44 CSS pixels"
+    Images used as buttons or links have a large enough area that responds to clicks and touches, and that area is clearly defined in the design documentation.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0331-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、ボタンやリンクになっている画像が存在しない。
+      en: |-
+        There are no images used as buttons or links on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0331-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          リンクやボタンになっている画像について、クリックやタッチに反応する領域が設計資料で明示されている。
+        en: |-
+          The area that responds to clicks and touches for images used as links or buttons is clearly defined in the design documentation.
+    - type: simple
+      id: 0331-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          ボタンやリンクになっている画像のクリックやタッチに反応する領域のサイズが、デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上に、モバイル向けWebでは44 x 44 CSS px以上になっている。
+        en: |-
+          The size of the area that responds to clicks and touches of images used as buttons or links is at least 24 x 24 CSS px for desktop Web, preferably larger than 44 x 44 CSS px, and larger than 44 x 44 CSS px for mobile Web.

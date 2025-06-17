@@ -10,3 +10,34 @@ check:
     音声・映像コンテンツは、そのコンテンツがなくても不足なく情報が伝わるような内容で、そのコンテンツがテキスト情報の代替もしくは補助的な位置づけであることが明示されている。
   en: |-
     Audio and video content is clearly indicated as being supplementary to or an alternative to text information, and is designed so that information is conveyed adequately even when the content is not present.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1481-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に音声・映像コンテンツがない。
+      en: |-
+        There is no audio or video content on the screen to be checked.
+  - type: and
+    conditions:
+
+    - type: simple
+      id: 1481-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          音声コンテンツ、動画、アニメーションは、テキスト情報と同一の内容を伝えるためのもので、そのコンテンツがなくても情報の理解やサービスの利用に支障がないような内容である。
+        en: |-
+          Content of audio, video, or animation is designed to convey the same information as the text information, and the absence of that content does not hinder understanding of the information or use of the service.
+    - type: simple
+      id: 1481-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          音声コンテンツ、動画、アニメーションは、そのコンテンツがテキスト情報と同一の内容であることがユーザーに対して明示されている。
+        en: |-
+          User is explicitly informed that the audio content, video, and animation are the same content as the text information.

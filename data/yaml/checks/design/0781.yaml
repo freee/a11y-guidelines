@@ -7,8 +7,36 @@ platform:
 - mobile
 check:
   ja: |-
-    *  グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている構成要素は、すべてのページ/画面で同じ出現順序になっている。かつ
-    *  これらの構成要素の中でのリンクやボタンの出現順序は、すべてのページ/画面で同じになっている。
+    グローバル・ナビゲーション、ヘッダー、フッター、パンくずリスト、サポートUIなど、複数のページ/画面で共通に用いられている要素は、すべてのページで一貫性のある形で用いられている。
   en: |-
-    *  Components commonly used across multiple pages/screens, such as global navigation, headers, footers, breadcrumb lists, and support UI, appear in the same order on all pages/screens. And,
-    *  The appearance order of links and buttons within these components is the same on all pages/screens.
+    Components commonly used across multiple pages/screens, such as global navigation, headers, footers, breadcrumb lists, and support UI, are used consistently on all pages.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0781-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、複数のページ/画面で共通に用いられている要素が存在しない。
+      en: |-
+        There are no elements that are used in common across multiple pages/screens on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0781-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          複数のページ/画面で共通に用いられている要素について、すべてのページで一貫した出現順序になっている。
+        en: |-
+          For elements that are used in common across multiple pages/screens, the order of appearance is consistent on all pages.
+    - type: simple
+      id: 0781-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          これらの要素の中でのリンクやボタンの出現順序は、すべてのページで同じになっている。
+        en: |-
+          The order of appearance of links and buttons within these elements is the same on all pages.

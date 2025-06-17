@@ -10,3 +10,23 @@ check:
     ステータス・メッセージとして扱われるべきメッセージ、すなわち表示時や変更時にスクリーン・リーダーによって自動的に読み上げられる必要があるメッセージが、設計資料で特定されている。
   en: |-
     Messages that should be treated as status messages, i.e., messages that need to be automatically read by screen readers when displayed or changed, are specified in the design documentation.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 1171-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、ステータス・メッセージとして扱われるべきメッセージが存在しない。
+      en: |-
+        There are no messages that should be treated as status messages on the screen to be checked.
+  - type: simple
+    id: 1171-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        ステータス・メッセージとして扱われるべきメッセージについて、表示時や変更時にスクリーン・リーダーによって自動的に読み上げられる必要があることが設計資料で明示されている。
+      en: |-
+        For messages that should be treated as status messages, it is explicitly stated in the design documentation that they need to be automatically read by screen readers when displayed or changed.

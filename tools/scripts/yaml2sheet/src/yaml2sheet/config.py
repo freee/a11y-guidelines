@@ -107,10 +107,10 @@ COLUMNS = {
         "generatedData": []
     },
     "designWeb": {
-        "plainData1": [],
+        "plainData1": ["webConditionStatement"],
         "plainData2": [],
         "linkData": [],
-        "generatedData": []
+        "generatedData": ["finalResult", "calculatedResult"]
     },
     "designMobile": {
         "plainData1": [],
