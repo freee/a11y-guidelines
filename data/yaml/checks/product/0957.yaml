@@ -28,10 +28,10 @@ conditions:
       ja: |-
         キーボード操作時、以下のすべてを満たしている:
 
-        *  Tab/Shift+Tabキーでフォーカスを移動した際、到達できないチェックボックスがない。
+        *  :kbd:`Tab` / :kbd:`Shift+Tab` キーでフォーカスを移動した際、到達できないチェックボックスがない。
         *  スペースキーを押下することで、フォーカスされているチェックボックスのオン/オフ譜を切り替えられる。
       en: |-
         All of the following are met when performing keyboard operations:
 
-        *  There are no check boxes that cannot be reached when moving the focus using the Tab/Shift+Tab keys.
+        *  There are no check boxes that cannot be reached when moving the focus using the :kbd:`Tab` / :kbd:`Shift+Tab` keys.
         *  The on/off state of the focused check box can be toggled by pressing the space key.

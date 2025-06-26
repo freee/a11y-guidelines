@@ -8,9 +8,9 @@ platform:
 - web
 guideline:
   ja: |-
-    音声/動画のプレイヤーをページに埋め込む場合、そのコンポーネントにフォーカスした状態から、Tabキー、矢印キー、Escキーなどで抜け出すことができるようにする。
+    音声/動画のプレイヤーをページに埋め込む場合、そのコンポーネントにフォーカスした状態から、 :kbd:`Tab` キー、矢印キー、 :kbd:`Esc` キーなどで抜け出すことができるようにする。
   en: |-
-    When embedding an audio/video player in a page, ensure that it is possible to move the focus away from the component by using the Tab key , arrow keys, or Esc key.
+    When embedding an audio/video player in a page, ensure that it is possible to move the focus away from the component by using the :kbd:`Tab` key, arrow keys, or :kbd:`Esc` key.
 sc:
 - 2.1.2
 intent:

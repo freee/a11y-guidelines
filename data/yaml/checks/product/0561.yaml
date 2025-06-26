@@ -66,12 +66,12 @@ conditions:
           ja: |-
             macOS VoiceOverで以下の操作をして見出しリストを表示したとき、ページ中の見出しが過不足なく表示される。
 
-            1. :kbd:`VO + U` を押下してローターのメニューを表示
+            1. :kbd:`VO+U` を押下してローターのメニューを表示
             2. 「見出し」を選択
           en: |-
             All headings on the page are displayed appropriately when displaying the heading list by steps below with macOS VoiceOver.
 
-            1. Press :kbd:`VO + U` to display the rotor menu
+            1. Press :kbd:`VO+U` to display the rotor menu
             2. Select "Headings"
 - platform: ios
   type: simple

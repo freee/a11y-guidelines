@@ -9,9 +9,9 @@ platform:
 - mobile
 guideline:
   ja: |-
-    キーボード操作時のTab/Shift+Tabキー操作、スクリーン・リーダー利用時のタッチUIでの左右フリック操作などでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+    キーボード操作時の :kbd:`Tab` / :kbd:`Shift+Tab` キー操作、スクリーン・リーダー利用時のタッチUIでの左右フリック操作などでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
   en: |-
-    When moving focus using keyboard operations like Tab/Shift+Tab keys, or touch UI left/right flick operations with screen readers, ensure that focus moves in an appropriate sequence that aligns with the content's meaning.
+    When moving focus using keyboard operations like :kbd:`Tab` / :kbd:`Shift+Tab` keys, or touch UI left/right flick operations with screen readers, ensure that focus moves in an appropriate sequence that aligns with the content's meaning.
 sc:
 - 1.3.2
 - 2.4.3

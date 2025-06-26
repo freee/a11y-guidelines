@@ -6,7 +6,7 @@ platform:
 - web
 check:
   ja: |-
-    Tab/Shift+Tabキーによるフォーカス移動時の挙動は以下のすべてを満たしている：
+    :kbd:`Tab` / :kbd:`Shift+Tab` キーによるフォーカス移動時の挙動は以下のすべてを満たしている：
 
     *  フォーカス・インジケーターまたはそれを代替する表示がある
     *  自動的に次のような挙動が発生しない：
@@ -17,7 +17,7 @@ check:
        -  モーダル・ダイアログの表示
        -  表示内容の大幅な変更
   en: |-
-    Behavior when moving focus using tab/shift+tab keys fulfills all of the following
+    Behavior when moving focus using :kbd:`Tab` / :kbd:`Shift+Tab` keys fulfills all of the following
 
     *  Focus indicator or alternative display is present
     *  The following behaviors do not occur automatically:

@@ -6,7 +6,7 @@ How to Perform Checks With NVDA
 
 This section details the initial configuration and basic instructions for using NVDA, a screen reader designed for Windows.
 
-Note that within this guide, notations like :kbd:`NVDA + N` indicate pressing the "NVDA control key", which is explained in :ref:`nvda-welcome-screen`, simultaneously with :kbd:`N`.
+Note that within this guide, notations like :kbd:`NVDA+N` indicate pressing the "NVDA control key", which is explained in :ref:`nvda-welcome-screen`, simultaneously with :kbd:`N`.
 
 ************************************
 Environment for Accessibility Checks
@@ -85,7 +85,7 @@ Depending on the language and the keyboard layout settings of Windows, :kbd:`Cap
 The option to use the :kbd:`Esc` key is intended for environments lacking any of the aforementioned keys, specifically useful for scenarios like using NVDA within a virtual Windows environment on macOS.
 
 For the purposes of this article, the NVDA control key will be referred to as :kbd:`NVDA`.
-For example, the notation :kbd:`NVDA + N` means to press the :kbd:`N` key while holding down the NVDA control key set here.
+For example, the notation :kbd:`NVDA+N` means to press the :kbd:`N` key while holding down the NVDA control key set here.
 
 Other Settings
 --------------
@@ -101,7 +101,7 @@ NVDA has many more settings available beyond those configurable via the welcome 
 Here, we'll discuss settings that are particularly useful when using NVDA for accessibility checks.
 
 The settings screen can be accessed by clicking on the NVDA icon in the system tray at the bottom right of the screen.
-This menu can also be displayed by pressing :kbd:`NVDA + N`.
+This menu can also be displayed by pressing :kbd:`NVDA+N`.
 
 In the "Settings" screen, setting categories are displayed on the left side, and the settings for the selected category are shown on the right side.
 
@@ -154,7 +154,7 @@ Browse Mode
 Uncheck "Use screen layout (when supported)."
 When this option is checked, during browse mode, a whole line of text on the screen is read aloud together.
 If part of this text is a link, both the linked and non-linked parts are read together, which can make it difficult to distinguish link text during checks.
-Note that this setting can also be changed with :kbd:`NVDA + V`.
+Note that this setting can also be changed with :kbd:`NVDA+V`.
 
 Uncheck both "Automatic focus mode for focus changes" and "Automatic focus mode for caret movement."
 When these options are checked, it can lead to confusion because NVDA may automatically switch to focus mode depending on your actions in browse mode.
@@ -227,16 +227,16 @@ NVDA Menu
 The NVDA menu provides access to various screens and tools of NVDA.
 This menu can be displayed by either of the following:
 
-*  Press :kbd:`NVDA + N`
+*  Press :kbd:`NVDA+N`
 *  Click on the NVDA icon in the system tray at the bottom right of the desktop
 
 Starting and Stopping NVDA
 ==========================
 
-If a desktop shortcut was created during installation, NVDA can be launched either by clicking the desktop shortcut or by pressing :kbd:`Ctrl + Alt + N`.
-If there is no shortcut, launch NVDA by typing :command:`nvda` in the "Run" dialog (accessed by pressing :kbd:`Windows + R`).
+If a desktop shortcut was created during installation, NVDA can be launched either by clicking the desktop shortcut or by pressing :kbd:`Ctrl+Alt+N`.
+If there is no shortcut, launch NVDA by typing :command:`nvda` in the "Run" dialog (accessed by pressing :kbd:`Windows+R`).
 
-Exiting NVDA can be done by pressing :kbd:`NVDA + Q`.
+Exiting NVDA can be done by pressing :kbd:`NVDA+Q`.
 If this key combination is not available for some reason, NVDA can also be exited via the previously mentioned NVDA menu.
 
 Focus Mode and Browse Mode
@@ -258,7 +258,7 @@ In contrast, in Browse Mode, keyboard actions are intercepted by NVDA and used t
 
 While Focus Mode is the standard operating mode, Browse Mode is primarily available only when browsing the Web.
 
-If Browse Mode is available, such as when the focus is on the content area of a Web browser, you can switch between the two modes by pressing :kbd:`NVDA + Space`.
+If Browse Mode is available, such as when the focus is on the content area of a Web browser, you can switch between the two modes by pressing :kbd:`NVDA+Space`.
 
 During Web browsing, it's common to review content in Browse Mode and switch to Focus Mode for form inputs.
 However, for Web content that behaves more like an application, it may primarily be operated in Focus Mode.
@@ -293,11 +293,11 @@ Changing Speech Settings
 ------------------------
 
 You can temporarily change the speech settings without opening the settings screen.
-Use :kbd:`NVDA + Ctrl` in combination with the arrow keys.
+Use :kbd:`NVDA+Ctrl` in combination with the arrow keys.
 
-Pressing :kbd:`NVDA + Ctrl + ←` or :kbd:`NVDA + Ctrl + →` will read out the name of the setting being adjusted and its current value, like "Pitch 50."
+Pressing :kbd:`NVDA+Ctrl+←` or :kbd:`NVDA+Ctrl+→` will read out the name of the setting being adjusted and its current value, like "Pitch 50."
 Continue using one of these key combinations until the desired setting is announced.
-Once the setting you want to adjust is read out loud, use :kbd:`NVDA + Ctrl + ↑` or :kbd:`NVDA + Ctrl + ↓` to adjust the value for the setting.
+Once the setting you want to adjust is read out loud, use :kbd:`NVDA+Ctrl+↑` or :kbd:`NVDA+Ctrl+↓` to adjust the value for the setting.
 
 Other Commands
 --------------
@@ -319,13 +319,13 @@ Reference Videos
    Stop reading.
 :kbd:`Shift`
    Pause/resume reading.
-:kbd:`NVDA + S`
+:kbd:`NVDA+S`
    Change the reading mode (If the sound unexpectedly stops, pressing this a few times might be helpful in some cases).
-:kbd:`NVDA + 1`
+:kbd:`NVDA+1`
    Input Help (Press once to enter Help mode, and press again to exit Help mode. In Help mode, the names and roles of the keys pressed are read aloud.)
-:kbd:`NVDA + Q`
+:kbd:`NVDA+Q`
    Quit NVDA.
-:kbd:`NVDA + N`
+:kbd:`NVDA+N`
    Show NVDA Menu.
 
 Updating NVDA
@@ -357,7 +357,7 @@ Conversely, if there are links, each link portion is treated as a unit, and if t
 If the text judged as a single unit exceeds a certain length, reading aloud will stop midway when pressing the :kbd:`↓` key.
 In this case, pressing the :kbd:`↓` key again will continue reading the next part.
 
-Pressing :kbd:`NVDA + ↑` allows you to reread the content that was just read aloud.
+Pressing :kbd:`NVDA+↑` allows you to reread the content that was just read aloud.
 (Precisely, this action makes NVDA read aloud the line where the cursor is currently located.)
 
 The left and right arrow keys are used for reading aloud by character.
@@ -367,12 +367,12 @@ Having the Entire Page Read Aloud
 
 You can have the entire page read aloud by following these steps:
 
-1. Move to the beginning of the page with :kbd:`Ctrl + Home`.
-2. Start reading aloud with :kbd:`NVDA + ↓`.
+1. Move to the beginning of the page with :kbd:`Ctrl+Home`.
+2. Start reading aloud with :kbd:`NVDA+↓`.
 
 If you want to stop the reading aloud partway through, press the :kbd:`Ctrl` key.
 
-Pressing :kbd:`NVDA + ↓` again will allow you to continue having the rest read aloud.
+Pressing :kbd:`NVDA+↓` again will allow you to continue having the rest read aloud.
 
 Interactable Components
 =======================
@@ -383,7 +383,7 @@ Specifically, find the component in Browse Mode and try performing key operation
 Ensure that operations with :kbd:`Enter`, :kbd:`Space`, and :kbd:`Esc` keys result in the expected behavior in Browse Mode.
 If new content is displayed as a result of these operations, verify that this content can be read aloud in Browse Mode.
 
-For key operations other than these, switch to Focus Mode by pressing :kbd:`NVDA + Space` before checking.
+For key operations other than these, switch to Focus Mode by pressing :kbd:`NVDA+Space` before checking.
 
 Reading Tables
 ==============
@@ -399,15 +399,15 @@ These all work in Browse Mode.
 
    *  -  Key Command
       -  Description
-   *  -  :kbd:`T`, :kbd:`Shift + T`
+   *  -  :kbd:`T`, :kbd:`Shift+T`
       -  Move to the next or previous table
-   *  -  :kbd:`Ctrl + Alt + ↑`
+   *  -  :kbd:`Ctrl+Alt+↑`
       -  Move to and read the cell above
-   *  -  :kbd:`Ctrl + Alt + ↓`
+   *  -  :kbd:`Ctrl+Alt+↓`
       -  Move to and read the cell below
-   *  -  :kbd:`Ctrl + Alt + ←`
+   *  -  :kbd:`Ctrl+Alt+←`
       -  Move to and read the cell to the left
-   *  -  :kbd:`Ctrl + Alt + →`
+   *  -  :kbd:`Ctrl+Alt+→`
       -  Move to and read the cell to the right
 
 The following content is announced when moving among cells using the functions listed above.
@@ -430,20 +430,20 @@ In Browse Mode, you can navigate through the content using key commands such as 
 
    *  -  Key Command
       -  Description
-   *  -  :kbd:`D`, :kbd:`Shift + D`
+   *  -  :kbd:`D`, :kbd:`Shift+D`
       -  Next, previous landmark (region)
-   *  -  :kbd:`H`, :kbd:`Shift + H`
+   *  -  :kbd:`H`, :kbd:`Shift+H`
       -  Next, previous heading
-   *  -  :kbd:`L`, :kbd:`Shift + L`
+   *  -  :kbd:`L`, :kbd:`Shift+L`
       -  Next, previous list
-   *  -  :kbd:`G`, :kbd:`Shift + G`
+   *  -  :kbd:`G`, :kbd:`Shift+G`
       -  Next, previous graphic
-   *  -  :kbd:`F`, :kbd:`Shift + F`
+   *  -  :kbd:`F`, :kbd:`Shift+F`
       -  Next, previous form field
-   *  -  :kbd:`T`, :kbd:`Shift + T`
+   *  -  :kbd:`T`, :kbd:`Shift+T`
       -  Next, previous table
 
-In addition to these key commands, pressing :kbd:`NVDA + F7` displays a list of elements within the page, and it is possible to navigate using this list.
+In addition to these key commands, pressing :kbd:`NVDA+F7` displays a list of elements within the page, and it is possible to navigate using this list.
 
 .. include:: /inc/info2faq/exp-screen-reader-check-nvda.rst
 
