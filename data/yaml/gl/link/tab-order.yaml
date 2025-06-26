@@ -8,9 +8,9 @@ platform:
 - web
 guideline:
   ja: |-
-    Tab/Shift+Tabキーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
+    :kbd:`Tab` / :kbd:`Shift+Tab` キーでフォーカスを移動させたとき、コンテンツの意味に合った適切な順序でフォーカスを移動させる。
   en: |-
-    When moving focus using Tab/Shift+Tab keys, ensure that focus moves in an appropriate sequence that aligns with the content's meaning.
+    When moving focus using :kbd:`Tab` / :kbd:`Shift+Tab` keys, ensure that focus moves in an appropriate sequence that aligns with the content's meaning.
 sc:
 - 2.4.3
 intent:

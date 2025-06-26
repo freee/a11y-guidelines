@@ -8,9 +8,9 @@ platform:
 - web
 guideline:
   ja: |-
-    ページ中のあらゆるコンポーネントについて、Tabキー、矢印キー、Escキーの押下など簡単な操作でフォーカスを外すことができるようにする。
+    ページ中のあらゆるコンポーネントについて、 :kbd:`Tab` キー、矢印キー、 :kbd:`Esc` キーの押下など簡単な操作でフォーカスを外すことができるようにする。
   en: |-
-    Ensure that focus can be moved off from every component on a page using simple operations such as pressing the Tab key, arrow keys, and Esc key.
+    Ensure that focus can be moved off from every component on a page using simple operations such as pressing the :kbd:`Tab` key, arrow keys, and :kbd:`Esc` key.
 sc:
 - 2.1.2
 intent:

@@ -13,7 +13,7 @@ Below, we will show you how to use the display switching functions for each oper
 Windows 10 And Windows 11
 *************************
 
-1. Open the "Settings" screen and click on "Accessibility" (in Windows 10, it's called "Ease of Access") (the :kbd:`Win + U` keyboard shortcut can be used).
+1. Open the "Settings" screen and click on "Accessibility" (in Windows 10, it's called "Ease of Access") (the :kbd:`Win+U` keyboard shortcut can be used).
 2. Click on "Color filters."
 3. Turn on the "Color filters" switch on the right side of the window, then click the dropdown below it to show the related options.
 4. Select "Grayscale."
@@ -22,7 +22,7 @@ Windows 10 And Windows 11
       :alt: Screenshot: the Color Filters settings
 
 If you frequently use this feature, it would be useful to enable "Keyboard shortcut for color filters" on the same screen.
-Enabling this setting allows you to toggle the color filters on and off at any time by pressing :kbd:`Win + Ctrl + C`.
+Enabling this setting allows you to toggle the color filters on and off at any time by pressing :kbd:`Win+Ctrl+C`.
 
 .. image:: /img/grayscale/win-settings-2.png
    :alt: Screenshot: the Color Filters settings with Keyboard Shortcut enabled

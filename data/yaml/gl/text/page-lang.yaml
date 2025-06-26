@@ -8,7 +8,7 @@ platform:
 - web
 guideline:
   ja: |-
-    ``html`` 要素に適切にlang属性を指定する。
+    ``html`` 要素に適切に ``lang`` 属性を指定する。
   en: |-
     Specify the ``lang`` attribute for the ``html`` element appropriately.
 sc:

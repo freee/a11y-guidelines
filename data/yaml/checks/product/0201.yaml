@@ -6,7 +6,7 @@ platform:
 - web
 check:
   ja: |-
-    *  Tab/Shift+Tabキーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
+    *  :kbd:`Tab` / :kbd:`Shift+Tab` キーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
     *  特定の箇所からフォーカスが抜け出せない状態では、矢印キーやEscキーの押下といった簡単な操作でその状態を抜け出すことができる
 
     特に注意が必要なコンポーネントの例：
@@ -15,7 +15,7 @@ check:
     *  ポップアップ・メニュー
     *  モーダル・ダイアログ
   en: |-
-    *  When moving the focus using Tab/Shift+Tab keys, the focus does not get stuck at certain location, or
+    *  When moving the focus using :kbd:`Tab` / :kbd:`Shift+Tab` keys, the focus does not get stuck at certain location, or
     *  If the focus gets stuck at certain location, simple operation such as pressing arrow keys or Esc key gets the focus away from the location
 
     Examples of components that require special caution:
@@ -30,12 +30,12 @@ conditions:
   id: "0201-keyboard-01"
   procedure:
     ja: |-
-      Tabキーを使って、ページの先頭からフォーカスを順に移動したときの挙動は、以下を満たしている：
+      :kbd:`Tab` キーを使って、ページの先頭からフォーカスを順に移動したときの挙動は、以下を満たしている：
 
-      *  TabキーまたはShift+Tabキーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
-      *  TabキーやShift+Tabキーの押下でフォーカスが抜け出せない場合に、矢印キーやEscキーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
+      *  :kbd:`Tab` / :kbd:`Shift+Tab` キーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
+      *  :kbd:`Tab` / :kbd:`Shift+Tab` キーの押下でフォーカスが抜け出せない場合に、矢印キーや :kbd:`Esc` キーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
     en: |-
-      Behavior when moving the focus sequentially from the top of the page using the Tab key fulfills the following:
+      Behavior when moving the focus sequentially from the top of the page using the :kbd:`Tab` key fulfills the following:
 
-      *  Pressing the Tab key or Shift+Tab key does not cause a situation where the focus cannot escape from a specific location, or
-      *  If the focus cannot escape by pressing the Tab key or Shift+Tab key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the Esc key.
+      *  Pressing the :kbd:` / :kbd:`Shift+Tab` key does not cause a situation where the focus cannot escape from a specific location, or
+      *  If the focus cannot escape by pressing the :kbd:`Tab` / :kbd:`Shift+Tab` key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the :kbd:`Esc` key.

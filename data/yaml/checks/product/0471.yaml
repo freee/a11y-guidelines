@@ -44,13 +44,13 @@ conditions:
           ja: |-
             NVDAのブラウズ・モードで以下の操作を行った際、情報や機能性を持たない画像が無視される：
 
-            1. :kbd:`Ctrl + Home` を押下してページの先頭に移動
+            1. :kbd:`Ctrl+Home` を押下してページの先頭に移動
             2. :kbd:`G` を押下して次の画像まで移動
             3. 「次の画像がありません」という読み上げがあるまで繰り返す
           en: |-
             Images that do not contain any information or functionality are ignored when performing the following operations in NVDA's browse mode:
 
-            1. Press :kbd:`Ctrl + Home` to move to the top of the page
+            1. Press :kbd:`Ctrl+Home` to move to the top of the page
             2. Press :kbd:`G` to move to the next image
             3. Repeat until "no next graphic" is announced
     - type: and
@@ -70,14 +70,14 @@ conditions:
           ja: |-
             macOS VoiceOverで以下の操作を行った際、情報や機能性を持たない画像が無視される：
 
-            1. :kbd:`VO + Home` を押下してページの先頭に移動
-            2. :kbd:`VO + Command + G` を押下して次の画像まで移動
+            1. :kbd:`VO+Home` を押下してページの先頭に移動
+            2. :kbd:`VO+Command+G` を押下して次の画像まで移動
             3. それ以上VoiceOverカーソルが移動しなくなるまで、または「イメージが見つかりません」という読み上げがあるまで繰り返す
           en: |-
             Images that do not contain any information or functionality are ignored when performing the following operations with macOS VoiceOver enabled:
 
-            1. Press :kbd:`VO + Home` to move to the top of the page
-            2. Press :kbd:`VO + Command + G` to move to the next image
+            1. Press :kbd:`VO+Home` to move to the top of the page
+            2. Press :kbd:`VO+Command+G` to move to the next image
             3. Repeat until the VoiceOver cursor stops moving or "no image found" is announced
 - platform: ios
   type: simple
