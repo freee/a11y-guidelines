@@ -33,3 +33,5 @@
 *  表の各行に同じリンク・テキストがある場合に、適切に ``table`` 要素や関連要素でリンクが含まれる行と列が明確になっている
 
 .. include:: /inc/info2gl/exp-link-text.rst
+
+.. translated:: true
