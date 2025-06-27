@@ -1,39 +1,39 @@
 .. _exp-magnification:
 
 ##############################
-拡大表示時のアクセシビリティー
+Accessibility in Enlarged View
 ##############################
 
-ロービジョンのユーザーの中には、画面表示を拡大してPCやスマートフォンを操作している人がいます。
-拡大表示時にも、レイアウトが崩れるなどして情報を得にくくなったり、操作をしにくくなったりといったことがないようにする必要があります。
+Some users with low vision operate their PCs and smartphones with the display enlarged. It is essential to ensure that when the display is enlarged, the layout does not break, making it difficult to access information or operate the device.
 
-***********************
-Webブラウザーの拡大表示
-***********************
+*****************************
+Enlarged View in Web Browsers
+*****************************
 
-Webブラウザーで表示を拡大する方法としては、ブラウザーのズーム機能を使う方法と、文字サイズを変更する方法があります。
+There are two ways to enlarge the display in a Web browser: using the browser's zoom function or changing the font size.
 
-当ガイドラインでは、いずれの方法を使った場合も、200パーセントに拡大した際問題が発生しないようにすることを求めています。
-この条件を満たすためには、少なくともズーム機能で200パーセントの拡大表示を問題なく行える必要があります。
+Our guidelines require that content does not have issues when enlarged to 200% using either method.
+To meet this requirement, content must work without issues when zoomed to 200% using the browser's zoom function at a minimum.
 
-一方文字サイズ変更機能による拡大表示については、200パーセントの拡大設定をしたときに表示が適切に拡大されることが望ましいのは言うまでもないことですが、実際に表示が拡大されるかどうかにかかわらず、コンテンツの理解や利用を阻害するようなレイアウト崩れが発生しないことが最低限求められています。
-こうすることで、定常的に文字サイズ変更機能を利用しているユーザーの利用を困難にしないことにつながります。
+On the other hand, with the font size change function, it is highly desirable for the display to enlarge appropriately when set to 200%.
+However, the minimum requirement is that no layout breakages occur that would hinder the understanding or use of the content, regardless of whether the display is actually enlarged.
+This helps ensure that users who regularly use the font size change function are not inconvenienced.
 
-ズーム機能を用いている場合、拡大表示をしても問題が発生することはあまりありません。
-一方文字サイズ変更機能を用いて拡大する場合、文字サイズの指定にpxなどの絶対値指定とemやremなどの相対値指定が混在している場合などに問題が発生します。
+When the zoom function is used, issues with enlarged displays are rare.
+However, when the font size is changed, issues can arise if absolute values like ``px`` and relative values like ``em`` or ``rem`` are mixed in the font size specifications.
 
-さらに、ガイドラインでは400パーセントに拡大したときに、縦スクロールと横スクロールが共に必要になるようなコンテンツにならないように、適切にリフローすることを求めています。
-このガイドラインの対応するWCAG 2.1の達成基準（SC 1.4.10）では、縦スクロールのコンテンツ（横書きのコンテンツ）では幅320 CSS px相当の表示にした際に横スクロールが、横スクロールのコンテンツ（縦書きのコンテンツ）では高さ256 CSS px相当の表示にした場合に縦スクロールが、それぞれ発生しないようにリフローすることを求めています。
-これは、1280x1024のサイズの画面において400パーセントのズーム表示をした場合に、縦横両方のスクロールが必要という状況にならないようにすることを意図しています。
+Furthermore, the guidelines require content to reflow appropriately so that both vertical and horizontal scrolling are not needed when enlarged to 400%.
+The corresponding WCAG 2.1 Success Criterion (SC 1.4.10) for this guideline requires that content reflows so that horizontal scrolling does not occur in vertically scrolling content (e.g., horizontal text) when the display is equivalent to 320 CSS px in width, and vertical scrolling does not occur in horizontally scrolling content (e.g., vertical text) when the display is equivalent to 256 CSS px in height.
+This is intended to prevent a situation where both vertical and horizontal scrolling are necessary when viewing a 1280x1024 screen at 400% zoom.
 
-なお、1280x1024のサイズの画面上での表示を確認するためには、ブラウザーのウィンドウをこのサイズにした上で拡大表示をしてみると良いでしょう。
-以下の手順で、簡単にウィンドウ・サイズを1280x1024に変更することができます。
+To check the display on a 1280x1024 screen, it is a good idea to set your browser window to this size and then enlarge the display.
+You can easily change the window size to 1280x1024 using the following steps:
 
-#. 以下のコードをターゲットとするブックマーク（ブックマークレット）を作成。
+#. Create a bookmark (bookmarklet) with the following code.
 
    .. raw:: html
 
-      <details><summary>コードを表示</summary>
+      <details><summary>Show code</summary>
 
    .. code-block:: javascript
 
@@ -42,55 +42,54 @@ Webブラウザーで表示を拡大する方法としては、ブラウザー�
    .. raw:: html
 
       </details>
-      <a href="javascript:window.open(location.href,'a11ytest_1280x1024','width=1280,height=1024')">ウィンドウ・サイズを1280x1024にするブックマークレット</a>
+      <a href="javascript:window.open(location.href,'a11ytest_1280x1024','width=1280,height=1024')">Bookmarklet to change window size to 1280x1024</a>
 
-#. チェック対象のページを表示した状態で、このブックマークレットを実行。
+#. While viewing the page you want to check, run this bookmarklet.
 
-参考：ズーム機能と文字サイズ変更機能
+Reference: Zoom vs. Font Size Change
 ====================================
 
-ズーム機能は、ウィンドウ全体を拡大・縮小する機能で、最近のブラウザーでは標準的な機能です。
-Google Chromeの場合、Chromeメニューにある「テキストを拡大する」、「テキストを縮小する」を実行することで利用できます。
-また、これらの機能はそれぞれ :kbd:`CTRL + +` 、 :kbd:`CTRL + -` を押下することでも実行できます。
+The zoom function is a standard feature in modern browsers that magnifies or reduces the entire window.
+In Google Chrome, you can use it by selecting :menuselection:`Make Text Larger` or :menuselection:`Make Text Smaller` from the Chrome menu.
+You can also use the keyboard shortcuts :kbd:`Ctrl++` and :kbd:`Ctrl+-`, respectively.
 
-一方文字サイズ変更機能は、テキストのサイズのみを変更する機能です。
-Google Chromeの場合、設定画面の「デザイン」のセクションにある「フォントをカスタマイズ」をクリックして表示される画面で設定します。
-この画面は、アドレスバーに ``chrome://settings/fonts`` と入力することでも表示できます。
+On the other hand, the font size change function only changes the size of the text.
+In Google Chrome, you can set this by clicking "Customize fonts" in the "Appearance" section of the settings page.
+You can also access this screen by typing ``chrome://settings/fonts`` into the address bar.
 
-なお、Google Chromeにおけるこの設定のデフォルト値は16です。
-（バージョン85.0.4183.102で確認）
-文字サイズ変更機能を用いた後に標準的な表示に戻す場合には、この値を指定します。
+Note that the default value for this setting in Google Chrome is 16 (verified with version 85.0.4183.102).
+To return to the standard display after using the font size change function, set this value.
 
-******************************************
-モバイル・アプリケーションにおける拡大表示
-******************************************
+************************************
+Enlarged View in Mobile Applications
+************************************
 
-拡大表示が必要なユーザーがスマートフォン上で動作するアプリケーションを使用する場合は、OSが提供する拡大表示の機能をを活用することが多いと考えられます。以下、拡大表示のための設定手順を示します。
+Users who need an enlarged view often use the magnification features provided by the operating system when using applications on smartphones. The following steps show how to configure the settings for an enlarged display.
 
-iOSの場合
-=========
+For iOS
+=======
 
-以下の手順で、最大の拡大表示にすることができます。iOSのDynamic Type機能に対応しているアプリケーションの場合、適切に拡大表示されます。
+You can set the maximum magnification by following these steps. Applications that support iOS's Dynamic Type feature will be displayed appropriately.
 
-#. 「設定」アプリ、 :menuselection:`アクセシビリティ --> 画面表示とテキストサイズ --> さらに大きな文字` の順にタップ
-#. 「さらに大きな文字」を有効にする
-#. 画面下部のスライダーで最大のサイズを指定
+#. In the "Settings" app, tap :menuselection:`Accessibility --> Display & Text Size --> Larger Text`.
+#. Turn on "Larger Accessibility Sizes".
+#. Use the slider at the bottom of the screen to set the maximum size.
 
-Androidの場合
-=============
+For Android
+===========
 
-注：以下の記述はPixel 6上のAndroid 12における操作手順です。端末の機種やAndroidのバージョンによって異なっている場合があります。
+Note: The following descriptions are for Android 16 on a Pixel 8. The steps may differ depending on the device model and Android version.
 
-以下の操作で、文字の表示サイズを最大にすることができます。
+You can set the font size by following these steps:
 
-#. 「設定」アプリ、 :menuselection:`ユーザー補助 --> テキストと表示 --> フォントサイズ` の順にタップ
-#. 画面下部で「最大」を選択
+#. In the "Settings" app, tap :menuselection:`Accessibility` --> Display size and text`.
+#. Use the slider under "Font size" to set the font size.
 
-また、以下の操作で文字以外の部分も含めて最大サイズの表示にすることができます。
+You can also set the display size, including parts other than text, by following these steps:
 
-#. 「設定」アプリ、 :menuselection:`ユーザー補助 --> テキストと表示 --> 表示サイズ` の順にタップ
-#. 画面下部で「最大」を選択
+#. In the "Settings" app, tap :menuselection:`Accessibility --> Display size and text`.
+#. Use the slider under "Display size" to set the display size.
 
-なお、この2つの設定を組み合わせて使用することも可能です。
+You can also use these two settings in combination.
 
 .. include:: /inc/info2gl/exp-magnification.rst
