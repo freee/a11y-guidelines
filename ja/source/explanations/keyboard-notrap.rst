@@ -15,3 +15,5 @@
 :kbd:`Tab` / :kbd:`Shift+Tab` キー、矢印キー、 :kbd:`Esc` キーなど、簡単な操作でフォーカスを外せるようにすることが必要です。
 
 .. include:: /inc/info2gl/exp-keyboard-notrap.rst
+
+.. translated:: true
