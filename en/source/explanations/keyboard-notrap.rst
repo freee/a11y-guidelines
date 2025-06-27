@@ -1,17 +1,18 @@
 .. _exp-keyboard-notrap:
 
-####################################
-キーボード・トラップが引き起こす問題
-####################################
 
-ガイドラインでは、ページ上にあるコンポーネントにキーボードを使ってフォーカスを移動できる場合、そのコンポーネントからフォーカスを外す操作もキーボードで可能にするように求めています。
+#################################
+Problems Caused by Keyboard Traps
+#################################
 
-これは、元々JavaアプレットやFlashを用いたページが頻繁に作られていた時期に、キーボードのみを使っているユーザーがページ中に埋め込まれたJavaアプレットやFlashプレイヤーからフォーカスが外せなくなる現象がしばしば見られたことに起因して定められた項目です。
-一般的なHTMLで実装されているページではこのような状況を引き起こすことは少ないですが、Reactコンポーネントやページ中に埋め込まれる音声/動画プレイヤーなどではこのような状況が発生する可能性があります。
+The guidelines require that if a user can use the keyboard to move the focus to a component on a page, they must also be able to move the focus away from that component using the keyboard.
 
-こういった状況が発生すると、ユーザーはそのコンポーネントの外にあるコンテンツにアクセスできなくなってしまいます。
-すなわち、ページの他の部分がいくらアクセシビリティーが高い状態であっても、この問題が発生しているページではページ全体を利用できない状態になってしまいますので、このような状況を回避することは必須です。
+This requirement was established because a common problem during the era of Java applets and Flash was that users who only used a keyboard would often get their focus trapped within an embedded Java applet or Flash player, unable to move it out.
+While this situation is less common on pages implemented with standard HTML, it can still occur with React components and embedded audio/video players.
 
-Tab/Shift+Tabキー、矢印キー、Escキーなど、簡単な操作でフォーカスを外せるようにすることが必要です。
+When this happens, the user is unable to access any content outside of that component.
+This means that no matter how accessible other parts of the page are, the entire page becomes unusable if this problem occurs. Therefore, it is essential to prevent such situations.
+
+It is necessary to allow users to move the focus out of a component with simple key presses like :kbd:`Tab` / :kbd:`Shift+Tab`, arrow keys, or :kbd:`Esc`.
 
 .. include:: /inc/info2gl/exp-keyboard-notrap.rst

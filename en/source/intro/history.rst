@@ -13,6 +13,14 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    ================================
 
    *  Updated the accessibility checklist to V7.0.0
+   *  Added translation that was missing in :ref:`faq-d0004`
+   *  Added translation:
+
+      -  :ref:`exp-magnification`
+      -  :ref:`exp-tab-order-check`
+      -  :ref:`exp-dynamic-content-hover`
+      -  :ref:`exp-link-text`
+      -  :ref:`exp-keyboard-notrap`
 
 `Ver. 202504.0 (Apr 22, 2025) <https://github.com/freee/a11y-guidelines/releases/202504.0>`__
 =============================================================================================

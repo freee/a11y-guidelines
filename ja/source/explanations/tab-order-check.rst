@@ -120,3 +120,5 @@
 .. include:: /inc/info2gl/exp-tab-order-check.rst
 
 .. include:: /inc/info2faq/exp-tab-order-check.rst
+
+.. translated:: true
