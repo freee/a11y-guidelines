@@ -6,18 +6,58 @@ platform:
 - web
 check:
   ja: |-
-    そのページへの到達手段が複数ある。ただし、特定のの操作の結果として表示されるページや、何らかの手順（例：ウィザード）の途中で表示されるようなページは除く。
-
-    例：
-
-    *  ナビゲーション・メニューといわゆるハブ・ページの両方から遷移できる。
-    *  特定のページ中のリンクから遷移することに加えて、サイト内検索機能からも遷移できる。
-    *  ヘルプ・ページ中のリンクからも遷移できる。
+    そのページへは、複数の異なるページから到達できる。
   en: |-
-    There are multiple ways to reach that page. However, this does not apply to pages displayed as a result of specific actions or those shown during a process (e.g., a wizard).
+    The target page can be reached from multiple different pages.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0811-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象のページは、特定の文脈で表示されなければ意味がないページである。
 
-    Examples:
+        例：
 
-    *  It can be accessed from both the navigation menu and so-called hub pages.
-    *  In addition to transitioning from links on a specific page, it can also be accessed through the site's search function.
-    *  It can also be accessed from links within the help page.
+        *  ウィザードの途中で表示されるページ
+        *  操作結果の表示など、特定の操作をしたときのみ表示されるページ
+      en: |-
+        The target page is a page that only makes sense when displayed in a specific context.
+
+        Examples:
+
+        *  A page displayed during a wizard.
+        *  A page that is only displayed when a specific action is performed, such as displaying the result of an operation.
+  - type: simple
+    id: 0811-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象のページには、グローバル・ナビゲーション中のリンクから到達できる。
+      en: |-
+        The target page can be reached from a link in the global navigation.
+  - type: simple
+    id: 0811-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象のページへは、特定のページ中のリンクから遷移できることに加えて、何らかの別の方法でも到達できる。
+
+        例：
+
+        *  ヘルプページからのリンク
+        *  サイトマップからのリンク
+        *  サイト内検索の結果からのリンク
+        *  一覧ページからのリンクに加えて、一覧ページのフィルター機能を使って表示されるページからのリンク
+      en: |-
+        In addition to being able to navigate to the target page from a link in a specific page, it can also be reached by some other means.
+
+        Examples:
+
+        *  A link from a help page.
+        *  A link from a sitemap.
+        *  A link from the results of an internal search.
+        *  In addtion to a link from a list page, links from pages displayed using the filter function of the list page.
