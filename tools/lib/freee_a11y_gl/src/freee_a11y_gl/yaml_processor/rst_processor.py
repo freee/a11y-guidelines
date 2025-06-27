@@ -21,12 +21,33 @@ def normalize_text(text: str) -> str:
     fullwidth_chars = r'[\u3000-\u303F\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FFF]'
     halfwidth_chars = r'[\u0000-\u007F\uFF61-\uFFDC\uFFE8-\uFFEE]'
 
-    # Remove whitespaces between fullwidth chars
-    text = re.sub(rf'({fullwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+    # Define whitespace pattern excluding newlines
+    whitespace_no_newline = r'[ \t\f\v\r\u00a0\u1680\u2000-\u200a\u2028\u2029\u202f\u205f\u3000]+'
 
-    # Remove whitespaces between halfwidth chars and full width chars
-    text = re.sub(rf'({fullwidth_chars})\s+({halfwidth_chars})', r'\1\2', text)
-    text = re.sub(rf'({halfwidth_chars})\s+({fullwidth_chars})', r'\1\2', text)
+    # Remove whitespaces (excluding newlines) between fullwidth chars
+    text = re.sub(rf'({fullwidth_chars}){whitespace_no_newline}({fullwidth_chars})', r'\1\2', text)
+
+    # Remove whitespaces (excluding newlines) between halfwidth chars and full width chars
+    # but preserve bullet point formatting
+    text = re.sub(rf'({fullwidth_chars}){whitespace_no_newline}({halfwidth_chars})', r'\1\2', text)
+    
+    # For halfwidth to fullwidth, use a different approach to preserve bullet points
+    # First, temporarily replace bullet point patterns
+    bullet_pattern = re.compile(r'^([ \t]*[*\-+])( +)', re.MULTILINE)
+    bullet_matches = []
+    
+    def bullet_replacer(match):
+        bullet_matches.append(match.group(2))  # Store the spaces
+        return match.group(1) + f'__BULLET_SPACE_{len(bullet_matches)-1}__'
+    
+    text = bullet_pattern.sub(bullet_replacer, text)
+    
+    # Now remove spaces between halfwidth and fullwidth chars
+    text = re.sub(rf'({halfwidth_chars}){whitespace_no_newline}({fullwidth_chars})', r'\1\2', text)
+    
+    # Restore bullet point spaces
+    for i, spaces in enumerate(bullet_matches):
+        text = text.replace(f'__BULLET_SPACE_{i}__', spaces)
 
     return text
 
