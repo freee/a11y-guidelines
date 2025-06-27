@@ -1,61 +1,61 @@
 .. _exp-tab-order-check:
 
-#################################
-Tab/Shift+Tabキーを用いたチェック
-#################################
+####################################################
+Checking with the :kbd:`Tab` / :kbd:`Shift+Tab` Keys
+####################################################
 
-Tab/Shift+Tabキーを用いたチェックは、以下を確認するために行います。
+The purpose of checks using the :kbd:`Tab` / :kbd:`Shift+Tab` keys is to confirm the following:
 
-*  キーボードのみによる操作が可能か
-*  自然な順序でフォーカスが移動するか
-*  ユーザーの混乱を招くような挙動を発生させないか
+*  Whether operation is possible using only a keyboard
+*  Whether focus moves in a natural order
+*  Whether behavior that could confuse the user is avoided
 
-************************
-キーボードのみによる操作
-************************
+*******************************
+Operation Using Only a Keyboard
+*******************************
 
-上肢が不自由でマウスなどのポインティング・ディバイスの操作が難しいユーザーの中には、主にキーボードを使ってPCを操作している人がいます。
-また、このようなユーザーが利用する音声認識を用いた入力手段や、スイッチを用いたインターフェースの多くは、キーボードの挙動をエミュレートするようになっています。
-そのため、キーボードのみで操作できるようにすることで、このような支援技術を用いて入力している場合にも、問題なく操作できる可能性が向上します。
+Some users with limited upper limb mobility who find it difficult to operate pointing devices like a mouse primarily use a keyboard to operate their PC.
+Additionally, many input methods using voice recognition and interfaces using switches that are used by such users are designed to emulate keyboard behavior.
+Therefore, by enabling operation using only a keyboard, the likelihood of being able to operate without problems is increased, even when inputting with such assistive technologies.
 
-上肢が不自由なユーザーに加えて、スクリーン・リーダーのユーザーも基本的にはキーボードのみを用いた操作を行います。
-この場合の細かい挙動や操作方法は、スクリーン・リーダーを利用していない場合とは異なることもありますが、ポインティング・ディバイスを用いないという点は同じです。
-そのため、スクリーン・リーダー・ユーザーが利用できるようにするという点からも、キーボードのみで操作ができるようにすることは重要です。
+In addition to users with limited upper limb mobility, screen reader users also fundamentally operate using only a keyboard.
+While the specific behavior and operation methods may differ from when a screen reader is not being used, the fact that a pointing device is not used is the same.
+Therefore, it is important to enable operation using only a keyboard from the perspective of making it usable for screen reader users as well.
 
-キーボードのみを用いた操作の場合、以下の点を満たしていることが必要です。
+In the case of operation using only a keyboard, it is necessary to meet the following points:
 
-*  操作を受け付けるあらゆるコンポーネント（リンク、ボタン、フォーム・フィールドなど）に、Tab/Shift+Tabキーで到達できる:
+*  All operable components (links, buttons, form fields, etc.) can be reached with the :kbd:`Tab` / :kbd:`Shift+Tab` keys:
 
-   キーボードのみで操作している場合、マウスを使用できる場合と異なり、画面上の任意の位置にフォーカスを移動させることができません。
-   そのため、操作対象となり得るコンポーネントには、キーボードの操作のみで確実に移動できるようにする必要があります。
+   When operating with only a keyboard, unlike when a mouse can be used, it is not possible to move the focus to any arbitrary position on the screen.
+   Therefore, it is necessary to ensure that components that can be operated can be reliably navigated to using only keyboard operations.
 
-*  操作を受け付けるコンポーネントは、キーボードからでも操作ができる:
+*  Operable components can also be operated from the keyboard:
 
-   必ずしもマウスを使っているわけではないという前提ですから、操作を受け付けるコンポーネントについてはキーボードのみで操作できる必要があります。
+   Since the premise is that a mouse is not necessarily being used, operable components need to be operable with only a keyboard.
 
-   -  マウス・クリックをトリガーとしたようなイベントは、Enterキーの押下もトリガーになるようにする
-   -  マウスオーバー（ホバー）によってのみ表示される情報や実行できる機能がない
+   -  Events that are triggered by a mouse click should also be triggered by pressing the :kbd:`Enter` key
+   -  There is no information displayed or functionality executed only by mouseover (hover)
 
-*  フォーカスされているコンポーネントを視覚的に判別できる:
+*  The focused component can be visually distinguished:
 
-   例えばあるボタンを押すとき、マウスを使用している場合にはマウス・ポインターを対象のボタンの上に移動してクリックすれば良いですが、キーボードのみを使用している場合、基本的にはTab/Shift+Tabキーでフォーカスを目的のボタンに移動させた上で、Enterキーやスペースキーを押下する必要があります。
-   この際、どのコンポーネントがフォーカスされているのかが視覚的に分からないと、目的のボタンにフォーカスがあるかどうかの判断ができません。
-   CSSで ``outline: none`` が指定されているなど、フォーカスされていることを示す表示（フォーカス・インジケーター）が消されているとこの問題が発生します。
+   For example, when pressing a button, if you are using a mouse, you can move the mouse pointer over the target button and click it. However, if you are using only a keyboard, you generally need to move the focus to the desired button with the :kbd:`Tab` / :kbd:`Shift+Tab` keys and then press the :kbd:`Enter` or :kbd:`Space` key.
+   In this case, if you cannot visually tell which component is focused, you cannot determine if the focus is on the desired button.
+   This problem occurs when the display that indicates focus (a focus indicator) is hidden, such as when ``outline: none`` is specified in CSS.
 
-なお、これらの確認は、必ずスクリーン・リーダーを利用しない状態で実施する必要があります。
-前述の通り、スクリーン・リーダーを利用している場合と利用していない場合では、細かい挙動や操作方法が異なる可能性があるためです。
+Note that these checks must always be performed without a screen reader.
+As mentioned above, the specific behavior and operation methods may differ when using a screen reader and when not using one.
 
-参考：マウス・ポインターを消して操作する方法
-============================================
+Reference: How to Operate with the Mouse Pointer Hidden
+=======================================================
 
-以下の手順で、マウス・ポインターを非表示にすることができます。
-スクリーン・リーダーを使用していないとき、この状態で実行できない操作がある場合、ガイドラインを満たしていない状態です。
+You can hide the mouse pointer by following these steps.
+If there are any operations that cannot be performed in this state when not using a screen reader, the guidelines are not being met.
 
-#. 以下のコードをターゲットとするブックマーク（ブックマークレット）を作成。
+#. Create a bookmark (bookmarklet) with the following code as its target.
 
    .. raw:: html
 
-      <details><summary>コードを表示</summary>
+      <details><summary>Show code</summary>
 
    .. code-block:: javascript
 
@@ -64,58 +64,57 @@ Tab/Shift+Tabキーを用いたチェックは、以下を確認するために�
    .. raw:: html
 
       </details>
-      <a href="javascript:(function(){var s=document.createElement('style');s.innerText='*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}';document.head.appendChild(s)})()">マウス・ポインターを非表示にするブックマークレット</a>
+      <a href="javascript:(function(){var s=document.createElement('style');s.innerText='*{cursor:none !important;pointer-events:none !important}*:focus{cursor: none !important;pointer-events:none !important}';document.head.appendChild(s)})()">Bookmarklet to hide the mouse pointer</a>
 
-#. チェック対象のページを表示した状態で、このブックマークレットを実行。
+#. With the page to be checked displayed, run this bookmarklet.
 
-関連ガイドライン
-================
+Related Guidelines
+==================
 
-*  入力ディバイス： :ref:`gl-input-device-keyboard-operable`
-*  入力ディバイス： :ref:`gl-input-device-focus-indicator`
-*  フォーム: :ref:`gl-form-keyboard-operable`
+*  Input Devices: :ref:`gl-input-device-keyboard-operable`
+*  Input Devices: :ref:`gl-input-device-focus-indicator`
+*  Forms: :ref:`gl-form-keyboard-operable`
 
 ********************
-フォーカスの移動順序
+Focus Movement Order
 ********************
 
-前述のようにマウスを使用しない場合は、基本的にTab/Shift+Tabキーでフォーカスを移動させます。
-その際、フォーカスの移動順序について、以下の観点から自然なものになるようにする必要があります。
+As mentioned earlier, when not using a mouse, focus is primarily moved with the :kbd:`Tab` / :kbd:`Shift+Tab` keys.
+In this case, the focus movement order needs to be natural from the following perspectives:
 
-*  画面レイアウト:
+*  Screen layout:
 
-   多くの場合、左から右、上から下の順に移動するのが自然な順序ですが、これに逆行する順序であったり、画面上の離れた場所に移動するような箇所がある場合は、問題がある可能性があります。
+   In most cases, moving from left to right and from top to bottom is a natural order. If there are places where the order is reversed or where the focus moves to a distant location on the screen, there may be a problem.
 
-*  想定される操作手順:
+*  Expected operation procedure:
 
-   主に入力フォームにおいて、フォーカスの移動順序が、想定される情報の入力順序に応じたものになっていることを確認する必要があります。
+   Mainly in input forms, it is necessary to check that the focus movement order corresponds to the expected order of information input.
 
-*  文脈:
+*  Context:
 
-   上記の画面レイアウトと操作手順の観点で自然な順序でフォーカスが移動するようになっていれば、ほとんどの場合問題ありませんが、コンテンツを読む場合の順序とフォーカスの移動順序も合致していることを確認する必要があります。
+   In most cases, there will be no problem if the focus moves in a natural order from the perspective of the screen layout and operation procedure mentioned above, but it is also necessary to confirm that the focus movement order matches the order in which the content is read.
 
+Related Guidelines
+==================
 
-関連ガイドライン
-================
+*  Input Devices: :ref:`gl-input-device-focus`
+*  Links: :ref:`gl-link-tab-order`
+*  Forms: :ref:`gl-form-tab-order`
 
-*  入力ディバイス： :ref:`gl-input-device-focus`
-*  リンク： :ref:`gl-link-tab-order`
-*  フォーム： :ref:`gl-form-tab-order`
+*******************************
+Behavior That Confuses the User
+*******************************
 
-************************
-ユーザーの混乱を招く挙動
-************************
+You need to check that no unexpected behavior occurs when the focus is moved with the :kbd:`Tab` / :kbd:`Shift+Tab` keys.
+The guidelines require that components do not exhibit the following behaviors when focus is moved:
 
-Tab/Shift+Tabキーでフォーカスを移動した際に、ユーザーが予期しないような挙動が発生しないことを確認する必要があります。
-ガイドラインでは、フォーカスが移動したときに以下のような挙動のコンポーネントを作らないように求めています。
+*  Page transitions
+*  Form submissions
+*  Displaying modal dialogs
 
-*  ページ遷移
-*  フォーム送信
-*  モーダル・ダイアログの表示
+Such behaviors can not only confuse the user but also lead to them performing unintended actions.
 
-このような挙動は、ユーザーを混乱させるだけでなく、ユーザーが意図しない操作を実行してしまうことにもつながります。
-
-:ref:`exp-form-dynamic-content` も併せて参照。
+See also :ref:`exp-form-dynamic-content`.
 
 .. include:: /inc/info2gl/exp-tab-order-check.rst
 
