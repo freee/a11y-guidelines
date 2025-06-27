@@ -1,28 +1,30 @@
 .. _exp-dynamic-content-hover:
 
 ########################################################
-マウスオーバー（ホバー）で表示されるコンテンツと拡大表示
+Content Displayed on Mouseover (Hover) and Magnification
 ########################################################
 
-マウス・ポインターのマウスオーバー（ホバー）やキーボード・フォーカスを受け取ったことがトリガーになって新たなコンテンツが表示される場合、特に拡大表示を利用しているロービジョンのユーザーのアクセスを阻害する可能性があります。
+When new content is displayed, triggered by a mouseover (hover) with the mouse pointer or by receiving keyboard focus, it can hinder access, especially for low-vision users who rely on magnification.
 
-拡大表示を利用している場合、一度に画面に表示されるのはコンテンツの一部分に過ぎません。ユーザーはマウス・ポインターを移動させることで、拡大表示する部分を切り替えながら、最終的にコンテンツ全体を理解するという作業をします。
+When using magnification, only a portion of the content is displayed on the screen at any given time.
+Users navigate by moving the mouse pointer to switch the magnified area, eventually piecing together the entire content.
 
-まず、この一連の動作の中で、マウス・ポインターが意図せずしてマウスオーバー表示をトリガーしてしまうことがあります。そして、こうして表示されたコンテンツによってそれまで閲覧していたコンテンツや操作しようとしていたコンポーネントが適切に表示されなくなり、動作を続けられなくなる場合があります。
+First, during this process, the mouse pointer can unintentionally trigger a mouseover display.
+When this happens, the newly displayed content can obscure the content the user was viewing or the component they were trying to interact with, preventing them from continuing their task.
 
-もちろん、マウスオーバーで表示されたコンテンツが他のコンテンツの利用を阻害しないようにすれば問題はありませんが、ユーザーによって異なる様々な拡大率のすべてを想定することは現実的ではありません。
-もしこのとき、マウス・ポインターを移動させずに、例えばEscキーを押すことでマウスオーバー表示されたコンテンツを非表示にすることができれば、ユーザーはそれまで行っていた動作を容易に継続することができます。
+Of course, this is not an issue if the content displayed on mouseover does not interfere with the use of other content, but it is not realistic to anticipate all the different magnification levels used by various users.
+If, at this point, the user could hide the mouseover content without moving the mouse pointer, for example, by pressing the :kbd:`Esc` key, they could easily resume their previous task.
 
-一方、マウスオーバーで表示されたコンテンツを拡大表示を用いているユーザーが読みたい場合、特に表示されたコンテンツが占める領域が大きい場合には、表示されたコンテンツをスクロールさせるような操作が必要になります。
-しかし、もしマウス・ポインターがマウスオーバーのトリガーとなったオブジェクトから離れることでそのコンテンツが非表示になってしまうと、こういった操作を行えなくなります。
-この問題を回避するために、マウスオーバーで新たに表示されたコンテンツ上にマウス・ポインターがある場合も、その表示が継続されるようにすることが求められています。
+On the other hand, if a user with magnification wants to read the content displayed on mouseover, they may need to scroll, especially if the displayed content occupies a large area.
+However, if the content disappears when the mouse pointer moves away from the object that triggered the mouseover, they cannot perform this operation.
+To avoid this problem, it is necessary to ensure that the content remains visible as long as the mouse pointer is over the newly displayed content.
 
-このように、拡大表示を用いている場合は、用いていない場合と比較してより多くの操作が必要となり、同じコンテンツを読むのにもより時間がかかる場合があります。
-そのため、マウスオーバー表示されたコンテンツを非表示にする操作をユーザーが能動的にした場合と、表示されているものが意味を持たなくなった場合（例えば「読み込み中……」といったメッセージなど）以外には、基本的にマウスオーバー表示されたコンテンツを自動的に非表示にしないことが求められています。
+As a result, using magnification often requires more operations and takes more time to read the same content compared to not using it.
+Therefore, it is generally recommended that content displayed on mouseover not automatically hide itself, except when the user actively performs an action to hide it or when the displayed content becomes meaningless (for example, a "loading..." message).
 
-これらの基準を満たしていても、マウスオーバー表示のトリガーとなるオブジェクトの位置と実際に表示されるコンテンツの表示位置が離れていると、ユーザーはその表示に気づかない場合があるという点には注意が必要です。
-本当にマウスオーバーによる表示が最善の方法なのか、よく検討する必要があるでしょう。
+Even when these criteria are met, it is important to note that if the object that triggers the mouseover display is far from where the content is actually displayed, the user may not notice the new content.
+It is important to carefully consider whether a mouseover display is truly the best method.
 
-なお、マウスオーバーをトリガーとする場合、 :ref:`gl-input-device-keyboard-operable` を満たすために、キーボード・フォーカスも合わせてトリガーにする必要がある点に十分注意する必要があります。
+You should also note that when using mouseover as a trigger, it is crucial to also use keyboard focus as a trigger to meet the requirements of :ref:`gl-input-device-keyboard-operable`.
 
 .. include:: /inc/info2gl/exp-dynamic-content-hover.rst

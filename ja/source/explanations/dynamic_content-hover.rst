@@ -26,3 +26,5 @@
 なお、マウスオーバーをトリガーとする場合、 :ref:`gl-input-device-keyboard-operable` を満たすために、キーボード・フォーカスも合わせてトリガーにする必要がある点に十分注意する必要があります。
 
 .. include:: /inc/info2gl/exp-dynamic-content-hover.rst
+
+.. translated:: true
