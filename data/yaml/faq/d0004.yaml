@@ -39,6 +39,10 @@ explanation:
     Additionally, if the icon serves as a button, the screen reader will announce that it is a button.
     For this reason, there is no need to include the word "button" in the alternative text either.
     If the announcement fails to convey that it is a button, there is likely an issue with the markup.
+
+    Note: The additional information such as "image" or "button" in screen reader announcements is based on the role of the element being read.
+    Every element has a default role, and you can change the role of an element from its default using the ``role`` attribute.
+    By using appropriate elements and, if necessary, leveraging the ``role`` attribute, you can ensure that screen readers can add the correct information.
 info:
 - exp-image-text-alternative
 - exp-markup-component
