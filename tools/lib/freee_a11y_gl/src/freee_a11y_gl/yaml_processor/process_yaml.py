@@ -40,6 +40,16 @@ def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
     # Process checks and their conditions
     checks: Dict[str, Any] = Check.object_data_all()
     for key in checks:
+        # Process check text for RST markup
+        if 'check' in checks[key]:
+            for lang in checks[key]['check']:
+                checks[key]['check'][lang] = rst_processor.process_rst_text(
+                    checks[key]['check'][lang], 
+                    info_links, 
+                    lang
+                )
+        
+        # Process conditions for RST markup
         if 'conditions' in checks[key]:
             checks[key]['conditions'] = [
                 rst_processor.process_rst_condition(condition, info_links) 
