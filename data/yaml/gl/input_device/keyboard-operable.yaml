@@ -22,6 +22,7 @@ intent:
     Ensure that users with visual impairments or physical disabilities who cannot or do not use a mouse can use content.
 checks:
 - '0172'
+- '0174'
 - '0211'
 - '0231'
 - '0361'
