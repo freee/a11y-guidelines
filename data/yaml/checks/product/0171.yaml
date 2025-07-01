@@ -6,24 +6,16 @@ platform:
 - web
 check:
   ja: |-
-    :kbd:`Tab` / :kbd:`Shift+Tab` キーによるフォーカス移動時の挙動は以下のすべてを満たしている：
-
-    *  フォーカス・インジケーターまたはそれを代替する表示がある
-    *  自動的に次のような挙動が発生しない：
-
-       -  フォームの送信
-       -  レイアウトの変更
-       -  ページの遷移
-       -  モーダル・ダイアログの表示
-       -  表示内容の大幅な変更
+    キーボードによる操作時、常にフォーカス箇所が視覚的に確認できる
   en: |-
-    Behavior when moving focus using :kbd:`Tab` / :kbd:`Shift+Tab` keys fulfills all of the following
-
-    *  Focus indicator or alternative display is present
-    *  The following behaviors do not occur automatically:
-
-      -  Form Submission
-      -  Layout Changes
-      -  Page Transitions
-      -  Display of modal dialogs
-      -  Significant changes in displayed content
+    When operating with the keyboard, the focus position can always be visually confirmed.
+conditions:
+- platform: web
+  type: simple
+  tool: keyboard
+  id: "0171-keyboard-01"
+  procedure:
+    ja: |-
+      ページ先頭から :kbd:`Tab` キーでフォーカスを移動し、常にフォーカス位置を視覚的に確認できることを確認する。
+    en: |-
+      Confirm that the focus position can always be visually confirmed by moving the focus from the top of the page using the :kbd:`Tab` key.

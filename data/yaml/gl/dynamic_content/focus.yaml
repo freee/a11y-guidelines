@@ -29,6 +29,6 @@ intent:
     Do not cause unexpected behavior for users with visual or cognitive impairments.
 checks:
 - '0152'
-- '0171'
+- '0173'
 info:
 - exp-tab-order-check

@@ -1,0 +1,33 @@
+id: '0173'
+sortKey: 501700
+severity: critical
+target: product
+platform:
+- web
+check:
+  ja: |-
+    キーボード操作時に、ユーザーが予期しない、またはユーザーの混乱を招くような表示の変化が自動的に発生しない。
+  en: |-
+    When operating with the keyboard, no unexpected or confusing display changes occur automatically.
+conditions:
+- platform: web
+  type: simple
+  tool: keyboard
+  id: "0173-keyboard-01"
+  procedure:
+    ja: |-
+      :kbd:`Tab` / :kbd:`Shift+Tab` キーによるフォーカス移動時に、自動的に次のような挙動が発生しない：
+
+      *  フォームの送信
+      *  レイアウトの変更
+      *  ページの遷移
+      *  モーダル・ダイアログの表示
+      *  表示内容の大幅な変更
+    en: |-
+      When moving focus with the :kbd:`Tab` / :kbd:`Shift+Tab` key, the following behaviors do not occur automatically:
+
+      *  Form submission
+      *  Layout changes
+      *  Page transitions
+      *  Modal dialog display
+      *  Significant changes in displayed content
