@@ -36,7 +36,8 @@ conditions:
       id: "0174-keyboard-02"
       procedure:
         ja: |-
-          モーダル・ダイアログ内で :kbd:`Tab` / :kbd:`Shift+Tab` キーを押してフォーカスを移動した際、フォーカスがモーダル・ダイアログの外に移動しない。
+          モーダル・ダイアログ内で、フォーカスがモーダル・ダイアログの最後の要素に移動するまで :kbd:`Tab` キーを押した後、再度 :kbd:`Tab` キーを押してもフォーカスはモーダル・ダイアログの外に出ない。
+          同様に、 :kbd:`Shift+Tab` キーを押してフォーカスがモーダル・ダイアログの最初の要素に移動した後、再度 :kbd:`Shift+Tab` キーを押してもフォーカスはモーダル・ダイアログの外に出ない。
         en: |-
           When the focus is moved by pressing :kbd:`Tab` / :kbd:`Shift+Tab` within the modal dialog, the focus does not move outside of the modal dialog.
     - type: simple
