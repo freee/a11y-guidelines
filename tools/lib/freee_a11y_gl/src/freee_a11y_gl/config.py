@@ -156,7 +156,7 @@ class Config:
         """Get localized platform name."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         try:
-            return settings.config.platform.names[platform][effective_lang]
+            return settings.config.platform.names[effective_lang][platform]
         except (KeyError, AttributeError):
             return platform
 

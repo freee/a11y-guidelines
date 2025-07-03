@@ -4,7 +4,7 @@ import platform
 from pathlib import Path
 from typing import Any, Dict, Optional, List, Literal
 import yaml
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 class LocaleConfig(BaseModel):
     """Locale-specific configuration."""
@@ -28,7 +28,8 @@ class PathConfig(BaseModel):
     guidelines: str = Field(default="/categories/", description="Guidelines path (must start and end with /)")
     faq: str = Field(default="/faq/articles/", description="FAQ path (must start and end with /)")
 
-    @validator("guidelines", "faq")
+    @field_validator("guidelines", "faq")
+    @classmethod
     def validate_path(cls, v: str) -> str:
         """Validate path string.
         
@@ -163,7 +164,7 @@ class Settings:
     def load_defaults(self) -> None:
         """デフォルト設定の読み込み"""
         # Pydanticモデルのデフォルト値を使用
-        self._settings = GlobalConfig().dict()
+        self._settings = GlobalConfig().model_dump()
 
     def _get_config_search_paths(self) -> List[Path]:
         """Get list of paths to search for config files.
