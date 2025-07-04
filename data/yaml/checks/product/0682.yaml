@@ -11,43 +11,53 @@ check:
     All content on the page is placed in the appropriate area indicated by ARIA landmarks.
 conditions:
 - platform: web
-  type: and
+  type: or
   conditions:
   - type: simple
-    tool: axe
-    id: "0682-axe-01"
+    tool: misc
+    id: "0682-content-00"
     procedure:
       ja: |-
-        画面上に表示されているコンテンツに対して、axe DevToolsで以下のいずれの問題も発生しない。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
-
-        -  :ref:`axe-rule-landmark-banner-is-top-level`
-        -  :ref:`axe-rule-landmark-complementary-is-top-level`
-        -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
-        -  :ref:`axe-rule-landmark-main-is-top-level`
-        -  :ref:`axe-rule-landmark-no-duplicate-banner`
-        -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
-        -  :ref:`axe-rule-landmark-no-duplicate-main`
-        -  :ref:`axe-rule-landmark-one-main`
-        -  :ref:`axe-rule-landmark-unique`
-        -  :ref:`axe-rule-region`
+        チェック対象はモーダル・ダイアログである。
       en: |-
-        None of the following issues is reported by axe DevTools against visible content.  (There usually is no problem if these issues are reported against hidden content.)
+        The check target is a modal dialog.
+  - type: and
+    conditions:
+    - type: simple
+      tool: axe
+      id: "0682-axe-01"
+      procedure:
+        ja: |-
+          画面上に表示されているコンテンツに対して、axe DevToolsで以下のいずれの問題も発生しない。（非表示箇所に対して以下の問題が発生しても、通常は問題ない。）
 
-        -  :ref:`axe-rule-landmark-banner-is-top-level`
-        -  :ref:`axe-rule-landmark-complementary-is-top-level`
-        -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
-        -  :ref:`axe-rule-landmark-main-is-top-level`
-        -  :ref:`axe-rule-landmark-no-duplicate-banner`
-        -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
-        -  :ref:`axe-rule-landmark-no-duplicate-main`
-        -  :ref:`axe-rule-landmark-one-main`
-        -  :ref:`axe-rule-landmark-unique`
-        -  :ref:`axe-rule-region`
-  - type: simple
-    tool: Landmark Navigation via Keyboard or Pop-up
-    id: "0682-misc-01"
-    procedure:
-      ja: |-
-        `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属している。
-      en: |-
-        Every part of the page content is contained in an appropriate ARIA landmark region when viewed using a browser with the `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ extention installed.
+          -  :ref:`axe-rule-landmark-banner-is-top-level`
+          -  :ref:`axe-rule-landmark-complementary-is-top-level`
+          -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
+          -  :ref:`axe-rule-landmark-main-is-top-level`
+          -  :ref:`axe-rule-landmark-no-duplicate-banner`
+          -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
+          -  :ref:`axe-rule-landmark-no-duplicate-main`
+          -  :ref:`axe-rule-landmark-one-main`
+          -  :ref:`axe-rule-landmark-unique`
+          -  :ref:`axe-rule-region`
+        en: |-
+          None of the following issues is reported by axe DevTools against visible content.  (There usually is no problem if these issues are reported against hidden content.)
+
+          -  :ref:`axe-rule-landmark-banner-is-top-level`
+          -  :ref:`axe-rule-landmark-complementary-is-top-level`
+          -  :ref:`axe-rule-landmark-contentinfo-is-top-level`
+          -  :ref:`axe-rule-landmark-main-is-top-level`
+          -  :ref:`axe-rule-landmark-no-duplicate-banner`
+          -  :ref:`axe-rule-landmark-no-duplicate-contentinfo`
+          -  :ref:`axe-rule-landmark-no-duplicate-main`
+          -  :ref:`axe-rule-landmark-one-main`
+          -  :ref:`axe-rule-landmark-unique`
+          -  :ref:`axe-rule-region`
+    - type: simple
+      tool: Landmark Navigation via Keyboard or Pop-up
+      id: "0682-misc-01"
+      procedure:
+        ja: |-
+          `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属している。
+        en: |-
+          Every part of the page content is contained in an appropriate ARIA landmark region when viewed using a browser with the `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ extention installed.

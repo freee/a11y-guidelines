@@ -19,9 +19,9 @@ conditions:
     id: "0561-content-00"
     procedure:
       ja: |-
-        チェック対象は、見出しを含まないモーダル・ダイアログである。
+        チェック対象は、モーダル・ダイアログで、設計資料で見出しが示されていない。
       en: |-
-        The target of the check is a modal dialog that does not contain any headings.
+        The check target is a modal dialog where no headings are indicated in the design documents.
   - type: and
     conditions:
     - type: simple
