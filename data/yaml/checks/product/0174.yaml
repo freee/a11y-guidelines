@@ -45,6 +45,6 @@ conditions:
       id: "0174-keyboard-03"
       procedure:
         ja: |-
-          モーダル・ダイアログが閉じた際、フォーカスはモーダル・ダイアログが開く直前の位置に戻る。
+          モーダル・ダイアログが閉じた際、フォーカスはモーダル・ダイアログが開く直前の位置、またはそれに隣接した位置に戻る。
         en: |-
-          When the modal dialog is closed, the focus returns to the position just before the modal dialog was opened.
+          When the modal dialog is closed, the focus returns to the position immediately before the modal dialog was opened or to an adjacent position.
