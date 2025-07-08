@@ -1,0 +1,91 @@
+# Default message catalog for freee_a11y_gl
+# This file contains localized strings for various components
+# Language specification is consistently at the deepest level
+
+severity_tags:
+  minor:
+    ja: "[MINOR]"
+    en: "[MINOR]"
+  normal:
+    ja: "[NORMAL]"
+    en: "[NORMAL]"
+  major:
+    ja: "[MAJOR]"
+    en: "[MAJOR]"
+  critical:
+    ja: "[CRITICAL]"
+    en: "[CRITICAL]"
+
+check_targets:
+  design:
+    ja: "デザイン"
+    en: "Design"
+  code:
+    ja: "コード"
+    en: "Code"
+  product:
+    ja: "プロダクト"
+    en: "Product"
+
+check_tools:
+  axe:
+    ja: "axe-core"
+    en: "axe-core"
+  lighthouse:
+    ja: "Lighthouse"
+    en: "Lighthouse"
+  wave:
+    ja: "WAVE"
+    en: "WAVE"
+
+platform_names:
+  web:
+    ja: "Web"
+    en: "Web"
+  mobile:
+    ja: "モバイル"
+    en: "Mobile"
+  general:
+    ja: "全般"
+    en: "General"
+  ios:
+    ja: "iOS"
+    en: "iOS"
+  android:
+    ja: "Android"
+    en: "Android"
+
+separators:
+  text:
+    ja: "："
+    en: ": "
+  list:
+    ja: "、"
+    en: ", "
+  and:
+    ja: "と"
+    en: " and "
+  or:
+    ja: "または"
+    en: " or "
+
+conjunctions:
+  and:
+    ja: "、かつ"
+    en: ", and "
+  or:
+    ja: "、または"
+    en: ", or "
+
+pass_texts:
+  singular:
+    ja: "を満たしている"
+    en: " is true"
+  plural:
+    ja: "を満たしている"
+    en: " are true"
+
+date_formats:
+  default:
+    ja: "%Y年%-m月%-d日"
+    en: "%B %-d, %Y"

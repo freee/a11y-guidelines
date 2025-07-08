@@ -3,7 +3,7 @@ from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel
 from ..relationship_manager import RelationshipManager
-from ..settings import settings
+from ..config import Config
 from ..utils import uniq
 
 @dataclass
@@ -161,11 +161,11 @@ class Guideline(BaseModel):
         category = rel.get_related_objects(self, 'category')[0]
 
         for lang in self.data.title.keys():
-            separator_char = settings.get(f'locale.{lang}.text_separator', ': ')
-            basedir = settings.get('paths.guidelines', '/categories/')
-            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
+            separator_char = Config.get_text_separator(lang)
+            basedir = Config.get_guidelines_path()
+            base_url = Config.get_base_url(lang)
             data['text'][lang] = f'{category.get_name(lang)}{separator_char}{self.data.title[lang]}'
-            data['url'][lang] = f'{baseurl}{lang_path}{basedir}{category.id}.html#{self.id}'
+            data['url'][lang] = f'{baseurl or base_url}{basedir}{category.id}.html#{self.id}'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
@@ -222,9 +222,9 @@ class Guideline(BaseModel):
         Returns:
             Joined string with localized separator
         """
-        separator = settings.get(f'locale.{lang}.list_separator', ', ')
+        separator = Config.get_list_separator(lang)
         platform_names = [
-            settings.get(f'platform.names.{lang}.{item}', item)
+            Config.get_platform_name(item, lang)
             for item in items
         ]
         return separator.join(platform_names)

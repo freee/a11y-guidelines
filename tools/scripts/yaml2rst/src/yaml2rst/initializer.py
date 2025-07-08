@@ -53,7 +53,7 @@ def setup_templates():
     return templates
 
 def parse_args():
-    languages = config.AVAILABLE_LANGUAGES
+    languages = config.get_available_languages()
     parser = argparse.ArgumentParser(description="Process YAML files into rst files for the a11y-guidelines.")
     parser.add_argument('--lang', '-l', type=str, choices=languages, default='ja', help=f'the language of the output file ({" ".join(languages)})')
     parser.add_argument('--basedir', '-b', type=str, default='..', help='Base directory where the data directory is located.')

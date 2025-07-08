@@ -3,7 +3,7 @@ import datetime
 from typing import Dict, List, Any, Optional, ClassVar
 from ..base import BaseModel
 from ...relationship_manager import RelationshipManager
-from ...settings import settings
+from ...config import Config
 from ...utils import uniq
 
 class Faq(BaseModel):
@@ -106,9 +106,9 @@ class Faq(BaseModel):
         }
         for lang in self.title.keys():
             data['text'][lang] = self.title[lang]
-            faq_path = settings.get('paths.faq', '/faq/articles/')
-            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
-            data['url'][lang] = f'{baseurl}{lang_path}{faq_path}{self.id}.html'
+            faq_path = Config.get_faq_path()
+            base_url = Config.get_base_url(lang)
+            data['url'][lang] = f'{baseurl or base_url}{faq_path}{self.id}.html'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
@@ -124,7 +124,7 @@ class Faq(BaseModel):
         tags = rel.get_related_objects(self, 'faq_tag')
         
         # Format date based on language
-        date_format = settings.get(f'locale.{lang}.date_format', '%Y年%-m月%-d日' if lang == 'ja' else '%B %-d, %Y')
+        date_format = Config.get_date_format(lang)
         formatted_date = self.updated.strftime(date_format)
 
         data = {

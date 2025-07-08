@@ -1,32 +1,21 @@
 """Configuration management system for freee_a11y_gl module."""
 import os
-import platform
 from pathlib import Path
 from typing import Any, Dict, Optional, List, Literal
 import yaml
 from pydantic import BaseModel, Field, field_validator
+from .message_catalog import MessageCatalog
 
-class LocaleConfig(BaseModel):
-    """Locale-specific configuration."""
-    text_separator: str = Field(description="Text separator for the category and the title for guideline links")
-    list_separator: str = Field(description="List item separator")
-    and_separator: str = Field(description="AND conjunction")
-    or_separator: str = Field(description="OR conjunction")
-    and_conjunction: str = Field(description="AND conjunction for grouped items")
-    or_conjunction: str = Field(description="OR conjunction for grouped items")
-    pass_singular_text: str = Field(description="Pass condition text for single condition")
-    pass_plural_text: str = Field(description="Pass condition text for multiple conditions")
-    date_format: str = Field(description="Date format in strftime format")
 
 class LanguageConfig(BaseModel):
     """Language configuration."""
-    available: list[str] = Field(default_factory=lambda: ["ja", "en"])
-    default: str = "ja"
+    available: list[str]
+    default: str
 
 class PathConfig(BaseModel):
     """Path configuration."""
-    guidelines: str = Field(default="/categories/", description="Guidelines path (must start and end with /)")
-    faq: str = Field(default="/faq/articles/", description="FAQ path (must start and end with /)")
+    guidelines: str = Field(description="Guidelines path (must start and end with /)")
+    faq: str = Field(description="FAQ path (must start and end with /)")
 
     @field_validator("guidelines", "faq")
     @classmethod
@@ -50,189 +39,151 @@ class PathConfig(BaseModel):
             raise ValueError("Path must end with /")
         return v
 
-class LangSpecificConfig(BaseModel):
-    """Language-specific configuration base."""
-    ja: Dict[str, str]
-    en: Dict[str, str]
-
-class SeverityTagsConfig(LangSpecificConfig):
-    """Severity tags configuration."""
-    ja: Dict[str, str] = Field(default_factory=lambda: {
-        "minor": "[MINOR]",
-        "normal": "[NORMAL]",
-        "major": "[MAJOR]",
-        "critical": "[CRITICAL]"
-    })
-    en: Dict[str, str] = Field(default_factory=lambda: {
-        "minor": "[MINOR]",
-        "normal": "[NORMAL]",
-        "major": "[MAJOR]",
-        "critical": "[CRITICAL]"
-    })
-
-class CheckTargetsConfig(LangSpecificConfig):
-    """Check targets configuration."""
-    ja: Dict[str, str] = Field(default_factory=lambda: {
-        "design": "デザイン",
-        "code": "コード",
-        "product": "プロダクト",
-    })
-    en: Dict[str, str] = Field(default_factory=lambda: {
-        "design": "Design",
-        "code": "Code",
-        "product": "Product",
-    })
-
-class PlatformConfig(BaseModel):
-    """Platform configuration."""
-    names: Dict[str, Dict[str, str]] = Field(default_factory=lambda: {
-        "ja": {
-            "web": "Web",
-            "mobile": "モバイル",
-            "general": "全般",
-            "ios": "iOS",
-            "android": "Android",
-        },
-        "en": {
-            "web": "Web",
-            "mobile": "Mobile",
-            "general": "General",
-            "ios": "iOS",
-            "android": "Android",
-        }
-    })
 
 class GlobalConfig(BaseModel):
     """Global configuration model."""
-    languages: LanguageConfig = Field(default_factory=lambda: LanguageConfig())
-    base_url: str = Field(default="https://a11y-guidelines.freee.co.jp")
-    paths: PathConfig = Field(default_factory=lambda: PathConfig())
-    severity_tags: SeverityTagsConfig = Field(default_factory=lambda: SeverityTagsConfig())
-    platform: PlatformConfig = Field(default_factory=lambda: PlatformConfig())
-    check_targets: CheckTargetsConfig = Field(default_factory=lambda: CheckTargetsConfig())
-    locale: Dict[str, LocaleConfig] = Field(default_factory=lambda: {
-        "ja": LocaleConfig(
-            text_separator="：",
-            list_separator="、",
-            and_separator="と",
-            or_separator="または",
-            and_conjunction="、かつ",
-            or_conjunction="、または",
-            pass_singular_text="を満たしている",
-            pass_plural_text="を満たしている",
-            date_format="%Y年%-m月%-d日"
-        ),
-        "en": LocaleConfig(
-            text_separator=": ",
-            list_separator=", ",
-            and_separator=" and ",
-            or_separator=" or ",
-            and_conjunction=", and ",
-            or_conjunction=", or ",
-            pass_singular_text=" is true",
-            pass_plural_text=" are true",
-            date_format="%B %-d, %Y"
-        )
-    })
+    languages: LanguageConfig
+    base_url: str
+    paths: PathConfig
 
 class Settings:
     """設定値を階層的に管理するクラス。
     優先順位: 
-    1. プログラムによる設定
-    2. 環境変数
-    3. 設定ファイル
-    4. デフォルト値
+    1. プログラムによる直接指定 (Config.initialize())
+    2. プロファイル設定 (~/.config/freee_a11y_gl/profiles/{profile}.yaml)
+    3. デフォルトプロファイル (~/.config/freee_a11y_gl/profiles/default.yaml)
+    4. ライブラリデフォルト (~/.config/freee_a11y_gl/lib/config.yaml)
+    5. 内蔵デフォルト設定 (data/config.yaml)
+    6. 緊急時フォールバック（最小限のハードコード値）
     """
     
-    def __init__(self):
+    def __init__(self, profile: Optional[str] = None):
         self._settings: Dict[str, Any] = {}
-        self._env_prefix = "FREEE_A11Y_GL_"
         self._config_model: Optional[GlobalConfig] = None
+        self._message_catalog: Optional[MessageCatalog] = None
+        self._profile = profile or "default"
         
         # デフォルト値の読み込み
         self.load_defaults()
         
-        # 設定ファイルの読み込み
-        self.load_from_file()
+        # 設定ファイルの読み込み（プロファイルベース）
+        self.load_from_profile()
         
-        # 環境変数の読み込み
-        self.load_from_env()
+        # メッセージカタログの読み込み
+        self.load_message_catalog()
         
         # 設定値の検証
         self.validate()
 
     def load_defaults(self) -> None:
         """デフォルト設定の読み込み"""
-        # Pydanticモデルのデフォルト値を使用
-        self._settings = GlobalConfig().model_dump()
+        # 内蔵デフォルト設定ファイルから読み込み
+        default_config_path = Path(__file__).parent / "data" / "config.yaml"
+        try:
+            if default_config_path.exists():
+                with default_config_path.open(encoding='utf-8') as f:
+                    config_data = yaml.safe_load(f)
+                    if config_data:
+                        self._settings = config_data
+                    else:
+                        # YAMLファイルが空の場合は最小限のデフォルト値を設定
+                        self._settings = self._get_minimal_defaults()
+            else:
+                # ファイルが存在しない場合は最小限のデフォルト値を設定
+                self._settings = self._get_minimal_defaults()
+        except (OSError, PermissionError, yaml.YAMLError):
+            # ファイル読み込みエラーの場合は最小限のデフォルト値を設定
+            self._settings = self._get_minimal_defaults()
 
-    def _get_config_search_paths(self) -> List[Path]:
-        """Get list of paths to search for config files.
+    def _get_minimal_defaults(self) -> Dict[str, Any]:
+        """最小限のデフォルト値を取得（緊急時フォールバック用）"""
+        return {
+            "languages": {
+                "available": ["ja", "en"],
+                "default": "ja"
+            },
+            "base_url": "https://a11y-guidelines.freee.co.jp",
+            "paths": {
+                "guidelines": "/categories/",
+                "faq": "/faq/articles/"
+            }
+        }
+
+    def _get_config_base_dir(self) -> Path:
+        """Get base configuration directory.
+        
+        Returns:
+            Base configuration directory path
+        """
+        return Path.home() / ".config" / "freee_a11y_gl"
+
+    def _get_profile_config_paths(self) -> List[Path]:
+        """Get list of profile configuration file paths to search.
         
         Returns:
             List of paths to search, in order of precedence
         """
+        config_dir = self._get_config_base_dir()
+        
         search_paths = []
         
-        # 1. 明示的に指定されたパス
-        explicit_path = os.environ.get(f"{self._env_prefix}CONFIG")
-        if explicit_path:
-            search_paths.append(Path(explicit_path))
-
-        # 2. カレントディレクトリ
-        search_paths.extend([
-            Path.cwd() / "config.yaml",
-            Path.cwd() / "config.yml"
-        ])
-
-        # 3. プラットフォーム固有の標準的な設定ディレクトリ
-        if platform.system() == "Windows":
-            if appdata := os.environ.get("APPDATA"):
-                search_paths.append(Path(appdata) / "freee_a11y_gl" / "config.yaml")
-        else:  # Unix-like
-            # ユーザー固有の設定
-            search_paths.append(Path.home() / ".config" / "freee_a11y_gl" / "config.yaml")
-            
-            # システム全体の設定
-            if platform.system() == "Darwin":  # macOS
-                search_paths.append(Path("/Library/Application Support/freee_a11y_gl/config.yaml"))
-            else:  # Linux/BSD
-                search_paths.append(Path("/etc/freee_a11y_gl/config.yaml"))
-
+        # 1. プロファイル設定
+        if self._profile != "default":
+            search_paths.append(config_dir / "profiles" / f"{self._profile}.yaml")
+        
+        # 2. デフォルトプロファイル
+        search_paths.append(config_dir / "profiles" / "default.yaml")
+        
+        # 3. ライブラリデフォルト
+        search_paths.append(config_dir / "lib" / "config.yaml")
+        
         return search_paths
 
-    def load_from_file(self, file_path: Optional[str] = None) -> None:
-        """設定ファイルからの読み込み
-        
-        Args:
-            file_path: 設定ファイルのパス。未指定の場合は標準の場所を探索
-        """
-        # 明示的なパスが指定された場合
-        if file_path:
-            path = Path(file_path).resolve()
-            if path.is_file():
-                with path.open() as f:
-                    self.update(yaml.safe_load(f))
-                return
-            raise FileNotFoundError(f"Config file not found: {file_path}")
-
-        # 標準的な場所を探索
-        for path in self._get_config_search_paths():
+    def load_from_profile(self) -> None:
+        """プロファイルベース設定ファイルからの読み込み"""
+        for path in self._get_profile_config_paths():
             try:
-                if path.is_file():
-                    with path.open() as f:
-                        self.update(yaml.safe_load(f))
-                        return
-            except (OSError, PermissionError):
-                continue  # 読み取り権限がない場合など
+                if path.exists() and path.is_file():
+                    with path.open(encoding='utf-8') as f:
+                        config_data = yaml.safe_load(f)
+                        if config_data:
+                            self.update(config_data)
+                            break  # 最初に見つかった設定ファイルを使用
+            except (OSError, PermissionError, yaml.YAMLError):
+                continue  # 読み取り権限がない場合やYAMLエラーの場合は次を試す
 
-    def load_from_env(self) -> None:
-        """環境変数からの読み込み"""
-        for key, value in os.environ.items():
-            if key.startswith(self._env_prefix):
-                # FREEE_A11Y_GL_URLS_BASE_JA -> ["urls"]["base"]["ja"]
-                config_key = key[len(self._env_prefix):].lower()
-                self.set_nested(config_key.split("_"), value)
+    def load_message_catalog(self) -> None:
+        """メッセージカタログの読み込み"""
+        config_dir = self._get_config_base_dir()
+        
+        # メッセージカタログの探索パス
+        catalog_paths = []
+        
+        # 1. プロファイル固有のメッセージカタログ
+        if self._profile != "default":
+            catalog_paths.append(config_dir / "messages" / f"{self._profile}.yaml")
+        
+        # 2. デフォルトメッセージカタログ
+        catalog_paths.append(config_dir / "messages" / "default.yaml")
+        
+        # 3. ライブラリ内蔵のデフォルトメッセージカタログ
+        lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
+        catalog_paths.append(lib_messages_path)
+        
+        # メッセージカタログの読み込み
+        for primary_path in catalog_paths:
+            try:
+                self._message_catalog = MessageCatalog.load_with_fallback(
+                    primary_path=primary_path,
+                    fallback_path=lib_messages_path if primary_path != lib_messages_path else None
+                )
+                break
+            except Exception:
+                continue
+        
+        # フォールバック: デフォルトのメッセージカタログ
+        if self._message_catalog is None:
+            self._message_catalog = MessageCatalog()
 
     def get(self, key: str, default: Any = None) -> Any:
         """設定値の取得
@@ -302,6 +253,30 @@ class Settings:
         if self._config_model is None:
             self.validate()
         return self._config_model
+
+    @property
+    def message_catalog(self) -> MessageCatalog:
+        """メッセージカタログを取得"""
+        if self._message_catalog is None:
+            self.load_message_catalog()
+        return self._message_catalog
+
+    def initialize(self, profile: Optional[str] = None, config_override: Optional[Dict[str, Any]] = None) -> None:
+        """設定の初期化（プログラムによる直接指定）
+        
+        Args:
+            profile: 使用するプロファイル名
+            config_override: 設定の上書き値
+        """
+        if profile and profile != self._profile:
+            self._profile = profile
+            # プロファイルが変更された場合は再読み込み
+            self.load_defaults()
+            self.load_from_profile()
+            self.load_message_catalog()
+        
+        if config_override:
+            self.update(config_override)
 
 # シングルトンインスタンス
 settings = Settings()

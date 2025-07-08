@@ -18,6 +18,7 @@ from .generators.content_generators import (
     MakefileConfig
 )
 from freee_a11y_gl import setup_instances
+from freee_a11y_gl.config import Config
 
 def main():
     """Main entry point for the YAML to RST converter."""
@@ -26,6 +27,17 @@ def main():
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = initializer.setup_constants(settings)
     templates = initializer.setup_templates()
     makefile_vars, makefile_vars_list = initializer.setup_variables()
+    
+    # Initialize freee_a11y_gl configuration with yaml2rst profile
+    Config.initialize(
+        profile="yaml2rst",
+        config_override={
+            "basedir": settings['basedir'],
+            "languages": {
+                "default": settings['lang']
+            }
+        }
+    )
     
     # Initialize core settings
     setup_instances(settings['basedir'])
