@@ -57,3 +57,5 @@
 *  操作結果の表示など、特定の操作をしたときのみ表示されるページ
 
 .. include:: /inc/info2gl/exp-page-navigation.rst
+
+.. translated:: true
