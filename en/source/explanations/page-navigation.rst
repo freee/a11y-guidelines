@@ -1,24 +1,57 @@
 .. _exp-page-navigation:
 
-##################################################################
-使いやすさとアクセシビリティーを改善するナビゲーションの設計と実装
-##################################################################
+##############################################################################
+Designing and Implementing Navigation for Improved Usability and Accessibility
+##############################################################################
 
-サイト内のナビゲーションの仕組みやサイトの構造は、そのサイトの使い勝手に影響します。
+The navigation mechanisms and site structure significantly impact a Web site's usability.
+This short article explains the importance of consistent navigation, clearly indicating the page's location, and providing multiple pathways.
 
-画面表示を拡大して利用しているロービジョンのユーザーは、画面の一部分だけを見て操作を行っている場合があります。
-このようなユーザーの場合、どのページにおいてもナビゲーションのためのリンクの出現順序やレイアウトが一貫していると、ページの構造などを推測しやすくなり、目的の機能をより早く、容易に見つけることができます。
+*********************
+Consistent Navigation
+*********************
 
-また、スクリーン・リーダーのユーザーの場合、複数のページで共通に出現するナビゲーションなどを毎回すべて読み上げさせるのは時間もかかり非効率的です。
-しかし、出現順序やレイアウトが一貫していれば、必ずしも毎回同じ内容を読み上げさせる必要がなくなります。
+Users with low vision who use magnification to view a screen may operate by looking at only a portion of it.
+For such users, if the order and layout of navigation links are consistent across all pages, it becomes easier to infer the page structure, allowing them to find the desired functions more quickly and easily.
 
-このとき重要なことは、視覚的に出現順序やレイアウトの一貫性があることに加えて、マークアップについても一貫したものを用いるということです。
-スクリーン・リーダーは、マークアップが示すセマンティクスを伝えるための情報を付加します。
-したがって、視覚的に同じものでもマークアップが異なれば、読み上げられ方も異なってしまいます。
-つまり読み上げられ方の一貫性を欠く結果になってしまいます。
+Furthermore, for screen reader users, having the screen reader announce all common navigation elements on every page is time-consuming and inefficient.
+However, if the order and layout are consistent, it is not always necessary to read out the same content every time.
 
-これに加えて、ページへの動線を複数提供することと、そのページがサイト構造においてどこに位置しているのかを明示することをが推奨されています。
-ページへの動線が1つしかないページの場合、サイト構造を正確に理解している、あるいは容易に推測できるユーザーでなければ、到達するのが困難なページになってしまいます。
-また、現在閲覧しているページがサイト構造の中のどこに位置しているのかという情報は、サイト構造に対する理解を助け、様々な操作に当たっての推測を容易にします。
+What is crucial here is that in addition to visual consistency in the order and layout, consistent markup should also be used.
+Screen readers add information to convey the semantics indicated by the markup.
+Therefore, even if something appears visually the same, if the markup differs, the way it is read aloud will also differ, leading to a lack of consistency in the spoken output.
+
+**************************************
+Clearly Indicating the Page's Location
+**************************************
+
+Clearly indicating where a page is located within the site's structure is crucial for users to understand that structure.
+Understanding the site structure helps users reach their target page more easily and facilitates assumptions when performing various operations.
+
+For example, displaying a breadcrumb trail that shows the hierarchical structure from the site's top page helps users understand the position of the current page.
+
+Furthermore, indicating which global navigation item the current page belongs to also helps users understand the site structure.
+This can be achieved by visually highlighting the global navigation item.
+Additionally, by appropriately using the ``aria-current`` attribute, screen reader users can also be informed of which item the current page belongs to.
+
+***************************
+Providing Multiple Pathways
+***************************
+
+If a page has only one pathway, it becomes difficult to reach for users who don't accurately understand or can't easily infer the site structure.
+To mitigate this issue, providing multiple pathways is recommended.
+
+Specifically, pages reachable from the global navigation fulfill this condition, as they can be accessed from anywhere within the site.
+Also, if a page can be reached via a link within a specific page as well as by some other means, this condition is met.
+Here are some specific examples:
+
+*  Links from a help page
+*  Links from site search results
+*  Links from a list page in addition to links from results displayed using the list page's filter function
+
+However, there is no need to provide multiple pathways for pages that only make sense when displayed in a specific context, such as the following examples:
+
+*  Pages displayed in the middle of a wizard
+*  Pages displayed only when a specific operation is performed, such as showing operation results
 
 .. include:: /inc/info2gl/exp-page-navigation.rst
