@@ -22,5 +22,6 @@ intent:
     Ensure that users of assistive technologies such as screen readers and users who operate only with a keyboard can use content appropriately.
 checks:
 - '0172'
+- '0174'
 info:
 - exp-tab-order-check
