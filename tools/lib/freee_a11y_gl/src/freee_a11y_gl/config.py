@@ -1,6 +1,5 @@
 """Configuration interface for freee_a11y_gl module."""
-import re
-from typing import Dict, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 from .settings import settings
 
 LanguageCode = Literal["ja", "en"]
@@ -9,8 +8,81 @@ class Config:
     """Configuration interface."""
 
     @classmethod
-    def register_settings(cls, new_settings: Optional[Dict[str, any]] = None) -> None:
-        """Register new settings."""
+    def initialize(cls, profile: Optional[str] = None, config_override: Optional[Dict[str, Any]] = None) -> None:
+        """Initialize configuration with profile and overrides.
+        
+        This method allows you to initialize the library's configuration with a specific
+        profile and optional configuration overrides. This is the recommended way to
+        configure the library for different use cases.
+        
+        Args:
+            profile: Profile name to use (e.g., "yaml2rst", "yaml2sheet", "custom_project").
+                    If None, uses "default" profile.
+            config_override: Dictionary of settings to override. Can contain nested
+                           dictionaries for hierarchical configuration.
+                           
+        Examples:
+            # Use a specific profile
+            Config.initialize(profile="yaml2rst")
+            
+            # Use profile with custom overrides
+            Config.initialize(
+                profile="yaml2sheet",
+                config_override={
+                    "base_url": "https://custom.example.com",
+                    "basedir": "/path/to/project",
+                    "languages": {
+                        "default": "en"
+                    },
+                    "paths": {
+                        "guidelines": "/custom/categories/"
+                    }
+                }
+            )
+            
+        Note:
+            This method should be called before using other Config methods.
+            Settings are validated after initialization. Localized strings should
+            be configured through message catalog files, not through config_override.
+        """
+        settings.initialize(profile=profile, config_override=config_override)
+
+    @classmethod
+    def register_settings(cls, new_settings: Optional[Dict[str, Any]] = None) -> None:
+        """Register new settings with validation.
+        
+        This method allows you to customize the library's configuration by providing
+        a dictionary of settings that will be merged with the existing configuration.
+        
+        Args:
+            new_settings: Dictionary of settings to register. Can contain nested
+                         dictionaries for hierarchical configuration.
+                         
+        Examples:
+            # Simple configuration
+            Config.register_settings({
+                "base_url": "https://custom.example.com"
+            })
+            
+            # Complex nested configuration
+            Config.register_settings({
+                "base_url": "https://custom.example.com",
+                "basedir": "/path/to/project",
+                "languages": {
+                    "default": "en",
+                    "available": ["ja", "en"]
+                },
+                "paths": {
+                    "guidelines": "/custom/categories/",
+                    "faq": "/custom/faq/"
+                }
+            })
+            
+        Note:
+            Settings are validated after registration. Invalid configurations
+            will raise a validation error. Localized strings should be configured
+            through message catalog files, not through this method.
+        """
         settings.update(new_settings)
 
     @classmethod
@@ -68,19 +140,19 @@ class Config:
         """Get separator of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         effective_type = separator_type if separator_type is not None else "text"
-        return settings.get(f"locale.{effective_lang}.{effective_type}_separator", "")
+        return settings.message_catalog.get_separator(effective_type, effective_lang)
 
     @classmethod
     def get_text_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get text separator for specified language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"locale.{effective_lang}.text_separator", "")
+        return settings.message_catalog.get_separator("text", effective_lang)
 
     @classmethod
     def get_list_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get list item separator for specified language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"locale.{effective_lang}.list_separator", ", ")
+        return settings.message_catalog.get_separator("list", effective_lang)
 
     @classmethod
     def get_pass_singular_text(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -93,7 +165,7 @@ class Config:
             Localized pass text for single condition
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"locale.{effective_lang}.pass_singular_text", " is true")
+        return settings.message_catalog.get_pass_text("singular", effective_lang)
 
     @classmethod
     def get_pass_plural_text(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -106,68 +178,38 @@ class Config:
             Localized pass text for multiple conditions
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.get(f"locale.{effective_lang}.pass_plural_text", " are true")
+        return settings.message_catalog.get_pass_text("plural", effective_lang)
 
     @classmethod
     def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         effective_type = conjunction_type if conjunction_type is not None else "and"
-        return settings.get(f"locale.{effective_lang}.{effective_type}_conjunction", "and")
+        return settings.message_catalog.get_conjunction(effective_type, effective_lang)
 
     @classmethod
     def get_check_tool_name(cls, tool_id: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check tool name."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.check_tools.names[tool_id][effective_lang]
-        except (KeyError, AttributeError):
-            return tool_id
+        return settings.message_catalog.get_check_tool(tool_id, effective_lang)
 
     @classmethod
     def get_check_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check target name."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.check_targets.names[target][effective_lang]
-        except (KeyError, AttributeError):
-            return target
+        return settings.message_catalog.get_check_target(target, effective_lang)
 
     @classmethod
     def get_severity_tag(cls, severity: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized severity tag."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.severity_tags.tags[severity][effective_lang]
-        except (KeyError, AttributeError):
-            return severity
-
-    @classmethod
-    def get_implementation_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
-        """Get localized implementation target name."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.implementation_targets.targets[target][effective_lang]
-        except (KeyError, AttributeError):
-            return target
+        return settings.message_catalog.get_severity_tag(severity, effective_lang)
 
     @classmethod
     def get_platform_name(cls, platform: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized platform name."""
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.platform.names[effective_lang][platform]
-        except (KeyError, AttributeError):
-            return platform
-
-    @classmethod
-    def get_platform_separator(cls, lang: Optional[LanguageCode] = None) -> str:
-        """Get platform list separator for specified language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        try:
-            return settings.config.platform.separator[effective_lang]
-        except (KeyError, AttributeError):
-            return ", "
+        return settings.message_catalog.get_platform_name(platform, effective_lang)
 
     @classmethod
     def get_faq_path(cls) -> str:
@@ -201,5 +243,22 @@ class Config:
             Date format string in strftime format
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        default_format = "%Y年%-m月%-d日" if effective_lang == "ja" else "%B %-d, %Y"
-        return settings.get(f"locale.{effective_lang}.date_format", default_format)
+        return settings.message_catalog.get_date_format("default", effective_lang)
+
+    @classmethod
+    def get_available_languages(cls) -> List[str]:
+        """Get list of available languages.
+        
+        Returns:
+            List of available language codes
+        """
+        return settings.get("languages.available", ["ja", "en"])
+
+    @classmethod
+    def get_default_language(cls) -> str:
+        """Get default language code.
+        
+        Returns:
+            Default language code
+        """
+        return settings.get("languages.default", "ja")

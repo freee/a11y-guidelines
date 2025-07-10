@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from .base import BaseModel
 from ..relationship_manager import RelationshipManager
 from typing import Literal
-from ..settings import settings
+from ..config import Config
 
 LanguageCode = Literal["ja", "en"]
 from ..utils import uniq
@@ -69,8 +69,8 @@ class Check(BaseModel):
         data = {
             'id': self.id,
             'check': self.check_text[lang],
-            'severity': settings.get(f'severity_tags.{lang}.{self.severity}', self.severity),
-            'target': settings.get(f'check_targets.{lang}.{self.target}', self.target),
+            'severity': Config.get_severity_tag(self.severity, lang),
+            'target': Config.get_check_target_name(self.target, lang),
             'platform': self.join_items(self.platform, lang),
             'guidelines': []
         }
@@ -109,9 +109,9 @@ class Check(BaseModel):
     @staticmethod
     def join_items(items: List[str], lang: str) -> str:
         """Join platform items with localized separator and platform names."""
-        separator = settings.get(f'locale.{lang}.list_separator', ', ')
+        separator = Config.get_list_separator(lang)
         platform_names = [
-            settings.get(f'platform.names.{lang}.{item}', item)
+            Config.get_platform_name(item, lang)
             for item in items
         ]
         return separator.join(platform_names)
@@ -362,7 +362,7 @@ class Method:
             lang: Language code
         """
         return {
-            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
+            'platform': Config.get_platform_name(self.platform, lang),
             'method': self.method[lang]
         }
 
@@ -433,8 +433,7 @@ class Procedure:
             'url': {}
         }
         for lang in self.procedure.keys():
-            lang_path = '' if lang == 'ja' else f'/{lang}'
-            baseurl = f"{settings.get('base_url')}{lang_path}/checks/examples/"
+            baseurl = Config.get_examples_url(lang)
             tool_link['text'][lang] = self.tool_display_name or self.tool.get_name(lang)
             tool_link['url'][lang] = f'{baseurl}{self.tool.id}.html#{self.id}'
         return {
@@ -475,16 +474,16 @@ class Condition:
     def summary(self, lang: str) -> str:
         """Get localized summary of condition."""
         if self.type == 'simple':
-            return f'{self.procedure.id}{settings.get(f"locale.{lang}.pass_singular_text", " is true")}'
+            return f'{self.procedure.id}{Config.get_pass_singular_text(lang)}'
 
         simple_conditions = [c.summary(lang) for c in self.conditions if c.type == 'simple']
         complex_conditions = [f'({c.summary(lang)})' for c in self.conditions if c.type != 'simple']
 
         conjunction_type = 'and' if self.type == 'and' else 'or'
-        summary_separator = settings.get(f'locale.{lang}.{conjunction_type}_separator', ' and ' if conjunction_type == 'and' else ' or ')
-        summary_connector = settings.get(f'locale.{lang}.{conjunction_type}_conjunction', ', and ' if conjunction_type == 'and' else ', or ')
-        pass_singular_text = settings.get(f'locale.{lang}.pass_singular_text', ' is true')
-        pass_plural_text = settings.get(f'locale.{lang}.pass_plural_text', ' are true') if conjunction_type == 'and' else pass_singular_text
+        summary_separator = Config.get_separator(lang, conjunction_type)
+        summary_connector = Config.get_conjunction(lang, conjunction_type)
+        pass_singular_text = Config.get_pass_singular_text(lang)
+        pass_plural_text = Config.get_pass_plural_text(lang) if conjunction_type == 'and' else pass_singular_text
 
         if len(simple_conditions) > 1:
             simple_conditions = [c.replace(pass_singular_text, '') for c in simple_conditions]
@@ -499,7 +498,7 @@ class Condition:
             return {}
 
         data = {
-            'platform': settings.get(f'platform.names.{lang}.{self.platform}', self.platform),
+            'platform': Config.get_platform_name(self.platform, lang),
             'condition': self.summary(lang)
         }
         procedures = self.procedures()

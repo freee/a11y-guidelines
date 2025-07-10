@@ -1,0 +1,25 @@
+# Default configuration for freee_a11y_gl
+# This file contains default values for all configuration settings
+# All default values are externalized from Python code for consistency
+
+languages:
+  available: ["ja", "en"]
+  default: "ja"
+
+base_url: "https://a11y-guidelines.freee.co.jp"
+
+paths:
+  guidelines: "/categories/"
+  faq: "/faq/articles/"
+
+# Profile-specific configurations
+profiles:
+  yaml2rst:
+    # yaml2rst script specific settings
+    # Inherits all default settings above
+    description: "Configuration profile for yaml2rst script"
+  
+  yaml2sheet:
+    # yaml2sheet script specific settings
+    # Inherits all default settings above
+    description: "Configuration profile for yaml2sheet script"

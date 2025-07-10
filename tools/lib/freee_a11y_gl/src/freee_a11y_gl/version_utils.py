@@ -27,8 +27,6 @@ def get_version_info(basedir: Optional[str] = None) -> Dict[str, str]:
         VersionError: If version file cannot be read or executed
     """
     try:
-        from .settings import settings
-
         from .config import Config
 
         version_data: Dict[str, str] = {}
