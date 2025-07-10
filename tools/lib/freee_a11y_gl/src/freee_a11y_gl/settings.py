@@ -1,10 +1,20 @@
 """Configuration management system for freee_a11y_gl module."""
 import os
+import sys
 from pathlib import Path
 from typing import Any, Dict, Optional, List, Literal
 import yaml
 from pydantic import BaseModel, Field, field_validator
 from .message_catalog import MessageCatalog
+
+# Python 3.9+ has importlib.resources.files, 3.8 needs importlib_resources
+if sys.version_info >= (3, 9):
+    from importlib import resources
+else:
+    try:
+        import importlib_resources as resources
+    except ImportError:
+        import importlib.resources as resources
 
 
 class LanguageConfig(BaseModel):
@@ -78,22 +88,43 @@ class Settings:
     def load_defaults(self) -> None:
         """デフォルト設定の読み込み"""
         # 内蔵デフォルト設定ファイルから読み込み
-        default_config_path = Path(__file__).parent / "data" / "config.yaml"
         try:
-            if default_config_path.exists():
-                with default_config_path.open(encoding='utf-8') as f:
+            # importlib.resources を使用してパッケージリソースにアクセス
+            if sys.version_info >= (3, 9):
+                config_files = resources.files("freee_a11y_gl.data")
+                config_file = config_files / "config.yaml"
+                if config_file.is_file():
+                    config_data = yaml.safe_load(config_file.read_text(encoding='utf-8'))
+                    if config_data:
+                        self._settings = config_data
+                    else:
+                        self._settings = self._get_minimal_defaults()
+                else:
+                    self._settings = self._get_minimal_defaults()
+            else:
+                # Python 3.8 compatibility
+                with resources.open_text("freee_a11y_gl.data", "config.yaml", encoding='utf-8') as f:
                     config_data = yaml.safe_load(f)
                     if config_data:
                         self._settings = config_data
                     else:
-                        # YAMLファイルが空の場合は最小限のデフォルト値を設定
                         self._settings = self._get_minimal_defaults()
-            else:
-                # ファイルが存在しない場合は最小限のデフォルト値を設定
+        except (FileNotFoundError, ModuleNotFoundError, yaml.YAMLError):
+            # リソースが見つからない場合やYAMLエラーの場合は、従来の方法でフォールバック
+            try:
+                default_config_path = Path(__file__).parent / "data" / "config.yaml"
+                if default_config_path.exists():
+                    with default_config_path.open(encoding='utf-8') as f:
+                        config_data = yaml.safe_load(f)
+                        if config_data:
+                            self._settings = config_data
+                        else:
+                            self._settings = self._get_minimal_defaults()
+                else:
+                    self._settings = self._get_minimal_defaults()
+            except (OSError, PermissionError, yaml.YAMLError):
+                # 最終フォールバック: 最小限のデフォルト値を設定
                 self._settings = self._get_minimal_defaults()
-        except (OSError, PermissionError, yaml.YAMLError):
-            # ファイル読み込みエラーの場合は最小限のデフォルト値を設定
-            self._settings = self._get_minimal_defaults()
 
     def _get_minimal_defaults(self) -> Dict[str, Any]:
         """最小限のデフォルト値を取得（緊急時フォールバック用）"""
@@ -166,9 +197,31 @@ class Settings:
         # 2. デフォルトメッセージカタログ
         catalog_paths.append(config_dir / "messages" / "default.yaml")
         
-        # 3. ライブラリ内蔵のデフォルトメッセージカタログ
-        lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
-        catalog_paths.append(lib_messages_path)
+        # 3. ライブラリ内蔵のデフォルトメッセージカタログ（importlib.resources使用）
+        lib_messages_path = None
+        try:
+            # importlib.resources を使用してパッケージリソースにアクセス
+            if sys.version_info >= (3, 9):
+                message_files = resources.files("freee_a11y_gl.data")
+                message_file = message_files / "messages.yaml"
+                if message_file.is_file():
+                    # 一時的にPathオブジェクトを作成（MessageCatalog.load_with_fallbackとの互換性のため）
+                    lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
+            else:
+                # Python 3.8 compatibility - リソースが存在するかチェック
+                try:
+                    resources.open_text("freee_a11y_gl.data", "messages.yaml")
+                    lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
+                except FileNotFoundError:
+                    pass
+        except (ModuleNotFoundError, FileNotFoundError):
+            # フォールバック: 従来の方法
+            fallback_path = Path(__file__).parent / "data" / "messages.yaml"
+            if fallback_path.exists():
+                lib_messages_path = fallback_path
+        
+        if lib_messages_path:
+            catalog_paths.append(lib_messages_path)
         
         # メッセージカタログの読み込み
         for primary_path in catalog_paths:

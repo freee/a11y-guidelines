@@ -1,5 +1,5 @@
 """Configuration interface for freee_a11y_gl module."""
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, List, Literal, Optional
 from .settings import settings
 
 LanguageCode = Literal["ja", "en"]
@@ -244,3 +244,21 @@ class Config:
         """
         effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
         return settings.message_catalog.get_date_format("default", effective_lang)
+
+    @classmethod
+    def get_available_languages(cls) -> List[str]:
+        """Get list of available languages.
+        
+        Returns:
+            List of available language codes
+        """
+        return settings.get("languages.available", ["ja", "en"])
+
+    @classmethod
+    def get_default_language(cls) -> str:
+        """Get default language code.
+        
+        Returns:
+            Default language code
+        """
+        return settings.get("languages.default", "ja")
