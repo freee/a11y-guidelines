@@ -1,0 +1,83 @@
+id: '0301'
+sortKey: 101350
+severity: minor
+target: design
+platform:
+- web
+check:
+  ja: |-
+    ブラウザーのズーム機能で400%に拡大表示しても、特定のレイアウトを保持する必要があるコンテンツを除き、適切にリフローされるように設計されている。
+
+    特定のレイアウトを保持する必要があるコンテンツの例：
+    
+    *  巨大な表
+    *  印刷のプレビュー
+    *  スキャンされた画像のプレビュー
+  en: |-
+    The design should allow for appropriate reflow when enlarged to 400% using the browser's zoom function, except for content that requires a fixed layout.
+
+    Examples of content that requires a fixed layout:
+    
+    *  Large tables
+    *  Print previews
+    *  Previews of scanned images
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: and
+    conditions:
+    - type: simple
+      id: 0301-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象のページは横書きのコンテンツである。
+        en: |-
+          The page to be checked is primarily in horizontal writing format.
+    - type: or
+      conditions:
+      - type: simple
+        id: 0301-content-02
+        tool: misc
+        procedure:
+          ja: |-
+            ブラウザー・ウィンドウの幅に応じてレイアウトを切り替え、幅320pxでも横スクロールが表示されない設計になっている。
+          en: |-
+            The content is designed so that the layout switches according to the browser window width, ensuring that no horizontal scrolling is displayed even at a width of 320px.
+      - type: simple
+        id: 0301-content-03
+        tool: misc
+        procedure:
+          ja: |-
+            ブラウザー・ウィンドウの幅が320pxのときに、横スクロールを必要とする部分は、特定のレイアウトを保持する必要があるコンテンツである。
+          en: |-
+            In a browser window with a width of 320px, any part that requires horizontal scrolling is content that needs to be displayed in a fixed layout.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0301-content-04
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象のページは縦書きのコンテンツである。
+        en: |-
+          The page to be checked is primarily in vertical writing format.
+    - type: or
+      conditions:
+      - type: simple
+        id: 0301-content-05
+        tool: misc
+        procedure:
+          ja: |-
+            ブラウザー・ウィンドウの高さに応じてレイアウトを切り替え、高さ256pxでも縦スクロールが表示されない設計になっている。
+          en: |-
+            The content is designed so that the layout switches according to the browser window height, ensuring that no vertical scrolling is displayed even at a height of 256px.
+      - type: simple
+        id: 0301-content-06
+        tool: misc
+        procedure:
+          ja: |-
+            ブラウザー・ウィンドウの高さが256pxのときに、縦スクロールを必要とする部分は、特定のレイアウトを保持する必要があるコンテンツである。
+          en: |-
+            In a browser window with a height of 256px, any part that requires vertical scrolling is content that needs to be displayed in a fixed layout.
