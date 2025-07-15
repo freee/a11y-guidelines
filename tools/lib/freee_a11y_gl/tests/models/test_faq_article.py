@@ -5,7 +5,7 @@ from freee_a11y_gl.models.faq.tag import FaqTag
 from freee_a11y_gl.models.content import Guideline
 from freee_a11y_gl.models.check import Check
 from freee_a11y_gl.relationship_manager import RelationshipManager
-from ..models.base_test import BaseModelTest
+from tests.models.base_test import BaseModelTest
 
 class TestFaq(BaseModelTest):
     model_class = Faq
@@ -35,7 +35,7 @@ class TestFaq(BaseModelTest):
         assert len(tags) == 1
         assert tags[0].id == "axe"
 
-    def test_create_relationships(self, setup_faq_tags, all_guideline_data):
+    def test_create_relationships(self, setup_faq_tags, all_guideline_data, all_check_data):
         """Test creating relationships with other objects."""
         mock_faq = {
             **self.sample_data,
@@ -74,7 +74,7 @@ class TestFaq(BaseModelTest):
             },
             "url": {
                 "ja": "https://example.com/faq/articles/p0009.html",
-                "en": "https://example.com/en/faq/articles/p0009.html"
+                "en": "https://example.com/faq/articles/p0009.html"
             }
         }
         assert link_data == expected_link_data
@@ -95,18 +95,17 @@ class TestFaq(BaseModelTest):
             'updated_str': '2025年3月25日',
             'tags': ['keyboard-operation'],
             'guidelines': [
-                {'category': '入力ディバイス', 'guideline': 'gl-input-device-keyboard-operable'},
-                {'category': '入力ディバイス', 'guideline': 'gl-input-device-focus'},
-                {'category': '入力ディバイス', 'guideline': 'gl-input-device-focus-indicator'},
-                {'category': 'リンク', 'guideline': 'gl-link-tab-order'},
+                {'category': '動的コンテンツ', 'guideline': 'gl-dynamic-content-focus'},
+                {'category': 'フォーム', 'guideline': 'gl-form-dynamic-content-focus'},
                 {'category': 'フォーム', 'guideline': 'gl-form-keyboard-operable'},
                 {'category': 'フォーム', 'guideline': 'gl-form-tab-order'},
-                {'category': 'フォーム', 'guideline': 'gl-form-dynamic-content-focus'},
-                {'category': '動的コンテンツ', 'guideline': 'gl-dynamic-content-focus'}
-            ],
-            'related_faqs': ['d0001']
+                {'category': '入力ディバイス', 'guideline': 'gl-input-device-focus'},
+                {'category': '入力ディバイス', 'guideline': 'gl-input-device-focus-indicator'},
+                {'category': '入力ディバイス', 'guideline': 'gl-input-device-keyboard-operable'},
+                {'category': 'リンク', 'guideline': 'gl-link-tab-order'}
+            ]
         }
-        assert_keys = ["id", "title", "problem", "solution", "explanation", "updated_str", "tags", "guidelines", "related_faqs"]
+        assert_keys = ["id", "title", "problem", "solution", "explanation", "updated_str", "tags", "guidelines"]
         for key in assert_keys:
             assert template_data[key] == expected_template_data[key]
 

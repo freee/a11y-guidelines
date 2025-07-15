@@ -11,14 +11,11 @@ class TestFaqTag:
 
     def test_init(self):
         """Test initialization of FaqTag."""
-        tag_data = {
-            "id": "axe",
-            "names": {"en": "axe", "ja": "axe"}
-        }
-        tag = FaqTag("axe", tag_data)
+        names = {"en": "axe", "ja": "axe"}
+        tag = FaqTag("axe", names)
         assert tag.id == "axe"
         assert tag.object_type == "faq_tag"
-        assert tag.data.names == {"en": "axe", "ja": "axe"}
+        assert tag.names == {"en": "axe", "ja": "axe"}
 
     def test_get_name(self):
         """Test getting name in specified language."""
@@ -61,19 +58,19 @@ class TestFaqTag:
         }
         Faq(mock_faq)
         
-        template_data = tag.get_template_data("ja")
-        assert template_data["id"] == "axe"
-        assert template_data["name"] == "axe"
+        template_data = tag.template_data("ja")
+        assert template_data["tag"] == "axe"
+        assert template_data["label"] == "axe"
+        assert template_data["count"] == 1
         assert len(template_data["articles"]) == 1
-        assert template_data["articles"][0]["id"] == "faq1"
+        assert template_data["articles"][0] == "faq1"
 
     def test_template_data_no_articles(self):
         """Test template data generation when no articles are associated."""
         tag = FaqTag.get_by_id("axe")
-        template_data = tag.get_template_data("ja")
-        assert template_data["id"] == "axe"
-        assert template_data["name"] == "axe"
-        assert len(template_data["articles"]) == 0
+        template_data = tag.template_data("ja")
+        # When no articles, template_data returns None
+        assert template_data is None
 
     def test_list_all(self):
         """Test listing all FAQ tags."""

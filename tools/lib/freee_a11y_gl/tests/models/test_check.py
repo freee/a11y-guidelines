@@ -4,7 +4,7 @@ from freee_a11y_gl.models.check import (
     Check, Condition, Procedure, Implementation, Method, CheckTool, Example, YouTube
 )
 from freee_a11y_gl.models.base import BaseModel
-from ..models.base_test import BaseModelTest
+from tests.models.base_test import BaseModelTest
 
 
 class TestCheck(BaseModelTest):
@@ -109,16 +109,16 @@ class TestCheck(BaseModelTest):
         assert result == ["mobile", "web"]  # Sorted and unique
 
     @patch('freee_a11y_gl.models.check.RelationshipManager')
-    @patch('freee_a11y_gl.models.check.settings')
-    def test_template_data(self, mock_settings, mock_rel_manager):
+    @patch('freee_a11y_gl.models.check.Config')
+    def test_template_data(self, mock_config, mock_rel_manager):
         """Test template data generation."""
-        mock_settings.get.side_effect = lambda key, default=None: {
-            'severity_tags.ja.normal': '[NORMAL]',
-            'check_targets.ja.code': 'コード',
-            'platform.names.ja.web': 'Web',
-            'platform.names.ja.mobile': 'モバイル',
-            'locale.ja.list_separator': '、'
-        }.get(key, default)
+        mock_config.get_severity_tag.return_value = '[NORMAL]'
+        mock_config.get_check_target_name.return_value = 'コード'
+        mock_config.get_platform_name.side_effect = lambda platform, lang: {
+            ('web', 'ja'): 'Web',
+            ('mobile', 'ja'): 'モバイル'
+        }.get((platform, lang), platform)
+        mock_config.get_list_separator.return_value = '、'
 
         mock_rel = MagicMock()
         mock_rel_manager.return_value = mock_rel
@@ -142,12 +142,12 @@ class TestCheck(BaseModelTest):
 
     def test_join_items_static_method(self):
         """Test join_items static method."""
-        with patch('freee_a11y_gl.models.check.settings') as mock_settings:
-            mock_settings.get.side_effect = lambda key, default=None: {
-                'locale.ja.list_separator': '、',
-                'platform.names.ja.web': 'Web',
-                'platform.names.ja.mobile': 'モバイル'
-            }.get(key, default)
+        with patch('freee_a11y_gl.models.check.Config') as mock_config:
+            mock_config.get_list_separator.return_value = '、'
+            mock_config.get_platform_name.side_effect = lambda platform, lang: {
+                ('web', 'ja'): 'Web',
+                ('mobile', 'ja'): 'モバイル'
+            }.get((platform, lang), platform)
 
             result = Check.join_items(["web", "mobile"], "ja")
             assert result == "Web、モバイル"
@@ -316,10 +316,10 @@ class TestCondition:
                 assert len(procedures) == 1
                 assert isinstance(procedures[0], Procedure)
 
-    @patch('freee_a11y_gl.models.check.settings')
-    def test_summary_simple(self, mock_settings):
+    @patch('freee_a11y_gl.models.check.Config')
+    def test_summary_simple(self, mock_config):
         """Test summary for simple condition."""
-        mock_settings.get.return_value = "を満たしている"
+        mock_config.get_pass_singular_text.return_value = "を満たしている"
         
         check_data = {
             "id": "test-check",
@@ -432,10 +432,10 @@ class TestImplementation:
         assert len(impl.methods) == 1
         assert isinstance(impl.methods[0], Method)
 
-    @patch('freee_a11y_gl.models.check.settings')
-    def test_template_data(self, mock_settings):
+    @patch('freee_a11y_gl.models.check.Config')
+    def test_template_data(self, mock_config):
         """Test template data generation."""
-        mock_settings.get.return_value = "Web"
+        mock_config.get_platform_name.return_value = "Web"
         
         title = {"ja": "実装タイトル", "en": "Implementation Title"}
         methods = [
@@ -455,10 +455,10 @@ class TestImplementation:
 class TestMethod:
     """Test cases for Method class."""
 
-    @patch('freee_a11y_gl.models.check.settings')
-    def test_template_data(self, mock_settings):
+    @patch('freee_a11y_gl.models.check.Config')
+    def test_template_data(self, mock_config):
         """Test template data generation."""
-        mock_settings.get.return_value = "Web"
+        mock_config.get_platform_name.return_value = "Web"
         
         method = Method(
             platform="web",

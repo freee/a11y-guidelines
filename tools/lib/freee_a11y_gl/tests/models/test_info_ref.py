@@ -15,61 +15,84 @@ class TestInfoRef:
         """Test initialization of internal reference."""
         ref = InfoRef("exp-test")
         assert ref.ref == "exp-test"
-        assert ref.ref_type == "internal"
-        assert ref.link is None
+        assert ref.internal == True
+        assert ref.ref_data is None
 
     def test_init_external_reference(self):
         """Test initialization of external reference."""
-        ref = InfoRef("ext-test")
-        assert ref.ref == "ext-test"
-        assert ref.ref_type == "external"
-        assert ref.link is None
+        ref = InfoRef("https://example.com")
+        assert ref.ref == "https://example.com"
+        assert ref.internal == False
+        assert ref.ref_data is None
 
     def test_refstring(self):
         """Test generating reference string."""
         ref = InfoRef("exp-test")
-        assert ref.get_refstring() == ":ref:`exp-test`"
+        assert ref.refstring() == ":ref:`exp-test`"
 
-    @pytest.mark.usefixtures("mock_infolabels")
+    def test_refstring_external_url(self):
+        """Test generating reference string for external URL."""
+        ref = InfoRef("https://example.com")
+        assert ref.refstring() == "https://example.com"
+
+    def test_refstring_pipe_reference(self):
+        """Test generating reference string for |name| style reference."""
+        ref = InfoRef("|example|")
+        assert ref.refstring() == "|example|"
+
     def test_link_data_internal(self):
         """Test getting link data for internal reference."""
         ref = InfoRef("exp-tab-order-check")
-        ref.set_link({"text": {"ja": "タイトル", "en": "Title"}})
-        link_data = ref.get_link_data("ja")
-        assert link_data["text"] == "タイトル"
+        link_data = ref.link_data()
+        assert "text" in link_data
         assert "url" in link_data
+        assert link_data["text"]["ja"] == ":ref:`exp-tab-order-check`"
+        assert link_data["url"]["ja"] == ""
 
-    def test_link_data_external(self):
-        """Test getting link data for external reference."""
-        ref = InfoRef("ext-wcag-1-1-1")
-        ref.set_link({
-            "text": {"ja": "外部リンク", "en": "External Link"},
-            "url": "https://example.com"
-        })
-        link_data = ref.get_link_data("ja")
-        assert link_data["text"] == "外部リンク"
-        assert link_data["url"] == "https://example.com"
+    def test_link_data_external_url(self):
+        """Test getting link data for external URL reference."""
+        ref = InfoRef("https://example.com")
+        link_data = ref.link_data()
+        assert "text" in link_data
+        assert "url" in link_data
+        assert link_data["text"]["ja"] == "https://example.com"
+        assert link_data["url"]["ja"] == "https://example.com"
+
+    def test_link_data_with_ref_data(self):
+        """Test getting link data when ref_data is set."""
+        ref = InfoRef("exp-test")
+        test_data = {
+            "text": {"ja": "テストタイトル", "en": "Test Title"},
+            "url": {"ja": "https://ja.example.com", "en": "https://en.example.com"}
+        }
+        ref.ref_data = test_data
+        link_data = ref.link_data()
+        assert link_data["text"]["ja"] == "テストタイトル"
+        assert link_data["url"]["ja"] == "https://ja.example.com"
 
     def test_set_link(self):
         """Test setting link data."""
         ref = InfoRef("exp-test")
-        link_data = {"text": {"ja": "タイトル", "en": "Title"}}
+        link_data = {
+            "text": {"ja": "タイトル", "en": "Title"},
+            "url": {"ja": "https://ja.example.com", "en": "https://en.example.com"}
+        }
         ref.set_link(link_data)
-        assert ref.link == link_data
+        assert ref.ref_data == link_data
 
     def test_list_all_internal(self):
         """Test listing all internal references."""
         refs = InfoRef.list_all_internal()
         assert isinstance(refs, list)
         assert all(isinstance(ref, InfoRef) for ref in refs)
-        assert all(ref.ref_type == "internal" for ref in refs)
+        assert all(ref.internal == True for ref in refs)
 
     def test_list_all_external(self):
         """Test listing all external references."""
         refs = InfoRef.list_all_external()
         assert isinstance(refs, list)
         assert all(isinstance(ref, InfoRef) for ref in refs)
-        assert all(ref.ref_type == "external" for ref in refs)
+        assert all(ref.internal == False for ref in refs)
 
     def test_list_has_guidelines(self, setup_categories, all_guideline_data):
         """Test listing references that have guidelines."""

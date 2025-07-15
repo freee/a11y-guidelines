@@ -9,10 +9,17 @@ def run_tests():
     """Run all tests and provide a summary."""
     
     test_suites = [
+        ("Core Config Tests", "tests/core/test_config.py"),
         ("Core Utils Tests", "tests/core/test_utils.py"),
         ("Base Model Tests", "tests/models/test_base.py"),
+        ("Check Model Tests", "tests/models/test_check.py"),
+        ("FAQ Article Tests", "tests/models/test_faq_article.py"),
+        ("Guideline Tests", "tests/models/test_guideline.py"),
+        ("Info Reference Tests", "tests/models/test_info_ref.py"),
+        ("FAQ Tag Tests", "tests/models/faq/test_tag.py"),
         ("RelationshipManager Tests", "tests/managers/test_relationship_manager.py"),
         ("YAML Processor Tests", "tests/yaml_processor/test_process_yaml.py"),
+        ("RST Processor Tests", "tests/yaml_processor/test_rst_processor.py"),
     ]
     
     results = []

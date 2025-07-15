@@ -158,7 +158,7 @@ class TestRelationshipManager:
         assert manager._unresolved_faqs["faq1"] == ["faq2"]
         assert manager._unresolved_faqs["faq2"] == ["faq1"]
 
-    @patch('freee_a11y_gl.relationship_manager.Faq')
+    @patch('freee_a11y_gl.models.faq.article.Faq')
     def test_resolve_faqs_success(self, mock_faq_class):
         """Test successful FAQ resolution."""
         manager = RelationshipManager()
@@ -182,7 +182,7 @@ class TestRelationshipManager:
         assert mock_faq2 in manager.get_related_objects(mock_faq1, "faq")
         assert mock_faq1 in manager.get_related_objects(mock_faq2, "faq")
 
-    @patch('freee_a11y_gl.relationship_manager.Faq')
+    @patch('freee_a11y_gl.models.faq.article.Faq')
     def test_resolve_faqs_missing_objects(self, mock_faq_class):
         """Test FAQ resolution when some objects are missing."""
         manager = RelationshipManager()
