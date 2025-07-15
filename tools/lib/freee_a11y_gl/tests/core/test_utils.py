@@ -86,7 +86,7 @@ class TestUniq:
         """Test list with no duplicates."""
         input_list = [1, 2, 3, 4, 5]
         result = uniq(input_list)
-        assert result == [1, 2, 3, 4, 5]
+        assert result == input_list
 
     def test_uniq_empty_list(self):
         """Test empty list."""
@@ -95,8 +95,9 @@ class TestUniq:
 
     def test_uniq_single_item(self):
         """Test single item list."""
-        result = uniq([1])
-        assert result == [1]
+        input_list = [1]
+        result = uniq(input_list)
+        assert result == input_list
 
     def test_uniq_all_same_items(self):
         """Test list with all same items."""
@@ -158,18 +159,21 @@ class TestTag2sc:
 
     def test_tag2sc_no_match(self):
         """Test tag that doesn't match pattern."""
-        result = tag2sc("not-wcag-tag")
-        assert result == "not-wcag-tag"
+        text = "not-wcag-tag"
+        result = tag2sc(text)
+        assert result == text
 
     def test_tag2sc_partial_match(self):
         """Test tag with partial match."""
-        result = tag2sc("wcag-incomplete")
-        assert result == "wcag-incomplete"
+        text = "wcag-incomplete"
+        result = tag2sc(text)
+        assert result == text
 
     def test_tag2sc_empty_string(self):
         """Test empty string input."""
-        result = tag2sc("")
-        assert result == ""
+        text = ""
+        result = tag2sc(text)
+        assert result == text
 
     def test_tag2sc_multiple_matches(self):
         """Test string with multiple WCAG patterns."""
