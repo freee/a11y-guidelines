@@ -6,12 +6,78 @@ platform:
 - web
 check:
   ja: |-
-    1280x1024のサイズのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに適切にリフローされ
+    ブラウザーのズーム機能で400%に拡大表示しても、特定のレイアウトを保持する必要があるコンテンツを除き、適切にリフローされる。
 
-    *  横書きのコンテンツでは横スクロールが、縦書きのコンテンツでは縦スクロールが発生しない、かつ
-    *  読み取れない内容や利用できない機能がない
+    特定のレイアウトを保持する必要があるコンテンツの例：
+    
+    *  巨大な表
+    *  印刷のプレビュー
+    *  スキャンされた画像のプレビュー
   en: |-
-    Magnifying content to 400 percent using the zoom function of the browser on a 1280x1024 window reflows the content properly and
+    The product should allow for appropriate reflow when enlarged to 400% using the browser's zoom function, except for content that requires a fixed layout.
 
-    *  no horizontal scrolling is necessary on left-to-right content, and no vertical scrolling is necessary on top-to-bottom content, and
-    *  there is no unreadable content or unusable functionality
+    Examples of content that requires a fixed layout:
+    
+    *  Large tables
+    *  Print previews
+    *  Previews of scanned images
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: and
+    conditions:
+    - type: simple
+      id: 0322-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象のページは横書きのコンテンツである。
+        en: |-
+          The page to be checked is primarily in horizontal writing format.
+    - type: or
+      conditions:
+      - type: simple
+        id: 0322-content-02
+        tool: misc
+        procedure:
+          ja: |-
+            幅が1280pxのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときも、横スクロールを必要としないレイアウトになっている。
+          en: |-
+            In a window with a width of 1280px, when the browser's zoom function is used to enlarge the display to 400 percent, horizontal scrolling is not required.
+      - type: simple
+        id: 0322-content-03
+        tool: misc
+        procedure:
+          ja: |-
+            幅が1280pxのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに横スクロールを必要とする部分は、特定のレイアウトを保持する必要があるコンテンツである。
+          en: |-
+            In a window with a width of 1280px, when the browser's zoom function is used to enlarge the display to 400 percent, any part that requires horizontal scrolling is content that needs to be displayed in a fixed layout.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0322-content-04
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象のページは縦書きのコンテンツである。
+        en: |-
+          The page to be checked is primarily in vertical writing format.
+    - type: or
+      conditions:
+      - type: simple
+        id: 0322-content-05
+        tool: misc
+        procedure:
+          ja: |-
+            高さが1024pxのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときも、縦スクロールを必要としないレイアウトになっている。
+          en: |-
+            In a window with a height of 1024px, when the browser's zoom function is used to enlarge the display to 400 percent, vertical scrolling is not required.
+      - type: simple
+        id: 0322-content-06
+        tool: misc
+        procedure:
+          ja: |-
+            高さが1024pxのウィンドウにおいて、ブラウザーのズーム機能を用いて400パーセントの拡大表示をしたときに縦スクロールを必要とする部分は、特定のレイアウトを保持する必要があるコンテンツである。
+          en: |-
+            In a window with a height of 1024px, when the browser's zoom function is used to enlarge the display to 400 percent, any part that requires vertical scrolling is content that needs to be displayed in a fixed layout.
