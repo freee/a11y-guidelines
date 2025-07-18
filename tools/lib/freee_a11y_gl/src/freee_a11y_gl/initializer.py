@@ -15,6 +15,7 @@ from .models.axe import AxeRule
 from .models.check import Check, CheckTool
 from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
+from .yaml_validator import YamlValidator, ValidationError
 
 def setup_instances(basedir: Optional[str] = None):
     """
@@ -32,12 +33,18 @@ def setup_instances(basedir: Optional[str] = None):
     # Get value from settings if not provided
     effective_basedir = basedir if basedir is not None else Config.get_basedir()
     src_path = get_src_path(effective_basedir)
-    # Mapping of entity type, srcdir, schema filename, and constructor.
+    
+    # Initialize YAML validator with configuration
+    schema_dir = os.path.join(effective_basedir, 'data', 'json', 'schemas')
+    validation_mode = Config.get_yaml_validation_mode()
+    validator = YamlValidator(schema_dir, validation_mode)
+    
+    # Mapping of entity type, srcdir, constructor, and schema name.
     # The order is important for the initialization of the instances.
     entity_config = [
-        ('check', src_path['checks'], Check),
-        ('guideline', src_path['guidelines'], Guideline),
-        ('faq', src_path['faq'], Faq)
+        ('check', src_path['checks'], Check, 'check'),
+        ('guideline', src_path['guidelines'], Guideline, 'guideline'),
+        ('faq', src_path['faq'], Faq, 'faq')
     ]
     static_entity_config = [
         ('category', src_path['gl_categories'], Category),
@@ -53,8 +60,8 @@ def setup_instances(basedir: Optional[str] = None):
     for entity_type, srcfile, constructor in static_entity_config:
         process_static_entity_file(srcfile, constructor)
 
-    for entity_type, srcdir, constructor in entity_config:
-        process_entity_files(srcdir, constructor)
+    for entity_type, srcdir, constructor, schema_name in entity_config:
+        process_entity_files(srcdir, constructor, schema_name, validator)
 
     process_axe_rules(basedir, AXE_CORE)
     rel = RelationshipManager()
@@ -158,14 +165,33 @@ def read_yaml_file(file):
 
     return data
 
-def process_entity_files(srcdir, constructor):
+def process_entity_files(srcdir, constructor, schema_name=None, validator=None):
+    """
+    Process entity files with optional validation.
+    
+    Args:
+        srcdir: Source directory containing YAML files
+        constructor: Constructor function for the entity
+        schema_name: Name of the schema to validate against (optional)
+        validator: YamlValidator instance (optional)
+    """
     files = ls_dir(srcdir)
     for file in files:
         try:
             file_content = read_file_content(file)
         except Exception as e:
             handle_file_error(e, file)
+        
         parsed_data = yaml.safe_load(file_content)
+        
+        # Perform validation if validator and schema_name are provided
+        if validator and schema_name:
+            try:
+                validator.validate_with_mode(parsed_data, schema_name, file)
+            except ValidationError as e:
+                print(f"YAML Validation Error: {e}", file=sys.stderr)
+                sys.exit(1)
+        
         parsed_data['src_path'] = os.path.abspath(file)
         try:
             constructor(parsed_data)

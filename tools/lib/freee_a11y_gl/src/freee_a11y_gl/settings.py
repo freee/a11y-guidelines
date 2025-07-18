@@ -50,11 +50,17 @@ class PathConfig(BaseModel):
         return v
 
 
+class ValidationConfig(BaseModel):
+    """Validation configuration."""
+    yaml_validation: Literal["strict", "warning", "disabled"] = "strict"
+
+
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig
     base_url: str
     paths: PathConfig
+    validation: ValidationConfig = Field(default_factory=ValidationConfig)
 
 class Settings:
     """設定値を階層的に管理するクラス。
@@ -137,6 +143,9 @@ class Settings:
             "paths": {
                 "guidelines": "/categories/",
                 "faq": "/faq/articles/"
+            },
+            "validation": {
+                "yaml_validation": "strict"
             }
         }
 

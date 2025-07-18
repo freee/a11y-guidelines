@@ -12,6 +12,9 @@ paths:
   guidelines: "/categories/"
   faq: "/faq/articles/"
 
+validation:
+  yaml_validation: "strict"  # strict | warning | disabled
+
 # Profile-specific configurations
 profiles:
   yaml2rst:
