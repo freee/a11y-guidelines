@@ -6,6 +6,26 @@ platform:
 - web
 check:
   ja: |-
-    そのページ/画面の目的を示し、かつ他のページ/画面とは異なるタイトルが設計資料で明示されている。
+    そのページ/画面の適切なタイトルが設計資料に明示されている。
   en: |-
-    The design documentation explicitly states a title that indicates the purpose of the page/screen and is different from the titles of other pages/screens.
+    The design documentation explicitly states an appropriate title for the page/screen.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0631-content-00"
+    procedure:
+      ja: |-
+        チェック対象はモーダル・ダイアログである。
+      en: |-
+        The check target is a modal dialog.
+  - type: simple
+    tool: misc
+    id: "0631-content-01"
+    procedure:
+      ja: |-
+        そのページ/画面のタイトルは、ページ/画面の目的を示し、かつ他のページ/画面とは異なるものになっている。
+      en: |-
+        The title of the page/screen indicates the purpose of the page/screen and is different from other pages/screens.
