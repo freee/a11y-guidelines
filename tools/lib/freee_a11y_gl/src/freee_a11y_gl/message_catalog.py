@@ -6,14 +6,7 @@ from typing import Any, Dict, Optional
 import yaml
 from pydantic import BaseModel, Field
 
-# Python 3.9+ has importlib.resources.files, 3.8 needs importlib_resources
-if sys.version_info >= (3, 9):
-    from importlib import resources
-else:
-    try:
-        import importlib_resources as resources
-    except ImportError:
-        import importlib.resources as resources
+from importlib import resources
 
 
 class MessageCatalog(BaseModel):
@@ -98,19 +91,13 @@ class MessageCatalog(BaseModel):
         """
         try:
             # importlib.resources を使用してパッケージリソースにアクセス
-            if sys.version_info >= (3, 9):
-                message_files = resources.files("freee_a11y_gl.data")
-                message_file = message_files / "messages.yaml"
-                if message_file.is_file():
-                    data = yaml.safe_load(message_file.read_text(encoding='utf-8')) or {}
-                    return cls(**data)
-                else:
-                    raise FileNotFoundError("messages.yaml not found in package resources")
+            message_files = resources.files("freee_a11y_gl.data")
+            message_file = message_files / "messages.yaml"
+            if message_file.is_file():
+                data = yaml.safe_load(message_file.read_text(encoding='utf-8')) or {}
+                return cls(**data)
             else:
-                # Python 3.8 compatibility
-                with resources.open_text("freee_a11y_gl.data", "messages.yaml", encoding='utf-8') as f:
-                    data = yaml.safe_load(f) or {}
-                    return cls(**data)
+                raise FileNotFoundError("messages.yaml not found in package resources")
         except (ModuleNotFoundError, FileNotFoundError) as e:
             raise FileNotFoundError(f"Message catalog resource not found: {e}")
     

@@ -7,14 +7,7 @@ import yaml
 from pydantic import BaseModel, Field, field_validator
 from .message_catalog import MessageCatalog
 
-# Python 3.9+ has importlib.resources.files, 3.8 needs importlib_resources
-if sys.version_info >= (3, 9):
-    from importlib import resources
-else:
-    try:
-        import importlib_resources as resources
-    except ImportError:
-        import importlib.resources as resources
+from importlib import resources
 
 
 class LanguageConfig(BaseModel):
@@ -96,25 +89,16 @@ class Settings:
         # 内蔵デフォルト設定ファイルから読み込み
         try:
             # importlib.resources を使用してパッケージリソースにアクセス
-            if sys.version_info >= (3, 9):
-                config_files = resources.files("freee_a11y_gl.data")
-                config_file = config_files / "config.yaml"
-                if config_file.is_file():
-                    config_data = yaml.safe_load(config_file.read_text(encoding='utf-8'))
-                    if config_data:
-                        self._settings = config_data
-                    else:
-                        self._settings = self._get_minimal_defaults()
+            config_files = resources.files("freee_a11y_gl.data")
+            config_file = config_files / "config.yaml"
+            if config_file.is_file():
+                config_data = yaml.safe_load(config_file.read_text(encoding='utf-8'))
+                if config_data:
+                    self._settings = config_data
                 else:
                     self._settings = self._get_minimal_defaults()
             else:
-                # Python 3.8 compatibility
-                with resources.open_text("freee_a11y_gl.data", "config.yaml", encoding='utf-8') as f:
-                    config_data = yaml.safe_load(f)
-                    if config_data:
-                        self._settings = config_data
-                    else:
-                        self._settings = self._get_minimal_defaults()
+                self._settings = self._get_minimal_defaults()
         except (FileNotFoundError, ModuleNotFoundError, yaml.YAMLError):
             # リソースが見つからない場合やYAMLエラーの場合は、従来の方法でフォールバック
             try:
@@ -210,19 +194,11 @@ class Settings:
         lib_messages_path = None
         try:
             # importlib.resources を使用してパッケージリソースにアクセス
-            if sys.version_info >= (3, 9):
-                message_files = resources.files("freee_a11y_gl.data")
-                message_file = message_files / "messages.yaml"
-                if message_file.is_file():
-                    # 一時的にPathオブジェクトを作成（MessageCatalog.load_with_fallbackとの互換性のため）
-                    lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
-            else:
-                # Python 3.8 compatibility - リソースが存在するかチェック
-                try:
-                    resources.open_text("freee_a11y_gl.data", "messages.yaml")
-                    lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
-                except FileNotFoundError:
-                    pass
+            message_files = resources.files("freee_a11y_gl.data")
+            message_file = message_files / "messages.yaml"
+            if message_file.is_file():
+                # 一時的にPathオブジェクトを作成（MessageCatalog.load_with_fallbackとの互換性のため）
+                lib_messages_path = Path(__file__).parent / "data" / "messages.yaml"
         except (ModuleNotFoundError, FileNotFoundError):
             # フォールバック: 従来の方法
             fallback_path = Path(__file__).parent / "data" / "messages.yaml"
