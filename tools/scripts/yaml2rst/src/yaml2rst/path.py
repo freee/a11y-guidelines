@@ -1,7 +1,6 @@
 import os
 from .config import AVAILABLE_LANGUAGES
 from freee_a11y_gl.source import DATA_DIR, YAML_DIR, JSON_DIR
-from freee_a11y_gl.constants import AXE_CORE
 
 # Output directory
 DEST_DIR_BASE = 'source'
