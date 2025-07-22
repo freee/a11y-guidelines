@@ -159,11 +159,10 @@ def handle_file_error(e, file_path):
 def read_yaml_file(file):
     try:
         file_content = read_file_content(file)
+        data = yaml.safe_load(file_content)
+        return data
     except Exception as e:
         handle_file_error(e, file)
-    data = yaml.safe_load(file_content)
-
-    return data
 
 def process_entity_files(srcdir, constructor, schema_name=None, validator=None):
     """
@@ -179,33 +178,32 @@ def process_entity_files(srcdir, constructor, schema_name=None, validator=None):
     for file in files:
         try:
             file_content = read_file_content(file)
-        except Exception as e:
-            handle_file_error(e, file)
-        
-        parsed_data = yaml.safe_load(file_content)
-        
-        # Perform validation if validator and schema_name are provided
-        if validator and schema_name:
+            parsed_data = yaml.safe_load(file_content)
+            
+            # Perform validation if validator and schema_name are provided
+            if validator and schema_name:
+                try:
+                    validator.validate_with_mode(parsed_data, schema_name, file)
+                except ValidationError as e:
+                    print(f"YAML Validation Error: {e}", file=sys.stderr)
+                    sys.exit(1)
+            
+            parsed_data['src_path'] = os.path.abspath(file)
             try:
-                validator.validate_with_mode(parsed_data, schema_name, file)
-            except ValidationError as e:
-                print(f"YAML Validation Error: {e}", file=sys.stderr)
-                sys.exit(1)
-        
-        parsed_data['src_path'] = os.path.abspath(file)
-        try:
-            constructor(parsed_data)
+                constructor(parsed_data)
+            except Exception as e:
+                handle_file_error(e, file)
         except Exception as e:
             handle_file_error(e, file)
 
 def process_static_entity_file(srcfile, constructor):
     try:
         file_content = read_file_content(srcfile)
+        parsed_data = json.loads(file_content)
+        for key, data in parsed_data.items():
+            try:
+                constructor(key, data)
+            except Exception as e:
+                handle_file_error(e, srcfile)
     except Exception as e:
         handle_file_error(e, srcfile)
-    parsed_data = json.loads(file_content)
-    for key, data in parsed_data.items():
-        try:
-            constructor(key, data)
-        except Exception as e:
-            handle_file_error(e, srcfile)
