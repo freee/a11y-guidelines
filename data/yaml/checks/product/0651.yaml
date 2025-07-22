@@ -6,10 +6,36 @@ platform:
 - web
 check:
   ja: |-
-    そのページ/画面の目的を示し、かつ他のページ/画面とは異なるタイトルが付けられている。
-
-    -  ブラウザーのタイトルバー/タブバーに表示されている。
+    ページ/画面には、適切なタイトルが付けられている。
   en: |-
-    The page/screen has a title that indicates its purpose and is different from other pages/screens.
-
-    *  It is displayed in the title bar/tab bar of the browser.
+    The page/screen has an appropriate title.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0651-content-00
+    procedure:
+      ja: |-
+        チェック対象はモーダル・ダイアログである。
+      en: |-
+        The check target is a modal dialog.
+  - type: and
+    conditions:
+    - type: simple
+      tool: axe
+      id: "0651-axe-01"
+      procedure:
+        ja: |-
+          axe DevToolsで「 :ref:`axe-rule-document-title` 」という問題が出ない。
+        en: |-
+          The issue :ref:`axe-rule-document-title` is not reported by axe DevTools.
+    - type: simple
+      tool: misc
+      id: "0651-content-01"
+      procedure:
+        ja: |-
+          ブラウザーのタイトルバーまたはタブバーに表示されているそのページ/画面のタイトルは、ページ/画面の目的を示し、かつ他のページ/画面とは異なるものになっている。
+        en: |-
+          The title of the page/screen displayed in the browser's title bar or tab bar indicates the purpose of the page/screen and is different from other pages/screens.
