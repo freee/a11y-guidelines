@@ -367,6 +367,12 @@ class TestAxeRule:
 
     def test_axe_rule_class_metadata(self):
         """Test AxeRule class-level metadata."""
+        # Reset class variables to ensure clean state
+        AxeRule.timestamp = None
+        AxeRule.version = None
+        AxeRule.major_version = None
+        AxeRule.deque_url = None
+        
         # Test initial state
         assert AxeRule.timestamp is None
         assert AxeRule.version is None

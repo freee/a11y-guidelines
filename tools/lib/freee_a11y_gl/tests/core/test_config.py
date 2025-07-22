@@ -687,7 +687,7 @@ class TestMessageCatalog:
     def test_get_check_tool_from_catalog(self):
         """Test getting check tool from message catalog."""
         result = Config.get_check_tool_name("axe", "ja")
-        assert result == "axe-core"
+        assert result == "axe DevTools"
 
     def test_get_platform_name_from_catalog(self):
         """Test getting platform name from message catalog."""

@@ -28,6 +28,15 @@ class TestYamlValidationConfig:
             },
             "validation": {
                 "yaml_validation": "strict"
+            },
+            "axe_core": {
+                "submodule_name": "vendor/axe-core",
+                "base_dir": "vendor/axe-core",
+                "deque_url": "https://dequeuniversity.com/rules/axe/",
+                "pkg_file": "package.json",
+                "rules_dir": "lib/rules",
+                "locale_dir": "locales",
+                "locale_ja_file": "ja.json"
             }
         }
         settings.validate()
@@ -246,13 +255,24 @@ class TestYamlValidationConfig:
 
     def test_settings_global_config_with_validation(self):
         """Test that GlobalConfig properly includes ValidationConfig."""
-        from freee_a11y_gl.settings import GlobalConfig, LanguageConfig, PathConfig, ValidationConfig
+        from freee_a11y_gl.settings import GlobalConfig, LanguageConfig, PathConfig, ValidationConfig, AxeCoreConfig
+        
+        axe_core_config = AxeCoreConfig(
+            submodule_name="vendor/axe-core",
+            base_dir="vendor/axe-core",
+            deque_url="https://dequeuniversity.com/rules/axe/",
+            pkg_file="package.json",
+            rules_dir="lib/rules",
+            locale_dir="locales",
+            locale_ja_file="ja.json"
+        )
         
         config = GlobalConfig(
             languages=LanguageConfig(available=["ja", "en"], default="ja"),
             base_url="https://example.com",
             paths=PathConfig(guidelines="/categories/", faq="/faq/"),
-            validation=ValidationConfig(yaml_validation="warning")
+            validation=ValidationConfig(yaml_validation="warning"),
+            axe_core=axe_core_config
         )
         
         assert config.validation.yaml_validation == "warning"
@@ -261,7 +281,8 @@ class TestYamlValidationConfig:
         config_default = GlobalConfig(
             languages=LanguageConfig(available=["ja", "en"], default="ja"),
             base_url="https://example.com",
-            paths=PathConfig(guidelines="/categories/", faq="/faq/")
+            paths=PathConfig(guidelines="/categories/", faq="/faq/"),
+            axe_core=axe_core_config
         )
         
         assert config_default.validation.yaml_validation == "strict"
