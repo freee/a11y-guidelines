@@ -16,6 +16,7 @@ class MessageCatalog(BaseModel):
     check_targets: Dict[str, Dict[str, str]] = Field(default_factory=dict)
     check_tools: Dict[str, Dict[str, str]] = Field(default_factory=dict)
     platform_names: Dict[str, Dict[str, str]] = Field(default_factory=dict)
+    implementation_targets: Dict[str, Dict[str, str]] = Field(default_factory=dict)
     separators: Dict[str, Dict[str, str]] = Field(default_factory=dict)
     conjunctions: Dict[str, Dict[str, str]] = Field(default_factory=dict)
     pass_texts: Dict[str, Dict[str, str]] = Field(default_factory=dict)
@@ -160,6 +161,21 @@ class MessageCatalog(BaseModel):
             return self.platform_names[platform][lang]
         except KeyError:
             return platform
+    
+    def get_implementation_target(self, target: str, lang: str = "ja") -> str:
+        """Get localized implementation target name.
+        
+        Args:
+            target: Implementation target identifier (web, android, ios)
+            lang: Language code (ja, en)
+            
+        Returns:
+            Localized implementation target name
+        """
+        try:
+            return self.implementation_targets[target][lang]
+        except KeyError:
+            return target
     
     def get_separator(self, separator_type: str, lang: str = "ja") -> str:
         """Get localized separator.

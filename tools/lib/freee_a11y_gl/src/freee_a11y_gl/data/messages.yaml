@@ -3,18 +3,18 @@
 # Language specification is consistently at the deepest level
 
 severity_tags:
-  minor:
-    ja: "[MINOR]"
-    en: "[MINOR]"
-  normal:
-    ja: "[NORMAL]"
-    en: "[NORMAL]"
-  major:
-    ja: "[MAJOR]"
-    en: "[MAJOR]"
   critical:
     ja: "[CRITICAL]"
     en: "[CRITICAL]"
+  major:
+    ja: "[MAJOR]"
+    en: "[MAJOR]"
+  normal:
+    ja: "[NORMAL]"
+    en: "[NORMAL]"
+  minor:
+    ja: "[MINOR]"
+    en: "[MINOR]"
 
 check_targets:
   design:
@@ -28,15 +28,27 @@ check_targets:
     en: "Product"
 
 check_tools:
+  nvda:
+    ja: "NVDA"
+    en: "NVDA"
+  macos-vo:
+    ja: "macOS VoiceOver"
+    en: "macOS VoiceOver"
   axe:
-    ja: "axe-core"
-    en: "axe-core"
-  lighthouse:
-    ja: "Lighthouse"
-    en: "Lighthouse"
-  wave:
-    ja: "WAVE"
-    en: "WAVE"
+    ja: "axe DevTools"
+    en: "axe DevTools"
+  ios-vo:
+    ja: "iOS VoiceOver"
+    en: "iOS VoiceOver"
+  android-tb:
+    ja: "Android TalkBack"
+    en: "Android TalkBack"
+  keyboard:
+    ja: "キーボード操作"
+    en: "Keyboard"
+  misc:
+    ja: "その他の手段"
+    en: "Miscellaneous Methods"
 
 platform_names:
   web:
@@ -46,14 +58,25 @@ platform_names:
     ja: "モバイル"
     en: "Mobile"
   general:
-    ja: "全般"
-    en: "General"
+    ja: "Web、モバイル"
+    en: "Web, Mobile"
   ios:
     ja: "iOS"
     en: "iOS"
   android:
     ja: "Android"
     en: "Android"
+
+implementation_targets:
+  web:
+    ja: "Web"
+    en: "Web"
+  android:
+    ja: "Android"
+    en: "Android"
+  ios:
+    ja: "iOS"
+    en: "iOS"
 
 separators:
   text:

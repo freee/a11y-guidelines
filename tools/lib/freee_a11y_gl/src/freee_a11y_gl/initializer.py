@@ -13,7 +13,6 @@ from .models.faq.article import Faq
 from .models.faq.tag import FaqTag
 from .models.axe import AxeRule
 from .models.check import Check, CheckTool
-from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
 from .yaml_validator import YamlValidator, ValidationError
 
@@ -54,7 +53,9 @@ def setup_instances(basedir: Optional[str] = None):
     ]
 
     # Setup CheckTool instances
-    for tool_id, tool_names in CHECK_TOOLS.items():
+    from .settings import settings
+    check_tools = settings.message_catalog.check_tools
+    for tool_id, tool_names in check_tools.items():
         CheckTool(tool_id, tool_names)
 
     for entity_type, srcfile, constructor in static_entity_config:
@@ -63,19 +64,20 @@ def setup_instances(basedir: Optional[str] = None):
     for entity_type, srcdir, constructor, schema_name in entity_config:
         process_entity_files(srcdir, constructor, schema_name, validator)
 
-    process_axe_rules(basedir, AXE_CORE)
+    axe_core_config = Config.get_axe_core_config()
+    process_axe_rules(basedir, axe_core_config)
     rel = RelationshipManager()
     rel.resolve_faqs()
     return rel
 
-def process_axe_rules(basedir: Optional[str], AXE_CORE):
+def process_axe_rules(basedir: Optional[str], axe_core_config):
     """
     Process axe-core rules from the Git submodule.
     
     Args:
         basedir: Base directory containing the Git repository.
                 If None, value from settings will be used. If not in settings, defaults to '.'
-        AXE_CORE: Dictionary containing axe-core configuration
+        axe_core_config: Dictionary containing axe-core configuration
     
     Raises:
         ValueError: If the axe-core submodule is not found
@@ -86,26 +88,26 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
     root_repo = git.Repo(effective_basedir)
     submodule = None
     for sm in root_repo.submodules:
-        if sm.name == AXE_CORE['submodule_name']:
+        if sm.name == axe_core_config['submodule_name']:
             submodule = sm
             break
 
     if submodule is None:
-        raise ValueError(f'Submodule with name {AXE_CORE["submodule_name"]} not found.')
+        raise ValueError(f'Submodule with name {axe_core_config["submodule_name"]} not found.')
 
-    axe_base = os.path.join(effective_basedir, AXE_CORE['base_dir'])
+    axe_base = os.path.join(effective_basedir, axe_core_config['base_dir'])
     axe_commit_id = submodule.hexsha
     axe_repo = git.Repo(axe_base)
     axe_commit = axe_repo.commit(axe_commit_id)
 
     # Get message file
-    msg_ja_path = os.path.join(AXE_CORE['locale_dir'], AXE_CORE['locale_ja_file'])
+    msg_ja_path = os.path.join(axe_core_config['locale_dir'], axe_core_config['locale_ja_file'])
     blob = axe_commit.tree / msg_ja_path
     file_content = blob.data_stream.read().decode('utf-8')
     messages_ja = json.loads(file_content)
 
     # Get rule files
-    tree = axe_commit.tree / AXE_CORE['rules_dir']
+    tree = axe_commit.tree / axe_core_config['rules_dir']
     rule_blobs = [item for item in tree.traverse() if item.type == 'blob' and item.path.endswith('.json')]
     for blob in rule_blobs:
         file_content = blob.data_stream.read().decode('utf-8')
@@ -113,12 +115,12 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
         AxeRule(parsed_data, messages_ja)
 
     # Get the package file
-    blob = axe_commit.tree / AXE_CORE['pkg_file']
+    blob = axe_commit.tree / axe_core_config['pkg_file']
     file_content = blob.data_stream.read().decode('utf-8')
     parsed_data = json.loads(file_content)
     AxeRule.version = parsed_data['version']
     AxeRule.major_version = re.sub(r'(\d+)\.(\d+)\.\d+', r'\1.\2', parsed_data['version'])
-    AxeRule.deque_url = AXE_CORE['deque_url']
+    AxeRule.deque_url = axe_core_config['deque_url']
     AxeRule.timestamp = time.strftime("%F %T%z", time.localtime(axe_commit.authored_date))
 
 def ls_dir(dirname, extension=None):

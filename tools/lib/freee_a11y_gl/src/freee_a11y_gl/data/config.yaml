@@ -15,6 +15,16 @@ paths:
 validation:
   yaml_validation: "strict"  # strict | warning | disabled
 
+# axe-core configuration
+axe_core:
+  submodule_name: "vendor/axe-core"
+  base_dir: "vendor/axe-core"
+  deque_url: "https://dequeuniversity.com/rules/axe/"
+  pkg_file: "package.json"
+  rules_dir: "lib/rules"
+  locale_dir: "locales"
+  locale_ja_file: "ja.json"
+
 # Profile-specific configurations
 profiles:
   yaml2rst:

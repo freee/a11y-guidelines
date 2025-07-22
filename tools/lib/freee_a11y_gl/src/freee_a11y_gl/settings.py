@@ -48,12 +48,24 @@ class ValidationConfig(BaseModel):
     yaml_validation: Literal["strict", "warning", "disabled"] = "strict"
 
 
+class AxeCoreConfig(BaseModel):
+    """Configuration for axe-core integration."""
+    submodule_name: str
+    base_dir: str
+    deque_url: str
+    pkg_file: str
+    rules_dir: str
+    locale_dir: str
+    locale_ja_file: str
+
+
 class GlobalConfig(BaseModel):
     """Global configuration model."""
     languages: LanguageConfig
     base_url: str
     paths: PathConfig
     validation: ValidationConfig = Field(default_factory=ValidationConfig)
+    axe_core: AxeCoreConfig
 
 class Settings:
     """設定値を階層的に管理するクラス。
@@ -130,6 +142,15 @@ class Settings:
             },
             "validation": {
                 "yaml_validation": "strict"
+            },
+            "axe_core": {
+                "submodule_name": "vendor/axe-core",
+                "base_dir": "vendor/axe-core",
+                "deque_url": "https://dequeuniversity.com/rules/axe/",
+                "pkg_file": "package.json",
+                "rules_dir": "lib/rules",
+                "locale_dir": "locales",
+                "locale_ja_file": "ja.json"
             }
         }
 
