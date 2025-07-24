@@ -29,9 +29,9 @@ conditions:
       id: 0531-content-01
       procedure:
         ja: |-
-          チェック対象の画面には、自社および他者のロゴ、バナー、図や写真の中の文字列を除いて、画像化されたテキストが存在しない。
+          チェック対象の画面には、自社および他社のロゴ、バナー、図や写真の中の文字列を除いて、画像化されたテキストが存在しない。
         en: |-
-          There are no images of text, except for text within logos of companies, banners, figures, or photographs, on the screen to be checked.
+          The screen to be checked does not contain any images of text, except for company and third-party logos, banners, and text within diagrams or photographs.
     - type: or
       conditions:
       - type: simple
