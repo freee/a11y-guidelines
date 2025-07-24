@@ -29,9 +29,9 @@ conditions:
       tool: misc
       procedure:
         ja: |-
-          チェック対象の画面には、自社および他者のロゴ、バナー、図や写真の中の文字列を除いて、テキスト情報を含む画像が存在しない。
+          チェック対象の画面には、自社および他社のロゴ、バナー、図や写真の中の文字列を除いて、テキスト情報を含む画像が存在しない。
         en: |-
-          There are no images containing text information on the screen to be checked, except for logos, banners, and text in diagrams and photographs of our company and others.
+          The screen to be checked does not contain any images with text information, except for company and third-party logos, banners, and text within diagrams or photographs.
     - type: simple
       id: 0511-content-02
       tool: misc
