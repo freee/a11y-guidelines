@@ -212,6 +212,12 @@ class Config:
         return settings.message_catalog.get_platform_name(platform, effective_lang)
 
     @classmethod
+    def get_implementation_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
+        """Get localized implementation target name."""
+        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
+        return settings.message_catalog.get_implementation_target(target, effective_lang)
+
+    @classmethod
     def get_faq_path(cls) -> str:
         """Get FAQ path
         Returns:
@@ -262,3 +268,37 @@ class Config:
             Default language code
         """
         return settings.get("languages.default", "ja")
+
+    @classmethod
+    def get_yaml_validation_mode(cls) -> str:
+        """Get YAML validation mode.
+        
+        Returns:
+            YAML validation mode ("strict", "warning", or "disabled")
+        """
+        return settings.get("validation.yaml_validation", "strict")
+
+    @classmethod
+    def set_yaml_validation_mode(cls, mode: str) -> None:
+        """Set YAML validation mode.
+        
+        Args:
+            mode: Validation mode ("strict", "warning", or "disabled")
+            
+        Raises:
+            ValueError: If mode is not valid
+        """
+        valid_modes = ["strict", "warning", "disabled"]
+        if mode not in valid_modes:
+            raise ValueError(f"Invalid validation mode: {mode}. Must be one of {valid_modes}")
+        
+        settings.set("validation.yaml_validation", mode)
+
+    @classmethod
+    def get_axe_core_config(cls) -> Dict[str, str]:
+        """Get axe-core configuration.
+        
+        Returns:
+            Dictionary containing axe-core configuration settings
+        """
+        return settings.get("axe_core", {})

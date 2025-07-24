@@ -1,0 +1,14 @@
+# Testing
+pytest==8.0.0
+pytest-cov==4.1.0
+
+# Type checking
+mypy==1.9.0
+types-PyYAML==6.0.12.12
+
+# Code formatting
+black==24.2.0
+isort==5.13.2
+
+# YAML parsing (needed for tests)
+PyYAML==6.0.1

@@ -8,7 +8,6 @@ from .models.axe import AxeRule
 from .relationship_manager import RelationshipManager
 
 # Constants and utilities
-from .constants import *
 from .source import get_src_path
 from .initializer import setup_instances
 from .info_utils import get_info_links
@@ -24,9 +23,6 @@ __all__ = [
     'WcagSc', 'InfoRef', 'AxeRule', 'CheckTool',
     # Managers
     'RelationshipManager',
-    # Constants
-    'PLATFORM_NAMES', 'SEVERITY_TAGS', 'CHECK_TARGETS',
-    'IMPLEMENTATION_TARGETS',
     # Utils
     'get_src_path', 'setup_instances', 'get_info_links',
     'get_version_info',

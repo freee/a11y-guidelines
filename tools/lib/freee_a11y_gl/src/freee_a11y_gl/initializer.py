@@ -13,8 +13,8 @@ from .models.faq.article import Faq
 from .models.faq.tag import FaqTag
 from .models.axe import AxeRule
 from .models.check import Check, CheckTool
-from .constants import CHECK_TOOLS, AXE_CORE
 from .source import get_src_path
+from .yaml_validator import YamlValidator, ValidationError
 
 def setup_instances(basedir: Optional[str] = None):
     """
@@ -32,12 +32,18 @@ def setup_instances(basedir: Optional[str] = None):
     # Get value from settings if not provided
     effective_basedir = basedir if basedir is not None else Config.get_basedir()
     src_path = get_src_path(effective_basedir)
-    # Mapping of entity type, srcdir, schema filename, and constructor.
+    
+    # Initialize YAML validator with configuration
+    schema_dir = os.path.join(effective_basedir, 'data', 'json', 'schemas')
+    validation_mode = Config.get_yaml_validation_mode()
+    validator = YamlValidator(schema_dir, validation_mode)
+    
+    # Mapping of entity type, srcdir, constructor, and schema name.
     # The order is important for the initialization of the instances.
     entity_config = [
-        ('check', src_path['checks'], Check),
-        ('guideline', src_path['guidelines'], Guideline),
-        ('faq', src_path['faq'], Faq)
+        ('check', src_path['checks'], Check, 'check'),
+        ('guideline', src_path['guidelines'], Guideline, 'guideline'),
+        ('faq', src_path['faq'], Faq, 'faq')
     ]
     static_entity_config = [
         ('category', src_path['gl_categories'], Category),
@@ -47,28 +53,31 @@ def setup_instances(basedir: Optional[str] = None):
     ]
 
     # Setup CheckTool instances
-    for tool_id, tool_names in CHECK_TOOLS.items():
+    from .settings import settings
+    check_tools = settings.message_catalog.check_tools
+    for tool_id, tool_names in check_tools.items():
         CheckTool(tool_id, tool_names)
 
     for entity_type, srcfile, constructor in static_entity_config:
         process_static_entity_file(srcfile, constructor)
 
-    for entity_type, srcdir, constructor in entity_config:
-        process_entity_files(srcdir, constructor)
+    for entity_type, srcdir, constructor, schema_name in entity_config:
+        process_entity_files(srcdir, constructor, schema_name, validator)
 
-    process_axe_rules(basedir, AXE_CORE)
+    axe_core_config = Config.get_axe_core_config()
+    process_axe_rules(basedir, axe_core_config)
     rel = RelationshipManager()
     rel.resolve_faqs()
     return rel
 
-def process_axe_rules(basedir: Optional[str], AXE_CORE):
+def process_axe_rules(basedir: Optional[str], axe_core_config):
     """
     Process axe-core rules from the Git submodule.
     
     Args:
         basedir: Base directory containing the Git repository.
                 If None, value from settings will be used. If not in settings, defaults to '.'
-        AXE_CORE: Dictionary containing axe-core configuration
+        axe_core_config: Dictionary containing axe-core configuration
     
     Raises:
         ValueError: If the axe-core submodule is not found
@@ -79,26 +88,26 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
     root_repo = git.Repo(effective_basedir)
     submodule = None
     for sm in root_repo.submodules:
-        if sm.name == AXE_CORE['submodule_name']:
+        if sm.name == axe_core_config['submodule_name']:
             submodule = sm
             break
 
     if submodule is None:
-        raise ValueError(f'Submodule with name {AXE_CORE["submodule_name"]} not found.')
+        raise ValueError(f'Submodule with name {axe_core_config["submodule_name"]} not found.')
 
-    axe_base = os.path.join(effective_basedir, AXE_CORE['base_dir'])
+    axe_base = os.path.join(effective_basedir, axe_core_config['base_dir'])
     axe_commit_id = submodule.hexsha
     axe_repo = git.Repo(axe_base)
     axe_commit = axe_repo.commit(axe_commit_id)
 
     # Get message file
-    msg_ja_path = os.path.join(AXE_CORE['locale_dir'], AXE_CORE['locale_ja_file'])
+    msg_ja_path = os.path.join(axe_core_config['locale_dir'], axe_core_config['locale_ja_file'])
     blob = axe_commit.tree / msg_ja_path
     file_content = blob.data_stream.read().decode('utf-8')
     messages_ja = json.loads(file_content)
 
     # Get rule files
-    tree = axe_commit.tree / AXE_CORE['rules_dir']
+    tree = axe_commit.tree / axe_core_config['rules_dir']
     rule_blobs = [item for item in tree.traverse() if item.type == 'blob' and item.path.endswith('.json')]
     for blob in rule_blobs:
         file_content = blob.data_stream.read().decode('utf-8')
@@ -106,12 +115,12 @@ def process_axe_rules(basedir: Optional[str], AXE_CORE):
         AxeRule(parsed_data, messages_ja)
 
     # Get the package file
-    blob = axe_commit.tree / AXE_CORE['pkg_file']
+    blob = axe_commit.tree / axe_core_config['pkg_file']
     file_content = blob.data_stream.read().decode('utf-8')
     parsed_data = json.loads(file_content)
     AxeRule.version = parsed_data['version']
     AxeRule.major_version = re.sub(r'(\d+)\.(\d+)\.\d+', r'\1.\2', parsed_data['version'])
-    AxeRule.deque_url = AXE_CORE['deque_url']
+    AxeRule.deque_url = axe_core_config['deque_url']
     AxeRule.timestamp = time.strftime("%F %T%z", time.localtime(axe_commit.authored_date))
 
 def ls_dir(dirname, extension=None):
@@ -152,34 +161,51 @@ def handle_file_error(e, file_path):
 def read_yaml_file(file):
     try:
         file_content = read_file_content(file)
+        data = yaml.safe_load(file_content)
+        return data
     except Exception as e:
         handle_file_error(e, file)
-    data = yaml.safe_load(file_content)
 
-    return data
-
-def process_entity_files(srcdir, constructor):
+def process_entity_files(srcdir, constructor, schema_name=None, validator=None):
+    """
+    Process entity files with optional validation.
+    
+    Args:
+        srcdir: Source directory containing YAML files
+        constructor: Constructor function for the entity
+        schema_name: Name of the schema to validate against (optional)
+        validator: YamlValidator instance (optional)
+    """
     files = ls_dir(srcdir)
     for file in files:
         try:
             file_content = read_file_content(file)
-        except Exception as e:
-            handle_file_error(e, file)
-        parsed_data = yaml.safe_load(file_content)
-        parsed_data['src_path'] = os.path.abspath(file)
-        try:
-            constructor(parsed_data)
+            parsed_data = yaml.safe_load(file_content)
+            
+            # Perform validation if validator and schema_name are provided
+            if validator and schema_name:
+                try:
+                    validator.validate_with_mode(parsed_data, schema_name, file)
+                except ValidationError as e:
+                    print(f"YAML Validation Error: {e}", file=sys.stderr)
+                    sys.exit(1)
+            
+            parsed_data['src_path'] = os.path.abspath(file)
+            try:
+                constructor(parsed_data)
+            except Exception as e:
+                handle_file_error(e, file)
         except Exception as e:
             handle_file_error(e, file)
 
 def process_static_entity_file(srcfile, constructor):
     try:
         file_content = read_file_content(srcfile)
+        parsed_data = json.loads(file_content)
+        for key, data in parsed_data.items():
+            try:
+                constructor(key, data)
+            except Exception as e:
+                handle_file_error(e, srcfile)
     except Exception as e:
         handle_file_error(e, srcfile)
-    parsed_data = json.loads(file_content)
-    for key, data in parsed_data.items():
-        try:
-            constructor(key, data)
-        except Exception as e:
-            handle_file_error(e, srcfile)
