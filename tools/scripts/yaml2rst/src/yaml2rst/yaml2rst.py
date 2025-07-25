@@ -80,21 +80,21 @@ def main():
     for config in generators:
         file_generator.generate(config, settings['build_all'], settings['targets'])
 
-        # Makefileの生成
-        makefile_config = MakefileConfig(
-            dest_dirs=DEST_DIRS,
-            makefile_vars=MAKEFILE_VARS,
-            base_vars=makefile_vars,
-            vars_list=makefile_vars_list
-        )
-        makefile_generator = GeneratorConfig(
-            MakefileGenerator,
-            'makefile',
-            STATIC_FILES['makefile'],
-            is_single_file=True,
-            extra_args={'config': makefile_config}
-        )
-        file_generator.generate(makefile_generator, settings['build_all'], settings['targets'])    
+    # Generate Makefile (once, outside the loop)
+    makefile_config = MakefileConfig(
+        dest_dirs=DEST_DIRS,
+        makefile_vars=MAKEFILE_VARS,
+        base_vars=makefile_vars,
+        vars_list=makefile_vars_list
+    )
+    makefile_generator = GeneratorConfig(
+        MakefileGenerator,
+        'makefile',
+        STATIC_FILES['makefile'],
+        is_single_file=True,
+        extra_args={'config': makefile_config}
+    )
+    file_generator.generate(makefile_generator, settings['build_all'], settings['targets'])
 
 if __name__ == "__main__":
     main()
