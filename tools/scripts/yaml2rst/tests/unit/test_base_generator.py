@@ -99,6 +99,19 @@ class TestBaseGenerator:
         with pytest.raises(TypeError):
             BaseGenerator('ja')
 
+    def test_generate_not_implemented_error(self):
+        """Test that generate raises NotImplementedError when called directly."""
+        # Create a minimal subclass that implements generate to call super()
+        class IncompleteGenerator(BaseGenerator):
+            def generate(self):
+                # Call the parent's generate method which should raise NotImplementedError
+                return super().generate()
+        
+        generator = IncompleteGenerator('ja')
+        
+        with pytest.raises(NotImplementedError, match="Subclasses must implement generate"):
+            list(generator.generate())
+
     def test_concrete_generator_generate(self):
         """Test concrete generator implementation."""
         test_data = [
@@ -167,6 +180,13 @@ class TestProcessSingleItem:
         
         with pytest.raises(GeneratorError):
             generator.process_single_item({'test': 'item'})
+
+    def test_process_item_not_implemented_error(self):
+        """Test that _process_item raises NotImplementedError when called directly."""
+        generator = ConcreteGenerator('ja')
+        
+        with pytest.raises(NotImplementedError, match="Implement this method if using process_single_item"):
+            generator._process_item({'test': 'item'})
 
     def test_process_single_item_success(self):
         """Test successful process_single_item."""

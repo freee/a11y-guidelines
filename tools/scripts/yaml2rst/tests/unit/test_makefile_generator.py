@@ -452,3 +452,66 @@ class TestMakefileGenerator:
             'faq_yaml': 'faq1.yaml'
         }
         assert generator.validate_data(invalid_data3) is False
+
+    @patch('yaml2rst.generators.content_generators.makefile_generator.Check')
+    @patch('yaml2rst.generators.content_generators.makefile_generator.Guideline')
+    @patch('yaml2rst.generators.content_generators.makefile_generator.Faq')
+    def test_generate_success(self, mock_faq_class, mock_guideline_class, 
+                            mock_check_class, sample_makefile_config):
+        """Test successful generate method execution."""
+        # Mock the class methods
+        mock_check_class.list_all_src_paths.return_value = ['check1.yaml']
+        mock_guideline_class.list_all_src_paths.return_value = ['gl1.yaml']
+        mock_faq_class.list_all_src_paths.return_value = ['faq1.yaml']
+        
+        generator = MakefileGenerator('ja', sample_makefile_config)
+        
+        # Mock the processing methods to return valid data
+        generator._process_category_targets = Mock(return_value=([], []))
+        generator._process_checktool_targets = Mock(return_value=([], []))
+        generator._process_faq_targets = Mock(return_value=([], [], []))
+        generator._process_info_targets = Mock(return_value=([], [], []))
+        
+        # Execute generate method
+        results = list(generator.generate())
+        
+        # Should yield one result
+        assert len(results) == 1
+        result = results[0]
+        
+        # Verify the result contains expected fields
+        assert 'check_yaml' in result
+        assert 'gl_yaml' in result
+        assert 'faq_yaml' in result
+        assert 'depends' in result
+        assert result['check_yaml'] == 'check1.yaml'
+        assert result['gl_yaml'] == 'gl1.yaml'
+        assert result['faq_yaml'] == 'faq1.yaml'
+
+    def test_generate_with_exception(self, sample_makefile_config):
+        """Test generate method with exception handling."""
+        generator = MakefileGenerator('ja', sample_makefile_config)
+        
+        # Mock get_template_data to raise an exception
+        generator.get_template_data = Mock(side_effect=Exception("Test error"))
+        
+        # Should raise the exception
+        with pytest.raises(Exception, match="Test error"):
+            list(generator.generate())
+
+    def test_generate_with_invalid_data(self, sample_makefile_config):
+        """Test generate method with invalid data that fails validation."""
+        generator = MakefileGenerator('ja', sample_makefile_config)
+        
+        # Mock get_template_data to return invalid data
+        invalid_data = {
+            'depends': 'not_a_list',  # Invalid - should be list
+            'gl_yaml': 'gl1.yaml',
+            'check_yaml': 'check1.yaml',
+            'faq_yaml': 'faq1.yaml'
+        }
+        generator.get_template_data = Mock(return_value=invalid_data)
+        
+        # Should not yield anything due to validation failure
+        results = list(generator.generate())
+        assert len(results) == 0

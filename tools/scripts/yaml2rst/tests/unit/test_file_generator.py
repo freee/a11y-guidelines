@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from yaml2rst.generators.file_generator import FileGenerator, GeneratorConfig
 from yaml2rst.generators.base_generator import BaseGenerator, GeneratorError
+from yaml2rst.generators.mixins import ValidationMixin
 
 
 class TestGeneratorConfig:
@@ -74,6 +75,19 @@ class TestGeneratorConfig:
         
         # Should not raise any exception
         config.validate()
+
+    def test_generator_config_validation_missing_required_fields(self, mock_generator_class):
+        """Test GeneratorConfig validation when required fields validation fails."""
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='test_template',
+            output_path='/test/output'
+        )
+        
+        # Mock ValidationMixin.validate_required_fields to return False
+        with patch('yaml2rst.generators.mixins.ValidationMixin.validate_required_fields', return_value=False):
+            with pytest.raises(ValueError, match="Required configuration fields are missing"):
+                config.validate()
 
 
 class TestFileGenerator:
@@ -422,3 +436,204 @@ class TestFileGeneratorIntegration:
         # Check that the correct file was generated
         call_args = template.write_rst.call_args[0]
         assert call_args[0]['filename'] == 'target_file'
+
+
+class TestGeneratorConfigValidationMixin:
+    """Test ValidationMixin integration in GeneratorConfig."""
+    
+    def test_generator_config_inherits_validation_mixin(self, mock_generator_class):
+        """Test that GeneratorConfig inherits from ValidationMixin."""
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='test_template',
+            output_path='/test/output'
+        )
+        
+        # Should be instance of ValidationMixin
+        assert isinstance(config, ValidationMixin)
+        
+        # Should have ValidationMixin methods
+        assert hasattr(config, 'validate_required_fields')
+        assert hasattr(config, 'validate_string_field')
+        assert hasattr(config, 'validate_list_field')
+    
+    def test_generator_config_validation_with_whitespace_template(self, mock_generator_class):
+        """Test GeneratorConfig validation with whitespace-only template name."""
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='   ',  # Whitespace only
+            output_path='/test/output'
+        )
+        
+        with pytest.raises(ValueError, match="Template name must not be empty"):
+            config.validate()
+    
+    def test_generator_config_validation_with_whitespace_output_path(self, mock_generator_class):
+        """Test GeneratorConfig validation with whitespace-only output path."""
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='test_template',
+            output_path='   '  # Whitespace only
+        )
+        
+        with pytest.raises(ValueError, match="Output path must not be empty"):
+            config.validate()
+    
+    def test_generator_config_validation_enhanced_error_handling(self, mock_generator_class):
+        """Test enhanced validation error handling."""
+        # Test with None values (should be caught by ValidationMixin)
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name=None,
+            output_path='/test/output'
+        )
+        
+        with pytest.raises(ValueError):
+            config.validate()
+    
+    def test_generator_config_validation_mixin_methods_work(self, mock_generator_class):
+        """Test that ValidationMixin methods work correctly in GeneratorConfig."""
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='test_template',
+            output_path='/test/output'
+        )
+        
+        # Test validate_required_fields
+        test_data = {'template_name': 'test', 'output_path': '/path'}
+        assert config.validate_required_fields(test_data, ['template_name', 'output_path']) is True
+        assert config.validate_required_fields(test_data, ['template_name', 'missing']) is False
+        
+        # Test validate_string_field
+        assert config.validate_string_field(test_data, 'template_name') is True
+        assert config.validate_string_field(test_data, 'missing_field') is False
+        
+        # Test with empty string
+        empty_data = {'template_name': '', 'output_path': '/path'}
+        assert config.validate_string_field(empty_data, 'template_name', allow_empty=True) is True
+        assert config.validate_string_field(empty_data, 'template_name', allow_empty=False) is False
+
+
+class TestFileGeneratorEnhancedErrorHandling:
+    """Test enhanced error handling in FileGenerator."""
+    
+    def test_generate_with_template_write_error(self, mock_templates, mock_generator_class):
+        """Test generation when template.write_rst raises exception."""
+        # Setup
+        generator = FileGenerator(mock_templates, 'ja')
+        
+        mock_data = {'filename': 'test', 'content': 'test content'}
+        mock_generator_instance = mock_generator_class.return_value
+        mock_generator_instance.generate.return_value = [mock_data]
+        
+        # Make template.write_rst raise an exception
+        template = mock_templates['category_page']
+        template.write_rst.side_effect = Exception("Template write failed")
+        
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='category_page',
+            output_path='/test/output.rst',
+            is_single_file=True
+        )
+        
+        # Execute and verify
+        with pytest.raises(GeneratorError, match="File generation failed"):
+            generator.generate(config, build_all=True, targets=[])
+    
+    def test_generate_with_generator_instantiation_error(self, mock_templates, mock_generator_class):
+        """Test generation when generator instantiation fails."""
+        # Setup
+        generator = FileGenerator(mock_templates, 'ja')
+        
+        # Make generator class raise exception during instantiation
+        mock_generator_class.side_effect = Exception("Generator instantiation failed")
+        
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='category_page',
+            output_path='/test/output.rst',
+            is_single_file=True
+        )
+        
+        # Execute and verify
+        with pytest.raises(GeneratorError, match="Failed to generate files"):
+            generator.generate(config, build_all=True, targets=[])
+    
+    def test_generate_with_data_processing_error(self, mock_templates, mock_generator_class, temp_dir):
+        """Test generation when data processing fails."""
+        # Setup
+        generator = FileGenerator(mock_templates, 'ja')
+        
+        # Generator returns data without 'filename' key for multiple files
+        mock_data = {'content': 'test content'}  # Missing 'filename'
+        mock_generator_instance = mock_generator_class.return_value
+        mock_generator_instance.generate.return_value = [mock_data]
+        
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='category_page',
+            output_path=str(temp_dir),  # Use temp_dir instead of /test/output
+            is_single_file=False  # This will try to access data['filename']
+        )
+        
+        # Execute and verify
+        with pytest.raises(GeneratorError, match="File generation failed"):
+            generator.generate(config, build_all=True, targets=[])
+    
+    def test_generate_logging_behavior(self, mock_templates, mock_generator_class):
+        """Test that FileGenerator logs appropriately."""
+        # Setup
+        generator = FileGenerator(mock_templates, 'ja')
+        generator.logger = Mock()
+        
+        mock_data = {'filename': 'test', 'content': 'test content'}
+        mock_generator_instance = mock_generator_class.return_value
+        mock_generator_instance.generate.return_value = [mock_data]
+        
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='category_page',
+            output_path='/test/output.rst',
+            is_single_file=True
+        )
+        
+        # Execute
+        generator.generate(config, build_all=True, targets=[])
+        
+        # Verify logging calls
+        assert generator.logger.info.call_count >= 2  # At least start and processing logs
+        
+        # Check specific log messages
+        log_calls = [call[0][0] for call in generator.logger.info.call_args_list]
+        assert any("Starting generation" in msg for msg in log_calls)
+        assert any("Processing destination" in msg for msg in log_calls)
+        assert any("Generating file" in msg for msg in log_calls)
+    
+    def test_generate_skipping_behavior_logging(self, mock_templates, mock_generator_class):
+        """Test logging when files are skipped."""
+        # Setup
+        generator = FileGenerator(mock_templates, 'ja')
+        generator.logger = Mock()
+        
+        mock_data = {'filename': 'test', 'content': 'test content'}
+        mock_generator_instance = mock_generator_class.return_value
+        mock_generator_instance.generate.return_value = [mock_data]
+        
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='category_page',
+            output_path='/test/output.rst',
+            is_single_file=True
+        )
+        
+        # Execute with build_all=False and no matching targets
+        generator.generate(config, build_all=False, targets=['/other/file.rst'])
+        
+        # Verify skipping was logged
+        log_calls = [call[0][0] for call in generator.logger.info.call_args_list]
+        assert any("Skipping file" in msg for msg in log_calls)
+        
+        # Verify template.write_rst was not called
+        template = mock_templates['category_page']
+        template.write_rst.assert_not_called()

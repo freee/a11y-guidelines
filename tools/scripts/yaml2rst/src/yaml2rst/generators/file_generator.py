@@ -1,5 +1,4 @@
 """Main file generation orchestrator."""
-import os
 from typing import Dict, Any, Type
 from dataclasses import dataclass
 from pathlib import Path
@@ -7,9 +6,11 @@ import logging
 
 from ..template_manager import TemplateManager
 from .base_generator import BaseGenerator, GeneratorError
+from .mixins import ValidationMixin
+
 
 @dataclass(frozen=True)
-class GeneratorConfig:
+class GeneratorConfig(ValidationMixin):
     """Configuration for a generator instance."""
     generator_class: Type[BaseGenerator]
     template_name: str
@@ -18,11 +19,23 @@ class GeneratorConfig:
     extra_args: Dict[str, Any] = None
 
     def validate(self) -> None:
-        """Validate configuration parameters."""
-        if not self.template_name:
+        """Validate configuration parameters using ValidationMixin."""
+        config_data = {
+            'template_name': self.template_name,
+            'output_path': self.output_path
+        }
+
+        # Use ValidationMixin methods for consistent validation
+        if not self.validate_string_field(config_data, 'template_name'):
             raise ValueError("Template name must not be empty")
-        if not self.output_path:
+        if not self.validate_string_field(config_data, 'output_path'):
             raise ValueError("Output path must not be empty")
+
+        # Validate required fields are present
+        if not self.validate_required_fields(
+                config_data, ['template_name', 'output_path']):
+            raise ValueError("Required configuration fields are missing")
+
 
 class FileGenerator:
     """Orchestrates file generation using content generators and templates."""
@@ -33,17 +46,22 @@ class FileGenerator:
         self.lang = lang
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def generate(self, config: GeneratorConfig, build_all: bool, targets: list[str]) -> None:
+    def generate(self, config: GeneratorConfig, build_all: bool,
+                 targets: list[str]) -> None:
         """Generate files using the specified generator configuration."""
         try:
-            self.logger.info(f"Starting generation with config: {config}, build_all: {build_all}")
+            self.logger.info(
+                f"Starting generation with config: {config}, "
+                f"build_all: {build_all}")
             config.validate()
-            
+
             if config.template_name not in self.templates:
-                raise GeneratorError(f"Template not found: {config.template_name}")
+                raise GeneratorError(
+                    f"Template not found: {config.template_name}")
 
             if config.extra_args:
-                generator = config.generator_class(**{'lang': self.lang, **config.extra_args})
+                generator = config.generator_class(
+                    **{'lang': self.lang, **config.extra_args})
             else:
                 generator = config.generator_class(self.lang)
 
@@ -56,18 +74,21 @@ class FileGenerator:
             for data in generator.generate():
                 try:
                     data['lang'] = self.lang
-                    dest_path = self._determine_destination(config, output_path, data)
+                    dest_path = self._determine_destination(
+                        config, output_path, data)
                     self.logger.info(f"Processing destination: {dest_path}")
-                    
-                    if self._should_generate(config, build_all, targets, dest_path):
+
+                    if self._should_generate(config, build_all, targets,
+                                             dest_path):
                         self.logger.info(f"Generating file: {dest_path}")
                         template.write_rst(data, dest_path)
                     else:
                         self.logger.info(f"Skipping file: {dest_path}")
-                        
+
                 except Exception as e:
                     self.logger.error(f"Failed to generate file: {e}")
-                    raise GeneratorError(f"File generation failed: {e}") from e
+                    raise GeneratorError(
+                        f"File generation failed: {e}") from e
 
         except Exception as e:
             self.logger.error(f"Generation failed: {e}")
@@ -79,7 +100,8 @@ class FileGenerator:
             path.mkdir(parents=True, exist_ok=True)
         except OSError as e:
             self.logger.error(f"Failed to create directory {path}: {e}")
-            raise GeneratorError(f"Failed to create directory: {e}") from e
+            raise GeneratorError(
+                f"Failed to create directory: {e}") from e
 
     def _determine_destination(
         self,

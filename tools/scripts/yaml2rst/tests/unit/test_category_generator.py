@@ -110,7 +110,7 @@ class TestCategoryGenerator:
         with pytest.raises(Exception):
             CategoryGenerator('ja')
 
-    @patch('yaml2rst.generators.content_generators.category_generator.RelationshipManager')
+    @patch('freee_a11y_gl.relationship_manager.RelationshipManager')
     @patch('yaml2rst.generators.content_generators.category_generator.Category.list_all')
     def test_generate_with_priority_sorting(self, mock_list_all, mock_relationship_manager):
         """Test that guidelines are sorted by priority."""
@@ -130,7 +130,7 @@ class TestCategoryGenerator:
             }
             mock_guidelines.append(mock_gl)
         
-        # Setup relationship manager
+        # Setup relationship manager singleton
         mock_rm_instance = Mock()
         mock_rm_instance.get_sorted_related_objects.return_value = mock_guidelines
         mock_relationship_manager.return_value = mock_rm_instance
@@ -142,7 +142,7 @@ class TestCategoryGenerator:
         guidelines = results[0]['guidelines']
         assert len(guidelines) == 3
 
-    @patch('yaml2rst.generators.content_generators.category_generator.RelationshipManager')
+    @patch('freee_a11y_gl.relationship_manager.RelationshipManager')
     @patch('yaml2rst.generators.content_generators.category_generator.Category.list_all')
     def test_generate_data_structure(self, mock_list_all, mock_relationship_manager):
         """Test the structure of generated data."""
@@ -160,7 +160,7 @@ class TestCategoryGenerator:
             'priority': 'high'
         }
         
-        # Setup relationship manager
+        # Setup relationship manager singleton
         mock_rm_instance = Mock()
         mock_rm_instance.get_sorted_related_objects.return_value = [mock_guideline]
         mock_relationship_manager.return_value = mock_rm_instance
@@ -296,7 +296,7 @@ class TestCategoryGenerator:
 class TestCategoryGeneratorIntegration:
     """Integration tests for CategoryGenerator."""
 
-    @patch('yaml2rst.generators.content_generators.category_generator.RelationshipManager')
+    @patch('freee_a11y_gl.relationship_manager.RelationshipManager')
     @patch('yaml2rst.generators.content_generators.category_generator.Category.list_all')
     def test_full_generation_workflow(self, mock_list_all, mock_relationship_manager):
         """Test complete generation workflow."""
@@ -321,7 +321,7 @@ class TestCategoryGeneratorIntegration:
             'priority': 'medium'
         }
         
-        # Setup relationship manager
+        # Setup relationship manager singleton
         mock_rm_instance = Mock()
         mock_rm_instance.get_sorted_related_objects.return_value = [mock_guideline1, mock_guideline2]
         mock_relationship_manager.return_value = mock_rm_instance
@@ -346,7 +346,7 @@ class TestCategoryGeneratorIntegration:
             assert final['filename'] == 'accessibility_basics'
             assert len(final['guidelines']) == 2
 
-    @patch('yaml2rst.generators.content_generators.category_generator.RelationshipManager')
+    @patch('freee_a11y_gl.relationship_manager.RelationshipManager')
     @patch('yaml2rst.generators.content_generators.category_generator.Category.list_all')
     def test_error_recovery(self, mock_list_all, mock_relationship_manager):
         """Test error recovery during generation."""

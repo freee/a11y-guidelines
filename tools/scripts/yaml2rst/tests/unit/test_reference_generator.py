@@ -70,6 +70,57 @@ class TestInfoToGuidelinesGenerator:
         assert generator.relationship_manager is not None
     
     @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_success(self, mock_info_class, mock_info_ref, mock_guideline):
+        """Test successful generate method execution."""
+        mock_info_class.list_has_guidelines.return_value = [mock_info_ref]
+        
+        generator = InfoToGuidelinesGenerator('ja')
+        generator.relationship_manager.get_sorted_related_objects = Mock(return_value=[mock_guideline])
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 1
+        assert results[0]['filename'] == 'test_ref'
+        assert len(results[0]['guidelines']) == 1
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_processing_error(self, mock_info_class, mock_info_ref, caplog):
+        """Test generate method with processing error."""
+        mock_info_class.list_has_guidelines.return_value = [mock_info_ref]
+        
+        generator = InfoToGuidelinesGenerator('ja')
+        generator.process_item = Mock(side_effect=Exception("Processing error"))
+        
+        with pytest.raises(Exception, match="Processing error"):
+            list(generator.generate())
+        
+        assert "Error processing info reference" in caplog.text
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_validation_failure(self, mock_info_class, mock_info_ref):
+        """Test generate method with validation failure."""
+        mock_info_class.list_has_guidelines.return_value = [mock_info_ref]
+        
+        generator = InfoToGuidelinesGenerator('ja')
+        generator.process_item = Mock(return_value={'invalid': 'data'})
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to validation failure
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_empty_data(self, mock_info_class, mock_info_ref):
+        """Test generate method with empty data from process_item."""
+        mock_info_class.list_has_guidelines.return_value = [mock_info_ref]
+        
+        generator = InfoToGuidelinesGenerator('ja')
+        generator.process_item = Mock(return_value=None)
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to empty data
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
     def test_get_items(self, mock_info_class, mock_info_ref):
         """Test getting items with internal info refs."""
         mock_info_class.list_has_guidelines.return_value = [mock_info_ref]
@@ -205,6 +256,57 @@ class TestInfoToFaqsGenerator:
         assert generator.relationship_manager is not None
     
     @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_success(self, mock_info_class, mock_info_ref, mock_faq):
+        """Test successful generate method execution."""
+        mock_info_class.list_has_faqs.return_value = [mock_info_ref]
+        
+        generator = InfoToFaqsGenerator('ja')
+        generator.relationship_manager.get_sorted_related_objects = Mock(return_value=[mock_faq])
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 1
+        assert results[0]['filename'] == 'test_ref'
+        assert len(results[0]['faqs']) == 1
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_processing_error(self, mock_info_class, mock_info_ref, caplog):
+        """Test generate method with processing error."""
+        mock_info_class.list_has_faqs.return_value = [mock_info_ref]
+        
+        generator = InfoToFaqsGenerator('ja')
+        generator.process_item = Mock(side_effect=Exception("FAQ processing error"))
+        
+        with pytest.raises(Exception, match="FAQ processing error"):
+            list(generator.generate())
+        
+        assert "Error processing FAQ info reference" in caplog.text
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_validation_failure(self, mock_info_class, mock_info_ref):
+        """Test generate method with validation failure."""
+        mock_info_class.list_has_faqs.return_value = [mock_info_ref]
+        
+        generator = InfoToFaqsGenerator('ja')
+        generator.process_item = Mock(return_value={'invalid': 'data'})
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to validation failure
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_empty_data(self, mock_info_class, mock_info_ref):
+        """Test generate method with empty data from process_item."""
+        mock_info_class.list_has_faqs.return_value = [mock_info_ref]
+        
+        generator = InfoToFaqsGenerator('ja')
+        generator.process_item = Mock(return_value=None)
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to empty data
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
     def test_get_items(self, mock_info_class, mock_info_ref):
         """Test getting items with internal info refs."""
         mock_info_class.list_has_faqs.return_value = [mock_info_ref]
@@ -327,6 +429,58 @@ class TestAxeRulesGenerator:
         assert generator.lang == 'ja'
     
     @patch('yaml2rst.generators.content_generators.reference_generator.AxeRule')
+    def test_generate_success(self, mock_axe_rule_class, mock_axe_rule):
+        """Test successful generate method execution."""
+        mock_axe_rule_class.version = '4.4.0'
+        mock_axe_rule_class.major_version = '4'
+        mock_axe_rule_class.deque_url = 'https://deque.com'
+        mock_axe_rule_class.timestamp = '2023-01-01'
+        mock_axe_rule_class.list_all.return_value = [mock_axe_rule]
+        
+        generator = AxeRulesGenerator('ja')
+        results = list(generator.generate())
+        
+        assert len(results) == 1
+        assert results[0]['version'] == '4.4.0'
+        assert len(results[0]['rules']) == 1
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.AxeRule')
+    def test_generate_with_template_data_error(self, mock_axe_rule_class, caplog):
+        """Test generate method with template data error."""
+        mock_axe_rule_class.version = '4.4.0'
+        mock_axe_rule_class.major_version = '4'
+        mock_axe_rule_class.deque_url = 'https://deque.com'
+        mock_axe_rule_class.timestamp = '2023-01-01'
+        mock_axe_rule_class.list_all.side_effect = Exception("Template data error")
+        
+        generator = AxeRulesGenerator('ja')
+        
+        with pytest.raises(Exception, match="Template data error"):
+            list(generator.generate())
+        
+        assert "Error generating axe rules template data" in caplog.text
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.AxeRule')
+    def test_generate_with_validation_failure(self, mock_axe_rule_class):
+        """Test generate method with validation failure."""
+        generator = AxeRulesGenerator('ja')
+        generator.get_template_data = Mock(return_value={'invalid': 'data'})
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to validation failure
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.AxeRule')
+    def test_generate_with_empty_data(self, mock_axe_rule_class):
+        """Test generate method with empty data from get_template_data."""
+        generator = AxeRulesGenerator('ja')
+        generator.get_template_data = Mock(return_value=None)
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to empty data
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.AxeRule')
     def test_get_template_data(self, mock_axe_rule_class, mock_axe_rule):
         """Test template data generation."""
         mock_axe_rule_class.version = '4.4.0'
@@ -433,6 +587,50 @@ class TestMiscDefinitionsGenerator:
         """Test generator initialization."""
         generator = MiscDefinitionsGenerator('ja')
         assert generator.lang == 'ja'
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_success(self, mock_info_class, mock_info_ref_external):
+        """Test successful generate method execution."""
+        mock_info_class.list_all_external.return_value = [mock_info_ref_external]
+        
+        generator = MiscDefinitionsGenerator('ja')
+        results = list(generator.generate())
+        
+        assert len(results) == 1
+        assert 'links' in results[0]
+        assert len(results[0]['links']) == 1
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_template_data_error(self, mock_info_class, caplog):
+        """Test generate method with template data error."""
+        mock_info_class.list_all_external.side_effect = Exception("Template data error")
+        
+        generator = MiscDefinitionsGenerator('ja')
+        
+        with pytest.raises(Exception, match="Template data error"):
+            list(generator.generate())
+        
+        assert "Error generating miscellaneous definitions template data" in caplog.text
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_validation_failure(self, mock_info_class):
+        """Test generate method with validation failure."""
+        generator = MiscDefinitionsGenerator('ja')
+        generator.get_template_data = Mock(return_value={'invalid': 'data'})
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to validation failure
+    
+    @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
+    def test_generate_with_empty_data(self, mock_info_class):
+        """Test generate method with empty data from get_template_data."""
+        generator = MiscDefinitionsGenerator('ja')
+        generator.get_template_data = Mock(return_value=None)
+        
+        results = list(generator.generate())
+        
+        assert len(results) == 0  # No results due to empty data
     
     @patch('yaml2rst.generators.content_generators.reference_generator.InfoRef')
     def test_get_template_data(self, mock_info_class, mock_info_ref_external):

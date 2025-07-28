@@ -121,7 +121,7 @@ class TestWcagGeneratorBase:
         
         assert len(guidelines) == 1
         assert guidelines[0] == {'category': 'test_category', 'id': 'test_guideline'}
-        generator.relationship_manager.get_sorted_related_objects.assert_called_once_with(mock_wcag_sc, 'guideline')
+        generator.relationship_manager.get_sorted_related_objects.assert_called_once_with(mock_wcag_sc, 'guideline', 'sort_key')
     
     def test_get_guidelines_for_sc_no_guidelines(self, mock_wcag_sc):
         """Test getting guidelines for SC with no guidelines."""

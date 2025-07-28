@@ -4,6 +4,7 @@ from unittest.mock import Mock, patch, MagicMock
 from typing import List, Dict, Any
 
 from yaml2rst.generators.common_generators import ListBasedGenerator, SingleFileGenerator
+from yaml2rst.generators.content_generator_base import ContentGeneratorBase
 
 
 class MockListBasedGenerator(ListBasedGenerator[str]):
@@ -61,6 +62,36 @@ class TestListBasedGenerator:
         """Test generator initialization."""
         generator = MockListBasedGenerator('ja')
         assert generator.lang == 'ja'
+
+    def test_get_items_not_implemented(self):
+        """Test that get_items raises NotImplementedError when not implemented."""
+        # Create a subclass that implements process_item but calls super() for get_items
+        class IncompleteListGenerator(ListBasedGenerator[str]):
+            def get_items(self) -> List[str]:
+                return super().get_items()
+            
+            def process_item(self, item: str) -> Dict[str, Any]:
+                return {'test': 'data'}
+        
+        generator = IncompleteListGenerator('ja')
+        
+        with pytest.raises(NotImplementedError):
+            generator.get_items()
+
+    def test_process_item_not_implemented(self):
+        """Test that process_item raises NotImplementedError when not implemented."""
+        # Create a subclass that implements get_items but calls super() for process_item
+        class IncompleteListGenerator(ListBasedGenerator[str]):
+            def get_items(self) -> List[str]:
+                return ['test']
+            
+            def process_item(self, item: str) -> Dict[str, Any]:
+                return super().process_item(item)
+        
+        generator = IncompleteListGenerator('ja')
+        
+        with pytest.raises(NotImplementedError):
+            generator.process_item('test')
     
     def test_generate_success(self):
         """Test successful generation with multiple items."""
@@ -180,6 +211,18 @@ class TestSingleFileGenerator:
         """Test generator initialization."""
         generator = MockSingleFileGenerator('ja')
         assert generator.lang == 'ja'
+
+    def test_get_template_data_not_implemented(self):
+        """Test that get_template_data raises NotImplementedError when not implemented."""
+        # Create a subclass that calls super() for get_template_data
+        class IncompleteSingleGenerator(SingleFileGenerator):
+            def get_template_data(self) -> Dict[str, Any]:
+                return super().get_template_data()
+        
+        generator = IncompleteSingleGenerator('ja')
+        
+        with pytest.raises(NotImplementedError):
+            generator.get_template_data()
     
     def test_generate_success(self):
         """Test successful generation."""
@@ -327,3 +370,141 @@ class TestGeneratorIntegration:
         # Both should have logged errors
         list_gen.logger.error.assert_called_once()
         single_gen.logger.error.assert_called_once()
+
+
+class TestContentGeneratorBaseIntegration:
+    """Test integration with ContentGeneratorBase and mixins."""
+    
+    def test_list_based_generator_inherits_content_generator_base(self):
+        """Test that ListBasedGenerator inherits from ContentGeneratorBase."""
+        generator = MockListBasedGenerator('ja')
+        
+        # Should be instance of ContentGeneratorBase
+        assert isinstance(generator, ContentGeneratorBase)
+        
+        # Should have mixin functionality
+        assert hasattr(generator, 'relationship_manager')  # RelationshipMixin
+        assert hasattr(generator, 'validate_required_fields')  # ValidationMixin
+        assert hasattr(generator, 'get_sorted_objects')  # UtilityMixin
+    
+    def test_single_file_generator_inherits_content_generator_base(self):
+        """Test that SingleFileGenerator inherits from ContentGeneratorBase."""
+        generator = MockSingleFileGenerator('ja')
+        
+        # Should be instance of ContentGeneratorBase
+        assert isinstance(generator, ContentGeneratorBase)
+        
+        # Should have mixin functionality
+        assert hasattr(generator, 'relationship_manager')  # RelationshipMixin
+        assert hasattr(generator, 'validate_required_fields')  # ValidationMixin
+        assert hasattr(generator, 'get_sorted_objects')  # UtilityMixin
+    
+    @patch('freee_a11y_gl.relationship_manager.RelationshipManager')
+    def test_relationship_manager_access(self, mock_rm_class):
+        """Test that generators can access RelationshipManager through mixin."""
+        mock_rm_instance = Mock()
+        mock_rm_class.return_value = mock_rm_instance
+        
+        generator = MockListBasedGenerator('ja')
+        
+        # Access relationship_manager should create instance
+        rm = generator.relationship_manager
+        
+        # Should have called RelationshipManager constructor
+        mock_rm_class.assert_called_once()
+        assert rm == mock_rm_instance
+        
+        # Second access should return same instance (lazy loading)
+        rm2 = generator.relationship_manager
+        assert rm2 == rm
+        mock_rm_class.assert_called_once()  # Should not be called again
+    
+    def test_validation_mixin_functionality(self):
+        """Test ValidationMixin methods are available."""
+        generator = MockListBasedGenerator('ja')
+        
+        # Test validate_required_fields
+        data = {'filename': 'test.rst', 'content': 'test content'}
+        assert generator.validate_required_fields(data, ['filename', 'content']) is True
+        assert generator.validate_required_fields(data, ['filename', 'missing']) is False
+        
+        # Test validate_list_field
+        data_with_list = {'items': ['item1', 'item2']}
+        assert generator.validate_list_field(data_with_list, 'items') is True
+        assert generator.validate_list_field(data, 'items') is False
+        
+        # Test validate_string_field
+        assert generator.validate_string_field(data, 'filename') is True
+        assert generator.validate_string_field(data, 'filename', allow_empty=False) is True
+        
+        empty_data = {'filename': ''}
+        assert generator.validate_string_field(empty_data, 'filename', allow_empty=True) is True
+        assert generator.validate_string_field(empty_data, 'filename', allow_empty=False) is False
+    
+    def test_utility_mixin_functionality(self):
+        """Test UtilityMixin methods are available."""
+        generator = MockListBasedGenerator('ja')
+        
+        # Create mock objects with sort_key attribute
+        class MockObj:
+            def __init__(self, sort_key):
+                self.sort_key = sort_key
+        
+        objects = [MockObj('c'), MockObj('a'), MockObj('b')]
+        
+        # Test get_sorted_objects
+        sorted_objects = generator.get_sorted_objects(objects)
+        assert [obj.sort_key for obj in sorted_objects] == ['a', 'b', 'c']
+        
+        # Test get_sorted_objects_by_lang_name
+        class MockObjWithNames:
+            def __init__(self, names):
+                self.names = names
+        
+        objects_with_names = [
+            MockObjWithNames({'ja': 'ウ', 'en': 'C'}),
+            MockObjWithNames({'ja': 'ア', 'en': 'A'}),
+            MockObjWithNames({'ja': 'イ', 'en': 'B'})
+        ]
+        
+        sorted_by_ja = generator.get_sorted_objects_by_lang_name(objects_with_names, 'ja')
+        assert [obj.names['ja'] for obj in sorted_by_ja] == ['ア', 'イ', 'ウ']
+        
+        # Test process_template_data
+        class MockObjWithTemplateData:
+            def template_data(self, lang):
+                return {'lang': lang, 'data': 'test'}
+        
+        obj_with_template = MockObjWithTemplateData()
+        template_data = generator.process_template_data(obj_with_template, 'ja')
+        assert template_data == {'lang': 'ja', 'data': 'test'}
+        
+        # Test process_template_data_list
+        objects_with_template = [MockObjWithTemplateData(), MockObjWithTemplateData()]
+        template_data_list = generator.process_template_data_list(objects_with_template, 'ja')
+        assert len(template_data_list) == 2
+        assert all(data['lang'] == 'ja' for data in template_data_list)
+    
+    def test_enhanced_validation_in_mock_generators(self):
+        """Test that mock generators can use enhanced validation."""
+        
+        class EnhancedMockListGenerator(MockListBasedGenerator):
+            def validate_data(self, data: Dict[str, Any]) -> bool:
+                """Enhanced validation using ValidationMixin."""
+                return (self.validate_required_fields(data, ['filename', 'content']) and
+                        self.validate_string_field(data, 'filename'))
+        
+        generator = EnhancedMockListGenerator('ja', ['item1'])
+        results = list(generator.generate())
+        
+        # Should pass validation with proper data
+        assert len(results) == 1
+        assert results[0]['filename'] == 'item1.rst'
+        
+        # Test with invalid data
+        generator_invalid = EnhancedMockListGenerator('ja', ['item1'])
+        generator_invalid.process_item = Mock(return_value={'filename': '', 'content': 'test'})
+        
+        results_invalid = list(generator_invalid.generate())
+        # Should fail validation due to empty filename
+        assert len(results_invalid) == 0
