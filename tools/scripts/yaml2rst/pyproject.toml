@@ -11,10 +11,17 @@ authors = [
     { name = "Masafumi NAKANE", email = "max@freee.co.jp" }
 ]
 dependencies = [
-    "jinja2",
-    "freee_a11y_gl>=0.1.0",
+    "jinja2>=3.0.0",
+    "freee_a11y_gl>=0.2.2",
 ]
 requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    # Project-specific dev dependencies only
+    # Common dev tools (pytest, black, mypy, etc.) are managed at root level
+    # Install with: pip install -r requirements-dev.txt
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
