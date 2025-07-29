@@ -1,15 +1,14 @@
 """Unit tests for the initializer module."""
 import pytest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 import sys
 from pathlib import Path
-import argparse
-import os
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 from yaml2rst import initializer
+
+# Add src to path
+parent_dir = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(parent_dir / "src"))
 
 
 class TestSetupParameters:
@@ -17,11 +16,12 @@ class TestSetupParameters:
 
     @patch('yaml2rst.initializer.parse_args')
     @patch('yaml2rst.initializer.process_arguments')
-    def test_setup_parameters_success(self, mock_process_args, mock_parse_args):
+    def test_setup_parameters_success(self, mock_process_args,
+                                      mock_parse_args):
         """Test successful parameter setup."""
         mock_args = Mock()
         mock_parse_args.return_value = mock_args
-        
+
         expected_settings = {
             'build_all': True,
             'targets': [],
@@ -29,9 +29,9 @@ class TestSetupParameters:
             'basedir': '/test/basedir'
         }
         mock_process_args.return_value = expected_settings
-        
+
         result = initializer.setup_parameters()
-        
+
         mock_parse_args.assert_called_once()
         mock_process_args.assert_called_once_with(mock_args)
         assert result == expected_settings
@@ -43,13 +43,10 @@ class TestSetupConstants:
     @patch('yaml2rst.initializer.get_dest_dirnames')
     @patch('yaml2rst.initializer.get_static_dest_files')
     @patch('yaml2rst.initializer.get_src_path')
-    def test_setup_constants_success(
-        self,
-        mock_get_src_path,
-        mock_get_static_dest_files,
-        mock_get_dest_dirnames,
-        sample_settings
-    ):
+    def test_setup_constants_success(self, mock_get_src_path,
+                                     mock_get_static_dest_files,
+                                     mock_get_dest_dirnames,
+                                     sample_settings):
         """Test successful constants setup."""
         mock_dest_dirs = {
             'guidelines': '/test/guidelines',
@@ -74,13 +71,14 @@ class TestSetupConstants:
             'wcag_sc': '/test/wcag_sc.json',
             'info': '/test/info.json'
         }
-        
+
         mock_get_dest_dirnames.return_value = mock_dest_dirs
         mock_get_static_dest_files.return_value = mock_static_files
         mock_get_src_path.return_value = mock_src_path
-        
-        dest_dirs, static_files, makefile_vars = initializer.setup_constants(sample_settings)
-        
+
+        dest_dirs, static_files, makefile_vars = (
+            initializer.setup_constants(sample_settings))
+
         # Verify function calls
         mock_get_dest_dirnames.assert_called_once_with(
             sample_settings['basedir'],
@@ -91,7 +89,7 @@ class TestSetupConstants:
             sample_settings['lang']
         )
         mock_get_src_path.assert_called_once_with(sample_settings['basedir'])
-        
+
         # Verify return values
         assert dest_dirs == mock_dest_dirs
         assert static_files == mock_static_files
@@ -106,14 +104,14 @@ class TestSetupVariables:
     def test_setup_variables_returns_correct_structure(self):
         """Test that setup_variables returns the correct structure."""
         makefile_vars, makefile_vars_list = initializer.setup_variables()
-        
+
         # Check makefile_vars structure
         assert isinstance(makefile_vars, dict)
         expected_vars = ['gl_yaml', 'check_yaml', 'faq_yaml']
         for var in expected_vars:
             assert var in makefile_vars
             assert makefile_vars[var] == ''
-        
+
         # Check makefile_vars_list structure
         assert isinstance(makefile_vars_list, dict)
         expected_lists = [
@@ -136,27 +134,28 @@ class TestSetupTemplates:
     @patch('yaml2rst.initializer.TemplateManager')
     @patch('yaml2rst.initializer.TEMPLATE_DIR', '/test/templates')
     @patch('yaml2rst.initializer.TEMPLATE_FILENAMES')
-    def test_setup_templates_success(self, mock_template_filenames, mock_template_manager_class):
+    def test_setup_templates_success(self, mock_template_filenames,
+                                     mock_template_manager_class):
         """Test successful template setup."""
         mock_template_filenames.items.return_value = [
             ('category_page', 'gl-category.rst'),
             ('faq_article', 'faq/article.rst')
         ]
-        
+
         mock_template_manager = Mock()
         mock_template = Mock()
         mock_template_manager.load.return_value = mock_template
         mock_template_manager_class.return_value = mock_template_manager
-        
+
         result = initializer.setup_templates()
-        
+
         # Verify TemplateManager creation
         assert mock_template_manager_class.call_count == 2
         mock_template_manager_class.assert_called_with('/test/templates')
-        
+
         # Verify template loading
         assert mock_template_manager.load.call_count == 2
-        
+
         # Verify result structure
         assert isinstance(result, dict)
         assert 'category_page' in result
@@ -170,10 +169,10 @@ class TestParseArgs:
     def test_parse_args_default_values(self, mock_get_languages):
         """Test parse_args with default values."""
         mock_get_languages.return_value = ['ja', 'en']
-        
+
         with patch('sys.argv', ['yaml2rst']):
             args = initializer.parse_args()
-        
+
         assert args.lang == 'ja'
         assert args.basedir == '..'
         assert args.files == []
@@ -182,17 +181,17 @@ class TestParseArgs:
     def test_parse_args_custom_values(self, mock_get_languages):
         """Test parse_args with custom values."""
         mock_get_languages.return_value = ['ja', 'en']
-        
+
         test_argv = [
             'yaml2rst',
             '--lang', 'en',
             '--basedir', '/custom/basedir',
             'file1.yaml', 'file2.yaml'
         ]
-        
+
         with patch('sys.argv', test_argv):
             args = initializer.parse_args()
-        
+
         assert args.lang == 'en'
         assert args.basedir == '/custom/basedir'
         assert args.files == ['file1.yaml', 'file2.yaml']
@@ -201,9 +200,9 @@ class TestParseArgs:
     def test_parse_args_invalid_language(self, mock_get_languages):
         """Test parse_args with invalid language."""
         mock_get_languages.return_value = ['ja', 'en']
-        
+
         test_argv = ['yaml2rst', '--lang', 'invalid']
-        
+
         with patch('sys.argv', test_argv):
             with pytest.raises(SystemExit):
                 initializer.parse_args()
@@ -212,7 +211,7 @@ class TestParseArgs:
     def test_parse_args_help(self, mock_get_languages):
         """Test parse_args help option."""
         mock_get_languages.return_value = ['ja', 'en']
-        
+
         with patch('sys.argv', ['yaml2rst', '--help']):
             with pytest.raises(SystemExit):
                 initializer.parse_args()
@@ -227,12 +226,12 @@ class TestProcessArguments:
         mock_args.basedir = '/test/basedir'
         mock_args.files = []
         mock_args.lang = 'ja'
-        
+
         with patch('os.path.abspath') as mock_abspath:
             mock_abspath.return_value = '/absolute/test/basedir'
-            
+
             result = initializer.process_arguments(mock_args)
-        
+
         assert result['build_all'] is True
         assert result['targets'] == []
         assert result['lang'] == 'ja'
@@ -244,18 +243,19 @@ class TestProcessArguments:
         mock_args.basedir = '/test/basedir'
         mock_args.files = ['file1.yaml', 'file2.yaml']
         mock_args.lang = 'en'
-        
+
         with patch('os.path.abspath') as mock_abspath:
             mock_abspath.side_effect = [
                 '/absolute/test/basedir',
                 '/absolute/file1.yaml',
                 '/absolute/file2.yaml'
             ]
-            
+
             result = initializer.process_arguments(mock_args)
-        
+
         assert result['build_all'] is False
-        assert result['targets'] == ['/absolute/file1.yaml', '/absolute/file2.yaml']
+        assert result['targets'] == ['/absolute/file1.yaml',
+                                     '/absolute/file2.yaml']
         assert result['lang'] == 'en'
         assert result['basedir'] == '/absolute/test/basedir'
 
@@ -265,12 +265,12 @@ class TestProcessArguments:
         mock_args.basedir = '/test/basedir'
         mock_args.files = []
         mock_args.lang = 'ja'
-        
+
         with patch('os.path.abspath') as mock_abspath:
             mock_abspath.return_value = '/absolute/test/basedir'
-            
+
             result = initializer.process_arguments(mock_args)
-        
+
         assert result['build_all'] is True
         assert result['targets'] == []
 
@@ -296,7 +296,8 @@ class TestInitializerIntegration:
         """Test the full initialization flow."""
         # Setup mocks
         mock_get_languages.return_value = ['ja', 'en']
-        mock_get_dest_dirnames.return_value = {'guidelines': '/test/guidelines'}
+        mock_get_dest_dirnames.return_value = {
+            'guidelines': '/test/guidelines'}
         mock_get_static_dest_files.return_value = {
             'all_checks': '/test/all_checks.rst',
             'wcag21mapping': '/test/wcag21mapping.rst',
@@ -308,20 +309,23 @@ class TestInitializerIntegration:
             'makefile': '/test/Makefile',
             'axe_rules': '/test/axe_rules.rst'
         }
-        mock_get_src_path.return_value = {'wcag_sc': '/test/wcag_sc.json', 'info': '/test/info.json'}
-        
-        mock_template_filenames.items.return_value = [('category_page', 'gl-category.rst')]
+        mock_get_src_path.return_value = {'wcag_sc': '/test/wcag_sc.json',
+                                          'info': '/test/info.json'}
+
+        mock_template_filenames.items.return_value = [
+            ('category_page', 'gl-category.rst')]
         mock_template_manager = Mock()
         mock_template_manager.load.return_value = Mock()
         mock_template_manager_class.return_value = mock_template_manager
-        
+
         # Test with default arguments
         with patch('sys.argv', ['yaml2rst']):
             settings = initializer.setup_parameters()
-            dest_dirs, static_files, makefile_vars = initializer.setup_constants(settings)
+            dest_dirs, static_files, makefile_vars = (
+                initializer.setup_constants(settings))
             templates = initializer.setup_templates()
             vars_dict, vars_list = initializer.setup_variables()
-        
+
         # Verify results
         assert settings['lang'] == 'ja'
         assert settings['build_all'] is True

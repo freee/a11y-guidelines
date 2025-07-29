@@ -2,16 +2,15 @@
 import pytest
 import tempfile
 import shutil
-from pathlib import Path
-from unittest.mock import Mock, MagicMock
 import sys
-import os
-
-# Add src directory to Python path for testing
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+from pathlib import Path
+from unittest.mock import Mock
 
 from yaml2rst.template_manager import TemplateManager
 from yaml2rst.generators.base_generator import GeneratorContext
+
+# Add src directory to Python path for testing
+sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 
 @pytest.fixture
@@ -50,7 +49,7 @@ def mock_templates():
     """Mock templates dictionary."""
     mock_template = Mock(spec=TemplateManager)
     mock_template.write_rst = Mock()
-    
+
     return {
         'category_page': mock_template,
         'allchecks_text': mock_template,
@@ -114,7 +113,7 @@ def mock_file_system(temp_dir):
     # Create test YAML files
     yaml_dir = temp_dir / "data" / "yaml"
     yaml_dir.mkdir(parents=True)
-    
+
     # Sample guideline YAML
     gl_dir = yaml_dir / "gl" / "test_category"
     gl_dir.mkdir(parents=True)
@@ -125,7 +124,7 @@ description: This is a test guideline
 priority: high
 category: test_category
 """)
-    
+
     # Sample FAQ YAML
     faq_dir = yaml_dir / "faq"
     faq_dir.mkdir(parents=True)
@@ -136,7 +135,7 @@ question: What is this?
 answer: This is a test FAQ
 tags: [test, sample]
 """)
-    
+
     # Sample check YAML
     check_dir = yaml_dir / "checks" / "test"
     check_dir.mkdir(parents=True)
@@ -147,7 +146,7 @@ description: This is a test check
 procedure: Test procedure
 implementation: Test implementation
 """)
-    
+
     return temp_dir
 
 
@@ -157,12 +156,12 @@ def mock_freee_a11y_gl():
     with pytest.MonkeyPatch().context() as m:
         mock_config = Mock()
         mock_config.initialize = Mock()
-        
+
         mock_setup = Mock()
-        
+
         m.setattr("yaml2rst.yaml2rst.Config", mock_config)
         m.setattr("yaml2rst.yaml2rst.setup_instances", mock_setup)
-        
+
         yield {
             'config': mock_config,
             'setup_instances': mock_setup
@@ -177,11 +176,13 @@ def capture_logs(caplog):
 
 class MockGenerator:
     """Mock generator for testing."""
-    
+
     def __init__(self, lang, data_to_yield=None):
         self.lang = lang
-        self.data_to_yield = data_to_yield or [{'filename': 'test', 'content': 'test content'}]
-    
+        self.data_to_yield = data_to_yield or [
+            {'filename': 'test', 'content': 'test content'}
+        ]
+
     def generate(self):
         """Generate mock data."""
         for item in self.data_to_yield:
@@ -193,7 +194,9 @@ def mock_generator_class():
     """Mock generator class."""
     mock_class = Mock()
     mock_instance = Mock()
-    mock_instance.generate.return_value = [{'filename': 'test', 'content': 'test content'}]
+    mock_instance.generate.return_value = [
+        {'filename': 'test', 'content': 'test content'}
+    ]
     mock_class.return_value = mock_instance
     return mock_class
 
@@ -220,7 +223,10 @@ def sample_faq_data():
         'id': 'faq_001',
         'title': 'Sample FAQ',
         'question': 'What is accessibility?',
-        'answer': 'Accessibility is the practice of making websites usable by everyone.',
+        'answer': (
+            'Accessibility is the practice of making websites usable by '
+            'everyone.'
+        ),
         'tags': ['accessibility', 'basics'],
         'filename': 'sample_faq'
     }

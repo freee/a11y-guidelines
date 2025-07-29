@@ -1,14 +1,13 @@
 """Unit tests for the main yaml2rst module."""
 import pytest
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 import sys
 from pathlib import Path
 
+from yaml2rst import yaml2rst
+
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
-
-from yaml2rst import yaml2rst
-from yaml2rst.generators.file_generator import GeneratorConfig
 
 
 class TestMain:
@@ -33,7 +32,8 @@ class TestMain:
     ):
         """Test successful execution of main function."""
         # Setup mocks
-        mock_initializer.setup_parameters.return_value = sample_settings
+        mock_initializer.setup_parameters.return_value = \
+            sample_settings
         mock_initializer.setup_constants.return_value = (
             sample_dest_dirs,
             sample_static_files,
@@ -41,19 +41,20 @@ class TestMain:
         )
         mock_initializer.setup_templates.return_value = mock_templates
         mock_initializer.setup_variables.return_value = ({}, {})
-        
+
         mock_file_generator = Mock()
         mock_file_generator_class.return_value = mock_file_generator
-        
+
         # Execute
         yaml2rst.main()
-        
+
         # Verify initialization calls
         mock_initializer.setup_parameters.assert_called_once()
-        mock_initializer.setup_constants.assert_called_once_with(sample_settings)
+        mock_initializer.setup_constants.assert_called_once_with(
+            sample_settings)
         mock_initializer.setup_templates.assert_called_once()
         mock_initializer.setup_variables.assert_called_once()
-        
+
         # Verify Config initialization
         mock_config.initialize.assert_called_once_with(
             profile="yaml2rst",
@@ -64,18 +65,20 @@ class TestMain:
                 }
             }
         )
-        
+
         # Verify setup_instances call
-        mock_setup_instances.assert_called_once_with(sample_settings['basedir'])
-        
+        mock_setup_instances.assert_called_once_with(
+            sample_settings['basedir'])
+
         # Verify directory creation
         assert mock_makedirs.call_count == len(sample_dest_dirs)
-        
+
         # Verify FileGenerator creation
-        mock_file_generator_class.assert_called_once_with(mock_templates, sample_settings['lang'])
-        
+        mock_file_generator_class.assert_called_once_with(
+            mock_templates, sample_settings['lang'])
+
         # Verify generator calls (should be called for each generator config)
-        assert mock_file_generator.generate.call_count >= 10  # At least 10 generators
+        assert mock_file_generator.generate.call_count >= 10  # At least 10
 
     @patch('yaml2rst.yaml2rst.initializer')
     @patch('yaml2rst.yaml2rst.setup_instances')
@@ -116,9 +119,10 @@ class TestMain:
         )
         mock_initializer.setup_templates.return_value = {}
         mock_initializer.setup_variables.return_value = ({}, {})
-        
-        mock_config.initialize.side_effect = Exception("Config initialization failed")
-        
+
+        mock_config.initialize.side_effect = Exception(
+            "Config initialization failed")
+
         # Execute and verify exception
         with pytest.raises(Exception, match="Config initialization failed"):
             yaml2rst.main()
@@ -139,12 +143,13 @@ class TestMain:
         """Test main function when directory creation fails."""
         # Setup mocks
         mock_initializer.setup_parameters.return_value = sample_settings
-        mock_initializer.setup_constants.return_value = (sample_dest_dirs, {}, {})
+        mock_initializer.setup_constants.return_value = (
+            sample_dest_dirs, {}, {})
         mock_initializer.setup_templates.return_value = {}
         mock_initializer.setup_variables.return_value = ({}, {})
-        
+
         mock_makedirs.side_effect = OSError("Permission denied")
-        
+
         # Execute and verify exception
         with pytest.raises(OSError, match="Permission denied"):
             yaml2rst.main()
@@ -191,11 +196,12 @@ class TestMain:
         )
         mock_initializer.setup_templates.return_value = mock_templates
         mock_initializer.setup_variables.return_value = ({}, {})
-        
+
         mock_file_generator = Mock()
-        mock_file_generator.generate.side_effect = Exception("File generation failed")
+        mock_file_generator.generate.side_effect = Exception(
+            "File generation failed")
         mock_file_generator_class.return_value = mock_file_generator
-        
+
         # Execute and verify exception
         with pytest.raises(Exception, match="File generation failed"):
             yaml2rst.main()
@@ -227,25 +233,26 @@ class TestMain:
         )
         mock_initializer.setup_templates.return_value = mock_templates
         mock_initializer.setup_variables.return_value = ({}, {})
-        
+
         mock_file_generator = Mock()
         mock_file_generator_class.return_value = mock_file_generator
-        
+
         # Execute
         yaml2rst.main()
-        
+
         # Verify generator configurations
         generate_calls = mock_file_generator.generate.call_args_list
-        
+
         # Check that we have the expected number of generator calls
-        assert len(generate_calls) >= 12  # At least 12 generators including makefile
-        
+        assert len(generate_calls) >= 12  # At least 12 generators
+
         # Verify specific generator types are present
         config_args = [call[0][0] for call in generate_calls]
-        
+
         # Check for key generator classes
-        generator_classes = [config.generator_class.__name__ for config in config_args]
-        
+        generator_classes = [config.generator_class.__name__
+                             for config in config_args]
+
         expected_generators = [
             'CategoryGenerator',
             'AllChecksGenerator',
@@ -256,10 +263,12 @@ class TestMain:
             'WcagMappingGenerator',
             'MakefileGenerator'
         ]
-        
+
         for expected in expected_generators:
-            assert any(expected in gen_class for gen_class in generator_classes), \
-                f"Expected generator {expected} not found in {generator_classes}"
+            assert any(expected in gen_class
+                       for gen_class in generator_classes), \
+                f"Expected generator {expected} not found in " \
+                f"{generator_classes}"
 
     @patch('yaml2rst.yaml2rst.initializer')
     @patch('yaml2rst.yaml2rst.setup_instances')
@@ -288,25 +297,27 @@ class TestMain:
             makefile_vars
         )
         mock_initializer.setup_templates.return_value = mock_templates
-        mock_initializer.setup_variables.return_value = ({'var1': 'val1'}, {'list1': []})
-        
+        mock_initializer.setup_variables.return_value = (
+            {'var1': 'val1'}, {'list1': []})
+
         mock_file_generator = Mock()
         mock_file_generator_class.return_value = mock_file_generator
-        
+
         # Execute
         yaml2rst.main()
-        
+
         # Verify Makefile generator was called
         generate_calls = mock_file_generator.generate.call_args_list
-        
+
         # Find the Makefile generator call
         makefile_calls = [
             call for call in generate_calls
             if call[0][0].generator_class.__name__ == 'MakefileGenerator'
         ]
-        
-        assert len(makefile_calls) == 1, "Makefile generator should be called exactly once"
-        
+
+        assert len(makefile_calls) == 1, \
+            "Makefile generator should be called exactly once"
+
         # Verify the Makefile generator config
         makefile_config = makefile_calls[0][0][0]
         assert makefile_config.template_name == 'makefile'
@@ -322,25 +333,25 @@ class TestMainIntegration:
         # Create minimal directory structure
         data_dir = temp_dir / "data"
         data_dir.mkdir()
-        
+
         # Mock sys.argv to provide test arguments
         test_args = ['yaml2rst', '--basedir', str(temp_dir), '--lang', 'ja']
         monkeypatch.setattr('sys.argv', test_args)
-        
+
         # Mock the freee_a11y_gl dependencies
         mock_config = Mock()
         mock_setup = Mock()
-        
+
         with patch('yaml2rst.yaml2rst.Config', mock_config), \
              patch('yaml2rst.yaml2rst.setup_instances', mock_setup), \
              patch('yaml2rst.yaml2rst.FileGenerator') as mock_fg:
-            
+
             mock_file_generator = Mock()
             mock_fg.return_value = mock_file_generator
-            
+
             # This should not raise an exception
             yaml2rst.main()
-            
+
             # Verify basic initialization occurred
             mock_config.initialize.assert_called_once()
             mock_setup.assert_called_once()
