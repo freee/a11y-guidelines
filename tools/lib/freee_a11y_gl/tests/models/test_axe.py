@@ -167,12 +167,12 @@ class TestAxeRule:
         mock_wcag_sc = MagicMock()
         mock_wcag_sc.sort_key = '1.1.1'
         
-        with patch('freee_a11y_gl.models.axe.RelationshipManager') as mock_rel_manager, \
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager') as mock_get_rel, \
              patch('freee_a11y_gl.models.axe.tag2sc') as mock_tag2sc, \
              patch('freee_a11y_gl.models.reference.WcagSc') as mock_wcag_sc_class:
             
             mock_rel_instance = MagicMock()
-            mock_rel_manager.return_value = mock_rel_instance
+            mock_get_rel.return_value = mock_rel_instance
             
             # Mock tag2sc to return success criteria IDs
             mock_tag2sc.side_effect = lambda tag: '1.1.1' if tag == 'wcag111' else '2.1.1' if tag == 'wcag21aa' else None
@@ -255,12 +255,12 @@ class TestAxeRule:
         mock_guideline.sort_key = 'image-001'
         mock_guideline.get_category_and_id.return_value = {'category': 'image', 'id': '001'}
         
-        with patch('freee_a11y_gl.models.axe.RelationshipManager') as mock_rel_manager, \
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager') as mock_get_rel, \
              patch('freee_a11y_gl.models.axe.tag2sc') as mock_tag2sc, \
              patch('freee_a11y_gl.models.reference.WcagSc') as mock_wcag_sc_class:
             
             mock_rel_instance = MagicMock()
-            mock_rel_manager.return_value = mock_rel_instance
+            mock_get_rel.return_value = mock_rel_instance
             
             mock_tag2sc.return_value = '1.1.1'
             mock_wcag_sc_class._instances = {'1.1.1': mock_wcag_sc}

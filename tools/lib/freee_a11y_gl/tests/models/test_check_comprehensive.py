@@ -183,7 +183,7 @@ class TestCheckComprehensive:
         """Test Check join_items static method."""
         items = ['web', 'mobile', 'desktop']
         
-        with patch('freee_a11y_gl.models.check.Config') as mock_config:
+        with patch('freee_a11y_gl.utils.Config') as mock_config:
             mock_config.get_list_separator.return_value = ', '
             mock_config.get_platform_name.side_effect = lambda item, lang: f'{item.title()}'
             
@@ -198,7 +198,7 @@ class TestCheckComprehensive:
         """Test Check object_data method."""
         check = Check(self.sample_data)
         
-        with patch('freee_a11y_gl.models.check.RelationshipManager'):
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager'):
             object_data = check.object_data()
             
             assert isinstance(object_data, dict)
@@ -226,7 +226,7 @@ class TestCheckComprehensive:
         
         check = Check(data_with_conditions)
         
-        with patch('freee_a11y_gl.models.check.RelationshipManager'):
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager'):
             object_data = check.object_data()
             
             assert 'conditions' in object_data
@@ -258,7 +258,7 @@ class TestCheckComprehensive:
         
         check1 = Check(self.sample_data)
         
-        with patch('freee_a11y_gl.models.check.RelationshipManager'):
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager'):
             all_data = Check.object_data_all()
             
             assert isinstance(all_data, dict)

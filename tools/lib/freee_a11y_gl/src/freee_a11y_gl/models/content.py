@@ -2,6 +2,7 @@
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel
+from ..mixins.template_mixin import TemplateDataMixin
 from ..relationship_manager import RelationshipManager
 from ..config import Config
 from ..utils import uniq
@@ -48,7 +49,7 @@ class Category(BaseModel):
         Returns:
             List of file paths that this category depends on
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         dependency = []
         for guideline in rel.get_sorted_related_objects(self, 'guideline'):
             dependency.append(guideline.src_path)
@@ -67,7 +68,7 @@ class Category(BaseModel):
         """
         return list(cls._instances.values())
 
-class Guideline(BaseModel):
+class Guideline(BaseModel, TemplateDataMixin):
     """Guideline model representing accessibility guidelines."""
 
     object_type = "guideline"
@@ -98,7 +99,7 @@ class Guideline(BaseModel):
         self.src_path = gl['src_path']
 
         # Set up relationships
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         if not Category.get_by_id(gl['category']):
             raise ValueError(f'Category ID {gl["category"]} referenced in guideline {self.id} does not exist.')
         rel.associate_objects(self, Category.get_by_id(gl['category']))
@@ -137,7 +138,7 @@ class Guideline(BaseModel):
         Returns:
             Dictionary with category name and guideline ID
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         category = rel.get_related_objects(self, 'category')[0]
         return {
             'category': category.get_name(lang),
@@ -157,7 +158,7 @@ class Guideline(BaseModel):
             'text': {},
             'url': {}
         }
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         category = rel.get_related_objects(self, 'category')[0]
 
         for lang in self.data.title.keys():
@@ -177,11 +178,11 @@ class Guideline(BaseModel):
         Returns:
             Dictionary with guideline data formatted for templates
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         data = {
             'id': self.id,
             'title': self.data.title[lang],
-            'platform': self.join_items(self.data.platform, lang),
+            'platform': self.join_platform_items(self.data.platform, lang),
             'guideline': self.data.guideline[lang],
             'intent': self.data.intent[lang],
             'category': rel.get_related_objects(self, 'category')[0].names[lang],
@@ -203,31 +204,14 @@ class Guideline(BaseModel):
         faqs = rel.get_sorted_related_objects(self, 'faq')
         if faqs:
             data['faqs'] = [faq.id for faq in faqs]
-
-        # Add info references if present
+        
+        # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
             data['info'] = [inforef.refstring() for inforef in info]
 
         return data
 
-    @staticmethod
-    def join_items(items: List[str], lang: str) -> str:
-        """Join platform items with localized separator.
-        
-        Args:
-            items: List of platform items
-            lang: Language code
-            
-        Returns:
-            Joined string with localized separator
-        """
-        separator = Config.get_list_separator(lang)
-        platform_names = [
-            Config.get_platform_name(item, lang)
-            for item in items
-        ]
-        return separator.join(platform_names)
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:

@@ -67,11 +67,13 @@ class TestGuideline(BaseModelTest):
         mock_config.get_platform_name.return_value = "Web"
         mock_config.get_list_separator.return_value = "、"
         
-        with patch('freee_a11y_gl.models.content.RelationshipManager') as mock_rel_manager, \
+        sample_guideline = guideline_factory("markup/semantics")
+        
+        with patch.object(sample_guideline, '_get_relationship_manager') as mock_get_rel, \
              patch('freee_a11y_gl.models.content.Config', mock_config):
             
             mock_rel = MagicMock()
-            mock_rel_manager.return_value = mock_rel
+            mock_get_rel.return_value = mock_rel
             
             def mock_get_related_objects(obj, relation_type):
                 if relation_type == "category":
@@ -91,8 +93,6 @@ class TestGuideline(BaseModelTest):
             
             mock_rel.get_related_objects.side_effect = mock_get_related_objects
             mock_rel.get_sorted_related_objects.side_effect = mock_get_sorted_related_objects
-            
-            sample_guideline = guideline_factory("markup/semantics")
             template_data = sample_guideline.template_data("ja")
             
             # Basic checks that the template data structure is correct

@@ -162,11 +162,15 @@ class InfoRef(BaseModel):
     @classmethod
     def list_has_guidelines(cls) -> List['InfoRef']:
         """Get references that have associated guidelines."""
+        from ..relationship_manager import RelationshipManager
         rel = RelationshipManager()
-        return [ref for ref in cls._instances.values() if rel.get_related_objects(ref, 'guideline')]
+        return [ref for ref in cls._instances.values() 
+                if rel.get_related_objects(ref, 'guideline')]
 
     @classmethod
     def list_has_faqs(cls) -> List['InfoRef']:
         """Get references that have associated FAQs."""
+        from ..relationship_manager import RelationshipManager
         rel = RelationshipManager()
-        return [ref for ref in cls._instances.values() if rel.get_related_objects(ref, 'faq')]
+        return [ref for ref in cls._instances.values() 
+                if rel.get_related_objects(ref, 'faq')]

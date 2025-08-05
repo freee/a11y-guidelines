@@ -2,11 +2,12 @@
 import datetime
 from typing import Dict, List, Any, Optional, ClassVar
 from ..base import BaseModel
+from ...mixins.template_mixin import TemplateDataMixin
 from ...relationship_manager import RelationshipManager
 from ...config import Config
 from ...utils import uniq
 
-class Faq(BaseModel):
+class Faq(BaseModel, TemplateDataMixin):
     """FAQ article model."""
 
     object_type = "faq"
@@ -40,7 +41,7 @@ class Faq(BaseModel):
 
     def _create_relationships(self, faq: Dict[str, Any]) -> None:
         """Create relationships with other objects."""
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
 
         # Associate tags
         from .tag import FaqTag
@@ -78,7 +79,7 @@ class Faq(BaseModel):
 
     def get_dependency(self) -> List[str]:
         """Get file dependencies for this FAQ."""
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         dependency = [self.src_path]
         
         guidelines = rel.get_related_objects(self, 'guideline')
@@ -120,7 +121,7 @@ class Faq(BaseModel):
         Returns:
             Dictionary containing FAQ data formatted for templates
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         tags = rel.get_related_objects(self, 'faq_tag')
         
         # Format date based on language
@@ -150,12 +151,13 @@ class Faq(BaseModel):
         if checks:
             data['checks'] = [check.template_data(lang) for check in checks]
 
-        # Add related FAQs if present
-        related_faqs = rel.get_sorted_related_objects(self, 'faq', key='sort_key')
+        # Add related FAQs if present  
+        related_faqs = rel.get_sorted_related_objects(self, 'faq', 
+                                                     key='sort_key')
         if related_faqs:
             data['related_faqs'] = [faq.id for faq in related_faqs]
 
-        # Add info references if present
+        # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
             data['info'] = [inforef.refstring() for inforef in info]

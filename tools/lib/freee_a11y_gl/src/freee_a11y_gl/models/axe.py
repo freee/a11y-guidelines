@@ -61,7 +61,7 @@ class AxeRule(BaseModel):
         # Set relationships
         self.has_wcag_sc = False
         self.has_guideline = False
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
 
         # Find and associate WCAG success criteria
         wcag_scs = [
@@ -91,7 +91,7 @@ class AxeRule(BaseModel):
         Returns:
             Dictionary with template data
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         data = {
             'id': self.id,
             'help': self.message.help,

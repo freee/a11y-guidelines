@@ -1,15 +1,15 @@
 """Check-related models for a11y-guidelines."""
-from typing import Dict, List, Any, Optional, ClassVar
+from typing import Dict, List, Any, Optional, ClassVar, Literal
 from dataclasses import dataclass
-from .base import BaseModel
-from ..relationship_manager import RelationshipManager
-from typing import Literal
-from ..config import Config
 
-LanguageCode = Literal["ja", "en"]
+from .base import BaseModel
+from ..mixins.template_mixin import TemplateDataMixin
+from ..config import Config
 from ..utils import uniq
 
-class Check(BaseModel):
+LanguageCode = Literal["ja", "en"]
+
+class Check(BaseModel, TemplateDataMixin):
     """Check model for accessibility validation criteria."""
 
     object_type = "check"
@@ -63,44 +63,46 @@ class Check(BaseModel):
         Returns:
             Dictionary with check data formatted for templates
         """
-        rel = RelationshipManager()
         gl_platform = kwargs.get('platform')
+        rel = self._get_relationship_manager()
 
+        # Start with base template data
         data = {
             'id': self.id,
             'check': self.check_text[lang],
             'severity': Config.get_severity_tag(self.severity, lang),
             'target': Config.get_check_target_name(self.target, lang),
-            'platform': self.join_items(self.platform, lang),
+            'platform': self.join_platform_items(self.platform, lang),
             'guidelines': []
         }
 
         # Add conditions if present
         if self.conditions:
             if not gl_platform:
-                data['conditions'] = [cond.template_data(lang) for cond in self.conditions]
+                data['conditions'] = [cond.template_data(lang) 
+                                    for cond in self.conditions]
             else:
                 data['conditions'] = [
                     cond.template_data(lang) 
                     for cond in self.conditions 
-                    if cond.platform == 'general' or cond.platform in gl_platform
+                    if (cond.platform == 'general' or 
+                        cond.platform in gl_platform)
                 ]
 
         # Add implementations if present
         if self.implementations:
-            data['implementations'] = [impl.template_data(lang) for impl in self.implementations]
+            data['implementations'] = [impl.template_data(lang) 
+                                     for impl in self.implementations]
 
-        # Add info references if present
+        # Add related objects using mixin methods
+        self.add_related_objects(data, 'faq')
+        
+        # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
             data['info_refs'] = [inforef.refstring() for inforef in info]
 
-        # Add FAQs if present
-        faqs = rel.get_sorted_related_objects(self, 'faq')
-        if faqs:
-            data['faqs'] = [faq.id for faq in faqs]
-
-        # Add guidelines
+        # Add guidelines with special formatting
         for gl in rel.get_sorted_related_objects(self, 'guideline'):
             data['guidelines'].append(gl.get_category_and_id(lang))
 
@@ -108,13 +110,19 @@ class Check(BaseModel):
 
     @staticmethod
     def join_items(items: List[str], lang: str) -> str:
-        """Join platform items with localized separator and platform names."""
-        separator = Config.get_list_separator(lang)
-        platform_names = [
-            Config.get_platform_name(item, lang)
-            for item in items
-        ]
-        return separator.join(platform_names)
+        """Join platform items with localized separator and platform names.
+        
+        Static method for backward compatibility with existing API.
+        
+        Args:
+            items: List of platform identifiers
+            lang: Language code ('ja' or 'en')
+            
+        Returns:
+            Joined string with localized platform names
+        """
+        from ..utils import join_items
+        return join_items(items, lang)
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:
@@ -130,7 +138,7 @@ class Check(BaseModel):
         Returns:
             Dictionary with check data formatted for object representation
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         data = {
             'id': self.id,
             'sortKey': self.sort_key,

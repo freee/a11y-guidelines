@@ -100,13 +100,11 @@ class TestCategory:
         with pytest.raises(KeyError):
             category.get_name('ja')
 
-    @patch('freee_a11y_gl.models.content.RelationshipManager')
     @patch('freee_a11y_gl.models.content.uniq')
-    def test_get_dependency_basic(self, mock_uniq, mock_rel_manager):
+    def test_get_dependency_basic(self, mock_uniq):
         """Test getting dependencies with basic setup."""
         # Setup mocks
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         
         # Mock guideline with src_path
         mock_guideline = MagicMock()
@@ -140,10 +138,11 @@ class TestCategory:
         mock_uniq.side_effect = lambda x: x
         
         category = Category('test', {'ja': 'テスト', 'en': 'Test'})
-        dependencies = category.get_dependency()
         
-        # Verify RelationshipManager was called
-        mock_rel_manager.assert_called_once()
+        with patch.object(category, '_get_relationship_manager', return_value=mock_rel):
+            dependencies = category.get_dependency()
+        
+        # Verify relationship manager methods were called
         mock_rel.get_sorted_related_objects.assert_called_once_with(category, 'guideline')
         
         # Verify uniq was called to remove duplicates
@@ -153,12 +152,10 @@ class TestCategory:
         expected_deps = ['guideline1.yaml', 'check1.yaml', 'faq1.yaml']
         assert dependencies == expected_deps
 
-    @patch('freee_a11y_gl.models.content.RelationshipManager')
     @patch('freee_a11y_gl.models.content.uniq')
-    def test_get_dependency_multiple_guidelines(self, mock_uniq, mock_rel_manager):
+    def test_get_dependency_multiple_guidelines(self, mock_uniq):
         """Test getting dependencies with multiple guidelines."""
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         
         # Mock multiple guidelines
         mock_guideline1 = MagicMock()
@@ -201,7 +198,9 @@ class TestCategory:
         mock_uniq.side_effect = lambda x: x
         
         category = Category('test', {'ja': 'テスト', 'en': 'Test'})
-        dependencies = category.get_dependency()
+        
+        with patch.object(category, '_get_relationship_manager', return_value=mock_rel):
+            dependencies = category.get_dependency()
         
         expected_deps = [
             'guideline1.yaml', 'check1.yaml', 'faq1.yaml',
@@ -209,27 +208,25 @@ class TestCategory:
         ]
         assert dependencies == expected_deps
 
-    @patch('freee_a11y_gl.models.content.RelationshipManager')
     @patch('freee_a11y_gl.models.content.uniq')
-    def test_get_dependency_no_guidelines(self, mock_uniq, mock_rel_manager):
+    def test_get_dependency_no_guidelines(self, mock_uniq):
         """Test getting dependencies when no guidelines exist."""
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         mock_rel.get_sorted_related_objects.return_value = []
         mock_uniq.side_effect = lambda x: x
         
         category = Category('test', {'ja': 'テスト', 'en': 'Test'})
-        dependencies = category.get_dependency()
+        
+        with patch.object(category, '_get_relationship_manager', return_value=mock_rel):
+            dependencies = category.get_dependency()
         
         assert dependencies == []
         mock_uniq.assert_called_once_with([])
 
-    @patch('freee_a11y_gl.models.content.RelationshipManager')
     @patch('freee_a11y_gl.models.content.uniq')
-    def test_get_dependency_no_checks_or_faqs(self, mock_uniq, mock_rel_manager):
+    def test_get_dependency_no_checks_or_faqs(self, mock_uniq):
         """Test getting dependencies when guidelines have no checks or FAQs."""
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         
         mock_guideline = MagicMock()
         mock_guideline.src_path = 'guideline1.yaml'
@@ -247,16 +244,16 @@ class TestCategory:
         mock_uniq.side_effect = lambda x: x
         
         category = Category('test', {'ja': 'テスト', 'en': 'Test'})
-        dependencies = category.get_dependency()
+        
+        with patch.object(category, '_get_relationship_manager', return_value=mock_rel):
+            dependencies = category.get_dependency()
         
         assert dependencies == ['guideline1.yaml']
 
-    @patch('freee_a11y_gl.models.content.RelationshipManager')
     @patch('freee_a11y_gl.models.content.uniq')
-    def test_get_dependency_with_duplicates(self, mock_uniq, mock_rel_manager):
+    def test_get_dependency_with_duplicates(self, mock_uniq):
         """Test that uniq is called to remove duplicates."""
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         
         mock_guideline = MagicMock()
         mock_guideline.src_path = 'guideline1.yaml'
@@ -283,7 +280,9 @@ class TestCategory:
         mock_uniq.return_value = ['guideline1.yaml', 'check1.yaml']
         
         category = Category('test', {'ja': 'テスト', 'en': 'Test'})
-        dependencies = category.get_dependency()
+        
+        with patch.object(category, '_get_relationship_manager', return_value=mock_rel):
+            dependencies = category.get_dependency()
         
         # Verify uniq was called with the expected list
         mock_uniq.assert_called_once_with(['guideline1.yaml', 'check1.yaml'])

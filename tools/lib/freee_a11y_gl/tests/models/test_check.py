@@ -108,24 +108,23 @@ class TestCheck(BaseModelTest):
         result = check.condition_platforms()
         assert result == ["mobile", "web"]  # Sorted and unique
 
-    @patch('freee_a11y_gl.models.check.RelationshipManager')
     @patch('freee_a11y_gl.models.check.Config')
-    def test_template_data(self, mock_config, mock_rel_manager):
+    def test_template_data(self, mock_config):
         """Test template data generation."""
         mock_config.get_severity_tag.return_value = '[NORMAL]'
         mock_config.get_check_target_name.return_value = 'コード'
-        mock_config.get_platform_name.side_effect = lambda platform, lang: {
-            ('web', 'ja'): 'Web',
-            ('mobile', 'ja'): 'モバイル'
-        }.get((platform, lang), platform)
-        mock_config.get_list_separator.return_value = '、'
-
-        mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
-        mock_rel.get_related_objects.return_value = []
-        mock_rel.get_sorted_related_objects.return_value = []
 
         check = Check(self.sample_data)
+        
+        # Mock the relationship manager method
+        mock_rel = MagicMock()
+        mock_rel.get_related_objects.return_value = []
+        mock_rel.get_sorted_related_objects.return_value = []
+        check._get_relationship_manager = MagicMock(return_value=mock_rel)
+        
+        # Mock the join_platform_items method from mixin
+        check.join_platform_items = MagicMock(return_value='Web、モバイル')
+
         result = check.template_data("ja")
 
         expected = {
@@ -140,17 +139,16 @@ class TestCheck(BaseModelTest):
         for key, value in expected.items():
             assert result[key] == value
 
-    def test_join_items_static_method(self):
-        """Test join_items static method."""
-        with patch('freee_a11y_gl.models.check.Config') as mock_config:
-            mock_config.get_list_separator.return_value = '、'
-            mock_config.get_platform_name.side_effect = lambda platform, lang: {
-                ('web', 'ja'): 'Web',
-                ('mobile', 'ja'): 'モバイル'
-            }.get((platform, lang), platform)
-
-            result = Check.join_items(["web", "mobile"], "ja")
+    def test_join_platform_items_method(self):
+        """Test join_platform_items method from mixin."""
+        check = Check(self.sample_data)
+        
+        with patch('freee_a11y_gl.mixins.template_mixin.join_items') as mock_join:
+            mock_join.return_value = "Web、モバイル"
+            
+            result = check.join_platform_items(["web", "mobile"], "ja")
             assert result == "Web、モバイル"
+            mock_join.assert_called_once_with(["web", "mobile"], "ja")
 
     def test_list_all_src_paths(self):
         """Test listing all source paths."""
@@ -161,16 +159,16 @@ class TestCheck(BaseModelTest):
         result = Check.list_all_src_paths()
         assert set(result) == {"test/check.yaml", "test/check2.yaml"}
 
-    @patch('freee_a11y_gl.models.check.RelationshipManager')
-    def test_object_data(self, mock_rel_manager):
+    def test_object_data(self):
         """Test object data generation."""
         mock_rel = MagicMock()
-        mock_rel_manager.return_value = mock_rel
         mock_rel.get_related_objects.return_value = []
         mock_rel.get_sorted_related_objects.return_value = []
 
         check = Check(self.sample_data)
-        result = check.object_data()
+        
+        with patch.object(check, '_get_relationship_manager', return_value=mock_rel):
+            result = check.object_data()
 
         expected = {
             'id': 'test-check-001',

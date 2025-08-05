@@ -22,7 +22,7 @@ class FaqTag(BaseModel):
 
     def article_count(self) -> int:
         """Get number of articles with this tag."""
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         return len(rel.get_related_objects(self, 'faq'))
 
     def get_name(self, lang: str) -> str:
@@ -45,7 +45,7 @@ class FaqTag(BaseModel):
         Returns:
             Dictionary with tag data or None if tag has no articles
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         faqs = rel.get_related_objects(self, 'faq')
         if not faqs:
             return None
