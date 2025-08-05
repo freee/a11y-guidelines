@@ -27,6 +27,7 @@ from .path import (get_dest_dirnames, get_static_dest_files, TEMPLATE_DIR,
                    TEMPLATE_FILENAMES)
 from freee_a11y_gl.source import get_src_path
 from .template_manager import TemplateManager
+from .template_config import TemplateConfig
 
 
 def setup_parameters() -> Dict[str, Any]:
@@ -87,9 +88,13 @@ def setup_constants(settings: Dict[str, Any]) -> Tuple[Dict[str, str],
     # build targets and dependencies for Sphinx documentation
     MAKEFILE_VARS = {
         'all_checks_target': STATIC_FILES['all_checks'],
-        'faq_index_target': " ".join([STATIC_FILES[key] for key in
-                                      ['faq_index', 'faq_tag_index',
-                                       'faq_article_index']]),
+        'faq_index_target': " ".join([
+            STATIC_FILES[key] for key in [
+                'faq_index',
+                'faq_tag_index',
+                'faq_article_index'
+            ]
+        ]),
         'wcag_mapping_target': STATIC_FILES['wcag21mapping'],
         'priority_diff_target': STATIC_FILES['priority_diff'],
         'miscdefs_target': STATIC_FILES['miscdefs'],
@@ -151,12 +156,24 @@ def setup_variables() -> Tuple[Dict[str, str], Dict[str, List[str]]]:
     return makefile_vars, makefile_vars_list
 
 
-def setup_templates() -> Dict[str, TemplateManager]:
+def setup_templates(
+    custom_template_dir: str = None
+) -> Dict[str, TemplateManager]:
     """Set up template manager instances for all template files.
 
     Initializes TemplateManager instances for each template file defined
     in the TEMPLATE_FILENAMES configuration. Each template is pre-loaded
     and ready for use by the content generators.
+
+    The function now supports the new template customization system, allowing
+    users to override templates on a per-file basis while maintaining
+    backward compatibility. It automatically loads configuration from files
+    and environment variables.
+
+    Args:
+        custom_template_dir: Optional custom template directory path.
+                           If provided, templates will be resolved with
+                           priority: custom -> user -> built-in
 
     Returns:
         Dictionary mapping template names to loaded TemplateManager instances
@@ -168,16 +185,53 @@ def setup_templates() -> Dict[str, TemplateManager]:
     - makefile: For build system Makefile
     - And others as defined in TEMPLATE_FILENAMES
 
+    Template Resolution Priority:
+        1. Custom template directory (if specified via CLI --template-dir)
+        2. User template directory (from config file or environment variable)
+        3. Built-in template directory (src/yaml2rst/templates/)
+
+    Configuration Sources (in order of precedence):
+        1. CLI argument (--template-dir)
+        2. Environment variables (YAML2RST_*)
+        3. Configuration file (~/.config/freee_a11y_gl/yaml2rst.conf)
+        4. Default values
+
     Example:
+        >>> # Use default template resolution (loads config automatically)
         >>> templates = setup_templates()
         >>> category_template = templates['category_page']
-        >>> # Template is ready to render with data
         >>> category_template.write_rst(data, 'output.rst')
+
+        >>> # Use custom template directory (overrides config)
+        >>> templates = setup_templates('/custom/templates')
+        >>> # Templates will be resolved from custom dir first
     """
+    # Create template configuration and load from all sources
+    config = TemplateConfig()
+
+    # Set built-in template directory from the existing TEMPLATE_DIR
+    from pathlib import Path
+    config.built_in_template_dir = Path(TEMPLATE_DIR)
+
+    # Set custom template directory if provided (CLI override)
+    if custom_template_dir:
+        config.custom_template_dir = custom_template_dir
+
+    # Load configuration from file and environment variables
+    # This will populate user_template_dir and other settings
+    try:
+        config.load_config()
+    except Exception as e:
+        # Log warning but continue with defaults
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.warning(f"Failed to load template configuration: {e}")
+
     templates = {}
     for name, filename in TEMPLATE_FILENAMES.items():
-        template = TemplateManager(TEMPLATE_DIR)
-        templates[name] = template.load(filename)
+        # Use the new template system with customizable resolution
+        template_manager = TemplateManager.from_config(config)
+        templates[name] = template_manager.load(filename)
     return templates
 
 
@@ -186,7 +240,8 @@ def parse_args() -> argparse.Namespace:
 
     Sets up the argument parser with all supported options and parses
     the command line arguments. The parser supports language selection,
-    base directory specification, and optional file targeting.
+    base directory specification, custom template directory, and optional
+    file targeting.
 
     Returns:
         Parsed command line arguments as argparse.Namespace
@@ -195,13 +250,16 @@ def parse_args() -> argparse.Namespace:
         --lang, -l: Target language code (choices from
                     config.get_available_languages())
         --basedir, -b: Base directory containing the data directory
+        --template-dir, -t: Custom template directory path
         files: Optional list of specific files to generate (positional)
 
     Example:
-        Command line: python -m yaml2rst --lang en --basedir /data file1.rst
+        Command line: python -m yaml2rst --lang en --basedir /data \\
+                     --template-dir /custom/templates file1.rst
         >>> args = parse_args()
         >>> print(args.lang)  # 'en'
         >>> print(args.basedir)  # '/data'
+        >>> print(args.template_dir)  # '/custom/templates'
         >>> print(args.files)  # ['file1.rst']
     """
     languages = config.get_available_languages()
@@ -221,6 +279,13 @@ def parse_args() -> argparse.Namespace:
         type=str,
         default='..',
         help='Base directory where the data directory is located.'
+    )
+    parser.add_argument(
+        '--template-dir', '-t',
+        type=str,
+        default=None,
+        help='Custom template directory path. Templates in this directory '
+             'will override built-in templates on a per-file basis.'
     )
     parser.add_argument(
         'files',
@@ -246,18 +311,21 @@ def process_arguments(args: argparse.Namespace) -> Dict[str, Any]:
         - targets (List[str]): List of absolute paths to target files
         - lang (str): Target language code
         - basedir (str): Absolute path to the base directory
+        - template_dir (str): Absolute path to custom template directory
+                             (None if not specified)
 
     Build Mode Logic:
         - If no files are specified in args.files, build_all is True
         - If specific files are provided, build_all is False and targets
           contains the absolute paths to those files
-        - The basedir is always converted to an absolute path
+        - The basedir and template_dir are always converted to absolute paths
 
     Example:
         >>> import argparse
         >>> args = argparse.Namespace(
         ...     lang='ja',
         ...     basedir='/data',
+        ...     template_dir='/custom/templates',
         ...     files=['category.rst']
         ... )
         >>> settings = process_arguments(args)
@@ -266,16 +334,23 @@ def process_arguments(args: argparse.Namespace) -> Dict[str, Any]:
             'build_all': False,
             'targets': ['/absolute/path/to/category.rst'],
             'lang': 'ja',
-            'basedir': '/absolute/path/to/data'
+            'basedir': '/absolute/path/to/data',
+            'template_dir': '/absolute/path/to/custom/templates'
         }
     """
     basedir = os.path.abspath(args.basedir)
+    template_dir = None
+    if args.template_dir:
+        template_dir = os.path.abspath(args.template_dir)
+
     files = []
     if args.files:
         files = [os.path.abspath(f) for f in args.files]
+
     return {
         'build_all': not args.files,
         'targets': files,
         'lang': args.lang,
-        'basedir': basedir
+        'basedir': basedir,
+        'template_dir': template_dir
     }

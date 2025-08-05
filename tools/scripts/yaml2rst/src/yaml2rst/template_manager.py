@@ -4,10 +4,18 @@ This module provides the TemplateManager class for loading and rendering
 Jinja2 templates to generate RST documentation files. It includes custom
 filters for RST-specific formatting, particularly for creating properly
 formatted headings that handle multibyte characters correctly.
+
+The TemplateManager now supports customizable template resolution through
+the TemplateResolver system, allowing users to override templates on a
+per-file basis while maintaining backward compatibility.
 """
 import unicodedata
 from typing import Dict, Any, Optional
-from jinja2 import Environment, FileSystemLoader, Template
+from pathlib import Path
+from jinja2 import Environment, Template
+
+from .template_resolver import TemplateResolver
+from .template_config import TemplateConfig
 
 
 class TemplateManager:
@@ -18,27 +26,39 @@ class TemplateManager:
     It provides specialized functionality for RST formatting, including
     proper handling of multibyte characters in headings.
 
+    The manager now supports customizable template resolution through the
+    TemplateResolver system, allowing users to override templates on a
+    per-file basis while maintaining backward compatibility.
+
     The manager automatically registers custom Jinja2 filters:
     - make_heading: Creates properly formatted RST headings with correct
       character width calculation for multibyte characters
 
     Attributes:
+        resolver (TemplateResolver): Template resolver for finding templates
         env (Environment): Jinja2 environment with configured loader and
                           filters
         template (Optional[Template]): Currently loaded template instance
 
     Example:
+        >>> # Legacy usage (backward compatible)
         >>> template_manager = TemplateManager('/path/to/templates')
         >>> template_manager.load('category_page.j2')
         >>> data = {'title': 'カテゴリ', 'content': 'Content'}
         >>> template_manager.write_rst(data, '/output/category.rst')
+
+        >>> # New usage with custom template directory
+        >>> config = TemplateConfig(custom_template_dir='/custom/templates')
+        >>> template_manager = TemplateManager.from_config(config)
+        >>> template_manager.load('category_page.j2')
     """
 
     def __init__(self, template_dir: str):
         """Initialize the template manager with a template directory.
 
         Sets up the Jinja2 environment with FileSystemLoader and registers
-        custom filters for RST formatting.
+        custom filters for RST formatting. This constructor maintains
+        backward compatibility with the original API.
 
         Args:
             template_dir: Path to the directory containing Jinja2 templates
@@ -47,15 +67,91 @@ class TemplateManager:
             >>> manager = TemplateManager('/project/templates')
             >>> # Templates can now be loaded from /project/templates/
         """
-        self.env = Environment(loader=FileSystemLoader(template_dir))
-        self.env.filters['make_heading'] = self.make_heading
+        # For backward compatibility, create a template config with only
+        # the built-in template directory and use the resolver
+        config = TemplateConfig()
+        config.built_in_template_dir = Path(template_dir)
+
+        self.resolver = TemplateResolver(template_config=config)
+        self._setup_jinja_environment()
         self.template: Optional[Template] = None
+
+    @classmethod
+    def from_config(
+            cls, config: Optional[TemplateConfig] = None) -> 'TemplateManager':
+        """Create a TemplateManager instance from a TemplateConfig.
+
+        This is the recommended way to create a TemplateManager when using
+        the new template customization features.
+
+        Args:
+            config: Template configuration. If None, uses default
+                   configuration.
+
+        Returns:
+            TemplateManager instance configured with the specified settings
+
+        Example:
+            >>> config = TemplateConfig(
+                custom_template_dir='/custom/templates')
+            >>> manager = TemplateManager.from_config(config)
+            >>> manager.load('category_page.j2')
+        """
+        if config is None:
+            config = TemplateConfig()
+
+        # Create instance and set up resolver
+        instance = cls.__new__(cls)
+        instance.resolver = TemplateResolver(template_config=config)
+        instance._setup_jinja_environment()
+        instance.template = None
+        return instance
+
+    def _setup_jinja_environment(self) -> None:
+        """Set up the Jinja2 environment with custom loader and filters."""
+        # Create a custom loader that uses the resolver
+        class ResolverLoader:
+            def __init__(self, resolver: TemplateResolver):
+                self.resolver = resolver
+
+            def get_source(self, environment, template):
+                try:
+                    template_path = self.resolver.resolve_template(template)
+                    with open(template_path, 'r', encoding='utf-8') as f:
+                        source = f.read()
+
+                    # Return source, filename, and uptodate function
+                    def uptodate():
+                        try:
+                            return Path(template_path).stat().st_mtime
+                        except OSError:
+                            return False
+
+                    return source, str(template_path), uptodate
+                except Exception as e:
+                    from jinja2 import TemplateNotFound
+                    raise TemplateNotFound(template) from e
+
+            def load(self, environment, name, globals=None):
+                """Load method required by Jinja2."""
+                source, filename, uptodate = self.get_source(environment, name)
+                code = environment.compile(source, name, filename)
+                return environment.template_class.from_code(
+                    environment, code, globals, uptodate)
+
+        self.env = Environment(loader=ResolverLoader(self.resolver))
+        self.env.filters['make_heading'] = self.make_heading
 
     def load(self, filename: str) -> 'TemplateManager':
         """Load a Jinja2 template by filename.
 
-        Loads the specified template file and stores it for rendering.
-        Returns self to allow method chaining.
+        Loads the specified template file using the template resolver and
+        stores it for rendering. Returns self to allow method chaining.
+
+        The template is resolved using the priority order:
+        1. Custom template directory (if specified)
+        2. User template directory (~/.config/freee_a11y_gl/templates/)
+        3. Built-in template directory
 
         Args:
             filename: Name of the template file to load (with or without .j2
@@ -65,8 +161,8 @@ class TemplateManager:
             Self instance to allow method chaining
 
         Raises:
-            TemplateNotFound: If the template file doesn't exist in the
-                             template directory
+            TemplateNotFound: If the template file doesn't exist in any
+                             of the configured template directories
 
         Example:
             >>> manager = TemplateManager('/templates')

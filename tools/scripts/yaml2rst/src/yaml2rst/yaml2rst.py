@@ -96,7 +96,7 @@ def main() -> None:
     settings = initializer.setup_parameters()
     DEST_DIRS, STATIC_FILES, MAKEFILE_VARS = initializer.setup_constants(
         settings)
-    templates = initializer.setup_templates()
+    templates = initializer.setup_templates(settings.get('template_dir'))
     makefile_vars, makefile_vars_list = initializer.setup_variables()
 
     # Initialize freee_a11y_gl configuration with yaml2rst profile
