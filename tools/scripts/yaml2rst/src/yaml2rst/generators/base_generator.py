@@ -5,13 +5,16 @@ import logging
 from dataclasses import dataclass
 from pathlib import Path
 
+
 class GeneratorError(Exception):
     """Base exception for generator errors."""
     pass
 
+
 class ValidationError(GeneratorError):
     """Raised when data validation fails."""
     pass
+
 
 @dataclass
 class GeneratorContext:
@@ -19,12 +22,13 @@ class GeneratorContext:
     lang: str
     base_dir: Path
 
+
 class BaseGenerator(ABC):
     """Base class for all content generators."""
-    
+
     def __init__(self, lang: str, base_dir: Optional[Path] = None):
         """Initialize the generator.
-        
+
         Args:
             lang: Language code for content generation
             base_dir: Base directory for file operations (optional)
@@ -43,10 +47,10 @@ class BaseGenerator(ABC):
     @abstractmethod
     def generate(self) -> Iterator[Dict[str, Any]]:
         """Generate content data.
-        
+
         Yields:
             Dictionary containing template data
-            
+
         Raises:
             GeneratorError: On generation failure
         """
@@ -54,7 +58,7 @@ class BaseGenerator(ABC):
 
     def get_dependencies(self) -> list[str]:
         """Get list of file dependencies for this generator.
-        
+
         Returns:
             List of file paths that this generator depends on
         """
@@ -62,13 +66,13 @@ class BaseGenerator(ABC):
 
     def validate_data(self, data: Dict[str, Any]) -> bool:
         """Validate generated data.
-        
+
         Args:
             data: Data to validate
-            
+
         Returns:
             True if data is valid, False otherwise
-            
+
         Raises:
             ValidationError: If validation fails with specific reason
         """
@@ -76,10 +80,10 @@ class BaseGenerator(ABC):
 
     def preprocess_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Preprocess data before template rendering.
-        
+
         Args:
             data: Data to preprocess
-            
+
         Returns:
             Preprocessed data
         """
@@ -87,10 +91,10 @@ class BaseGenerator(ABC):
 
     def postprocess_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
         """Postprocess data after template rendering.
-        
+
         Args:
             data: Data to postprocess
-            
+
         Returns:
             Postprocessed data
         """
@@ -98,13 +102,13 @@ class BaseGenerator(ABC):
 
     def process_single_item(self, item: Any) -> Dict[str, Any]:
         """Process a single item into template data.
-        
+
         Args:
             item: Item to process
-            
+
         Returns:
             Processed template data
-            
+
         Raises:
             GeneratorError: On processing failure
         """
@@ -113,27 +117,30 @@ class BaseGenerator(ABC):
             if not data:
                 self.logger.warning(f"No data generated for item: {item}")
                 return {}
-                
+
             if not self.validate_data(data):
-                raise ValidationError(f"Data validation failed for item: {item}")
-                
+                raise ValidationError(
+                    f"Data validation failed for item: {item}")
+
             processed_data = self.preprocess_data(data)
             return self.postprocess_data(processed_data)
-            
+
         except Exception as e:
             self.logger.error(f"Error processing item {item}: {str(e)}")
-            raise GeneratorError(f"Failed to process item: {str(e)}") from e
+            raise GeneratorError(
+                f"Failed to process item: {str(e)}") from e
 
     def _process_item(self, item: Any) -> Dict[str, Any]:
         """Internal method to process a single item.
-        
+
         Args:
             item: Item to process
-            
+
         Returns:
             Processed template data
         """
-        raise NotImplementedError("Implement this method if using process_single_item")
+        raise NotImplementedError(
+            "Implement this method if using process_single_item")
 
     def cleanup(self) -> None:
         """Cleanup any resources after generation."""

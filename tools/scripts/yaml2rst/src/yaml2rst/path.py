@@ -1,6 +1,5 @@
 import os
 from .config import AVAILABLE_LANGUAGES
-from freee_a11y_gl.source import DATA_DIR, YAML_DIR, JSON_DIR
 
 # Output directory
 DEST_DIR_BASE = 'source'
@@ -14,7 +13,8 @@ PRIORITY_DIFF_FILENAME = "priority-diff.rst"
 MISCDEFS_FILENAME = "defs.txt"
 AXE_RULES_FILENAME = 'axe-rules.rst'
 
-TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+TEMPLATE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                            'templates')
 TEMPLATE_FILENAMES = {
     'tool_example': 'checks/examples-tool.rst',
     'allchecks_text': 'checks/allchecks.rst',
@@ -32,6 +32,8 @@ TEMPLATE_FILENAMES = {
     'axe_rules': 'axe-rules.rst',
     'makefile': 'incfiles.mk',
 }
+
+
 def get_dest_dirnames(basedir, lang):
     """
     Returns a dictionary of destination directory names for the given language.
@@ -59,9 +61,9 @@ def get_dest_dirnames(basedir, lang):
         'faq_tags': os.path.join(faq_dest_dir, 'tags')
     }
 
+
 def get_static_dest_files(basedir, lang):
-    """
-    Returns a dictionary of static destination file paths for the given language.
+    """Return static destination file paths for the given language.
 
     Args:
         lang (str): Language code
@@ -71,13 +73,19 @@ def get_static_dest_files(basedir, lang):
     """
     dest_dirnames = get_dest_dirnames(basedir, lang)
     return {
-        'all_checks': os.path.join(dest_dirnames['checks'], ALL_CHECKS_FILENAME),
-        'wcag21mapping': os.path.join(dest_dirnames['misc'], WCAG_MAPPING_FILENAME),
-        'priority_diff': os.path.join(dest_dirnames['misc'], PRIORITY_DIFF_FILENAME),
+        'all_checks': os.path.join(dest_dirnames['checks'],
+                                   ALL_CHECKS_FILENAME),
+        'wcag21mapping': os.path.join(dest_dirnames['misc'],
+                                      WCAG_MAPPING_FILENAME),
+        'priority_diff': os.path.join(dest_dirnames['misc'],
+                                      PRIORITY_DIFF_FILENAME),
         'miscdefs': os.path.join(dest_dirnames['misc'], MISCDEFS_FILENAME),
-        'faq_index': os.path.join(dest_dirnames['faq_base'], FAQ_INDEX_FILENAME),
-        'faq_article_index': os.path.join(dest_dirnames['faq_articles'], FAQ_INDEX_FILENAME),
-        'faq_tag_index': os.path.join(dest_dirnames['faq_tags'], FAQ_INDEX_FILENAME),
+        'faq_index': os.path.join(dest_dirnames['faq_base'],
+                                  FAQ_INDEX_FILENAME),
+        'faq_article_index': os.path.join(dest_dirnames['faq_articles'],
+                                          FAQ_INDEX_FILENAME),
+        'faq_tag_index': os.path.join(dest_dirnames['faq_tags'],
+                                      FAQ_INDEX_FILENAME),
         'makefile': os.path.join(dest_dirnames['base'], MAKEFILE_FILENAME),
         'axe_rules': os.path.join(dest_dirnames['misc'], AXE_RULES_FILENAME)
     }

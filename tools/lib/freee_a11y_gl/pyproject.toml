@@ -16,6 +16,13 @@ dependencies = [
     "pydantic>=2.7.0"
 ]
 
+[project.optional-dependencies]
+dev = [
+    # Project-specific dev dependencies only
+    # Common dev tools (pytest, black, mypy, etc.) are managed at root level
+    # Install with: pip install -r requirements-dev.txt
+]
+
 [tool.setuptools]
 package-dir = { "" = "src" }
 include-package-data = true
