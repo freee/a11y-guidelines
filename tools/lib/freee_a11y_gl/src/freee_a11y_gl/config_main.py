@@ -1,8 +1,14 @@
 """Configuration interface for freee_a11y_gl module."""
 from typing import Any, Dict, List, Literal, Optional
 from .settings import settings
+from .config.path_config import PathConfig
+from .config.localization_config import LocalizationConfig
+from .config.message_config import MessageConfig
+from .config.validation_config import ValidationConfig
+from .config.tool_config import ToolConfig
 
 LanguageCode = Literal["ja", "en"]
+
 
 class Config:
     """Configuration interface."""
@@ -113,7 +119,7 @@ class Config:
         Returns:
             Language path segment ("" for ja, "/en" for en)
         """
-        return "" if lang == "ja" else f"/{lang}"
+        return PathConfig.get_language_path(lang)
 
     @classmethod
     def get_base_url(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -125,34 +131,27 @@ class Config:
         Returns:
             Base URL with language path
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        base = settings.get("base_url", "")
-        lang_path = cls._get_language_path(effective_lang)
-        return f"{base}{lang_path}"
+        return PathConfig.get_base_url(lang)
 
     @classmethod
     def get_guidelines_path(cls) -> str:
         """Get guidelines (categories) path."""
-        return settings.get("paths.guidelines", "/categories/")
+        return PathConfig.get_guidelines_path()
 
     @classmethod
     def get_separator(cls, lang: Optional[LanguageCode] = None, separator_type: Optional[str] = None) -> str:
         """Get separator of specified type for language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        effective_type = separator_type if separator_type is not None else "text"
-        return settings.message_catalog.get_separator(effective_type, effective_lang)
+        return LocalizationConfig.get_separator(lang, separator_type)
 
     @classmethod
     def get_text_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get text separator for specified language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_separator("text", effective_lang)
+        return LocalizationConfig.get_text_separator(lang)
 
     @classmethod
     def get_list_separator(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get list item separator for specified language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_separator("list", effective_lang)
+        return LocalizationConfig.get_list_separator(lang)
 
     @classmethod
     def get_pass_singular_text(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -164,8 +163,7 @@ class Config:
         Returns:
             Localized pass text for single condition
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_pass_text("singular", effective_lang)
+        return LocalizationConfig.get_pass_singular_text(lang)
 
     @classmethod
     def get_pass_plural_text(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -177,45 +175,37 @@ class Config:
         Returns:
             Localized pass text for multiple conditions
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_pass_text("plural", effective_lang)
+        return LocalizationConfig.get_pass_plural_text(lang)
 
     @classmethod
     def get_conjunction(cls, lang: Optional[LanguageCode] = None, conjunction_type: Optional[str] = None) -> str:
         """Get conjunction of specified type for language."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        effective_type = conjunction_type if conjunction_type is not None else "and"
-        return settings.message_catalog.get_conjunction(effective_type, effective_lang)
+        return LocalizationConfig.get_conjunction(lang, conjunction_type)
 
     @classmethod
     def get_check_tool_name(cls, tool_id: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check tool name."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_check_tool(tool_id, effective_lang)
+        return MessageConfig.get_check_tool_name(tool_id, lang)
 
     @classmethod
     def get_check_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized check target name."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_check_target(target, effective_lang)
+        return MessageConfig.get_check_target_name(target, lang)
 
     @classmethod
     def get_severity_tag(cls, severity: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized severity tag."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_severity_tag(severity, effective_lang)
+        return MessageConfig.get_severity_tag(severity, lang)
 
     @classmethod
     def get_platform_name(cls, platform: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized platform name."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_platform_name(platform, effective_lang)
+        return MessageConfig.get_platform_name(platform, lang)
 
     @classmethod
     def get_implementation_target_name(cls, target: str, lang: Optional[LanguageCode] = None) -> str:
         """Get localized implementation target name."""
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_implementation_target(target, effective_lang)
+        return MessageConfig.get_implementation_target_name(target, lang)
 
     @classmethod
     def get_faq_path(cls) -> str:
@@ -223,7 +213,7 @@ class Config:
         Returns:
             Path string for FAQ articles
         """
-        return settings.get("paths.faq", "/faq/articles/")
+        return PathConfig.get_faq_path()
 
     @classmethod
     def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -235,8 +225,7 @@ class Config:
         Returns:
             URL string for examples in the specified language
         """
-        base_url = cls.get_base_url(lang)
-        return f"{base_url}/checks/examples/"
+        return PathConfig.get_examples_url(lang)
 
     @classmethod
     def get_date_format(cls, lang: Optional[LanguageCode] = None) -> str:
@@ -248,8 +237,7 @@ class Config:
         Returns:
             Date format string in strftime format
         """
-        effective_lang = lang if lang is not None else settings.get("languages.default", "ja")
-        return settings.message_catalog.get_date_format("default", effective_lang)
+        return LocalizationConfig.get_date_format(lang)
 
     @classmethod
     def get_available_languages(cls) -> List[str]:
@@ -258,7 +246,7 @@ class Config:
         Returns:
             List of available language codes
         """
-        return settings.get("languages.available", ["ja", "en"])
+        return LocalizationConfig.get_available_languages()
 
     @classmethod
     def get_default_language(cls) -> str:
@@ -267,7 +255,7 @@ class Config:
         Returns:
             Default language code
         """
-        return settings.get("languages.default", "ja")
+        return LocalizationConfig.get_default_language()
 
     @classmethod
     def get_yaml_validation_mode(cls) -> str:
@@ -276,7 +264,7 @@ class Config:
         Returns:
             YAML validation mode ("strict", "warning", or "disabled")
         """
-        return settings.get("validation.yaml_validation", "strict")
+        return ValidationConfig.get_yaml_validation_mode()
 
     @classmethod
     def set_yaml_validation_mode(cls, mode: str) -> None:
@@ -288,11 +276,7 @@ class Config:
         Raises:
             ValueError: If mode is not valid
         """
-        valid_modes = ["strict", "warning", "disabled"]
-        if mode not in valid_modes:
-            raise ValueError(f"Invalid validation mode: {mode}. Must be one of {valid_modes}")
-        
-        settings.set("validation.yaml_validation", mode)
+        return ValidationConfig.set_yaml_validation_mode(mode)
 
     @classmethod
     def get_axe_core_config(cls) -> Dict[str, str]:
@@ -301,4 +285,4 @@ class Config:
         Returns:
             Dictionary containing axe-core configuration settings
         """
-        return settings.get("axe_core", {})
+        return ToolConfig.get_axe_core_config()

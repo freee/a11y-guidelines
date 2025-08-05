@@ -302,7 +302,7 @@ class TestConfigWithValidData:
         
         return mock_config
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_with_valid_data_ja(self, mock_settings):
         """Test getting check tool name with valid data in Japanese."""
         mock_settings.config = self._create_mock_config()
@@ -313,7 +313,7 @@ class TestConfigWithValidData:
         result = Config.get_check_tool_name("axe", "ja")
         assert result == "axe-core"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_with_valid_data_en(self, mock_settings):
         """Test getting check tool name with valid data in English."""
         mock_settings.config = self._create_mock_config()
@@ -324,7 +324,7 @@ class TestConfigWithValidData:
         result = Config.get_check_tool_name("lighthouse", "en")
         assert result == "Lighthouse"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_default_lang(self, mock_settings):
         """Test getting check tool name with default language."""
         mock_settings.config = self._create_mock_config()
@@ -335,7 +335,7 @@ class TestConfigWithValidData:
         result = Config.get_check_tool_name("wave")
         assert result == "WAVE"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_with_valid_data_ja(self, mock_settings):
         """Test getting check target name with valid data in Japanese."""
         mock_settings.config = self._create_mock_config()
@@ -346,7 +346,7 @@ class TestConfigWithValidData:
         result = Config.get_check_target_name("design", "ja")
         assert result == "デザイン"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_with_valid_data_en(self, mock_settings):
         """Test getting check target name with valid data in English."""
         mock_settings.config = self._create_mock_config()
@@ -357,7 +357,7 @@ class TestConfigWithValidData:
         result = Config.get_check_target_name("code", "en")
         assert result == "Code"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_default_lang(self, mock_settings):
         """Test getting check target name with default language."""
         mock_settings.config = self._create_mock_config()
@@ -368,7 +368,7 @@ class TestConfigWithValidData:
         result = Config.get_check_target_name("product")
         assert result == "プロダクト"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_with_valid_data_ja(self, mock_settings):
         """Test getting severity tag with valid data in Japanese."""
         mock_settings.config = self._create_mock_config()
@@ -379,7 +379,7 @@ class TestConfigWithValidData:
         result = Config.get_severity_tag("major", "ja")
         assert result == "[重要]"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_with_valid_data_en(self, mock_settings):
         """Test getting severity tag with valid data in English."""
         mock_settings.config = self._create_mock_config()
@@ -390,7 +390,7 @@ class TestConfigWithValidData:
         result = Config.get_severity_tag("critical", "en")
         assert result == "[CRITICAL]"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_default_lang(self, mock_settings):
         """Test getting severity tag with default language."""
         mock_settings.config = self._create_mock_config()
@@ -409,7 +409,7 @@ class TestConfigWithValidData:
         ("product", "ja", "プロダクト"),
         ("product", "en", "Product"),
     ])
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_parametrized(self, mock_settings, target, lang, expected):
         """Test getting check target name with various combinations."""
         mock_settings.config = self._create_mock_config()
@@ -430,7 +430,7 @@ class TestConfigWithValidData:
         ("critical", "ja", "[致命的]"),
         ("critical", "en", "[CRITICAL]"),
     ])
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_parametrized(self, mock_settings, severity, lang, expected):
         """Test getting severity tag with various combinations."""
         mock_settings.config = self._create_mock_config()
@@ -503,7 +503,7 @@ class TestConfigErrorHandling:
         settings.__dict__.clear()
         settings.__init__()
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_config_missing(self, mock_settings):
         """Test getting check tool name when config is missing."""
         mock_settings.config = MagicMock()
@@ -515,7 +515,7 @@ class TestConfigErrorHandling:
         result = Config.get_check_tool_name("axe")
         assert result == "axe"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_attribute_error(self, mock_settings):
         """Test getting check tool name when AttributeError occurs."""
         mock_settings.config = MagicMock()
@@ -527,7 +527,7 @@ class TestConfigErrorHandling:
         result = Config.get_check_tool_name("axe")
         assert result == "axe"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_tool_name_key_error(self, mock_settings):
         """Test getting check tool name when KeyError occurs."""
         mock_settings.config = MagicMock()
@@ -539,7 +539,7 @@ class TestConfigErrorHandling:
         result = Config.get_check_tool_name("nonexistent")
         assert result == "nonexistent"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_config_missing(self, mock_settings):
         """Test getting check target name when config is missing."""
         mock_settings.config = MagicMock()
@@ -551,7 +551,7 @@ class TestConfigErrorHandling:
         result = Config.get_check_target_name("design")
         assert result == "design"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_check_target_name_attribute_error(self, mock_settings):
         """Test getting check target name when AttributeError occurs."""
         mock_settings.config = MagicMock()
@@ -563,7 +563,7 @@ class TestConfigErrorHandling:
         result = Config.get_check_target_name("design")
         assert result == "design"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_config_missing(self, mock_settings):
         """Test getting severity tag when config is missing."""
         mock_settings.config = MagicMock()
@@ -575,7 +575,7 @@ class TestConfigErrorHandling:
         result = Config.get_severity_tag("major")
         assert result == "major"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_severity_tag_attribute_error(self, mock_settings):
         """Test getting severity tag when AttributeError occurs."""
         mock_settings.config = MagicMock()
@@ -587,7 +587,7 @@ class TestConfigErrorHandling:
         result = Config.get_severity_tag("major")
         assert result == "major"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_platform_name_config_missing(self, mock_settings):
         """Test getting platform name when config is missing."""
         mock_settings.config = MagicMock()
@@ -599,7 +599,7 @@ class TestConfigErrorHandling:
         result = Config.get_platform_name("web")
         assert result == "web"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_platform_name_attribute_error(self, mock_settings):
         """Test getting platform name when AttributeError occurs."""
         mock_settings.config = MagicMock()
@@ -611,7 +611,7 @@ class TestConfigErrorHandling:
         result = Config.get_platform_name("web")
         assert result == "web"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_get_platform_name_lang_missing(self, mock_settings):
         """Test getting platform name when language is missing."""
         mock_settings.config = MagicMock()
@@ -700,7 +700,7 @@ class TestMessageCatalog:
         result = Config.get_severity_tag("nonexistent", "ja")
         assert result == "nonexistent"
 
-    @patch('freee_a11y_gl.config.settings')
+    @patch('freee_a11y_gl.config.message_config.settings')
     def test_message_catalog_with_mock(self, mock_settings):
         """Test message catalog integration with mocked settings."""
         # Create a mock message catalog
