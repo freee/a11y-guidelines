@@ -77,7 +77,8 @@ class TestEndToEndGeneration:
         mock_template.write_rst = Mock()
         mock_template_manager = Mock()
         mock_template_manager.load.return_value = mock_template
-        mock_template_manager_class.return_value = mock_template_manager
+        mock_template_manager_class.from_config.return_value = \
+            mock_template_manager
 
         # Setup guideline data mocks
         mock_category1 = Mock()
@@ -137,7 +138,7 @@ class TestEndToEndGeneration:
         mock_setup_instances.assert_called_once_with(str(temp_dir))
 
         # Verify that templates were loaded
-        assert mock_template_manager_class.call_count > 0
+        assert mock_template_manager_class.from_config.call_count > 0
 
         # Verify that files were generated
         assert mock_template.write_rst.call_count > 0

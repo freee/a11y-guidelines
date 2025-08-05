@@ -17,30 +17,40 @@ class TestTemplateManager:
         """Test TemplateManager initialization."""
         template_dir = "/test/templates"
 
-        with patch('yaml2rst.template_manager.Environment') as \
-             mock_env_class, \
-             patch('yaml2rst.template_manager.FileSystemLoader') as \
-             mock_loader_class:
+        with patch('yaml2rst.template_manager.TemplateResolver') as \
+             mock_resolver_class, \
+             patch('yaml2rst.template_manager.TemplateConfig') as \
+             mock_config_class, \
+             patch('yaml2rst.template_manager.Environment') as \
+             mock_env_class:
 
-            mock_loader = Mock()
+            mock_resolver = Mock()
+            mock_config = Mock()
             mock_env = Mock()
             mock_env.filters = {}  # Make filters a dict-like object
-            mock_loader_class.return_value = mock_loader
+
+            mock_resolver_class.return_value = mock_resolver
+            mock_config_class.return_value = mock_config
             mock_env_class.return_value = mock_env
 
             manager = TemplateManager(template_dir)
 
-            # Verify FileSystemLoader was created with correct directory
-            mock_loader_class.assert_called_once_with(template_dir)
+            # Verify TemplateConfig was created
+            mock_config_class.assert_called_once()
 
-            # Verify Environment was created with the loader
-            mock_env_class.assert_called_once_with(loader=mock_loader)
+            # Verify TemplateResolver was created with the config
+            mock_resolver_class.assert_called_once_with(
+                template_config=mock_config)
+
+            # Verify Environment was created
+            mock_env_class.assert_called_once()
 
             # Verify filter was registered
             assert mock_env.filters['make_heading'] == manager.make_heading
 
             # Verify initial state
             assert manager.template is None
+            assert manager.resolver == mock_resolver
 
     def test_load(self):
         """Test template loading."""
@@ -48,8 +58,7 @@ class TestTemplateManager:
         filename = "test_template.rst"
 
         with patch('yaml2rst.template_manager.Environment') as \
-             mock_env_class, \
-             patch('yaml2rst.template_manager.FileSystemLoader'):
+             mock_env_class:
 
             mock_env = Mock()
             mock_env.filters = {}  # Make filters a dict-like object
@@ -77,7 +86,6 @@ class TestTemplateManager:
         rendered_content = "# Test Title\nTest content"
 
         with patch('yaml2rst.template_manager.Environment'), \
-             patch('yaml2rst.template_manager.FileSystemLoader'), \
              patch('builtins.open', mock_open()) as mock_file:
 
             manager = TemplateManager(template_dir)
@@ -290,7 +298,6 @@ class TestTemplateManager:
 
         with patch('yaml2rst.template_manager.Environment') as \
              mock_env_class, \
-             patch('yaml2rst.template_manager.FileSystemLoader'), \
              patch('builtins.open', mock_open()) as mock_file:
 
             mock_env = Mock()

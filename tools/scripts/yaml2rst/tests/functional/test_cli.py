@@ -70,7 +70,7 @@ class TestCLIInterface:
             mock_template = Mock()
             mock_template_manager = Mock()
             mock_template_manager.load.return_value = mock_template
-            mock_template_mgr.return_value = mock_template_manager
+            mock_template_mgr.from_config.return_value = mock_template_manager
 
             # Test with default arguments
             with patch('sys.argv', ['yaml2rst']):
@@ -577,7 +577,7 @@ class TestCLIIntegration:
             mock_template.write_rst = Mock()
             mock_template_manager = Mock()
             mock_template_manager.load.return_value = mock_template
-            mock_template_mgr.return_value = mock_template_manager
+            mock_template_mgr.from_config.return_value = mock_template_manager
 
             # Execute CLI
             args = ['yaml2rst', '--basedir', str(temp_dir), '--lang', 'ja']
