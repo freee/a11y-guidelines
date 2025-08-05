@@ -1,5 +1,10 @@
 """Validation configuration management."""
 from ..settings import settings
+from ..exceptions import ConfigurationError
+from ..validation_utils import InputValidator
+from ..logging_config import get_logger
+
+logger = get_logger()
 
 
 class ValidationConfig:
@@ -12,7 +17,11 @@ class ValidationConfig:
         Returns:
             YAML validation mode ("strict", "warning", or "disabled")
         """
-        return settings.get("validation.yaml_validation", "strict")
+        try:
+            return settings.get("validation.yaml_validation", "strict")
+        except Exception as e:
+            logger.warning(f"Failed to get YAML validation mode: {e}")
+            return "strict"
 
     @classmethod
     def set_yaml_validation_mode(cls, mode: str) -> None:
@@ -22,12 +31,19 @@ class ValidationConfig:
             mode: Validation mode ("strict", "warning", or "disabled")
             
         Raises:
-            ValueError: If mode is not valid
+            ConfigurationError: If mode is not valid
         """
-        valid_modes = ["strict", "warning", "disabled"]
-        if mode not in valid_modes:
-            raise ValueError(
-                f"Invalid validation mode: {mode}. "
-                f"Must be one of {valid_modes}")
+        # Validate input
+        mode = InputValidator.validate_non_empty_string(mode, "validation mode")
+        mode = InputValidator.validate_enum(
+            mode, ["strict", "warning", "disabled"], "validation mode"
+        )
         
-        settings.set("validation.yaml_validation", mode)
+        try:
+            settings.set("validation.yaml_validation", mode)
+            logger.info(f"Set YAML validation mode to: {mode}")
+        except Exception as e:
+            raise ConfigurationError(
+                f"Failed to set YAML validation mode to {mode}",
+                str(e)
+            )

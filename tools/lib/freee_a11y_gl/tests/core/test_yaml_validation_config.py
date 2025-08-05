@@ -6,7 +6,9 @@ import pytest
 import sys
 from unittest.mock import patch, MagicMock
 from freee_a11y_gl.config import Config
-from freee_a11y_gl.yaml_validator import YamlValidator, ValidationError
+from freee_a11y_gl.yaml_validator import YamlValidator
+from freee_a11y_gl.yaml_validator import ValidationError as YamlValidationError
+from freee_a11y_gl.exceptions import ValidationError
 from freee_a11y_gl.settings import settings
 
 
@@ -55,8 +57,8 @@ class TestYamlValidationConfig:
             assert Config.get_yaml_validation_mode() == mode
 
     def test_set_validation_mode_invalid(self):
-        """Test setting invalid validation mode raises ValueError."""
-        with pytest.raises(ValueError, match="Invalid validation mode"):
+        """Test setting invalid validation mode raises ValidationError."""
+        with pytest.raises(ValidationError, match="validation mode must be one of"):
             Config.set_yaml_validation_mode("invalid_mode")
 
     def test_config_initialize_with_validation_override(self):
@@ -129,9 +131,9 @@ class TestYamlValidationConfig:
             
             # Mock validation failure
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
-                mock_validate.side_effect = ValidationError("Test validation error")
+                mock_validate.side_effect = YamlValidationError("Test validation error")
                 
-                with pytest.raises(ValidationError, match="Test validation error"):
+                with pytest.raises(YamlValidationError, match="Test validation error"):
                     validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
 
     def test_validate_with_mode_warning_success(self):
@@ -161,7 +163,7 @@ class TestYamlValidationConfig:
             
             # Mock validation failure
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
-                mock_validate.side_effect = ValidationError("Test validation error")
+                mock_validate.side_effect = YamlValidationError("Test validation error")
                 
                 with patch('builtins.print') as mock_print:
                     result = validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")

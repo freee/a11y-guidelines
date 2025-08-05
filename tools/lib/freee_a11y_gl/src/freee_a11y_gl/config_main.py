@@ -1,6 +1,11 @@
 """Configuration interface for freee_a11y_gl module."""
 from typing import Any, Dict, List, Literal, Optional
 from .settings import settings
+from .exceptions import ConfigurationError
+from .validation_utils import InputValidator
+from .logging_config import get_logger
+
+logger = get_logger()
 from .config.path_config import PathConfig
 from .config.localization_config import LocalizationConfig
 from .config.message_config import MessageConfig
@@ -97,8 +102,21 @@ class Config:
         
         Args:
             base_url: Base URL (e.g., https://a11y-guidelines.freee.co.jp)
+            
+        Raises:
+            ConfigurationError: If base_url is invalid
         """
-        settings.update({"base_url": base_url.rstrip("/")})
+        # Validate input
+        base_url = InputValidator.validate_url(base_url, "base URL")
+        
+        try:
+            settings.update({"base_url": base_url.rstrip("/")})
+            logger.info(f"Set base URL to: {base_url}")
+        except Exception as e:
+            raise ConfigurationError(
+                f"Failed to set base URL to {base_url}",
+                str(e)
+            )
 
     @classmethod
     def get_basedir(cls) -> str:
