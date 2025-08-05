@@ -1,6 +1,4 @@
 """End-to-end integration tests for yaml2rst."""
-import sys
-from pathlib import Path
 from unittest.mock import Mock, patch
 
 import pytest
@@ -10,9 +8,6 @@ from yaml2rst.generators.file_generator import FileGenerator, GeneratorConfig
 from yaml2rst.generators.content_generators.category_generator import (
     CategoryGenerator
 )
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 class TestEndToEndGeneration:

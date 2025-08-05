@@ -1,4 +1,5 @@
 """Unit tests for mixin classes."""
+import pytest
 from unittest.mock import Mock, patch
 
 from yaml2rst.generators.mixins import (
@@ -40,110 +41,60 @@ class TestRelationshipMixin:
 class TestValidationMixin:
     """Test ValidationMixin functionality."""
 
-    def test_validate_required_fields_success(self):
-        """Test successful validation of required fields."""
+    @pytest.mark.parametrize("data,required_fields,expected", [
+        # Success case - all required fields present
+        ({'field1': 'value1', 'field2': 'value2', 'field3': 'value3'},
+         ['field1', 'field2'], True),
+        # Failure case - missing required field
+        ({'field1': 'value1'}, ['field1', 'field2'], False),
+    ])
+    def test_validate_required_fields(self, data, required_fields, expected):
+        """Test validation of required fields with various inputs."""
         class TestClass(ValidationMixin):
             pass
 
         instance = TestClass()
-        data = {'field1': 'value1', 'field2': 'value2', 'field3': 'value3'}
-        required_fields = ['field1', 'field2']
+        assert instance.validate_required_fields(
+            data, required_fields) == expected
 
-        assert instance.validate_required_fields(data, required_fields) is True
-
-    def test_validate_required_fields_missing(self):
-        """Test validation failure when required fields are missing."""
+    @pytest.mark.parametrize("data,field_name,expected", [
+        # Success case - valid list
+        ({'items': [1, 2, 3]}, 'items', True),
+        # Failure case - missing field
+        ({}, 'items', False),
+        # Failure case - not a list
+        ({'items': 'not a list'}, 'items', False),
+    ])
+    def test_validate_list_field(self, data, field_name, expected):
+        """Test validation of list fields with various inputs."""
         class TestClass(ValidationMixin):
             pass
 
         instance = TestClass()
-        data = {'field1': 'value1'}
-        required_fields = ['field1', 'field2']
+        assert instance.validate_list_field(data, field_name) == expected
 
-        result = instance.validate_required_fields(data, required_fields)
-        assert result is False
-
-    def test_validate_list_field_success(self):
-        """Test successful validation of list field."""
+    @pytest.mark.parametrize("data,field_name,allow_empty,expected", [
+        # Success case - valid string
+        ({'text': 'hello world'}, 'text', False, True),
+        # Failure case - missing field
+        ({}, 'text', False, False),
+        # Failure case - not a string
+        ({'text': 123}, 'text', False, False),
+        # Failure case - empty string not allowed
+        ({'text': '   '}, 'text', False, False),
+        # Success case - empty string allowed
+        ({'text': ''}, 'text', True, True),
+    ])
+    def test_validate_string_field(self, data, field_name, allow_empty,
+                                   expected):
+        """Test validation of string fields with various inputs."""
         class TestClass(ValidationMixin):
             pass
 
         instance = TestClass()
-        data = {'items': [1, 2, 3]}
-
-        assert instance.validate_list_field(data, 'items') is True
-
-    def test_validate_list_field_missing(self):
-        """Test validation failure when list field is missing."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {}
-
-        assert instance.validate_list_field(data, 'items') is False
-
-    def test_validate_list_field_not_list(self):
-        """Test validation failure when field is not a list."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {'items': 'not a list'}
-
-        assert instance.validate_list_field(data, 'items') is False
-
-    def test_validate_string_field_success(self):
-        """Test successful validation of string field."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {'text': 'hello world'}
-
-        assert instance.validate_string_field(data, 'text') is True
-
-    def test_validate_string_field_missing(self):
-        """Test validation failure when string field is missing."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {}
-
-        assert instance.validate_string_field(data, 'text') is False
-
-    def test_validate_string_field_not_string(self):
-        """Test validation failure when field is not a string."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {'text': 123}
-
-        assert instance.validate_string_field(data, 'text') is False
-
-    def test_validate_string_field_empty_not_allowed(self):
-        """Test validation failure when empty string is not allowed."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {'text': '   '}  # Only whitespace
-
-        assert instance.validate_string_field(data, 'text') is False
-
-    def test_validate_string_field_empty_allowed(self):
-        """Test validation success when empty string is allowed."""
-        class TestClass(ValidationMixin):
-            pass
-
-        instance = TestClass()
-        data = {'text': ''}
-
-        result = instance.validate_string_field(data, 'text',
-                                                allow_empty=True)
-        assert result is True
+        result = instance.validate_string_field(
+            data, field_name, allow_empty=allow_empty)
+        assert result == expected
 
 
 class TestUtilityMixin:

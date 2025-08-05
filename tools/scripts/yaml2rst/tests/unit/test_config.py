@@ -1,10 +1,5 @@
 """Tests for config.py module."""
 from unittest.mock import patch
-import sys
-import os
-
-# Add the src directory to the path for testing
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../src'))
 
 
 class TestConfig:

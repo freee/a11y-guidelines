@@ -1,15 +1,10 @@
 """Unit tests for the category generator module."""
 import pytest
 from unittest.mock import Mock, patch
-import sys
-from pathlib import Path
 
 from yaml2rst.generators.content_generators.category_generator import (
     CategoryGenerator
 )
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 class TestCategoryGenerator:

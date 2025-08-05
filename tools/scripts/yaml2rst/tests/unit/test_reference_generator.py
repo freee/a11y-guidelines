@@ -218,47 +218,30 @@ class TestInfoToGuidelinesGenerator:
         assert result['guidelines'][0] == {'category': 'cat1', 'id': 'gl1'}
         assert result['guidelines'][1] == {'category': 'cat2', 'id': 'gl2'}
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = InfoToGuidelinesGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data
+        ({
             'filename': 'test_ref',
             'guidelines': [{'category': 'test', 'id': 'gl1'}]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_filename(self):
-        """Test data validation with missing filename."""
-        generator = InfoToGuidelinesGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing filename
+        ({
             'guidelines': [{'category': 'test', 'id': 'gl1'}]
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_missing_guidelines(self):
-        """Test data validation with missing guidelines."""
-        generator = InfoToGuidelinesGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Missing guidelines
+        ({
             'filename': 'test_ref'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_guidelines_type(self):
-        """Test data validation with invalid guidelines type."""
-        generator = InfoToGuidelinesGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Invalid guidelines type
+        ({
             'filename': 'test_ref',
             'guidelines': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = InfoToGuidelinesGenerator('ja')
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.reference_generator.'
            'InfoRef')
@@ -408,47 +391,30 @@ class TestInfoToFaqsGenerator:
         assert result['faqs'][0] == 'faq1'
         assert result['faqs'][1] == 'faq2'
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = InfoToFaqsGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data
+        ({
             'filename': 'test_ref',
             'faqs': ['faq1', 'faq2']
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_filename(self):
-        """Test data validation with missing filename."""
-        generator = InfoToFaqsGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing filename
+        ({
             'faqs': ['faq1', 'faq2']
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_missing_faqs(self):
-        """Test data validation with missing faqs."""
-        generator = InfoToFaqsGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Missing faqs
+        ({
             'filename': 'test_ref'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_faqs_type(self):
-        """Test data validation with invalid faqs type."""
-        generator = InfoToFaqsGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Invalid faqs type
+        ({
             'filename': 'test_ref',
             'faqs': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = InfoToFaqsGenerator('ja')
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.reference_generator.'
            'InfoRef')
@@ -567,59 +533,42 @@ class TestAxeRulesGenerator:
         assert data['version'] == '4.4.0'
         assert data['rules'] == []
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = AxeRulesGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data
+        ({
             'version': '4.4.0',
             'major_version': '4',
             'deque_url': 'https://deque.com',
             'timestamp': '2023-01-01',
             'rules': [{'id': 'test_rule'}]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_version(self):
-        """Test data validation with missing version."""
-        generator = AxeRulesGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing version
+        ({
             'major_version': '4',
             'deque_url': 'https://deque.com',
             'timestamp': '2023-01-01',
             'rules': []
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_missing_rules(self):
-        """Test data validation with missing rules."""
-        generator = AxeRulesGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Missing rules
+        ({
             'version': '4.4.0',
             'major_version': '4',
             'deque_url': 'https://deque.com',
             'timestamp': '2023-01-01'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_rules_type(self):
-        """Test data validation with invalid rules type."""
-        generator = AxeRulesGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Invalid rules type
+        ({
             'version': '4.4.0',
             'major_version': '4',
             'deque_url': 'https://deque.com',
             'timestamp': '2023-01-01',
             'rules': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = AxeRulesGenerator('ja')
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.reference_generator.'
            'AxeRule')
@@ -751,11 +700,9 @@ class TestMiscDefinitionsGenerator:
         assert data['links'][0]['label'] == 'Ref 1'
         assert data['links'][1]['label'] == 'Ref 2'
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = MiscDefinitionsGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data with links
+        ({
             'links': [
                 {
                     'label': 'Test Link',
@@ -763,74 +710,49 @@ class TestMiscDefinitionsGenerator:
                     'url': 'https://example.com'
                 }
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_links(self):
-        """Test data validation with empty links."""
-        generator = MiscDefinitionsGenerator('ja')
-
-        valid_data = {
+        }, True),
+        # Valid data with empty links
+        ({
             'links': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_links(self):
-        """Test data validation with missing links."""
-        generator = MiscDefinitionsGenerator('ja')
-
-        invalid_data = {}
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_links_type(self):
-        """Test data validation with invalid links type."""
-        generator = MiscDefinitionsGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing links
+        ({}, False),
+        # Invalid links type
+        ({
             'links': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_link_structure(self):
-        """Test data validation with invalid link structure."""
-        generator = MiscDefinitionsGenerator('ja')
-
-        # Missing 'label'
-        invalid_data1 = {
+        }, False),
+        # Missing 'label' in link
+        ({
             'links': [
                 {
                     'text': 'Test Text',
                     'url': 'https://example.com'
                 }
             ]
-        }
-        assert generator.validate_data(invalid_data1) is False
-
-        # Missing 'text'
-        invalid_data2 = {
+        }, False),
+        # Missing 'text' in link
+        ({
             'links': [
                 {
                     'label': 'Test Link',
                     'url': 'https://example.com'
                 }
             ]
-        }
-        assert generator.validate_data(invalid_data2) is False
-
-        # Missing 'url'
-        invalid_data3 = {
+        }, False),
+        # Missing 'url' in link
+        ({
             'links': [
                 {
                     'label': 'Test Link',
                     'text': 'Test Text'
                 }
             ]
-        }
-        assert generator.validate_data(invalid_data3) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = MiscDefinitionsGenerator('ja')
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.reference_generator.'
            'InfoRef')

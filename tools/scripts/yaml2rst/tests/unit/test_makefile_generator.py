@@ -433,92 +433,68 @@ class TestMakefileGenerator:
         assert len(info_to_gl_targets) == 1
         assert len(build_depends) == 1
 
-    def test_validate_data_valid(self, sample_makefile_config):
-        """Test data validation with valid data."""
-        generator = MakefileGenerator('ja', sample_makefile_config)
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data case
+        ({
             'depends': [
                 {'target': 'test.rst', 'depends': 'test.yaml'}
             ],
             'gl_yaml': 'gl1.yaml gl2.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_required_fields(
-            self, sample_makefile_config):
-        """Test data validation with missing required fields."""
-        generator = MakefileGenerator('ja', sample_makefile_config)
-
-        # Missing 'depends'
-        invalid_data1 = {
+        }, True),
+        # Missing 'depends' field
+        ({
             'gl_yaml': 'gl1.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-        assert generator.validate_data(invalid_data1) is False
-
-        # Missing 'gl_yaml'
-        invalid_data2 = {
+        }, False),
+        # Missing 'gl_yaml' field
+        ({
             'depends': [],
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-        assert generator.validate_data(invalid_data2) is False
-
-    def test_validate_data_invalid_depends_type(self, sample_makefile_config):
-        """Test data validation with invalid depends type."""
-        generator = MakefileGenerator('ja', sample_makefile_config)
-
-        invalid_data = {
-            'depends': 'not_a_list',  # Should be list
+        }, False),
+        # Invalid depends type
+        ({
+            'depends': 'not_a_list',
             'gl_yaml': 'gl1.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_depends_structure(self,
-                                                     sample_makefile_config):
-        """Test data validation with invalid depends structure."""
-        generator = MakefileGenerator('ja', sample_makefile_config)
-
+        }, False),
         # Missing 'target' in dependency
-        invalid_data1 = {
+        ({
             'depends': [
                 {'depends': 'test.yaml'}  # Missing 'target'
             ],
             'gl_yaml': 'gl1.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-        assert generator.validate_data(invalid_data1) is False
-
+        }, False),
         # Missing 'depends' in dependency
-        invalid_data2 = {
+        ({
             'depends': [
                 {'target': 'test.rst'}  # Missing 'depends'
             ],
             'gl_yaml': 'gl1.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-        assert generator.validate_data(invalid_data2) is False
-
+        }, False),
         # Non-dict in depends list
-        invalid_data3 = {
+        ({
             'depends': [
                 'not_a_dict'
             ],
             'gl_yaml': 'gl1.yaml',
             'check_yaml': 'check1.yaml',
             'faq_yaml': 'faq1.yaml'
-        }
-        assert generator.validate_data(invalid_data3) is False
+        }, False),
+    ])
+    def test_validate_data_makefile(self, data, expected,
+                                    sample_makefile_config):
+        """Test MakefileGenerator data validation with various inputs."""
+        generator = MakefileGenerator('ja', sample_makefile_config)
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.makefile_generator.Check')
     @patch('yaml2rst.generators.content_generators.makefile_generator.'

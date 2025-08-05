@@ -1,10 +1,6 @@
 """Tests for path.py module."""
 from unittest.mock import patch
 import os
-import sys
-
-# Add the src directory to the path for testing
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../src'))
 
 
 class TestPath:

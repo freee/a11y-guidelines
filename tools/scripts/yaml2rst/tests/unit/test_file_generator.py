@@ -1,16 +1,12 @@
 """Unit tests for the file generator module."""
 import pytest
 from unittest.mock import Mock, patch
-import sys
 from pathlib import Path
 import logging
 
 from yaml2rst.generators.file_generator import FileGenerator, GeneratorConfig
 from yaml2rst.generators.base_generator import BaseGenerator, GeneratorError
 from yaml2rst.generators.mixins import ValidationMixin
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 class TestGeneratorConfig:
@@ -43,43 +39,28 @@ class TestGeneratorConfig:
         assert config.is_single_file is False
         assert config.extra_args is None
 
-    def test_generator_config_validation_empty_template(
-            self, mock_generator_class):
-        """Test GeneratorConfig validation with empty template name."""
+    @pytest.mark.parametrize(
+        "template_name,output_path,should_raise,expected_error", [
+            ('', '/test/output', True, "Template name must not be empty"),
+            ('test_template', '', True, "Output path must not be empty"),
+            ('test_template', '/test/output', False, None),
+        ])
+    def test_generator_config_validation(self, mock_generator_class,
+                                         template_name, output_path,
+                                         should_raise, expected_error):
+        """Test GeneratorConfig validation with various parameters."""
         config = GeneratorConfig(
             generator_class=mock_generator_class,
-            template_name='',
-            output_path='/test/output'
+            template_name=template_name,
+            output_path=output_path
         )
 
-        with pytest.raises(ValueError,
-                           match="Template name must not be empty"):
+        if should_raise:
+            with pytest.raises(ValueError, match=expected_error):
+                config.validate()
+        else:
+            # Should not raise any exception
             config.validate()
-
-    def test_generator_config_validation_empty_output_path(
-            self, mock_generator_class):
-        """Test GeneratorConfig validation with empty output path."""
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path=''
-        )
-
-        with pytest.raises(ValueError,
-                           match="Output path must not be empty"):
-            config.validate()
-
-    def test_generator_config_validation_success(
-            self, mock_generator_class):
-        """Test GeneratorConfig validation with valid parameters."""
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output'
-        )
-
-        # Should not raise any exception
-        config.validate()
 
     def test_generator_config_validation_missing_required_fields(
             self, mock_generator_class):
@@ -274,129 +255,58 @@ class TestFileGenerator:
                            match="Failed to create directory"):
             generator._ensure_directory(test_path)
 
-    def test_determine_destination_single_file(self, mock_templates,
-                                               mock_generator_class):
-        """Test destination determination for single file."""
+    @pytest.mark.parametrize(
+        "is_single_file,output_path,filename,expected_result", [
+            (True, '/test/output.rst', 'ignored', '/test/output.rst'),
+            (False, '/test/output', 'test_file', '/test/output/test_file.rst'),
+        ])
+    def test_determine_destination(self, mock_templates, mock_generator_class,
+                                   is_single_file, output_path, filename,
+                                   expected_result):
+        """Test destination determination for single and multiple files."""
+        generator = FileGenerator(mock_templates, 'ja')
+
+        config = GeneratorConfig(
+            generator_class=mock_generator_class,
+            template_name='test_template',
+            output_path=output_path,
+            is_single_file=is_single_file
+        )
+
+        output_path_obj = Path(output_path)
+        data = {'filename': filename}
+
+        result = generator._determine_destination(config, output_path_obj,
+                                                  data)
+
+        assert result == Path(expected_result)
+
+    @pytest.mark.parametrize(
+        "build_all,targets,dest_path,is_single_file,expected_result", [
+            (True, [], '/test/output.rst', True, True),
+            (False, ['/test/output.rst'], '/test/output.rst', True, True),
+            (False, ['/test/output'], '/test/output/file.rst', False, True),
+            (False, ['/other/file.rst'], '/test/output.rst', True, False),
+        ])
+    def test_should_generate(self, mock_templates, mock_generator_class,
+                             build_all, targets, dest_path, is_single_file,
+                             expected_result):
+        """Test should_generate logic with various scenarios."""
         generator = FileGenerator(mock_templates, 'ja')
 
         config = GeneratorConfig(
             generator_class=mock_generator_class,
             template_name='test_template',
             output_path='/test/output.rst',
-            is_single_file=True
-        )
-
-        output_path = Path('/test/output.rst')
-        data = {'filename': 'ignored'}
-
-        result = generator._determine_destination(config, output_path, data)
-
-        assert result == output_path
-
-    def test_determine_destination_multiple_files(self, mock_templates,
-                                                  mock_generator_class):
-        """Test destination determination for multiple files."""
-        generator = FileGenerator(mock_templates, 'ja')
-
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output',
-            is_single_file=False
-        )
-
-        output_path = Path('/test/output')
-        data = {'filename': 'test_file'}
-
-        result = generator._determine_destination(config, output_path, data)
-
-        expected = output_path / 'test_file.rst'
-        assert result == expected
-
-    def test_should_generate_build_all(self, mock_templates,
-                                       mock_generator_class):
-        """Test should_generate when build_all is True."""
-        generator = FileGenerator(mock_templates, 'ja')
-
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output.rst',
-            is_single_file=True
+            is_single_file=is_single_file
         )
 
         result = generator._should_generate(
-            config, build_all=True, targets=[],
-            dest_path=Path('/test/output.rst')
+            config, build_all=build_all, targets=targets,
+            dest_path=Path(dest_path)
         )
 
-        assert result is True
-
-    def test_should_generate_specific_target(self, mock_templates,
-                                             mock_generator_class):
-        """Test should_generate when file is in targets."""
-        generator = FileGenerator(mock_templates, 'ja')
-
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output.rst',
-            is_single_file=True
-        )
-
-        dest_path = Path('/test/output.rst')
-        targets = [str(dest_path)]
-
-        result = generator._should_generate(
-            config, build_all=False, targets=targets,
-            dest_path=dest_path
-        )
-
-        assert result is True
-
-    def test_should_generate_parent_directory_target(
-            self, mock_templates, mock_generator_class):
-        """Test should_generate when parent directory is in targets."""
-        generator = FileGenerator(mock_templates, 'ja')
-
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output',
-            is_single_file=False
-        )
-
-        dest_path = Path('/test/output/file.rst')
-        targets = ['/test/output']
-
-        result = generator._should_generate(
-            config, build_all=False, targets=targets,
-            dest_path=dest_path
-        )
-
-        assert result is True
-
-    def test_should_generate_no_match(self, mock_templates,
-                                      mock_generator_class):
-        """Test should_generate when no match found."""
-        generator = FileGenerator(mock_templates, 'ja')
-
-        config = GeneratorConfig(
-            generator_class=mock_generator_class,
-            template_name='test_template',
-            output_path='/test/output.rst',
-            is_single_file=True
-        )
-
-        dest_path = Path('/test/output.rst')
-        targets = ['/other/file.rst']
-
-        result = generator._should_generate(
-            config, build_all=False, targets=targets,
-            dest_path=dest_path
-        )
-
-        assert result is False
+        assert result is expected_result
 
 
 class TestFileGeneratorIntegration:

@@ -1,15 +1,10 @@
 """Functional tests for the CLI interface."""
 import os
-import sys
-from pathlib import Path
 from unittest.mock import Mock, patch
 
 import pytest
 
 from yaml2rst import initializer, yaml2rst
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 class TestCLIInterface:

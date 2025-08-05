@@ -1,7 +1,5 @@
 """Unit tests for the base generator module."""
 import pytest
-from unittest.mock import patch
-import sys
 from pathlib import Path
 import logging
 
@@ -9,22 +7,27 @@ from yaml2rst.generators.base_generator import (
     BaseGenerator, GeneratorError, ValidationError, GeneratorContext
 )
 
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
+
+class ConcreteGenerator(BaseGenerator):
+    """Concrete implementation of BaseGenerator for testing."""
+
+    def __init__(self, lang, base_dir=None, test_data=None):
+        super().__init__(lang, base_dir)
+        self.test_data = test_data or []
+
+    def generate(self):
+        """Generate test data."""
+        for item in self.test_data:
+            yield item
 
 
 class TestGeneratorContext:
     """Test cases for GeneratorContext dataclass."""
 
-    def test_generator_context_creation(self):
+    def test_generator_context_creation(self, generator_context):
         """Test GeneratorContext creation."""
-        context = GeneratorContext(
-            lang='ja',
-            base_dir=Path('/test/basedir')
-        )
-
-        assert context.lang == 'ja'
-        assert context.base_dir == Path('/test/basedir')
+        assert generator_context.lang == 'ja'
+        assert generator_context.base_dir == Path('/test/basedir')
 
     def test_generator_context_with_string_path(self):
         """Test GeneratorContext with string path."""
@@ -54,19 +57,6 @@ class TestGeneratorError:
         assert isinstance(error, Exception)
 
 
-class ConcreteGenerator(BaseGenerator):
-    """Concrete implementation of BaseGenerator for testing."""
-
-    def __init__(self, lang, base_dir=None, test_data=None):
-        super().__init__(lang, base_dir)
-        self.test_data = test_data or []
-
-    def generate(self):
-        """Generate test data."""
-        for item in self.test_data:
-            yield item
-
-
 class TestBaseGenerator:
     """Test cases for BaseGenerator class."""
 
@@ -79,13 +69,14 @@ class TestBaseGenerator:
         assert generator.lang == 'ja'  # Backward compatibility
         assert isinstance(generator.logger, logging.Logger)
 
-    def test_base_generator_initialization_default_basedir(self):
+    def test_base_generator_initialization_default_basedir(self, temp_dir):
         """Test BaseGenerator initialization with default base_dir."""
-        with patch('pathlib.Path.cwd', return_value=Path('/current/dir')):
+        with pytest.MonkeyPatch().context() as m:
+            m.setattr('pathlib.Path.cwd', lambda: temp_dir)
             generator = ConcreteGenerator('en')
 
         assert generator.context.lang == 'en'
-        assert generator.context.base_dir == Path('/current/dir')
+        assert generator.context.base_dir == temp_dir
 
     def test_base_generator_initialization_string_basedir(self):
         """Test BaseGenerator initialization with string base_dir."""
@@ -95,19 +86,14 @@ class TestBaseGenerator:
 
     def test_generate_abstract_method(self):
         """Test that generate is abstract in BaseGenerator."""
-        # This test verifies that BaseGenerator cannot be instantiated
-        # directly
         with pytest.raises(TypeError):
             BaseGenerator('ja')
 
     def test_generate_not_implemented_error(self):
         """Test that generate raises NotImplementedError when called
         directly."""
-        # Create a minimal subclass that implements generate to call super()
         class IncompleteGenerator(BaseGenerator):
             def generate(self):
-                # Call parent's generate method which should raise
-                # NotImplementedError
                 return super().generate()
 
         generator = IncompleteGenerator('ja')
@@ -276,8 +262,6 @@ class TestContextManager:
 
         with generator as ctx:
             assert ctx is generator
-
-        # Should complete without error
 
     def test_context_manager_cleanup_called(self):
         """Test that cleanup is called on context manager exit."""

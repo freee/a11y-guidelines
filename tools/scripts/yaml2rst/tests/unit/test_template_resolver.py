@@ -10,28 +10,31 @@ from yaml2rst.template_config import TemplateConfig
 class TestTemplateResolver:
     """Test cases for TemplateResolver class."""
 
-    def test_init_default(self):
-        """Test initialization with default parameters."""
-        resolver = TemplateResolver()
+    @pytest.mark.parametrize(
+        "custom_dir,template_config,expected_custom_dir,"
+        "expected_config_type", [
+            (None, None, None, TemplateConfig),
+            ("/custom/templates", None, "/custom/templates", TemplateConfig),
+            (None, TemplateConfig(), None, TemplateConfig),
+        ])
+    def test_init(self, custom_dir, template_config, expected_custom_dir,
+                  expected_config_type):
+        """Test initialization with various parameters."""
+        kwargs = {}
+        if custom_dir is not None:
+            kwargs['custom_template_dir'] = custom_dir
+        if template_config is not None:
+            kwargs['template_config'] = template_config
 
-        assert resolver.custom_template_dir is None
-        assert isinstance(resolver.template_config, TemplateConfig)
+        resolver = TemplateResolver(**kwargs)
+
+        assert resolver.custom_template_dir == expected_custom_dir
+        if template_config is not None:
+            assert resolver.template_config is template_config
+        else:
+            assert isinstance(resolver.template_config, expected_config_type)
         assert resolver._template_cache == {}
         assert resolver._search_paths_cache is None
-
-    def test_init_with_custom_dir(self):
-        """Test initialization with custom template directory."""
-        custom_dir = "/custom/templates"
-        resolver = TemplateResolver(custom_template_dir=custom_dir)
-
-        assert resolver.custom_template_dir == custom_dir
-
-    def test_init_with_template_config(self):
-        """Test initialization with custom TemplateConfig."""
-        config = TemplateConfig()
-        resolver = TemplateResolver(template_config=config)
-
-        assert resolver.template_config is config
 
     def test_get_search_paths_caching(self):
         """Test that search paths are cached."""
@@ -212,32 +215,32 @@ class TestTemplateResolver:
 
             assert "missing.rst" in str(exc_info.value)
 
-    def test_check_template_exists_true(self, tmp_path):
-        """Test checking template existence when it exists."""
-        template_dir = tmp_path / "templates"
-        template_dir.mkdir()
-        template_file = template_dir / "test.rst"
-        template_file.write_text("test template")
-
+    @pytest.mark.parametrize("template_exists,expected_result", [
+        (True, True),
+        (False, False),
+    ])
+    def test_check_template_exists(self, tmp_path, template_exists,
+                                   expected_result):
+        """Test checking template existence."""
         resolver = TemplateResolver()
 
+        if template_exists:
+            template_dir = tmp_path / "templates"
+            template_dir.mkdir()
+            template_file = template_dir / "test.rst"
+            template_file.write_text("test template")
+            search_paths = [str(template_dir)]
+            template_name = "test.rst"
+        else:
+            search_paths = ['/nonexistent/path']
+            template_name = "missing.rst"
+
         with patch.object(resolver, 'get_search_paths') as mock_paths:
-            mock_paths.return_value = [str(template_dir)]
+            mock_paths.return_value = search_paths
 
-            result = resolver.check_template_exists("test.rst")
+            result = resolver.check_template_exists(template_name)
 
-            assert result is True
-
-    def test_check_template_exists_false(self):
-        """Test checking template existence when it doesn't exist."""
-        resolver = TemplateResolver()
-
-        with patch.object(resolver, 'get_search_paths') as mock_paths:
-            mock_paths.return_value = ['/nonexistent/path']
-
-            result = resolver.check_template_exists("missing.rst")
-
-            assert result is False
+            assert result is expected_result
 
     def test_list_available_templates(self, tmp_path):
         """Test listing available templates."""
@@ -297,72 +300,45 @@ class TestTemplateResolver:
                 assert result == {str(template_dir): []}
                 assert "Cannot list templates" in caplog.text
 
-    def test_get_template_source_info_custom(self, tmp_path):
-        """Test getting template source info for custom template."""
-        custom_dir = tmp_path / "custom"
-        custom_dir.mkdir()
-        template_file = custom_dir / "test.rst"
-        template_file.write_text("custom template")
+    @pytest.mark.parametrize("source_type,use_custom_dir,mock_user_dir", [
+        ('custom', True, False),
+        ('user', False, True),
+        ('builtin', False, False),
+    ])
+    def test_get_template_source_info(self, tmp_path, source_type,
+                                      use_custom_dir, mock_user_dir):
+        """Test getting template source info for different source types."""
+        template_dir = tmp_path / source_type
+        template_dir.mkdir()
+        template_file = template_dir / "test.rst"
+        template_file.write_text(f"{source_type} template")
 
-        resolver = TemplateResolver(custom_template_dir=str(custom_dir))
+        if use_custom_dir:
+            resolver = TemplateResolver(custom_template_dir=str(template_dir))
+        else:
+            resolver = TemplateResolver()
 
-        with patch.object(resolver, 'get_search_paths') as mock_paths:
-            mock_paths.return_value = [str(custom_dir)]
+        patches = []
+        if mock_user_dir:
+            patches.append(patch.object(resolver.template_config,
+                                        'get_user_template_dir_expanded',
+                                        return_value=template_dir))
 
-            result = resolver.get_template_source_info("test.rst")
+        patches.append(patch.object(resolver, 'get_search_paths',
+                                    return_value=[str(template_dir)]))
 
-            expected = {
-                'template_name': 'test.rst',
-                'resolved_path': str(template_file.resolve()),
-                'source_path': str(custom_dir),
-                'source_type': 'custom'
-            }
-            assert result == expected
-
-    def test_get_template_source_info_user(self, tmp_path):
-        """Test getting template source info for user template."""
-        user_dir = tmp_path / "user"
-        user_dir.mkdir()
-        template_file = user_dir / "test.rst"
-        template_file.write_text("user template")
-
-        resolver = TemplateResolver()
-
-        with patch.object(resolver.template_config,
-                          'get_user_template_dir_expanded') as mock_user_dir:
-            with patch.object(resolver, 'get_search_paths') as mock_paths:
-                mock_user_dir.return_value = user_dir
-                mock_paths.return_value = [str(user_dir)]
-
+        with patches[0] if len(patches) == 2 else patches[0]:
+            if len(patches) == 2:
+                with patches[1]:
+                    result = resolver.get_template_source_info("test.rst")
+            else:
                 result = resolver.get_template_source_info("test.rst")
 
-                expected = {
-                    'template_name': 'test.rst',
-                    'resolved_path': str(template_file.resolve()),
-                    'source_path': str(user_dir),
-                    'source_type': 'user'
-                }
-                assert result == expected
-
-    def test_get_template_source_info_builtin(self, tmp_path):
-        """Test getting template source info for builtin template."""
-        builtin_dir = tmp_path / "builtin"
-        builtin_dir.mkdir()
-        template_file = builtin_dir / "test.rst"
-        template_file.write_text("builtin template")
-
-        resolver = TemplateResolver()
-
-        with patch.object(resolver, 'get_search_paths') as mock_paths:
-            mock_paths.return_value = [str(builtin_dir)]
-
-            result = resolver.get_template_source_info("test.rst")
-
             expected = {
                 'template_name': 'test.rst',
                 'resolved_path': str(template_file.resolve()),
-                'source_path': str(builtin_dir),
-                'source_type': 'builtin'
+                'source_path': str(template_dir),
+                'source_type': source_type
             }
             assert result == expected
 
@@ -401,26 +377,27 @@ class TestTemplateResolver:
         assert resolver._template_cache == {}
         assert resolver._search_paths_cache is None
 
-    def test_get_cache_info(self):
+    @pytest.mark.parametrize(
+        "cached_templates,search_paths_cached,expected_templates,"
+        "expected_paths", [
+            (0, False, 0, False),
+            (1, True, 1, True),
+        ])
+    def test_get_cache_info(self, cached_templates, search_paths_cached,
+                            expected_templates, expected_paths):
         """Test getting cache information."""
         resolver = TemplateResolver()
 
-        # Initially empty
-        info = resolver.get_cache_info()
-        expected = {
-            'cached_templates': 0,
-            'search_paths_cached': False
-        }
-        assert info == expected
-
-        # Populate caches
-        resolver._template_cache["test.rst"] = "/path/to/test.rst"
-        resolver._search_paths_cache = ["/path1"]
+        # Set up cache state
+        if cached_templates > 0:
+            resolver._template_cache["test.rst"] = "/path/to/test.rst"
+        if search_paths_cached:
+            resolver._search_paths_cache = ["/path1"]
 
         info = resolver.get_cache_info()
         expected = {
-            'cached_templates': 1,
-            'search_paths_cached': True
+            'cached_templates': expected_templates,
+            'search_paths_cached': expected_paths
         }
         assert info == expected
 

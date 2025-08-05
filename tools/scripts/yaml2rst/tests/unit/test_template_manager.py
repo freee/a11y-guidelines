@@ -1,13 +1,8 @@
 """Tests for template_manager.py module."""
 import pytest
 from unittest.mock import patch, Mock, mock_open
-import os
-import sys
 
 from yaml2rst.template_manager import TemplateManager
-
-# Add the src directory to the path for testing
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../../src'))
 
 
 class TestTemplateManager:
@@ -107,64 +102,18 @@ class TestTemplateManager:
             # Verify content was written
             mock_file().write.assert_called_once_with(rendered_content)
 
-    def test_make_heading_level_1_with_overline(self):
-        """Test heading generation for level 1 (with overline)."""
+    @pytest.mark.parametrize("level,expected", [
+        (1, "############\nTest Heading\n############"),
+        (2, "************\nTest Heading\n************"),
+        (3, "Test Heading\n============"),
+        (4, "Test Heading\n------------"),
+        (5, "Test Heading\n^^^^^^^^^^^^"),
+        (6, 'Test Heading\n""""""""""""'),
+    ])
+    def test_make_heading_levels(self, level, expected):
+        """Test heading generation for different levels."""
         title = "Test Heading"
-        level = 1
-
         result = TemplateManager.make_heading(title, level)
-
-        expected = "############\nTest Heading\n############"
-        assert result == expected
-
-    def test_make_heading_level_2_with_overline(self):
-        """Test heading generation for level 2 (with overline)."""
-        title = "Test Heading"
-        level = 2
-
-        result = TemplateManager.make_heading(title, level)
-
-        expected = "************\nTest Heading\n************"
-        assert result == expected
-
-    def test_make_heading_level_3_without_overline(self):
-        """Test heading generation for level 3 (without overline)."""
-        title = "Test Heading"
-        level = 3
-
-        result = TemplateManager.make_heading(title, level)
-
-        expected = "Test Heading\n============"
-        assert result == expected
-
-    def test_make_heading_level_4_without_overline(self):
-        """Test heading generation for level 4 (without overline)."""
-        title = "Test Heading"
-        level = 4
-
-        result = TemplateManager.make_heading(title, level)
-
-        expected = "Test Heading\n------------"
-        assert result == expected
-
-    def test_make_heading_level_5_without_overline(self):
-        """Test heading generation for level 5 (without overline)."""
-        title = "Test Heading"
-        level = 5
-
-        result = TemplateManager.make_heading(title, level)
-
-        expected = "Test Heading\n^^^^^^^^^^^^"
-        assert result == expected
-
-    def test_make_heading_level_6_without_overline(self):
-        """Test heading generation for level 6 (without overline)."""
-        title = "Test Heading"
-        level = 6
-
-        result = TemplateManager.make_heading(title, level)
-
-        expected = 'Test Heading\n""""""""""""'
         assert result == expected
 
     def test_make_heading_with_class_name(self):

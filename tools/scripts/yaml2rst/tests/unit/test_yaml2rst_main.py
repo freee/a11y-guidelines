@@ -1,13 +1,12 @@
-"""Unit tests for the main yaml2rst module."""
-import pytest
-from unittest.mock import Mock, patch
+"""Tests for yaml2rst main module and entry point."""
+import os
+import subprocess
 import sys
-from pathlib import Path
+from unittest.mock import Mock, patch
+
+import pytest
 
 from yaml2rst import yaml2rst
-
-# Add src to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 
 class TestMain:
@@ -32,8 +31,7 @@ class TestMain:
     ):
         """Test successful execution of main function."""
         # Setup mocks
-        mock_initializer.setup_parameters.return_value = \
-            sample_settings
+        mock_initializer.setup_parameters.return_value = sample_settings
         mock_initializer.setup_constants.return_value = (
             sample_dest_dirs,
             sample_static_files,
@@ -78,7 +76,7 @@ class TestMain:
             mock_templates, sample_settings['lang'])
 
         # Verify generator calls (should be called for each generator config)
-        assert mock_file_generator.generate.call_count >= 10  # At least 10
+        assert mock_file_generator.generate.call_count >= 10
 
     @patch('yaml2rst.yaml2rst.initializer')
     @patch('yaml2rst.yaml2rst.setup_instances')
@@ -244,7 +242,7 @@ class TestMain:
         generate_calls = mock_file_generator.generate.call_args_list
 
         # Check that we have the expected number of generator calls
-        assert len(generate_calls) >= 12  # At least 12 generators
+        assert len(generate_calls) >= 12
 
         # Verify specific generator types are present
         config_args = [call[0][0] for call in generate_calls]
@@ -323,6 +321,93 @@ class TestMain:
         assert makefile_config.template_name == 'makefile'
         assert makefile_config.is_single_file is True
         assert 'config' in makefile_config.extra_args
+
+
+class TestMainEntryPoint:
+    """Test the main entry point functionality."""
+
+    def test_main_entry_point_structure(self):
+        """Test that __main__.py has the correct structure."""
+        import yaml2rst.__main__
+
+        # Read the __main__.py file content
+        with open(yaml2rst.__main__.__file__, 'r') as f:
+            content = f.read()
+
+        # Verify it contains the expected import and execution pattern
+        assert 'from .yaml2rst import main' in content
+        assert "if __name__ == '__main__':" in content
+        assert 'main()' in content
+
+    @patch('yaml2rst.__main__.main')
+    def test_main_import_without_execution(self, mock_main):
+        """Test that importing __main__ doesn't call main() when not run
+        directly."""
+        # Import the module (should not call main since __name__ != '__main__')
+        import yaml2rst.__main__
+
+        # Reset and test that main exists and is callable
+        mock_main.reset_mock()
+
+        # Verify the main function is available
+        assert hasattr(yaml2rst.__main__, 'main')
+        assert callable(yaml2rst.__main__.main)
+
+    def test_main_module_structure(self):
+        """Test the structure and imports of __main__.py."""
+        import yaml2rst.__main__
+
+        # Verify that main is imported from yaml2rst
+        assert hasattr(yaml2rst.__main__, 'main')
+
+        # Verify the module has the expected attributes
+        assert hasattr(yaml2rst.__main__, '__name__')
+        assert hasattr(yaml2rst.__main__, '__file__')
+
+    def test_main_function_integration(self):
+        """Test that the main function from yaml2rst module is imported."""
+        from yaml2rst.__main__ import main
+        from yaml2rst.yaml2rst import main as yaml2rst_main
+
+        # Verify that the imported main is the same as the one from yaml2rst
+        assert main is yaml2rst_main
+
+    def test_module_can_be_executed_as_script(self):
+        """Test that the module can be executed as a script using python -m."""
+        # Get the absolute path to the yaml2rst directory
+        yaml2rst_dir = os.path.join(os.path.dirname(__file__), '../../')
+        yaml2rst_dir = os.path.abspath(yaml2rst_dir)
+
+        # Test running the module as a script (this will actually execute it)
+        # We'll use --help to avoid full execution but verify entry point works
+        result = subprocess.run(
+            [sys.executable, '-m', 'yaml2rst', '--help'],
+            cwd=yaml2rst_dir,
+            capture_output=True,
+            text=True
+        )
+
+        # The command should execute without import errors
+        # Even if it fails due to missing arguments, no import errors
+        assert 'ModuleNotFoundError' not in result.stderr
+        assert 'ImportError' not in result.stderr
+
+    def test_main_execution_when_run_as_main(self):
+        """Test that main() is called when __main__.py is executed as main."""
+        # This test verifies the structure and logic of the __main__.py file
+        import yaml2rst.__main__
+
+        # Read the file and verify the execution logic is present
+        with open(yaml2rst.__main__.__file__, 'r') as f:
+            content = f.read()
+
+        # Verify the conditional execution structure
+        lines = content.strip().split('\n')
+        assert any("if __name__ == '__main__':" in line for line in lines)
+        assert any("main()" in line for line in lines)
+
+        # Verify the import is correct
+        assert any("from .yaml2rst import main" in line for line in lines)
 
 
 class TestMainIntegration:

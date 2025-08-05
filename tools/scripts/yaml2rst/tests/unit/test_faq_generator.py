@@ -148,14 +148,15 @@ class TestFaqGeneratorBase:
         assert sorted_tags[0] == mock_tag2  # 'Aタグ' comes first
         assert sorted_tags[1] == mock_tag1  # 'Zタグ' comes second
 
-    def test_validate_data_default(self):
+    @pytest.mark.parametrize("data", [
+        {},
+        {'any': 'data'},
+        None,
+    ])
+    def test_validate_data_default(self, data):
         """Test default validation always returns True."""
         generator = MockFaqGeneratorBase('ja')
-
-        # Should return True for any data
-        assert generator.validate_data({}) is True
-        assert generator.validate_data({'any': 'data'}) is True
-        assert generator.validate_data(None) is True
+        assert generator.validate_data(data)
 
 
 class TestFaqArticleGenerator:
@@ -199,36 +200,25 @@ class TestFaqArticleGenerator:
         assert result['question'] == 'What is this?'
         assert result['answer'] == 'This is a test FAQ'
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = FaqArticleGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data
+        ({
             'filename': 'test_faq',
             'title': 'Test FAQ'
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_filename(self):
-        """Test data validation with missing filename."""
-        generator = FaqArticleGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing filename
+        ({
             'title': 'Test FAQ'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_missing_title(self):
-        """Test data validation with missing title."""
-        generator = FaqArticleGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Missing title
+        ({
             'filename': 'test_faq'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = FaqArticleGenerator('ja')
+        assert generator.validate_data(data) == expected
 
 
 class TestFaqIndexGenerator:
@@ -428,48 +418,31 @@ class TestFaqTagIndexGenerator:
         assert 'tags' in data
         assert data['tags'] == []
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = FaqTagIndexGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data with tags
+        ({
             'tags': [
                 {'id': 'tag1', 'name': 'Tag 1'},
                 {'id': 'tag2', 'name': 'Tag 2'}
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_tags(self):
-        """Test data validation with empty tags."""
-        generator = FaqTagIndexGenerator('ja')
-
-        valid_data = {
+        }, True),
+        # Valid data with empty tags
+        ({
             'tags': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_tags(self):
-        """Test data validation with missing tags field."""
-        generator = FaqTagIndexGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing tags field
+        ({
             'other_field': 'value'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_tags_type(self):
-        """Test data validation with invalid tags type."""
-        generator = FaqTagIndexGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Invalid tags type
+        ({
             'tags': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = FaqTagIndexGenerator('ja')
+        assert generator.validate_data(data) == expected
 
 
 class TestFaqArticleIndexGenerator:
@@ -524,45 +497,28 @@ class TestFaqArticleIndexGenerator:
         assert data['articles'][0]['id'] == 'faq1'
         assert data['articles'][1]['id'] == 'faq2'
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = FaqArticleIndexGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data with articles
+        ({
             'articles': [
                 {'id': 'faq1', 'title': 'FAQ 1'},
                 {'id': 'faq2', 'title': 'FAQ 2'}
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_articles(self):
-        """Test data validation with empty articles."""
-        generator = FaqArticleIndexGenerator('ja')
-
-        valid_data = {
+        }, True),
+        # Valid data with empty articles
+        ({
             'articles': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_articles(self):
-        """Test data validation with missing articles field."""
-        generator = FaqArticleIndexGenerator('ja')
-
-        invalid_data = {
+        }, True),
+        # Missing articles field
+        ({
             'other_field': 'value'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_articles_type(self):
-        """Test data validation with invalid articles type."""
-        generator = FaqArticleIndexGenerator('ja')
-
-        invalid_data = {
+        }, False),
+        # Invalid articles type
+        ({
             'articles': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        }, False),
+    ])
+    def test_validate_data(self, data, expected):
+        """Test data validation with various inputs."""
+        generator = FaqArticleIndexGenerator('ja')
+        assert generator.validate_data(data) == expected

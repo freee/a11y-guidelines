@@ -1,14 +1,8 @@
 """Unit tests for the initializer module."""
 import pytest
 from unittest.mock import Mock, patch
-import sys
-from pathlib import Path
 
 from yaml2rst import initializer
-
-# Add src to path
-parent_dir = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(parent_dir / "src"))
 
 
 class TestSetupParameters:

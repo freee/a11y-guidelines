@@ -131,48 +131,25 @@ class TestAllChecksGenerator:
 
         generator.logger.info.assert_any_call("Generated 0 checks")
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = AllChecksGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data cases
+        ({
             'allchecks': [
                 {'id': 'check1', 'title': 'Check 1'},
                 {'id': 'check2', 'title': 'Check 2'}
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_list(self):
-        """Test data validation with empty checks list."""
+        }, True),
+        # Empty list case
+        ({'allchecks': []}, True),
+        # Missing field case
+        ({'other_field': 'value'}, False),
+        # Invalid type case
+        ({'allchecks': 'not_a_list'}, False),
+    ])
+    def test_validate_data_allchecks(self, data, expected):
+        """Test AllChecksGenerator data validation with various inputs."""
         generator = AllChecksGenerator('ja')
-
-        valid_data = {
-            'allchecks': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_allchecks(self):
-        """Test data validation with missing allchecks field."""
-        generator = AllChecksGenerator('ja')
-
-        invalid_data = {
-            'other_field': 'value'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_allchecks_type(self):
-        """Test data validation with invalid allchecks type."""
-        generator = AllChecksGenerator('ja')
-
-        invalid_data = {
-            'allchecks': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        assert generator.validate_data(data) == expected
 
 
 class TestCheckExampleGenerator:
@@ -247,48 +224,27 @@ class TestCheckExampleGenerator:
         assert result['filename'] == 'examples-empty_tool'
         assert result['examples'] == {'examples': []}
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = CheckExampleGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data cases
+        ({
             'filename': 'examples-test_tool',
             'examples': {'examples': [{'title': 'Test', 'content': 'Content'}]}
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_filename(self):
-        """Test data validation with missing filename."""
-        generator = CheckExampleGenerator('ja')
-
-        invalid_data = {
-            'examples': {'examples': []}
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_missing_examples(self):
-        """Test data validation with missing examples."""
-        generator = CheckExampleGenerator('ja')
-
-        invalid_data = {
-            'filename': 'examples-test_tool'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_both_fields_present(self):
-        """Test data validation with both required fields present."""
-        generator = CheckExampleGenerator('ja')
-
-        valid_data = {
+        }, True),
+        # Valid with empty examples
+        ({
             'filename': 'examples-test_tool',
             'examples': {'examples': []},
             'extra_field': 'ignored'  # Extra fields should be ignored
-        }
-
-        assert generator.validate_data(valid_data) is True
+        }, True),
+        # Missing filename
+        ({'examples': {'examples': []}}, False),
+        # Missing examples
+        ({'filename': 'examples-test_tool'}, False),
+    ])
+    def test_validate_data_check_examples(self, data, expected):
+        """Test CheckExampleGenerator data validation with various inputs."""
+        generator = CheckExampleGenerator('ja')
+        assert generator.validate_data(data) == expected
 
     @patch('yaml2rst.generators.content_generators.check_generator.CheckTool')
     def test_get_dependencies(self, mock_checktool_class, mock_check_tool):

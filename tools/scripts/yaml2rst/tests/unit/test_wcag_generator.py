@@ -238,48 +238,25 @@ class TestWcagMappingGenerator:
         assert 'mapping' in data
         assert data['mapping'] == []
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = WcagMappingGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data cases
+        ({
             'mapping': [
                 {'id': 'sc1', 'level': 'A'},
                 {'id': 'sc2', 'level': 'AA', 'guidelines': []}
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_mapping(self):
-        """Test data validation with empty mapping."""
+        }, True),
+        # Empty mapping case
+        ({'mapping': []}, True),
+        # Missing field case
+        ({'other_field': 'value'}, False),
+        # Invalid type case
+        ({'mapping': 'not_a_list'}, False),
+    ])
+    def test_validate_data_wcag_mapping(self, data, expected):
+        """Test WcagMappingGenerator data validation with various inputs."""
         generator = WcagMappingGenerator('ja')
-
-        valid_data = {
-            'mapping': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_mapping(self):
-        """Test data validation with missing mapping field."""
-        generator = WcagMappingGenerator('ja')
-
-        invalid_data = {
-            'other_field': 'value'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_mapping_type(self):
-        """Test data validation with invalid mapping type."""
-        generator = WcagMappingGenerator('ja')
-
-        invalid_data = {
-            'mapping': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        assert generator.validate_data(data) == expected
 
 
 class TestPriorityDiffGenerator:
@@ -377,45 +354,22 @@ class TestPriorityDiffGenerator:
         assert 'diffs' in data
         assert data['diffs'] == []
 
-    def test_validate_data_valid(self):
-        """Test data validation with valid data."""
-        generator = PriorityDiffGenerator('ja')
-
-        valid_data = {
+    @pytest.mark.parametrize("data,expected", [
+        # Valid data cases
+        ({
             'diffs': [
                 {'id': 'sc1', 'level': 'AAA', 'local_priority': 'AA'},
                 {'id': 'sc2', 'level': 'AA', 'local_priority': 'A'}
             ]
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_empty_diffs(self):
-        """Test data validation with empty diffs."""
+        }, True),
+        # Empty diffs case
+        ({'diffs': []}, True),
+        # Missing field case
+        ({'other_field': 'value'}, False),
+        # Invalid type case
+        ({'diffs': 'not_a_list'}, False),
+    ])
+    def test_validate_data_priority_diff(self, data, expected):
+        """Test PriorityDiffGenerator data validation with various inputs."""
         generator = PriorityDiffGenerator('ja')
-
-        valid_data = {
-            'diffs': []
-        }
-
-        assert generator.validate_data(valid_data) is True
-
-    def test_validate_data_missing_diffs(self):
-        """Test data validation with missing diffs field."""
-        generator = PriorityDiffGenerator('ja')
-
-        invalid_data = {
-            'other_field': 'value'
-        }
-
-        assert generator.validate_data(invalid_data) is False
-
-    def test_validate_data_invalid_diffs_type(self):
-        """Test data validation with invalid diffs type."""
-        generator = PriorityDiffGenerator('ja')
-
-        invalid_data = {
-            'diffs': 'not_a_list'
-        }
-
-        assert generator.validate_data(invalid_data) is False
+        assert generator.validate_data(data) == expected
