@@ -6,20 +6,37 @@ This directory contains a comprehensive test suite for the yaml2rst project. The
 
 ```
 tests/
-├── README.md                    # This file
-├── conftest.py                  # Shared pytest fixtures and configuration
-├── unit/                        # Unit tests for individual components
-│   ├── test_yaml2rst_main.py    # Tests for main module
-│   ├── test_initializer.py      # Tests for initialization logic
-│   ├── test_file_generator.py   # Tests for file generation
-│   ├── test_base_generator.py   # Tests for base generator class
-│   └── test_category_generator.py # Tests for category generator
-├── integration/                 # Integration tests
-│   └── test_e2e_generation.py   # End-to-end generation tests
-├── functional/                  # Functional tests
-│   └── test_cli.py              # CLI interface tests
-└── performance/                 # Performance tests
-    └── test_performance.py      # Performance and scalability tests
+├── README.md                           # This file
+├── conftest.py                         # Shared pytest fixtures and configuration
+├── fixtures/                           # Test fixtures and data
+│   ├── expected_output/                # Expected output files for comparison
+│   ├── templates/                      # Test template files
+│   └── yaml/                          # Test YAML data files
+├── unit/                              # Unit tests for individual components
+│   ├── test_yaml2rst_main.py          # Tests for main module
+│   ├── test_initializer.py            # Tests for initialization logic
+│   ├── test_config.py                 # Tests for configuration management
+│   ├── test_file_generator.py         # Tests for file generation orchestration
+│   ├── test_base_generator.py         # Tests for base generator class
+│   ├── test_content_generator_base.py # Tests for content generator base
+│   ├── test_mixins.py                 # Tests for mixin classes
+│   ├── test_category_generator.py     # Tests for category generator
+│   ├── test_check_generator.py        # Tests for check generator
+│   ├── test_faq_generator.py          # Tests for FAQ generator
+│   ├── test_wcag_generator.py         # Tests for WCAG mapping generator
+│   ├── test_reference_generator.py    # Tests for reference generator
+│   ├── test_makefile_generator.py     # Tests for Makefile generator
+│   ├── test_common_generators.py      # Tests for common generator utilities
+│   ├── test_template_manager.py       # Tests for template management
+│   ├── test_template_config.py        # Tests for template configuration
+│   ├── test_template_resolver.py      # Tests for template resolution
+│   ├── test_template_export.py        # Tests for template export functionality
+│   └── test_path.py                   # Tests for path utilities
+├── integration/                       # Integration tests
+│   ├── test_e2e_generation.py         # End-to-end generation tests
+│   └── test_template_customization.py # Template customization integration tests
+└── functional/                        # Functional tests
+    └── test_cli.py                     # CLI interface tests
 ```
 
 ## Test Categories
@@ -29,35 +46,68 @@ tests/
 Unit tests focus on testing individual components in isolation. They use extensive mocking to isolate the code under test and verify specific behaviors.
 
 **Coverage includes:**
-- Main module functionality (`test_yaml2rst_main.py`)
-- Initialization and argument parsing (`test_initializer.py`)
-- File generation logic (`test_file_generator.py`)
-- Base generator class (`test_base_generator.py`)
-- Content generators (`test_category_generator.py`)
+- **Core System Components:**
+  - Main module functionality (`test_yaml2rst_main.py`)
+  - Initialization and argument parsing (`test_initializer.py`)
+  - Configuration management (`test_config.py`)
+  - Path utilities (`test_path.py`)
+
+- **Generation Framework:**
+  - File generation orchestration (`test_file_generator.py`)
+  - Base generator class (`test_base_generator.py`)
+  - Content generator base class (`test_content_generator_base.py`)
+  - Mixin classes for shared functionality (`test_mixins.py`)
+  - Common generator utilities (`test_common_generators.py`)
+
+- **Content Generators:**
+  - Category page generation (`test_category_generator.py`)
+  - Check item generation (`test_check_generator.py`)
+  - FAQ article and index generation (`test_faq_generator.py`)
+  - WCAG mapping generation (`test_wcag_generator.py`)
+  - Reference documentation generation (`test_reference_generator.py`)
+  - Makefile generation (`test_makefile_generator.py`)
+
+- **Template System:**
+  - Template management (`test_template_manager.py`)
+  - Template configuration (`test_template_config.py`)
+  - Template resolution (`test_template_resolver.py`)
+  - Template export functionality (`test_template_export.py`)
 
 ### Integration Tests (`tests/integration/`)
 
 Integration tests verify that multiple components work together correctly. They test the interaction between different parts of the system.
 
 **Coverage includes:**
-- End-to-end generation workflows
-- Component integration
-- Data flow between generators and file writers
-- Multi-language support
+- **End-to-end workflows** (`test_e2e_generation.py`):
+  - Complete generation workflows from YAML to RST
+  - Multi-language support and switching
+  - Data flow between generators and file writers
+  - Integration of all system components
+
+- **Template customization** (`test_template_customization.py`):
+  - Template resolution priority system
+  - Custom template directory functionality
+  - Template export and import workflows
+  - Integration between TemplateConfig, TemplateResolver, and TemplateManager
 
 ### Functional Tests (`tests/functional/`)
 
 Functional tests verify the system's behavior from a user's perspective, focusing on the command-line interface and user workflows.
 
 **Coverage includes:**
-- CLI argument parsing and validation
-- Command execution workflows
-- Error handling and user feedback
-- Configuration management
+- **CLI interface** (`test_cli.py`):
+  - Command-line argument parsing and validation
+  - Standard generation workflows (`--lang`, `--basedir`)
+  - Template customization options (`--template-dir`)
+  - Template export functionality (`--export-templates`)
+  - File-specific generation (positional arguments)
+  - Error handling and user feedback
+  - Help system and usage information
+  - Configuration file integration
 
-### Performance Tests (`tests/performance/`)
+### Performance Tests
 
-Performance tests ensure the system performs well under various conditions and scales appropriately.
+Performance tests ensure the system performs well under various conditions and scales appropriately. These tests are integrated within the unit and integration test suites using performance markers.
 
 **Coverage includes:**
 - Large dataset processing
