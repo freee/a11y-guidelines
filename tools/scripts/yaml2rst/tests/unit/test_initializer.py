@@ -14,6 +14,7 @@ class TestSetupParameters:
                                       mock_parse_args):
         """Test successful parameter setup."""
         mock_args = Mock()
+        mock_args.export_templates = False
         mock_parse_args.return_value = mock_args
 
         expected_settings = {
@@ -29,6 +30,47 @@ class TestSetupParameters:
         mock_parse_args.assert_called_once()
         mock_process_args.assert_called_once_with(mock_args)
         assert result == expected_settings
+
+    @patch('yaml2rst.initializer.parse_args')
+    @patch('yaml2rst.initializer.export_templates')
+    @patch('sys.exit')
+    def test_setup_parameters_export_mode(self, mock_exit, mock_export,
+                                          mock_parse_args):
+        """Test setup_parameters in export mode."""
+        mock_args = Mock()
+        mock_args.export_templates = True
+        mock_args.template_dir = '/custom/templates'
+        mock_args.basedir = '/test/basedir'  # Add required attribute
+        mock_args.files = []  # Add required attribute
+        mock_args.lang = 'ja'  # Add required attribute
+        mock_parse_args.return_value = mock_args
+
+        initializer.setup_parameters()
+
+        mock_parse_args.assert_called_once()
+        mock_export.assert_called_once_with('/custom/templates')
+        mock_exit.assert_called_once_with(0)
+
+    @patch('yaml2rst.initializer.parse_args')
+    @patch('yaml2rst.initializer.export_templates')
+    @patch('sys.exit')
+    def test_setup_parameters_export_mode_default_dir(self, mock_exit,
+                                                       mock_export,
+                                                       mock_parse_args):
+        """Test setup_parameters in export mode with default directory."""
+        mock_args = Mock()
+        mock_args.export_templates = True
+        mock_args.template_dir = None
+        mock_args.basedir = '/test/basedir'  # Add required attribute
+        mock_args.files = []  # Add required attribute
+        mock_args.lang = 'ja'  # Add required attribute
+        mock_parse_args.return_value = mock_args
+
+        initializer.setup_parameters()
+
+        mock_parse_args.assert_called_once()
+        mock_export.assert_called_once_with(None)
+        mock_exit.assert_called_once_with(0)
 
 
 class TestSetupConstants:

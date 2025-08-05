@@ -17,10 +17,14 @@ Functions:
     setup_templates: Initialize template management system
     parse_args: Parse command line arguments
     process_arguments: Process parsed arguments into settings dictionary
+    export_templates: Export built-in templates to specified directory
 """
 import os
+import sys
+import shutil
 import argparse
-from typing import Dict, Any, List, Tuple
+from pathlib import Path
+from typing import Dict, Any, List, Tuple, Optional
 
 from . import config
 from .path import (get_dest_dirnames, get_static_dest_files, TEMPLATE_DIR,
@@ -30,12 +34,19 @@ from .template_manager import TemplateManager
 from .template_config import TemplateConfig
 
 
+class TemplateExportError(Exception):
+    """Exception raised when template export operation fails."""
+    pass
+
+
 def setup_parameters() -> Dict[str, Any]:
     """Set up configuration parameters from command line arguments.
 
     Parses command line arguments and processes them into a configuration
     dictionary that controls the build process. This is the main entry
     point for configuration setup.
+
+    If --export-templates is specified, exports templates and exits.
 
     Returns:
         Configuration dictionary containing:
@@ -51,6 +62,12 @@ def setup_parameters() -> Dict[str, Any]:
         >>> print(settings['build_all'])  # True or False
     """
     args = parse_args()
+
+    # Handle template export mode
+    if args.export_templates:
+        export_templates(args.template_dir)
+        sys.exit(0)
+
     return process_arguments(args)
 
 
@@ -240,8 +257,8 @@ def parse_args() -> argparse.Namespace:
 
     Sets up the argument parser with all supported options and parses
     the command line arguments. The parser supports language selection,
-    base directory specification, custom template directory, and optional
-    file targeting.
+    base directory specification, custom template directory, template
+    export functionality, and optional file targeting.
 
     Returns:
         Parsed command line arguments as argparse.Namespace
@@ -251,6 +268,7 @@ def parse_args() -> argparse.Namespace:
                     config.get_available_languages())
         --basedir, -b: Base directory containing the data directory
         --template-dir, -t: Custom template directory path
+        --export-templates: Export built-in templates and exit
         files: Optional list of specific files to generate (positional)
 
     Example:
@@ -286,6 +304,13 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help='Custom template directory path. Templates in this directory '
              'will override built-in templates on a per-file basis.'
+    )
+    parser.add_argument(
+        '--export-templates',
+        action='store_true',
+        help='Export built-in templates to template directory and exit. '
+             'Uses --template-dir if specified, otherwise uses the default '
+             'user template directory (~/.config/freee_a11y_gl/templates).'
     )
     parser.add_argument(
         'files',
@@ -354,3 +379,99 @@ def process_arguments(args: argparse.Namespace) -> Dict[str, Any]:
         'basedir': basedir,
         'template_dir': template_dir
     }
+
+
+def export_templates(target_dir: Optional[str] = None) -> None:
+    """Export built-in templates to specified directory.
+
+    Copies all built-in template files to the target directory, preserving
+    the directory structure. This allows users to customize templates by
+    modifying the exported copies.
+
+    Args:
+        target_dir: Target directory path. If None, uses the default user
+                   template directory from configuration.
+
+    Raises:
+        TemplateExportError: If the export operation fails due to file
+                           system errors, permission issues, or other
+                           problems.
+
+    Directory Structure:
+        The exported templates maintain the same structure as the built-in
+        templates:
+        - Root level templates (gl-category.rst, etc.)
+        - checks/ subdirectory
+        - faq/ subdirectory
+
+    Example:
+        >>> # Export to default user directory
+        >>> export_templates()
+        Templates exported to: /home/user/.config/freee_a11y_gl/templates
+
+        >>> # Export to custom directory
+        >>> export_templates('/custom/templates')
+        Templates exported to: /custom/templates
+    """
+    try:
+        # Determine target directory
+        if target_dir:
+            dest_dir = Path(target_dir).expanduser().resolve()
+        else:
+            # Use default user template directory from configuration
+            template_config = TemplateConfig()
+            template_config.load_config()
+            dest_dir = template_config.get_user_template_dir_expanded()
+
+        # Create target directory if it doesn't exist
+        dest_dir.mkdir(parents=True, exist_ok=True)
+
+        # Get source template directory
+        source_dir = Path(TEMPLATE_DIR)
+
+        # Track exported files for user feedback
+        exported_files = []
+
+        # Copy all template files
+        for template_name, template_file in TEMPLATE_FILENAMES.items():
+            source_path = source_dir / template_file
+            dest_path = dest_dir / template_file
+
+            # Validate source file exists
+            if not source_path.exists():
+                raise TemplateExportError(
+                    f"Built-in template not found: {source_path}"
+                )
+
+            # Create subdirectories if needed
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # Copy file with metadata preservation
+            shutil.copy2(source_path, dest_path)
+            exported_files.append(template_file)
+
+        # Provide user feedback
+        print(f"Templates exported to: {dest_dir}")
+        print(f"Exported {len(exported_files)} template files:")
+        for template_file in sorted(exported_files):
+            print(f"  - {template_file}")
+
+        # Provide usage instructions
+        print("\nTo customize templates:")
+        print(f"1. Edit files in: {dest_dir}")
+        print("2. Run yaml2rst normally - custom templates will be used "
+              "automatically")
+
+    except PermissionError as e:
+        raise TemplateExportError(
+            f"Permission denied when exporting templates: {e}. "
+            f"Check directory permissions for: {dest_dir}"
+        ) from e
+    except OSError as e:
+        raise TemplateExportError(
+            f"File system error during template export: {e}"
+        ) from e
+    except Exception as e:
+        raise TemplateExportError(
+            f"Unexpected error during template export: {e}"
+        ) from e
