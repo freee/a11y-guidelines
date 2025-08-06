@@ -8,36 +8,26 @@ from freee_a11y_gl.exceptions import ValidationError
 class TestInputValidator:
     """Test cases for InputValidator class."""
 
-    def test_validate_id_valid(self):
+    @pytest.mark.parametrize("valid_id", [
+        "test", "test123", "test-id", "test_id", "TEST_ID-123", "a1", "123"
+    ])
+    def test_validate_id_valid(self, valid_id):
         """Test validate_id with valid IDs."""
-        valid_ids = [
-            "test",
-            "test123",
-            "test-id",
-            "test_id",
-            "TEST_ID-123",
-            "a1",
-            "123"
-        ]
-        
-        for valid_id in valid_ids:
-            result = InputValidator.validate_id(valid_id)
-            assert result == valid_id
+        result = InputValidator.validate_id(valid_id)
+        assert result == valid_id
 
-    def test_validate_id_invalid(self):
+    @pytest.mark.parametrize("invalid_id,reason", [
+        ("", "empty"),
+        ("test id", "space"),
+        ("test@id", "special char"),
+        ("test.id", "dot"),
+        ("test/id", "slash"),
+        ("test#id", "hash"),
+    ])
+    def test_validate_id_invalid(self, invalid_id, reason):
         """Test validate_id with invalid IDs."""
-        invalid_ids = [
-            "",  # empty
-            "test id",  # space
-            "test@id",  # special char
-            "test.id",  # dot
-            "test/id",  # slash
-            "test#id",  # hash
-        ]
-        
-        for invalid_id in invalid_ids:
-            with pytest.raises(ValidationError):
-                InputValidator.validate_id(invalid_id)
+        with pytest.raises(ValidationError):
+            InputValidator.validate_id(invalid_id)
 
     def test_validate_id_non_string(self):
         """Test validate_id with non-string input."""
@@ -49,28 +39,24 @@ class TestInputValidator:
         with pytest.raises(ValidationError, match="User ID cannot be empty"):
             InputValidator.validate_id("", "User ID")
 
-    def test_validate_language_code_valid(self):
+    @pytest.mark.parametrize("valid_code", ["ja", "en", "fr", "de", "es"])
+    def test_validate_language_code_valid(self, valid_code):
         """Test validate_language_code with valid codes."""
-        valid_codes = ["ja", "en", "fr", "de", "es"]
-        
-        for code in valid_codes:
-            result = InputValidator.validate_language_code(code)
-            assert result == code
+        result = InputValidator.validate_language_code(valid_code)
+        assert result == valid_code
 
-    def test_validate_language_code_invalid(self):
+    @pytest.mark.parametrize("invalid_code,reason", [
+        ("J", "too short"),
+        ("JA", "uppercase"),
+        ("eng", "too long"),
+        ("j1", "contains number"),
+        ("j-", "contains special char"),
+        ("", "empty"),
+    ])
+    def test_validate_language_code_invalid(self, invalid_code, reason):
         """Test validate_language_code with invalid codes."""
-        invalid_codes = [
-            "J",  # too short
-            "JA",  # uppercase
-            "eng",  # too long
-            "j1",  # contains number
-            "j-",  # contains special char
-            "",  # empty
-        ]
-        
-        for invalid_code in invalid_codes:
-            with pytest.raises(ValidationError):
-                InputValidator.validate_language_code(invalid_code)
+        with pytest.raises(ValidationError):
+            InputValidator.validate_language_code(invalid_code)
 
     def test_validate_language_code_non_string(self):
         """Test validate_language_code with non-string input."""

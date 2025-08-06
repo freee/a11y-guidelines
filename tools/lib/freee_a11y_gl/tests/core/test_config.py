@@ -755,3 +755,55 @@ class TestConfigBackwardCompatibility:
                 assert result is not None
             except Exception as e:
                 pytest.fail(f"Method {method} failed with: {e}")
+
+
+class TestConfigRobustness:
+    """Test cases for config robustness and error handling."""
+
+    def setup_method(self):
+        """Setup for each test method."""
+        settings.__dict__.clear()
+        settings.__init__()
+
+    def test_message_config_none_language_handling(self):
+        """Test MessageConfig handles None language codes gracefully."""
+        from freee_a11y_gl.config.message_config import MessageConfig
+
+        result = MessageConfig.get_check_tool_name("test_tool", None)
+        assert isinstance(result, str)
+
+    def test_message_config_valid_parameters(self):
+        """Test MessageConfig with various valid parameters."""
+        from freee_a11y_gl.config.message_config import MessageConfig
+
+        test_cases = [
+            ("get_check_tool_name", "axe", "ja"),
+            ("get_check_target_name", "design", "en"),
+            ("get_severity_tag", "major", "ja"),
+            ("get_platform_name", "web", "en"),
+        ]
+
+        for method_name, param1, param2 in test_cases:
+            method = getattr(MessageConfig, method_name)
+            result = method(param1, param2)
+            assert isinstance(result, str)
+
+    @patch('freee_a11y_gl.config.path_config.settings')
+    def test_path_config_exception_fallback(self, mock_settings):
+        """Test PathConfig falls back gracefully on exceptions."""
+        from freee_a11y_gl.config.path_config import PathConfig
+
+        mock_settings.get.side_effect = Exception("Settings error")
+
+        result = PathConfig.get_base_url("ja")
+        assert result == ""
+
+    def test_path_config_none_language_handling(self):
+        """Test PathConfig handles None language codes gracefully."""
+        from freee_a11y_gl.config.path_config import PathConfig
+
+        result1 = PathConfig.get_base_url(None)
+        result2 = PathConfig.get_examples_url(None)
+
+        assert isinstance(result1, str)
+        assert isinstance(result2, str)
