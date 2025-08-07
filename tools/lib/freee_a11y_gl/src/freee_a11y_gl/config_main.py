@@ -4,13 +4,13 @@ from .settings import settings
 from .exceptions import ConfigurationError
 from .validation_utils import InputValidator
 from .logging_config import get_logger
-
-logger = get_logger()
 from .config.path_config import PathConfig
 from .config.localization_config import LocalizationConfig
 from .config.message_config import MessageConfig
 from .config.validation_config import ValidationConfig
 from .config.tool_config import ToolConfig
+
+logger = get_logger()
 
 LanguageCode = Literal["ja", "en"]
 
@@ -21,21 +21,21 @@ class Config:
     @classmethod
     def initialize(cls, profile: Optional[str] = None, config_override: Optional[Dict[str, Any]] = None) -> None:
         """Initialize configuration with profile and overrides.
-        
+
         This method allows you to initialize the library's configuration with a specific
         profile and optional configuration overrides. This is the recommended way to
         configure the library for different use cases.
-        
+
         Args:
             profile: Profile name to use (e.g., "yaml2rst", "yaml2sheet", "custom_project").
                     If None, uses "default" profile.
             config_override: Dictionary of settings to override. Can contain nested
                            dictionaries for hierarchical configuration.
-                           
+
         Examples:
             # Use a specific profile
             Config.initialize(profile="yaml2rst")
-            
+
             # Use profile with custom overrides
             Config.initialize(
                 profile="yaml2sheet",
@@ -50,7 +50,7 @@ class Config:
                     }
                 }
             )
-            
+
         Note:
             This method should be called before using other Config methods.
             Settings are validated after initialization. Localized strings should
@@ -61,20 +61,20 @@ class Config:
     @classmethod
     def register_settings(cls, new_settings: Optional[Dict[str, Any]] = None) -> None:
         """Register new settings with validation.
-        
+
         This method allows you to customize the library's configuration by providing
         a dictionary of settings that will be merged with the existing configuration.
-        
+
         Args:
             new_settings: Dictionary of settings to register. Can contain nested
                          dictionaries for hierarchical configuration.
-                         
+
         Examples:
             # Simple configuration
             Config.register_settings({
                 "base_url": "https://custom.example.com"
             })
-            
+
             # Complex nested configuration
             Config.register_settings({
                 "base_url": "https://custom.example.com",
@@ -88,7 +88,7 @@ class Config:
                     "faq": "/custom/faq/"
                 }
             })
-            
+
         Note:
             Settings are validated after registration. Invalid configurations
             will raise a validation error. Localized strings should be configured
@@ -99,16 +99,16 @@ class Config:
     @classmethod
     def set_base_url(cls, base_url: str) -> None:
         """Set the base URL for the site.
-        
+
         Args:
             base_url: Base URL (e.g., https://a11y-guidelines.freee.co.jp)
-            
+
         Raises:
             ConfigurationError: If base_url is invalid
         """
         # Validate input
         base_url = InputValidator.validate_url(base_url, "base URL")
-        
+
         try:
             settings.update({"base_url": base_url.rstrip("/")})
             logger.info(f"Set base URL to: {base_url}")
@@ -121,7 +121,7 @@ class Config:
     @classmethod
     def get_basedir(cls) -> str:
         """Get base directory path.
-        
+
         Returns:
             Base directory path from settings, or '.' if not set
         """
@@ -130,10 +130,10 @@ class Config:
     @classmethod
     def _get_language_path(cls, lang: LanguageCode) -> str:
         """Get the language-specific path segment.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Language path segment ("" for ja, "/en" for en)
         """
@@ -142,10 +142,10 @@ class Config:
     @classmethod
     def get_base_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get base URL with language path for specified language.
-        
+
         Args:
             lang: Language code. If None, default language from settings will be used.
-            
+
         Returns:
             Base URL with language path
         """
@@ -174,10 +174,10 @@ class Config:
     @classmethod
     def get_pass_singular_text(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized pass text for conditions.
-        
+
         Args:
             lang: Language code. If None, default language from settings will be used.
-            
+
         Returns:
             Localized pass text for single condition
         """
@@ -186,10 +186,10 @@ class Config:
     @classmethod
     def get_pass_plural_text(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized pass text for conditions.
-        
+
         Args:
             lang: Language code. If None, default language from settings will be used.
-            
+
         Returns:
             Localized pass text for multiple conditions
         """
@@ -236,10 +236,10 @@ class Config:
     @classmethod
     def get_examples_url(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get examples base URL for specified language.
-        
+
         Args:
             lang: Language code. If None, default language from settings will be used.
-            
+
         Returns:
             URL string for examples in the specified language
         """
@@ -248,10 +248,10 @@ class Config:
     @classmethod
     def get_date_format(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized date format string.
-        
+
         Args:
             lang: Language code. If None, default language from settings will be used.
-            
+
         Returns:
             Date format string in strftime format
         """
@@ -260,7 +260,7 @@ class Config:
     @classmethod
     def get_available_languages(cls) -> List[str]:
         """Get list of available languages.
-        
+
         Returns:
             List of available language codes
         """
@@ -269,7 +269,7 @@ class Config:
     @classmethod
     def get_default_language(cls) -> str:
         """Get default language code.
-        
+
         Returns:
             Default language code
         """
@@ -278,7 +278,7 @@ class Config:
     @classmethod
     def get_yaml_validation_mode(cls) -> str:
         """Get YAML validation mode.
-        
+
         Returns:
             YAML validation mode ("strict", "warning", or "disabled")
         """
@@ -287,10 +287,10 @@ class Config:
     @classmethod
     def set_yaml_validation_mode(cls, mode: str) -> None:
         """Set YAML validation mode.
-        
+
         Args:
             mode: Validation mode ("strict", "warning", or "disabled")
-            
+
         Raises:
             ValueError: If mode is not valid
         """
@@ -299,7 +299,7 @@ class Config:
     @classmethod
     def get_axe_core_config(cls) -> Dict[str, str]:
         """Get axe-core configuration.
-        
+
         Returns:
             Dictionary containing axe-core configuration settings
         """

@@ -1,6 +1,7 @@
-import pytest
-from unittest.mock import patch, MagicMock
 from freee_a11y_gl.utils import join_items, uniq, tag2sc
+
+
+from unittest.mock import patch
 
 
 class TestJoinItems:
@@ -11,9 +12,9 @@ class TestJoinItems:
         """Test joining single platform item in Japanese."""
         mock_config.get_list_separator.return_value = "、"
         mock_config.get_platform_name.return_value = "Web"
-        
+
         result = join_items(["web"], "ja")
-        
+
         mock_config.get_list_separator.assert_called_once_with("ja")
         mock_config.get_platform_name.assert_called_once_with("web", "ja")
         assert result == "Web"
@@ -26,9 +27,9 @@ class TestJoinItems:
             "web": "Web",
             "mobile": "モバイル"
         }[item]
-        
+
         result = join_items(["web", "mobile"], "ja")
-        
+
         mock_config.get_list_separator.assert_called_once_with("ja")
         assert mock_config.get_platform_name.call_count == 2
         assert result == "Web、モバイル"
@@ -41,9 +42,9 @@ class TestJoinItems:
             "web": "Web",
             "mobile": "Mobile"
         }[item]
-        
+
         result = join_items(["web", "mobile"], "en")
-        
+
         mock_config.get_list_separator.assert_called_once_with("en")
         assert mock_config.get_platform_name.call_count == 2
         assert result == "Web, Mobile"
@@ -52,9 +53,9 @@ class TestJoinItems:
     def test_join_items_empty_list(self, mock_config):
         """Test joining empty list."""
         mock_config.get_list_separator.return_value = "、"
-        
+
         result = join_items([], "ja")
-        
+
         mock_config.get_list_separator.assert_called_once_with("ja")
         assert result == ""
 
@@ -64,12 +65,12 @@ class TestJoinItems:
         mock_config.get_list_separator.return_value = ", "
         mock_config.get_platform_name.side_effect = lambda item, lang: {
             "web": "Web",
-            "ios": "iOS", 
+            "ios": "iOS",
             "android": "Android"
         }[item]
-        
+
         result = join_items(["web", "ios", "android"], "en")
-        
+
         assert result == "Web, iOS, Android"
 
 
@@ -184,6 +185,6 @@ class TestTag2sc:
         """Test case sensitivity."""
         result = tag2sc("WCAG111")
         assert result == "WCAG111"  # Should not match due to case
-        
+
         result = tag2sc("wcag111")
         assert result == "1.1.1"  # Should match lowercase

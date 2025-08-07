@@ -10,7 +10,6 @@ import yaml
 from unittest.mock import patch
 
 from freee_a11y_gl.initializer import setup_instances
-from freee_a11y_gl.yaml_validator import ValidationError
 
 
 class TestInitializerValidation(unittest.TestCase):
@@ -20,20 +19,20 @@ class TestInitializerValidation(unittest.TestCase):
         """Set up test fixtures"""
         # Create temporary directory structure
         self.temp_dir = tempfile.mkdtemp()
-        
+
         # Create data directory structure
         self.data_dir = os.path.join(self.temp_dir, 'data')
         self.yaml_dir = os.path.join(self.data_dir, 'yaml')
         self.json_dir = os.path.join(self.data_dir, 'json')
         self.schemas_dir = os.path.join(self.json_dir, 'schemas')
-        
+
         os.makedirs(self.yaml_dir)
         os.makedirs(self.schemas_dir)
-        
+
         # Create subdirectories for YAML files
         for subdir in ['checks', 'gl', 'faq']:
             os.makedirs(os.path.join(self.yaml_dir, subdir))
-        
+
         # Create minimal schema files
         common_schema = {
             "$id": "https://a11y-guidelines.freee.co.jp/schemas/common.json",
@@ -50,7 +49,7 @@ class TestInitializerValidation(unittest.TestCase):
                 }
             }
         }
-        
+
         check_schema = {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
             "$id": "https://a11y-guidelines.freee.co.jp/schemas/check.json",
@@ -71,19 +70,19 @@ class TestInitializerValidation(unittest.TestCase):
             "additionalProperties": False,
             "required": ["id", "sortKey", "check", "severity", "target", "platform"]
         }
-        
+
         # Write schema files
         with open(os.path.join(self.schemas_dir, 'common.json'), 'w') as f:
             json.dump(common_schema, f)
-        
+
         with open(os.path.join(self.schemas_dir, 'check.json'), 'w') as f:
             json.dump(check_schema, f)
-        
+
         # Create minimal schemas for other types to avoid warnings
         for schema_name in ['guideline.json', 'faq.json']:
             with open(os.path.join(self.schemas_dir, schema_name), 'w') as f:
                 json.dump({"type": "object"}, f)
-        
+
         # Create required JSON files for static entities
         static_files = {
             'guideline-categories.json': {},
@@ -91,7 +90,7 @@ class TestInitializerValidation(unittest.TestCase):
             'faq-tags.json': {},
             'info.json': {}
         }
-        
+
         for filename, content in static_files.items():
             with open(os.path.join(self.json_dir, filename), 'w') as f:
                 json.dump(content, f)
@@ -114,11 +113,11 @@ class TestInitializerValidation(unittest.TestCase):
             'target': 'design',
             'platform': ['web', 'mobile']
         }
-        
+
         filepath = os.path.join(self.yaml_dir, 'checks', filename)
         with open(filepath, 'w') as f:
             yaml.dump(valid_check, f)
-        
+
         return filepath
 
     def create_invalid_check_yaml(self, filename='0002.yaml'):
@@ -133,11 +132,11 @@ class TestInitializerValidation(unittest.TestCase):
             'target': 'design',
             'platform': ['web', 'mobile']
         }
-        
+
         filepath = os.path.join(self.yaml_dir, 'checks', filename)
         with open(filepath, 'w') as f:
             yaml.dump(invalid_check, f)
-        
+
         return filepath
 
     @patch('freee_a11y_gl.initializer.process_axe_rules')
@@ -146,12 +145,12 @@ class TestInitializerValidation(unittest.TestCase):
         """Test setup_instances with valid YAML files"""
         # Create valid YAML file
         self.create_valid_check_yaml()
-        
+
         # Mock the axe rules processing and relationship manager
         mock_axe_rules.return_value = None
         mock_rel_instance = mock_rel_manager.return_value
         mock_rel_instance.resolve_faqs.return_value = None
-        
+
         # This should not raise any exception
         try:
             result = setup_instances(self.temp_dir)
@@ -166,15 +165,15 @@ class TestInitializerValidation(unittest.TestCase):
         """Test setup_instances with invalid YAML files"""
         # Create invalid YAML file
         self.create_invalid_check_yaml()
-        
+
         # Mock the axe rules processing and relationship manager
         mock_axe_rules.return_value = None
         mock_rel_instance = mock_rel_manager.return_value
         mock_rel_instance.resolve_faqs.return_value = None
-        
+
         # This should call sys.exit(1) due to validation error
         setup_instances(self.temp_dir)
-        
+
         # Verify that sys.exit was called with code 1
         mock_exit.assert_called_with(1)
 
@@ -185,12 +184,12 @@ class TestInitializerValidation(unittest.TestCase):
         # Create both valid and invalid YAML files
         self.create_valid_check_yaml('0001.yaml')
         self.create_invalid_check_yaml('0002.yaml')
-        
+
         # Mock the axe rules processing and relationship manager
         mock_axe_rules.return_value = None
         mock_rel_instance = mock_rel_manager.return_value
         mock_rel_instance.resolve_faqs.return_value = None
-        
+
         # This should exit due to the invalid file
         with patch('sys.exit') as mock_exit:
             setup_instances(self.temp_dir)

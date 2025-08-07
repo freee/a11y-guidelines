@@ -1,11 +1,12 @@
 """Content models for a11y-guidelines."""
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Any
 from dataclasses import dataclass
 from .base import BaseModel
 from ..mixins.template_mixin import TemplateDataMixin
-from ..relationship_manager import RelationshipManager
 from ..config import Config
 from ..utils import uniq
+from ..relationship_manager import RelationshipManager  # noqa: F401
+
 
 @dataclass
 class GuidelineData:
@@ -15,6 +16,7 @@ class GuidelineData:
     guideline: Dict[str, str]
     intent: Dict[str, str]
 
+
 class Category(BaseModel):
     """Category model representing groupings of guidelines."""
 
@@ -23,7 +25,7 @@ class Category(BaseModel):
 
     def __init__(self, category_id: str, names: Dict[str, str]):
         """Initialize category.
-        
+
         Args:
             category_id: Unique category identifier
             names: Dictionary of localized names (lang code -> name)
@@ -34,10 +36,10 @@ class Category(BaseModel):
 
     def get_name(self, lang: str) -> str:
         """Get localized name for category.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Localized name, falls back to Japanese if language not found
         """
@@ -45,7 +47,7 @@ class Category(BaseModel):
 
     def get_dependency(self) -> List[str]:
         """Get list of file dependencies for this category.
-        
+
         Returns:
             List of file paths that this category depends on
         """
@@ -62,11 +64,12 @@ class Category(BaseModel):
     @classmethod
     def list_all(cls) -> List['Category']:
         """Get all category instances.
-        
+
         Returns:
             List of all category instances
         """
         return list(cls._instances.values())
+
 
 class Guideline(BaseModel, TemplateDataMixin):
     """Guideline model representing accessibility guidelines."""
@@ -76,7 +79,7 @@ class Guideline(BaseModel, TemplateDataMixin):
 
     def __init__(self, gl: Dict[str, Any]):
         """Initialize guideline.
-        
+
         Args:
             gl: Dictionary containing guideline data
         """
@@ -84,7 +87,7 @@ class Guideline(BaseModel, TemplateDataMixin):
 
         if self.id in self._instances:
             raise ValueError(f'Duplicate guideline ID: {self.id}')
-        
+
         self.sort_key = gl['sortKey']
         if self.sort_key in [g.sort_key for g in self._instances.values()]:
             raise ValueError(f'Duplicate guideline sortKey: {self.sort_key}')
@@ -103,7 +106,7 @@ class Guideline(BaseModel, TemplateDataMixin):
         if not Category.get_by_id(gl['category']):
             raise ValueError(f'Category ID {gl["category"]} referenced in guideline {self.id} does not exist.')
         rel.associate_objects(self, Category.get_by_id(gl['category']))
-        
+
         # Associate checks
         for check_id in gl.get('checks', []):
             from .check import Check  # Import here to avoid circular imports
@@ -131,10 +134,10 @@ class Guideline(BaseModel, TemplateDataMixin):
 
     def get_category_and_id(self, lang: str) -> Dict[str, str]:
         """Get category name and guideline ID.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary with category name and guideline ID
         """
@@ -147,10 +150,10 @@ class Guideline(BaseModel, TemplateDataMixin):
 
     def link_data(self, baseurl: str = '') -> Dict[str, Dict[str, str]]:
         """Get link data for guideline.
-        
+
         Args:
             baseurl: Base URL for links
-            
+
         Returns:
             Dictionary with localized text and URLs
         """
@@ -171,10 +174,10 @@ class Guideline(BaseModel, TemplateDataMixin):
 
     def template_data(self, lang: str) -> Dict[str, Any]:
         """Get template data for guideline.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary with guideline data formatted for templates
         """
@@ -204,7 +207,7 @@ class Guideline(BaseModel, TemplateDataMixin):
         faqs = rel.get_sorted_related_objects(self, 'faq')
         if faqs:
             data['faqs'] = [faq.id for faq in faqs]
-        
+
         # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
@@ -212,11 +215,10 @@ class Guideline(BaseModel, TemplateDataMixin):
 
         return data
 
-
     @classmethod
     def list_all_src_paths(cls) -> List[str]:
         """Get all guideline source paths.
-        
+
         Returns:
             List of source file paths
         """

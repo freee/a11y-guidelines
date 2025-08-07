@@ -3,10 +3,10 @@
 
 class FreeeA11yGlError(Exception):
     """Base exception class for all freee_a11y_gl related errors."""
-    
+
     def __init__(self, message: str, details: str = None):
         """Initialize the exception.
-        
+
         Args:
             message: The error message
             details: Additional error details
@@ -14,7 +14,7 @@ class FreeeA11yGlError(Exception):
         self.message = message
         self.details = details
         super().__init__(self.message)
-    
+
     def __str__(self) -> str:
         """Return string representation of the error."""
         if self.details:

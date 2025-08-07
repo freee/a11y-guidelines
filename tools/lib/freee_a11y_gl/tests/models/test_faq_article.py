@@ -1,11 +1,8 @@
-import pytest
 import datetime
 from freee_a11y_gl.models.faq.article import Faq
-from freee_a11y_gl.models.faq.tag import FaqTag
-from freee_a11y_gl.models.content import Guideline
-from freee_a11y_gl.models.check import Check
 from freee_a11y_gl.relationship_manager import RelationshipManager
 from tests.models.base_test import BaseModelTest
+
 
 class TestFaq(BaseModelTest):
     model_class = Faq
@@ -132,7 +129,7 @@ class TestFaq(BaseModelTest):
         Faq(faq1)
         Faq(faq2)
         Faq(faq3)
-        
+
         # Test sorting by ID
         all_faqs = Faq.list_all()
         assert len(all_faqs) == 3

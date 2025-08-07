@@ -1,4 +1,3 @@
-import pytest
 import time
 from freee_a11y_gl.yaml_processor.rst_processor import (
     normalize_text, process_rst_text, process_rst_condition
@@ -7,13 +6,13 @@ from freee_a11y_gl.yaml_processor.rst_processor import (
 
 class TestNormalizeText:
     """Test cases for normalize_text function.
-    
+
     The normalize_text function is responsible for:
     1. Preserving fullwidth spaces (U+3000) in all contexts
     2. Removing regular spaces between different character types (Japanese/English/Numbers)
     3. Preserving bullet point formatting and indentation
     4. Handling various Unicode space characters appropriately
-    
+
     Test Categories:
     - Basic functionality tests
     - Space preservation tests (fullwidth spaces)
@@ -28,22 +27,22 @@ class TestNormalizeText:
         text1 = "これは　テスト　です"
         result1 = normalize_text(text1)
         assert result1 == text1
-        
+
         # Complex mixed content with numbers and English
         text2 = "これは　123　テスト　abc　です"
         result2 = normalize_text(text2)
         assert result2 == text2
-        
+
         # Explicit U+3000 fullwidth space testing
         text3 = "これは\u3000テスト\u3000です"
         result3 = normalize_text(text3)
         assert result3 == text3
-        
+
         # Fullwidth spaces between same character types (Japanese)
         text4 = "これは\u3000テスト\u3000です"
         result4 = normalize_text(text4)
         assert result4 == text4
-        
+
         # Fullwidth spaces between English characters
         text5 = "test\u3000hello\u3000world"
         result5 = normalize_text(text5)
@@ -68,12 +67,12 @@ class TestNormalizeText:
         text1 = "これは test です"
         result1 = normalize_text(text1)
         assert result1 == "これはtestです"
-        
+
         # English-Japanese-English pattern
         text2 = "test これは test"
         result2 = normalize_text(text2)
         assert result2 == "testこれはtest"
-        
+
         # Numbers and Japanese pattern
         text3 = "価格は 100 円です"
         result3 = normalize_text(text3)
@@ -91,32 +90,32 @@ class TestNormalizeText:
         text1 = "* これは\n  テストです\n- もう一つの\n  テスト"
         result1 = normalize_text(text1)
         assert result1 == text1  # Ensure formatting is preserved
-        
+
         # Indented bullet points
         text2 = "  * インデントされた\n    項目です"
         result2 = normalize_text(text2)
         assert result2 == text2
-        
+
         # Mixed bullet types
         text3 = "* アスタリスク\n- ハイフン\n+ プラス"
         result3 = normalize_text(text3)
         assert result3 == text3
-        
+
         # Multi-level indented bullets
         text4 = "* レベル1\n  * レベル2\n    * レベル3\n      項目です"
         result4 = normalize_text(text4)
         assert result4 == text4
-        
+
         # Tab-indented bullets
         text5 = "\t* タブインデント\n\t  項目です"
         result5 = normalize_text(text5)
         assert result5 == text5
-        
+
         # Mixed space and tab indentation
         text6 = "  * スペース\n\t- タブ\n    + 混合"
         result6 = normalize_text(text6)
         assert result6 == text6
-        
+
         # Fullwidth spaces in bullet content
         text7 = "* これは\u3000テスト\u3000です\n  * 次の\u3000項目"
         result7 = normalize_text(text7)
@@ -138,12 +137,12 @@ class TestNormalizeText:
         text1 = "これは\u2000テスト\u2001です"
         result1 = normalize_text(text1)
         assert result1 == "これはテストです"
-        
+
         # En space, Em space, Thin space
         text2 = "これは\u2002test\u2003です\u2009end"
         result2 = normalize_text(text2)
         assert result2 == "これはtestですend"
-        
+
         # Mixed Unicode spaces between character types
         text3 = "test\u2004これは\u2005です"  # Three-per-em space, Four-per-em space
         result3 = normalize_text(text3)
@@ -161,17 +160,17 @@ class TestNormalizeText:
         text1 = "これは   test   です"
         result1 = normalize_text(text1)
         assert result1 == "これはtestです"
-        
+
         # Mixed regular and fullwidth spaces (fullwidth should be preserved)
         text2 = "これは   test\u3000\u3000です   end"
         result2 = normalize_text(text2)
         assert result2 == "これはtest\u3000\u3000ですend"
-        
+
         # Tab characters between different character types
         text3 = "これは\ttest\tです"
         result3 = normalize_text(text3)
         assert result3 == "これはtestです"
-        
+
         # Mixed spaces and tabs
         text4 = "これは \t test \t です"
         result4 = normalize_text(text4)
@@ -192,48 +191,48 @@ class TestNormalizeText:
     def test_normalize_text_performance_small_text(self):
         """Test performance with small text (< 100 characters)."""
         text = "これは　テスト　です。" * 5  # ~50 characters
-        
+
         start_time = time.time()
         for _ in range(1000):  # Run 1000 times
             normalize_text(text)
         end_time = time.time()
-        
+
         # Should complete 1000 iterations in less than 1 second
         assert (end_time - start_time) < 1.0
 
     def test_normalize_text_performance_medium_text(self):
         """Test performance with medium text (1000+ characters)."""
         text = "これは　テスト　です。English text with spaces. 数字123も含む。" * 20  # ~1000+ characters
-        
+
         start_time = time.time()
         for _ in range(100):  # Run 100 times
             normalize_text(text)
         end_time = time.time()
-        
+
         # Should complete 100 iterations in less than 1 second
         assert (end_time - start_time) < 1.0
 
     def test_normalize_text_performance_large_text(self):
         """Test performance with large text (10000+ characters)."""
         text = "これは　テスト　です。English text with spaces. 数字123も含む。\n* 箇条書き\n  - サブ項目\n" * 200  # ~10000+ characters
-        
+
         start_time = time.time()
         for _ in range(10):  # Run 10 times
             normalize_text(text)
         end_time = time.time()
-        
+
         # Should complete 10 iterations in less than 1 second
         assert (end_time - start_time) < 1.0
 
     def test_normalize_text_consistency_multiple_runs(self):
         """Test that normalize_text produces consistent results across multiple runs."""
         text = "これは test です　with　fullwidth　spaces"
-        
+
         # Run the function multiple times and ensure consistent results
         results = []
         for _ in range(10):
             results.append(normalize_text(text))
-        
+
         # All results should be identical
         first_result = results[0]
         for result in results[1:]:
@@ -242,22 +241,22 @@ class TestNormalizeText:
     def test_normalize_text_memory_efficiency(self):
         """Test that normalize_text doesn't cause memory leaks with repeated calls."""
         import gc
-        
+
         text = "これは　テスト　です。" * 100  # Medium-sized text
-        
+
         # Force garbage collection before test
         gc.collect()
         initial_objects = len(gc.get_objects())
-        
+
         # Run function many times
         for _ in range(1000):
             result = normalize_text(text)
             del result  # Explicitly delete result
-        
+
         # Force garbage collection after test
         gc.collect()
         final_objects = len(gc.get_objects())
-        
+
         # Object count should not increase significantly (allow some variance)
         object_increase = final_objects - initial_objects
         assert object_increase < 100  # Allow some increase but not excessive
@@ -328,22 +327,22 @@ class TestProcessRstText:
 
     def test_process_rst_text_language_specific_normalization(self):
         """Test that normalization only occurs for Japanese language processing."""
-        
+
         # Test Japanese text with space normalization (spaces between character types should be removed)
         japanese_mixed_text = "これは test です"  # Regular space between Japanese and English
         result_ja_mixed = process_rst_text(japanese_mixed_text, {}, "ja")
         assert result_ja_mixed == "これはtestです"  # Space removed between different character types
-        
+
         # Test English text with English processing (should not normalize - return as-is)
         english_text = "This is a test"
         result_en = process_rst_text(english_text, {}, "en")
         assert result_en == english_text  # Use variable to confirm input unchanged
-        
+
         # Test fullwidth space preservation in Japanese (should not change)
         fullwidth_text = "これは　テスト　です"  # Fullwidth spaces (U+3000)
         result_fullwidth = process_rst_text(fullwidth_text, {}, "ja")
         assert result_fullwidth == fullwidth_text  # Use variable to confirm input unchanged
-        
+
         # Test that Japanese text with English processing is not normalized (return as-is)
         japanese_text_en_processing = "これは test です"
         result_ja_text_en_lang = process_rst_text(japanese_text_en_processing, {}, "en")
@@ -395,9 +394,9 @@ class TestProcessRstCondition:
         info = {
             "test-ref": {"text": {"ja": "テスト項目", "en": "Test Item"}}
         }
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "simple"
         assert result["procedure"]["procedure"]["ja"] == "テスト項目を確認"  # Space before particle is normalized
         assert result["procedure"]["procedure"]["en"] == "Check Test Item"
@@ -409,9 +408,9 @@ class TestProcessRstCondition:
             "other_data": "value"
         }
         info = {}
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "simple"
         assert result["other_data"] == "value"
         assert "procedure" not in result
@@ -445,9 +444,9 @@ class TestProcessRstCondition:
             "ref1": {"text": {"ja": "項目1", "en": "Item 1"}},
             "ref2": {"text": {"ja": "項目2", "en": "Item 2"}}
         }
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "and"
         assert len(result["conditions"]) == 2
         assert result["conditions"][0]["procedure"]["procedure"]["ja"] == "項目1をチェック"  # Space before particle is normalized
@@ -481,9 +480,9 @@ class TestProcessRstCondition:
             ]
         }
         info = {}
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "or"
         assert len(result["conditions"]) == 2
         assert result["conditions"][0]["procedure"]["procedure"]["ja"] == "Tabキーを使用"  # Space between English and Japanese is normalized
@@ -515,9 +514,9 @@ class TestProcessRstCondition:
         info = {
             "test": {"text": {"ja": "テスト", "en": "Test"}}
         }
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "and"
         nested = result["conditions"][0]["conditions"][0]
         assert nested["procedure"]["procedure"]["ja"] == "テストを実行"  # Space before particle is normalized
@@ -530,9 +529,9 @@ class TestProcessRstCondition:
             "conditions": []
         }
         info = {}
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["type"] == "and"
         assert result["conditions"] == []
 
@@ -554,9 +553,9 @@ class TestProcessRstCondition:
             }
         }
         info = {}
-        
+
         result = process_rst_condition(condition, info)
-        
+
         assert result["platform"] == "web"
         assert result["id"] == "test-condition"
         assert result["procedure"]["note"]["ja"] == "注意事項"

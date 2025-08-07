@@ -1,17 +1,15 @@
-import pytest
-from unittest.mock import patch, MagicMock
 from freee_a11y_gl.models.base import BaseModel
 
 
 class ConcreteModel(BaseModel):
     """Concrete implementation of BaseModel for testing."""
-    
+
     object_type = "test_model"
     _instances = {}
 
     def __init__(self, id: str, extra_data: str = None):
         """Initialize concrete model for testing.
-        
+
         Args:
             id: Model identifier
             extra_data: Additional test data
@@ -41,8 +39,8 @@ class TestBaseModel:
         # Create a new class without _instances
         class NewModel(BaseModel):
             object_type = "new_model"
-        
-        model = NewModel("test-id")
+
+        _ = NewModel("test-id")
         assert hasattr(NewModel, '_instances')
         assert isinstance(NewModel._instances, dict)
 
@@ -50,12 +48,12 @@ class TestBaseModel:
         """Test creating multiple instances."""
         model1 = ConcreteModel("id1", "data1")
         model2 = ConcreteModel("id2", "data2")
-        
+
         assert model1.id == "id1"
         assert model1.extra_data == "data1"
         assert model2.id == "id2"
         assert model2.extra_data == "data2"
-        
+
         assert len(ConcreteModel._instances) == 2
         assert ConcreteModel._instances["id1"] == model1
         assert ConcreteModel._instances["id2"] == model2
@@ -116,8 +114,8 @@ class TestBaseModel:
 
     def test_type_hints_work_correctly(self):
         """Test that type hints work correctly with get_by_id."""
-        model = ConcreteModel("typed-id")
-        
+        _ = ConcreteModel("typed-id")
+
         # This should work with proper typing
         retrieved = ConcreteModel.get_by_id("typed-id")
         assert isinstance(retrieved, ConcreteModel)
@@ -132,12 +130,12 @@ class TestBaseModel:
         """Test that ID attribute behavior is as expected."""
         model = ConcreteModel("original-id")
         assert model.id == "original-id"
-        
-        # ID can be changed (not immutable by design), 
+
+        # ID can be changed (not immutable by design),
         # but this doesn't affect instance storage
         model.id = "changed-id"
         assert model.id == "changed-id"
-        
+
         # Original key is still in instances
         assert ConcreteModel.get_by_id("original-id") == model
         assert ConcreteModel.get_by_id("changed-id") is None
@@ -146,16 +144,16 @@ class TestBaseModel:
         """Test that class and instance attributes work correctly."""
         model1 = ConcreteModel("id1")
         model2 = ConcreteModel("id2")
-        
+
         # object_type is a class attribute
         assert model1.object_type == "test_model"
         assert model2.object_type == "test_model"
         assert ConcreteModel.object_type == "test_model"
-        
+
         # _instances is a class attribute
         assert model1._instances is ConcreteModel._instances
         assert model2._instances is ConcreteModel._instances
-        
+
         # id is an instance attribute
         assert model1.id != model2.id
 

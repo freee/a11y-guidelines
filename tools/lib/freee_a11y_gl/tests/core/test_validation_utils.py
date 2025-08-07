@@ -75,7 +75,7 @@ class TestInputValidator:
             "http://localhost:3000",
             "https://192.168.1.1:8080"
         ]
-        
+
         for url in valid_urls:
             result = InputValidator.validate_url(url)
             assert result == url
@@ -89,7 +89,7 @@ class TestInputValidator:
             "https://",  # incomplete
             "not-a-url",  # not a URL
         ]
-        
+
         for invalid_url in invalid_urls:
             with pytest.raises(ValidationError):
                 InputValidator.validate_url(invalid_url)
@@ -113,7 +113,7 @@ class TestInputValidator:
             "/api/v1/",
             "/123/",
         ]
-        
+
         for path in valid_paths:
             result = InputValidator.validate_path(path)
             assert result == path
@@ -126,7 +126,7 @@ class TestInputValidator:
             "/path",  # no trailing slash
             "path",  # no slashes
         ]
-        
+
         for invalid_path in invalid_paths:
             with pytest.raises(ValidationError):
                 InputValidator.validate_path(invalid_path)
@@ -144,7 +144,7 @@ class TestInputValidator:
             "  test  ",  # whitespace is stripped internally
             "123",
         ]
-        
+
         for string in valid_strings:
             result = InputValidator.validate_non_empty_string(string, "test_field")
             assert result == string
@@ -156,7 +156,7 @@ class TestInputValidator:
             "   ",  # only whitespace
             "\t\n",  # only whitespace chars
         ]
-        
+
         for invalid_string in invalid_strings:
             with pytest.raises(ValidationError, match="test_field cannot be empty"):
                 InputValidator.validate_non_empty_string(invalid_string, "test_field")
@@ -173,7 +173,7 @@ class TestInputValidator:
             {"key": "value"},
             {"nested": {"key": "value"}},
         ]
-        
+
         for valid_dict in valid_dicts:
             result = InputValidator.validate_dict(valid_dict, "test_dict")
             assert result == valid_dict
@@ -186,7 +186,7 @@ class TestInputValidator:
             [],
             None,
         ]
-        
+
         for invalid_input in invalid_inputs:
             with pytest.raises(ValidationError, match="test_dict must be a dictionary"):
                 InputValidator.validate_dict(invalid_input, "test_dict")
@@ -199,7 +199,7 @@ class TestInputValidator:
             [1, 2, 3],
             [{"key": "value"}],
         ]
-        
+
         for valid_list in valid_lists:
             result = InputValidator.validate_list(valid_list, "test_list")
             assert result == valid_list
@@ -212,7 +212,7 @@ class TestInputValidator:
             {},
             None,
         ]
-        
+
         for invalid_input in invalid_inputs:
             with pytest.raises(ValidationError, match="test_list must be a list"):
                 InputValidator.validate_list(invalid_input, "test_list")
@@ -225,7 +225,7 @@ class TestInputValidator:
             "",
             "  test  ",
         ]
-        
+
         for valid_input in valid_inputs:
             result = InputValidator.validate_optional_string(valid_input, "test_field")
             assert result == valid_input
@@ -237,7 +237,7 @@ class TestInputValidator:
             [],
             {},
         ]
-        
+
         for invalid_input in invalid_inputs:
             with pytest.raises(ValidationError, match="test_field must be a string or None"):
                 InputValidator.validate_optional_string(invalid_input, "test_field")
@@ -245,7 +245,7 @@ class TestInputValidator:
     def test_validate_enum_valid(self):
         """Test validate_enum with valid values."""
         valid_values = ["option1", "option2", "option3"]
-        
+
         for value in valid_values:
             result = InputValidator.validate_enum(value, valid_values, "test_enum")
             assert result == value
@@ -253,13 +253,13 @@ class TestInputValidator:
     def test_validate_enum_invalid_value(self):
         """Test validate_enum with invalid value."""
         valid_values = ["option1", "option2", "option3"]
-        
+
         with pytest.raises(ValidationError, match="test_enum must be one of"):
             InputValidator.validate_enum("invalid_option", valid_values, "test_enum")
 
     def test_validate_enum_non_string(self):
         """Test validate_enum with non-string input."""
         valid_values = ["option1", "option2", "option3"]
-        
+
         with pytest.raises(ValidationError, match="test_enum must be a string"):
             InputValidator.validate_enum(123, valid_values, "test_enum")

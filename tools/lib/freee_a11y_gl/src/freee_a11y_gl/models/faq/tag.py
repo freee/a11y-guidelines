@@ -1,7 +1,7 @@
 """FAQ tag model for categorizing FAQ articles."""
-from typing import Dict, List, Optional, Any, ClassVar
+from typing import Dict, List, Optional, Any
 from ..base import BaseModel
-from ...relationship_manager import RelationshipManager
+
 
 class FaqTag(BaseModel):
     """Tag for categorizing FAQ articles."""
@@ -11,7 +11,7 @@ class FaqTag(BaseModel):
 
     def __init__(self, tag_id: str, names: Dict[str, str]):
         """Initialize FAQ tag.
-        
+
         Args:
             tag_id: Tag identifier
             names: Dictionary of localized tag names
@@ -27,10 +27,10 @@ class FaqTag(BaseModel):
 
     def get_name(self, lang: str) -> str:
         """Get localized tag name.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Localized name, falls back to English
         """
@@ -38,10 +38,10 @@ class FaqTag(BaseModel):
 
     def template_data(self, lang: str) -> Optional[Dict[str, Any]]:
         """Get template data for tag.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary with tag data or None if tag has no articles
         """
@@ -61,11 +61,11 @@ class FaqTag(BaseModel):
     @classmethod
     def list_all(cls, **kwargs) -> List['FaqTag']:
         """Get all tags, optionally sorted.
-        
+
         Args:
             **kwargs: Optional sorting parameters:
                 - sort_by: One of 'count', 'label'
-                
+
         Returns:
             List of tag instances
         """

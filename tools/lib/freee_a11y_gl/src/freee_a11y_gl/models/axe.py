@@ -1,10 +1,11 @@
 """Models for axe-core accessibility testing tool."""
 import re
-from typing import Dict, List, Optional, Any, ClassVar
+from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from .base import BaseModel
-from ..relationship_manager import RelationshipManager
 from ..utils import tag2sc
+from ..relationship_manager import RelationshipManager  # noqa: F401
+
 
 @dataclass
 class AxeMessage:
@@ -12,12 +13,13 @@ class AxeMessage:
     help: Dict[str, str]
     description: Dict[str, str]
 
+
 class AxeRule(BaseModel):
     """axe-core rule model."""
 
     object_type = "axe_rule"
     _instances: Dict[str, 'AxeRule'] = {}
-    
+
     # Class-level metadata
     timestamp: Optional[str] = None
     version: Optional[str] = None
@@ -26,7 +28,7 @@ class AxeRule(BaseModel):
 
     def __init__(self, rule: Dict[str, Any], messages_ja: Dict[str, Any]):
         """Initialize axe rule.
-        
+
         Args:
             rule: Dictionary containing rule data
             messages_ja: Dictionary containing Japanese translations
@@ -84,10 +86,10 @@ class AxeRule(BaseModel):
 
     def template_data(self, lang: str) -> Dict[str, Any]:
         """Get template data for axe rule.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary with template data
         """
@@ -102,7 +104,6 @@ class AxeRule(BaseModel):
             data['translated'] = True
 
         if self.has_wcag_sc:
-            from .reference import WcagSc
             scs = sorted(
                 rel.get_related_objects(self, 'wcag_sc'),
                 key=lambda x: x.sort_key

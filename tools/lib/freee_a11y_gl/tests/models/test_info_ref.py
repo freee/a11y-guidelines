@@ -1,8 +1,7 @@
-import pytest
 from freee_a11y_gl.models.reference import InfoRef
-from freee_a11y_gl.relationship_manager import RelationshipManager
 from freee_a11y_gl.models.content import Guideline
 from freee_a11y_gl.models.faq.article import Faq
+
 
 class TestInfoRef:
     def test_singleton_behavior(self):
@@ -15,14 +14,14 @@ class TestInfoRef:
         """Test initialization of internal reference."""
         ref = InfoRef("exp-test")
         assert ref.ref == "exp-test"
-        assert ref.internal == True
+        assert ref.internal is True
         assert ref.ref_data is None
 
     def test_init_external_reference(self):
         """Test initialization of external reference."""
         ref = InfoRef("https://example.com")
         assert ref.ref == "https://example.com"
-        assert ref.internal == False
+        assert ref.internal is False
         assert ref.ref_data is None
 
     def test_refstring(self):
@@ -85,14 +84,14 @@ class TestInfoRef:
         refs = InfoRef.list_all_internal()
         assert isinstance(refs, list)
         assert all(isinstance(ref, InfoRef) for ref in refs)
-        assert all(ref.internal == True for ref in refs)
+        assert all(ref.internal is True for ref in refs)
 
     def test_list_all_external(self):
         """Test listing all external references."""
         refs = InfoRef.list_all_external()
         assert isinstance(refs, list)
         assert all(isinstance(ref, InfoRef) for ref in refs)
-        assert all(ref.internal == False for ref in refs)
+        assert all(ref.internal is False for ref in refs)
 
     def test_list_has_guidelines(self, setup_categories, all_guideline_data):
         """Test listing references that have guidelines."""
@@ -109,7 +108,7 @@ class TestInfoRef:
             "src_path": "path/to/test.yaml"
         }
         Guideline(guideline_data)
-        
+
         # Test the method
         refs = InfoRef.list_has_guidelines()
         assert isinstance(refs, list)

@@ -13,7 +13,7 @@ class ValidationConfig:
     @classmethod
     def get_yaml_validation_mode(cls) -> str:
         """Get YAML validation mode.
-        
+
         Returns:
             YAML validation mode ("strict", "warning", or "disabled")
         """
@@ -26,10 +26,10 @@ class ValidationConfig:
     @classmethod
     def set_yaml_validation_mode(cls, mode: str) -> None:
         """Set YAML validation mode.
-        
+
         Args:
             mode: Validation mode ("strict", "warning", or "disabled")
-            
+
         Raises:
             ConfigurationError: If mode is not valid
         """
@@ -38,7 +38,7 @@ class ValidationConfig:
         mode = InputValidator.validate_enum(
             mode, ["strict", "warning", "disabled"], "validation mode"
         )
-        
+
         try:
             settings.set("validation.yaml_validation", mode)
             logger.info(f"Set YAML validation mode to: {mode}")

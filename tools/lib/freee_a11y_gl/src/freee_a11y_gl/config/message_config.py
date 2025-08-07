@@ -1,7 +1,6 @@
 """Message and label configuration management."""
 from typing import Optional
 from ..settings import settings
-from ..exceptions import MessageCatalogError
 from ..validation_utils import InputValidator
 from ..logging_config import get_logger
 
@@ -21,7 +20,7 @@ class MessageConfig:
         tool_id = InputValidator.validate_non_empty_string(tool_id, "tool_id")
         if lang is not None:
             lang = InputValidator.validate_language_code(lang)
-        
+
         try:
             effective_lang = (lang if lang is not None else
                               settings.get("languages.default", "ja"))
@@ -38,7 +37,7 @@ class MessageConfig:
         target = InputValidator.validate_non_empty_string(target, "target")
         if lang is not None:
             lang = InputValidator.validate_language_code(lang)
-        
+
         try:
             effective_lang = (lang if lang is not None else
                               settings.get("languages.default", "ja"))
@@ -56,7 +55,7 @@ class MessageConfig:
         severity = InputValidator.validate_non_empty_string(severity, "severity")
         if lang is not None:
             lang = InputValidator.validate_language_code(lang)
-        
+
         try:
             effective_lang = (lang if lang is not None else
                               settings.get("languages.default", "ja"))
@@ -74,7 +73,7 @@ class MessageConfig:
         platform = InputValidator.validate_non_empty_string(platform, "platform")
         if lang is not None:
             lang = InputValidator.validate_language_code(lang)
-        
+
         try:
             effective_lang = (lang if lang is not None else
                               settings.get("languages.default", "ja"))
@@ -92,7 +91,7 @@ class MessageConfig:
         target = InputValidator.validate_non_empty_string(target, "target")
         if lang is not None:
             lang = InputValidator.validate_language_code(lang)
-        
+
         try:
             effective_lang = (lang if lang is not None else
                               settings.get("languages.default", "ja"))

@@ -18,7 +18,7 @@ class TestYamlValidator(unittest.TestCase):
         """Set up test fixtures"""
         # Create temporary directory for schemas
         self.temp_dir = tempfile.mkdtemp()
-        
+
         # Sample schemas for testing
         self.common_schema = {
             "$id": "https://a11y-guidelines.freee.co.jp/schemas/common.json",
@@ -35,7 +35,7 @@ class TestYamlValidator(unittest.TestCase):
                 }
             }
         }
-        
+
         self.check_schema = {
             "$schema": "https://json-schema.org/draft/2020-12/schema",
             "$id": "https://a11y-guidelines.freee.co.jp/schemas/check.json",
@@ -66,14 +66,14 @@ class TestYamlValidator(unittest.TestCase):
             "additionalProperties": False,
             "required": ["id", "check", "severity", "target", "platform"]
         }
-        
+
         # Write schema files
         with open(os.path.join(self.temp_dir, 'common.json'), 'w') as f:
             json.dump(self.common_schema, f)
-        
+
         with open(os.path.join(self.temp_dir, 'check.json'), 'w') as f:
             json.dump(self.check_schema, f)
-        
+
         # Create empty files for other schemas to avoid warnings
         for schema_name in ['guideline.json', 'faq.json']:
             with open(os.path.join(self.temp_dir, schema_name), 'w') as f:
@@ -87,13 +87,13 @@ class TestYamlValidator(unittest.TestCase):
     def test_validator_initialization(self):
         """Test validator initialization"""
         validator = YamlValidator(self.temp_dir)
-        
+
         # Check that schemas are loaded
         self.assertIn('common', validator.schemas)
         self.assertIn('check', validator.schemas)
         self.assertIn('guideline', validator.schemas)
         self.assertIn('faq', validator.schemas)
-        
+
         # Check that resolvers are created
         self.assertIn('common', validator.resolvers)
         self.assertIn('check', validator.resolvers)
@@ -102,7 +102,7 @@ class TestYamlValidator(unittest.TestCase):
         """Test getting available schema names"""
         validator = YamlValidator(self.temp_dir)
         schemas = validator.get_available_schemas()
-        
+
         expected_schemas = ['common', 'check', 'guideline', 'faq']
         for schema in expected_schemas:
             self.assertIn(schema, schemas)
@@ -110,7 +110,7 @@ class TestYamlValidator(unittest.TestCase):
     def test_valid_yaml_data(self):
         """Test validation with valid YAML data"""
         validator = YamlValidator(self.temp_dir)
-        
+
         valid_data = {
             "id": "0001",
             "check": {
@@ -121,7 +121,7 @@ class TestYamlValidator(unittest.TestCase):
             "target": "design",
             "platform": ["web", "mobile"]
         }
-        
+
         # Should not raise any exception
         try:
             validator.validate_yaml_data(valid_data, 'check', '/test/file.yaml')
@@ -131,7 +131,7 @@ class TestYamlValidator(unittest.TestCase):
     def test_invalid_yaml_data_missing_required(self):
         """Test validation with missing required fields"""
         validator = YamlValidator(self.temp_dir)
-        
+
         invalid_data = {
             "id": "0001",
             "check": {
@@ -141,10 +141,10 @@ class TestYamlValidator(unittest.TestCase):
             "severity": "normal",
             # Missing required fields: target, platform
         }
-        
+
         with self.assertRaises(ValidationError) as context:
             validator.validate_yaml_data(invalid_data, 'check', '/test/file.yaml')
-        
+
         error_message = str(context.exception)
         self.assertIn("Validation failed for file: /test/file.yaml", error_message)
         self.assertIn("Schema: check", error_message)
@@ -152,7 +152,7 @@ class TestYamlValidator(unittest.TestCase):
     def test_invalid_yaml_data_wrong_type(self):
         """Test validation with wrong data types"""
         validator = YamlValidator(self.temp_dir)
-        
+
         invalid_data = {
             "id": "0001",
             "check": {
@@ -163,17 +163,17 @@ class TestYamlValidator(unittest.TestCase):
             "target": "design",
             "platform": ["web", "mobile"]
         }
-        
+
         with self.assertRaises(ValidationError) as context:
             validator.validate_yaml_data(invalid_data, 'check', '/test/file.yaml')
-        
+
         error_message = str(context.exception)
         self.assertIn("'invalid_severity' is not one of", error_message)
 
     def test_invalid_yaml_data_ref_validation(self):
         """Test validation with $ref that fails"""
         validator = YamlValidator(self.temp_dir)
-        
+
         invalid_data = {
             "id": "0001",
             "check": {
@@ -184,22 +184,22 @@ class TestYamlValidator(unittest.TestCase):
             "target": "design",
             "platform": ["web", "mobile"]
         }
-        
+
         with self.assertRaises(ValidationError) as context:
             validator.validate_yaml_data(invalid_data, 'check', '/test/file.yaml')
-        
+
         error_message = str(context.exception)
         self.assertIn("'en' is a required property", error_message)
 
     def test_unknown_schema(self):
         """Test validation with unknown schema name"""
         validator = YamlValidator(self.temp_dir)
-        
+
         valid_data = {"test": "data"}
-        
+
         with self.assertRaises(ValidationError) as context:
             validator.validate_yaml_data(valid_data, 'unknown_schema', '/test/file.yaml')
-        
+
         error_message = str(context.exception)
         self.assertIn("Schema 'unknown_schema' not found", error_message)
 
@@ -209,7 +209,7 @@ class TestYamlValidator(unittest.TestCase):
         """Test warning when schema file is missing"""
         # This should not raise an exception, just print a warning
         validator = YamlValidator('/nonexistent/path')
-        
+
         # Validator should still be created but with empty schemas
         self.assertEqual(len(validator.schemas), 0)
 

@@ -9,7 +9,7 @@ class ToolConfig:
     @classmethod
     def get_axe_core_config(cls) -> Dict[str, str]:
         """Get axe-core configuration.
-        
+
         Returns:
             Dictionary containing axe-core configuration settings
         """

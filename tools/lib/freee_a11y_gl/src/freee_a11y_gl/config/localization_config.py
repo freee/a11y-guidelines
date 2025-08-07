@@ -37,11 +37,11 @@ class LocalizationConfig:
     @classmethod
     def get_pass_singular_text(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized pass text for conditions.
-        
+
         Args:
             lang: Language code. If None, default language from settings
                   will be used.
-            
+
         Returns:
             Localized pass text for single condition
         """
@@ -53,11 +53,11 @@ class LocalizationConfig:
     @classmethod
     def get_pass_plural_text(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized pass text for conditions.
-        
+
         Args:
             lang: Language code. If None, default language from settings
                   will be used.
-            
+
         Returns:
             Localized pass text for multiple conditions
         """
@@ -80,11 +80,11 @@ class LocalizationConfig:
     @classmethod
     def get_date_format(cls, lang: Optional[LanguageCode] = None) -> str:
         """Get localized date format string.
-        
+
         Args:
             lang: Language code. If None, default language from settings
                   will be used.
-            
+
         Returns:
             Date format string in strftime format
         """
@@ -96,7 +96,7 @@ class LocalizationConfig:
     @classmethod
     def get_available_languages(cls) -> List[str]:
         """Get list of available languages.
-        
+
         Returns:
             List of available language codes
         """
@@ -105,7 +105,7 @@ class LocalizationConfig:
     @classmethod
     def get_default_language(cls) -> str:
         """Get default language code.
-        
+
         Returns:
             Default language code
         """

@@ -19,14 +19,14 @@ __author__ = "Test Author"
 __email__ = "test@example.com"
 release_date = "2023-01-01"
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '1.2.3'
             assert result['__author__'] == 'Test Author'
             assert result['__email__'] == 'test@example.com'
@@ -37,14 +37,14 @@ release_date = "2023-01-01"
         version_content = '''__version__ = '2.0.0'
 __author__ = 'Single Quote Author'
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '2.0.0'
             assert result['__author__'] == 'Single Quote Author'
 
@@ -60,14 +60,14 @@ __author__ = "Test Author"
 
 # Final comment
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '1.0.0'
             assert result['__author__'] == 'Test Author'
             assert len(result) == 2  # Only non-comment lines
@@ -77,7 +77,7 @@ __author__ = "Test Author"
         with tempfile.TemporaryDirectory() as temp_dir:
             with pytest.raises(VersionError) as exc_info:
                 get_version_info(basedir=temp_dir)
-            
+
             assert 'Version file not found' in str(exc_info.value)
 
     def test_get_version_info_empty_version_file(self):
@@ -86,9 +86,9 @@ __author__ = "Test Author"
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write('')
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result == {}
 
     def test_get_version_info_only_comments(self):
@@ -97,14 +97,14 @@ __author__ = "Test Author"
 # No actual version data
 # Just comments
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result == {}
 
     def test_get_version_info_malformed_lines(self):
@@ -113,15 +113,15 @@ __author__ = "Test Author"
 malformed_line_without_equals
 __author__ = "Test Author"
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             # Should skip malformed lines and process valid ones
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '1.0.0'
             assert result['__author__'] == 'Test Author'
             assert len(result) == 2  # Only valid lines processed
@@ -131,30 +131,30 @@ __author__ = "Test Author"
         version_content = '''__version__="1.0.0"
 __author__ = "Test Author"
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             # Should raise VersionError due to malformed line (no space around =)
             with pytest.raises(VersionError, match="Failed to read version information"):
-                result = get_version_info(basedir=temp_dir)
+                _ = get_version_info(basedir=temp_dir)
 
     @patch('freee_a11y_gl.config.Config')
     def test_get_version_info_uses_config_default(self, mock_config):
         """Test get_version_info uses Config default when basedir is None."""
         version_content = '__version__ = "1.0.0"'
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             mock_config.get_basedir.return_value = temp_dir
-            
+
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info()
-            
+
             mock_config.get_basedir.assert_called_once()
             assert result['__version__'] == '1.0.0'
 
@@ -163,12 +163,12 @@ __author__ = "Test Author"
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             version_file.touch()
-            
+
             # Mock open to raise PermissionError
             with patch('builtins.open', side_effect=PermissionError("Permission denied")):
                 with pytest.raises(VersionError) as exc_info:
                     get_version_info(basedir=temp_dir)
-                
+
                 assert 'Failed to read version information' in str(exc_info.value)
 
     def test_get_version_info_unicode_content(self):
@@ -177,14 +177,14 @@ __author__ = "Test Author"
 __author__ = "テスト作者"
 __description__ = "日本語の説明"
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '1.0.0'
             assert result['__author__'] == 'テスト作者'
             assert result['__description__'] == '日本語の説明'
@@ -196,14 +196,14 @@ __author__ = 'Single Quote Author'
 __email__ = "double@example.com"
 __license__ = 'MIT'
 '''
-        
+
         with tempfile.TemporaryDirectory() as temp_dir:
             version_file = Path(temp_dir) / 'version.py'
             with open(version_file, 'w', encoding='utf-8') as f:
                 f.write(version_content)
-            
+
             result = get_version_info(basedir=temp_dir)
-            
+
             assert result['__version__'] == '1.0.0'
             assert result['__author__'] == 'Single Quote Author'
             assert result['__email__'] == 'double@example.com'
@@ -216,10 +216,10 @@ class TestVersionError:
     def test_version_error_creation(self):
         """Test VersionError can be created and raised."""
         error_msg = "Test version error"
-        
+
         with pytest.raises(VersionError) as exc_info:
             raise VersionError(error_msg)
-        
+
         assert str(exc_info.value) == error_msg
 
     def test_version_error_inheritance(self):
@@ -231,8 +231,8 @@ class TestVersionError:
         """Test VersionError can wrap other exceptions."""
         original_error = FileNotFoundError("Original error")
         version_error = VersionError(f"Wrapped error: {str(original_error)}")
-        
+
         with pytest.raises(VersionError) as exc_info:
             raise version_error
-        
+
         assert "Wrapped error: Original error" in str(exc_info.value)

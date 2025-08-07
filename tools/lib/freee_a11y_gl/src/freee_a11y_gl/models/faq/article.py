@@ -1,11 +1,11 @@
 """FAQ article model."""
 import datetime
-from typing import Dict, List, Any, Optional, ClassVar
+from typing import Dict, List, Any
 from ..base import BaseModel
 from ...mixins.template_mixin import TemplateDataMixin
-from ...relationship_manager import RelationshipManager
 from ...config import Config
 from ...utils import uniq
+
 
 class Faq(BaseModel, TemplateDataMixin):
     """FAQ article model."""
@@ -15,21 +15,21 @@ class Faq(BaseModel, TemplateDataMixin):
 
     def __init__(self, faq: Dict[str, Any]):
         """Initialize FAQ article.
-        
+
         Args:
             faq: Dictionary containing FAQ data
         """
         super().__init__(faq['id'])
         if self.id in self._instances:
             raise ValueError(f'Duplicate FAQ ID: {self.id}')
-        
+
         self.sort_key = faq['sortKey']
         if self.sort_key in [f.sort_key for f in self._instances.values()]:
             raise ValueError(f'Duplicate FAQ sortKey: {self.sort_key}')
 
         self.src_path = faq['src_path']
         self.updated = datetime.datetime.fromisoformat(faq['updated'])
-        
+
         # Store localized content
         self.title = faq['title']
         self.problem = faq['problem']
@@ -81,7 +81,7 @@ class Faq(BaseModel, TemplateDataMixin):
         """Get file dependencies for this FAQ."""
         rel = self._get_relationship_manager()
         dependency = [self.src_path]
-        
+
         guidelines = rel.get_related_objects(self, 'guideline')
         if guidelines:
             dependency.extend(gl.src_path for gl in guidelines)
@@ -94,10 +94,10 @@ class Faq(BaseModel, TemplateDataMixin):
 
     def link_data(self, baseurl: str = '') -> Dict[str, Dict[str, str]]:
         """Get link data for FAQ.
-        
+
         Args:
             baseurl: Optional base URL prefix
-            
+
         Returns:
             Dictionary with localized text and URLs
         """
@@ -114,16 +114,16 @@ class Faq(BaseModel, TemplateDataMixin):
 
     def template_data(self, lang: str) -> Dict[str, Any]:
         """Get template data for FAQ.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary containing FAQ data formatted for templates
         """
         rel = self._get_relationship_manager()
         tags = rel.get_related_objects(self, 'faq_tag')
-        
+
         # Format date based on language
         date_format = Config.get_date_format(lang)
         formatted_date = self.updated.strftime(date_format)
@@ -151,9 +151,9 @@ class Faq(BaseModel, TemplateDataMixin):
         if checks:
             data['checks'] = [check.template_data(lang) for check in checks]
 
-        # Add related FAQs if present  
-        related_faqs = rel.get_sorted_related_objects(self, 'faq', 
-                                                     key='sort_key')
+        # Add related FAQs if present
+        related_faqs = rel.get_sorted_related_objects(self, 'faq',
+                                                      key='sort_key')
         if related_faqs:
             data['related_faqs'] = [faq.id for faq in related_faqs]
 
@@ -167,10 +167,10 @@ class Faq(BaseModel, TemplateDataMixin):
     @classmethod
     def list_all(cls, sort_by: str = 'sortKey') -> List['Faq']:
         """Get all FAQ instances sorted by specified key.
-        
+
         Args:
             sort_by: Sorting key ('sortKey' or 'date')
-            
+
         Returns:
             List of FAQ instances sorted by the specified key
         """

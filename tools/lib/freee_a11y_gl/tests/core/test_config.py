@@ -1,10 +1,10 @@
 import pytest
 from unittest.mock import patch, MagicMock
 from freee_a11y_gl.config import Config
-from freee_a11y_gl.settings import settings, Settings
 from freee_a11y_gl.message_catalog import MessageCatalog
 
 # Test data for mocking valid configuration
+from freee_a11y_gl.settings import settings
 MOCK_CONFIG_DATA = {
     "check_tools": {
         "names": {
@@ -281,25 +281,25 @@ class TestConfigWithValidData:
     def _create_mock_config(self):
         """Create a mock config object with valid data."""
         mock_config = MagicMock()
-        
+
         # Mock check_tools
         mock_config.check_tools.names = MOCK_CONFIG_DATA["check_tools"]["names"]
-        
+
         # Mock check_targets - create proper mock objects with new structure
         check_targets_mock = MagicMock()
         check_targets_mock.ja = {k: v["ja"] for k, v in MOCK_CONFIG_DATA["check_targets"]["names"].items()}
         check_targets_mock.en = {k: v["en"] for k, v in MOCK_CONFIG_DATA["check_targets"]["names"].items()}
         mock_config.check_targets = check_targets_mock
-        
+
         # Mock severity_tags - create proper mock objects with new structure
         severity_tags_mock = MagicMock()
         severity_tags_mock.ja = {k: v["ja"] for k, v in MOCK_CONFIG_DATA["severity_tags"]["tags"].items()}
         severity_tags_mock.en = {k: v["en"] for k, v in MOCK_CONFIG_DATA["severity_tags"]["tags"].items()}
         mock_config.severity_tags = severity_tags_mock
-        
+
         # Mock platform
         mock_config.platform.names = MOCK_CONFIG_DATA["platform"]["names"]
-        
+
         return mock_config
 
     @patch('freee_a11y_gl.config.message_config.settings')
@@ -309,7 +309,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the tool name
         mock_settings.message_catalog.get_check_tool.return_value = "axe-core"
-        
+
         result = Config.get_check_tool_name("axe", "ja")
         assert result == "axe-core"
 
@@ -320,7 +320,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "en"
         # Mock message catalog to return the tool name
         mock_settings.message_catalog.get_check_tool.return_value = "Lighthouse"
-        
+
         result = Config.get_check_tool_name("lighthouse", "en")
         assert result == "Lighthouse"
 
@@ -331,7 +331,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the tool name
         mock_settings.message_catalog.get_check_tool.return_value = "WAVE"
-        
+
         result = Config.get_check_tool_name("wave")
         assert result == "WAVE"
 
@@ -342,7 +342,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the target name
         mock_settings.message_catalog.get_check_target.return_value = "デザイン"
-        
+
         result = Config.get_check_target_name("design", "ja")
         assert result == "デザイン"
 
@@ -353,7 +353,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "en"
         # Mock message catalog to return the target name
         mock_settings.message_catalog.get_check_target.return_value = "Code"
-        
+
         result = Config.get_check_target_name("code", "en")
         assert result == "Code"
 
@@ -364,7 +364,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the target name
         mock_settings.message_catalog.get_check_target.return_value = "プロダクト"
-        
+
         result = Config.get_check_target_name("product")
         assert result == "プロダクト"
 
@@ -375,7 +375,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the severity tag
         mock_settings.message_catalog.get_severity_tag.return_value = "[重要]"
-        
+
         result = Config.get_severity_tag("major", "ja")
         assert result == "[重要]"
 
@@ -386,7 +386,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "en"
         # Mock message catalog to return the severity tag
         mock_settings.message_catalog.get_severity_tag.return_value = "[CRITICAL]"
-        
+
         result = Config.get_severity_tag("critical", "en")
         assert result == "[CRITICAL]"
 
@@ -397,7 +397,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the severity tag
         mock_settings.message_catalog.get_severity_tag.return_value = "[軽微]"
-        
+
         result = Config.get_severity_tag("minor")
         assert result == "[軽微]"
 
@@ -416,7 +416,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = lang
         # Mock message catalog to return the expected value
         mock_settings.message_catalog.get_check_target.return_value = expected
-        
+
         result = Config.get_check_target_name(target, lang)
         assert result == expected
 
@@ -437,7 +437,7 @@ class TestConfigWithValidData:
         mock_settings.get.return_value = lang
         # Mock message catalog to return the expected value
         mock_settings.message_catalog.get_severity_tag.return_value = expected
-        
+
         result = Config.get_severity_tag(severity, lang)
         assert result == expected
 
@@ -511,7 +511,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_check_tool.return_value = "axe"
-        
+
         result = Config.get_check_tool_name("axe")
         assert result == "axe"
 
@@ -523,7 +523,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_check_tool.return_value = "axe"
-        
+
         result = Config.get_check_tool_name("axe")
         assert result == "axe"
 
@@ -535,7 +535,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_check_tool.return_value = "nonexistent"
-        
+
         result = Config.get_check_tool_name("nonexistent")
         assert result == "nonexistent"
 
@@ -547,7 +547,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_check_target.return_value = "design"
-        
+
         result = Config.get_check_target_name("design")
         assert result == "design"
 
@@ -559,7 +559,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_check_target.return_value = "design"
-        
+
         result = Config.get_check_target_name("design")
         assert result == "design"
 
@@ -571,7 +571,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_severity_tag.return_value = "major"
-        
+
         result = Config.get_severity_tag("major")
         assert result == "major"
 
@@ -583,7 +583,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_severity_tag.return_value = "major"
-        
+
         result = Config.get_severity_tag("major")
         assert result == "major"
 
@@ -595,7 +595,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_platform_name.return_value = "web"
-        
+
         result = Config.get_platform_name("web")
         assert result == "web"
 
@@ -607,7 +607,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_platform_name.return_value = "web"
-        
+
         result = Config.get_platform_name("web")
         assert result == "web"
 
@@ -619,7 +619,7 @@ class TestConfigErrorHandling:
         mock_settings.get.return_value = "ja"
         # Mock message catalog to return the original value (fallback behavior)
         mock_settings.message_catalog.get_platform_name.return_value = "web"
-        
+
         result = Config.get_platform_name("web", "ja")
         assert result == "web"
 
@@ -708,7 +708,7 @@ class TestMessageCatalog:
         mock_catalog.get_severity_tag.return_value = "[カスタム重要]"
         mock_settings.message_catalog = mock_catalog
         mock_settings.get.return_value = "ja"
-        
+
         result = Config.get_severity_tag("major", "ja")
         assert result == "[カスタム重要]"
         mock_catalog.get_severity_tag.assert_called_once_with("major", "ja")
@@ -747,7 +747,7 @@ class TestConfigBackwardCompatibility:
             lambda: Config.get_examples_url(),
             lambda: Config.get_date_format(),
         ]
-        
+
         for method in methods_to_test:
             try:
                 result = method()

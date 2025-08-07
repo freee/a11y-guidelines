@@ -22,7 +22,7 @@ class TestFreeeA11yGlError:
     def test_basic_creation(self):
         """Test basic exception creation."""
         error = FreeeA11yGlError("Test message")
-        
+
         assert error.message == "Test message"
         assert error.details is None
         assert str(error) == "Test message"
@@ -30,7 +30,7 @@ class TestFreeeA11yGlError:
     def test_creation_with_details(self):
         """Test exception creation with details."""
         error = FreeeA11yGlError("Test message", "Additional details")
-        
+
         assert error.message == "Test message"
         assert error.details == "Additional details"
         assert str(error) == "Test message\nDetails: Additional details"
@@ -38,7 +38,7 @@ class TestFreeeA11yGlError:
     def test_inheritance(self):
         """Test that FreeeA11yGlError inherits from Exception."""
         error = FreeeA11yGlError("Test message")
-        
+
         assert isinstance(error, Exception)
         assert isinstance(error, FreeeA11yGlError)
 
@@ -46,14 +46,14 @@ class TestFreeeA11yGlError:
         """Test that exception can be raised and caught."""
         with pytest.raises(FreeeA11yGlError) as exc_info:
             raise FreeeA11yGlError("Test error")
-        
+
         assert exc_info.value.message == "Test error"
 
     def test_can_be_caught_as_exception(self):
         """Test that exception can be caught as generic Exception."""
         with pytest.raises(Exception) as exc_info:
             raise FreeeA11yGlError("Test error")
-        
+
         assert isinstance(exc_info.value, FreeeA11yGlError)
 
 
@@ -63,7 +63,7 @@ class TestSpecificExceptions:
     def test_configuration_error(self):
         """Test ConfigurationError."""
         error = ConfigurationError("Config error", "Config details")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, ConfigurationError)
         assert error.message == "Config error"
@@ -72,7 +72,7 @@ class TestSpecificExceptions:
     def test_validation_error(self):
         """Test ValidationError."""
         error = ValidationError("Validation failed")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, ValidationError)
         assert error.message == "Validation failed"
@@ -80,7 +80,7 @@ class TestSpecificExceptions:
     def test_data_error(self):
         """Test DataError."""
         error = DataError("Data error")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, DataError)
         assert error.message == "Data error"
@@ -88,7 +88,7 @@ class TestSpecificExceptions:
     def test_file_operation_error(self):
         """Test FileOperationError."""
         error = FileOperationError("File operation failed")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, FileOperationError)
         assert error.message == "File operation failed"
@@ -96,7 +96,7 @@ class TestSpecificExceptions:
     def test_resource_not_found_error(self):
         """Test ResourceNotFoundError."""
         error = ResourceNotFoundError("Resource not found")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, ResourceNotFoundError)
         assert error.message == "Resource not found"
@@ -104,7 +104,7 @@ class TestSpecificExceptions:
     def test_duplicate_id_error(self):
         """Test DuplicateIdError."""
         error = DuplicateIdError("Duplicate ID detected")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, DataError)  # Should inherit from DataError
         assert isinstance(error, DuplicateIdError)
@@ -113,7 +113,7 @@ class TestSpecificExceptions:
     def test_reference_error(self):
         """Test ReferenceError."""
         error = ReferenceError("Invalid reference")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, DataError)  # Should inherit from DataError
         assert isinstance(error, ReferenceError)
@@ -122,7 +122,7 @@ class TestSpecificExceptions:
     def test_version_error(self):
         """Test VersionError."""
         error = VersionError("Version error")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, VersionError)
         assert error.message == "Version error"
@@ -130,7 +130,7 @@ class TestSpecificExceptions:
     def test_info_utils_error(self):
         """Test InfoUtilsError."""
         error = InfoUtilsError("Info utils error")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, InfoUtilsError)
         assert error.message == "Info utils error"
@@ -138,7 +138,7 @@ class TestSpecificExceptions:
     def test_message_catalog_error(self):
         """Test MessageCatalogError."""
         error = MessageCatalogError("Message catalog error")
-        
+
         assert isinstance(error, FreeeA11yGlError)
         assert isinstance(error, MessageCatalogError)
         assert error.message == "Message catalog error"
@@ -161,7 +161,7 @@ class TestExceptionHierarchy:
             InfoUtilsError,
             MessageCatalogError
         ]
-        
+
         for exc_class in exception_classes:
             error = exc_class("Test message")
             assert isinstance(error, FreeeA11yGlError)
@@ -172,7 +172,7 @@ class TestExceptionHierarchy:
             DuplicateIdError,
             ReferenceError
         ]
-        
+
         for exc_class in data_error_subclasses:
             error = exc_class("Test message")
             assert isinstance(error, DataError)
@@ -183,15 +183,15 @@ class TestExceptionHierarchy:
         # Test catching specific exception
         with pytest.raises(DuplicateIdError):
             raise DuplicateIdError("Duplicate ID")
-        
+
         # Test catching parent class
         with pytest.raises(DataError):
             raise DuplicateIdError("Duplicate ID")
-        
+
         # Test catching base class
         with pytest.raises(FreeeA11yGlError):
             raise DuplicateIdError("Duplicate ID")
-        
+
         # Test catching as generic Exception
         with pytest.raises(Exception):
             raise DuplicateIdError("Duplicate ID")
@@ -204,7 +204,7 @@ class TestExceptionUsage:
         """Test using exceptions in a try-except context."""
         def risky_operation():
             raise ConfigurationError("Invalid config", "Missing required field")
-        
+
         try:
             risky_operation()
         except ConfigurationError as e:
@@ -218,16 +218,16 @@ class TestExceptionUsage:
         """Test exception chaining with raise from."""
         def inner_operation():
             raise ValueError("Original error")
-        
+
         def outer_operation():
             try:
                 inner_operation()
             except ValueError as e:
                 raise ConfigurationError("Config failed") from e
-        
+
         with pytest.raises(ConfigurationError) as exc_info:
             outer_operation()
-        
+
         assert exc_info.value.message == "Config failed"
         assert exc_info.value.__cause__ is not None
         assert isinstance(exc_info.value.__cause__, ValueError)
@@ -243,17 +243,17 @@ class TestExceptionUsage:
                 raise DataError("Data error")
             else:
                 return "success"
-        
+
         # Test successful operation
         result = operation_that_can_fail("success")
         assert result == "success"
-        
+
         # Test different error types
         with pytest.raises(ValidationError):
             operation_that_can_fail("validation")
-        
+
         with pytest.raises(ConfigurationError):
             operation_that_can_fail("config")
-        
+
         with pytest.raises(DataError):
             operation_that_can_fail("data")
