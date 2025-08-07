@@ -28,17 +28,17 @@ def clear_instances():
     for model_class in [Faq, FaqTag, Guideline, Category, Check, CheckTool, InfoRef, WcagSc]:
         if hasattr(model_class, '_instances'):
             model_class._instances.clear()
-    
+
     # Clear RelationshipManager singleton
     RelationshipManager._instance = None
-    
+
     yield
-    
+
     # Clear again after test
     for model_class in [Faq, FaqTag, Guideline, Category, Check, CheckTool, InfoRef, WcagSc]:
         if hasattr(model_class, '_instances'):
             model_class._instances.clear()
-    
+
     # Clear RelationshipManager singleton
     RelationshipManager._instance = None
 
@@ -54,12 +54,12 @@ def setup_categories():
         ("dynamic_content", {"ja": "動的コンテンツ", "en": "Dynamic Content"}),
         ("text", {"ja": "テキスト", "en": "Text"})
     ]
-    
+
     categories = []
     for category_id, names in categories_data:
         category = Category(category_id, names)
         categories.append(category)
-    
+
     return categories
 
 
@@ -71,12 +71,12 @@ def setup_faq_tags():
         ("keyboard-operation", {"ja": "キーボード操作", "en": "Keyboard Operation"}),
         ("screen-reader", {"ja": "スクリーンリーダー", "en": "Screen Reader"})
     ]
-    
+
     tags = []
     for tag_id, names in tags_data:
         tag = FaqTag(tag_id, names)
         tags.append(tag)
-    
+
     return tags
 
 
@@ -113,12 +113,12 @@ def setup_wcag_sc():
             }
         })
     ]
-    
+
     wcag_scs = []
     for sc_id, data in wcag_data:
         wcag_sc = WcagSc(sc_id, data)
         wcag_scs.append(wcag_sc)
-    
+
     return wcag_scs
 
 
@@ -147,38 +147,38 @@ def all_check_data():
             "conditions": []
         }
     ]
-    
+
     # Mock Config to avoid dependency issues
     with patch('freee_a11y_gl.models.check.Config') as mock_config:
         mock_config.get_severity_tag.side_effect = lambda severity, lang: {
             ('normal', 'ja'): '[NORMAL]',
             ('high', 'ja'): '[HIGH]'
         }.get((severity, lang), f'[{severity.upper()}]')
-        
+
         mock_config.get_check_target_name.side_effect = lambda target, lang: {
             ('code', 'ja'): 'コード',
             ('design', 'ja'): 'デザイン'
         }.get((target, lang), target)
-        
+
         mock_config.get_platform_name.side_effect = lambda platform, lang: {
             ('web', 'ja'): 'Web',
             ('mobile', 'ja'): 'モバイル'
         }.get((platform, lang), platform)
-        
+
         mock_config.get_list_separator.return_value = '、'
-        
+
         # Mock RelationshipManager
         with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager') as mock_get_rel:
             mock_rel = MagicMock()
             mock_get_rel.return_value = mock_rel
             mock_rel.get_related_objects.return_value = []
             mock_rel.get_sorted_related_objects.return_value = []
-            
+
             checks = []
             for data in checks_data:
                 check = Check(data)
                 checks.append(check)
-    
+
     return checks
 
 
@@ -277,13 +277,13 @@ def all_guideline_data(setup_categories):
             "category": "dynamic_content"
         }
     ]
-    
+
     # Don't mock RelationshipManager for guidelines to allow real relationships
     guidelines = []
     for data in guidelines_data:
         guideline = Guideline(data)
         guidelines.append(guideline)
-    
+
     return guidelines
 
 
@@ -344,13 +344,13 @@ def faq_factory(setup_faq_tags, all_guideline_data):
                 "guidelines": []
             }
         }
-        
+
         if faq_id not in faq_data:
             raise ValueError(f"Unknown FAQ ID: {faq_id}")
-        
+
         # Don't mock RelationshipManager for FAQ creation to allow real relationships
         return Faq(faq_data[faq_id])
-    
+
     return _create_faq
 
 
@@ -409,20 +409,20 @@ def guideline_factory(setup_categories):
                 "platform": ["web"]
             }
         }
-        
+
         if guideline_id not in guidelines_data:
             raise ValueError(f"Unknown Guideline ID: {guideline_id}")
-        
+
         # Mock RelationshipManager for guideline creation
         with patch('freee_a11y_gl.models.content.RelationshipManager') as mock_rel_manager:
             mock_rel = MagicMock()
             mock_rel_manager.return_value = mock_rel
-            
+
             # Create mock category based on guideline data
             mock_category = MagicMock()
             guideline_data = guidelines_data[guideline_id]
             category_id = guideline_data["category"]
-            
+
             if category_id == "markup":
                 mock_category.names = {"ja": "マークアップと実装", "en": "Markup and Implementation"}
                 mock_category.id = "markup"
@@ -435,15 +435,15 @@ def guideline_factory(setup_categories):
                 mock_category.names = {"ja": "テキスト", "en": "Text"}
                 mock_category.id = "text"
                 mock_category.get_name.side_effect = lambda lang: {"ja": "テキスト", "en": "Text"}[lang]
-            
+
             def mock_get_related_objects(obj, relation_type):
                 if relation_type == "category":
                     return [mock_category]
                 return []
-            
+
             mock_rel.get_related_objects.side_effect = mock_get_related_objects
             mock_rel.get_sorted_related_objects.return_value = []
-            
+
             return Guideline(guidelines_data[guideline_id])
-    
+
     return _create_guideline
