@@ -18,11 +18,11 @@ from .axe import AxeRule
 __all__ = [
     # Base
     'BaseModel',
-    
+
     # Content
     'Category',
     'Guideline',
-    
+
     # Checks
     'Check',
     'CheckTool',
@@ -30,15 +30,15 @@ __all__ = [
     'Procedure',
     'Implementation',
     'Method',
-    
+
     # FAQs
     'Faq',
     'FaqTag',
-    
+
     # References
     'WcagSc',
     'InfoRef',
-    
+
     # axe-core
     'AxeRule',
 ]

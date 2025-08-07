@@ -1,3 +1,19 @@
+"""
+freee_a11y_gl - Accessibility Guidelines Library
+
+This package provides a comprehensive framework for managing accessibility guidelines,
+checks, and related content. It includes models for categories, guidelines, checks,
+FAQ articles, and WCAG success criteria, along with utilities for YAML processing,
+validation, and relationship management.
+
+Main components:
+- Models: Category, Guideline, Check, Faq, WcagSc, etc.
+- YAML processing and validation
+- Relationship management between entities
+- Configuration and settings management
+- Message catalog for internationalization
+"""
+
 # Core models
 from .models.content import Category, Guideline
 from .models.check import Check, CheckTool

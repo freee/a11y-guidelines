@@ -1,15 +1,16 @@
 """Check-related models for a11y-guidelines."""
-from typing import Dict, List, Any, Optional, ClassVar
+from typing import Dict, List, Any, Optional, ClassVar, Literal
 from dataclasses import dataclass
-from .base import BaseModel
-from ..relationship_manager import RelationshipManager
-from typing import Literal
-from ..config import Config
 
-LanguageCode = Literal["ja", "en"]
+from .base import BaseModel
+from ..mixins.template_mixin import TemplateDataMixin
+from ..config import Config
 from ..utils import uniq
 
-class Check(BaseModel):
+LanguageCode = Literal["ja", "en"]
+
+
+class Check(BaseModel, TemplateDataMixin):
     """Check model for accessibility validation criteria."""
 
     object_type = "check"
@@ -17,7 +18,7 @@ class Check(BaseModel):
 
     def __init__(self, check: Dict[str, Any]):
         """Initialize check.
-        
+
         Args:
             check: Dictionary containing check data
         """
@@ -25,7 +26,7 @@ class Check(BaseModel):
 
         if self.id in self._instances:
             raise ValueError(f'Duplicate check ID: {self.id}')
-        
+
         self.sort_key = check['sortKey']
         if self.sort_key in [c.sort_key for c in self._instances.values()]:
             raise ValueError(f'Duplicate check sortKey: {self.sort_key}')
@@ -55,52 +56,54 @@ class Check(BaseModel):
 
     def template_data(self, lang: str, **kwargs) -> Dict[str, Any]:
         """Get template data for check.
-        
+
         Args:
             lang: Language code
             **kwargs: Additional template parameters
-            
+
         Returns:
             Dictionary with check data formatted for templates
         """
-        rel = RelationshipManager()
         gl_platform = kwargs.get('platform')
+        rel = self._get_relationship_manager()
 
+        # Start with base template data
         data = {
             'id': self.id,
             'check': self.check_text[lang],
             'severity': Config.get_severity_tag(self.severity, lang),
             'target': Config.get_check_target_name(self.target, lang),
-            'platform': self.join_items(self.platform, lang),
+            'platform': self.join_platform_items(self.platform, lang),
             'guidelines': []
         }
 
         # Add conditions if present
         if self.conditions:
             if not gl_platform:
-                data['conditions'] = [cond.template_data(lang) for cond in self.conditions]
+                data['conditions'] = [cond.template_data(lang)
+                                      for cond in self.conditions]
             else:
                 data['conditions'] = [
-                    cond.template_data(lang) 
-                    for cond in self.conditions 
-                    if cond.platform == 'general' or cond.platform in gl_platform
+                    cond.template_data(lang)
+                    for cond in self.conditions
+                    if (cond.platform == 'general' or
+                        cond.platform in gl_platform)
                 ]
 
         # Add implementations if present
         if self.implementations:
-            data['implementations'] = [impl.template_data(lang) for impl in self.implementations]
+            data['implementations'] = [impl.template_data(lang)
+                                       for impl in self.implementations]
 
-        # Add info references if present
+        # Add related objects using mixin methods
+        self.add_related_objects(data, 'faq')
+
+        # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
             data['info_refs'] = [inforef.refstring() for inforef in info]
 
-        # Add FAQs if present
-        faqs = rel.get_sorted_related_objects(self, 'faq')
-        if faqs:
-            data['faqs'] = [faq.id for faq in faqs]
-
-        # Add guidelines
+        # Add guidelines with special formatting
         for gl in rel.get_sorted_related_objects(self, 'guideline'):
             data['guidelines'].append(gl.get_category_and_id(lang))
 
@@ -108,13 +111,19 @@ class Check(BaseModel):
 
     @staticmethod
     def join_items(items: List[str], lang: str) -> str:
-        """Join platform items with localized separator and platform names."""
-        separator = Config.get_list_separator(lang)
-        platform_names = [
-            Config.get_platform_name(item, lang)
-            for item in items
-        ]
-        return separator.join(platform_names)
+        """Join platform items with localized separator and platform names.
+
+        Static method for backward compatibility with existing API.
+
+        Args:
+            items: List of platform identifiers
+            lang: Language code ('ja' or 'en')
+
+        Returns:
+            Joined string with localized platform names
+        """
+        from ..utils import join_items
+        return join_items(items, lang)
 
     @classmethod
     def list_all_src_paths(cls) -> List[str]:
@@ -123,14 +132,14 @@ class Check(BaseModel):
 
     def object_data(self, baseurl: str = '') -> Dict[str, Any]:
         """Get object data for check.
-        
+
         Args:
             baseurl: Optional base URL prefix
-        
+
         Returns:
             Dictionary with check data formatted for object representation
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         data = {
             'id': self.id,
             'sortKey': self.sort_key,
@@ -143,12 +152,12 @@ class Check(BaseModel):
 
         # Add guidelines
         data['guidelines'] = [gl.link_data() for gl in rel.get_sorted_related_objects(self, 'guideline')]
-        
+
         # Add FAQs if present
         faqs = rel.get_sorted_related_objects(self, 'faq')
         if faqs:
             data['faqs'] = [faq.link_data() for faq in faqs]
-        
+
         # Add info references if present
         info = rel.get_related_objects(self, 'info_ref')
         if info:
@@ -159,13 +168,13 @@ class Check(BaseModel):
             # 親のplatform情報を受け渡しながらconditionsを処理
             conditions_data = []
             condition_statements = []
-            
+
             for condition in self.conditions:
                 # 条件を再帰的に処理（checkのplatformを引き継ぐ）
                 check_platform = self.platform[0] if condition.platform is None and self.platform else None
                 cond_data = condition.object_data(check_platform, is_top=True)
                 conditions_data.append(cond_data)
-                
+
                 # conditionStatementsの生成
                 statement = {
                     'platform': cond_data.get('platform'),  # platformはobject_dataから取得
@@ -191,7 +200,7 @@ class Check(BaseModel):
                         'title': title,
                         'method': method.method
                     })
-            
+
             for platform, methods in implementations.items():
                 platform_key = f'implementation_{platform}'
                 if platform_key not in data:
@@ -207,10 +216,10 @@ class Check(BaseModel):
     @classmethod
     def object_data_all(cls, baseurl: str = '') -> Dict[str, Any]:
         """Get object data for all checks.
-        
+
         Args:
             baseurl: Optional base URL prefix
-            
+
         Returns:
             Dictionary mapping check IDs to their object data
         """
@@ -227,12 +236,13 @@ class Check(BaseModel):
         for check_id in sorted_checks:
             yield cls._instances[check_id].template_data(lang)
 
+
 class Example:
     """Example use of a check procedure."""
 
     def __init__(self, procedure: 'Procedure', check: 'Check'):
         """Initialize example.
-        
+
         Args:
             procedure: The procedure this example demonstrates
             check: The check this example belongs to
@@ -252,6 +262,7 @@ class Example:
         })
         return template_data
 
+
 class CheckTool:
     """Tool used for accessibility checks."""
 
@@ -259,7 +270,7 @@ class CheckTool:
 
     def __init__(self, tool_id: str, names: Dict[str, str]):
         """Initialize check tool.
-        
+
         Args:
             tool_id: Tool identifier
             names: Dictionary of localized names
@@ -271,7 +282,7 @@ class CheckTool:
 
     def add_example(self, example: Example) -> None:
         """Add an example for this tool.
-        
+
         Args:
             example: Example instance to add
         """
@@ -279,10 +290,10 @@ class CheckTool:
 
     def get_name(self, lang: str) -> str:
         """Get localized name for tool.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Localized name, falls back to Japanese
         """
@@ -294,10 +305,10 @@ class CheckTool:
 
     def example_template_data(self, lang: str) -> List[Dict[str, Any]]:
         """Get template data for all examples.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             List of example template data
         """
@@ -327,14 +338,15 @@ class CheckTool:
     @classmethod
     def get_by_id(cls, tool_id: str) -> Optional['CheckTool']:
         """Get tool by ID.
-        
+
         Args:
             tool_id: Tool identifier
-            
+
         Returns:
             Tool instance if found, None otherwise
         """
         return cls._instances.get(tool_id)
+
 
 @dataclass
 class YouTube:
@@ -349,6 +361,7 @@ class YouTube:
             'title': self.title
         }
 
+
 @dataclass
 class Method:
     """Implementation method for a check."""
@@ -357,7 +370,7 @@ class Method:
 
     def template_data(self, lang: str) -> Dict[str, str]:
         """Get template data for method.
-        
+
         Args:
             lang: Language code
         """
@@ -365,6 +378,7 @@ class Method:
             'platform': Config.get_platform_name(self.platform, lang),
             'method': self.method[lang]
         }
+
 
 @dataclass
 class Implementation:
@@ -383,19 +397,20 @@ class Implementation:
             'methods': [method.template_data(lang) for method in self.methods]
         }
 
+
 class Procedure:
     """Check procedure for validation."""
 
     def __init__(self, condition: Dict[str, Any], check: 'Check'):
         """Initialize procedure.
-        
+
         Args:
             condition: Dictionary containing procedure data
             check: Parent check instance
         """
         self.id = condition['id']
         tool_name = condition['tool']
-        
+
         # Get or create tool
         if tool_name in CheckTool.list_all_ids():
             tool = CheckTool.get_by_id(tool_name)
@@ -444,12 +459,13 @@ class Procedure:
             'procedure': self.procedure
         }
 
+
 class Condition:
     """Check condition for validation."""
 
     def __init__(self, condition: Dict[str, Any], check: 'Check'):
         """Initialize condition.
-        
+
         Args:
             condition: Dictionary containing condition data
             check: Parent check instance
@@ -508,16 +524,16 @@ class Condition:
 
     def object_data(self, parent_platform: Optional[str] = None, is_top: bool = True) -> Dict[str, Any]:
         """Get object data for condition.
-        
+
         Args:
             parent_platform: Optional platform from parent condition
             is_top: Whether this is a top-level condition
-            
+
         Returns:
             Dictionary containing condition data
         """
         data = {'type': self.type}
-        
+
         # プラットフォームの解決（自身のplatformがNoneの場合は親から継承）
         platform = parent_platform if self.platform is None else self.platform
 

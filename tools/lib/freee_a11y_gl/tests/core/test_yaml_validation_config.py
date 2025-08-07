@@ -6,7 +6,9 @@ import pytest
 import sys
 from unittest.mock import patch, MagicMock
 from freee_a11y_gl.config import Config
-from freee_a11y_gl.yaml_validator import YamlValidator, ValidationError
+from freee_a11y_gl.yaml_validator import YamlValidator
+from freee_a11y_gl.yaml_validator import ValidationError as YamlValidationError
+from freee_a11y_gl.exceptions import ValidationError
 from freee_a11y_gl.settings import settings
 
 
@@ -49,14 +51,14 @@ class TestYamlValidationConfig:
     def test_set_validation_mode_valid(self):
         """Test setting valid validation modes."""
         valid_modes = ["strict", "warning", "disabled"]
-        
+
         for mode in valid_modes:
             Config.set_yaml_validation_mode(mode)
             assert Config.get_yaml_validation_mode() == mode
 
     def test_set_validation_mode_invalid(self):
-        """Test setting invalid validation mode raises ValueError."""
-        with pytest.raises(ValueError, match="Invalid validation mode"):
+        """Test setting invalid validation mode raises ValidationError."""
+        with pytest.raises(ValidationError, match="validation mode must be one of"):
             Config.set_yaml_validation_mode("invalid_mode")
 
     def test_config_initialize_with_validation_override(self):
@@ -68,7 +70,7 @@ class TestYamlValidationConfig:
                 }
             }
         )
-        
+
         assert Config.get_yaml_validation_mode() == "warning"
 
     def test_yaml_validator_initialization_with_mode(self):
@@ -78,13 +80,13 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator_strict = YamlValidator("/mock/schema", "strict")
             assert validator_strict.validation_mode == "strict"
-            
+
             validator_warning = YamlValidator("/mock/schema", "warning")
             assert validator_warning.validation_mode == "warning"
-            
+
             validator_disabled = YamlValidator("/mock/schema", "disabled")
             assert validator_disabled.validation_mode == "disabled"
 
@@ -94,9 +96,9 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema", "disabled")
-            
+
             # Should return True without performing validation
             result = validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
             assert result is True
@@ -107,13 +109,13 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema", "strict")
-            
+
             # Mock successful validation
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
                 mock_validate.return_value = None  # No exception means success
-                
+
                 result = validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
                 assert result is True
                 mock_validate.assert_called_once_with({}, "test_schema", "/mock/file.yaml")
@@ -124,14 +126,14 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema", "strict")
-            
+
             # Mock validation failure
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
-                mock_validate.side_effect = ValidationError("Test validation error")
-                
-                with pytest.raises(ValidationError, match="Test validation error"):
+                mock_validate.side_effect = YamlValidationError("Test validation error")
+
+                with pytest.raises(YamlValidationError, match="Test validation error"):
                     validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
 
     def test_validate_with_mode_warning_success(self):
@@ -140,13 +142,13 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema", "warning")
-            
+
             # Mock successful validation
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
                 mock_validate.return_value = None  # No exception means success
-                
+
                 result = validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
                 assert result is True
 
@@ -156,16 +158,16 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('json.load'), \
              patch('os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema", "warning")
-            
+
             # Mock validation failure
             with patch.object(validator, 'validate_yaml_data') as mock_validate:
-                mock_validate.side_effect = ValidationError("Test validation error")
-                
+                mock_validate.side_effect = YamlValidationError("Test validation error")
+
                 with patch('builtins.print') as mock_print:
                     result = validator.validate_with_mode({}, "test_schema", "/mock/file.yaml")
-                    
+
                     # Should return False and print warning
                     assert result is False
                     mock_print.assert_called_once()
@@ -177,7 +179,7 @@ class TestYamlValidationConfig:
         """Test integration with initializer configuration."""
         # Set validation mode to disabled
         Config.set_yaml_validation_mode("disabled")
-        
+
         # Mock all the dependencies to avoid file system operations
         with patch('freee_a11y_gl.initializer.get_src_path') as mock_get_src_path, \
              patch('freee_a11y_gl.initializer.process_static_entity_file'), \
@@ -186,10 +188,10 @@ class TestYamlValidationConfig:
              patch('freee_a11y_gl.initializer.RelationshipManager') as mock_rel_manager, \
              patch('freee_a11y_gl.initializer.CheckTool'), \
              patch('freee_a11y_gl.initializer.YamlValidator') as mock_validator_class:
-            
+
             mock_get_src_path.return_value = {
                 'checks': '/mock/checks',
-                'guidelines': '/mock/guidelines', 
+                'guidelines': '/mock/guidelines',
                 'faq': '/mock/faq',
                 'gl_categories': '/mock/categories.json',
                 'wcag_sc': '/mock/wcag.json',
@@ -197,11 +199,11 @@ class TestYamlValidationConfig:
                 'info': '/mock/info.json'
             }
             mock_rel_manager.return_value.resolve_faqs.return_value = None
-            
+
             # Import and call setup_instances
             from freee_a11y_gl.initializer import setup_instances
             setup_instances('/mock/basedir')
-            
+
             # Verify YamlValidator was initialized with disabled mode
             # The call should include the schema directory path and validation mode
             mock_validator_class.assert_called_once()
@@ -215,22 +217,22 @@ class TestYamlValidationConfig:
              patch('builtins.open'), \
              patch('freee_a11y_gl.yaml_validator.json.load'), \
              patch('freee_a11y_gl.yaml_validator.os.path.abspath'):
-            
+
             validator = YamlValidator("/mock/schema")  # Default mode should be strict
             assert validator.validation_mode == "strict"
-            
+
             # The original validate_yaml_data method should still work
             with patch.object(validator, 'schemas', {'test': {}}), \
                  patch.object(validator, 'resolvers', {'test': MagicMock()}), \
                  patch('freee_a11y_gl.yaml_validator.Draft202012Validator') as mock_validator_class:
-                
+
                 mock_validator_instance = MagicMock()
                 mock_validator_class.return_value = mock_validator_instance
                 mock_validator_instance.iter_errors.return_value = []  # No errors
-                
+
                 # Should not raise exception
                 validator.validate_yaml_data({}, "test", "/mock/file.yaml")
-                
+
                 # Verify validator was called
                 mock_validator_class.assert_called_once()
                 mock_validator_instance.iter_errors.assert_called_once_with({})
@@ -238,17 +240,17 @@ class TestYamlValidationConfig:
     def test_settings_validation_config_structure(self):
         """Test that settings properly validate ValidationConfig structure."""
         from freee_a11y_gl.settings import ValidationConfig
-        
+
         # Test valid configurations
         valid_config = ValidationConfig(yaml_validation="strict")
         assert valid_config.yaml_validation == "strict"
-        
+
         valid_config = ValidationConfig(yaml_validation="warning")
         assert valid_config.yaml_validation == "warning"
-        
+
         valid_config = ValidationConfig(yaml_validation="disabled")
         assert valid_config.yaml_validation == "disabled"
-        
+
         # Test default value
         default_config = ValidationConfig()
         assert default_config.yaml_validation == "strict"
@@ -256,7 +258,7 @@ class TestYamlValidationConfig:
     def test_settings_global_config_with_validation(self):
         """Test that GlobalConfig properly includes ValidationConfig."""
         from freee_a11y_gl.settings import GlobalConfig, LanguageConfig, PathConfig, ValidationConfig, AxeCoreConfig
-        
+
         axe_core_config = AxeCoreConfig(
             submodule_name="vendor/axe-core",
             base_dir="vendor/axe-core",
@@ -266,7 +268,7 @@ class TestYamlValidationConfig:
             locale_dir="locales",
             locale_ja_file="ja.json"
         )
-        
+
         config = GlobalConfig(
             languages=LanguageConfig(available=["ja", "en"], default="ja"),
             base_url="https://example.com",
@@ -274,9 +276,9 @@ class TestYamlValidationConfig:
             validation=ValidationConfig(yaml_validation="warning"),
             axe_core=axe_core_config
         )
-        
+
         assert config.validation.yaml_validation == "warning"
-        
+
         # Test with default validation config
         config_default = GlobalConfig(
             languages=LanguageConfig(available=["ja", "en"], default="ja"),
@@ -284,5 +286,5 @@ class TestYamlValidationConfig:
             paths=PathConfig(guidelines="/categories/", faq="/faq/"),
             axe_core=axe_core_config
         )
-        
+
         assert config_default.validation.yaml_validation == "strict"

@@ -168,9 +168,9 @@ def all_check_data():
         mock_config.get_list_separator.return_value = '、'
         
         # Mock RelationshipManager
-        with patch('freee_a11y_gl.models.check.RelationshipManager') as mock_rel_manager:
+        with patch('freee_a11y_gl.models.base.BaseModel._get_relationship_manager') as mock_get_rel:
             mock_rel = MagicMock()
-            mock_rel_manager.return_value = mock_rel
+            mock_get_rel.return_value = mock_rel
             mock_rel.get_related_objects.return_value = []
             mock_rel.get_sorted_related_objects.return_value = []
             

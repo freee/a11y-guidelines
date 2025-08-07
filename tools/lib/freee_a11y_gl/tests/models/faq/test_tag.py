@@ -1,7 +1,7 @@
 import pytest
 from freee_a11y_gl.models.faq.tag import FaqTag
 from freee_a11y_gl.models.faq.article import Faq
-from freee_a11y_gl.relationship_manager import RelationshipManager
+
 
 class TestFaqTag:
     @pytest.fixture(autouse=True)
@@ -57,7 +57,7 @@ class TestFaqTag:
             "tags": ["axe"]
         }
         Faq(mock_faq)
-        
+
         template_data = tag.template_data("ja")
         assert template_data["tag"] == "axe"
         assert template_data["label"] == "axe"
