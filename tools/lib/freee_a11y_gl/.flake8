@@ -1,0 +1,17 @@
+[flake8]
+max-line-length = 88
+extend-ignore = E203,W503,E501
+exclude = 
+    build/,
+    dist/,
+    *.egg-info/,
+    __pycache__/,
+    .git/,
+    .tox/,
+    .venv/,
+    venv/
+per-file-ignores =
+    # Allow unused imports in __init__.py files
+    __init__.py:F401
+    # Allow longer lines in test files for readability
+    tests/*:E501
