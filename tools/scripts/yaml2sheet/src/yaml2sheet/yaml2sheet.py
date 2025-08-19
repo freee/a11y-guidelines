@@ -33,7 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '-c', '--config',
         type=str,
-        help='Path to configuration file (supported formats: yaml, toml, ini)'
+        help='Path to configuration file (YAML format only)'
     )
     
     parser.add_argument(
@@ -222,7 +222,7 @@ def main() -> int:
 
         # Generate checklist
         logger.info(f"Starting checklist generation in {env_type} environment")
-        generator = ChecklistSheetGenerator(credentials, spreadsheet_id, editor_email)
+        generator = ChecklistSheetGenerator(credentials, spreadsheet_id, editor_email, config)
         generator.generate_checklist(source_data, initialize=args.init)
         logger.info(f"Checklist generation completed successfully")
         return 0

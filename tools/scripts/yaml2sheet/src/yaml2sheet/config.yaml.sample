@@ -8,3 +8,4 @@ sheet_editor_email: email@example.com
 log_level: INFO  # DEBUG, INFO, WARNING, ERROR, CRITICAL
 basedir: /path/to/a11y-guidelines  # The root directory of the Guidelines project
 base_url: https://a11y-guidelines.freee.co.jp  # Base URL for the Guidelines
+version_info_cell: A27  # Cell position for version info (Excel format like A27, B15, etc.)
