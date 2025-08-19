@@ -39,6 +39,7 @@ class TestApplicationConfig:
         assert config.log_level == "INFO"
         assert config.basedir is None
         assert config.base_url == "https://a11y-guidelines.freee.co.jp"
+        assert config.version_info_cell == "A27"
     
     
     def test_get_log_level(self):
@@ -160,6 +161,52 @@ class TestApplicationConfig:
         assert config.credentials_path == abs_creds
         assert config.token_path == abs_token
 
+    def test_version_info_cell_validation_valid(self):
+        """Test valid version_info_cell formats."""
+        valid_cells = ["A27", "B15", "Z100", "AA1", "AB123"]
+        for cell in valid_cells:
+            config = ApplicationConfig(version_info_cell=cell)
+            assert config.version_info_cell == cell.upper()
+
+    def test_version_info_cell_validation_invalid(self):
+        """Test invalid version_info_cell formats."""
+        invalid_cells = ["A", "27", "A27B", "1A", "A-27", ""]
+        for cell in invalid_cells:
+            with pytest.raises(ValueError, match="version_info_cell must be in Excel format"):
+                ApplicationConfig(version_info_cell=cell)
+
+    def test_parse_version_info_cell_simple(self):
+        """Test parsing simple cell references."""
+        config = ApplicationConfig(version_info_cell="A27")
+        row_index, column_index = config.parse_version_info_cell()
+        assert row_index == 26  # 0-based
+        assert column_index == 0  # A = 0
+
+        config = ApplicationConfig(version_info_cell="B15")
+        row_index, column_index = config.parse_version_info_cell()
+        assert row_index == 14  # 0-based
+        assert column_index == 1  # B = 1
+
+    def test_parse_version_info_cell_multi_column(self):
+        """Test parsing multi-column cell references."""
+        config = ApplicationConfig(version_info_cell="AA1")
+        row_index, column_index = config.parse_version_info_cell()
+        assert row_index == 0  # 0-based
+        assert column_index == 26  # AA = 26
+
+        config = ApplicationConfig(version_info_cell="AB10")
+        row_index, column_index = config.parse_version_info_cell()
+        assert row_index == 9  # 0-based
+        assert column_index == 27  # AB = 27
+
+    def test_parse_version_info_cell_case_insensitive(self):
+        """Test that cell parsing is case insensitive."""
+        config = ApplicationConfig(version_info_cell="a27")
+        row_index, column_index = config.parse_version_info_cell()
+        assert row_index == 26
+        assert column_index == 0
+        assert config.version_info_cell == "A27"  # Should be normalized to uppercase
+
 
 class TestConfigLoaders:
     """Test configuration file loaders."""
@@ -194,9 +241,6 @@ class TestConfigLoaders:
         
         with pytest.raises(ValueError, match="Invalid YAML in config file"):
             loader.load(invalid_yaml_file)
-    
-    
-    
 
 
 class TestFindConfigFile:
@@ -337,6 +381,7 @@ class TestCreateDefaultConfig:
         assert data["token_path"] == "token.json"
         assert data["log_level"] == "INFO"
         assert data["base_url"] == "https://a11y-guidelines.freee.co.jp"
+        assert data["version_info_cell"] == "A27"
     
     
     def test_create_default_config_default_path(self, temp_dir):

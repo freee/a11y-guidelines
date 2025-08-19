@@ -9,7 +9,13 @@ from yaml2sheet.utils import (
     format_statement_summary,
     l10n_string,
     adjust_sheet_size,
-    create_version_info_request
+    create_version_info_request,
+    get_generated_data_start_column,
+    get_generated_data_end_column,
+    get_result_column_index,
+    get_calculated_result_column_index,
+    column_index_to_letter,
+    has_generated_data
 )
 
 
@@ -423,7 +429,7 @@ class TestCreateVersionInfoRequest:
     """Test create_version_info_request function."""
     
     def test_create_version_info_request_basic(self):
-        """Test basic version info request creation."""
+        """Test basic version info request creation with default parameters."""
         request = create_version_info_request("1.0.0", "2024-01-01", 123)
         
         expected = {
@@ -446,6 +452,52 @@ class TestCreateVersionInfoRequest:
             }
         }
         assert request == expected
+
+    def test_create_version_info_request_custom_position(self):
+        """Test version info request creation with custom cell position."""
+        # Test B15 position (row_index=14, column_index=1)
+        request = create_version_info_request("2.0.0", "2024-02-01", 456, 
+                                            row_index=14, column_index=1)
+        
+        expected = {
+            'updateCells': {
+                'rows': [{
+                    'values': [{
+                        'userEnteredValue': {
+                            'stringValue': 'チェックリスト・バージョン：2.0.0 (2024-02-01)'
+                        }
+                    }]
+                }],
+                'fields': 'userEnteredValue',
+                'range': {
+                    'sheetId': 456,
+                    'startRowIndex': 14,  # B15 (0-based)
+                    'endRowIndex': 15,
+                    'startColumnIndex': 1,  # Column B
+                    'endColumnIndex': 2
+                }
+            }
+        }
+        assert request == expected
+
+    def test_create_version_info_request_different_positions(self):
+        """Test version info request with various cell positions."""
+        test_cases = [
+            # (row_index, column_index, description)
+            (0, 0, "A1"),
+            (9, 25, "Z10"),
+            (99, 26, "AA100"),
+        ]
+        
+        for row_idx, col_idx, description in test_cases:
+            request = create_version_info_request("1.0", "2024-01-01", 123,
+                                                row_index=row_idx, column_index=col_idx)
+            
+            range_info = request['updateCells']['range']
+            assert range_info['startRowIndex'] == row_idx, f"Failed for {description}"
+            assert range_info['endRowIndex'] == row_idx + 1, f"Failed for {description}"
+            assert range_info['startColumnIndex'] == col_idx, f"Failed for {description}"
+            assert range_info['endColumnIndex'] == col_idx + 1, f"Failed for {description}"
     
     def test_create_version_info_request_empty_version(self):
         """Test version info request with empty version."""

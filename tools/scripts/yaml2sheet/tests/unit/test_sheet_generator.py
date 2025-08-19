@@ -1239,3 +1239,348 @@ class TestChecklistSheetGenerator:
                 for i, header_id in enumerate(header_ids):
                     expected_name = COLUMN_INFO['name'].get(header_id, {}).get(lang, header_id)
                     assert headers[i] == expected_name
+
+    def test_protected_ranges_setter(self, mock_credentials, mock_service):
+        """Test protected_ranges property setter."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Test setting protected_ranges
+            test_ranges = {123: [456, 789]}
+            generator.protected_ranges = test_ranges
+            
+            assert generator.protected_ranges == test_ranges
+            assert generator.spreadsheet_manager.protected_ranges == test_ranges
+
+    def test_add_generated_data_subcheck_with_conditions(self, mock_credentials, mock_service):
+        """Test adding generated data for subcheck with conditions."""
+        check = {
+            'id': '0001-sub-01',
+            'isSubcheck': True,
+            'conditions': [
+                {
+                    'target': 'designWeb',
+                    'type': 'simple',
+                    'procedure': {'id': '0001-sub-01-proc'}
+                }
+            ]
+        }
+        
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            row_data = []
+            id_to_row = {'0001': 2, '0001-sub-01': 3, '0001-sub-01-proc': 3}  # Add procedure ID mapping
+            
+            generator._add_generated_data(check, 'designWeb', 'ja', row_data, id_to_row)
+            
+            assert len(row_data) == 2
+            # First cell should be empty for subchecks
+            assert row_data[0].value is None
+            assert row_data[0].protection is True
+            # Second cell should reference parent row
+            assert row_data[1].type == CellType.FORMULA
+            assert row_data[1].protection is True
+
+    def test_add_generated_data_simple_check_no_conditions(self, mock_credentials, mock_service):
+        """Test adding generated data for simple check without conditions."""
+        check = {
+            'id': '0001',
+            'isSubcheck': False
+            # No conditions
+        }
+        
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            row_data = []
+            id_to_row = {'0001': 2}
+            
+            generator._add_generated_data(check, 'designWeb', 'ja', row_data, id_to_row)
+            
+            assert len(row_data) == 2
+            # Should have formula cells for simple checks without conditions
+            assert row_data[0].type == CellType.FORMULA
+            assert row_data[0].protection is True
+            assert row_data[1].type == CellType.FORMULA
+            assert row_data[1].protection is True
+
+    def test_execute_batch_update_with_exception(self, mock_credentials, mock_service):
+        """Test execute_batch_update with exception handling."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Mock generate_batch_requests to raise an exception
+            with patch.object(generator, 'generate_batch_requests') as mock_generate:
+                mock_generate.side_effect = Exception("Test exception")
+                
+                with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                    with pytest.raises(Exception, match="Test exception"):
+                        generator.execute_batch_update()
+                    
+                    # Verify error was logged
+                    mock_logger.error.assert_called_once()
+                    assert "Error executing batch update" in str(mock_logger.error.call_args)
+
+    def test_execute_sheet_creation_requests_with_sheets(self, mock_credentials, mock_service):
+        """Test _execute_sheet_creation_requests with actual sheet creation requests."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Mock batch_update response
+            mock_service.spreadsheets().batchUpdate().execute.return_value = {
+                'replies': [
+                    {
+                        'addSheet': {
+                            'properties': {
+                                'sheetId': 123,
+                                'title': 'Test Sheet'
+                            }
+                        }
+                    }
+                ]
+            }
+            
+            initial_requests = [
+                {
+                    'addSheet': {
+                        'properties': {
+                            'title': 'Test Sheet'
+                        }
+                    }
+                }
+            ]
+            
+            with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                generator._execute_sheet_creation_requests(initial_requests)
+                
+                # Verify logging
+                mock_logger.info.assert_called_once()
+                assert "Creating sheets" in str(mock_logger.info.call_args)
+
+    def test_generate_batch_requests_unknown_sheet_name(self, mock_credentials, mock_service):
+        """Test generate_batch_requests with unknown sheet name."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Add a sheet with unknown name that doesn't match TARGET_NAMES
+            sheet = SheetStructure(name='Unknown Sheet', sheet_id=None)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN)]
+            ]
+            generator.sheets['Unknown Sheet'] = sheet
+            
+            with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                requests, pending_formats = generator.generate_batch_requests()
+                
+                # Should log warning about unknown target_id
+                mock_logger.warning.assert_called_once()
+                assert "Could not find target_id for sheet: Unknown Sheet" in str(mock_logger.warning.call_args)
+
+    def test_add_sheet_content_requests_with_exception(self, mock_credentials, mock_service):
+        """Test _add_sheet_content_requests with exception handling."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            sheet = SheetStructure(name='Test Sheet', sheet_id=123)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN)]
+            ]
+            
+            requests = []
+            
+            # Mock _adjust_sheet_size to raise an exception
+            with patch.object(generator, '_adjust_sheet_size') as mock_adjust:
+                mock_adjust.side_effect = Exception("Adjust sheet size error")
+                
+                with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                    with pytest.raises(Exception, match="Adjust sheet size error"):
+                        generator._add_sheet_content_requests(requests, 123, sheet)
+                    
+                    # Verify error was logged
+                    mock_logger.error.assert_called_once()
+                    assert "Error processing sheet content" in str(mock_logger.error.call_args)
+
+    def test_add_data_update_requests_chunking(self, mock_credentials, mock_service):
+        """Test _add_data_update_requests with chunking for large datasets."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Create large dataset that will require chunking
+            large_data = []
+            for i in range(150):  # More than CHUNK_SIZE (100)
+                large_data.append([CellData(f'Data{i}', CellType.PLAIN)])
+            
+            requests = []
+            
+            with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                generator._add_data_update_requests(requests, 123, large_data)
+                
+                # Should create multiple updateCells requests due to chunking
+                update_requests = [req for req in requests if 'updateCells' in req]
+                assert len(update_requests) == 2  # 150 rows / 100 chunk size = 2 chunks
+                
+                # Verify debug logging for chunking
+                mock_logger.debug.assert_called()
+
+    def test_add_column_visibility_requests_no_generated_data_no_subchecks(self, mock_credentials, mock_service):
+        """Test _add_column_visibility_requests for target without generated data."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = 'productWeb'  # Target without generated data
+            
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('', CellType.PLAIN)]  # No subchecks
+            ]
+            
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+            
+            # Should have requests to reset visibility and hide column B
+            visibility_requests = [req for req in requests if 'updateDimensionProperties' in req]
+            assert len(visibility_requests) == 2  # Reset all + hide column B
+            
+            # Check that column B (index 1) is hidden
+            hide_request = next(req for req in visibility_requests if req['updateDimensionProperties']['range']['startIndex'] == 1)
+            assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
+
+    def test_add_column_visibility_requests_with_generated_data_with_subchecks(self, mock_credentials, mock_service):
+        """Test _add_column_visibility_requests for target with generated data and subchecks."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = 'designWeb'  # Target with generated data
+            
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('SubcheckData', CellType.PLAIN)]  # Has subchecks
+            ]
+            
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+            
+            # Should have requests to reset visibility, hide column C, and merge A-B
+            visibility_requests = [req for req in requests if 'updateDimensionProperties' in req]
+            merge_requests = [req for req in requests if 'mergeCells' in req]
+            
+            assert len(visibility_requests) == 2  # Reset all + hide column C
+            assert len(merge_requests) == 1  # Merge A-B
+            
+            # Check that column C (index 2) is hidden
+            hide_request = next(req for req in visibility_requests if req['updateDimensionProperties']['range']['startIndex'] == 2)
+            assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
+
+    def test_create_rich_text_cell_absolute_url(self, mock_credentials, mock_service):
+        """Test creating rich text cell with absolute URL."""
+        links = [
+            {
+                'text': {'ja': 'テストリンク', 'en': 'Test link'},
+                'url': {'ja': 'https://example.com/absolute', 'en': 'https://example.com/absolute'}
+            }
+        ]
+        
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            cell = generator._create_rich_text_cell(links, 'ja')
+            
+            assert cell.type == CellType.RICH_TEXT
+            assert cell.value['text'] == 'テストリンク'
+            
+            format_run = cell.value['format_runs'][0]
+            # Should use absolute URL as-is
+            assert format_run['format']['link']['uri'] == 'https://example.com/absolute'
+
+    def test_create_rich_text_cell_missing_base_url(self, mock_credentials, mock_service):
+        """Test creating rich text cell with relative URL when base_url is missing."""
+        links = [
+            {
+                'text': {'ja': 'テストリンク', 'en': 'Test link'},
+                'url': {'ja': '/relative-url', 'en': '/relative-url'}
+            }
+        ]
+        
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            # Mock freee_a11y_gl.settings to return empty base_url
+            with patch('freee_a11y_gl.settings') as mock_settings:
+                mock_settings.get.return_value = ''
+                
+                generator = ChecklistSheetGenerator(
+                    credentials=mock_credentials,
+                    spreadsheet_id='test_spreadsheet_id'
+                )
+                
+                cell = generator._create_rich_text_cell(links, 'ja')
+                
+                assert cell.type == CellType.RICH_TEXT
+                format_run = cell.value['format_runs'][0]
+                # Should use relative URL as-is when base_url is empty
+                assert format_run['format']['link']['uri'] == '/relative-url'
+
+    def test_process_update_batches_with_error_handling(self, mock_credentials, mock_service):
+        """Test _process_update_batches with error handling."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            
+            # Mock batch_update to fail on first batch but succeed on second
+            call_count = 0
+            def mock_batch_update(requests):
+                nonlocal call_count
+                call_count += 1
+                if call_count == 1:
+                    raise Exception("First batch error")
+                return {}
+            
+            generator.api_client.batch_update = mock_batch_update
+            
+            # Create requests that will be split into multiple batches
+            update_requests = [{'updateCells': {}} for _ in range(75)]  # 2 batches with BATCH_SIZE=50
+            
+            with patch('yaml2sheet.sheet_generator.logger') as mock_logger:
+                generator._process_update_batches(update_requests)
+                
+                # Should log error for first batch but continue with second
+                error_calls = [call for call in mock_logger.error.call_args_list if 'Error in batch' in str(call)]
+                assert len(error_calls) == 1
+                
+                # Should log completion for both batches
+                info_calls = [call for call in mock_logger.info.call_args_list if 'Processing batch' in str(call)]
+                assert len(info_calls) == 2

@@ -451,7 +451,7 @@ class TestMain:
         mock_load_config.assert_called_once_with(None)
         mock_get_creds.assert_called_once_with(mock_config)
         mock_process_yaml.assert_called_once_with('/test/basedir')
-        mock_generator_class.assert_called_once_with(mock_creds, 'test_spreadsheet_id', 'test@example.com')
+        mock_generator_class.assert_called_once_with(mock_creds, 'test_spreadsheet_id', 'test@example.com', mock_config)
         mock_generator.generate_checklist.assert_called_once_with(mock_source_data, initialize=False)
     
     @patch('yaml2sheet.yaml2sheet.parse_args')

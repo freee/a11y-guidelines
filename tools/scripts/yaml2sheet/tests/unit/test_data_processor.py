@@ -8,6 +8,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from yaml2sheet.data_processor import DataProcessor
 from yaml2sheet.sheet_structure import CheckInfo
+from yaml2sheet.utils import format_statement_summary
 
 
 class TestDataProcessor:
@@ -238,15 +239,13 @@ class TestDataProcessor:
         assert check['subchecks'] == {}
     
     def test_format_statement_summary(self):
-        """Test _format_statement_summary method."""
-        processor = DataProcessor()
-        
+        """Test format_statement_summary function from utils."""
         statement = {
             'ja': 'テストが動作する',
             'en': 'the test works'
         }
         
-        result = processor._format_statement_summary(statement)
+        result = format_statement_summary(statement)
         
         expected = {
             'ja': 'テストが動作することを確認する。',
