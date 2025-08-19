@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2sheet"
-version = "0.1.4"
+version = "0.2.0"
 description = "Generate checklist in Google Sheets from YAML data"
 readme = "README.md"
 authors = [
@@ -13,7 +13,6 @@ authors = [
 dependencies = [
     "google-api-python-client>=2.0.0",
     "google-auth-oauthlib>=1.0.0",
-    "toml>=0.10.0",
     "freee_a11y_gl>=0.2.2"
 ]
 requires-python = ">=3.8"

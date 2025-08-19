@@ -2,6 +2,7 @@ from typing import Dict, List, Optional
 import logging
 from .sheet_structure import SheetStructure
 from .config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
+from .utils import get_generated_data_start_column, get_generated_data_end_column, get_result_column_index, has_generated_data
 
 logger = logging.getLogger(__name__)
 
@@ -139,9 +140,9 @@ class SheetFormatter:
         })
 
         # Add conditoinal formatting if there are generated data columns
-        if COLUMNS[self.current_target]['generatedData']:
-            generated_column_start = len(COLUMNS['idCols']) + 1
-            generated_column_end = len(COLUMNS['idCols']) + len(COLUMNS[self.current_target]['generatedData'])
+        if has_generated_data(self.current_target):
+            generated_column_start = get_generated_data_start_column() + 1
+            generated_column_end = get_generated_data_end_column(self.current_target)
             # Pass condition formatting for generated check results
             requests.append({
                 'addConditionalFormatRule': {
@@ -197,7 +198,7 @@ class SheetFormatter:
         Returns:
             int: Index of result column
         """
-        return len(COLUMNS['idCols']) + len(COLUMNS[self.current_target]['generatedData'])
+        return get_result_column_index(self.current_target)
 
     def add_protection_settings(self, sheet_id: int, sheet: SheetStructure) -> List[Dict]:
         """Add sheet protection settings
@@ -213,8 +214,8 @@ class SheetFormatter:
         data_length = len(sheet.data)
         
         # Protect generated data columns if present
-        if COLUMNS[self.current_target]['generatedData']:
-            generated_data_start = len(COLUMNS['idCols'])
+        if has_generated_data(self.current_target):
+            generated_data_start = get_generated_data_start_column()
             generated_data_count = len(COLUMNS[self.current_target]['generatedData'])
             
             protection_request = {

@@ -2,11 +2,13 @@ from typing import List, Dict, Optional
 from dataclasses import dataclass, field
 from .cell_data import CellData
 
+
 @dataclass
 class ColumnProperties:
     """Properties for a spreadsheet column"""
     width: int
     hidden: bool = False
+
 
 @dataclass
 class SheetStructure:
@@ -19,6 +21,7 @@ class SheetStructure:
     data: List[List[CellData]] = field(default_factory=list)
     conditional_formats: List[Dict] = field(default_factory=list)
     protected_ranges: List[Dict] = field(default_factory=list)
+
 
 @dataclass
 class CheckInfo:
