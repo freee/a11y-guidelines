@@ -87,3 +87,11 @@ body {
     outline: 2px dashed #5b9dd9;
     outline-offset: 2px;
 }
+
+/* フッターの関連サイトへのリンク */
+.related-sites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-block: 1rem;
+}
