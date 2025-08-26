@@ -229,7 +229,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          RELEASE_NOTES_FILE="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}-html/ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
+          RELEASE_NOTES_FILE="${ASSET_DIR}/ja/source/intro/ChangeLog/${TAG:0:4}/${TAG}.rst"
           if [ -f "$RELEASE_NOTES_FILE" ]; then
             gh release create ${TAG} \
               --title "Ver. ${TAG}" \
