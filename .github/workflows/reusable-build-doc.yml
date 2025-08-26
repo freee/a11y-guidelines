@@ -183,7 +183,7 @@ jobs:
           if [ $SPHINX_VER != "requirements.txt" ]; then
             pip install "sphinx${SPHINX_VER}"
           fi
-          if [ THEME_VER != "requirements.txt" ]; then
+          if [ $THEME_VER != "requirements.txt" ]; then
             pip install "sphinx_rtd_theme${THEME_VER}"
           fi
         working-directory: ${{ github.workspace }}
