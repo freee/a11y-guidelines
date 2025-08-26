@@ -208,7 +208,7 @@ jobs:
 
       - name: Prepare release asset
         run: |
-          ASSET_DIR="${GITHUB_WORKSPACE}/a11y-guidelines-${TAG}"
+          ASSET_DIR="${GITHUB_WORKSPACE}/freee-a11y-guidelines-${TAG}"
           mkdir -p "${ASSET_DIR}"
           
           echo "Processing artifacts..."
