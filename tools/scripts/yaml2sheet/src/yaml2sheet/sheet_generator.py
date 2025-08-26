@@ -2,126 +2,95 @@ import logging
 from typing import Dict, List, Any, Optional
 import json
 from google.oauth2.credentials import Credentials
+# Import build for backward compatibility with tests
 from googleapiclient.discovery import build
 
 from .config import TARGET_NAMES, LANGS, COLUMN_INFO, CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
+from .config_loader import ApplicationConfig
 from .sheet_structure import SheetStructure, CheckInfo
 from .cell_data import CellData, CellType
 from .condition_formatter import ConditionFormatter
 from .sheet_formatter import SheetFormatter
 from .data_processor import DataProcessor
+from .sheet_api_client import SheetsAPIClient
+from .spreadsheet_manager import SpreadsheetManager
+from .row_data_builder import RowDataBuilder
+from .column_manager import ColumnManager
+from .sheet_content_manager import SheetContentManager
+from .batch_update_manager import BatchUpdateManager
 from .utils import create_version_info_request, adjust_sheet_size
+from .sheet_structure_builder import SheetStructureBuilder
 
 logger = logging.getLogger(__name__)
 
 class ChecklistSheetGenerator:
     """Generates Google Sheets checklists from source data"""
     
-    def __init__(self, credentials: Credentials, spreadsheet_id: str):
+    def __init__(self, credentials: Credentials, spreadsheet_id: str, 
+                 editor_email: str = "", config: Optional[ApplicationConfig] = None):
         """Initialize the generator
         
         Args:
             credentials: Google API credentials
             spreadsheet_id: Target spreadsheet ID
+            editor_email: Email address of editor for protected ranges
+            config: Application configuration (optional)
         """
-        self.service = build('sheets', 'v4', credentials=credentials)
+        # Store initialization parameters
+        self.credentials = credentials
         self.spreadsheet_id = spreadsheet_id
+        self.editor_email = editor_email
+        self.config = config
+        
+        # Initialize new architecture components
+        self.api_client = SheetsAPIClient(credentials, spreadsheet_id)
+        self.spreadsheet_manager = SpreadsheetManager(self.api_client)
+        
+        # Backward compatibility: expose service at top level
+        self.service = self.api_client.service
+        
+        # For backward compatibility with tests that expect immediate API calls during init,
+        # we need to trigger the loading of existing sheets if the service creation succeeded
+        # This ensures that any API errors during sheet loading are raised during initialization
+        try:
+            # Try to access existing_sheets property to trigger loading
+            _ = self.existing_sheets
+        except Exception:
+            # If there's an error loading sheets, re-raise it to maintain test compatibility
+            raise
+        
+        # Initialize other attributes
         self.sheets: Dict[str, SheetStructure] = {}
-        self.existing_sheets: Dict[str, Dict[str, Any]] = {}
         self.current_lang: str = 'ja'
         self.current_target: str = ''
         self.data_processor = DataProcessor()
-        self._load_existing_sheets()
 
-    def _load_existing_sheets(self) -> None:
-        """Load existing sheet information including protected ranges from spreadsheet"""
-        try:
-            # スプレッドシートの基本情報を取得
-            spreadsheet = self.service.spreadsheets().get(
-                spreadsheetId=self.spreadsheet_id
-            ).execute()
+    @property
+    def existing_sheets(self) -> Dict[str, Dict[str, Any]]:
+        """Backward compatibility: expose existing_sheets from spreadsheet_manager"""
+        self.spreadsheet_manager._ensure_sheets_loaded()
+        return self.spreadsheet_manager.existing_sheets
 
-            logger.debug("Loading existing sheets")            
-            self.existing_sheets = {}
-            self.protected_ranges = {}  # 保護範囲情報を格納する辞書
-            
-            for sheet in spreadsheet.get('sheets', []):
-                properties = sheet['properties']
-                title = properties['title']
-                sheet_id = properties['sheetId']
-                logger.debug(f"Found existing sheet: '{title}'")
-                self.existing_sheets[title] = {
-                    'sheetId': sheet_id,
-                    'index': properties.get('index', 0)
-                }
-                
-                # 保護範囲情報があれば取得
-                if 'protectedRanges' in sheet:
-                    self.protected_ranges[sheet_id] = [
-                        protected_range.get('protectedRangeId')
-                        for protected_range in sheet.get('protectedRanges', [])
-                        if 'protectedRangeId' in protected_range
-                    ]
-                    if self.protected_ranges[sheet_id]:
-                        logger.debug(f"Found {len(self.protected_ranges[sheet_id])} protected ranges in sheet '{title}'")
-            
-            logger.debug(f"Loaded existing sheets: {list(self.existing_sheets.keys())}")
-            
-            # 保護範囲の詳細情報を取得
-            if any(self.protected_ranges.values()):
-                try:
-                    # 保護範囲の詳細情報を取得するには別のAPI呼び出しが必要
-                    protected_ranges_response = self.service.spreadsheets().getByDataFilter(
-                        spreadsheetId=self.spreadsheet_id,
-                        body={
-                            "dataFilters": [
-                                {"developerMetadataLookup": {"metadataKey": "protectedRanges"}}
-                            ]
-                        }
-                    ).execute()
-                    
-                    # 追加の処理が必要であれば、ここに書く
-                    # 必要に応じて protected_ranges_response からさらに詳細情報を抽出
-                    
-                except Exception as e:
-                    # 詳細情報の取得に失敗してもプログラムを続行する
-                    logger.warning(f"Failed to get detailed protected ranges info: {e}")
-        except Exception as e:
-            logger.error(f"Error loading existing sheets: {e}")
-            raise
+    @existing_sheets.setter
+    def existing_sheets(self, value: Dict[str, Dict[str, Any]]) -> None:
+        """Backward compatibility: allow setting existing_sheets for tests"""
+        self.spreadsheet_manager.existing_sheets = value
+        self.spreadsheet_manager._sheets_loaded = True
+
+    @property
+    def protected_ranges(self) -> Dict[int, List[int]]:
+        """Backward compatibility: expose protected_ranges from spreadsheet_manager"""
+        self.spreadsheet_manager._ensure_sheets_loaded()
+        return self.spreadsheet_manager.protected_ranges
+
+    @protected_ranges.setter
+    def protected_ranges(self, value: Dict[int, List[int]]) -> None:
+        """Backward compatibility: allow setting protected_ranges for tests"""
+        self.spreadsheet_manager.protected_ranges = value
 
     def initialize_spreadsheet(self) -> None:
         """Initialize spreadsheet by removing extra sheets"""
-        try:
-            spreadsheet = self.service.spreadsheets().get(
-                spreadsheetId=self.spreadsheet_id
-            ).execute()
-            
-            # Delete sheets after first
-            if len(spreadsheet.get('sheets', [])) > 1:
-                delete_requests = [
-                    {'deleteSheet': {'sheetId': sheet['properties']['sheetId']}}
-                    for sheet in spreadsheet['sheets'][1:]
-                ]
-                
-                if delete_requests:
-                    self.service.spreadsheets().batchUpdate(
-                        spreadsheetId=self.spreadsheet_id,
-                        body={'requests': delete_requests}
-                    ).execute()
-                    logger.info("Deleted existing sheets except the first one")
-            
-            # Reset existing sheets info
-            self.existing_sheets = {
-                spreadsheet['sheets'][0]['properties']['title']: {
-                    'sheetId': spreadsheet['sheets'][0]['properties']['sheetId'],
-                    'index': 0
-                }
-            }
-            
-        except Exception as e:
-            logger.error(f"Error initializing spreadsheet: {e}")
-            raise
+        self.spreadsheet_manager.initialize_spreadsheet()
 
     def prepare_sheet_structure(
         self,
@@ -144,37 +113,24 @@ class ChecklistSheetGenerator:
         self.current_lang = lang
         self.current_target = target_id
         
-        logger.info(f"Preparing sheet structure: target_id={target_id}, target_name={target_name}, lang={lang}")
-        sheet = SheetStructure(name=target_name, sheet_id=None)
-        
-        # Prepare headers
-        headers = self.get_headers(target_id, lang)
-        header_row = []
-        for header in headers:
-            header_row.append(CellData(
-                value=header,
-                type=CellType.PLAIN,
-                formatting={"textFormat": {"bold": True}}
-            ))
-        sheet.data.append(header_row)
-        
-        # Map IDs to rows
-        id_to_row = self._create_id_row_mapping(checks)
-        
-        # Prepare data rows
-        for check in checks:
-            row_data = self.prepare_row_data(check, target_id, lang, id_to_row)
-            sheet.data.append(row_data)
-        
-        # Add conditional formatting
-        data_length = len(sheet.data)
-        formatter = SheetFormatter(self.current_lang, self.current_target)
-        sheet.conditional_formats.extend(formatter.add_conditional_formatting(sheet.sheet_id, data_length))
-        
-        return sheet
+        # Use the new SheetStructureBuilder
+        builder = SheetStructureBuilder(self.editor_email)
+        return builder.build_sheet_structure(target_id, target_name, lang, checks)
 
-    def get_headers(self, target_id: str, lang: str) -> List[str]:
-        """Get column headers for sheet
+    def get_header_ids(self, target_id: str) -> List[str]:
+        """Get column IDs for sheet
+        
+        Args:
+            target_id: Target identifier
+            
+        Returns:
+            List[str]: Column IDs
+        """
+        column_manager = ColumnManager(target_id)
+        return column_manager.get_header_ids()
+
+    def get_header_names(self, target_id: str, lang: str) -> List[str]:
+        """Get localized column header names for sheet
         
         Args:
             target_id: Target identifier
@@ -183,35 +139,8 @@ class ChecklistSheetGenerator:
         Returns:
             List[str]: Localized header names
         """
-        # Column groups in order
-        id_headers = COLUMNS['idCols']
-        generated_headers = COLUMNS[target_id]['generatedData']
-        user_headers = COLUMNS['userEntered']
-        plain_headers = [
-            *COLUMNS['common']['plainData1'],
-            *COLUMNS[target_id]['plainData1'],
-            *COLUMNS['common']['plainData2'],
-            *COLUMNS[target_id]['plainData2']
-        ]
-        link_headers = [
-            *COLUMNS[target_id]['linkData'],
-            *COLUMNS['common']['linkData']
-        ]
-        
-        # All headers in order
-        all_headers = [
-            *id_headers,
-            *generated_headers,
-            *user_headers,
-            *plain_headers,
-            *link_headers
-        ]
-        
-        # Get localized names
-        return [
-            COLUMN_INFO['name'].get(header, {}).get(lang, header)
-            for header in all_headers
-        ]
+        column_manager = ColumnManager(target_id)
+        return column_manager.get_header_names(lang)
 
     def prepare_row_data(
         self,
@@ -231,30 +160,9 @@ class ChecklistSheetGenerator:
         Returns:
             List[CellData]: List of prepared cell data
         """
-        row_data = []
-        
-        # Add ID columns
-        for header in COLUMNS['idCols']:
-            row_data.append(CellData(
-                value=check[header],
-                type=CellType.PLAIN,
-                formatting={'numberFormat': {'type': 'TEXT', 'pattern': '0000'}}
-            ))
-            
-        # Add generated data if needed
-        if COLUMNS[target_id]['generatedData']:
-            self._add_generated_data(check, target_id, lang, row_data, id_to_row)
-            
-        # Add user entry columns
-        self._add_user_entry_columns(check, target_id, lang, row_data)
-        
-        # Add plain data columns
-        self._add_plain_data_columns(check, target_id, lang, row_data)
-        
-        # Add link columns
-        self._add_link_columns(check, target_id, lang, row_data)
-        
-        return row_data
+        # Use the new RowDataBuilder
+        row_builder = RowDataBuilder(lang, target_id)
+        return row_builder.prepare_row_data(check, target_id, lang, id_to_row)
 
     def _add_generated_data(
         self,
@@ -283,6 +191,9 @@ class ChecklistSheetGenerator:
         
         formatter = ConditionFormatter(CHECK_RESULTS, FINAL_CHECK_RESULTS, target_id)
         
+        # Calculate column for calculatedResult (second generatedData column) - define once for all cases
+        calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
+        
         if check.get('conditions'):
             for condition in check['conditions']:
                 if condition['target'] == target_id:
@@ -290,8 +201,6 @@ class ChecklistSheetGenerator:
                     
                     if not is_subcheck:
                         # Parent check
-                        # Calculate column for calculatedResult (second generatedData column)
-                        calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
                         ref_col = f'{calc_col}{id_to_row[check["id"]]}'
                         row_data.extend([
                             CellData(
@@ -321,8 +230,7 @@ class ChecklistSheetGenerator:
                     
         # Simple check case
         if not is_subcheck:
-            # Calculate column positions
-            calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
+            # Calculate result column position
             result_col = chr(ord('A') + len(COLUMNS['idCols']) + len(COLUMNS[target_id]['generatedData']))
             result_cell = f'{result_col}{id_to_row[check["id"]]}'
             calc_cell = f'{calc_col}{id_to_row[check["id"]]}'
@@ -343,8 +251,7 @@ class ChecklistSheetGenerator:
                 )
             ])
         else:
-            # Calculate column for calculatedResult
-            calc_col = chr(ord('A') + len(COLUMNS['idCols']) + 1)  # +1 for finalResult
+            # Subcheck case
             parent_id = check['id'].split('-')[0]
             parent_row = id_to_row[parent_id]
             row_data.extend([
@@ -512,76 +419,6 @@ class ChecklistSheetGenerator:
             type=CellType.RICH_TEXT
         )
 
-    def _create_id_row_mapping(self, checks: List[Dict]) -> Dict[str, int]:
-        """Create mapping of IDs to row numbers
-        
-        Args:
-            checks: List of checks
-            
-        Returns:
-            Dict[str, int]: Mapping of IDs to row numbers
-        """
-        id_to_row = {}
-        current_row = 2  # Start after header
-        
-        for check in checks:
-            if check.get('isSubcheck'):
-                continue
-                
-            check_id = check['id']
-            id_to_row[check_id] = current_row
-            
-            # Map procedure IDs
-            if check.get('conditions'):
-                for condition in check['conditions']:
-                    if condition['target'] == self.current_target:
-                        if condition['type'] == 'simple':
-                            proc_id = condition['procedure']['id']
-                            id_to_row[proc_id] = current_row
-                        else:
-                            self._map_procedure_ids(condition, id_to_row, current_row)
-
-            # Map subcheck IDs
-            subchecks = check.get('subchecks', {}).get(self.current_target, {})
-            if subchecks and 'conditions' in subchecks:
-                subcheck_count = len(subchecks['conditions'])
-                
-                for i, subcheck in enumerate(subchecks['conditions'], start=1):
-                    subcheck_row = current_row + i
-                    id_to_row[subcheck['id']] = subcheck_row
-                    
-                    if subcheck.get('conditions'):
-                        for condition in subcheck['conditions']:
-                            if condition['type'] == 'simple':
-                                proc_id = condition['procedure']['id']
-                                id_to_row[proc_id] = subcheck_row
-                            else:
-                                self._map_procedure_ids(condition, id_to_row, subcheck_row)
-                
-                current_row += subcheck_count
-                
-            current_row += 1
-
-        return id_to_row
-
-    def _map_procedure_ids(
-        self,
-        condition: Dict,
-        id_to_row: Dict[str, int],
-        row: int
-    ) -> None:
-        """Map procedure IDs to rows
-        
-        Args:
-            condition: Condition to process
-            id_to_row: ID to row mapping to update
-            row: Current row number
-        """
-        if condition['type'] == 'simple':
-            id_to_row[condition['procedure']['id']] = row
-        else:
-            for cond in condition['conditions']:
-                self._map_procedure_ids(cond, id_to_row, row)
 
     def generate_checklist(self, source_data: Dict[str, Any], initialize: bool = False) -> None:
         """Generate complete checklist with progress reporting
@@ -593,7 +430,6 @@ class ChecklistSheetGenerator:
         if initialize:
             logger.info("Initializing spreadsheet (removing existing sheets)")
             self.initialize_spreadsheet()
-            self._load_existing_sheets()
 
         # Store version info for later use
         self._version_info = {
@@ -644,66 +480,104 @@ class ChecklistSheetGenerator:
             initial_requests, pending_formats = self.generate_batch_requests()
             
             # Execute sheet creation requests
-            creation_requests = [req for req in initial_requests if 'addSheet' in req]
-            if creation_requests:
-                logger.info(f"Creating sheets: {[req.get('addSheet', {}).get('properties', {}).get('title') for req in creation_requests]}")
-                creation_response = self.service.spreadsheets().batchUpdate(
-                    spreadsheetId=self.spreadsheet_id,
-                    body={'requests': creation_requests}
-                ).execute()
-                
-                # Update sheet IDs
-                for reply in creation_response.get('replies', []):
-                    if 'addSheet' in reply:
-                        sheet_id = reply['addSheet']['properties']['sheetId']
-                        sheet_title = reply['addSheet']['properties']['title']
-                        self.existing_sheets[sheet_title] = {
-                            'sheetId': sheet_id,
-                            'index': 0
-                        }
+            self._execute_sheet_creation_requests(initial_requests)
 
             # Generate and execute remaining updates
-            update_requests, _ = self.generate_batch_requests()
-            update_requests = [req for req in update_requests if 'addSheet' not in req]
-            
-            if update_requests:
-                # Add version info request
-                if hasattr(self, '_version_info'):
-                    first_sheet_id = self.get_first_sheet_id()
-                    version_update_request = create_version_info_request(
-                        self._version_info['version'],
-                        self._version_info['date'],
-                        first_sheet_id
-                    )
-                    update_requests.append(version_update_request)
-                
-                # Process in smaller batches to avoid timeouts
-                BATCH_SIZE = 50  # Reduced batch size to avoid timeout
-                total_requests = len(update_requests)
-                logger.info(f"Updating {total_requests} sheet contents in smaller batches")
-                
-                # タイムアウト回避のためのバッチ処理
-                for i in range(0, total_requests, BATCH_SIZE):
-                    end_idx = min(i + BATCH_SIZE, total_requests)
-                    batch = update_requests[i:end_idx]
-                    logger.info(f"Processing batch {i//BATCH_SIZE + 1}/{(total_requests-1)//BATCH_SIZE + 1}: requests {i+1}-{end_idx} of {total_requests}")
-                    
-                    try:
-                        # タイムアウト設定を長めに
-                        self.service.spreadsheets().batchUpdate(
-                            spreadsheetId=self.spreadsheet_id,
-                            body={'requests': batch}
-                        ).execute()
-                        logger.info(f"Batch {i//BATCH_SIZE + 1} completed successfully")
-                    except Exception as e:
-                        logger.error(f"Error in batch {i//BATCH_SIZE + 1}: {e}")
-                        # エラーが発生しても次のバッチを続行
-                
-                logger.info(f"All sheet updates completed")
+            self._execute_sheet_update_requests()
                                 
         except Exception as e:
             logger.error(f"Error executing batch update: {e}")
             raise
+
+    def _execute_sheet_creation_requests(self, initial_requests: List[Dict]) -> None:
+        """Execute sheet creation requests and update sheet IDs
+        
+        Args:
+            initial_requests: List of all initial requests
+        """
+        creation_requests = [req for req in initial_requests if 'addSheet' in req]
+        if not creation_requests:
+            return
+            
+        logger.info(f"Creating sheets: {[req.get('addSheet', {}).get('properties', {}).get('title') for req in creation_requests]}")
+        creation_response = self.api_client.batch_update(creation_requests)
+        
+        # Update sheet IDs
+        for reply in creation_response.get('replies', []):
+            if 'addSheet' in reply:
+                sheet_id = reply['addSheet']['properties']['sheetId']
+                sheet_title = reply['addSheet']['properties']['title']
+                self.spreadsheet_manager.update_sheet_info(sheet_title, sheet_id, 0)
+
+    def _execute_sheet_update_requests(self) -> None:
+        """Execute sheet update requests in batches"""
+        update_requests, _ = self.generate_batch_requests()
+        update_requests = [req for req in update_requests if 'addSheet' not in req]
+        
+        if not update_requests:
+            return
+            
+        # Add version info request
+        self._add_version_info_request(update_requests)
+        
+        # Process in smaller batches to avoid timeouts
+        self._process_update_batches(update_requests)
+
+    def _add_version_info_request(self, update_requests: List[Dict]) -> None:
+        """Add version info request if version info is available
+        
+        Args:
+            update_requests: List of update requests to append to
+        """
+        if hasattr(self, '_version_info') and hasattr(self, 'config') and self.config:
+            first_sheet_id = self.get_first_sheet_id()
+            row_index, column_index = self.config.parse_version_info_cell()
+            version_update_request = create_version_info_request(
+                self._version_info['version'],
+                self._version_info['date'],
+                first_sheet_id,
+                row_index=row_index,
+                column_index=column_index
+            )
+            update_requests.append(version_update_request)
+        elif hasattr(self, '_version_info'):
+            # Fallback to default behavior if no config is provided
+            first_sheet_id = self.get_first_sheet_id()
+            version_update_request = create_version_info_request(
+                self._version_info['version'],
+                self._version_info['date'],
+                first_sheet_id
+            )
+            update_requests.append(version_update_request)
+
+    def _process_update_batches(self, update_requests: List[Dict]) -> None:
+        """Process update requests in batches to avoid timeouts
+        
+        Args:
+            update_requests: List of update requests to process
+        """
+        BATCH_SIZE = 50  # Reduced batch size to avoid timeout
+        total_requests = len(update_requests)
+        logger.info(f"Updating {total_requests} sheet contents in smaller batches")
+        
+        # タイムアウト回避のためのバッチ処理
+        for i in range(0, total_requests, BATCH_SIZE):
+            end_idx = min(i + BATCH_SIZE, total_requests)
+            batch = update_requests[i:end_idx]
+            batch_num = i//BATCH_SIZE + 1
+            total_batches = (total_requests-1)//BATCH_SIZE + 1
+            
+            logger.info(f"Processing batch {batch_num}/{total_batches}: requests {i+1}-{end_idx} of {total_requests}")
+            
+            try:
+                # タイムアウト設定を長めに
+                self.api_client.batch_update(batch)
+                logger.info(f"Batch {batch_num} completed successfully")
+            except Exception as e:
+                logger.error(f"Error in batch {batch_num}: {e}")
+                # エラーが発生しても次のバッチを続行
+        
+        logger.info(f"All sheet updates completed")
 
     def generate_batch_requests(self) -> tuple[List[Dict], Dict]:
         """Generate batch update requests
@@ -720,7 +594,7 @@ class ChecklistSheetGenerator:
             data_length = len(sheet.data)
             column_count = len(sheet.data[0]) if sheet.data else 26
 
-            logger.debug(f"Processing sheet '{sheet_name}', exists: {sheet_name in self.existing_sheets}")
+            logger.debug(f"Processing sheet '{sheet_name}', exists: {self.spreadsheet_manager.sheet_exists(sheet_name)}")
 
             # Get target ID and language
             target_id = None
@@ -741,11 +615,11 @@ class ChecklistSheetGenerator:
                 continue
 
             # Handle existing or new sheet
-            if sheet_name in self.existing_sheets:
-                sheet_id = self.existing_sheets[sheet_name]['sheetId']
+            if self.spreadsheet_manager.sheet_exists(sheet_name):
+                sheet_id = self.spreadsheet_manager.get_sheet_id(sheet_name)
                 logger.debug(f"Updating existing sheet: {sheet_name} (id: {sheet_id})")
                 
-                formatter = SheetFormatter(current_lang, target_id)
+                formatter = SheetFormatter(current_lang, target_id, self.editor_email)
 
                 # Add content and formatting
                 self._add_sheet_content_requests(requests, sheet_id, sheet)
@@ -814,17 +688,7 @@ class ChecklistSheetGenerator:
 
     def _adjust_sheet_size(self, sheet_id: int, sheet_name: str, data_length: int, column_count: int) -> None:
         """Adjust sheet size if needed"""
-        spreadsheet = self.service.spreadsheets().get(
-            spreadsheetId=self.spreadsheet_id,
-            ranges=[sheet_name],
-            includeGridData=False
-        ).execute()
-        
-        grid_properties = None
-        for s in spreadsheet['sheets']:
-            if s['properties']['title'] == sheet_name:
-                grid_properties = s['properties']['gridProperties']
-                break
+        grid_properties = self.spreadsheet_manager.get_sheet_grid_properties(sheet_name)
                 
         if grid_properties:
             current_rows = grid_properties.get('rowCount', 1000)
@@ -837,10 +701,7 @@ class ChecklistSheetGenerator:
             
             if size_requests:
                 logger.debug("Executing size adjustment requests")
-                self.service.spreadsheets().batchUpdate(
-                    spreadsheetId=self.spreadsheet_id,
-                    body={'requests': size_requests}
-                ).execute()
+                self.api_client.batch_update(size_requests)
 
     def _add_clear_content_request(
         self,
@@ -944,7 +805,7 @@ class ChecklistSheetGenerator:
         data_length: int
     ) -> None:
         """Add formatting and protection requests"""
-        formatter = SheetFormatter(self.current_lang, self.current_target)
+        formatter = SheetFormatter(self.current_lang, self.current_target, self.editor_email)
         
         # Basic formatting
         requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
@@ -1069,7 +930,7 @@ class ChecklistSheetGenerator:
         Returns:
             List[int]: List of column widths
         """
-        headers = self.get_headers(self.current_target, self.current_lang)
+        headers = self.get_header_ids(self.current_target)
         return [
             COLUMN_INFO['width'].get(header, 100)
             for header in headers
@@ -1084,5 +945,33 @@ class ChecklistSheetGenerator:
         Raises:
             KeyError: If no sheets exist
         """
-        first_sheet_name = next(iter(self.existing_sheets))
-        return self.existing_sheets[first_sheet_name]['sheetId']
+        return self.spreadsheet_manager.get_first_sheet_id()
+
+    # Backward compatibility methods for tests
+    def _create_id_row_mapping(self, checks: List[Dict]) -> Dict[str, int]:
+        """Create mapping of IDs to row numbers (backward compatibility)
+        
+        Args:
+            checks: List of checks
+            
+        Returns:
+            Dict[str, int]: Mapping of IDs to row numbers
+        """
+        builder = SheetStructureBuilder(self.editor_email)
+        return builder._create_id_row_mapping(checks, self.current_target)
+
+    def _map_procedure_ids(
+        self,
+        condition: Dict,
+        id_to_row: Dict[str, int],
+        row: int
+    ) -> None:
+        """Map procedure IDs to rows (backward compatibility)
+        
+        Args:
+            condition: Condition to process
+            id_to_row: ID to row mapping to update
+            row: Current row number
+        """
+        builder = SheetStructureBuilder(self.editor_email)
+        builder._map_procedure_ids(condition, id_to_row, row)

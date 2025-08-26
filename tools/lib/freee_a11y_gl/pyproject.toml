@@ -4,17 +4,44 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "freee_a11y_gl"
-version = "0.1.0"
+version = "0.2.2"
 description = "A module to process a11y guidelines data"
 authors = [
     {name = "Masafumi NAKANE", email = "max@freee.co.jp"}
 ]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 dependencies = [
     "pyyaml>=6.0",
     "gitpython>=3.1.43",
     "pydantic>=2.7.0"
 ]
 
+[project.optional-dependencies]
+dev = [
+    # Project-specific dev dependencies only
+    # Common dev tools (pytest, black, mypy, etc.) are managed at root level
+    # Install with: pip install -r requirements-dev.txt
+]
+
 [tool.setuptools]
 package-dir = { "" = "src" }
+include-package-data = true
+
+[tool.setuptools.package-data]
+freee_a11y_gl = ["data/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--disable-warnings",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]

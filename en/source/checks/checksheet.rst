@@ -42,6 +42,21 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
+V7.0.0 (Agust 7, 2025)
+======================
+
+*  Revised the check sheet for items whose applicable stage is "Design" and platform is "Web" to match the recording method to the check sheet for items whose applicable stage is "Product" and platform is "Web", and reviewed the check items.
+*  Reviewed some of the check items regarding images of text, integrating check ID: 0481 into :ref:`check-0511`.
+*  Revised the wording and examples of the check methods for items whose applicable stage is "Product" and concern reflow: :ref:`check-0322`.
+*  Added check items regarding reflow to the checks for items whose applicable stage is "Design": :ref:`check-0301`.
+*  Clarified which check items do not need to be performed when the check target is a modal dialog: :ref:`check-0561`, :ref:`check-0631`, :ref:`check-0651`, :ref:`check-0682`, :ref:`check-0801`, :ref:`check-0861`, :ref:`check-0862`.
+*  Reviewed :ref:`check-0171` and created :ref:`check-0173` by separating some of its content.
+*  Reviewed :ref:`check-1312` and created :ref:`check-0174` by separating some of its content.
+*  Added check items for items whose applicable stage is "Design" corresponding to :ref:`check-0174`: :ref:`check-0155`.
+*  Added specific examples for evaluating :ref:`check-0811`
+*  Reviewed some wording
+*  Corrected typographical errors
+
 V6.1.0 (April 18, 2025)
 =======================
 

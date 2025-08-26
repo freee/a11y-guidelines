@@ -8,13 +8,33 @@ platform:
 check:
   ja: |-
     エディット・ボックス、チェックボックス、ラジオボタンなど、フォーム・コントロールの役割が分かるように、付加するべきラベルが設計資料で明示されている。
-
-    Webの場合
-       *  画面上に表示されているテキストまたは代替テキストが付加された画像をラベルとして指定する。
-       *  ``aria-label`` 属性値として指定すべきテキストを明示する。
   en: |-
-    In order to make the roles of form controls, such as edit boxes, checkboxes, and radio buttons understandable, design documentation explicitly specifies the labels to be added.
-
-    For the web:
-       *  Specify text displayed on the screen or images with alternative text as labels.
-       *  Explicitly specify the text that should be designated as the ``aria-label`` attribute value.
+    The design documentation clearly indicates the labels to be assigned to form controls, such as edit boxes, checkboxes, and radio buttons, so that their purpose is easily understood.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0931-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、フォーム・コントロールが存在しない。
+      en: |-
+        There are no form controls on the screen to be checked.
+  - type: simple
+    id: 0931-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        フォーム・コントロールのラベルとして適切なテキストまたは代替テキストが付加された画像が画面上にある場合、設計資料にその対応関係が明示されている。
+      en: |-
+        If there are text or images with alternative text which are appropriate as labels for form controls on the screen, the design documentation clearly specifies the correspondence.
+  - type: simple
+    id: 0931-content-02
+    tool: misc
+    procedure:
+      ja: |-
+        画面上にラベルとして適切なテキストが表示されていない場合、フォーム・コントロールのラベルとして指定すべきテキストとその実装方法（例： ``aria-label`` 属性を利用するなど）が設計資料に明示されている。
+      en: |-
+        If there is no appropriate text displayed on the screen as a label, the design documentation clearly specifies the text to be designated as the label for the form control and how to implement it (e.g., using the ``aria-label`` attribute).

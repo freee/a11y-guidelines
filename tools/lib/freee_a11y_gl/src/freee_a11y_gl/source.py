@@ -1,3 +1,9 @@
+"""Source path utilities for accessibility guidelines data files.
+
+This module provides utilities for locating and accessing various data files
+including YAML guidelines, checks, FAQ files, and JSON configuration files.
+"""
+
 import os
 from typing import Dict, Optional
 
@@ -5,14 +11,15 @@ DATA_DIR = 'data'
 YAML_DIR = 'yaml'
 JSON_DIR = 'json'
 
+
 def get_src_path(basedir: Optional[str] = None) -> Dict[str, str]:
     """
     Get source file paths for various components.
-    
+
     Args:
         basedir: Base directory containing data files.
                 If None, value from settings will be used. If not in settings, defaults to '.'
-        
+
     Returns:
         Dictionary containing paths for different types of source files
     """

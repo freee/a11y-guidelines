@@ -6,12 +6,36 @@ platform:
 - web
 check:
   ja: |-
-    マウスオーバーで表示されるすべてのコンテンツは、以下のすべてを満たす設計になっている:
-
-    *  ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーで消える、など）
-    *  マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合にのみ、マウスオーバーで表示されたコンテンツを非表示にする。
+    マウスオーバーで表示されるすべてのコンテンツは、拡大表示利用時にもユーザーの意図に反して消えない設計になっている。
   en: |-
-    All content displayed on mouseover is designed to meet all of the following criteria:
-
-    *  It is possible to hide the content displayed on mouseover without moving the pointer (e.g., it disappears when the ESC key is pressed).
-    *  The content displayed on mouseover is hidden only if the mouseover state is no longer active, the user performs an action to hide it, or the content becomes invalid.
+    All content displayed on mouseover is designed so that it doesn't disappear against the user's intention even when using the magnification function.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0091-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面に、マウスオーバーで表示されるコンテンツが存在しない。
+      en: |-
+        There is no content displayed on mouseover in the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0091-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる機能が定義されている。（例：ESCキーの押下や表示されたコンテンツ上でのマウス・クリックなど）
+        en: |-
+          A function is defined to hide the content displayed on mouseover without moving the mouse pointer. (e.g. press the ESC key or click the mouse on the displayed content)
+    - type: simple
+      id: 0091-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          マウスオーバーで表示されたコンテンツが非表示になるのは、マウスオーバー状態ではなくなった場合、ユーザーが非表示にする操作を行った場合、内容が無効になった場合のみであることが設計資料に明記されている。
+        en: |-
+          It is clearly stated in the design document that the content displayed on mouseover is hidden only when the mouseover state is removed, the user performs an operation to hide it, or the content becomes invalid.

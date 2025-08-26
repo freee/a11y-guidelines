@@ -1,12 +1,13 @@
 """FAQ article model."""
 import datetime
-from typing import Dict, List, Any, Optional, ClassVar
+from typing import Dict, List, Any
 from ..base import BaseModel
-from ...relationship_manager import RelationshipManager
-from ...settings import settings
+from ...mixins.template_mixin import TemplateDataMixin
+from ...config import Config
 from ...utils import uniq
 
-class Faq(BaseModel):
+
+class Faq(BaseModel, TemplateDataMixin):
     """FAQ article model."""
 
     object_type = "faq"
@@ -14,21 +15,21 @@ class Faq(BaseModel):
 
     def __init__(self, faq: Dict[str, Any]):
         """Initialize FAQ article.
-        
+
         Args:
             faq: Dictionary containing FAQ data
         """
         super().__init__(faq['id'])
         if self.id in self._instances:
             raise ValueError(f'Duplicate FAQ ID: {self.id}')
-        
+
         self.sort_key = faq['sortKey']
         if self.sort_key in [f.sort_key for f in self._instances.values()]:
             raise ValueError(f'Duplicate FAQ sortKey: {self.sort_key}')
 
         self.src_path = faq['src_path']
         self.updated = datetime.datetime.fromisoformat(faq['updated'])
-        
+
         # Store localized content
         self.title = faq['title']
         self.problem = faq['problem']
@@ -40,23 +41,29 @@ class Faq(BaseModel):
 
     def _create_relationships(self, faq: Dict[str, Any]) -> None:
         """Create relationships with other objects."""
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
 
         # Associate tags
         from .tag import FaqTag
         for tag_id in faq['tags']:
+            if not FaqTag.get_by_id(tag_id):
+                raise ValueError(f'Tag ID {tag_id} referenced in FAQ {self.id} does not exist.')
             rel.associate_objects(self, FaqTag.get_by_id(tag_id))
 
         # Associate guidelines if present
         if 'guidelines' in faq:
             from ..content import Guideline
             for gl_id in faq['guidelines']:
+                if not Guideline.get_by_id(gl_id):
+                    raise ValueError(f'Guideline ID {gl_id} referenced in FAQ {self.id} does not exist.')
                 rel.associate_objects(self, Guideline.get_by_id(gl_id))
 
         # Associate checks if present
         if 'checks' in faq:
             from ..check import Check
             for check_id in faq['checks']:
+                if not Check.get_by_id(check_id):
+                    raise ValueError(f'Check ID {check_id} referenced in FAQ {self.id} does not exist.')
                 rel.associate_objects(self, Check.get_by_id(check_id))
 
         # Associate info references if present
@@ -72,9 +79,9 @@ class Faq(BaseModel):
 
     def get_dependency(self) -> List[str]:
         """Get file dependencies for this FAQ."""
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         dependency = [self.src_path]
-        
+
         guidelines = rel.get_related_objects(self, 'guideline')
         if guidelines:
             dependency.extend(gl.src_path for gl in guidelines)
@@ -87,10 +94,10 @@ class Faq(BaseModel):
 
     def link_data(self, baseurl: str = '') -> Dict[str, Dict[str, str]]:
         """Get link data for FAQ.
-        
+
         Args:
             baseurl: Optional base URL prefix
-            
+
         Returns:
             Dictionary with localized text and URLs
         """
@@ -100,25 +107,25 @@ class Faq(BaseModel):
         }
         for lang in self.title.keys():
             data['text'][lang] = self.title[lang]
-            faq_path = settings.get('paths.faq', '/faq/articles/')
-            lang_path = '' if lang == 'ja' else f'/{lang}'  # 言語パスの追加
-            data['url'][lang] = f'{baseurl}{lang_path}{faq_path}{self.id}.html'
+            faq_path = Config.get_faq_path()
+            base_url = Config.get_base_url(lang)
+            data['url'][lang] = f'{baseurl or base_url}{faq_path}{self.id}.html'
         return data
 
     def template_data(self, lang: str) -> Dict[str, Any]:
         """Get template data for FAQ.
-        
+
         Args:
             lang: Language code
-            
+
         Returns:
             Dictionary containing FAQ data formatted for templates
         """
-        rel = RelationshipManager()
+        rel = self._get_relationship_manager()
         tags = rel.get_related_objects(self, 'faq_tag')
-        
+
         # Format date based on language
-        date_format = settings.get(f'locale.{lang}.date_format', '%Y年%-m月%-d日' if lang == 'ja' else '%B %-d, %Y')
+        date_format = Config.get_date_format(lang)
         formatted_date = self.updated.strftime(date_format)
 
         data = {
@@ -145,11 +152,12 @@ class Faq(BaseModel):
             data['checks'] = [check.template_data(lang) for check in checks]
 
         # Add related FAQs if present
-        related_faqs = rel.get_sorted_related_objects(self, 'faq', key='sort_key')
+        related_faqs = rel.get_sorted_related_objects(self, 'faq',
+                                                      key='sort_key')
         if related_faqs:
             data['related_faqs'] = [faq.id for faq in related_faqs]
 
-        # Add info references if present
+        # Add info references (special handling for refstring)
         info = rel.get_related_objects(self, 'info_ref')
         if info:
             data['info'] = [inforef.refstring() for inforef in info]
@@ -159,10 +167,10 @@ class Faq(BaseModel):
     @classmethod
     def list_all(cls, sort_by: str = 'sortKey') -> List['Faq']:
         """Get all FAQ instances sorted by specified key.
-        
+
         Args:
             sort_by: Sorting key ('sortKey' or 'date')
-            
+
         Returns:
             List of FAQ instances sorted by the specified key
         """

@@ -10,3 +10,41 @@ check:
     同じ文脈において、遷移先が同じリンク、目的が同じボタンには、一貫したテキストやアイコンが使われている。
   en: |-
     Consistent text and icons are used for links and buttons with the same destination or purpose in the same context.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0242-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、リンクやボタンが存在しない。
+      en: |-
+        There are no links or buttons on the screen to be checked.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0242-content-01
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象の画面には、リンク先が同じ複数のリンクが存在しない。
+        en: |-
+          There are no multiple links with the same destination on the screen to be checked.
+    - type: simple
+      id: 0242-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          チェック対象の画面には、目的が同じ複数のボタンが存在しない。
+        en: |-
+          There are no multiple buttons with the same purpose on the screen to be checked.
+  - type: simple
+    id: 0242-content-03
+    tool: misc
+    procedure:
+      ja: |-
+        同じ画面に遷移する複数のリンクや、同じ機能を実行する複数のボタンには、一貫したテキストやアイコンが使われている。
+      en: |-
+        Consistent text and icons are used for multiple links that transition to the same screen or multiple buttons that execute the same function on the same screen.

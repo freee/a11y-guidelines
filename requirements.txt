@@ -1,9 +1,14 @@
+# Documentation build dependencies
 wheel
-sphinx >= 3.0
-sphinx_rtd_theme
+sphinx ~= 7.0
+sphinx_rtd_theme ~= 3.0
 sphinxcontrib-trimblank
-jsonschema < 4.18.0
 sphinx-lint
+
+# Shared production dependencies
+jsonschema < 4.18.0
 pytz
+
+# Local packages
 tools/lib/freee_a11y_gl
 tools/scripts/yaml2rst

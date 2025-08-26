@@ -21,7 +21,7 @@ intent:
     Do not cause behaviors that are unexpected for users with visual or cognitive impairments.
 checks:
 - '0152'
-- '0171'
+- '0173'
 info:
 - exp-form-dynamic-content
 - exp-tab-order-check

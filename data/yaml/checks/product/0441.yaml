@@ -48,7 +48,7 @@ conditions:
               *  NVDAで以下の操作をしたとき、画像の内容を適切に表す簡潔な読み上げがされる。
 
                  -  ブラウズ・モードで矢印キーを操作して当該箇所を読み上げさせたとき
-                 -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
+                 -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift+Tab` キーの操作でフォーカスされたとき
 
               *  詳細な説明が必要な画像の場合、以下のいずれかを満たしている。
 
@@ -59,7 +59,7 @@ conditions:
               *  Using NVDA, an appropriate brief description of the image is announced when performing the following:
 
                  -  When reading the part with the image using arrow keys in browse mode
-                 -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.
+                 -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift+Tab` key operation, for focusable images, such as  links.
 
               *  One of the following is true for images that require detailed description
 
@@ -77,7 +77,7 @@ conditions:
               *  macOS VoiceOverで以下の操作をしたとき、画像の内容を適切に表す簡潔な読み上げがされる。
 
                  -  :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で当該箇所を読み上げさせたとき
-                 -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift + Tab` キーの操作でフォーカスされたとき
+                 -  その画像がリンクなど、フォーカスを受け取るものの場合、 :kbd:`Tab` / :kbd:`Shift+Tab` キーの操作でフォーカスされたとき
 
               *  詳細な説明が必要な画像の場合、以下のいずれかを満たしている。
 
@@ -88,7 +88,7 @@ conditions:
               *  Using macOS VoiceOver, an appropriate brief description of the image is announced when performing the following:
 
                 -  When reading the part with the image using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor.
-                -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift + Tab` key operation, for focusable images, such as  links.
+                -  When the image receives focus with :kbd:`Tab` / :kbd:`Shift+Tab` key operation, for focusable images, such as  links.
 
               *  Confirm that one of the following is true for images that require detailed description
 

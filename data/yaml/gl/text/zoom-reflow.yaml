@@ -19,6 +19,7 @@ intent:
   en: |-
     Ensure that individuals with low vision can use the content without issues, even when magnifying it with the zoom function.
 checks:
+- '0301'
 - '0322'
 info:
 - exp-magnification

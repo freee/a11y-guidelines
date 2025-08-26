@@ -1,0 +1,15 @@
+# Testing framework
+pytest==8.0.0
+pytest-cov==4.1.0
+
+# Code quality tools
+black==24.2.0
+isort==5.13.2
+flake8>=7.0.0
+
+# Type checking
+mypy==1.9.0
+types-PyYAML==6.0.12.12
+
+# Performance monitoring
+psutil>=7.0.0

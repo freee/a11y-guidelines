@@ -43,11 +43,21 @@ conditions:
         -  :ref:`axe-rule-landmark-one-main`
         -  :ref:`axe-rule-landmark-unique`
         -  :ref:`axe-rule-region`
-  - type: simple
-    tool: Landmark Navigation via Keyboard or Pop-up
-    id: "0682-misc-01"
-    procedure:
-      ja: |-
-        `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属している。
-      en: |-
-        Every part of the page content is contained in an appropriate ARIA landmark region when viewed using a browser with the `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ extention installed.
+  - type: or
+    conditions:
+    - type: simple
+      tool: misc
+      id: "0682-content-00"
+      procedure:
+        ja: |-
+          チェック対象はモーダル・ダイアログである。
+        en: |-
+          The check target is a modal dialog.
+    - type: simple
+      tool: Landmark Navigation via Keyboard or Pop-up
+      id: "0682-misc-01"
+      procedure:
+        ja: |-
+          `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ をインストールしたブラウザーで表示した際、コンテンツのすべてのパーツが適切なARIAランドマークの領域に属している。
+        en: |-
+          Every part of the page content is contained in an appropriate ARIA landmark region when viewed using a browser with the `Landmark Navigation via Keyboard or Pop-up <https://matatk.agrip.org.uk/landmarks/>`__ extention installed.

@@ -1,0 +1,38 @@
+# Default configuration for freee_a11y_gl
+# This file contains default values for all configuration settings
+# All default values are externalized from Python code for consistency
+
+languages:
+  available: ["ja", "en"]
+  default: "ja"
+
+base_url: "https://a11y-guidelines.freee.co.jp"
+
+paths:
+  guidelines: "/categories/"
+  faq: "/faq/articles/"
+
+validation:
+  yaml_validation: "strict"  # strict | warning | disabled
+
+# axe-core configuration
+axe_core:
+  submodule_name: "vendor/axe-core"
+  base_dir: "vendor/axe-core"
+  deque_url: "https://dequeuniversity.com/rules/axe/"
+  pkg_file: "package.json"
+  rules_dir: "lib/rules"
+  locale_dir: "locales"
+  locale_ja_file: "ja.json"
+
+# Profile-specific configurations
+profiles:
+  yaml2rst:
+    # yaml2rst script specific settings
+    # Inherits all default settings above
+    description: "Configuration profile for yaml2rst script"
+  
+  yaml2sheet:
+    # yaml2sheet script specific settings
+    # Inherits all default settings above
+    description: "Configuration profile for yaml2sheet script"

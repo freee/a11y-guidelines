@@ -14,37 +14,47 @@ check:
     *  The order of appearance of links and buttons within these components is the same on all pages/screens.
 conditions:
 - platform: web
-  type: and
+  type: or
   conditions:
   - type: simple
-    tool: keyboard
-    id: "0801-keyboard-01"
+    tool: misc
+    id: "0801-content-00"
     procedure:
       ja: |-
-        TabキーおよびShift+Tabキーでフォーカスを移動した際、複数のページで移動順序が一貫している。
+        チェック対象はモーダル・ダイアログである。
       en: |-
-        Focus moves in a consistent order across multiple pages when moving the focus using the Tab key and Shift+Tab key.
-  - type: or
+        The check target is a modal dialog.
+  - type: and
     conditions:
     - type: simple
-      tool: nvda
-      id: "0801-nvda-01"
+      tool: keyboard
+      id: "0801-keyboard-01"
       procedure:
         ja: |-
-          NVDAのブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫している。
+          :kbd:`Tab` / :kbd:`Shift+Tab` キーでフォーカスを移動した際、複数のページで移動順序が一貫している。
         en: |-
-          The reading order is consistent across multiple pages when reading the content using the up/down arrow keys in NVDA's browse mode.
-      YouTube:
-        id: GYKStFpsfUw
-        title: 同じ出現順序【NVDAでアクセシビリティー チェック】
-    - type: simple
-      tool: macos-vo
-      id: "0801-macvo-01"
-      procedure:
-        ja: |-
-          macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫している。
-        en: |-
-          The reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
+          Focus moves in a consistent order across multiple pages when moving the focus using the :kbd:`Tab` / :kbd:`Shift+Tab` key.
+    - type: or
+      conditions:
+      - type: simple
+        tool: nvda
+        id: "0801-nvda-01"
+        procedure:
+          ja: |-
+            NVDAのブラウズ・モードで上下矢印キーで読み上げさせたとき、複数のページで読み上げ順序が一貫している。
+          en: |-
+            The reading order is consistent across multiple pages when reading the content using the up/down arrow keys in NVDA's browse mode.
+        YouTube:
+          id: GYKStFpsfUw
+          title: 同じ出現順序【NVDAでアクセシビリティー チェック】
+      - type: simple
+        tool: macos-vo
+        id: "0801-macvo-01"
+        procedure:
+          ja: |-
+            macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによるVoiceOverカーソルの操作で読み上げさせたとき、複数のページで読み上げ順序が一貫している。
+          en: |-
+            The reading order is consistent across multiple pages when reading the content using the :kbd:`VO` key and the left/right arrow keys to operate the VoiceOver cursor with macOS VoiceOver enabled.
 - platform: ios
   type: simple
   tool: ios-vo

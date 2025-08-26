@@ -1,5 +1,5 @@
 id: '0862'
-sortKey: 603900
+sortKey: 603800
 severity: normal
 target: product
 platform:
@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような表示がされている。
+    グローバル・ナビゲーションやパンくずリスト内で、そのページが対応する要素が分かるような表示がされている。
   en: |-
-    There is a visual indication of the location of current page within the global navigation and the breadcrumb list.
+    The display indicates the elements corresponding to the current page within the global navigation and breadcrumb list.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0862-content-00"
+    procedure:
+      ja: |-
+        チェック対象はモーダル・ダイアログである。
+      en: |-
+        The check target is a modal dialog.
+  - type: simple
+    tool: misc
+    id: "0862-content-01"
+    procedure:
+      ja: |-
+        グローバル・ナビゲーションやパンくずリスト内で、そのページが対応する要素が分かるような表示がされている。
+      en: |-
+        The display indicates the elements corresponding to the current page within the global navigation and breadcrumb list.

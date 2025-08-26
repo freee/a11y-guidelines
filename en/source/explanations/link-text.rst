@@ -1,35 +1,35 @@
 .. _exp-link-text:
 
-################################
-リンク先の内容を推測しやすくする
-################################
+############################################
+Making It Easy to Guess the Link Destination
+############################################
 
-リンク先に求めている情報があるかどうかを推測しやすくすることは、どのようなユーザーにとっても使い勝手の向上につながります。
+Making it easier to predict whether a link leads to the desired information improves the user experience for everyone.
 
-リンク先の内容の推測を容易にして、不必要なページ遷移を抑制することは、肢体不自由でマウス操作に時間がかかるなどといった状況のユーザーにとっては特に重要です。
+For users with physical disabilities who take more time to operate a mouse, it is especially important to make it easier to predict the content of a linked page and thereby prevent unnecessary page transitions.
 
-また、スクリーン・リーダーのユーザーは、スクリーン・リーダーが提供するページ中のリンクを一覧表示する機能を用いて、目的のページへのリンクを探す場合があります。
-さらに、 :kbd:`Tab` キーや :kbd:`Shift+Tab` キーを繰り返し押すことでフォーカスを移動させ、目的のリンクを探すユーザーも少なくありません。
-このような場合、リンク・テキスト（ ``a`` 要素の中身）が、リンク先のページの内容を推測できるものになっているかどうかが重要です。
+Additionally, screen reader users may use their screen reader's feature to list all links on a page to find the one they need.
+Many users also find links by repeatedly pressing the :kbd:`Tab` / :kbd:`Shift+Tab` keys to move the focus.
+In these cases, it is crucial that the link text (the content of the ``a`` element) enables users to predict the content of the destination page.
 
-.. list-table:: 注意すべきリンク・テキストの文言の例（「」部分がリンク・テキスト）
+.. list-table:: Examples of problematic link text (link text is in quotation marks)
    :header-rows: 1
 
-   *  -  NG
-      -  OK
-   *  -  ○○は「こちら」
-      -  「○○はこちら」
-   *  -  「もっと見る」
-      -  「○○についてもっと見る」
-   *  -  「詳細」
-      -  「○○についての詳細」
+   *  -  Inadvisable
+      -  Recommended
+   *  -  "Click here" for XX
+      -  "Click here for XX"
+   *  -  "Read more"
+      -  "Read more about XX"
+   *  -  "Details"
+      -  "Details about XX"
 
-また、マークアップによってリンクの意図が明確になっていれば、ガイドラインを満たすことができます。
+You can also meet the guidelines if the link's purpose is clear from the markup.
 
-具体的には、リンク・テキストが同じ複数のリンクがあるページで、以下のような条件を満たしている場合を例として挙げられます。
+Specifically, consider a page with multiple links that have the same link text and meet the following conditions:
 
-*  当該のリンクがページ中の異なるセクションに含まれている場合、見出しが適切にマークアップされていて、各リンクが含まれるセクションが明確になっている
-*  リストの各項目に同じリンク・テキストのリンクがある場合に、適切にリスト・アイテムがマークアップされていて、どのリスト項目に含まれるリンクかが明確になっている
-*  表の各行に同じリンク・テキストがある場合に、適切に ``table`` 要素や関連要素でリンクが含まれる行と列が明確になっている
+*  If the links are in different sections of the page, the headings are properly marked up, making it clear which section each link is in.
+*  If a list contains links with the same link text, the list items are properly marked up, making it clear which list item each link belongs to.
+*  If a table has links with the same link text in each row, the ``table`` element and related elements are properly marked up, making the row and column of each link clear.
 
 .. include:: /inc/info2gl/exp-link-text.rst

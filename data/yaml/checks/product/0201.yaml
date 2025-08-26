@@ -6,8 +6,7 @@ platform:
 - web
 check:
   ja: |-
-    *  Tab/Shift+Tabキーによるフォーカスの移動時、特定の箇所からフォーカスが抜け出せないような状況が発生しない、または
-    *  特定の箇所からフォーカスが抜け出せない状態では、矢印キーやEscキーの押下といった簡単な操作でその状態を抜け出すことができる
+    キーボードのみの操作で、フォーカスが特定の場所に閉じ込められるような状態が発生しない。
 
     特に注意が必要なコンポーネントの例：
 
@@ -15,27 +14,38 @@ check:
     *  ポップアップ・メニュー
     *  モーダル・ダイアログ
   en: |-
-    *  When moving the focus using Tab/Shift+Tab keys, the focus does not get stuck at certain location, or
-    *  If the focus gets stuck at certain location, simple operation such as pressing arrow keys or Esc key gets the focus away from the location
+    No situation occurs where the focus is trapped in a specific location when operating with the keyboard only.
 
-    Examples of components that require special caution:
+    Examples of components that require special attention:
 
-    *  audio and/or video players
-    *  pop-up menus
-    *  modal dialogs
+    *  Video or audio content players
+    *  Popup menus
+    *  Modal dialogs
 conditions:
 - platform: web
-  type: simple
-  tool: keyboard
-  id: "0201-keyboard-01"
-  procedure:
-    ja: |-
-      Tabキーを使って、ページの先頭からフォーカスを順に移動したときの挙動は、以下を満たしている：
-
-      *  TabキーまたはShift+Tabキーを押下しても、特定の場所からフォーカスが抜け出せないような状況が発生しない、または
-      *  TabキーやShift+Tabキーの押下でフォーカスが抜け出せない場合に、矢印キーやEscキーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
-    en: |-
-      Behavior when moving the focus sequentially from the top of the page using the Tab key fulfills the following:
-
-      *  Pressing the Tab key or Shift+Tab key does not cause a situation where the focus cannot escape from a specific location, or
-      *  If the focus cannot escape by pressing the Tab key or Shift+Tab key, it is possible to remove the focus from the corresponding location with simple key operations such as the arrow keys or the Esc key.
+  type: or
+  conditions:
+  - type: simple
+    tool: keyboard
+    id: "0201-keyboard-01"
+    procedure:
+      ja: |-
+        ページの先頭から、 :kbd:`Tab` キーを順に押してフォーカスを移動した際、特定の箇所から抜け出せないような状況が発生しない。
+      en: |-
+        When moving the focus sequentially from the top of the page using the :kbd:`Tab` key, no situation occurs where the focus cannot escape from a specific location.
+  - type: simple
+    tool: keyboard
+    id: "0201-keyboard-02"
+    procedure:
+      ja: |-
+        :kbd:`Tab` / :kbd:`Shift+Tab` キーの押下でフォーカスが抜け出せない場合に、矢印キーや :kbd:`Esc` キーなど、簡単なキー操作でフォーカスを当該箇所から外すことができる。
+      en: |-
+        If the focus cannot escape by pressing the :kbd:`Tab` / :kbd:`Shift+Tab` keys, it can be moved away from that location using simple key operations such as the arrow keys or the :kbd:`Esc` key.
+  - type: simple
+    tool: keyboard
+    id: "0201-keyboard-03"
+    procedure:
+      ja: |-
+        :kbd:`Tab` / :kbd:`Shift+Tab` キーの押下でフォーカスが抜け出せない場合に、そのコンポーネントを非表示にするためのボタンやメニューが存在し、キーボードのみで操作できる。
+      en: |-
+        If the focus cannot escape by pressing the :kbd:`Tab` / :kbd:`Shift+Tab` keys, there is a button or menu to hide that component, and it can be operated using only the keyboard.

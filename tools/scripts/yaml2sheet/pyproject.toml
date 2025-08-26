@@ -4,20 +4,25 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yaml2sheet"
-version = "0.1.1"
+version = "0.2.0"
 description = "Generate checklist in Google Sheets from YAML data"
 readme = "README.md"
 authors = [
     { name = "Masafumi NAKANE", email = "max@freee.co.jp" }
 ]
 dependencies = [
-    "google-api-python-client",
-    "google-auth-oauthlib",
-    "sphinx",
-    "toml",
-    "freee_a11y_gl>=0.1.0"
+    "google-api-python-client>=2.0.0",
+    "google-auth-oauthlib>=1.0.0",
+    "freee_a11y_gl>=0.2.2"
 ]
 requires-python = ">=3.8"
+
+[project.optional-dependencies]
+dev = [
+    # Project-specific dev dependencies only
+    # Common dev tools (pytest, black, mypy, etc.) are managed at root level
+    # Install with: pip install -r requirements-dev.txt
+]
 
 [tool.setuptools]
 package-dir = {"" = "src"}

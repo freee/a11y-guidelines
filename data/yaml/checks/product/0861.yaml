@@ -1,5 +1,5 @@
 id: '0861'
-sortKey: 603800
+sortKey: 603900
 severity: normal
 target: product
 platform:
@@ -14,6 +14,14 @@ conditions:
 - platform: web
   type: or
   conditions:
+  - type: simple
+    tool: misc
+    id: "0861-content-00"
+    procedure:
+      ja: |-
+        チェック対象はモーダル・ダイアログである。
+      en: |-
+        The check target is a modal dialog.
   - type: simple
     tool: nvda
     id: "0861-nvda-01"

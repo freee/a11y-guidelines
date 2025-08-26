@@ -1,18 +1,17 @@
 """Reference models for accessibility standards and citations."""
-from typing import Dict, List, Optional, Any, ClassVar
+from typing import Dict, List, Optional, Any
 from urllib.parse import quote as url_encode
 from dataclasses import dataclass
 from .base import BaseModel
-from ..relationship_manager import RelationshipManager
 import re
-from ..config import Config, LanguageCode
-from ..utils import tag2sc
+
 
 @dataclass
 class LocalizedReference:
     """Container for localized reference data."""
     title: Dict[str, str]
     url: Dict[str, str]
+
 
 class WcagSc(BaseModel):
     """Web Content Accessibility Guidelines (WCAG) Success Criteria."""
@@ -22,7 +21,7 @@ class WcagSc(BaseModel):
 
     def __init__(self, sc_id: str, sc: Dict[str, Any]):
         """Initialize WCAG success criterion.
-        
+
         Args:
             sc_id: Success criterion ID
             sc: Dictionary containing SC data
@@ -62,6 +61,7 @@ class WcagSc(BaseModel):
         sorted_keys = sorted(cls._instances.keys(), key=lambda sc: cls._instances[sc].sort_key)
         return {key: cls.get_by_id(key) for key in sorted_keys}
 
+
 class InfoRef(BaseModel):
     """Information reference model for both internal and external references."""
 
@@ -70,7 +70,7 @@ class InfoRef(BaseModel):
 
     def __new__(cls, ref: str, data: Optional[Dict[str, Any]] = None) -> 'InfoRef':
         """Create or return existing InfoRef instance.
-        
+
         Args:
             ref: Reference string
             data: Optional reference data for external refs
@@ -84,7 +84,7 @@ class InfoRef(BaseModel):
 
     def __init__(self, ref: str, data: Optional[Dict[str, Any]] = None):
         """Initialize info reference.
-        
+
         Args:
             ref: Reference string
             data: Optional reference data from pickle
@@ -112,7 +112,7 @@ class InfoRef(BaseModel):
 
     def link_data(self) -> Optional[Dict[str, Dict[str, str]]]:
         """Get link data for references.
-        
+
         Returns:
             Dictionary with localized text and URLs for all reference types
         """
@@ -143,7 +143,7 @@ class InfoRef(BaseModel):
 
     def set_link(self, data: Dict[str, Dict[str, str]]) -> None:
         """Set link data for references.
-        
+
         Args:
             data: Dictionary containing localized url and text
         """
@@ -162,11 +162,19 @@ class InfoRef(BaseModel):
     @classmethod
     def list_has_guidelines(cls) -> List['InfoRef']:
         """Get references that have associated guidelines."""
-        rel = RelationshipManager()
-        return [ref for ref in cls._instances.values() if rel.get_related_objects(ref, 'guideline')]
+        rel = cls._get_relationship_manager_instance()
+        return [ref for ref in cls._instances.values()
+                if rel.get_related_objects(ref, 'guideline')]
 
     @classmethod
     def list_has_faqs(cls) -> List['InfoRef']:
         """Get references that have associated FAQs."""
-        rel = RelationshipManager()
-        return [ref for ref in cls._instances.values() if rel.get_related_objects(ref, 'faq')]
+        rel = cls._get_relationship_manager_instance()
+        return [ref for ref in cls._instances.values()
+                if rel.get_related_objects(ref, 'faq')]
+
+    @classmethod
+    def _get_relationship_manager_instance(cls):
+        """Get relationship manager instance."""
+        from ..relationship_manager import RelationshipManager
+        return RelationshipManager()

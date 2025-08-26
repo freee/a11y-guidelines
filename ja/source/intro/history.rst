@@ -11,6 +11,7 @@ Ver. 202205.0以降、チェック内容に関連する更新情報は :ref:`che
    最新リリース以降の変更点
    ========================
 
+.. include:: ChangeLog/2025/202508.0.rst
 .. include:: ChangeLog/2025/202504.0.rst
 .. include:: ChangeLog/2024/202411.0.rst
 .. include:: ChangeLog/2024/202409.0.rst

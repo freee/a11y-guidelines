@@ -6,7 +6,7 @@ from typing import Optional
 from pathlib import Path
 from .auth import GoogleAuthManager
 from .sheet_generator import ChecklistSheetGenerator
-from .config_loader import load_configuration, ApplicationConfig
+from .config_loader import load_configuration, ApplicationConfig, create_default_config
 from googleapiclient.errors import HttpError
 from google.oauth2.credentials import Credentials
 
@@ -23,11 +23,17 @@ def parse_args() -> argparse.Namespace:
         description='Generate checklist in Google Sheets',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
+
+    parser.add_argument(
+        '--create-config',
+        action='store_true',
+        help='Create a default configuration file in the current directory and exit.'
+    )
     
     parser.add_argument(
         '-c', '--config',
         type=str,
-        help='Path to configuration file (supported formats: yaml, toml, ini)'
+        help='Path to configuration file (YAML format only)'
     )
     
     parser.add_argument(
@@ -127,43 +133,72 @@ def main() -> int:
     if args.verbose:
         setup_logging(logging.DEBUG)
         logger.debug("Verbose logging enabled")
+
+    if args.create_config:
+        try:
+            output_path = Path.cwd() / "yaml2sheet.yaml"
+            created_path = create_default_config(output_path)
+            logger.info(f"Default configuration file created at: {created_path}")
+            print(f"Default configuration file created at: {created_path}")
+            print("Please edit this file with your settings and run the command again.")
+            return 0
+        except Exception as e:
+            logger.error(f"Failed to create configuration file: {e}")
+            return 1
     
     try:
         # Load configuration
         logger.debug(f"Loading configuration from {args.config if args.config else 'default locations'}")
         config = load_configuration(args.config)
-        
-        # Update log level from config if not in verbose mode
-        if not args.verbose:
-            current_level = logging.getLogger().getEffectiveLevel()
-            config_level = config.get_log_level()
-            if current_level != config_level:
-                logger.debug(f"Updating log level from {current_level} to {config_level}")
-                setup_logging(config_level)
-        
-        # Log which environment we're using
-        env_type = "production" if args.production else "development"
-        logger.info(f"Using {env_type} environment")
-        
-        # Get authentication
-        credentials = get_credentials(config)
-        if credentials is None:
+
+    except FileNotFoundError:
+        logger.warning("Configuration file not found.")
+        if not args.config and sys.stdout.isatty():
+            try:
+                response = input("Would you like to create a default configuration file (config.yaml)? [y/N]: ")
+                if response.lower().strip() == 'y':
+                    output_path = Path.cwd() / "yaml2sheet.yaml"
+                    created_path = create_default_config(output_path)
+                    print(f"\nDefault configuration file created at: {created_path}")
+                    print("Please edit this file with your settings and run the command again.")
+                    return 0
+                else:
+                    print("Aborting. Please create a configuration file manually.")
+                    return 1
+            except (EOFError, KeyboardInterrupt):
+                print("\nOperation cancelled.")
+                return 1
+        else:
+            logger.error("No configuration file found at the specified path or default locations.")
             return 1
 
-    except Exception as e:
-        logger.error(f"Configuration error: {e}")
+    # Update log level from config if not in verbose mode
+    if not args.verbose:
+        current_level = logging.getLogger().getEffectiveLevel()
+        config_level = config.get_log_level()
+        if current_level != config_level:
+            logger.debug(f"Updating log level from {current_level} to {config_level}")
+            setup_logging(config_level)
+    
+    # Log which environment we're using
+    env_type = "production" if args.production else "development"
+    logger.info(f"Using {env_type} environment")
+    
+    # Get authentication
+    credentials = get_credentials(config)
+    if credentials is None:
         return 1
 
     try:
         # Get base directory using unified handler
         source_path = config.get_basedir(args.basedir)
         logger.info(f"Using base directory: {source_path}")
-            
+
         # Set base URL from command line or config
         base_url = args.url or config.get_base_url()
         GL.update({'base_url': base_url})
         logger.info(f"Using base URL: {base_url}")
-        
+
         # Process source YAML data
         logger.info(f"Processing YAML data from {source_path}")
         source_data = process_yaml_data(str(source_path))
@@ -177,14 +212,17 @@ def main() -> int:
         # Get appropriate spreadsheet ID
         spreadsheet_id = config.get_spreadsheet_id(args.production)
         logger.info(f"Using spreadsheet ID: {spreadsheet_id}")
-        
+
+        editor_email = config.sheet_editor_email
+        logger.info(f"Using editor email: {editor_email}")
+
         if credentials is None:
             logger.error("No valid credentials available. Please run the script again to authenticate.")
             return 1
-            
+
         # Generate checklist
         logger.info(f"Starting checklist generation in {env_type} environment")
-        generator = ChecklistSheetGenerator(credentials, spreadsheet_id)
+        generator = ChecklistSheetGenerator(credentials, spreadsheet_id, editor_email, config)
         generator.generate_checklist(source_data, initialize=args.init)
         logger.info(f"Checklist generation completed successfully")
         return 0

@@ -1,11 +1,12 @@
 """Relationship management for accessibility guidelines entities."""
-from typing import Any, Dict, List
+from typing import Any, List
 
 from .models.base import BaseModel
 
+
 class RelationshipManager:
     """Manages relationships between different model objects."""
-    
+
     _instance = None
     _initialized = False
 
@@ -16,7 +17,7 @@ class RelationshipManager:
 
     def __init__(self):
         """Initialize the relationship manager.
-        
+
         Uses singleton pattern to ensure only one instance exists.
         """
         if self._initialized:
@@ -27,7 +28,7 @@ class RelationshipManager:
 
     def associate_objects(self, obj1: BaseModel, obj2: BaseModel) -> None:
         """Associate two objects bidirectionally.
-        
+
         Args:
             obj1: First object to associate
             obj2: Second object to associate
@@ -56,7 +57,7 @@ class RelationshipManager:
 
     def add_unresolved_faqs(self, faq1_id: str, faq2_id: str) -> None:
         """Add unresolved FAQ relationship to be resolved later.
-        
+
         Args:
             faq1_id: ID of first FAQ
             faq2_id: ID of second FAQ
@@ -70,7 +71,7 @@ class RelationshipManager:
     def resolve_faqs(self) -> None:
         """Resolve all unresolved FAQ relationships."""
         from .models.faq.article import Faq  # Import here to avoid circular imports
-        
+
         for faq_id in self._unresolved_faqs:
             for faq2_id in self._unresolved_faqs[faq_id]:
                 faq1 = Faq.get_by_id(faq_id)
@@ -80,11 +81,11 @@ class RelationshipManager:
 
     def get_related_objects(self, obj: BaseModel, related_type: str) -> List[Any]:
         """Get all related objects of a specific type for an object.
-        
+
         Args:
             obj: Source object
             related_type: Type of related objects to retrieve
-            
+
         Returns:
             List of related objects
         """
@@ -100,12 +101,12 @@ class RelationshipManager:
         key: str = 'sort_key'
     ) -> List[Any]:
         """Get sorted related objects of a specific type.
-        
+
         Args:
             obj: Source object
             related_type: Type of related objects to get
             key: Key to sort by (defaults to 'sort_key')
-            
+
         Returns:
             Sorted list of related objects
         """

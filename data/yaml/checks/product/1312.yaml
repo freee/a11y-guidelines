@@ -6,14 +6,6 @@ platform:
 - web
 check:
   ja: |-
-    モーダル・ダイアログが表示される場合：
-
-    *  ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで自動表示されない
-    *  キーボード操作でモーダル・ダイアログを開きTabキーを押下すると、フォーカスがモーダル・ダイアログ内に移動し、モーダル・ダイアログが閉じた際にはフォーカスが元の位置に戻る
-    *  モーダル・ダイアログ内でTabまたはShift+Tabキーを押してフォーカスを移動した際、フォーカスがモーダル・ダイアログの外に移動しない
+    ユーザーの入力操作や情報の閲覧を妨げるようなタイミングで自動表示されるモーダル・ダイアログはない。
   en: |-
-    Modal dialogs meet the following:
-
-    *  Does not appear automatically at a time that interferes with the user's input operations or viewing of information
-    *  Opening a modal dialog with a keyboard operation and pressing the Tab key moves the focus into the modal dialog, and the focus returns to its original position when the modal dialog is closed
-    *  Focus does not move outside of a modal dialog when the focus is moved by pressing Tab or Shift+Tab within the modal dialog.
+    There are no modal dialogs that are automatically displayed at a timing that interferes with user input operations or information viewing.

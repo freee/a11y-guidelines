@@ -6,12 +6,50 @@ platform:
 - web
 check:
   ja: |-
-    チェックボックス、ラジオボタン、ボタンなど、フォーム・コントロールの見た目をブラウザーのデフォルトのものから変更する場合、クリックやタッチに反応する領域が充分な大きさになっていて、その領域が設計資料で明示されている。
-
-    *  デスクトップWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
-    *  モバイルWebでは44 x 44 CSS px以上
+    チェックボックス、ラジオボタン、ボタンなど、フォーム・コントロールは、クリックやタッチに反応する領域が充分に大きく、その領域が設計資料で明示されている。
   en: |-
-    When altering the appearance of form controls such as checkboxes, radio buttons, and buttons from the browser's default, the area responsive to clicks or touches is sufficiently large, and this area is explicitly specified in the design documentation.
+    Form controls such as checkboxes, radio buttons, and buttons have a large enough area that responds to clicks and touches, and that area is clearly defined in the design documentation.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    id: 0332-content-00
+    tool: misc
+    procedure:
+      ja: |-
+        チェック対象の画面には、フォーム・コントロールが存在しない。
+      en: |-
+        There are no form controls on the screen to be checked.
+  - type: simple
+    id: 0332-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        フォーム・コントロールの見た目をブラウザーのデフォルト表示から変更するような指示が設計資料に存在しない。
+      en: |-
+        There are no instructions in the design documentation to change the appearance of form controls from the browser default.
+  - type: and
+    conditions:
+    - type: simple
+      id: 0332-content-02
+      tool: misc
+      procedure:
+        ja: |-
+          フォーム・コントロールのクリックやタッチに反応する領域が、設計資料で明示されている。
+        en: |-
+          The area that responds to clicks and touches of form controls is clearly defined in the design documentation.
+    - type: simple
+      id: 0332-content-03
+      tool: misc
+      procedure:
+        ja: |-
+          フォーム・コントロールのクリックやタッチに反応する領域のサイズは、以下の条件を満たしている：
 
-    *  For desktop Web, at least 24 x 24 CSS px, preferably more than 44 x 44 CSS px
-    *  For mobile Web, more than 44 x 44 CSS px
+          *  デスクトップ向けWebでは最低24 x 24 CSS px、なるべく44 x 44 CSS px以上
+          *  モバイル向けWebでは44 x 44 CSS px以上
+        en: |-
+          The area that responds to clicks and touches of form controls meets the following conditions:
+
+          *  for desktop Web: at least 24 x 24 CSS px, preferably larger than 44 x 44 CSS px
+          *  for mobile Web: larger than 44 x 44 CSS px

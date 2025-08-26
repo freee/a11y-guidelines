@@ -1,0 +1,50 @@
+id: '0174'
+sortKey: 501820
+severity: major
+target: product
+platform:
+- web
+check:
+  ja: |-
+    モーダル・ダイアログはキーボードのみで操作できる。
+  en: |-
+    Modal dialogs can be operated using only the keyboard.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: 0174-content-00
+    procedure:
+      ja: |-
+        チェック対象の画面では、モーダル・ダイアログが表示されることはない。
+      en: |-
+        No modal dialog is displayed on the screen being checked.
+  - type: and
+    conditions:
+    - type: simple
+      tool: keyboard
+      id: "0174-keyboard-01"
+      procedure:
+        ja: |-
+          モーダル・ダイアログが表示された直後に :kbd:`Tab` キーを押下すると、フォーカスがモーダル・ダイアログ内に移動する。
+        en: |-
+          When the :kbd:`Tab` key is pressed immediately after a modal dialog is displayed, the focus moves into the modal dialog.
+    - type: simple
+      tool: keyboard
+      id: "0174-keyboard-02"
+      procedure:
+        ja: |-
+          モーダル・ダイアログ内で、フォーカスがモーダル・ダイアログの最後の要素に移動するまで :kbd:`Tab` キーを押した後、再度 :kbd:`Tab` キーを押してもフォーカスはモーダル・ダイアログの外に出ない。
+          同様に、 :kbd:`Shift+Tab` キーを押してフォーカスがモーダル・ダイアログの最初の要素に移動した後、再度 :kbd:`Shift+Tab` キーを押してもフォーカスはモーダル・ダイアログの外に出ない。
+        en: |-
+          When the focus is moved by pressing :kbd:`Tab` / :kbd:`Shift+Tab` within the modal dialog, the focus does not move outside of the modal dialog.
+    - type: simple
+      tool: keyboard
+      id: "0174-keyboard-03"
+      procedure:
+        ja: |-
+          モーダル・ダイアログが閉じた際、フォーカスはモーダル・ダイアログが開く直前の位置、またはそれに隣接した位置に戻る。
+        en: |-
+          When the modal dialog is closed, the focus returns to the position immediately before the modal dialog was opened or to an adjacent position.

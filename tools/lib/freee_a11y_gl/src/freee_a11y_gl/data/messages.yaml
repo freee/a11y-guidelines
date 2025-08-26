@@ -1,0 +1,114 @@
+# Default message catalog for freee_a11y_gl
+# This file contains localized strings for various components
+# Language specification is consistently at the deepest level
+
+severity_tags:
+  critical:
+    ja: "[CRITICAL]"
+    en: "[CRITICAL]"
+  major:
+    ja: "[MAJOR]"
+    en: "[MAJOR]"
+  normal:
+    ja: "[NORMAL]"
+    en: "[NORMAL]"
+  minor:
+    ja: "[MINOR]"
+    en: "[MINOR]"
+
+check_targets:
+  design:
+    ja: "デザイン"
+    en: "Design"
+  code:
+    ja: "コード"
+    en: "Code"
+  product:
+    ja: "プロダクト"
+    en: "Product"
+
+check_tools:
+  nvda:
+    ja: "NVDA"
+    en: "NVDA"
+  macos-vo:
+    ja: "macOS VoiceOver"
+    en: "macOS VoiceOver"
+  axe:
+    ja: "axe DevTools"
+    en: "axe DevTools"
+  ios-vo:
+    ja: "iOS VoiceOver"
+    en: "iOS VoiceOver"
+  android-tb:
+    ja: "Android TalkBack"
+    en: "Android TalkBack"
+  keyboard:
+    ja: "キーボード操作"
+    en: "Keyboard"
+  misc:
+    ja: "その他の手段"
+    en: "Miscellaneous Methods"
+
+platform_names:
+  web:
+    ja: "Web"
+    en: "Web"
+  mobile:
+    ja: "モバイル"
+    en: "Mobile"
+  general:
+    ja: "Web、モバイル"
+    en: "Web, Mobile"
+  ios:
+    ja: "iOS"
+    en: "iOS"
+  android:
+    ja: "Android"
+    en: "Android"
+
+implementation_targets:
+  web:
+    ja: "Web"
+    en: "Web"
+  android:
+    ja: "Android"
+    en: "Android"
+  ios:
+    ja: "iOS"
+    en: "iOS"
+
+separators:
+  text:
+    ja: "："
+    en: ": "
+  list:
+    ja: "、"
+    en: ", "
+  and:
+    ja: "と"
+    en: " and "
+  or:
+    ja: "または"
+    en: " or "
+
+conjunctions:
+  and:
+    ja: "、かつ"
+    en: ", and "
+  or:
+    ja: "、または"
+    en: ", or "
+
+pass_texts:
+  singular:
+    ja: "を満たしている"
+    en: " is true"
+  plural:
+    ja: "を満たしている"
+    en: " are true"
+
+date_formats:
+  default:
+    ja: "%Y年%-m月%-d日"
+    en: "%B %-d, %Y"

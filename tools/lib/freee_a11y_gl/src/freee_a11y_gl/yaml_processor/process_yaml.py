@@ -14,6 +14,7 @@ from ..version_utils import get_version_info
 from ..initializer import setup_instances
 from . import rst_processor
 
+
 def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
     """
     Process YAML files and return structured data as a Python dictionary.
@@ -36,13 +37,23 @@ def process_yaml_data(basedir: Optional[str] = None) -> Dict[str, Any]:
     for info in InfoRef.list_all_internal():
         if info.ref in info_links:
             info.set_link(info_links[info.ref])
-    
+
     # Process checks and their conditions
     checks: Dict[str, Any] = Check.object_data_all()
     for key in checks:
+        # Process check text for RST markup
+        if 'check' in checks[key]:
+            for lang in checks[key]['check']:
+                checks[key]['check'][lang] = rst_processor.process_rst_text(
+                    checks[key]['check'][lang],
+                    info_links,
+                    lang
+                )
+
+        # Process conditions for RST markup
         if 'conditions' in checks[key]:
             checks[key]['conditions'] = [
-                rst_processor.process_rst_condition(condition, info_links) 
+                rst_processor.process_rst_condition(condition, info_links)
                 for condition in checks[key]['conditions']
             ]
 

@@ -2,19 +2,26 @@
 from typing import Dict, Any, Iterator, TypeVar, Generic, List
 from abc import abstractmethod
 
-from freee_a11y_gl import Faq, FaqTag, WcagSc, RelationshipManager
-from .base_generator import BaseGenerator
+from .content_generator_base import ContentGeneratorBase
 
 T = TypeVar('T')
 
-class ListBasedGenerator(BaseGenerator, Generic[T]):
-    """Base class for generators that process lists of items."""
+
+class ListBasedGenerator(ContentGeneratorBase, Generic[T]):
+    """Base class for generators that process lists of items.
+
+    This class extends ContentGeneratorBase to provide a standardized pattern
+    for generators that process lists of items. It includes:
+    - Unified RelationshipManager access via RelationshipMixin
+    - Common validation methods via ValidationMixin
+    - Utility methods for sorting and processing via UtilityMixin
+    """
 
     def generate(self) -> Iterator[Dict[str, Any]]:
         """Generate content from a list of items."""
         items = self.get_items()
         self.logger.info(f"Processing {len(items)} items")
-        
+
         for item in items:
             try:
                 data = self.process_item(item)
@@ -34,8 +41,16 @@ class ListBasedGenerator(BaseGenerator, Generic[T]):
         """Process a single item into template data."""
         raise NotImplementedError
 
-class SingleFileGenerator(BaseGenerator):
-    """Base class for generators that produce a single file."""
+
+class SingleFileGenerator(ContentGeneratorBase):
+    """Base class for generators that produce a single file.
+
+    This class extends ContentGeneratorBase to provide a standardized pattern
+    for generators that produce single files. It includes:
+    - Unified RelationshipManager access via RelationshipMixin
+    - Common validation methods via ValidationMixin
+    - Utility methods for sorting and processing via UtilityMixin
+    """
 
     @abstractmethod
     def get_template_data(self) -> Dict[str, Any]:

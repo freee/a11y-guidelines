@@ -263,10 +263,10 @@
     {
       "if": {
         "properties": {
-          "target": { "const": "product" }
+          "target": { "const": "code" }
         }
       },
-      "else": {
+      "then": {
         "not": {
           "required": ["conditions"]
         }

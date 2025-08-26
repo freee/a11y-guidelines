@@ -1,0 +1,31 @@
+id: '0155'
+sortKey: 100810
+severity: critical
+target: design
+platform:
+- web
+check:
+  ja: |-
+    モーダル・ダイアログがキーボードのみで操作できる設計になっている。
+  en: |-
+    The design allows modal dialogs to be operated using only the keyboard.
+conditions:
+- platform: web
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0155-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面では、モーダル・ダイアログが表示されることはない。
+      en: |-
+        No modal dialog is displayed on the screen being checked.
+  - type: simple
+    tool: misc
+    id: "0155-content-01"
+    procedure:
+      ja: |-
+        モーダル・ダイアログが閉じた際、フォーカスがモーダル・ダイアログが開く直前の位置、またはそれに隣接した位置に戻るような設計になっていて、フォーカスが戻るべき位置が設計資料で明示されている。
+      en: |-
+        The design specifies that when the modal dialog is closed, the focus returns to the position immediately before the modal dialog was opened or to an adjacent position, and the position to which the focus should return is clearly indicated in the design documents.

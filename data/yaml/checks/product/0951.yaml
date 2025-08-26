@@ -49,14 +49,14 @@ conditions:
         id: "0951-nvda-01"
         procedure:
           ja: |-
-            NVDAのフォーカス・モードで :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられる。
+            NVDAのフォーカス・モードで :kbd:`Tab` / :kbd:`Shift+Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられる。
           en: |-
-            The appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys in NVDA's focus mode.
+            The appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift+Tab` keys in NVDA's focus mode.
       - type: simple
         tool: macos-vo
         id: "0951-macvo-01"
         procedure:
           ja: |-
-            macOS VoiceOver有効時に :kbd:`Tab` / :kbd:`Shift + Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられる。
+            macOS VoiceOver有効時に :kbd:`Tab` / :kbd:`Shift+Tab` キーを用いてフォーカスをそのフォーム・コントロールに移動した際、対応した適切なテキストが読み上げられる。
           en: |-
-            The appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift + Tab` keys with macOS VoiceOver enabled.
+            The appropriate text, corresponding to the form control is announced when moving focus to the form control using :kbd:`Tab` / :kbd:`Shift+Tab` keys with macOS VoiceOver enabled.

@@ -65,7 +65,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.9.x'
+        python-version: '3.13.x'
     - name: Install the Latest pip
       run: python -m pip install --upgrade pip
     - name: install ja_JP.UTF-8 locale

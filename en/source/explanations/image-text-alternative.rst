@@ -30,7 +30,7 @@ It is necessary to consider the context and content when preparing descriptions,
 A collection of examples to help determine the appropriate descriptions is planned to be developed.
 
 For short descriptions, using the ``alt`` attribute of the ``img`` element, or possibly the ``aria-label`` or ``aria-labelledby`` attributes, would be suitable.
-For longer descriptions, methods such as using the ``aria-describedby`` attribute, the ``longdesc`` attribute, or placing links to pages with detailed descriptions around the image can also be considered.
+For longer descriptions, in addition to using the ``aria-describedby`` attribute or the ``figcaption`` element, it is also possible to place a link to a detailed description or text containing detailed explanations around the image.
 
 The above is applicable when the image contains meaningful information.
 If the image is purely decorative and contains no meaningful information, it is necessary to write in such a way that assistive technologies like screen readers can ignore the presence of the image.

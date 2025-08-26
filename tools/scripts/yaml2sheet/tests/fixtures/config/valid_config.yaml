@@ -1,0 +1,7 @@
+credentials_path: "credentials.json"
+token_path: "token.json"
+development_spreadsheet_id: "test_dev_spreadsheet_id"
+production_spreadsheet_id: "test_prod_spreadsheet_id"
+sheet_editor_email: "test@example.com"
+log_level: "INFO"
+base_url: "https://a11y-guidelines.freee.co.jp"
