@@ -214,7 +214,7 @@ jobs:
           echo "Processing artifacts..."
           ARTIFACT_DIR="${GITHUB_WORKSPACE}/artifacts/release-${TAG}"
           if [ -d "$ARTIFACT_DIR" ]; then
-            cp -r "${ARTIFACT_DIR}/*" "${ASSET_DIR}/"
+            cp -r ${ARTIFACT_DIR}/* ${ASSET_DIR}/
 
             # Remove metadata files from the asset
             rm -f "${ASSET_DIR}/.deploy_path" 2>/dev/null || true
