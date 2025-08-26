@@ -46,7 +46,7 @@ jobs:
 
           CURRENT_PUSHED_TAG=""
           if [[ "${IS_TAG_PUSH}" == "true" ]]; then
-            CURRENT_PUSHED_TAG="$(echo ${GITHUB_REFNAME} | sed s/refs\/tags\///)"
+            CURRENT_PUSHED_TAG="$(echo ${GITHUB_REFNAME} | sed 's/refs\/tags\///')"
           fi
 
           # Handle manual workflow dispatch with target_ref
