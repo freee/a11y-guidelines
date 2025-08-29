@@ -211,5 +211,5 @@ Updated:
 .. _WCAG21: https://www.w3.org/TR/WCAG21/
 
 .. |cclogo| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
-   :alt: Creative Commons License
+   :alt: Creative Commons Attribution 4.0 International (CC BY 4.0) License
 
