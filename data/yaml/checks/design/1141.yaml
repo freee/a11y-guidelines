@@ -8,8 +8,12 @@ platform:
 check:
   ja: |-
     法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正が可能な設計になっている。
+
+    ここで「データの変更や削除」とは、ユーザーが簡単な操作により元の状態を完全に復元できないものを指す。簡単な操作とは、ボタン操作や、少しの文字入力などである。
   en: |-
     For functions that involve legal actions, financial transactions, or the modification and deletion of data, the design allows for cancellation, pre-submission confirmation and modification, or error checking and correction at the time of submission.
+
+    Here, "modification and deletion of data" refers to cases where users cannot fully restore the original state through simple operations. Simple operations include button clicks or minimal text input.
 conditions:
 - platform: web
   type: or
@@ -20,8 +24,12 @@ conditions:
     procedure:
       ja: |-
         チェック対象の画面には、法的行為、経済的取引、データの変更や削除を生じる機能が存在しない。
+
+        ここで「データの変更や削除」とは、ユーザーが簡単な操作により元の状態を完全に復元できないものを指す。簡単な操作とは、ボタン操作や、少しの文字入力などである。
       en: |-
         There are no functions that involve legal actions, financial transactions, or the modification and deletion of data on the screen to be checked.
+
+        Here, "modification and deletion of data" refers to cases where users cannot fully restore the original state through simple operations. Simple operations include button clicks or minimal text input.
   - type: simple
     id: 1141-content-01
     tool: misc
