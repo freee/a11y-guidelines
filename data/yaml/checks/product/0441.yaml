@@ -33,9 +33,9 @@ conditions:
       id: "0441-content-00"
       procedure:
         ja: |-
-          チェック対象の画面に存在する画像は、装飾目的のもののみである。
+          チェック対象の画面に画像が存在しない、または装飾目的のもののみである。
         en: |-
-          The images on the target screen are only for decorative purposes.
+          There are no images on the target screen, or the images are only for decorative purposes.
     - type: and
       conditions:  
       - type: or
