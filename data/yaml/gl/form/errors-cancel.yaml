@@ -10,15 +10,23 @@ platform:
 guideline:
   ja: |-
     法的行為、経済的取引、データの変更や削除を生じる機能については、取り消し、送信前の確認・修正、または送信時のエラー・チェックと修正を可能にする。
+
+    ここで「データの変更や削除」とは、ユーザーが簡単な操作により元の状態を完全に復元できないものを指す。簡単な操作とは、ボタン操作や、少しの文字入力などである。
   en: |-
     For functions involving legal commitments, financial transactions, or the alteration or deletion of data, enable cancellation, pre-submission confirmation and modification, or error checking and correction at the time of submission.
+
+    Here, "alteration or deletion of data" refers to cases where users cannot fully restore the original state through simple operations. Simple operations include button clicks or minimal text input.
 sc:
 - 3.3.4
 intent:
   ja: |-
     誤操作による影響を少なくする。
+
+    データの変更や削除については、ユーザーが簡単な操作で完全に復元できない場合に確認などが必要となる。これは、操作にかかる時間は人によって異なるため、時間ではなく操作の簡易性と手数で判断する。
   en: |-
     Minimize the impact of misoperation.
+
+    For data alteration or deletion, confirmation is required when users cannot fully restore the original state through simple operations. This criterion is based on the simplicity and number of operations rather than time, as the time required for operations varies from person to person.
 checks:
 - '1141'
 info:

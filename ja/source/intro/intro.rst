@@ -212,6 +212,6 @@ Copyright © |copyright|
 .. _WCAG21ja: https://waic.jp/translations/WCAG21/
 
 .. |cclogo| image:: https://i.creativecommons.org/l/by/4.0/88x31.png
-   :alt: クリエイティブ・コモンズ・ライセンス
+   :alt: クリエイティブ・コモンズ 表示 国際 4.0 (CC BY 4.0) ライセンス
 
 .. translated:: true
