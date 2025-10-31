@@ -12,6 +12,14 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+`Ver. 202510.0 (Oct 31, 2025) <https://github.com/freee/a11y-guidelines/releases/202510.0>`__
+=============================================================================================
+
+* Remove Japanese-specific criteria for contrast from :ref:`check-0002`.
+* Add "no image" as a case for image checking in :ref:`check-0441`.
+* Clarify the criteria for "data modification or deletion" in :ref:`check-1141`.
+* Correct the alt attribute value for the Creative Commons license banner image.
+
 `Ver. 202508.0 (Aug 26, 2025) <https://github.com/freee/a11y-guidelines/releases/202508.0>`__
 =============================================================================================
 
