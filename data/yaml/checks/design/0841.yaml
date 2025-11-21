@@ -22,21 +22,11 @@ conditions:
         チェック対象の画面には、グローバル・ナビゲーションやパンくずリストが存在しない。
       en: |-
         There are no global navigation or breadcrumb lists on the screen to be checked.
-  - type: and
-    conditions:
-    - type: simple
-      id: 0841-content-01
-      tool: misc
-      procedure:
-        ja: |-
-          グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置が視覚的に分かるように示されている。
-        en: |-
-          The position of the page/screen within the site or application is visually indicated in the global navigation or breadcrumb list.
-    - type: simple
-      id: 0841-content-02
-      tool: misc
-      procedure:
-        ja: |-
-          グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置を示す要素に、適切な ``aria-current`` 属性の値が指定されている。
-        en: |-
-          The appropriate value of the ``aria-current`` attribute is specified for the element that indicates the position of the page/screen within the site or application in the global navigation or breadcrumb list.
+  - type: simple
+    id: 0841-content-01
+    tool: misc
+    procedure:
+      ja: |-
+        グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置が視覚的に分かるように示されている。
+      en: |-
+        The position of the page/screen within the site or application is visually indicated in the global navigation or breadcrumb list.
