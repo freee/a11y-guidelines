@@ -1,0 +1,32 @@
+id: '0595'
+sortKey: 502730
+severity: critical
+target: product
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    状態に応じて形や色が切り替わるアイコンがある場合、スクリーン・リーダーでアイコンの状態を読み取れる、または状態を示すテキストが近くにある。
+  en: |-
+    If there are icons that change shape or color based on state, the screen reader can identify the state of the icon, or there is text nearby indicating the state.
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0595-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、状態に応じて形や色が切り替わるアイコンが存在しない。
+      en: |-
+        There are no icons that change shape or color based on state on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0595-nvda-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーで状態に応じて変化するアイコンを読み上げたとき、アイコンが示す状態が分かる、または状態を示すテキストが近くにあり読み上げられる。
+      en: |-
+        When the screen reader reads an icon that changes based on state, users can understand the state the icon represents, or there is nearby text indicating the state that is also read.
