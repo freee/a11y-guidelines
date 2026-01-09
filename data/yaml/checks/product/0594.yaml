@@ -1,0 +1,32 @@
+id: '0594'
+sortKey: 502720
+severity: critical
+target: product
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    トグルボタンがある場合、スクリーン・リーダーでON/OFFの状態が分かる。
+  en: |-
+    If there is a toggle button, the screen reader can identify whether it is ON or OFF.
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0594-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、トグルボタンが存在しない。
+      en: |-
+        There is no toggle button on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0594-nvda-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーでトグルボタンにフォーカスを移動したとき、それがトグルボタンであることと、ON/OFFの状態が分かる。
+      en: |-
+        When moving focus to a toggle button with the screen reader, users can recognize that it is a toggle button and whether it is ON or OFF.

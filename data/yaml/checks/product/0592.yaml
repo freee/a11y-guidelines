@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    複数の状態を持つコンポーネントは、スクリーン・リーダー利用時にもその状態が分かるようになっている。（例：タブUIの現在選択されているタブ、状態に応じて変化するアイコンなど）
+    状態を表現するもの（例：選択状態、展開/折りたたみ状態など）がある場合、スクリーン・リーダーでその状態を読み取れる。
   en: |-
-    The state of components with multiple states can be determined by the screen reader. (e.g., the currently selected tab in the tabbed UI, icons that change according to state, etc.)
+    If there are elements expressing state (e.g., selected state, expanded/collapsed state), the screen reader can identify that state.
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0592-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、状態を表現するコンポーネント（選択状態、展開/折りたたみ状態など）が存在しない。
+      en: |-
+        There are no state-expressing (selected state, expanded/collapsed state, etc.) components on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0592-nvda-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーで状態を持つコンポーネント（選択状態、展開/折りたたみ状態など）を読み上げたとき、その状態が分かる。
+      en: |-
+        When the screen reader reads a component with state (selected state, expanded/collapsed state, etc.), users can understand that state.

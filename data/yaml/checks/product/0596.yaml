@@ -1,0 +1,32 @@
+id: '0596'
+sortKey: 502740
+severity: critical
+target: product
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    バッジ（通知数など）が表示される場合、スクリーン・リーダーでバッジの存在と意味が分かる。
+  en: |-
+    If badges (such as notification counts) are displayed, the screen reader can identify the presence and meaning of the badge.
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0596-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、バッジが存在しない。
+      en: |-
+        There are no badges on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0596-nvda-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーでバッジが付加された要素を読み上げたとき、バッジの存在とその意味（通知数など）が分かる。
+      en: |-
+        When the screen reader reads an element with a badge, users can understand the presence of the badge and its meaning (such as notification count).
