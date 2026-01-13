@@ -27,6 +27,6 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        情報や機能性を持たない画像について、代替テキスト（ ``alt`` 属性または ``aria-label`` 属性の値）を空にすべきこと、または ``role="presentation"`` を指定すべきことが設計資料で明示されている。
+        情報や機能性を持たない画像について、装飾的な画像でありスクリーン・リーダーに無視させるべきであることが設計資料で明示されている。
       en: |-
-        The design documentation clearly states that images that do not contain any information or functionality should have an empty alternative text (value of ``alt`` attribute or ``aria-label`` attribute) or specify ``role="presentation"``.
+        The design documentation clearly states that images that do not contain any information or functionality are decorative and should be ignored by screen readers.
