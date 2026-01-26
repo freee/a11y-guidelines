@@ -28,9 +28,9 @@ conditions:
       id: 0111-mouse-01
       procedure:
         ja: |-
-          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーの押下や表示されたコンテンツ上でのマウス・クリックなど）
+          マウス・ポインターを移動させることなく、マウスオーバーで表示されたコンテンツを非表示にできる。（ESCキーの押下やマウス・クリックなど）
         en: |-
-          The content displayed on mouseover can be hidden without moving the mouse pointer. (Press the ESC key or click the mouse on the displayed content)
+          The content displayed on mouseover can be hidden without moving the mouse pointer. (Press the ESC key or mouse click, etc.)
     - type: simple
       tool: mouse
       id: 0111-mouse-02
