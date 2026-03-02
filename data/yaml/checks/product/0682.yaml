@@ -1,6 +1,6 @@
 id: '0682'
 sortKey: 500600
-severity: normal
+severity: minor
 target: product
 platform:
 - web
