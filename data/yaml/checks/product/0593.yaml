@@ -1,0 +1,32 @@
+id: '0593'
+sortKey: 502710
+severity: critical
+target: product
+platform:
+- web
+- mobile
+check:
+  ja: |-
+    タブUIがある場合、スクリーン・リーダーで現在選択されているタブがどれかが分かる。
+  en: |-
+    If there is a tabbed UI, the screen reader can identify which tab is currently selected.
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    tool: misc
+    id: "0593-content-00"
+    procedure:
+      ja: |-
+        チェック対象の画面には、タブUIが存在しない。
+      en: |-
+        There is no tabbed UI on the screen to be checked.
+  - type: simple
+    tool: nvda
+    id: "0593-nvda-01"
+    procedure:
+      ja: |-
+        スクリーン・リーダーでタブにフォーカスを移動したとき、それがタブであることと、現在選択されているかどうかが分かる。
+      en: |-
+        When moving focus to a tab with the screen reader, users can recognize that it is a tab and whether it is currently selected.

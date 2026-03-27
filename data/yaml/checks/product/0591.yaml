@@ -7,9 +7,9 @@ platform:
 - mobile
 check:
   ja: |-
-    静的なテキストではない部分（例：開閉するメニュー、タブ・パネル、日付選択UI）も、スクリーン・リーダーで問題なく操作できる。
+    静的なテキストではない部分（例：リンク、ボタン、開閉するメニュー、タブ・パネル、日付選択UI）も、スクリーン・リーダーで問題なく操作できる。
   en: |-
-    Non-static text (e.g., open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
+    Non-static text (e.g., links, buttons, open/close menus, tab panels, date selection UI) can be manipulated by the screen reader without difficulty.
 conditions:
 - platform: web
   type: or

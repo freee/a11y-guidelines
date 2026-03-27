@@ -12,6 +12,16 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+`Ver. 202603.0 (Mar 27, 2026) <https://github.com/freee/a11y-guidelines/releases/202603.0>`__
+=============================================================================================
+
+* Remove the ``aria-current`` attribute requirement check from :ref:`check-0841`.
+* Update :ref:`check-0592` and split component-specific state checks into :ref:`check-0593`, :ref:`check-0594`, :ref:`check-0595`, and :ref:`check-0596`.
+* Clarify that "non-static text" in :ref:`check-0591` includes buttons and links.
+* Remove the "displayed content" description from the mouse click procedure in :ref:`check-0111`.
+* Reorganize :ref:`check-0682` and change its severity to minor.
+* Add new :ref:`check-0683` for verifying landmark placement of main content areas.
+
 `Ver. 202510.0 (Oct 31, 2025) <https://github.com/freee/a11y-guidelines/releases/202510.0>`__
 =============================================================================================
 

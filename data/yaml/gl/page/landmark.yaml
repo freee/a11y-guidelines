@@ -28,5 +28,6 @@ checks:
 - '0661'
 - '0671'
 - '0682'
+- '0683'
 info:
 - exp-page-structure
