@@ -43,3 +43,21 @@ conditions:
     YouTube:
       id: Wl6cydtXNw4
       title: 開閉するボタン【NVDAでアクセシビリティー チェック】
+  - type: simple
+    tool: macos-vo
+    id: "0591-macvo-01"
+    procedure:
+      ja: |-
+        以下のすべてを満たしていることをmacOS VoiceOverで確認：
+
+        *  :kbd:`VO+←` / :kbd:`VO+→` によるVoiceOverカーソルの操作でその部分を読み上げさせたとき、何らかの操作を受け付けるものであることが分かる
+        *  その部分で提供されているすべての機能を、最低限キーボードで操作できる
+        *  操作の結果表示が変わる場合、そのことが読み上げられる内容から理解できる
+        *  操作の結果表示が変わる場合、 :kbd:`VO+←` / :kbd:`VO+→` によるVoiceOverカーソルの操作で変更後の表示内容を読み上げさせて確認できる
+      en: |-
+        Confirm that all of the following are met using macOS VoiceOver:
+
+        *  Users can recognize that the component accepts some operation when reading the part by operating the VoiceOver cursor with :kbd:`VO+←` / :kbd:`VO+→`.
+        *  All of the functions provided in the part can be operated at least by keyboard.
+        *  If the displayed content changes upon operation, users can recognize it through the announcement.
+        *  If the displayed content changes upon operation, users can read the updated content by operating the VoiceOver cursor with :kbd:`VO+←` / :kbd:`VO+→`.

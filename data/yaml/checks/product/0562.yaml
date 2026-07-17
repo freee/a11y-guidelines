@@ -89,3 +89,33 @@ conditions:
     YouTube:
       id: lnW6TRgkBg0
       title: 表【NVDAでアクセシビリティー チェック】
+  - type: simple
+    tool: macos-vo
+    id: "0562-macvo-01"
+    procedure:
+      ja: |-
+        以下の手順で、ページ上のすべての表をmacOS VoiceOverで発見することができ、かつ、表中のセル間を移動して、セルの内容を適切に読み上げることができる。
+
+        *  表の発見：
+
+           -  :kbd:`VO+Command+T` で次の表に、 :kbd:`VO+Shift+Command+T` で前の表に移動する、または
+           -  :kbd:`VO+U` を押下してローターのメニューを表示し、「表」を選択して、ページ中のすべての表が過不足なく表示されることを確認する
+
+        *  表中のセル間を移動して、セルの内容を読み上げる：
+
+           1. 表にVoiceOverカーソルを移動し、 :kbd:`VO+Shift+↓` を押下して表の内部に入る
+           2. :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` でセル間を移動して、セルの内容を読み上げさせる
+           3. 確認が終わったら、 :kbd:`VO+Shift+↑` を押下して表の外に出る
+      en: |-
+        The following steps allow you to discover all tables on the page with macOS VoiceOver and move among cells within the tables to read the cell content properly.
+
+        *  Discovering tables:
+
+           -  Move to the next/previous table with :kbd:`VO+Command+T` / :kbd:`VO+Shift+Command+T`, or
+           -  Press :kbd:`VO+U` to display the rotor menu, select "Tables", and confirm that all tables on the page are listed
+
+        *  Moving among cells within tables and reading the cell contents:
+
+           1. Move the VoiceOver cursor onto the table, and press :kbd:`VO+Shift+↓` to interact with the table
+           2. Move among cells using :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` and have the cell contents announced
+           3. When done, press :kbd:`VO+Shift+↑` to stop interacting with the table

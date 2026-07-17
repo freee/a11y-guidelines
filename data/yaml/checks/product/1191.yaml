@@ -38,6 +38,19 @@ conditions:
     YouTube:
       id: 5YO_NxGuks8
       title: ステータスメッセージ【NVDAでアクセシビリティー チェック】
+  - type: simple
+    tool: macos-vo
+    id: "1191-macvo-01"
+    procedure:
+      ja: |-
+        macOS VoiceOverを起動した状態で設計資料に従ってステータス・メッセージが表示される操作を行ったとき、表示されたステータス・メッセージが自動的に読み上げられる。
+      en: |-
+        With macOS VoiceOver running, performing the operation to display status messages according to the design documents causes the displayed status messages to be automatically announced.
+    note:
+      ja: |-
+        参考： ``aria-live`` を用いた実装において期待される挙動については、 :ref:`exp-dynamic-content-status` に示した実装例を参照
+      en: |-
+        Note: Refer to the implementation example shown in :ref:`exp-dynamic-content-status` for the expected behavior in the implementation using ``aria-live``.
 - platform: ios
   type: simple
   tool: ios-vo
