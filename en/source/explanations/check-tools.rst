@@ -10,3 +10,4 @@ Tools for Checking Accessibility
    check-contrast
    screen-reader-check
    axe
+   a11y-visualizer

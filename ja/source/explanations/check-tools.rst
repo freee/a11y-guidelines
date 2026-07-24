@@ -10,6 +10,7 @@
    check-contrast
    screen-reader-check
    axe
+   a11y-visualizer
 
 .. translated:: true
 
