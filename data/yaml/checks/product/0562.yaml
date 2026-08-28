@@ -104,8 +104,9 @@ conditions:
         *  表中のセル間を移動して、セルの内容を読み上げる：
 
            1. 表にVoiceOverカーソルを移動し、 :kbd:`VO+Shift+↓` を押下して表の内部に入る
-           2. :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` でセル間を移動して、セルの内容を読み上げさせる
-           3. 確認が終わったら、 :kbd:`VO+Shift+↑` を押下して表の外に出る
+           2. :kbd:`VO+Command+=` を押下して「グループ化をオン」にする
+           3. :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` でセル間を移動して、セルの内容を読み上げさせる
+           4. 確認が終わったら、 :kbd:`VO+Command+=` を押下して「グループ化をオフ」にし、 :kbd:`VO+Shift+↑` を押下して表の外に出る
       en: |-
         The following steps allow you to discover all tables on the page with macOS VoiceOver and move among cells within the tables to read the cell content properly.
 
@@ -117,5 +118,6 @@ conditions:
         *  Moving among cells within tables and reading the cell contents:
 
            1. Move the VoiceOver cursor onto the table, and press :kbd:`VO+Shift+↓` to interact with the table
-           2. Move among cells using :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` and have the cell contents announced
-           3. When done, press :kbd:`VO+Shift+↑` to stop interacting with the table
+           2. Press :kbd:`VO+Command+=` to turn grouping on
+           3. Move among cells using :kbd:`VO+←` / :kbd:`VO+→` / :kbd:`VO+↑` / :kbd:`VO+↓` and have the cell contents announced
+           4. When done, press :kbd:`VO+Command+=` to turn grouping off, and press :kbd:`VO+Shift+↑` to stop interacting with the table
