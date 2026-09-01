@@ -7,9 +7,9 @@ platform:
 - mobile
 check:
   ja: |-
-    スクリーン・リーダーで、グローバル・ナビゲーションやパンくずリスト内でそのページの位置が分かるような読み上げがされる。
+    スクリーン・リーダーで、サイトやアプリケーション内でのナビゲーションを担うコンポーネント（グローバル・ナビゲーションやパンくずリストなど）内でそのページの位置が分かるような読み上げがされる。
   en: |-
-    The screen reader announces the location of current page within the global navigation and breadcrumb list.
+    The screen reader announces the location of the current page within the components responsible for navigation within the site or application, such as global navigation or breadcrumb lists.
 conditions:
 - platform: web
   type: or
@@ -19,17 +19,27 @@ conditions:
     id: "0861-content-00"
     procedure:
       ja: |-
-        チェック対象はモーダル・ダイアログである。
+        チェック対象が以下のいずれかに該当する。
+
+        *  サイトやアプリケーション内でのナビゲーションを担うコンポーネントが存在しない
+        *  モーダル・ダイアログである
+        *  ウィザードなど、特定の手順に沿ってのみ表示される画面である
+        *  エラーページなど、例外的な場合にのみ表示され、現在地の表示が不可能な画面である
       en: |-
-        The check target is a modal dialog.
+        The check target meets one of the following conditions:
+
+        *  There are no components responsible for navigation within the site or application.
+        *  It is a modal dialog.
+        *  It is a screen displayed only in a specific procedure, such as a wizard.
+        *  It is a screen displayed only in exceptional cases, such as an error page, where indicating the current location is not possible.
   - type: simple
     tool: nvda
     id: "0861-nvda-01"
     procedure:
       ja: |-
-        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
+        NVDAのブラウズ・モードでの矢印キーの操作による読み上げで、サイトやアプリケーション内でのナビゲーションを担うすべてのコンポーネント（グローバル・ナビゲーションやパンくずリストなど）の中で、現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
       en: |-
-        The part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
+        In all components responsible for navigation within the site or application (such as global navigation and breadcrumb lists), the part that represents the currently displayed page is indicated by announcement such as "current page" when reading the content using arrow keys in NVDA's browse mode.
     YouTube:
       id: wegzVOdnLJM
       title: 現在のページ【NVDAでアクセシビリティー チェック】
@@ -38,6 +48,6 @@ conditions:
     id: "0861-macvo-01"
     procedure:
       ja: |-
-        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、パンくずリストやグローバル・ナビゲーションの中で現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
+        macOS VoiceOverの :kbd:`VO` キーと左右矢印キーによる読み上げで、サイトやアプリケーション内でのナビゲーションを担うすべてのコンポーネント（グローバル・ナビゲーションやパンくずリストなど）の中で、現在表示中のページを表す箇所を読み上げたとき、「現在のページ」というような発声がある。
       en: |-
-        The part that represents the currently displayed page in the breadcrumbs or global navigation is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.
+        In all components responsible for navigation within the site or application (such as global navigation and breadcrumb lists), the part that represents the currently displayed page is indicated by announcement such as "current page" when reading the content using the :kbd:`VO` key and the left/right arrow keys with macOS VoiceOver enabled.

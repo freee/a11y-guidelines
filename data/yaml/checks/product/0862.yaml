@@ -7,9 +7,9 @@ platform:
 - mobile
 check:
   ja: |-
-    グローバル・ナビゲーションやパンくずリスト内で、そのページが対応する要素が分かるような表示がされている。
+    サイトやアプリケーション内でのナビゲーションを担うコンポーネント（グローバル・ナビゲーションやパンくずリストなど）内で、そのページが対応する要素が分かるような表示がされている。
   en: |-
-    The display indicates the elements corresponding to the current page within the global navigation and breadcrumb list.
+    The display indicates the elements corresponding to the current page within the components responsible for navigation within the site or application, such as global navigation or breadcrumb lists.
 conditions:
 - platform: web
   type: or
@@ -19,14 +19,22 @@ conditions:
     id: "0862-content-00"
     procedure:
       ja: |-
-        チェック対象はモーダル・ダイアログである。
+        チェック対象が以下のいずれかに該当する。
+
+        *  モーダル・ダイアログである
+        *  ウィザードなど、特定の手順に沿ってのみ表示される画面である
+        *  エラーページなど、例外的な場合にのみ表示され、現在地の表示が不可能な画面である
       en: |-
-        The check target is a modal dialog.
+        The check target meets one of the following conditions:
+
+        *  It is a modal dialog.
+        *  It is a screen displayed only in a specific procedure, such as a wizard.
+        *  It is a screen displayed only in exceptional cases, such as an error page, where indicating the current location is not possible.
   - type: simple
     tool: misc
     id: "0862-content-01"
     procedure:
       ja: |-
-        グローバル・ナビゲーションやパンくずリスト内で、そのページが対応する要素が分かるような表示がされている。
+        サイトやアプリケーション内でのナビゲーションを担うすべてのコンポーネント（グローバル・ナビゲーションやパンくずリストなど）内で、そのページが対応する要素が分かるような表示がされている。
       en: |-
-        The display indicates the elements corresponding to the current page within the global navigation and breadcrumb list.
+        In all components responsible for navigation within the site or application (such as global navigation and breadcrumb lists), the elements corresponding to the current page are visually indicated.
