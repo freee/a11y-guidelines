@@ -7,9 +7,9 @@ platform:
 - mobile
 check:
   ja: |-
-    そのページ/画面のサイトやアプリケーション内での位置がグローバル・ナビゲーションやパンくずリスト内で示されている。
+    そのページ/画面のサイトやアプリケーション内での位置が、サイトやアプリケーション内でのナビゲーションを担うコンポーネント（グローバル・ナビゲーションやパンくずリストなど）内で示されている。
   en: |-
-    The position of the page/screen within the site or application is indicated in the global navigation or breadcrumb list.
+    The position of the page/screen within the site or application is indicated within the components responsible for navigation within the site or application, such as global navigation or breadcrumb lists.
 conditions:
 - platform: web
   type: or
@@ -19,14 +19,22 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        チェック対象の画面には、グローバル・ナビゲーションやパンくずリストが存在しない。
+        チェック対象の画面が、以下のいずれかに該当する。
+
+        *  モーダル・ダイアログである
+        *  ウィザードなど、特定の手順に沿ってのみ表示される画面である
+        *  エラーページなど、例外的な場合にのみ表示され、現在地の表示が不可能な画面である
       en: |-
-        There are no global navigation or breadcrumb lists on the screen to be checked.
+        The screen to be checked meets one of the following conditions:
+
+        *  It is a modal dialog.
+        *  It is a screen displayed only in a specific procedure, such as a wizard.
+        *  It is a screen displayed only in exceptional cases, such as an error page, where indicating the current location is not possible.
   - type: simple
     id: 0841-content-01
     tool: misc
     procedure:
       ja: |-
-        グローバル・ナビゲーションやパンくずリスト内で、そのページ/画面のサイトやアプリケーション内での位置が視覚的に分かるように示されている。
+        そのページ/画面の、サイトやアプリケーション内での位置が視覚的に分かるような表示が、サイトやアプリケーション内でのナビゲーションを担うコンポーネントによって示されている。
       en: |-
-        The position of the page/screen within the site or application is visually indicated in the global navigation or breadcrumb list.
+        A visual indication of the position of the page/screen within the site or application is provided by the components responsible for navigation within the site or application.
