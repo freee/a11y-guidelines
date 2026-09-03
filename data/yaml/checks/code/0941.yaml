@@ -18,11 +18,13 @@ implementations:
   - platform: web
     method:
       ja: |-
-        *  ``label`` 要素、または ``aria-labelledby`` 属性を用いて表示されているテキストまたは画像と関連付ける、または
-        *  ``aria-label`` 属性でラベルを指定する
+        *  ラベルとして表示されているテキストまたは画像が存在する場合、 ``label`` 要素を用いてフォーム・コントロールと関連付ける
+        *  ``label`` 要素を使用できない場合に限り、 ``aria-labelledby`` 属性を用いて、表示されているテキストまたは画像と関連付ける
+        *  ラベルとして表示されているものが存在しない、または ``label`` 要素と ``aria-labelledby`` 属性のいずれも使用できない場合に限り、 ``aria-label`` 属性でラベルを指定する
       en: |-
-        *  Associate the displayed text or image with the ``label`` element or the ``aria-labelledby`` attribute, or
-        *  Specify the label with the ``aria-label`` attribute.
+        *  When there is displayed text or an image serving as a label, associate it with the form control using the ``label`` element.
+        *  Only when the ``label`` element cannot be used, associate the displayed text or image with the form control using the ``aria-labelledby`` attribute.
+        *  Only when no displayed label exists, or when neither the ``label`` element nor the ``aria-labelledby`` attribute can be used, specify the label with the ``aria-label`` attribute.
   - platform: ios
     method:
       ja: |-

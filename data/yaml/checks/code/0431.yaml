@@ -20,11 +20,13 @@ implementations:
   - platform: web
     method:
       ja: |-
-        *  ``alt`` 属性または ``aria-label`` 属性で指定する
-        *  表示されているテキストを簡潔な説明として利用する場合は、 ``aria-labelledby`` 属性でそのテキストと画像を関連付ける
+        *  ``img`` 要素の場合は、 ``alt`` 属性で指定する
+        *  ``img`` 要素以外の要素で画像を表現している場合は、 ``role="img"`` を付加した上で、 ``aria-label`` 属性で指定する
+        *  表示されているテキストを簡潔な説明として利用する場合は、 ``aria-labelledby`` 属性でそのテキストと画像を関連付ける（ ``img`` 要素以外の場合は ``role="img"`` を付加する）
       en: |-
-        *  Specify with the ``alt`` attribute or the ``aria-label`` attribute.
-        *  To use the displayed text as a concise description, associate that text with the image using the ``aria-labelledby`` attribute.
+        *  For the ``img`` element, specify with the ``alt`` attribute.
+        *  For elements other than the ``img`` element that represent images, add ``role="img"`` and specify with the ``aria-label`` attribute.
+        *  To use the displayed text as a concise description, associate that text with the image using the ``aria-labelledby`` attribute (for elements other than the ``img`` element, add ``role="img"``).
   - platform: ios
     method:
       ja: |-

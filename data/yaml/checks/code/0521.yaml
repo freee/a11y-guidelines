@@ -18,9 +18,11 @@ implementations:
   - platform: web
     method:
       ja: |-
-        *  ``alt`` 属性、または ``aria-label`` 属性を用いる
+        *  ``img`` 要素の場合は、 ``alt`` 属性を用いる
+        *  ``img`` 要素以外の要素で画像を表現している場合は、 ``role="img"`` を付加した上で、 ``aria-label`` 属性を用いる
       en: |-
-        *  Use the ``alt`` attribute or the ``aria-label`` attribute
+        *  For the ``img`` element, use the ``alt`` attribute.
+        *  For elements other than the ``img`` element that represent images, add ``role="img"`` and use the ``aria-label`` attribute.
   - platform: ios
     method:
       ja: |-
