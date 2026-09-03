@@ -45,6 +45,6 @@ conditions:
       tool: misc
       procedure:
         ja: |-
-          役割や意味がわかるような代替テキスト（ ``alt`` 属性のまたは ``aria-label`` 属性の値）が設計資料で明示されている。
+          役割や意味がわかるような代替テキストが設計資料で明示されている。
         en: |-
-          Alternative text (value of ``alt`` attribute or ``aria-label`` attribute) that indicates the role or meaning is clearly defined in the design documentation.
+          Alternative text that indicates the role or meaning is clearly defined in the design documentation.

@@ -35,6 +35,6 @@ conditions:
     tool: misc
     procedure:
       ja: |-
-        画面上にラベルとして適切なテキストが表示されていない場合、フォーム・コントロールのラベルとして指定すべきテキストとその実装方法（例： ``aria-label`` 属性を利用するなど）が設計資料に明示されている。
+        画面上にラベルとして適切なテキストが表示されていない場合、フォーム・コントロールのラベルとして指定すべきテキストが設計資料に明示されている。
       en: |-
-        If there is no appropriate text displayed on the screen as a label, the design documentation clearly specifies the text to be designated as the label for the form control and how to implement it (e.g., using the ``aria-label`` attribute).
+        If there is no appropriate text displayed on the screen as a label, the design documentation clearly specifies the text to be designated as the label for the form control.
