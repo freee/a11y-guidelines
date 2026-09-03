@@ -18,12 +18,12 @@ implementations:
   - platform: web
     method:
       ja: |-
-        *  空の ``alt`` 属性（ ``alt=""`` ）を指定、または
-        *  ``role="presentation"`` を指定、または
+        *  ``img`` 要素の場合は、空の ``alt`` 属性（ ``alt=""`` ）を指定、または
+        *  ``img`` 要素以外の要素で画像を表現している場合は、 ``role="none"`` または ``role="presentation"`` を指定、または
         *  CSSで背景画像として指定
       en: |-
-        *  Specify an empty ``alt`` attribute ( ``alt=""`` ). Or
-        *  Specify ``role="presentation"``. Or
+        *  For ``img`` elements, specify an empty ``alt`` attribute ( ``alt=""`` ). Or
+        *  For non-``img`` elements representing images, specify ``role="none"`` or ``role="presentation"``. Or
         *  Specify as a background image in CSS.
   - platform: ios
     method:
