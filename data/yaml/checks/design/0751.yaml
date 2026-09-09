@@ -7,6 +7,26 @@ platform:
 - mobile
 check:
   ja: |-
-    特定の画面方向に固定した使用を前提としたデザインになっていない。
+    スマートフォンやタブレット等の画面方向を検知できるデバイスでの使用時に、特定の画面方向（縦向き／横向き）に固定した使用を前提としたデザインになっていない。
   en: |-
-    The design does not assume use fixed to a specific screen orientation.
+    When used on devices that can detect screen orientation, such as smartphones and tablets, the design does not assume use fixed to a specific screen orientation (portrait/landscape).
+conditions:
+- platform: general
+  type: or
+  conditions:
+  - type: simple
+    id: "0751-content-01"
+    tool: misc
+    procedure:
+      ja: |-
+        PC（デスクトップやノートPC）での利用のみを想定しており、スマートフォンやタブレット等の画面方向を検知できるデバイスでの使用を想定していない。
+      en: |-
+        The design is intended only for use on PCs (desktops or laptops) and is not intended for use on devices that can detect screen orientation, such as smartphones and tablets.
+  - type: simple
+    id: "0751-content-02"
+    tool: misc
+    procedure:
+      ja: |-
+        スマートフォンやタブレット等の画面方向を検知できるデバイスでの使用を想定していて、縦向き（portrait）・横向き（landscape）のどちらの方向でも使用できるデザインになっている。
+      en: |-
+        The design is intended for use on devices that can detect screen orientation, such as smartphones and tablets, and can be used in both portrait and landscape orientations.
