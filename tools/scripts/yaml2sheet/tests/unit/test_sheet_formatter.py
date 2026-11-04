@@ -11,6 +11,7 @@ Tests the SheetFormatter class which handles sheet formatting operations includi
 import pytest
 from unittest.mock import Mock, patch
 from yaml2sheet.sheet_formatter import SheetFormatter
+from yaml2sheet.row_data_builder import RowDataBuilder
 from yaml2sheet.sheet_structure import SheetStructure
 from yaml2sheet.cell_data import CellData, CellType
 from yaml2sheet.config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
@@ -159,10 +160,38 @@ class TestSheetFormatter:
         assert len(requests) == 2
         
         # Check that only user-entered conditions are present
+        # Targets without generated data take final results (OK/NG) directly
         assert all('TEXT_EQ' in req['addConditionalFormatRule']['rule']['booleanRule']['condition']['type'] for req in requests)
-        assert requests[0]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == CHECK_RESULTS['pass']['ja']
-        assert requests[1]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == CHECK_RESULTS['fail']['ja']
-    
+        assert requests[0]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == FINAL_CHECK_RESULTS['pass']['ja']
+        assert requests[1]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == FINAL_CHECK_RESULTS['fail']['ja']
+
+    @pytest.mark.parametrize('target_id', [
+        'designWeb', 'designMobile', 'codeWeb', 'codeMobile',
+        'productWeb', 'productIos', 'productAndroid'
+    ])
+    @pytest.mark.parametrize('lang', ['ja', 'en'])
+    def test_add_conditional_formatting_matches_data_validation(self, target_id, lang):
+        """Test that conditional formatting of the result column matches its data validation."""
+        formatter = SheetFormatter(lang, target_id, 'test@example.com')
+        row = RowDataBuilder(lang, target_id).prepare_row_data(
+            {'id': '0001', 'checkId': '0001', 'subcheckId': ''},
+            target_id, lang, {'0001': 2}
+        )
+        result_cell = row[formatter.get_result_column_index()]
+        validation_values = [
+            value['userEnteredValue']
+            for value in result_cell.validation['condition']['values']
+        ]
+
+        requests = formatter.add_conditional_formatting(123, 10)
+        user_entry_values = [
+            req['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue']
+            for req in requests[:2]
+        ]
+
+        # Pass/fail values for the result column must be selectable in the validation list
+        assert all(value in validation_values for value in user_entry_values)
+
     def test_add_conditional_formatting_english(self):
         """Test conditional formatting with English language."""
         formatter = SheetFormatter('en', 'productWeb', 'test@example.com')

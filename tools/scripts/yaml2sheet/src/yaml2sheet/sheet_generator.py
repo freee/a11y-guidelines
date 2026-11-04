@@ -18,7 +18,7 @@ from .row_data_builder import RowDataBuilder
 from .column_manager import ColumnManager
 from .sheet_content_manager import SheetContentManager
 from .batch_update_manager import BatchUpdateManager
-from .utils import create_version_info_request, adjust_sheet_size
+from .utils import create_version_info_request, adjust_sheet_size, get_user_entry_results
 from .sheet_structure_builder import SheetStructureBuilder
 
 logger = logging.getLogger(__name__)
@@ -278,7 +278,7 @@ class ChecklistSheetGenerator:
             lang: Language code
             row_data: Row data to append to
         """
-        validation_dict = CHECK_RESULTS if COLUMNS[target_id]['generatedData'] else FINAL_CHECK_RESULTS
+        validation_dict = get_user_entry_results(target_id)
         validation_values = [validation_dict[key][lang] for key in validation_dict.keys()]
         validation_rule = {
             'condition': {
