@@ -849,14 +849,15 @@ class ChecklistSheetGenerator:
         
         if has_generated_data:
             if not has_subchecks:
-                # Hide columns B-D if no subchecks
+                # Hide columns B-C if no subchecks
+                # (column D shows the calculated result from column E)
                 requests.append({
                     'updateDimensionProperties': {
                         'range': {
                             'sheetId': sheet_id,
                             'dimension': 'COLUMNS',
                             'startIndex': 1,
-                            'endIndex': 4
+                            'endIndex': 3
                         },
                         'properties': {'hiddenByUser': True},
                         'fields': 'hiddenByUser'

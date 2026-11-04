@@ -1567,6 +1567,64 @@ class TestChecklistSheetGenerator:
             hide_request = next(req for req in visibility_requests if req['updateDimensionProperties']['range']['startIndex'] == 1)
             assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
 
+    @pytest.mark.parametrize('target_id', ['productIos', 'productAndroid'])
+    def test_add_column_visibility_requests_with_generated_data_no_subchecks(self, mock_credentials, mock_service, target_id):
+        """Test _add_column_visibility_requests for target with generated data but no subchecks."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = target_id
+
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('', CellType.PLAIN)]  # No subchecks
+            ]
+
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+
+            visibility_requests = [req for req in requests if 'updateDimensionProperties' in req]
+            merge_requests = [req for req in requests if 'mergeCells' in req]
+
+            assert len(visibility_requests) == 2  # Reset all + hide columns B-C
+            assert len(merge_requests) == 0
+
+            # Columns B-C (index 1-2) are hidden; column D (calculated result) stays visible
+            hide_request = visibility_requests[1]
+            assert hide_request['updateDimensionProperties']['range']['startIndex'] == 1
+            assert hide_request['updateDimensionProperties']['range']['endIndex'] == 3
+            assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
+
+    @pytest.mark.parametrize('initially_hidden', [set(), {1, 2, 3}, {1, 2, 3, 4, 5, 6, 7, 8, 9}])
+    def test_add_column_visibility_requests_overrides_existing_hidden_columns(self, mock_credentials, mock_service, initially_hidden):
+        """Test that existing hidden columns end up in the configured state regardless of initial state."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = 'productIos'
+
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('', CellType.PLAIN)]  # No subchecks
+            ]
+
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+
+            # Apply requests in order to the initial column state
+            hidden = set(initially_hidden)
+            for req in requests:
+                props = req.get('updateDimensionProperties')
+                if props and 'hiddenByUser' in props['properties']:
+                    columns = set(range(props['range']['startIndex'], props['range']['endIndex']))
+                    hidden = hidden | columns if props['properties']['hiddenByUser'] else hidden - columns
+
+            assert hidden == {1, 2}  # Only columns B-C are hidden
+
     def test_add_column_visibility_requests_with_generated_data_with_subchecks(self, mock_credentials, mock_service):
         """Test _add_column_visibility_requests for target with generated data and subchecks."""
         with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):

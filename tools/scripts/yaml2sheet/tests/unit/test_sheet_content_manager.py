@@ -381,12 +381,12 @@ class TestSheetContentManager:
         
         # Verify visibility requests
         visibility_requests = [req for req in requests if 'updateDimensionProperties' in req]
-        assert len(visibility_requests) == 2  # Reset all + hide columns B-D
-        
-        # Verify columns B-D are hidden
+        assert len(visibility_requests) == 2  # Reset all + hide columns B-C
+
+        # Verify columns B-C are hidden and column D stays visible
         hide_request = visibility_requests[1]
         assert hide_request['updateDimensionProperties']['range']['startIndex'] == 1
-        assert hide_request['updateDimensionProperties']['range']['endIndex'] == 4
+        assert hide_request['updateDimensionProperties']['range']['endIndex'] == 3
         assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
 
     def test_add_column_visibility_requests_with_generated_data_with_subchecks(self):
