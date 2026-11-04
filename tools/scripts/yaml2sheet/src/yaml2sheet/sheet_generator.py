@@ -624,6 +624,10 @@ class ChecklistSheetGenerator:
                 # Add content and formatting
                 self._add_sheet_content_requests(requests, sheet_id, sheet)
                 requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
+                # Remove existing rules first; otherwise they accumulate on every update
+                requests.extend(formatter.delete_conditional_formatting(
+                    sheet_id, self.spreadsheet_manager.get_conditional_format_count(sheet_id)
+                ))
                 requests.extend(formatter.add_conditional_formatting(sheet_id, data_length))
             else:
                 # Create new sheet

@@ -209,7 +209,42 @@ class TestChecklistSheetGenerator:
             assert generator.existing_sheets['Sheet1']['sheetId'] == 0
             assert generator.existing_sheets['Sheet2']['sheetId'] == 123
             assert generator.protected_ranges[123] == [456]
-    
+
+    def test_load_existing_sheets_with_conditional_formats(self, mock_credentials, mock_service):
+        """Test loading conditional format rule counts of existing sheets."""
+        mock_service.spreadsheets().get().execute.return_value = {
+            'sheets': [
+                {
+                    'properties': {
+                        'title': 'Sheet1',
+                        'sheetId': 0,
+                        'index': 0
+                    }
+                },
+                {
+                    'properties': {
+                        'title': 'Sheet2',
+                        'sheetId': 123,
+                        'index': 1
+                    },
+                    'conditionalFormats': [
+                        {'ranges': [], 'booleanRule': {}},
+                        {'ranges': [], 'booleanRule': {}},
+                        {'ranges': [], 'booleanRule': {}}
+                    ]
+                }
+            ]
+        }
+
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            assert generator.spreadsheet_manager.get_conditional_format_count(123) == 3
+            assert generator.spreadsheet_manager.get_conditional_format_count(0) == 0
+
     def test_load_existing_sheets_with_protected_ranges_error(self, mock_credentials, mock_service):
         """Test loading existing sheets when protected ranges API fails."""
         mock_service.spreadsheets().get().execute.return_value = {
@@ -948,7 +983,65 @@ class TestChecklistSheetGenerator:
                 
                 # Should call _add_sheet_content_requests
                 mock_add_content.assert_called_once()
-    
+
+    def test_generate_batch_requests_existing_sheet_replaces_conditional_formats(self, mock_credentials, mock_service):
+        """Test that existing conditional format rules are deleted before new ones are added."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            generator.existing_sheets['デザイン: Web'] = {'sheetId': 123, 'index': 0}
+            generator.spreadsheet_manager.conditional_format_counts = {123: 3}
+
+            sheet = SheetStructure(name='デザイン: Web', sheet_id=123)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('Data2', CellType.PLAIN)]
+            ]
+            generator.sheets['デザイン: Web'] = sheet
+
+            with patch.object(generator, '_add_sheet_content_requests'):
+                requests, _ = generator.generate_batch_requests()
+
+            delete_indices = [
+                i for i, req in enumerate(requests) if 'deleteConditionalFormatRule' in req
+            ]
+            add_indices = [
+                i for i, req in enumerate(requests) if 'addConditionalFormatRule' in req
+            ]
+
+            # Existing rules are deleted from the last index
+            assert [requests[i]['deleteConditionalFormatRule']['index'] for i in delete_indices] == [2, 1, 0]
+            assert all(requests[i]['deleteConditionalFormatRule']['sheetId'] == 123 for i in delete_indices)
+            # All deletions come before additions
+            assert add_indices
+            assert max(delete_indices) < min(add_indices)
+
+    def test_generate_batch_requests_existing_sheet_without_conditional_formats(self, mock_credentials, mock_service):
+        """Test that no deletion requests are generated when the sheet has no conditional format rules."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            generator.existing_sheets['デザイン: Web'] = {'sheetId': 123, 'index': 0}
+
+            sheet = SheetStructure(name='デザイン: Web', sheet_id=123)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('Data2', CellType.PLAIN)]
+            ]
+            generator.sheets['デザイン: Web'] = sheet
+
+            with patch.object(generator, '_add_sheet_content_requests'):
+                requests, _ = generator.generate_batch_requests()
+
+            assert not any('deleteConditionalFormatRule' in req for req in requests)
+            assert any('addConditionalFormatRule' in req for req in requests)
+
     def test_execute_batch_update_success(self, mock_credentials, mock_service):
         """Test successful batch update execution."""
         with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):

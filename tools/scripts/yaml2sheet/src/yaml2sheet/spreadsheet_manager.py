@@ -18,6 +18,7 @@ class SpreadsheetManager:
         self.api_client = api_client
         self.existing_sheets: Dict[str, Dict[str, Any]] = {}
         self.protected_ranges: Dict[int, List[int]] = {}
+        self.conditional_format_counts: Dict[int, int] = {}
         self._sheets_loaded = False
 
     def _load_existing_sheets(self) -> None:
@@ -29,7 +30,8 @@ class SpreadsheetManager:
             logger.debug("Loading existing sheets")            
             self.existing_sheets = {}
             self.protected_ranges = {}  # 保護範囲情報を格納する辞書
-            
+            self.conditional_format_counts = {}  # 条件付き書式ルール数を格納する辞書
+
             for sheet in spreadsheet.get('sheets', []):
                 properties = sheet['properties']
                 title = properties['title']
@@ -49,7 +51,13 @@ class SpreadsheetManager:
                     ]
                     if self.protected_ranges[sheet_id]:
                         logger.debug(f"Found {len(self.protected_ranges[sheet_id])} protected ranges in sheet '{title}'")
-            
+
+                # 既存の条件付き書式ルール数を取得（更新時に削除するため）
+                conditional_formats = sheet.get('conditionalFormats', [])
+                if conditional_formats:
+                    self.conditional_format_counts[sheet_id] = len(conditional_formats)
+                    logger.debug(f"Found {len(conditional_formats)} conditional format rules in sheet '{title}'")
+
             logger.debug(f"Loaded existing sheets: {list(self.existing_sheets.keys())}")
             
             # 保護範囲の詳細情報を取得
@@ -165,6 +173,17 @@ class SpreadsheetManager:
             List[int]: List of protected range IDs
         """
         return self.protected_ranges.get(sheet_id, [])
+
+    def get_conditional_format_count(self, sheet_id: int) -> int:
+        """Get number of existing conditional format rules for a sheet
+
+        Args:
+            sheet_id: ID of the sheet
+
+        Returns:
+            int: Number of conditional format rules
+        """
+        return self.conditional_format_counts.get(sheet_id, 0)
 
     def get_sheet_grid_properties(self, sheet_name: str) -> Optional[Dict[str, Any]]:
         """Get grid properties for a sheet

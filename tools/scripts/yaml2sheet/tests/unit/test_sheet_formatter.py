@@ -83,6 +83,26 @@ class TestSheetFormatter:
         expected_index = len(COLUMNS['idCols']) + len(COLUMNS['designMobile']['generatedData'])
         assert formatter.get_result_column_index() == expected_index
     
+    def test_delete_conditional_formatting(self):
+        """Test deletion requests for existing conditional formatting rules."""
+        formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')
+        sheet_id = 123
+
+        requests = formatter.delete_conditional_formatting(sheet_id, 3)
+
+        # Rules should be deleted from the last index
+        assert requests == [
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 2}},
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 1}},
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 0}},
+        ]
+
+    def test_delete_conditional_formatting_no_rules(self):
+        """Test that no deletion requests are generated when there are no rules."""
+        formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')
+
+        assert formatter.delete_conditional_formatting(123, 0) == []
+
     def test_add_conditional_formatting_with_generated_data(self):
         """Test conditional formatting for target with generated data."""
         formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')

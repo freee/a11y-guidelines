@@ -191,7 +191,30 @@ class SheetFormatter:
                 }
             })
         return requests
-        
+
+    def delete_conditional_formatting(self, sheet_id: int, rule_count: int) -> List[Dict]:
+        """Delete existing conditional formatting rules
+
+        Rules are deleted from the last index so that the remaining
+        indices stay valid while the requests are applied in order.
+
+        Args:
+            sheet_id: ID of sheet to clear
+            rule_count: Number of existing conditional formatting rules
+
+        Returns:
+            List[Dict]: List of conditional formatting deletion requests
+        """
+        return [
+            {
+                'deleteConditionalFormatRule': {
+                    'sheetId': sheet_id,
+                    'index': index
+                }
+            }
+            for index in reversed(range(rule_count))
+        ]
+
     def get_result_column_index(self) -> int:
         """Get index of result column based on current target
         
