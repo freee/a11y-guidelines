@@ -42,8 +42,22 @@ Accessibility Check List Update History
 Here, we list updates related to the English translation since the introduction of V4.3.7, when we began providing translations for all sheets.
 For the changes to the original Japanese version, please refer to the `Japanese version of this page </checks/checksheet.html>`__.
 
-V7.0.0 (Agust 7, 2025)
-======================
+V8.0.0 (November 9, 2026)
+=========================
+
+*  Changes due to the contrast ratio guidelines abolishing our own criteria for "large-scale text," which assumed Japanese text, and aligning with the WCAG criteria: :ref:`check-0002`, :ref:`check-0021`.
+*  Reviewed :ref:`check-0592` and created :ref:`check-0593`, :ref:`check-0594`, :ref:`check-0595`, and :ref:`check-0596` by separating some of its content.
+*  Reviewed :ref:`check-0682` and created :ref:`check-0683` by separating the content regarding the placement of major content areas in ARIA landmarks.
+*  Changed the severity of :ref:`check-0682` to [MINOR].
+*  Added examples of how to perform the check using macOS VoiceOver: :ref:`check-0562`, :ref:`check-0591`, :ref:`check-0922`, :ref:`check-1191`.
+*  Removed the check method example regarding the ``aria-current`` attribute from :ref:`check-0841`.
+*  Clarified what "modification and deletion of data" refers to in :ref:`check-1141`.
+*  Explicitly stated the case where there are no images on the screen to be checked in :ref:`check-0441`.
+*  Added links and buttons to the examples of non-static text in :ref:`check-0591`.
+*  Revised the examples of operations to hide content in the mouse check method example of :ref:`check-0111`.
+
+V7.0.0 (August 7, 2025)
+=======================
 
 *  Revised the check sheet for items whose applicable stage is "Design" and platform is "Web" to match the recording method to the check sheet for items whose applicable stage is "Product" and platform is "Web", and reviewed the check items.
 *  Reviewed some of the check items regarding images of text, integrating check ID: 0481 into :ref:`check-0511`.
