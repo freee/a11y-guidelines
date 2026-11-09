@@ -19,7 +19,7 @@ class SheetFormatter:
         
         Args:
             sheet_id: ID of sheet to format
-            data_length: Number of data rows
+            data_length: Number of rows including the header row
             
         Returns:
             List[Dict]: List of formatting requests
@@ -52,7 +52,7 @@ class SheetFormatter:
                 'range': {
                     'sheetId': sheet_id,
                     'startRowIndex': 1,
-                    'endRowIndex': data_length + 1
+                    'endRowIndex': data_length
                 },
                 'cell': {
                     'userEnteredFormat': {
@@ -83,7 +83,7 @@ class SheetFormatter:
         
         Args:
             sheet_id: ID of sheet to format
-            data_length: Number of data rows
+            data_length: Number of rows including the header row
             
         Returns:
             List[Dict]: List of conditional formatting requests
@@ -100,7 +100,7 @@ class SheetFormatter:
                     'ranges': [{
                         'sheetId': sheet_id,
                         'startRowIndex': 1,
-                        'endRowIndex': data_length + 1,
+                        'endRowIndex': data_length,
                         'startColumnIndex': result_column,
                         'endColumnIndex': result_column + 1
                     }],
@@ -124,7 +124,7 @@ class SheetFormatter:
                     'ranges': [{
                         'sheetId': sheet_id,
                         'startRowIndex': 1,
-                        'endRowIndex': data_length + 1,
+                        'endRowIndex': data_length,
                         'startColumnIndex': result_column,
                         'endColumnIndex': result_column + 1
                     }],
@@ -152,7 +152,7 @@ class SheetFormatter:
                         'ranges': [{
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_column_start,
                             'endColumnIndex': generated_column_end
                         }],
@@ -176,7 +176,7 @@ class SheetFormatter:
                         'ranges': [{
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_column_start,
                             'endColumnIndex': generated_column_end
                         }],
@@ -249,7 +249,7 @@ class SheetFormatter:
                         'range': {
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_data_start,
                             'endColumnIndex': generated_data_start + generated_data_count
                         },

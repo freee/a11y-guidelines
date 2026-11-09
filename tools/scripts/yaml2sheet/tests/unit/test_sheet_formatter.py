@@ -60,7 +60,7 @@ class TestSheetFormatter:
         wrap_request = requests[1]
         assert wrap_request['repeatCell']['range']['sheetId'] == sheet_id
         assert wrap_request['repeatCell']['range']['startRowIndex'] == 1
-        assert wrap_request['repeatCell']['range']['endRowIndex'] == data_length + 1
+        assert wrap_request['repeatCell']['range']['endRowIndex'] == data_length
         assert wrap_request['repeatCell']['cell']['userEnteredFormat']['wrapStrategy'] == 'WRAP'
         
         # Check freeze row request
@@ -120,7 +120,7 @@ class TestSheetFormatter:
         result_column = formatter.get_result_column_index()
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['sheetId'] == sheet_id
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['startRowIndex'] == 1
-        assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endRowIndex'] == data_length + 1
+        assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endRowIndex'] == data_length
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['startColumnIndex'] == result_column
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endColumnIndex'] == result_column + 1
         assert user_pass_request['addConditionalFormatRule']['rule']['booleanRule']['condition']['type'] == 'TEXT_EQ'
@@ -234,7 +234,7 @@ class TestSheetFormatter:
         protection_request = requests[0]
         assert protection_request['addProtectedRange']['protectedRange']['range']['sheetId'] == sheet_id
         assert protection_request['addProtectedRange']['protectedRange']['range']['startRowIndex'] == 1
-        assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == len(sheet.data) + 1
+        assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == len(sheet.data)  # header row excluded, last data row included
         
         generated_data_start = len(COLUMNS['idCols'])
         generated_data_count = len(COLUMNS['designWeb']['generatedData'])
@@ -342,7 +342,7 @@ class TestSheetFormatter:
             for request in requests:
                 range_info = request['addConditionalFormatRule']['rule']['ranges'][0]
                 assert range_info['startRowIndex'] == 1
-                assert range_info['endRowIndex'] == data_length + 1
+                assert range_info['endRowIndex'] == data_length
                 assert range_info['sheetId'] == sheet_id
     
     def test_protection_settings_with_different_sheet_sizes(self):
@@ -360,7 +360,7 @@ class TestSheetFormatter:
             if len(COLUMNS['designWeb']['generatedData']) > 0:
                 assert len(requests) == 1
                 protection_request = requests[0]
-                assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == num_rows + 1
+                assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == num_rows
     
     def test_formatting_consistency_across_languages(self):
         """Test that formatting is consistent across languages."""
