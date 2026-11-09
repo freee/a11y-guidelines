@@ -12,6 +12,13 @@ For the changes to the original Japanese version, please refer to the `Japanese 
    Changes After the Latest release
    ================================
 
+`Ver. 202611.0 (Nov 9, 2026) <https://github.com/freee/a11y-guidelines/releases/202611.0>`__
+============================================================================================
+
+* Update the accessibility check list to V8.0.0, incorporating changes that had not yet been reflected in the check list.
+* Add examples of how to perform the checks using macOS VoiceOver: :ref:`check-0562`, :ref:`check-0591`, :ref:`check-0922`, :ref:`check-1191`.
+* Add supplementary information: :ref:`exp-a11y-visualizer`.
+
 `Ver. 202603.0 (Mar 27, 2026) <https://github.com/freee/a11y-guidelines/releases/202603.0>`__
 =============================================================================================
 
