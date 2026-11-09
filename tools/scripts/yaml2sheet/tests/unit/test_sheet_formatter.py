@@ -11,6 +11,7 @@ Tests the SheetFormatter class which handles sheet formatting operations includi
 import pytest
 from unittest.mock import Mock, patch
 from yaml2sheet.sheet_formatter import SheetFormatter
+from yaml2sheet.row_data_builder import RowDataBuilder
 from yaml2sheet.sheet_structure import SheetStructure
 from yaml2sheet.cell_data import CellData, CellType
 from yaml2sheet.config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
@@ -59,7 +60,7 @@ class TestSheetFormatter:
         wrap_request = requests[1]
         assert wrap_request['repeatCell']['range']['sheetId'] == sheet_id
         assert wrap_request['repeatCell']['range']['startRowIndex'] == 1
-        assert wrap_request['repeatCell']['range']['endRowIndex'] == data_length + 1
+        assert wrap_request['repeatCell']['range']['endRowIndex'] == data_length
         assert wrap_request['repeatCell']['cell']['userEnteredFormat']['wrapStrategy'] == 'WRAP'
         
         # Check freeze row request
@@ -83,6 +84,26 @@ class TestSheetFormatter:
         expected_index = len(COLUMNS['idCols']) + len(COLUMNS['designMobile']['generatedData'])
         assert formatter.get_result_column_index() == expected_index
     
+    def test_delete_conditional_formatting(self):
+        """Test deletion requests for existing conditional formatting rules."""
+        formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')
+        sheet_id = 123
+
+        requests = formatter.delete_conditional_formatting(sheet_id, 3)
+
+        # Rules should be deleted from the last index
+        assert requests == [
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 2}},
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 1}},
+            {'deleteConditionalFormatRule': {'sheetId': sheet_id, 'index': 0}},
+        ]
+
+    def test_delete_conditional_formatting_no_rules(self):
+        """Test that no deletion requests are generated when there are no rules."""
+        formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')
+
+        assert formatter.delete_conditional_formatting(123, 0) == []
+
     def test_add_conditional_formatting_with_generated_data(self):
         """Test conditional formatting for target with generated data."""
         formatter = SheetFormatter('ja', 'designWeb', 'test@example.com')
@@ -99,7 +120,7 @@ class TestSheetFormatter:
         result_column = formatter.get_result_column_index()
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['sheetId'] == sheet_id
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['startRowIndex'] == 1
-        assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endRowIndex'] == data_length + 1
+        assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endRowIndex'] == data_length
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['startColumnIndex'] == result_column
         assert user_pass_request['addConditionalFormatRule']['rule']['ranges'][0]['endColumnIndex'] == result_column + 1
         assert user_pass_request['addConditionalFormatRule']['rule']['booleanRule']['condition']['type'] == 'TEXT_EQ'
@@ -139,10 +160,38 @@ class TestSheetFormatter:
         assert len(requests) == 2
         
         # Check that only user-entered conditions are present
+        # Targets without generated data take final results (OK/NG) directly
         assert all('TEXT_EQ' in req['addConditionalFormatRule']['rule']['booleanRule']['condition']['type'] for req in requests)
-        assert requests[0]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == CHECK_RESULTS['pass']['ja']
-        assert requests[1]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == CHECK_RESULTS['fail']['ja']
-    
+        assert requests[0]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == FINAL_CHECK_RESULTS['pass']['ja']
+        assert requests[1]['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue'] == FINAL_CHECK_RESULTS['fail']['ja']
+
+    @pytest.mark.parametrize('target_id', [
+        'designWeb', 'designMobile', 'codeWeb', 'codeMobile',
+        'productWeb', 'productIos', 'productAndroid'
+    ])
+    @pytest.mark.parametrize('lang', ['ja', 'en'])
+    def test_add_conditional_formatting_matches_data_validation(self, target_id, lang):
+        """Test that conditional formatting of the result column matches its data validation."""
+        formatter = SheetFormatter(lang, target_id, 'test@example.com')
+        row = RowDataBuilder(lang, target_id).prepare_row_data(
+            {'id': '0001', 'checkId': '0001', 'subcheckId': ''},
+            target_id, lang, {'0001': 2}
+        )
+        result_cell = row[formatter.get_result_column_index()]
+        validation_values = [
+            value['userEnteredValue']
+            for value in result_cell.validation['condition']['values']
+        ]
+
+        requests = formatter.add_conditional_formatting(123, 10)
+        user_entry_values = [
+            req['addConditionalFormatRule']['rule']['booleanRule']['condition']['values'][0]['userEnteredValue']
+            for req in requests[:2]
+        ]
+
+        # Pass/fail values for the result column must be selectable in the validation list
+        assert all(value in validation_values for value in user_entry_values)
+
     def test_add_conditional_formatting_english(self):
         """Test conditional formatting with English language."""
         formatter = SheetFormatter('en', 'productWeb', 'test@example.com')
@@ -185,7 +234,7 @@ class TestSheetFormatter:
         protection_request = requests[0]
         assert protection_request['addProtectedRange']['protectedRange']['range']['sheetId'] == sheet_id
         assert protection_request['addProtectedRange']['protectedRange']['range']['startRowIndex'] == 1
-        assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == len(sheet.data) + 1
+        assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == len(sheet.data)  # header row excluded, last data row included
         
         generated_data_start = len(COLUMNS['idCols'])
         generated_data_count = len(COLUMNS['designWeb']['generatedData'])
@@ -293,7 +342,7 @@ class TestSheetFormatter:
             for request in requests:
                 range_info = request['addConditionalFormatRule']['rule']['ranges'][0]
                 assert range_info['startRowIndex'] == 1
-                assert range_info['endRowIndex'] == data_length + 1
+                assert range_info['endRowIndex'] == data_length
                 assert range_info['sheetId'] == sheet_id
     
     def test_protection_settings_with_different_sheet_sizes(self):
@@ -311,7 +360,7 @@ class TestSheetFormatter:
             if len(COLUMNS['designWeb']['generatedData']) > 0:
                 assert len(requests) == 1
                 protection_request = requests[0]
-                assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == num_rows + 1
+                assert protection_request['addProtectedRange']['protectedRange']['range']['endRowIndex'] == num_rows
     
     def test_formatting_consistency_across_languages(self):
         """Test that formatting is consistent across languages."""

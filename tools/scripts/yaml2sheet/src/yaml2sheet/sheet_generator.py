@@ -18,7 +18,7 @@ from .row_data_builder import RowDataBuilder
 from .column_manager import ColumnManager
 from .sheet_content_manager import SheetContentManager
 from .batch_update_manager import BatchUpdateManager
-from .utils import create_version_info_request, adjust_sheet_size
+from .utils import create_version_info_request, adjust_sheet_size, get_user_entry_results
 from .sheet_structure_builder import SheetStructureBuilder
 
 logger = logging.getLogger(__name__)
@@ -278,7 +278,7 @@ class ChecklistSheetGenerator:
             lang: Language code
             row_data: Row data to append to
         """
-        validation_dict = CHECK_RESULTS if COLUMNS[target_id]['generatedData'] else FINAL_CHECK_RESULTS
+        validation_dict = get_user_entry_results(target_id)
         validation_values = [validation_dict[key][lang] for key in validation_dict.keys()]
         validation_rule = {
             'condition': {
@@ -624,6 +624,10 @@ class ChecklistSheetGenerator:
                 # Add content and formatting
                 self._add_sheet_content_requests(requests, sheet_id, sheet)
                 requests.extend(formatter.apply_basic_formatting(sheet_id, data_length))
+                # Remove existing rules first; otherwise they accumulate on every update
+                requests.extend(formatter.delete_conditional_formatting(
+                    sheet_id, self.spreadsheet_manager.get_conditional_format_count(sheet_id)
+                ))
                 requests.extend(formatter.add_conditional_formatting(sheet_id, data_length))
             else:
                 # Create new sheet
@@ -845,14 +849,15 @@ class ChecklistSheetGenerator:
         
         if has_generated_data:
             if not has_subchecks:
-                # Hide columns B-D if no subchecks
+                # Hide columns B-C if no subchecks
+                # (column D shows the calculated result from column E)
                 requests.append({
                     'updateDimensionProperties': {
                         'range': {
                             'sheetId': sheet_id,
                             'dimension': 'COLUMNS',
                             'startIndex': 1,
-                            'endIndex': 4
+                            'endIndex': 3
                         },
                         'properties': {'hiddenByUser': True},
                         'fields': 'hiddenByUser'

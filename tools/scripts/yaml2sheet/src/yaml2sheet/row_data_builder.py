@@ -3,7 +3,7 @@ import logging
 from .cell_data import CellData, CellType
 from .condition_formatter import ConditionFormatter
 from .config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
-from .utils import l10n_string
+from .utils import l10n_string, get_user_entry_results
 
 logger = logging.getLogger(__name__)
 
@@ -191,8 +191,7 @@ class RowDataBuilder:
             lang: Language code
             row_data: Row data to append to
         """
-        validation_dict = (CHECK_RESULTS if COLUMNS[target_id]['generatedData']
-                           else FINAL_CHECK_RESULTS)
+        validation_dict = get_user_entry_results(target_id)
         validation_values = [validation_dict[key][lang]
                              for key in validation_dict.keys()]
         validation_rule = {

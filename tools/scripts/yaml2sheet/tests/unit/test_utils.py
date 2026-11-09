@@ -15,8 +15,10 @@ from yaml2sheet.utils import (
     get_result_column_index,
     get_calculated_result_column_index,
     column_index_to_letter,
-    has_generated_data
+    has_generated_data,
+    get_user_entry_results
 )
+from yaml2sheet.config import CHECK_RESULTS, FINAL_CHECK_RESULTS
 
 
 class TestFormatStatementSummary:
@@ -589,3 +591,17 @@ class TestCreateVersionInfoRequest:
         assert len(update_cells['rows'][0]['values']) == 1
         assert 'userEnteredValue' in update_cells['rows'][0]['values'][0]
         assert 'stringValue' in update_cells['rows'][0]['values'][0]['userEnteredValue']
+
+
+class TestGetUserEntryResults:
+    """Test get_user_entry_results function."""
+    
+    @pytest.mark.parametrize('target_id', ['designWeb', 'productWeb', 'productIos', 'productAndroid'])
+    def test_target_with_generated_data(self, target_id):
+        """Test that targets with generated data take check results (yes/no)."""
+        assert get_user_entry_results(target_id) is CHECK_RESULTS
+    
+    @pytest.mark.parametrize('target_id', ['designMobile', 'codeWeb', 'codeMobile'])
+    def test_target_without_generated_data(self, target_id):
+        """Test that targets without generated data take final results (pass/fail)."""
+        assert get_user_entry_results(target_id) is FINAL_CHECK_RESULTS

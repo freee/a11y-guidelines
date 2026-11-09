@@ -1,5 +1,5 @@
 from typing import Dict, List, Union
-from .config import M17nField, COLUMNS
+from .config import M17nField, COLUMNS, CHECK_RESULTS, FINAL_CHECK_RESULTS
 
 
 def format_statement_summary(statement: M17nField) -> M17nField:
@@ -215,3 +215,21 @@ def has_generated_data(target_id: str) -> bool:
         bool: True if target has generated data columns
     """
     return bool(COLUMNS.get(target_id, {}).get('generatedData', []))
+
+
+def get_user_entry_results(target_id: str) -> Dict[str, M17nField]:
+    """Get result values to be entered in the result column
+
+    Targets with generated data columns take check results (yes/no),
+    which are converted into final results (pass/fail) by formulas.
+    Other targets take final results directly.
+
+    Args:
+        target_id: Target ID to check
+
+    Returns:
+        Dict[str, M17nField]: Result values for the result column
+    """
+    if has_generated_data(target_id):
+        return CHECK_RESULTS
+    return FINAL_CHECK_RESULTS

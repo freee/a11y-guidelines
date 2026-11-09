@@ -209,7 +209,42 @@ class TestChecklistSheetGenerator:
             assert generator.existing_sheets['Sheet1']['sheetId'] == 0
             assert generator.existing_sheets['Sheet2']['sheetId'] == 123
             assert generator.protected_ranges[123] == [456]
-    
+
+    def test_load_existing_sheets_with_conditional_formats(self, mock_credentials, mock_service):
+        """Test loading conditional format rule counts of existing sheets."""
+        mock_service.spreadsheets().get().execute.return_value = {
+            'sheets': [
+                {
+                    'properties': {
+                        'title': 'Sheet1',
+                        'sheetId': 0,
+                        'index': 0
+                    }
+                },
+                {
+                    'properties': {
+                        'title': 'Sheet2',
+                        'sheetId': 123,
+                        'index': 1
+                    },
+                    'conditionalFormats': [
+                        {'ranges': [], 'booleanRule': {}},
+                        {'ranges': [], 'booleanRule': {}},
+                        {'ranges': [], 'booleanRule': {}}
+                    ]
+                }
+            ]
+        }
+
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            assert generator.spreadsheet_manager.get_conditional_format_count(123) == 3
+            assert generator.spreadsheet_manager.get_conditional_format_count(0) == 0
+
     def test_load_existing_sheets_with_protected_ranges_error(self, mock_credentials, mock_service):
         """Test loading existing sheets when protected ranges API fails."""
         mock_service.spreadsheets().get().execute.return_value = {
@@ -948,7 +983,65 @@ class TestChecklistSheetGenerator:
                 
                 # Should call _add_sheet_content_requests
                 mock_add_content.assert_called_once()
-    
+
+    def test_generate_batch_requests_existing_sheet_replaces_conditional_formats(self, mock_credentials, mock_service):
+        """Test that existing conditional format rules are deleted before new ones are added."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            generator.existing_sheets['デザイン: Web'] = {'sheetId': 123, 'index': 0}
+            generator.spreadsheet_manager.conditional_format_counts = {123: 3}
+
+            sheet = SheetStructure(name='デザイン: Web', sheet_id=123)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('Data2', CellType.PLAIN)]
+            ]
+            generator.sheets['デザイン: Web'] = sheet
+
+            with patch.object(generator, '_add_sheet_content_requests'):
+                requests, _ = generator.generate_batch_requests()
+
+            delete_indices = [
+                i for i, req in enumerate(requests) if 'deleteConditionalFormatRule' in req
+            ]
+            add_indices = [
+                i for i, req in enumerate(requests) if 'addConditionalFormatRule' in req
+            ]
+
+            # Existing rules are deleted from the last index
+            assert [requests[i]['deleteConditionalFormatRule']['index'] for i in delete_indices] == [2, 1, 0]
+            assert all(requests[i]['deleteConditionalFormatRule']['sheetId'] == 123 for i in delete_indices)
+            # All deletions come before additions
+            assert add_indices
+            assert max(delete_indices) < min(add_indices)
+
+    def test_generate_batch_requests_existing_sheet_without_conditional_formats(self, mock_credentials, mock_service):
+        """Test that no deletion requests are generated when the sheet has no conditional format rules."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+
+            generator.existing_sheets['デザイン: Web'] = {'sheetId': 123, 'index': 0}
+
+            sheet = SheetStructure(name='デザイン: Web', sheet_id=123)
+            sheet.data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('Data2', CellType.PLAIN)]
+            ]
+            generator.sheets['デザイン: Web'] = sheet
+
+            with patch.object(generator, '_add_sheet_content_requests'):
+                requests, _ = generator.generate_batch_requests()
+
+            assert not any('deleteConditionalFormatRule' in req for req in requests)
+            assert any('addConditionalFormatRule' in req for req in requests)
+
     def test_execute_batch_update_success(self, mock_credentials, mock_service):
         """Test successful batch update execution."""
         with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
@@ -1473,6 +1566,64 @@ class TestChecklistSheetGenerator:
             # Check that column B (index 1) is hidden
             hide_request = next(req for req in visibility_requests if req['updateDimensionProperties']['range']['startIndex'] == 1)
             assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
+
+    @pytest.mark.parametrize('target_id', ['productIos', 'productAndroid'])
+    def test_add_column_visibility_requests_with_generated_data_no_subchecks(self, mock_credentials, mock_service, target_id):
+        """Test _add_column_visibility_requests for target with generated data but no subchecks."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = target_id
+
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('', CellType.PLAIN)]  # No subchecks
+            ]
+
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+
+            visibility_requests = [req for req in requests if 'updateDimensionProperties' in req]
+            merge_requests = [req for req in requests if 'mergeCells' in req]
+
+            assert len(visibility_requests) == 2  # Reset all + hide columns B-C
+            assert len(merge_requests) == 0
+
+            # Columns B-C (index 1-2) are hidden; column D (calculated result) stays visible
+            hide_request = visibility_requests[1]
+            assert hide_request['updateDimensionProperties']['range']['startIndex'] == 1
+            assert hide_request['updateDimensionProperties']['range']['endIndex'] == 3
+            assert hide_request['updateDimensionProperties']['properties']['hiddenByUser'] is True
+
+    @pytest.mark.parametrize('initially_hidden', [set(), {1, 2, 3}, {1, 2, 3, 4, 5, 6, 7, 8, 9}])
+    def test_add_column_visibility_requests_overrides_existing_hidden_columns(self, mock_credentials, mock_service, initially_hidden):
+        """Test that existing hidden columns end up in the configured state regardless of initial state."""
+        with patch('yaml2sheet.sheet_generator.build', return_value=mock_service):
+            generator = ChecklistSheetGenerator(
+                credentials=mock_credentials,
+                spreadsheet_id='test_spreadsheet_id'
+            )
+            generator.current_target = 'productIos'
+
+            data = [
+                [CellData('Header1', CellType.PLAIN), CellData('Header2', CellType.PLAIN)],
+                [CellData('Data1', CellType.PLAIN), CellData('', CellType.PLAIN)]  # No subchecks
+            ]
+
+            requests = []
+            generator._add_column_visibility_requests(requests, 123, data, 10)
+
+            # Apply requests in order to the initial column state
+            hidden = set(initially_hidden)
+            for req in requests:
+                props = req.get('updateDimensionProperties')
+                if props and 'hiddenByUser' in props['properties']:
+                    columns = set(range(props['range']['startIndex'], props['range']['endIndex']))
+                    hidden = hidden | columns if props['properties']['hiddenByUser'] else hidden - columns
+
+            assert hidden == {1, 2}  # Only columns B-C are hidden
 
     def test_add_column_visibility_requests_with_generated_data_with_subchecks(self, mock_credentials, mock_service):
         """Test _add_column_visibility_requests for target with generated data and subchecks."""

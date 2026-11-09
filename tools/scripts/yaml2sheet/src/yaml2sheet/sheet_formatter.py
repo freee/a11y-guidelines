@@ -1,8 +1,8 @@
 from typing import Dict, List, Optional
 import logging
 from .sheet_structure import SheetStructure
-from .config import CHECK_RESULTS, FINAL_CHECK_RESULTS, COLUMNS
-from .utils import get_generated_data_start_column, get_generated_data_end_column, get_result_column_index, has_generated_data
+from .config import FINAL_CHECK_RESULTS, COLUMNS
+from .utils import get_generated_data_start_column, get_generated_data_end_column, get_result_column_index, has_generated_data, get_user_entry_results
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class SheetFormatter:
         
         Args:
             sheet_id: ID of sheet to format
-            data_length: Number of data rows
+            data_length: Number of rows including the header row
             
         Returns:
             List[Dict]: List of formatting requests
@@ -52,7 +52,7 @@ class SheetFormatter:
                 'range': {
                     'sheetId': sheet_id,
                     'startRowIndex': 1,
-                    'endRowIndex': data_length + 1
+                    'endRowIndex': data_length
                 },
                 'cell': {
                     'userEnteredFormat': {
@@ -83,14 +83,16 @@ class SheetFormatter:
         
         Args:
             sheet_id: ID of sheet to format
-            data_length: Number of data rows
+            data_length: Number of rows including the header row
             
         Returns:
             List[Dict]: List of conditional formatting requests
         """
         result_column = self.get_result_column_index()
+        # Use the same values as the data validation of the result column
+        user_entry_results = get_user_entry_results(self.current_target)
         requests = []
-        
+
         # Pass condition formatting for user-entered check results
         requests.append({
             'addConditionalFormatRule': {
@@ -98,14 +100,14 @@ class SheetFormatter:
                     'ranges': [{
                         'sheetId': sheet_id,
                         'startRowIndex': 1,
-                        'endRowIndex': data_length + 1,
+                        'endRowIndex': data_length,
                         'startColumnIndex': result_column,
                         'endColumnIndex': result_column + 1
                     }],
                     'booleanRule': {
                         'condition': {
                             'type': 'TEXT_EQ',
-                            'values': [{'userEnteredValue': CHECK_RESULTS['pass'][self.current_lang]}]
+                            'values': [{'userEnteredValue': user_entry_results['pass'][self.current_lang]}]
                         },
                         'format': {
                             'backgroundColor': {'red': 0.85, 'green': 0.92, 'blue': 0.83}
@@ -122,14 +124,14 @@ class SheetFormatter:
                     'ranges': [{
                         'sheetId': sheet_id,
                         'startRowIndex': 1,
-                        'endRowIndex': data_length + 1,
+                        'endRowIndex': data_length,
                         'startColumnIndex': result_column,
                         'endColumnIndex': result_column + 1
                     }],
                     'booleanRule': {
                         'condition': {
                             'type': 'TEXT_EQ',
-                            'values': [{'userEnteredValue': CHECK_RESULTS['fail'][self.current_lang]}]
+                            'values': [{'userEnteredValue': user_entry_results['fail'][self.current_lang]}]
                         },
                         'format': {
                             'backgroundColor': {'red': 0.96, 'green': 0.80, 'blue': 0.80}
@@ -150,7 +152,7 @@ class SheetFormatter:
                         'ranges': [{
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_column_start,
                             'endColumnIndex': generated_column_end
                         }],
@@ -174,7 +176,7 @@ class SheetFormatter:
                         'ranges': [{
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_column_start,
                             'endColumnIndex': generated_column_end
                         }],
@@ -191,7 +193,30 @@ class SheetFormatter:
                 }
             })
         return requests
-        
+
+    def delete_conditional_formatting(self, sheet_id: int, rule_count: int) -> List[Dict]:
+        """Delete existing conditional formatting rules
+
+        Rules are deleted from the last index so that the remaining
+        indices stay valid while the requests are applied in order.
+
+        Args:
+            sheet_id: ID of sheet to clear
+            rule_count: Number of existing conditional formatting rules
+
+        Returns:
+            List[Dict]: List of conditional formatting deletion requests
+        """
+        return [
+            {
+                'deleteConditionalFormatRule': {
+                    'sheetId': sheet_id,
+                    'index': index
+                }
+            }
+            for index in reversed(range(rule_count))
+        ]
+
     def get_result_column_index(self) -> int:
         """Get index of result column based on current target
         
@@ -224,7 +249,7 @@ class SheetFormatter:
                         'range': {
                             'sheetId': sheet_id,
                             'startRowIndex': 1,
-                            'endRowIndex': data_length + 1,
+                            'endRowIndex': data_length,
                             'startColumnIndex': generated_data_start,
                             'endColumnIndex': generated_data_start + generated_data_count
                         },
